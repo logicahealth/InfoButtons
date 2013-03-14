@@ -28,15 +28,24 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
+		
+		<pluginRepository>
+       <id>maven2-repository.dev.java.net</id>
+       <url>http://download.java.net/maven/2/</url>
+     </pluginRepository>
+     
 	</pluginRepositories> 
+	
+
   <build>
   <plugins>
     <plugin>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>jaxws-maven-plugin</artifactId>
       <executions>
+          
         <execution>
-            <id>FirstWsdl</id>
+          <id>FirstWsdl</id>
           <goals>
             <goal>wsimport</goal>
           </goals>
@@ -47,9 +56,11 @@
               </wsdlUrl>
             </wsdlUrls>
             <packageName>UtsMetathesaurusContent </packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
              <keep>true</keep>
 	      <genWsdl>true</genWsdl>
           </configuration>
+          
          </execution>
           <execution>
               <id>SecondWsdl</id>
@@ -63,6 +74,7 @@
               </wsdlUrl>
             </wsdlUrls>
             <packageName>UtsSecurity</packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
              <keep>true</keep>
 	      <genWsdl>true</genWsdl>
           </configuration>
@@ -79,6 +91,7 @@
               </wsdlUrl>
             </wsdlUrls>
             <packageName>UtsMetathesaurusMetaData </packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
              <keep>true</keep>
 	      <genWsdl>true</genWsdl>
           </configuration>
@@ -95,6 +108,7 @@
               </wsdlUrl>
             </wsdlUrls>
             <packageName>UtsMetathesaurusFinder  </packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
              <keep>true</keep>
 	      <genWsdl>true</genWsdl>
           </configuration>
@@ -111,6 +125,7 @@
               </wsdlUrl>
             </wsdlUrls>
             <packageName>UtsMetathesaurusHistory</packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
              <keep>true</keep>
 	      <genWsdl>true</genWsdl>
           </configuration>
@@ -127,11 +142,13 @@
               </wsdlUrl>
             </wsdlUrls>
             <packageName>UtsSemNet</packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
              <keep>true</keep>
 	      <genWsdl>true</genWsdl>
           </configuration>
           </execution>
         </executions>
+        
     </plugin>
    </plugins>
 </build>
