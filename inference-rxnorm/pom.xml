@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>edu.utah.openinfobutton</groupId>
+  <artifactId>inference-rxnorm</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>RXNorm REST API Client</name>
+  <description>RXNorm REST API Client</description>
+    
+    <repositories>
+ 		<repository>
+		<id>further</id>
+		<url>https://nexus.chpc.utah.edu/content/groups/public</url>
+		<releases>
+			<enabled>true</enabled>
+		</releases>
+		<snapshots>
+			<enabled>true</enabled>
+		</snapshots>
+	</repository>	   
+  </repositories>
+
+  <pluginRepositories>
+	<pluginRepository>
+		<id>further</id>
+		<url>https://nexus.chpc.utah.edu/content/groups/public</url>
+		<releases>
+			<enabled>true</enabled>
+		</releases>
+		<snapshots>
+			<enabled>true</enabled>
+		</snapshots>
+	</pluginRepository>
+  </pluginRepositories> 
+  <dependencies>
+  	<dependency>
+  		<groupId>javax.xml</groupId>
+  		<artifactId>jaxb-api</artifactId>
+  		<version>2.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.httpcomponents</groupId>
+  		<artifactId>httpclient</artifactId>
+  		<version>4.2.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>edu.utah.further.core</groupId>
+  		<artifactId>core-xml</artifactId>
+  		<version>1.3.0-SNAPSHOT</version>
+  		<type>jar</type>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.hl7.v3</groupId>
+  		<artifactId>infobutton-schema</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
+  <scm>
+	<connection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/inference-rxnorm</connection>
+	<developerConnection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/inference-rxnorm</developerConnection>
+	<url>https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/inference-rxnorm</url>
+  </scm>
+</project>
