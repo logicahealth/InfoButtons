@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<terminologyInference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="TerminologyInference.xsd">
-	<description>Gets an RxNorm ingredient code from a display name</description>
-	<targetCodeSystem id="" name="RxNorm"/>
-	<callInferenceByName>getRxNormCode</callInferenceByName>
-</terminologyInference>
