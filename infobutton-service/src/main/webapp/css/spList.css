@@ -1,0 +1,80 @@
+/*Overall styles*/
+body { 	font: 13px verdana; margin: 0px; padding: 0px 0px 5px 0px; }
+h2 { font-weight: bold; font-size: 12px; text-indent: 2px; }
+a:visited, a:active { color: #00f; }
+img { border: none; }
+h4 { color: #266873; font-size: 13px; font-weight: bold; margin: 15px 0px 0px 0px; }
+h4.section { background: #eff8e7; color: #000; font-weight: bold; margin: 25px -5px 0px -5px; font-size: 14px; padding: 6px; }
+h4.errorMessage { padding: 0px 10px 40px 10px; }
+a.section { padding-top: 10px; }
+a.topLink { font-weight: bold; float:right; font-size: 12px;}
+ul { margin-top: 2px; list-style: square; }
+li { padding-bottom: 5px; }
+br+br { display: none; }
+hr { display:none; }
+span.highlight { background: #ff8; text-decoration: inherit; }
+
+/*Styles for classes embedded in the web service result*/
+td.EPDefaultTitle { width: 420px !important; font-size: 16px; font-weight: bold; text-align: left; text-indent: -6px; }
+.ContentHeader { display: none; }
+
+/*Section styles*/
+#listHeader { 
+	background: #fff url('../images/logo_springfield.gif') right 2px no-repeat; 
+	vertical-align: middle; margin: 0px 10px 0px 3px;
+	height: 70px; line-height: 60px; font-style: italic;
+	color: #266873; }
+#listHeader img { vertical-align: middle; padding-bottom: 2px; }
+#listMain { border: 1px solid #266873; padding: 0px; margin: 0px 10px 0px 10px; _height: 1%; }
+#content table { width: auto;}
+#content { clear:both; background: #fbfbfb; border-top: 1px solid #266873; padding: 0px 14px; margin: 0px 0px 0px 250px; height: 431px; overflow: auto;  }
+#listMain:last-child:after { content:".";display:block;height:0;clear:both;visibility:hidden; }
+
+/*Page navigation box with links to sections*/
+#nav {  
+	position: absolute;
+	top: 101px;
+	left: 11px;
+	border-top: 1px solid #266873;
+	width: 240px; background: #ddd;
+	list-style: none; margin: 0px;
+	padding: 10px 0px 0px 10px; 
+	height: 421px;
+}
+#nav li { padding: 0px; margin: 0px; }
+#nav li a { display: block; text-decoration: none; font-size: 11px; padding: 5px 10px 5px 10px; background: #f2f2f2; margin: 0px 1px 1px 1px; }
+#nav li a:visited { color: #00f; }
+#nav li a:hover { background: #f5f5f5; }
+#nav li a.selected, #nav li a.selected:hover { background: #fbfbfb; padding: 8px 10px 8px 10px; margin-right: 0px; margin-left: -5px; }
+
+/*Styles for the results pager i.e. (<< < 1 2 3 4 5 > >>)*/
+#pager { padding: 0px 6px; margin: 0px 0px; background: #f00; }
+#displaying { width: 60%; float:left; text-align: left;  padding: 6px 0px; color: #266873; }
+#pages { float: right; text-align: right; margin-bottom: -1px; }
+#pages a, #pages span { 
+	margin: 0px 2px; padding: 7px 3px; 
+	display: block; float: left; 
+	border-bottom: 1px solid #266873; }
+#pages span { color: #ccc; }
+#pages span.current {
+	font-weight: bold;
+	margin-top: -4px; _position: relative;
+	padding: 8px 10px;
+	color: #266873; background: #fff;
+	border: 1px solid #266873;
+	border-bottom: 2px solid #fff; }
+#pages a:visited { color: #00f; }
+#pages a:hover { background: #eff8e7; }
+
+/*Styles for the list of search results*/
+#resultList { min-height:375px; _height:375px; clear:both; list-style: none; margin: 0px; border-top: 1px solid #266873; background: #fff; padding: 0px; }
+#resultList h3.category { background: #EAF3FA; color: #000; font-weight: bold; margin: 0px; font-size: 14px; padding: 6px; }
+#resultList ul { list-style: none; padding-left: 0px; }
+#resultList ul li { padding: 0px; margin: 0px; }
+#resultList ul li a { padding-left: 10px; margin: 0px; }
+#resultList li { background: #fff; font-weight: bold; margin: 0px; padding: 0px; }
+#resultList li a { display: block; padding: 5px 2px; font-weight: normal; text-decoration: none; }
+#resultList li a span { padding-left: 5px; }
+#resultList li a b { color: #000; float:left; text-align: right; width: 30px; }
+#resultList li a:hover { background-color: #eff8e7; }
+a.pdf { background: url('../images/pdf.gif') 8px 4px no-repeat; padding-left: 19px !important; }

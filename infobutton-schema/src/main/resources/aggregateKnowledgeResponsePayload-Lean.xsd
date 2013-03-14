@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2011 rel. 3 sp1 (x64) (http://www.altova.com) by Guilherme Del Fiol (Duke University) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:v3="urn:hl7-org:v3" xmlns:atom="http://www.w3.org/2005/Atom:atom" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.w3.org/2005/Atom:atom" schemaLocation="aAtom.xsd"/>
+	<xs:element name="knowledgeResponse" type="knowledgeResponseType">
+		<xs:annotation>
+			<xs:documentation>This is the root element of a knowledge response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="knowledgeResponseType">
+		<xs:sequence>
+			<xs:element ref="atom:feed" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

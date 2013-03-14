@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminologyInference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../TerminologyInference.xsd">
+	<description>Example: Receive RxCUI 310965 [Ibuprofen 200mg Oral Tablet]. Convert to a maximum of 5 package drug codes (NDC)</description>
+	<inferenceStep sequence="1" direction="DIRECT" maxConcepts="5">
+		<relationshipSemanticType>
+			<code codeSystem="UMLS_CUI" code="HAS_PACKAGED_DRUG" displayName="has packaged drug"/>
+		</relationshipSemanticType>
+	</inferenceStep>
+</terminologyInference>

@@ -1,0 +1,121 @@
+body { 
+	min-width: 700px;
+	background: #f0f0f0; 
+	font: 12px verdana; padding: 0px 75px; margin: 0px;
+}
+
+#shadow { background: #f0f0f0 url('../images/shL.png') top left repeat-y; padding-left: 21px; }
+#shadow2 { background: #f0f0f0 url('../images/shR.png') top right repeat-y; padding-right: 21px; }
+
+h2 { font-weight: bold; font-size: 18px; margin: 4px 2px 4px 0px; padding: 8px 8px; color: #fff; background: #001155 }
+a:visited, a:active, a:focus, a:hover { color: #00f }
+img { border: none }
+
+#footer { 
+	background: transparent url('../images/shBL.png') bottom left no-repeat;
+	padding-left: 21px;
+}
+
+#footer div { 
+	background: transparent url('../images/shBR.png') bottom right no-repeat;
+	padding-right: 21px; 
+}
+
+#footer div div { 
+	background: #fdfdfd url('../images/shB.png') bottom left repeat-x;
+	padding: 6px 8px 27px 8px;
+	text-align: center;
+	font: normal 11px verdana;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#footer div div span { background: #ccc; color: #fff; padding: 5px 24px; }
+
+#header { 
+	padding: 70px 0px 0px 0px; margin: 0px;
+	background:#ffffff url('../images/project_logo_medium.jpg') no-repeat left top;
+}
+
+#header ul { 
+	height: 53px;
+	background: #add08f url('../images/navBG.gif') top right repeat-x; 
+	list-style: none; padding: 0px 20px 0px 0px;  text-align: right;
+	margin: 0px;
+}
+#header li {
+	height: 53px;
+	padding: 5px 40px 0px 18px;
+	line-height: 53px;
+	float: right;
+	background: transparent url('../images/tabArrow.png') top right no-repeat }
+	
+#header li.first { background-image: url('../images/tabArrow2.png') }
+#header li.last:after { content:".";display:block;height:0;clear:both;visibility:hidden }
+
+#header a { 
+	font-weight: bold; font-family: arial;
+	text-decoration: none; color: #266873; text-transform: lowercase; 
+}
+
+#header a:hover { color: #fff }
+
+#main {
+	background: #fdfdfd; 
+	padding: 10px 40px; margin: 0px;
+	border-color: #e8e8e8;
+	border-style: solid; 
+	border-width: 0px 0px 0px 0px;
+}
+
+table { margin: 0px; border-collapse: collapse; border-spacing: 0px; width: 100% }
+table td { color: #001155; line-height: 16px; vertical-align: top; border: 4px solid #fdfdfd; border-width: 0px 4px 4px 0px; padding: 8px; background: #eeeeff }
+table td.label { font-weight: bold; color: #001155; border-right: 0px; }
+table td .topLabel { font-weight: bold; color: #6d904f; padding: 0px 0px 10px 0px; margin: 0px; }
+table th { text-align: left; background: #9Dc07F; color: #fbfbfb; border: 4px solid #fdfdfd; border-left-width: 0px; padding: 10px }
+table ul { list-style: none; margin: 0px; padding: 0px }
+table li { padding: 3px 0px }
+table a { text-decoration: none; color: #266837 }
+table a.resource { background: #f8f8f8; margin: 0px; padding: 4px 7px 6px 5px; border: 1px solid #ADD08F }
+table a.resource:hover { background-color: #fdfdfd }
+table a span { text-decoration: underline }
+table a img { vertical-align: middle; text-decoration: none; padding: 0px 0px 0px 0px; margin:  -12px -0px -12px -5px}
+table textarea { width: 100%; height: 100px; font-size: 11px;}
+
+table table { width: 100%; padding: 0px }
+table table a { display:block; padding: 5px 10px 8px 5px; text-decoration: underline; color: #266837 }
+table table a:hover { }
+table table td.button { text-align: center; border-left: 1px solid #eff8e7; background: #e0e8d8; }
+table table td.mark { text-align: center; background: #aec0c3; font-family: 'impact'; font-size: 1.3em; color: #fff; padding: 5px 2px 8px 1px }
+table table tr.updated td.mark { background: #f68310 }
+table table td.button a { 
+	padding: 5px 5px 8px 5px;
+	font-weight: bold; 
+	background: #e0e8d8;
+}
+table table a:hover, table table td.button a:hover { background: #eaf3e3 }
+table table td.explain { background: #666 }
+table table td.link { background: #e0e8d8 }
+table table td.dosage { background: #e0e8d8; padding: 5px 5px 8px 5px; font-style: italic; border-left: 1px solid #eff8e7 }
+table table td.explain p { font-style: italic; color: #eee; text-align: right; margin: 8px; vertical-align: top }
+table table td.explain p a { font-style: normal } 
+table table tr.updated td.link a { background: #e9e0c2 }
+table table tr.updated td.button, table table tr.updated td.button a { background: #e9e0c2 }
+table table tr.updated td.link a:hover, table table tr.updated td.button a:hover { background: #f9f0d2 }
+table table td { vertical-align: middle; margin: 0px; padding: 0px; border: 1px solid #eff8e7; border-width: 0px 0px 2px 0px; border-style: solid }
+table table h4 { background: #266873; font-weight: normal; padding: 5px 9px; color: #eff8e7; border: 1px solid #266873; margin:  0px }
+table table p.legend { float:right; width: 25%; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
