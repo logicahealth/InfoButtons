@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../ResourceProfile-v2.0.xsd">
+	<header version="1" id="1">
+		<title>ARUP Consult</title>
+		<knowledgeResourcePurpose>Provides coverage of a subset of laboratory tests performed at the ARUP lab.</knowledgeResourcePurpose>
+		<profileDescription>Relevant in a laboratory results review context.</profileDescription>
+		<versionControl publicationDate="2010-06-21T08:56:00">
+			<modification>
+				<modificationDescription>First version. </modificationDescription>
+				<modificationReason>
+					<code codeSystem="Internal" displayName="Creation" code="CREATION"/>
+				</modificationReason>
+			</modification>
+			<author>
+				<name lastName="Del Fiol" firstName="Guilherme"/>
+				<organization name="Duke University" id="1.3.6.1.4.1.4275">
+					<department>Community and Family Medicine</department>
+				</organization>
+				<jobTitle>Assistant Professor</jobTitle>
+				<contactInformation>
+					<eMail>guilherme.delfiol@duke.edu</eMail>
+					<phone>919-681-7011</phone>
+				</contactInformation>
+			</author>
+		</versionControl>
+		<resourceLink url="www.arupconsult.com" linkName="Home page"/>
+	</header>
+	<profileDefinition>
+		<authorizedOrganizations>
+			<authorizedOrganization name="National Institutes of Health" id="1.3.6.1.4.1.9328"/>
+			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
+			<authorizedOrganization name="Duke Unversity" id="1.3.6.1.4.1.4275"/>
+		</authorizedOrganizations>
+		<relevantContexts>
+			<context name="Laboratory results review" id="1" hl7Compliant="false" urlStyle="DIRTY">
+
+				<contextDefinition>
+					<task matching="true" searching="false">
+						<matchingDomain>
+							<enumeratedDefinition>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.5.4" displayName="laboratory results review" code="LABRREV"/>
+								</enumerationItem>
+							</enumeratedDefinition>
+						</matchingDomain>
+					</task>
+					<performerKnowledgeUserType matching="true" searching="false">
+						<matchingDomain>
+							<enumeratedDefinition>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.5.110" displayName="Provider" code="PROV"/>
+								</enumerationItem>
+							</enumeratedDefinition>
+						</matchingDomain>
+					</performerKnowledgeUserType>
+					
+					<subjectCoverage matching="false" searching="true" parameterValueSource="displayName">
+						<syntaxOnResource nonHl7CompliantName="IW_FIELD_ADVANCE_PHRASE"/>
+					</subjectCoverage>
+					<subTopicCoverage matching="false" searching="true" parameterValueSource="code">
+						<syntaxOnResource nonHl7CompliantName="term"/>
+						<matchingDomain>
+							<enumeratedDefinition>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.6.177" displayName="Clinical significance" code="Clinical significance"/>
+								</enumerationItem>
+							</enumeratedDefinition>
+						</matchingDomain>
+					</subTopicCoverage>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://search.arupconsult.com/search/?"/>
+					<attributes>
+						<attribute name="IW_DATABASE" value="ACforIHC"/>
+					</attributes>
+				</knowledgeRequestService>
+			</context>
+		</relevantContexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

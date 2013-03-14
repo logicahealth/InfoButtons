@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminologyInference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../TerminologyInference.xsd">
+	<description>Translates MeSH Age groups into ClinicalTrials.gov proprietary age group keywords</description>
+	<targetCodeSystem name="Clinical trials.gov age groups" id="ClinicalTrials.gov"/>
+	<codeInference>
+		<sourceCodeSystem id="2.16.840.1.113883.6.177" name="MeSH"/>
+		<inferenceDefinition>
+			<localMappings>
+				<mapping targetValue="0" sourceValue="D007231"/>
+				<mapping targetValue="0" sourceValue="D007223"/>
+				<mapping targetValue="0" sourceValue="D002675"/>
+				<mapping targetValue="0" sourceValue="D002648"/>
+				<mapping targetValue="0" sourceValue="D000293"/>
+				<mapping targetValue="1" sourceValue="D055815"/>
+				<mapping targetValue="1" sourceValue="D000328"/>
+				<mapping targetValue="1" sourceValue="D008875"/>
+				<mapping targetValue="2" sourceValue="D000368"/>
+				<mapping targetValue="2" sourceValue="D000369"/>
+			</localMappings>
+		</inferenceDefinition>
+	</codeInference>
+</terminologyInference>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../ResourceProfile-v2.0.xsd">
+
+	<header version="0" id="1">
+		<title>FDA's Table of Valid Genomic Biomarkers in Approved Drug Labels</title>
+		<profileDescription>FDA's Table of Valid Genomic Biomarkers in the Context of Approved Drug Labels</profileDescription>
+		<versionControl publicationDate="2011-01-10T11:13:00">
+			<author>
+				<name firstName="Guilherme" lastName="Del Fiol"/>
+				<organization name="Duke University" id="1.3.6.1.4.1.4275">
+					<department>Community and Family Medicine</department>
+				</organization>
+				<jobTitle>Assistant Professor</jobTitle>
+				<contactInformation>
+					<eMail>guilherme.delfiol@duke.edu</eMail>
+				</contactInformation>
+			</author>
+		</versionControl>
+		<resourceLink url="http://www.fda.gov/Drugs/ScienceResearch/ResearchAreas/Pharmacogenetics/ucm083378.htm" linkName="FDA Table of Pharmacogenomic Biomarkers in Drug Labels"/>
+	</header>
+	<profileDefinition>
+		<authorizedOrganizations>
+			<authorizedOrganization name="University of Washington" id="1.3.6.1.4.1.150"/>
+		</authorizedOrganizations>
+		<relevantContexts>
+			<context name="Tamoxifen" id="1" hl7Compliant="false" urlStyle="CLEAN">
+				<contextDefinition>
+					<task matching="true" searching="false">
+						<matchingDomain>
+							<enumeratedDefinition>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.5.4" displayName="medication order entry" code="MEDOE"/>
+								</enumerationItem>
+							</enumeratedDefinition>
+						</matchingDomain>
+					</task>
+					<subjectCoverage matching="true" searching="false">
+						<matchingDomain>
+							<externalValueSet>
+									<code codeSystemName="RxNorm R" codeSystem="1552" displayName="Tamoxifen codes" code="TAMOXIFEN"/>
+							</externalValueSet>
+						</matchingDomain>
+					</subjectCoverage>
+					<subTopicCoverage matching="false" searching="true" parameterValueSource="code">
+						<matchingDomain>
+							<enumeratedDefinition>
+								<enumerationItem>
+									<code displayName="Estrogen receptor" code="ucm237721.htm" codeSystem=""/>
+								</enumerationItem>
+							</enumeratedDefinition>
+						</matchingDomain>
+					</subTopicCoverage>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://www.fda.gov/Drugs/ScienceResearch/ResearchAreas/Pharmacogenetics/"/>
+				</knowledgeRequestService>
+			</context>
+			<context name="Nilotinib" id="1" hl7Compliant="false" urlStyle="CLEAN">
+				<contextDefinition>
+					<task matching="true" searching="false">
+						<matchingDomain>
+							<enumeratedDefinition>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.5.4" displayName="medication order entry" code="MEDOE"/>
+								</enumerationItem>
+							</enumeratedDefinition>
+						</matchingDomain>
+					</task>
+					<subjectCoverage matching="true" searching="false">
+						<matchingDomain>
+							<externalValueSet>
+									<code codeSystemName="RxNorm R" codeSystem="1552" displayName="Nilotinib codes" code="NILOTINIB"/>
+							</externalValueSet>
+						</matchingDomain>
+					</subjectCoverage>
+					<subTopicCoverage matching="false" searching="true" parameterValueSource="code">
+						<matchingDomain>
+							<enumeratedDefinition>
+								<enumerationItem>
+									<code displayName="Philadelphia chromosome" code="ucm237444.htm" codeSystem=""/>
+								</enumerationItem>
+								<enumerationItem>
+									<code displayName="UGT1A1" code="ucm237446.htm" codeSystem=""/>
+								</enumerationItem>
+							</enumeratedDefinition>
+						</matchingDomain>
+					</subTopicCoverage>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://www.fda.gov/Drugs/ScienceResearch/ResearchAreas/Pharmacogenetics/"/>
+				</knowledgeRequestService>
+			</context>
+		</relevantContexts>
+	</profileDefinition>
+</knowledgeResourceProfile>
+

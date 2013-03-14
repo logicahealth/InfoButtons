@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminologyInference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../TerminologyInference.xsd">
+	<description>Defines mappings from multiple source systems to ICD9-CM</description>
+	<targetCodeSystem name="ICD9-CM" id="2.16.840.1.113883.6.2"/>
+	<codeInference>
+		<sourceCodeSystem name="SNOMED CT" id="SNOMED CT"/>
+		<inferenceDefinition>
+			<externalDefinition>
+				<codeProperty name="Mapping from SNOMED-CT to ICD9-CM" id="SNOMED_ICD_9_MAP"/>
+				<displayNameProperty name="Preferred Synonym" id="Synonym"/>
+			</externalDefinition>
+		</inferenceDefinition>
+	</codeInference>
+	<keywordInference>
+		<searchCodeSystem id="ICD-9-CM" name="International Classification of Diseases 9 - Clinical Modification"/>
+		<codeProperty name="Mapping from SNOMED-CT to ICD9-CM" id="SNOMED_ICD_9_MAP"/>
+		<displayNameProperty name="Preferred Synonym" id="Synonym"/>
+	</keywordInference>
+</terminologyInference>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terminologyInference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../TerminologyInference.xsd">
+	<description>Defines mappings from multiple source systems to ICD9-CM</description>
+	<codeInference>
+		<sourceCodeSystem name="RxNorm" id="RxNorm R"/>
+		<inferenceDefinition>
+			<externalDefinition>
+				<traverseAssociation direction="DIRECT" sequence="1">
+					<code codeSystem="RxNorm R" displayName="parent" code="isa"/>
+				</traverseAssociation>
+				<traverseAssociation direction="DIRECT" sequence="2">
+					<code codeSystem="RxNorm R" displayName="has ingredient" code="has_ingredient"/>
+				</traverseAssociation>
+				<returnProperty name="Synonym" id="Synonym"/>
+			</externalDefinition>
+		</inferenceDefinition>
+	</codeInference>
+	<keywordInference>
+		<searchCodeSystem id="ICD-9-CM" name="International Classification of Diseases 9 - Clinical Modification"/>
+	</keywordInference>
+</terminologyInference>

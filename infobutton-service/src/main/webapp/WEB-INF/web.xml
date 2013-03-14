@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+$Rev:: 1102          $:  Revision of last commit
+$Author:: ai28       $:  Author of last commit
+$Date:: 2010-10-01 1#$:  Date of last commit
+-->
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+        http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    id="services" version="2.5">
+  
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+    WEB-INF/core-data-annotation-context.xml
+    WEB-INF/core-data-datasource-context.xml
+     WEB-INF/core-profile-datasource-context.xml
+    </param-value>
+  </context-param>
+  
+  <listener>
+    <listener-class>
+		org.springframework.web.context.ContextLoaderListener
+	</listener-class>
+  </listener>
+  
+ <listener>
+	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+</listener> 
+
+  
+  <servlet>
+    <servlet-name>CXFServlet</servlet-name>
+    <servlet-class>
+			org.apache.cxf.transport.servlet.CXFServlet
+		</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>KnowledgeRequestServlet</servlet-name>
+  	<servlet-class>
+  		edu.duke.mc.cfm.dci.dss.KnowledgeRequestServlet
+  	</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>CXFServlet</servlet-name>
+    <url-pattern>/knowledgeRequest/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>KnowledgeRequestServlet</servlet-name>
+  	<url-pattern>/infoRequest</url-pattern>
+  </servlet-mapping>
+
+</web-app>

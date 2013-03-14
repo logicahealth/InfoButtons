@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>OpenInfobutton Project - Testing Tool</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<style>
+.code_input, .result_output
+{
+border:1px solid #c3c3c3;
+width:100%;
+height:100px;
+background-color:#ffffff;
+color:#000000;
+}
+</style>
+<script language="JavaScript" type="text/JavaScript">
+<!--
+function buildUrl(){ 
+	var knowledgeRequest ;
+	knowledgeRequest = document.getElementById("server").value + 'representedOrganization.id.root=' + document.getElementById("organizationId").value;
+
+	if (document.getElementById("taskContextC").value != '') {
+		knowledgeRequest = knowledgeRequest + '&taskContext.c.c=' + document.getElementById("taskContextC").value;
+	}
+		
+	if (document.getElementById("mainSearchCriteriaC").value != '') {
+		knowledgeRequest = knowledgeRequest + '&mainSearchCriteria.v.c=' + document.getElementById("mainSearchCriteriaC").value;
+	}
+	if (document.getElementById("mainSearchCriteriaCs").value != '') {
+		knowledgeRequest = knowledgeRequest + '&mainSearchCriteria.v.cs=' + document.getElementById("mainSearchCriteriaCs").value;
+	}
+	if (document.getElementById("mainSearchCriteriaDn").value != '') {
+		knowledgeRequest = knowledgeRequest + '&mainSearchCriteria.v.dn=' + document.getElementById("mainSearchCriteriaDn").value;
+	}
+
+	if (document.getElementById("administrativeGenderCodeC").value != '') {
+		knowledgeRequest = knowledgeRequest + '&patientPerson.administrativeGenderCode.c=' + 
+		document.getElementById("administrativeGenderCodeC").value + 
+		'&patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1';
+	}
+
+	if (document.getElementById("ageV").value != '') {
+		knowledgeRequest = knowledgeRequest + '&age.v.v=' + document.getElementById("ageV").value +
+		'&age.v.u=' + document.getElementById("ageU").value;
+	}
+
+	if (document.getElementById("ageGroupC").value != '') {
+		knowledgeRequest = knowledgeRequest + '&ageGroup.v.c=' + 
+		document.getElementById("ageGroupC").value + '&ageGroup.v.cs=2.16.840.1.113883.6.177';
+	}
+
+	if (document.getElementById("encounterC").value != '') {
+		knowledgeRequest = knowledgeRequest + '&encounter.c.c=' +
+		document.getElementById("encounterC").value;  
+	}
+
+	if (document.getElementById("informationRecipient").value != '') {
+		knowledgeRequest = knowledgeRequest + '&informationRecipient=' + 
+		document.getElementById("informationRecipient").value;
+	}
+
+	if (document.getElementById("informationRecipientLanguageC").value != '') {
+		knowledgeRequest = knowledgeRequest + '&informationRecipient.languageCode.c=' +
+		document.getElementById("informationRecipientLanguageC").value;  
+	}
+
+	if (document.getElementById("informationRecipientDisciplineC").value != '') {
+		knowledgeRequest = knowledgeRequest + '&informationRecipient.healthCareProvider.c.c=' +
+		document.getElementById("informationRecipientDisciplineC").value +
+		'&informationRecipient.healthCareProvider.c.cs=2.16.840.1.113883.6.101';
+	}
+	
+	if (document.getElementById("performer").value != '') {
+		knowledgeRequest = knowledgeRequest + '&performer=' + 
+		document.getElementById("performer").value;
+	}
+
+	if (document.getElementById("performerLanguageC").value != '') {
+		knowledgeRequest = knowledgeRequest + '&performer.languageCode.c=' +
+		document.getElementById("performerLanguageC").value;
+	}
+
+	if (document.getElementById("performerDisciplineC").value != '') {
+		knowledgeRequest = knowledgeRequest + '&performer.healthCareProvider.c.c=' +
+		document.getElementById("performerDisciplineC").value +
+		'&performer.healthCareProvider.c.cs=2.16.840.1.113883.6.101';
+	}
+
+	knowledgeRequest = knowledgeRequest + document.getElementById("output").value;
+	
+	return knowledgeRequest;
+}
+
+function launchUrl()
+{
+	var url = buildUrl();
+	var textField = document.getElementById('urlOutput');
+	textField.value = url;
+	window.open(url,"Infobutton", 'scrollbars=yes, resizable=yes, toolbar=yes, status=yes, left=0, top=0, width=1200,height=800');
+	return false;
+}
+
+
+
+
+//-->
+</script>
+</head>
+
+<body>
+<p><a href="http://www.openinfobutton.org/"><img border="0" src="images/project_logo_medium.jpg"/></a></p>
+<h2><font margin-top="0" face="Arial, Helvetica, sans-serif"><a href="http://www.openinfobutton.org/">OpenInfobutton</a></font></h2>
+
+<p> 
+	<font face="Arial, Helvetica, sans-serif"><font size="3"><strong>*Server: </strong></font>
+	<select name="server" id="server">
+		<option value="http://155.100.240.79:8080/infobutton-service/infoRequest?">ITS- CISOPENINFO</option>
+		<option value="http://dev-service.oib.utah.edu:8080/infobutton-service/infoRequest?">Development</option>
+		<option value="http://service.oib.utah.edu:8080/infobutton-service/infoRequest?">Production</option>
+	</select>
+	</font>
+</p>
+
+<p> 
+	<font face="Arial, Helvetica, sans-serif"><font size="3"><strong>*Requesting Organization: </strong></font>
+	<select name="organizationId" id="organizationId">
+		<option value="1.3.6.1.4.1.3768&xsltTransform=Infobutton_UI_VA">Veterans Administration</option>
+		<option value="MBL">Marine Biology Laboratory</option>
+		<option value="1.3.6.1.4.1.4275&xsltTransform=Infobutton_UI_Duke">Duke University Health System</option>
+		<option value="1.3.6.1.4.1.9328">National Institutes of Health</option>
+		<option value="1.3.6.1.4.1.150&xsltTransform=Infobutton_UI_UW">University of Washington</option>
+		<option value="1.3.6.1.4.1.5884">University of Utah</option>
+	</select>
+	</font>
+</p>
+
+
+<p> <font face="Arial, Helvetica, sans-serif"><font size="3"><strong>*Task context: </strong></font> 
+  <select name="taskContextC" id="taskContextC">
+    <option value=""></option>
+    <option value="LABRREV">Lab results review</option>
+    <option value="MLREV">Medication list review</option>
+    <option value="MEDOE">Medication order entry</option>
+    <option value="PROBLISTREV">Problem list review</option>
+  </select>
+  </font></p>
+
+<p><font size="3" face="Arial, Helvetica, sans-serif"><strong>*Main search criteria:</strong></font>
+<font face="Arial, Helvetica, sans-serif"> 
+Code: <input name="mainSearchCriteriaC" id="mainSearchCriteriaC" type="text" size="15"> Display name: <input name="mainSearchCriteriaDn" id="mainSearchCriteriaDn" type="text" size="25"> Code system: <select name="mainSearchCriteriaCs" id="mainSearchCriteriaCs">
+    <option value=""></option>
+    <option value="2.16.840.1.113883.6.103">ICD9-CM</option>
+    <option value="2.16.840.1.113883.6.1">LOINC</option>
+    <option value="2.16.840.1.113883.6.177">MeSH</option>
+	<option value="2.16.840.1.113883.6.69">National Drug Codes</option>
+    <option value="2.16.840.1.113883.6.88">RxNorm</option>
+	<option value="2.16.840.1.113883.6.96">SNOMED-CT</option>
+  </select>
+  </font>
+</p>
+
+<p><font face="Arial, Helvetica, sans-serif"><strong>Age: </strong> Value: <input name="ageV" id="ageV" type="text" size="8">
+  Unit: <select name="ageU" id="ageU">
+    <option value=""></option>
+	<option value="a">Years</option>
+    <option value="m">Months</option>
+    <option value="d">Days</option>
+  </select>
+  </font></p>
+
+
+<p><font face="Arial, Helvetica, sans-serif"><strong>Age group: </strong>
+  <select name="ageGroupC" id="ageGroupC">
+    <option value=""></option>
+	<option value="D000293">adolescent; 13-18 years</option>
+    <option value="D000328">adult; 19-44 years</option>
+    <option value="D000368">aged; 56-79 years</option>
+    <option value="D000369">aged, 80 and older; a person 80 years of age and older</option>
+    <option value="D008875">middle aged; 45-64 years</option>
+    <option value="D055815">young adult; 19-24 years</option>
+    <option value="D002648">child; 6 to 12 years</option>
+    <option value="D002675">child, preschool; 2 to 5 years</option>
+    <option value="D007223">Infant; 1 to 23 months</option>
+    <option value="D007231">infant, newborn; birth to 1 month</option>
+  </select>
+</font></p>
+  
+<p><font face="Arial, Helvetica, sans-serif"><strong>Gender: </strong>
+  <select name="administrativeGenderCodeC" id="administrativeGenderCodeC">
+    <option value=""></option>
+	<option value="M">Male</option>
+    <option value="F">Female</option>
+  </select>
+  </font></p>
+
+<p><font face="Arial, Helvetica, sans-serif"><strong>Care setting: </strong>
+  <select name="encounterC" id="encounterC">
+    <option value=""></option>
+	<option value="AMB">Outpatient</option>
+    <option value="IMP">Inpatient</option>
+    <option value="EMER">Emergency</option>
+  </select>
+  </font></p>
+
+  
+  <p><font face="Arial, Helvetica, sans-serif"><strong>Performer: </strong></font><font face="Arial, Helvetica, sans-serif"> 
+  <select name="performer" id="performer">
+    <option value=""></option>
+	<option value="PROV">Healthcare Provider</option>
+    <option value="PAT">Patient</option>
+  </select>
+  language:
+  <select name="performerLanguageC" id="performerLanguageC">
+    <option value=""></option>
+	<option value="en">English</option>
+    <option value="es">Spanish</option>
+  </select>
+  discipline:
+  <select name="performerDisciplineC" id="performerDisciplineC">
+    <option value=""></option>
+	<option value="200000000X">Physician</option>
+    <option value="163W00000X">Registered Nurse</option>
+  </select>
+
+  </font></p>
+
+  <p><font face="Arial, Helvetica, sans-serif"><strong>Information recipient: </strong></font><font face="Arial, Helvetica, sans-serif"> 
+  <select name="informationRecipient" id="informationRecipient">
+    <option value=""></option>
+	<option value="PROV">Healthcare Provider</option>
+    <option value="PAT">Patient</option>
+  </select>
+  language:
+  <select name="informationRecipientLanguageC" id="informationRecipientLanguageC">
+    <option value=""></option>
+	<option value="en">English</option>
+    <option value="es">Spanish</option>
+  </select>
+  discipline:
+  <select name="informationRecipientDisciplineC" id="informationRecipientDisciplineC">
+    <option value=""></option>
+	<option value="200000000X">Physician</option>
+    <option value="163W00000X">Registered Nurse</option>
+  </select>
+  </font></p>
+
+<p><font face="Arial, Helvetica, sans-serif"><strong>Output: </strong></font><font face="Arial, Helvetica, sans-serif"> 
+  <select name="output" id="output">
+	<option value="">HTML</option>
+    <option value="&transform">XML</option>
+  </select>
+  </font></p>
+
+  
+<p><font face="Arial, Helvetica, sans-serif"> 
+  <input name="submit" type="submit" value="Build URL" onClick="launchUrl();">
+  </font></p>
+
+<textarea id="urlOutput" class="result_output"></textarea>
+
+</body>
+</html>
