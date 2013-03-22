@@ -21,11 +21,6 @@ import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
 import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
 import edu.utah.openinfobutton.externalresource.implementation.TerminologyMappings;
 
-/*
-$Rev:: 2135          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2011-02-10 1#$:  Date of last commit
-*/
 
 @Component
 public class TransformCode {
@@ -40,6 +35,15 @@ public class TransformCode {
 	@Qualifier("externalSet")
 	private TerminologyHandler ESHandler;
 	List<Mapping> validMappings;
+	
+	/**
+	 * 
+	 * @param element required for rxnorm
+	 * @param code the code that we are trying to transform
+	 * @param supportedCodeSystems from the profile
+	 * @param request the already transformed codes are stored in the request
+	 * @return
+	 */
 	public  Code transformInput(CodedContextElement element, Code code, List<String> supportedCodeSystems, KnowledgeRequest request )
 	{
 		if(supportedCodeSystems.size()>0)

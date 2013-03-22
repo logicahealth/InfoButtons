@@ -1,7 +1,6 @@
 package edu.duke.mc.cfm.dci.infobutton;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -9,13 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Context;
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.KnowledgeResourceProfile;
-
-/*
-$Rev:: 1252          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2010-10-26 1#$:  Date of last commit
-*/
-
 
 public class ContextProfileHandler {
 
@@ -45,6 +37,11 @@ public class ContextProfileHandler {
 		return results;
 	}
 	
+	/**
+	 * The contexts in a profile are matched against the request.If successful the context is added to the result.
+	 * @param profile
+	 * @return RequestResult
+	 */
 	private  RequestResult matchContexts (KnowledgeResourceProfile profile) {
 		log.debug("Matching profile... "+profile.getHeader().getTitle());
 		RequestResult result = new RequestResult(profile);

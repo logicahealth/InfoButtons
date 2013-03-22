@@ -5,12 +5,6 @@ import java.util.List;
 
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.KnowledgeResourceProfile;
 
-/*
-$Rev:: 2216          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2011-02-24 1#$:  Date of last commit
-*/
-
 public class ResourceProfileProvider {
 	
 	private static ResourceProfileProvider instance;
@@ -20,7 +14,6 @@ public class ResourceProfileProvider {
 	private ResourceProfileProvider () {
 		
 		profiles = new ArrayList<KnowledgeResourceProfile>();
-		//changed
 		ResourceProfileLoaderNew rpn = new ResourceProfileLoaderNew();
 		profiles.addAll(rpn.getProfiles());
 	}

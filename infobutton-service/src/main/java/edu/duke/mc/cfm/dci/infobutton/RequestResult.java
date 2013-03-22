@@ -8,11 +8,6 @@ import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Id;
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.KnowledgeResourceProfile;
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.KnowledgeResourceProfile.ProfileDefinition.SupportedTerminologies;
 
-/*
-$Rev:: 1252          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2010-10-26 1#$:  Date of last commit
-*/
 
 public class RequestResult implements Comparable<RequestResult>{
 	
