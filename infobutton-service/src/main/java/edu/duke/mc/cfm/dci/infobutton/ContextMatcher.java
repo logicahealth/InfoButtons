@@ -15,14 +15,6 @@ import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Id;
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
 import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
 
-
-
-/*
-$Rev:: 2327          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2011-03-08 1#$:  Date of last commit
-*/
-
 @Configurable(preConstruction = true)
 public abstract class ContextMatcher {
 	

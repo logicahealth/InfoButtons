@@ -9,11 +9,6 @@ import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Code;
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.CodedContextElement;
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
 
-/*
-$Rev:: 1095          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2010-10-01 1#$:  Date of last commit
-*/
 
 public class MainSearchCriteriaMatcher extends ContextMatcher{
 

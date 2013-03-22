@@ -58,12 +58,6 @@ import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Code;
 import edu.utah.further.subsetdb.service.LogsDao;
 
 
-/*
-$Rev:: 2220          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2011-02-24 1#$:  Date of last commit
-*/
-
 
 @Configurable(dependencyCheck = false)
 public class KnowledgeRequestServlet extends HttpServlet {
@@ -74,7 +68,9 @@ public class KnowledgeRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	KnowledgeRequestEngine engine;
-	
+	/**
+	 * Starting point. This is where the infobutton request enters the system
+	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException
 	{
 		Map<String, String[]> requestParameters = req.getParameterMap();
@@ -105,7 +101,7 @@ public class KnowledgeRequestServlet extends HttpServlet {
 			transformer = tfactory.newTransformer();
 			transformer.transform(source, result);
 			String orgid= knowledgeRequest.getHolder().getRepresentedOrganization().getRoot();
-//			    dao.saveRequest(stringWriter.toString(), req.getRemoteAddr(), orgid);//Log written here
+			dao.saveRequest(stringWriter.toString(), req.getRemoteAddr(), orgid);//Log written here
 			doc = engine.getResponse(knowledgeRequest);
 			resp.setContentType("text/html");
             source = new DOMSource(doc);
@@ -145,7 +141,11 @@ public class KnowledgeRequestServlet extends HttpServlet {
 			}
 	}
 	
-	
+	/**
+	 * 
+	 * @param requestParameters The parameters that were passes in the infobutton request
+	 * @return KnowledgeRequest which holds the passed request parameters in a well defined format of CodedContextElements
+	 */
 	private KnowledgeRequest getServiceRequest(Map<String, String[]> requestParameters) {
 		PatientContext patientContext = new PatientContext();
 		Patient patient = new Patient();

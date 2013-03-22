@@ -28,18 +28,16 @@ import edu.duke.mc.cfm.dci.infobutton.RequestResult;
 import edu.duke.mc.cfm.dci.infobutton.ResponseGenerator;
 import edu.duke.mc.cfm.dci.infobutton.TaskCheckHandler;
 
-
-/*
-$Rev:: 2138          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2011-02-11 1#$:  Date of last commit
-*/
-
 @Component
 public class KnowledgeRequestEngine {
 
 	@Autowired
 	ResponseGenerator rg;
+	/**
+	 * 
+	 * @param knowledgeRequest built from the input request parameters
+	 * @return Document which contains the aggregateKnowledgeResponse after processing the infobutton request
+	 */
 	public Document getResponse(KnowledgeRequest knowledgeRequest) {
 		Document doc = null ;
 		List<RequestResult> result = returnResult(knowledgeRequest);
@@ -73,6 +71,12 @@ public class KnowledgeRequestEngine {
 		return doc;
 	}
 
+	/**
+	 * Based on the knowledge Request, access and task checks are done.
+	 * Then based on the qualified resource profiles, matching is done to produce the results.
+	 * @param request
+	 * @return List of Results
+	 */
 	private List<RequestResult> returnResult(KnowledgeRequest request) {
 		
 		List<RequestResult> result = new ArrayList<RequestResult>();

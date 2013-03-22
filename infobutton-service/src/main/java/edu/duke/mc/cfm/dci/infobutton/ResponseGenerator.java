@@ -55,11 +55,6 @@ import edu.duke.mc.cfm.dci.infobutton.schemas.kb.SubTopic;
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.SubTopic.SearchParameter;
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.SyntaxOnResource;
 
-/*
-$Rev:: 2193          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2011-02-22 1#$:  Date of last commit
-*/
 
 @Component
 public class ResponseGenerator {
@@ -68,6 +63,13 @@ public class ResponseGenerator {
 	Logger log = Logger.getLogger(ResponseGenerator.class.getName());
 	@Autowired
 	TransformCode tc;
+	/**
+	 * Does searching and accordingly creates the feed for each resource profile 
+	 * @param r the infobutton knowledgeRequest
+	 * @param results List of results after matching
+	 * @return AggregateKnowledgeResponse
+	 * @throws DatatypeConfigurationException
+	 */
 	public  AggregateKnowledgeResponse returnResponse(KnowledgeRequest r, List<RequestResult> results) throws DatatypeConfigurationException {
 
 		AggregateKnowledgeResponse knowledgeResponse = new AggregateKnowledgeResponse();
@@ -132,10 +134,6 @@ public class ResponseGenerator {
 	private List<CategoryType> getFeedLevelCategory(ContextDefinition cd) {
 		
 		List<CategoryType> category = new ArrayList<CategoryType>();
-		CategoryType c = new CategoryType();
-		c.setTerm("OTHER");
-		c.setScheme("REDS_MT010001UV");
-		category.add(c);
 		if(cd.getPatientGender()!=null&&(cd.getPatientGender().isMatch()||cd.getPatientGender().isSearch()) &&
 				request.getCategoryHashMap().containsKey(CodeConstants.PATIENT_GENDER_KEY))
 			category.addAll(request.getCategoryHashMap().get(CodeConstants.PATIENT_GENDER_KEY));
@@ -288,10 +286,6 @@ public class ResponseGenerator {
 			TextType title = new TextType();
 			title.setType("text");
 			title.getContent().add((contextCode.getCode().getDisplayName()));
-			CategoryType category = new CategoryType();
-			category.setTerm("OTHER");
-			category.setScheme("REDS_MT010001UV");
-			entry.getCategory().add(category);
 			entry.getCategory().addAll(convertCDIntoCategory(contextCode));
 			entry.getLink().add(link);
 			entry.setTitle(title);
@@ -352,12 +346,8 @@ public class ResponseGenerator {
 				TextType title = new TextType();
 				title.setType("text");
 				title.getContent().add((subtopicList.get(i).getLinkName()));
-				CategoryType category = new CategoryType();
-				category.setTerm("OTHER");
-				category.setScheme("REDS_MT010001UV");
 				entry.getLink().add(link);
 				entry.setTitle(title);
-				entry.getCategory().add(category);
 				entries.add(entry);
 			
 			}

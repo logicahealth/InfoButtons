@@ -6,11 +6,6 @@ import java.util.List;
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Id;
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.KnowledgeResourceProfile;
 
-/*
-$Rev:: 1094          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2010-10-01 1#$:  Date of last commit
-*/
 
 public class AccessCheckHandler {
 
