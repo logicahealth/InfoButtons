@@ -181,7 +181,7 @@ public class ResponseGenerator {
 		FeedType feedType = new FeedType();
 		try {
 			String urlBase = context.getKnowledgeRequestService().getKnowledgeRequestServiceLocation().getUrl();
-			StringBuilder baseLink = generateBaseLink(urlBase, context.getContextDefinition(),supportedCodeSystems);
+			StringBuilder baseLink = generateBaseLink(urlBase, context.getContextDefinition(),supportedCodeSystems, null);
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			URL url = new URL(baseLink.toString());
 			URI uri = new URI(url.getProtocol(),url.getHost(), url.getPath(), url.getQuery(), null);
@@ -238,18 +238,18 @@ public class ResponseGenerator {
 		
 		List<EntryType> entries = new ArrayList<EntryType>();
 		String urlBase = context.getKnowledgeRequestService().getKnowledgeRequestServiceLocation().getUrl();
-		
-		StringBuilder baseLink = generateBaseLink(urlBase, context.getContextDefinition(),supportedCodeSystems);
+		List<CategoryType> entryLevelCategoryList = new ArrayList<CategoryType>();
+		StringBuilder baseLink = generateBaseLink(urlBase, context.getContextDefinition(),supportedCodeSystems,entryLevelCategoryList);
 		
 		StringBuilder subTopics = new StringBuilder();
 		LinkType link;
 		EntryType entry;
-		List<CD> codes = new ArrayList<CD>();
+		List<Code> codes = new ArrayList<Code>();
 		List<SubTopic> subtopicList = context.getContextDefinition().getSubTopics().getSubTopic();
 		for(int i=0;i<subtopicList.size();i++)
 		{ 
 			try{
-			CD temp = subtopicList.get(i).getSearchParameter().getValueSource().getSearchCode();
+			Code temp = subtopicList.get(i).getSearchParameter().getValueSource().getSearchCode().getCode();
 			if(temp!=null)
 				codes.add(temp);
 			}catch(NullPointerException e)
@@ -267,42 +267,43 @@ public class ResponseGenerator {
 			}
 		}
 		
-		for (CD contextCode : codes) {
+		for (Code contextCode : codes) {
 			link = new LinkType();
 			subTopics = new StringBuilder(baseLink);
 			subTopics.append(CodeConstants.SUBTOPIC_CODE);
 			subTopics.append("=");
-			subTopics.append(contextCode.getCode().getCode());
+			subTopics.append(contextCode.getCode());
 			subTopics.append("&");
 			subTopics.append(CodeConstants.SUBTOPIC_CODESYSTEM);
 			subTopics.append("=");
-			subTopics.append(contextCode.getCode().getCodeSystem());
+			subTopics.append(contextCode.getCodeSystem());
 			subTopics.append("&");
 			subTopics.append(CodeConstants.SUBTOPIC_DISPLAYNAME);
 			subTopics.append("=");
-			subTopics.append(contextCode.getCode().getDisplayName());
+			subTopics.append(contextCode.getDisplayName());
 			link.setHref(subTopics.toString());
 			entry = new EntryType();
 			TextType title = new TextType();
 			title.setType("text");
-			title.getContent().add((contextCode.getCode().getDisplayName()));
-			entry.getCategory().addAll(convertCDIntoCategory(contextCode));
+			title.getContent().add((contextCode.getDisplayName()));
+			entry.getCategory().addAll(entryLevelCategoryList);
+			entry.getCategory().addAll(convertCodeIntoCategory(contextCode,CodeConstants.SUBTOPIC_CODE,
+					CodeConstants.SUBTOPIC_CODESYSTEM,CodeConstants.SUBTOPIC_DISPLAYNAME));
 			entry.getLink().add(link);
 			entry.setTitle(title);
-			
 			entries.add(entry);
 		}
 		return entries;
 	}
 	
-	private List<CategoryType> convertCDIntoCategory(CD contextCode) {
+	private List<CategoryType> convertCodeIntoCategory(Code code,String codeKey, String codeSystemKey, String displayNameKey) {
 		List<CategoryType> categoryList = new ArrayList<CategoryType>();
-		if(!contextCode.getCode().getCode().equals(""))
-			categoryList.add(CodeUtility.convertIntoCategoryType(contextCode.getCode().getCode(), CodeConstants.SUBTOPIC_CODE));
-		if(!contextCode.getCode().getCodeSystem().equals(""))
-			categoryList.add(CodeUtility.convertIntoCategoryType(contextCode.getCode().getCodeSystem(), CodeConstants.SUBTOPIC_CODESYSTEM));
-		if(!contextCode.getCode().getDisplayName().equals(""))
-			categoryList.add(CodeUtility.convertIntoCategoryType(contextCode.getCode().getDisplayName(), CodeConstants.SUBTOPIC_DISPLAYNAME));
+		if(!code.getCode().equals(""))
+			categoryList.add(CodeUtility.convertIntoCategoryType(code.getCode(),codeKey));
+		if(!code.getCodeSystem().equals(""))
+			categoryList.add(CodeUtility.convertIntoCategoryType(code.getCodeSystem(),codeSystemKey));
+		if(!code.getDisplayName().equals(""))
+			categoryList.add(CodeUtility.convertIntoCategoryType(code.getDisplayName(),displayNameKey));
 		return categoryList;
 	}
 
@@ -449,7 +450,7 @@ public class ResponseGenerator {
 		
 	}
 	
-	private  StringBuilder generateBaseLink(String url, Context.ContextDefinition contextDef,List<String> supportedCodeSystems) {
+	private  StringBuilder generateBaseLink(String url, Context.ContextDefinition contextDef,List<String> supportedCodeSystems, List<CategoryType> entryLevelCategoryList) {
 
 		StringBuilder str = new StringBuilder(url);
 		Code code = CodeUtility.getCode();;
@@ -506,6 +507,11 @@ public class ResponseGenerator {
 			code = tc.transformOutput(contextDef.getConceptOfInterest(),request.getMainSearchCriteria().getCode(),supportedCodeSystems,request);
 			str.append(returnParameters(code, CodeConstants.MAINSEARCH_CODE, 
 					CodeConstants.MAINSEARCH_CODESYSTEM, CodeConstants.MAINSEARCH_DISPLAYNAME));
+			if((entryLevelCategoryList!=null)&&(request.getMainSearchCriteria().getCode().getCode().equals("")))
+			{
+				entryLevelCategoryList.addAll(convertCodeIntoCategory(code, CodeConstants.MAINSEARCH_CODE, 
+					CodeConstants.MAINSEARCH_CODESYSTEM, CodeConstants.MAINSEARCH_DISPLAYNAME));
+			}
 		}
 		return str;
 	}
