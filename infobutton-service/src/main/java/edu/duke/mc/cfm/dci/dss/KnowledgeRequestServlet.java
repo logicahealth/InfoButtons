@@ -77,6 +77,7 @@ public class KnowledgeRequestServlet extends HttpServlet {
 		KnowledgeRequest knowledgeRequest=getServiceRequest(requestParameters);
 		ResourceProfileLoaderNew.setMode(knowledgeRequest.getExecutionMode());
 		REDSMT010001UVKnowledgeRequestNotification request = KnowledgeRequest.getJAXBElement(knowledgeRequest);
+		resp.setCharacterEncoding("UTF-8");
 		PrintWriter out = resp.getWriter();
 		JAXBContext ctx;
 		DocumentBuilderFactory dbf;
