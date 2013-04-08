@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- edited with XMLSpy v2012 rel. 2 sp1 (x64) (http://www.altova.com) by Guilherme Del Fiol (Duke University) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
-	<xs:element name="aggregateKnowledgeResponse">
+	<xs:element name="aggregateKnowledgeResponse" type="aggregateKnowledgeResponse">
 		<xs:annotation>
 			<xs:documentation>Aggregate knowledge response root element</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="feed" maxOccurs="unbounded"/>
-			</xs:sequence>
-			<xs:attributeGroup ref="commonAttributes"/>
-		</xs:complexType>
 	</xs:element>
 	<xs:element name="feed" type="feedType">
 		<xs:annotation>
@@ -240,4 +234,10 @@
 		<xs:attribute ref="xml:base"/>
 		<xs:attribute ref="xml:lang" use="required"/>
 	</xs:attributeGroup>
+	<xs:complexType name="aggregateKnowledgeResponse">
+		<xs:sequence>
+			<xs:element ref="feed" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="commonAttributes"/>
+	</xs:complexType>
 </xs:schema>
