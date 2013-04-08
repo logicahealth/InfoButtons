@@ -33,12 +33,15 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.hl7.v3.AggregateKnowledgeResponse;
 import org.hl7.v3.CategoryType;
 import org.hl7.v3.REDSMT010001UVKnowledgeRequestNotification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.w3c.dom.Document;
+
+import com.google.gson.Gson;
 
 import edu.duke.mc.cfm.dci.infobutton.CodeConstants;
 import edu.duke.mc.cfm.dci.infobutton.CodeUtility;
@@ -92,7 +95,7 @@ public class KnowledgeRequestServlet extends HttpServlet {
 			db = dbf.newDocumentBuilder();
 			doc = db.newDocument();
 			m.marshal(new JAXBElement<REDSMT010001UVKnowledgeRequestNotification>(
-					  new QName("urn:hl7-org:v3", "knowledgeRequestNotification"), REDSMT010001UVKnowledgeRequestNotification.class, request ), doc);
+					  new QName("knowledgeRequestNotification"), REDSMT010001UVKnowledgeRequestNotification.class, request ), doc);
 			//Code below is for getting the large xml string from request
 			Source source = new DOMSource(doc);
             StringWriter stringWriter = new StringWriter();
@@ -103,18 +106,45 @@ public class KnowledgeRequestServlet extends HttpServlet {
 			transformer.transform(source, result);
 			String orgid= knowledgeRequest.getHolder().getRepresentedOrganization().getRoot();
 			dao.saveRequest(stringWriter.toString(), req.getRemoteAddr(), orgid);//Log written here
-			doc = engine.getResponse(knowledgeRequest);
+			AggregateKnowledgeResponse response = engine.getResponse(knowledgeRequest);
+			ctx = JAXBContext.newInstance(AggregateKnowledgeResponse.class);
+			m =ctx.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			dbf = DocumentBuilderFactory.newInstance();
+			dbf.setNamespaceAware(true);
+			db = dbf.newDocumentBuilder();
+			doc = db.newDocument();
+			m.marshal(new JAXBElement<AggregateKnowledgeResponse>(
+					  new QName("aggregateKnowledgeResponse"), AggregateKnowledgeResponse.class, response ), doc);
 			resp.setContentType("text/html");
             source = new DOMSource(doc);
             stringWriter = new StringWriter();
             result = new StreamResult(stringWriter);
             tfactory = TransformerFactory.newInstance();
             transformer = tfactory.newTransformer();
-            transformer.transform(source, result);//trying to convert xml file to string
-            if (req.getParameter("transform") != null) 
+            transformer.transform(source, result);//now stringwriter has xml.
+            String knowledgeResType = req.getParameter(CodeConstants.KNOWLEDGE_RESPONSE_TYPE);
+            if ((req.getParameter("transform") != null)||(knowledgeResType!=null)) 
             {
-            	resp.setContentType("text/xml");
-            	out.println(stringWriter.getBuffer().toString());
+            	if(knowledgeResType!=null)
+            	{
+            		if(knowledgeResType.equals("application/json"))
+            		{
+            			Gson gson = new Gson();
+            			resp.setContentType("application/json");
+            			out.println(gson.toJson(response));
+            		}
+            		else if(knowledgeResType.equals("application/xml"))
+            		{
+                		resp.setContentType("text/xml");
+                		out.println(stringWriter.getBuffer().toString());
+                	}
+            	}
+            	else//for backward compatibility with 'transform' in URL
+            	{
+            		resp.setContentType("text/xml");
+            		out.println(stringWriter.getBuffer().toString());
+            	}
             } 
             else
             {
@@ -159,7 +189,6 @@ public class KnowledgeRequestServlet extends HttpServlet {
 		Encounter encounter = new Encounter();
 		Date effectiveTime = new Date();
 		String executionMode = new String();
-		
 		Map<String,List<CategoryType>> categoryHashMap = new HashMap<String, List<CategoryType>>();
 		//Set time
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyymmddhhmmss");
@@ -501,7 +530,6 @@ public class KnowledgeRequestServlet extends HttpServlet {
 		if (requestParameters.containsKey(CodeConstants.EXECUTION_MODE)) {
 			executionMode = requestParameters.get(CodeConstants.EXECUTION_MODE)[0];
 		}
-		
 		KnowledgeRequest knowledgeRequest = new KnowledgeRequest(patientContext, holder, performer, informationRecipient,
 				taskContext,mainSearchCriteria, encounter, effectiveTime, executionMode);
 		knowledgeRequest.setCategoryHashMap(categoryHashMap);
