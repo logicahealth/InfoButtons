@@ -93,8 +93,8 @@ public class ResponseGenerator {
 		TextType subTitle = new TextType();
 		title.setType("text");
 		subTitle.setType("text");
-		title.getContent().add(header.getTitle());
-		subTitle.getContent().add(request.getMainSearchCriteria().getCode().getDisplayName());
+		title.getValue().add(header.getTitle());
+		subTitle.getValue().add(request.getMainSearchCriteria().getCode().getDisplayName());
 		feed.setTitle(title);
 		feed.setSubtitle(subTitle);
 	 	GregorianCalendar gcal = new GregorianCalendar();
@@ -260,7 +260,7 @@ public class ResponseGenerator {
 				entry = new EntryType();
 				TextType title = new TextType();
 				title.setType("text");
-				title.getContent().add((subtopicList.get(i).getLinkName()));
+				title.getValue().add((subtopicList.get(i).getLinkName()));
 				entry.getLink().add(link);
 				entry.setTitle(title);
 				entries.add(entry);
@@ -285,7 +285,7 @@ public class ResponseGenerator {
 			entry = new EntryType();
 			TextType title = new TextType();
 			title.setType("text");
-			title.getContent().add((contextCode.getDisplayName()));
+			title.getValue().add((contextCode.getDisplayName()));
 			entry.getCategory().addAll(entryLevelCategoryList);
 			entry.getCategory().addAll(convertCodeIntoCategory(contextCode,CodeConstants.SUBTOPIC_CODE,
 					CodeConstants.SUBTOPIC_CODESYSTEM,CodeConstants.SUBTOPIC_DISPLAYNAME));
@@ -346,7 +346,7 @@ public class ResponseGenerator {
 				entry = new EntryType();
 				TextType title = new TextType();
 				title.setType("text");
-				title.getContent().add((subtopicList.get(i).getLinkName()));
+				title.getValue().add((subtopicList.get(i).getLinkName()));
 				entry.getLink().add(link);
 				entry.setTitle(title);
 				entries.add(entry);
@@ -358,7 +358,7 @@ public class ResponseGenerator {
 				entry = new EntryType();
 				TextType title = new TextType();
 				title.setType("text");
-				title.getContent().add((subtopicList.get(i).getLinkName()));
+				title.getValue().add((subtopicList.get(i).getLinkName()));
 				entry.getLink().add(link);
 				entry.setTitle(title);
 				entries.add(entry);

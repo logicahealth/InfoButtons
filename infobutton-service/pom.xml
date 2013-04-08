@@ -245,6 +245,12 @@ $Date:: 2011-02-24 1#$:  Date of last commit
        	<artifactId>infobutton-externalresources</artifactId>
        	<version>0.0.1-SNAPSHOT</version>
        </dependency>
+       <dependency>
+      	<groupId>com.google.code.gson</groupId>
+      	<artifactId>gson</artifactId>
+      	<version>2.2.2</version>
+      	<scope>compile</scope>
+       </dependency>
    </dependencies>
     <build>
         <plugins>
