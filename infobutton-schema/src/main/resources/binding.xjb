@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jxb:bindings 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+    version="2.1">
+    
+    <jxb:bindings schemaLocation="KnowledgeResponse.xsd">
+            <jxb:bindings node="//xs:complexType[@name='textType']">
+               
+                	<jxb:property name="value"/>
+            </jxb:bindings>
+            
+    </jxb:bindings>
+</jxb:bindings>
+
+
