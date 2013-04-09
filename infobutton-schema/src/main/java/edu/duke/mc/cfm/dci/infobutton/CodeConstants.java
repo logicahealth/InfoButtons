@@ -121,6 +121,8 @@ public final class CodeConstants {
 	
 	public static final String EXECUTION_MODE = "executionMode";
 	
+	public static final String KNOWLEDGE_RESPONSE_TYPE = "knowledgeResponseType";
+	
 	//Following are for storing the request parameters in the hashMap of knowledge request
 	public static final String PATIENT_GENDER_KEY = "PATIENT_GENDER_KEY";
 	public static final String PATIENT_AGEGROUP_KEY = "PATIENT_AGEGROUP_KEY";
