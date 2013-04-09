@@ -134,7 +134,7 @@ public class KnowledgeRequestServlet extends HttpServlet {
             			resp.setContentType("application/json");
             			out.println(gson.toJson(response));
             		}
-            		else if(knowledgeResType.equals("application/xml"))
+            		else if(knowledgeResType.equals("text/xml"))
             		{
                 		resp.setContentType("text/xml");
                 		out.println(stringWriter.getBuffer().toString());
