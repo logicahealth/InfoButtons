@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.UUID;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -40,12 +41,12 @@ import org.hl7.v3.CategoryType;
 import org.hl7.v3.DateTimeType;
 import org.hl7.v3.EntryType;
 import org.hl7.v3.FeedType;
+import org.hl7.v3.IdType;
 import org.hl7.v3.LinkType;
 import org.hl7.v3.TextType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.CD;
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Code;
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.CodedContextElement;
 import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Context;
@@ -73,18 +74,27 @@ public class ResponseGenerator {
 	public  AggregateKnowledgeResponse returnResponse(KnowledgeRequest r, List<RequestResult> results) throws DatatypeConfigurationException {
 
 		AggregateKnowledgeResponse knowledgeResponse = new AggregateKnowledgeResponse();
+		if(r.getPerformer().getLanguage().getCode().equals(""))
+			knowledgeResponse.setLang("en");
+		else
+			knowledgeResponse.setLang(r.getPerformer().getLanguage().getCode());
 		int count = results.size();
 		FeedType feed;
 		request = r;
 		for (int x = 0; x < count; x++) {
 			feed = createFeed(results.get(x));
 			if (!feed.getEntry().isEmpty()) 
+			{
+				IdType feedID = new IdType();
+				feedID.setValue("urn:uuid:"+UUID.randomUUID());
+				feed.setId(feedID);
 				knowledgeResponse.getFeed().add(feed);
+			}
 		}
 		return knowledgeResponse;
 	}
 	
-	private  FeedType createFeed(RequestResult result) throws DatatypeConfigurationException {
+	private  FeedType createFeed(RequestResult result){
 		
 		FeedType feed = new FeedType();
 		KnowledgeResourceProfile.Header header = result.getHeader();
@@ -97,18 +107,12 @@ public class ResponseGenerator {
 		subTitle.getValue().add(request.getMainSearchCriteria().getCode().getDisplayName());
 		feed.setTitle(title);
 		feed.setSubtitle(subTitle);
-	 	GregorianCalendar gcal = new GregorianCalendar();
-		gcal.setTime(Calendar.getInstance().getTime());
-		XMLGregorianCalendar xmlTime = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
-		DateTimeType updated = new DateTimeType();
-		updated.setValue(xmlTime);
-		feed.setUpdated(updated);
+	 	feed.setUpdated(getUpdateTime());
 		int count = contexts.size();
-		if(result.isHl7URLCompliant()){
-			if(result.isHl7KnowledgeResponseCompliant()){
+		if(result.isHl7URLCompliant()&&result.isHl7KnowledgeResponseCompliant()){
 				FeedType feedFromResource = null;
 				for (int x = 0; x < count; x++){
-					feedFromResource = parseAndCeateEntries(contexts.get(x),result.getSupportedCodeSystems());
+					feedFromResource = parseAndCreateEntries(contexts.get(x),result.getSupportedCodeSystems());
 					feed.getEntry().addAll(feedFromResource.getEntry());
 				}
 				/**
@@ -116,17 +120,33 @@ public class ResponseGenerator {
 				 */
 				if(count>0)
 					feed.getCategory().addAll(feedFromResource.getCategory());
-			}else{
-				for (int x = 0; x < count; x++)
-					feed.getEntry().addAll(createEntries(contexts.get(x),result.getSupportedCodeSystems()));
-				if(count>0)
-					feed.getCategory().addAll(getFeedLevelCategory(contexts.get(0).getContextDefinition()));
-			}
-		}else{
-			for (int x = 0; x < count; x++)
-				feed.getEntry().addAll(createNonHL7CompliantEntries(contexts.get(x),result.getSupportedCodeSystems(),result.getUrlStyle()));
+				return feed;
+		}
+		else{
+			String lang="en";
 			if(count>0)
-				feed.getCategory().addAll(getFeedLevelCategory(contexts.get(0).getContextDefinition()));
+			{
+				ContextDefinition cd = contexts.get(0).getContextDefinition();
+				feed.getCategory().addAll(getFeedLevelCategory(cd));
+				if(cd.getInformationRecipientLanguage()!=null&&(cd.getInformationRecipientLanguage().isMatch()||cd.getInformationRecipientLanguage().isSearch())&&
+						request.getCategoryHashMap().containsKey(CodeConstants.INFORMATION_RECIPIENT_LANGUAGE_KEY))
+				{
+					lang=request.getInformationRecipient().getLanguage().getCode();
+					feed.setLang(lang);
+				}
+				else
+					feed.setLang(lang);
+			}
+			if(result.isHl7URLCompliant())
+			{
+				for (int x = 0; x < count; x++)
+					feed.getEntry().addAll(createEntries(contexts.get(x),result.getSupportedCodeSystems(),lang));
+			}
+			else
+			{
+				for (int x = 0; x < count; x++)
+				feed.getEntry().addAll(createNonHL7CompliantEntries(contexts.get(x),result.getSupportedCodeSystems(),result.getUrlStyle(),lang));
+			}
 		}
 		return feed;
 	}
@@ -177,7 +197,7 @@ public class ResponseGenerator {
 	 * @param supportedCodeSystems to generate the base link
 	 * @return the entire feed in the form of xml
 	 */
-	private FeedType parseAndCeateEntries(Context context, List<String> supportedCodeSystems) {
+	private FeedType parseAndCreateEntries(Context context, List<String> supportedCodeSystems) {
 		FeedType feedType = new FeedType();
 		try {
 			String urlBase = context.getKnowledgeRequestService().getKnowledgeRequestServiceLocation().getUrl();
@@ -234,7 +254,7 @@ public class ResponseGenerator {
 		return feedType;
 	}
 	
-	private  List<EntryType> createEntries (Context context,List<String> supportedCodeSystems) {
+	private  List<EntryType> createEntries (Context context,List<String> supportedCodeSystems, String lang) {
 		
 		List<EntryType> entries = new ArrayList<EntryType>();
 		String urlBase = context.getKnowledgeRequestService().getKnowledgeRequestServiceLocation().getUrl();
@@ -255,12 +275,21 @@ public class ResponseGenerator {
 			}catch(NullPointerException e)
 			{
 				link = new LinkType();
+				link.setRel("alternate");
+				link.setType("html");
+				link.setHreflang(lang);
+				link.setTitle(subtopicList.get(i).getLinkName());
 				subTopics = new StringBuilder(baseLink);
 				link.setHref(subTopics.toString());
 				entry = new EntryType();
+				entry.setUpdated(getUpdateTime());
+				entry.setLang(lang);
+				IdType entryID = new IdType();
+				entryID.setValue("urn:uuid:"+UUID.randomUUID());
+				entry.setId(entryID);
 				TextType title = new TextType();
 				title.setType("text");
-				title.getValue().add((subtopicList.get(i).getLinkName()));
+				title.getValue().add(subtopicList.get(i).getLinkName());
 				entry.getLink().add(link);
 				entry.setTitle(title);
 				entries.add(entry);
@@ -269,6 +298,10 @@ public class ResponseGenerator {
 		
 		for (Code contextCode : codes) {
 			link = new LinkType();
+			link.setRel("alternate");
+			link.setType("html");
+			link.setHreflang(lang);
+			link.setTitle(contextCode.getDisplayName());
 			subTopics = new StringBuilder(baseLink);
 			subTopics.append(CodeConstants.SUBTOPIC_CODE);
 			subTopics.append("=");
@@ -283,9 +316,14 @@ public class ResponseGenerator {
 			subTopics.append(contextCode.getDisplayName());
 			link.setHref(subTopics.toString());
 			entry = new EntryType();
+			entry.setUpdated(getUpdateTime());
+			entry.setLang(lang);
+			IdType entryID = new IdType();
+			entryID.setValue("urn:uuid:"+UUID.randomUUID());
+			entry.setId(entryID);
 			TextType title = new TextType();
 			title.setType("text");
-			title.getValue().add((contextCode.getDisplayName()));
+			title.getValue().add(contextCode.getDisplayName());
 			entry.getCategory().addAll(entryLevelCategoryList);
 			entry.getCategory().addAll(convertCodeIntoCategory(contextCode,CodeConstants.SUBTOPIC_CODE,
 					CodeConstants.SUBTOPIC_CODESYSTEM,CodeConstants.SUBTOPIC_DISPLAYNAME));
@@ -307,7 +345,7 @@ public class ResponseGenerator {
 		return categoryList;
 	}
 
-	private  List <EntryType> createNonHL7CompliantEntries (Context context, List<String> supportedCodeSystems, String urlStyle) {
+	private  List <EntryType> createNonHL7CompliantEntries (Context context, List<String> supportedCodeSystems, String urlStyle, String lang) {
 		
 		List<EntryType> entries = new ArrayList<EntryType>();
 		String urlBase = context.getKnowledgeRequestService().getKnowledgeRequestServiceLocation().getUrl();
@@ -329,40 +367,37 @@ public class ResponseGenerator {
 		for(int i=0;i<subtopicList.size();i++)
 		{
 			link = new LinkType();
-			try{
+			link.setRel("alternate");
+			link.setType("html");
+			link.setHreflang(lang);
+			link.setTitle(subtopicList.get(i).getLinkName());
 			SearchParameter sp = subtopicList.get(i).getSearchParameter();
 			subTopics = new StringBuilder(baseLink);
-			String searchTerm = sp.getValueSource().getSearchTerm();
-			if (sp.getSyntaxOnResource() != null) {
-				subTopics.append(sp.getSyntaxOnResource().getNonHl7CompliantName());
+			String searchTerm =null;
+			if (sp!=null) {
+				if(sp.getSyntaxOnResource() != null)
+					subTopics.append(sp.getSyntaxOnResource().getNonHl7CompliantName());
+				if(sp.getValueSource()!=null)
+					searchTerm=sp.getValueSource().getSearchTerm();
 			}
-			if(searchTerm==null)
+			if(searchTerm!=null)
 			{
-				throw new NullPointerException();
-			}
 				subTopics.append((urlStyle.equals("CLEAN")) ? "/" : "=");
 				subTopics.append(searchTerm);
-				link.setHref(subTopics.toString());
-				entry = new EntryType();
-				TextType title = new TextType();
-				title.setType("text");
-				title.getValue().add((subtopicList.get(i).getLinkName()));
-				entry.getLink().add(link);
-				entry.setTitle(title);
-				entries.add(entry);
-			
 			}
-			catch(NullPointerException e)
-			{
-				link.setHref(subTopics.toString());
-				entry = new EntryType();
-				TextType title = new TextType();
-				title.setType("text");
-				title.getValue().add((subtopicList.get(i).getLinkName()));
-				entry.getLink().add(link);
-				entry.setTitle(title);
-				entries.add(entry);
-			}
+			link.setHref(subTopics.toString());
+			entry = new EntryType();
+			entry.setUpdated(getUpdateTime());
+			entry.setLang(lang);
+			IdType entryID = new IdType();
+			entryID.setValue("urn:uuid:"+UUID.randomUUID());
+			entry.setId(entryID);
+			TextType title = new TextType();
+			title.setType("text");
+			title.getValue().add(subtopicList.get(i).getLinkName());
+			entry.getLink().add(link);
+			entry.setTitle(title);
+			entries.add(entry);
 		}
 		return entries;
 		
@@ -540,5 +575,20 @@ public class ResponseGenerator {
 		}
 		
 		return str.toString();
+	}
+	
+	private DateTimeType getUpdateTime() {
+		try {
+		GregorianCalendar gcal = new GregorianCalendar();
+		gcal.setTime(Calendar.getInstance().getTime());
+		XMLGregorianCalendar xmlTime;
+		xmlTime = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+		DateTimeType updated = new DateTimeType();
+		updated.setValue(xmlTime);
+		return updated;
+		} catch (DatatypeConfigurationException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
