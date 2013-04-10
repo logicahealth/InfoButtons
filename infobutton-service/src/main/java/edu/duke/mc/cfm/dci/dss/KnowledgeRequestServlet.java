@@ -251,31 +251,17 @@ public class KnowledgeRequestServlet extends HttpServlet {
 		
 		if (requestParameters.containsKey(CodeConstants.PATIENT_AGE)) {
 		   	patient.setAge(Float.valueOf(requestParameters.get(CodeConstants.PATIENT_AGE)[0]));
-		   	CategoryType c = new CategoryType();
-			c.setTerm(requestParameters.get(CodeConstants.PATIENT_AGE)[0]);
-			c.setScheme(CodeConstants.PATIENT_AGE);
-			category.add(c);
 		}
 		Code ageGroup = CodeUtility.getCode(CodeConstants.AGEGROUP);
 		if (requestParameters.containsKey(CodeConstants.AGEGROUP_CODE)) {
 		   	ageGroup.setCode(requestParameters.get(CodeConstants.AGEGROUP_CODE)[0]);
-			CategoryType c = new CategoryType();
-			c.setTerm(requestParameters.get(CodeConstants.AGEGROUP_CODE)[0]);
-			c.setScheme(CodeConstants.AGEGROUP_CODE);
-			category.add(c);
 		}
 		if (requestParameters.containsKey(CodeConstants.AGEGROUP_DISPLAYNAME)) {
 		   	ageGroup.setDisplayName(requestParameters.get(CodeConstants.AGEGROUP_DISPLAYNAME)[0]);
-		   	CategoryType c = new CategoryType();
-			c.setTerm(requestParameters.get(CodeConstants.AGEGROUP_DISPLAYNAME)[0]);
-			c.setScheme(CodeConstants.AGEGROUP_DISPLAYNAME);
-			category.add(c);
 		}
 		patient.setAgeGroup(ageGroup);
 		patientContext.setPatient(patient);
-		categoryHashMap.put(CodeConstants.PATIENT_AGEGROUP_KEY,category);
-		category = new ArrayList<CategoryType>();
-		
+
 		//Set task context
 		Code task = CodeUtility.getCode(CodeConstants.TASKCONTEXT);
 		if (requestParameters.containsKey(CodeConstants.TASKCONTEXT_CODE)) {
@@ -532,6 +518,20 @@ public class KnowledgeRequestServlet extends HttpServlet {
 		}
 		KnowledgeRequest knowledgeRequest = new KnowledgeRequest(patientContext, holder, performer, informationRecipient,
 				taskContext,mainSearchCriteria, encounter, effectiveTime, executionMode);
+		ageGroup = knowledgeRequest.getPatientContext().getPatient().getAgeGroup();
+		if(!ageGroup.getCode().equals(""))
+		{
+			category = new ArrayList<CategoryType>();
+			CategoryType c = new CategoryType();
+			c.setScheme(CodeConstants.AGEGROUP_CODE);
+			c.setTerm(ageGroup.getCode());
+			category.add(c);
+			c = new CategoryType();
+			c.setScheme(CodeConstants.AGEGROUP_CODESYSTEM);
+			c.setTerm(ageGroup.getCodeSystem());
+			category.add(c);
+			categoryHashMap.put(CodeConstants.PATIENT_AGEGROUP_KEY,category);
+		}
 		knowledgeRequest.setCategoryHashMap(categoryHashMap);
 		return knowledgeRequest;
 	}
