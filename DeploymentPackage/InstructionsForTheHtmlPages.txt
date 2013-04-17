@@ -1,0 +1,5 @@
+InfobuttonQA.html :
+Changes lines 119 and 120 to point to your server locations
+
+OpenInfobuttonDemo.html:
+Change the baseUrl on line 79.
