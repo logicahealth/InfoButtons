@@ -1,0 +1,71 @@
+<!--<h2>Enter the status it will be added into the database.</h2><br/>
+1 = active ; 2 = under development ; 3 = inactive<br/><br/>-->
+
+<?php
+$table = 'resource_profiles';
+if (!$table) { echo " Table not found"; }
+if(!$_POST["id"]) {echo " Wrong access <br/><a href=http://localhost/drupal/prof>Click here<a> to go back to profiles";exit();}
+$id =  $_POST["id"];
+$version = $_POST["version"];
+
+
+$result = db_query("SELECT * FROM {$table} where id = '$id' and version='$version' " ); 
+foreach ($result as $row) {
+ $record = $row;  
+}
+
+  $status_new = $_POST["state"];
+  $error = 0;
+	
+   if($status_new < 3)
+   {
+	  $test = db_query("SELECT * FROM {$table} where id = '$id' and status ='$status_new' " );
+	   foreach ($test as $r) {
+           $count++;  
+            }
+           if($count > 0)
+           {
+		 $qu= "UPDATE {$table} SET status = '3'  WHERE id = '$id' and status ='$status_new' ";
+                    $re = db_query($qu);
+		  if(!$re)
+                    {
+		
+		?>
+					<script type="text/javascript">
+					window.alert("Updating failed.Try again!");
+					</script>
+		<?php	
+		echo '<META HTTP-EQUIV="Refresh" Content="0; URL=http://localhost/drupal/prof">';
+	 }
+		  
+		 //echo '<META HTTP-EQUIV="Refresh" Content="0; URL=http://localhost/drupal/prof">';
+		  //$error = 1;
+		   }
+         
+   }
+   
+  
+ if($error ==0)
+{ 
+ $qu= "UPDATE {$table} SET status = '$status_new' WHERE id = '$id' and version = '$version'";
+ $re = db_query($qu);
+	 if(!$re)
+	 {
+		
+		?>
+					<script type="text/javascript">
+					window.alert("Updating failed.Try again!");
+					</script>
+		<?php	
+		echo '<META HTTP-EQUIV="Refresh" Content="0; URL=http://localhost/drupal/prof">';
+	 }
+	else
+	{
+	echo '<META HTTP-EQUIV="Refresh" Content="0; URL=http://localhost/drupal/prof">';
+	 }
+}
+
+
+
+
+?>
