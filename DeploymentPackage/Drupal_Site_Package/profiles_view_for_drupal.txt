@@ -1,0 +1,473 @@
+$view = new view;
+$view->name = 'Profiles';
+$view->description = '';
+$view->tag = 'default';
+$view->base_table = 'resource_profiles';
+$view->human_name = 'profiles';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['title'] = 'Resource Profiles';
+$handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['query']['options']['query_comment'] = FALSE;
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['pager']['type'] = 'full';
+$handler->display->display_options['pager']['options']['items_per_page'] = '20';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['pager']['options']['id'] = '0';
+$handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = 0;
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'id' => 'id',
+  'version' => 'version',
+  'name' => 'name',
+  'published' => 'published',
+  'status' => 'status',
+  'nothing' => 'nothing',
+);
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'id' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => 'views-align-center',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'version' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => 'views-align-center',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'name' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'published' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'status' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'nothing' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+$handler->display->display_options['style_options']['override'] = 1;
+$handler->display->display_options['style_options']['sticky'] = 1;
+$handler->display->display_options['style_options']['empty_table'] = 0;
+/* Header: Global: Text area */
+$handler->display->display_options['header']['area']['id'] = 'area';
+$handler->display->display_options['header']['area']['table'] = 'views';
+$handler->display->display_options['header']['area']['field'] = 'area';
+$handler->display->display_options['header']['area']['empty'] = FALSE;
+/* Footer: Global: Result summary */
+$handler->display->display_options['footer']['result']['id'] = 'result';
+$handler->display->display_options['footer']['result']['table'] = 'views';
+$handler->display->display_options['footer']['result']['field'] = 'result';
+$handler->display->display_options['footer']['result']['empty'] = FALSE;
+/* Footer: Global: Text area */
+$handler->display->display_options['footer']['area']['id'] = 'area';
+$handler->display->display_options['footer']['area']['table'] = 'views';
+$handler->display->display_options['footer']['area']['field'] = 'area';
+$handler->display->display_options['footer']['area']['empty'] = TRUE;
+$handler->display->display_options['footer']['area']['content'] = 'Id : Primary Key to identify each record 
+Name : The Name of the file 
+Content : Click to download the profile
+Published : The date published
+Status : 1=active; 2=under development; 3=inactive
+Version : starts with 1 and increments when new version added';
+$handler->display->display_options['footer']['area']['format'] = 'full_html';
+$handler->display->display_options['footer']['area']['tokenize'] = 0;
+/* Footer: Global: Text area */
+$handler->display->display_options['footer']['area_1']['id'] = 'area_1';
+$handler->display->display_options['footer']['area_1']['table'] = 'views';
+$handler->display->display_options['footer']['area_1']['field'] = 'area';
+$handler->display->display_options['footer']['area_1']['label'] = 'Insert new profile';
+$handler->display->display_options['footer']['area_1']['empty'] = TRUE;
+$handler->display->display_options['footer']['area_1']['content'] = '<h2>Browse and upload a new profile and it will be added into the database.</h2>
+<?php
+echo "<form  method=\\"POST\\" enctype=\\"multipart/form-data\\"> 
+    <input name=\\"file\\" type=\\"file\\">
+	<input name=\\"submit\\" type=\\"submit\\" value=\\"Upload\\">
+    </form>";
+
+if(isset($_POST[\'submit\'])) {
+	
+	$table = \'resource_profiles\';
+		
+    $file_name = $_FILES[\'file\'][\'name\'];
+    $tmp_name  = $_FILES[\'file\'][\'tmp_name\'];
+    $file_size = $_FILES[\'file\'][\'size\'];
+    $file_type = $_FILES[\'file\'][\'type\'];
+    $fp = fopen($tmp_name, \'r\');
+    $file_content = fread($fp, $file_size) or die("Error: cannot read file");
+    $file_content = mysql_real_escape_string($file_content) or die("Error: cannot read file");
+    fclose($fp);
+    // INSERT
+    $qu = "INSERT INTO {$table}
+                (`name`,`version`,`status`,`content`)
+                VALUES
+                (\'$file_name\',\'1\',\'1\',\'$file_content\')";
+ $re = db_query($qu) or die ("Sorry Cant insert db!");
+ echo $file_name." inserted succesfully to database";
+}
+
+?>';
+$handler->display->display_options['footer']['area_1']['format'] = 'php_code';
+$handler->display->display_options['footer']['area_1']['tokenize'] = 0;
+/* Field: Resource profiles: Id */
+$handler->display->display_options['fields']['id']['id'] = 'id';
+$handler->display->display_options['fields']['id']['table'] = 'resource_profiles';
+$handler->display->display_options['fields']['id']['field'] = 'id';
+/* Field: Resource profiles: Name */
+$handler->display->display_options['fields']['name']['id'] = 'name';
+$handler->display->display_options['fields']['name']['table'] = 'resource_profiles';
+$handler->display->display_options['fields']['name']['field'] = 'name';
+$handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['name']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['name']['alter']['external'] = 0;
+$handler->display->display_options['fields']['name']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['name']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['name']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['name']['alter']['max_length'] = '5';
+$handler->display->display_options['fields']['name']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['name']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['name']['alter']['more_link'] = 1;
+$handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['name']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['name']['alter']['html'] = 0;
+$handler->display->display_options['fields']['name']['element_class'] = 'spacing';
+$handler->display->display_options['fields']['name']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['name']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['name']['hide_empty'] = 0;
+$handler->display->display_options['fields']['name']['empty_zero'] = 0;
+$handler->display->display_options['fields']['name']['hide_alter_empty'] = 1;
+/* Field: Resource profiles: Content */
+$handler->display->display_options['fields']['content']['id'] = 'content';
+$handler->display->display_options['fields']['content']['table'] = 'resource_profiles';
+$handler->display->display_options['fields']['content']['field'] = 'content';
+$handler->display->display_options['fields']['content']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['content']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['content']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['content']['alter']['external'] = 0;
+$handler->display->display_options['fields']['content']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['content']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['content']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['content']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['content']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['content']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['content']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['content']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['content']['alter']['html'] = 0;
+$handler->display->display_options['fields']['content']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['content']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['content']['hide_empty'] = 0;
+$handler->display->display_options['fields']['content']['empty_zero'] = 0;
+$handler->display->display_options['fields']['content']['hide_alter_empty'] = 1;
+/* Field: Resource profiles: Published */
+$handler->display->display_options['fields']['published']['id'] = 'published';
+$handler->display->display_options['fields']['published']['table'] = 'resource_profiles';
+$handler->display->display_options['fields']['published']['field'] = 'published';
+$handler->display->display_options['fields']['published']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['published']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['published']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['published']['alter']['external'] = 0;
+$handler->display->display_options['fields']['published']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['published']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['published']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['published']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['published']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['published']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['published']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['published']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['published']['alter']['html'] = 0;
+$handler->display->display_options['fields']['published']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['published']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['published']['hide_empty'] = 0;
+$handler->display->display_options['fields']['published']['empty_zero'] = 0;
+$handler->display->display_options['fields']['published']['hide_alter_empty'] = 1;
+/* Field: Resource profiles: Status */
+$handler->display->display_options['fields']['status']['id'] = 'status';
+$handler->display->display_options['fields']['status']['table'] = 'resource_profiles';
+$handler->display->display_options['fields']['status']['field'] = 'status';
+$handler->display->display_options['fields']['status']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['status']['alter']['make_link'] = 1;
+$handler->display->display_options['fields']['status']['alter']['path'] = 'update_status';
+$handler->display->display_options['fields']['status']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['status']['alter']['external'] = 0;
+$handler->display->display_options['fields']['status']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['status']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['status']['alter']['alt'] = 'Update the existing status ';
+$handler->display->display_options['fields']['status']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['status']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['status']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['status']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['status']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['status']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['status']['alter']['html'] = 0;
+$handler->display->display_options['fields']['status']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['status']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['status']['hide_empty'] = 0;
+$handler->display->display_options['fields']['status']['empty_zero'] = 0;
+$handler->display->display_options['fields']['status']['hide_alter_empty'] = 1;
+$handler->display->display_options['fields']['status']['format_plural'] = 0;
+/* Field: Resource profiles: Version */
+$handler->display->display_options['fields']['version']['id'] = 'version';
+$handler->display->display_options['fields']['version']['table'] = 'resource_profiles';
+$handler->display->display_options['fields']['version']['field'] = 'version';
+$handler->display->display_options['fields']['version']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['version']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['version']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['version']['alter']['external'] = 0;
+$handler->display->display_options['fields']['version']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['version']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['version']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['version']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['version']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['version']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['version']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['version']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['version']['alter']['html'] = 0;
+$handler->display->display_options['fields']['version']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['version']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['version']['hide_empty'] = 0;
+$handler->display->display_options['fields']['version']['empty_zero'] = 0;
+$handler->display->display_options['fields']['version']['hide_alter_empty'] = 1;
+$handler->display->display_options['fields']['version']['format_plural'] = 0;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = 'Update';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Update';
+$handler->display->display_options['fields']['nothing']['alter']['make_link'] = 1;
+$handler->display->display_options['fields']['nothing']['alter']['path'] = 'update_existing?id=[id]&version=[version]';
+$handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['external'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['alt'] = 'Updates the current profile with a newer version';
+$handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'views-field views-field-edit-link';
+$handler->display->display_options['fields']['nothing']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['nothing']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['nothing']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['html'] = 0;
+$handler->display->display_options['fields']['nothing']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['nothing']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['nothing']['hide_empty'] = 0;
+$handler->display->display_options['fields']['nothing']['empty_zero'] = 0;
+$handler->display->display_options['fields']['nothing']['hide_alter_empty'] = 0;
+/* Sort criterion: Resource profiles: Id */
+$handler->display->display_options['sorts']['id']['id'] = 'id';
+$handler->display->display_options['sorts']['id']['table'] = 'resource_profiles';
+$handler->display->display_options['sorts']['id']['field'] = 'id';
+/* Sort criterion: Resource profiles: Version */
+$handler->display->display_options['sorts']['version']['id'] = 'version';
+$handler->display->display_options['sorts']['version']['table'] = 'resource_profiles';
+$handler->display->display_options['sorts']['version']['field'] = 'version';
+$handler->display->display_options['sorts']['version']['order'] = 'DESC';
+/* Contextual filter: Resource profiles: Status */
+$handler->display->display_options['arguments']['status']['id'] = 'status';
+$handler->display->display_options['arguments']['status']['table'] = 'resource_profiles';
+$handler->display->display_options['arguments']['status']['field'] = 'status';
+$handler->display->display_options['arguments']['status']['default_argument_type'] = 'fixed';
+$handler->display->display_options['arguments']['status']['summary']['format'] = 'default_summary';
+/* Filter criterion: Resource profiles: Id */
+$handler->display->display_options['filters']['id']['id'] = 'id';
+$handler->display->display_options['filters']['id']['table'] = 'resource_profiles';
+$handler->display->display_options['filters']['id']['field'] = 'id';
+$handler->display->display_options['filters']['id']['operator'] = 'not empty';
+$handler->display->display_options['filters']['id']['exposed'] = TRUE;
+$handler->display->display_options['filters']['id']['expose']['operator_id'] = 'id_op';
+$handler->display->display_options['filters']['id']['expose']['label'] = 'Id';
+$handler->display->display_options['filters']['id']['expose']['use_operator'] = 1;
+$handler->display->display_options['filters']['id']['expose']['operator'] = 'id_op';
+$handler->display->display_options['filters']['id']['expose']['identifier'] = 'id';
+$handler->display->display_options['filters']['id']['expose']['multiple'] = FALSE;
+/* Filter criterion: Resource profiles: Name */
+$handler->display->display_options['filters']['name']['id'] = 'name';
+$handler->display->display_options['filters']['name']['table'] = 'resource_profiles';
+$handler->display->display_options['filters']['name']['field'] = 'name';
+$handler->display->display_options['filters']['name']['operator'] = 'contains';
+$handler->display->display_options['filters']['name']['exposed'] = TRUE;
+$handler->display->display_options['filters']['name']['expose']['operator_id'] = 'name_op';
+$handler->display->display_options['filters']['name']['expose']['label'] = 'Name';
+$handler->display->display_options['filters']['name']['expose']['use_operator'] = 1;
+$handler->display->display_options['filters']['name']['expose']['operator'] = 'name_op';
+$handler->display->display_options['filters']['name']['expose']['identifier'] = 'name';
+$handler->display->display_options['filters']['name']['expose']['required'] = 0;
+$handler->display->display_options['filters']['name']['expose']['multiple'] = FALSE;
+/* Filter criterion: Resource profiles: Status */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'resource_profiles';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['operator'] = '<=';
+$handler->display->display_options['filters']['status']['value']['value'] = '1';
+$handler->display->display_options['filters']['status']['exposed'] = TRUE;
+$handler->display->display_options['filters']['status']['expose']['operator_id'] = 'status_op';
+$handler->display->display_options['filters']['status']['expose']['label'] = 'Status';
+$handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
+$handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
+$handler->display->display_options['filters']['status']['expose']['multiple'] = FALSE;
+
+/* Display: Page */
+$handler = $view->new_display('page', 'Page', 'page');
+$handler->display->display_options['defaults']['relationships'] = FALSE;
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Resource profiles: Id */
+$handler->display->display_options['fields']['id']['id'] = 'id';
+$handler->display->display_options['fields']['id']['table'] = 'resource_profiles';
+$handler->display->display_options['fields']['id']['field'] = 'id';
+/* Field: Resource profiles: Version */
+$handler->display->display_options['fields']['version']['id'] = 'version';
+$handler->display->display_options['fields']['version']['table'] = 'resource_profiles';
+$handler->display->display_options['fields']['version']['field'] = 'version';
+$handler->display->display_options['fields']['version']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['version']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['version']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['version']['alter']['external'] = 0;
+$handler->display->display_options['fields']['version']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['version']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['version']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['version']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['version']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['version']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['version']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['version']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['version']['alter']['html'] = 0;
+$handler->display->display_options['fields']['version']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['version']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['version']['hide_empty'] = 0;
+$handler->display->display_options['fields']['version']['empty_zero'] = 0;
+$handler->display->display_options['fields']['version']['hide_alter_empty'] = 1;
+$handler->display->display_options['fields']['version']['format_plural'] = 0;
+/* Field: Resource profiles: Name */
+$handler->display->display_options['fields']['name']['id'] = 'name';
+$handler->display->display_options['fields']['name']['table'] = 'resource_profiles';
+$handler->display->display_options['fields']['name']['field'] = 'name';
+$handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['name']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['name']['alter']['external'] = 0;
+$handler->display->display_options['fields']['name']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['name']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['name']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['name']['alter']['max_length'] = '5';
+$handler->display->display_options['fields']['name']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['name']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['name']['alter']['more_link'] = 1;
+$handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['name']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['name']['alter']['html'] = 0;
+$handler->display->display_options['fields']['name']['element_class'] = 'spacing';
+$handler->display->display_options['fields']['name']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['name']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['name']['hide_empty'] = 0;
+$handler->display->display_options['fields']['name']['empty_zero'] = 0;
+$handler->display->display_options['fields']['name']['hide_alter_empty'] = 1;
+/* Field: Resource profiles: Published */
+$handler->display->display_options['fields']['published']['id'] = 'published';
+$handler->display->display_options['fields']['published']['table'] = 'resource_profiles';
+$handler->display->display_options['fields']['published']['field'] = 'published';
+$handler->display->display_options['fields']['published']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['published']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['published']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['published']['alter']['external'] = 0;
+$handler->display->display_options['fields']['published']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['published']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['published']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['published']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['published']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['published']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['published']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['published']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['published']['alter']['html'] = 0;
+$handler->display->display_options['fields']['published']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['published']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['published']['hide_empty'] = 0;
+$handler->display->display_options['fields']['published']['empty_zero'] = 0;
+$handler->display->display_options['fields']['published']['hide_alter_empty'] = 1;
+/* Field: Resource profiles: Status */
+$handler->display->display_options['fields']['status']['id'] = 'status';
+$handler->display->display_options['fields']['status']['table'] = 'resource_profiles';
+$handler->display->display_options['fields']['status']['field'] = 'status';
+$handler->display->display_options['fields']['status']['alter']['alter_text'] = 0;
+$handler->display->display_options['fields']['status']['alter']['make_link'] = 0;
+$handler->display->display_options['fields']['status']['alter']['path'] = 'update_status?id=[id]&version=[version]';
+$handler->display->display_options['fields']['status']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['status']['alter']['external'] = 0;
+$handler->display->display_options['fields']['status']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['status']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['status']['alter']['alt'] = 'Update the existing status ';
+$handler->display->display_options['fields']['status']['alter']['link_class'] = 'views-field views-field-edit-link';
+$handler->display->display_options['fields']['status']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['status']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['status']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['status']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['status']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['status']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['status']['alter']['html'] = 0;
+$handler->display->display_options['fields']['status']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['status']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['status']['hide_empty'] = 0;
+$handler->display->display_options['fields']['status']['empty_zero'] = 0;
+$handler->display->display_options['fields']['status']['hide_alter_empty'] = 1;
+$handler->display->display_options['fields']['status']['format_plural'] = 0;
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = 'Update';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Update';
+$handler->display->display_options['fields']['nothing']['alter']['make_link'] = 1;
+$handler->display->display_options['fields']['nothing']['alter']['path'] = 'update_existing?id=[id]&version=[version]';
+$handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['external'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['replace_spaces'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['trim_whitespace'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['alt'] = 'Updates the current profile with a newer version';
+$handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'views-field views-field-edit-link';
+$handler->display->display_options['fields']['nothing']['alter']['nl2br'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['word_boundary'] = 1;
+$handler->display->display_options['fields']['nothing']['alter']['ellipsis'] = 1;
+$handler->display->display_options['fields']['nothing']['alter']['more_link'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['strip_tags'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['trim'] = 0;
+$handler->display->display_options['fields']['nothing']['alter']['html'] = 0;
+$handler->display->display_options['fields']['nothing']['element_label_colon'] = 1;
+$handler->display->display_options['fields']['nothing']['element_default_classes'] = 1;
+$handler->display->display_options['fields']['nothing']['hide_empty'] = 0;
+$handler->display->display_options['fields']['nothing']['empty_zero'] = 0;
+$handler->display->display_options['fields']['nothing']['hide_alter_empty'] = 0;
+$handler->display->display_options['path'] = 'prof';
+$handler->display->display_options['menu']['type'] = 'normal';
+$handler->display->display_options['menu']['title'] = 'Resource Profiles';
+$handler->display->display_options['menu']['description'] = 'View all the resource profiles in the database';
+$handler->display->display_options['menu']['weight'] = '0';
+$handler->display->display_options['menu']['context'] = 0;
+$handler->display->display_options['tab_options']['weight'] = '0';

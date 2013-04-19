@@ -1,0 +1,63 @@
+<h2>Browse and upload the updated profile and it will be added into the database.</h2>
+
+<?php
+$table = 'resource_profiles';
+if (!$table) { echo " Table not found"; }
+if(!$_GET["id"]) {echo " Wrong access <br/><a href=http://localhost/drupal/prof>Click here<a> to go back to profiles";exit();}
+$id =  $_GET["id"];
+$version = $_GET["version"];
+
+
+$result = db_query( "SELECT * FROM {$table} where id = '$id' and version='$version' " ); 
+
+foreach ($result as $row) {
+ $record = $row;  
+}
+
+
+echo "<form  method=\"POST\" enctype=\"multipart/form-data\"> 
+    <input name=\"file\" type=\"file\">
+	<input name=\"submit\" type=\"submit\" value=\"Upload\">
+    </form>";
+
+if(isset($_POST['submit'])) {
+	
+    $file_name = $_FILES['file']['name'];
+    $tmp_name  = $_FILES['file']['tmp_name'];
+    $file_size = $_FILES['file']['size'];
+    $file_type = $_FILES['file']['type'];
+    $fp = fopen($tmp_name, 'r');
+    $file_content = fread($fp, $file_size) or die("Error: cannot read file (file size)");
+    $file_content = mysql_real_escape_string($file_content) or trigger_error(mysql_error());
+   fclose($fp);
+	
+	
+    // INSERT
+	$status =  $record -> {'status'} ;
+   
+   
+   if($status == 2)//previous version under development 
+   {
+	   $record -> {'status'} = $record -> {'status'} + 1 ;
+	   $qu= "UPDATE {$table}
+                SET status = 3 WHERE id = '$id' and version = '$version'";
+	   $re = db_query($qu) or die ("Sorry Cant insert db!");
+	   
+   }
+   $version = $version +1 ;
+ 
+  $qu ="INSERT INTO {$table}
+                (`id`,`name`,`version`,`status`,`content`)
+                VALUES
+                ('$id','$file_name','$version','2','$file_content')";
+				
+ $re = db_query($qu) or die ("Sorry Cant insert db!");
+ $name = $record -> {'name'};
+ echo $name." version '$version' succesfully updated in the database<br/>";
+ echo "This file's status is - Under Development <br> Your will be redirected..";
+header("Refresh: 5;url=http://localhost/drupal/prof");
+}
+
+
+
+?>
