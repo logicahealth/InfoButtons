@@ -43,7 +43,7 @@ Desktop.ini
 ######################
 # Eclipse
 ######################
-/infobutton-service/src/main/webapp/WEB-INF/serviceParams.properties 
+#/infobutton-service/src/main/webapp/WEB-INF/serviceParams.properties 
 *.pydevproject
 .project
 .metadata
