@@ -23,9 +23,9 @@ $Date:: 2011-01-13 1#$:  Date of last commit
   				</execution>
   			</executions>
 			<configuration>
-				<schemaDirectory>src\main\resources\</schemaDirectory>
+				<schemaDirectory>src/main/resources/</schemaDirectory>
 				<schemaFiles>KnowledgeResponse.xsd,binding.xjb,REDS_MT010001UV-Restricted-flattened-08-19-2011.xsd</schemaFiles>				
-				<outputDirectory>src\main\java</outputDirectory>
+				<outputDirectory>src/main/java</outputDirectory>
 				<packageName>org.hl7.v3</packageName>
 				<clearOutputDir>false</clearOutputDir>
 			</configuration>  			
