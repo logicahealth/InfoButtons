@@ -271,7 +271,41 @@ public class ResponseGenerator {
 			try{
 			Code temp = subtopicList.get(i).getSearchParameter().getValueSource().getSearchCode().getCode();
 			if(temp!=null)
-				codes.add(temp);
+			{
+				link = new LinkType();
+				link.setRel("alternate");
+				link.setType("html");
+				link.setHreflang(lang);
+				link.setTitle(subtopicList.get(i).getLinkName());
+				subTopics = new StringBuilder(baseLink);
+				subTopics.append(CodeConstants.SUBTOPIC_CODE);
+				subTopics.append("=");
+				subTopics.append(temp.getCode());
+				subTopics.append("&");
+				subTopics.append(CodeConstants.SUBTOPIC_CODESYSTEM);
+				subTopics.append("=");
+				subTopics.append(temp.getCodeSystem());
+				subTopics.append("&");
+				subTopics.append(CodeConstants.SUBTOPIC_DISPLAYNAME);
+				subTopics.append("=");
+				subTopics.append(temp.getDisplayName());
+				link.setHref(subTopics.toString());
+				entry = new EntryType();
+				entry.setUpdated(getUpdateTime());
+				entry.setLang(lang);
+				IdType entryID = new IdType();
+				entryID.setValue("urn:uuid:"+UUID.randomUUID());
+				entry.setId(entryID);
+				TextType title = new TextType();
+				title.setType("text");
+				title.getValue().add(subtopicList.get(i).getLinkName());
+				entry.getCategory().addAll(entryLevelCategoryList);
+				entry.getCategory().addAll(convertCodeIntoCategory(temp,CodeConstants.SUBTOPIC_CODE,
+						CodeConstants.SUBTOPIC_CODESYSTEM,CodeConstants.SUBTOPIC_DISPLAYNAME));
+				entry.getLink().add(link);
+				entry.setTitle(title);
+				entries.add(entry);
+			}
 			}catch(NullPointerException e)
 			{
 				link = new LinkType();
@@ -294,42 +328,6 @@ public class ResponseGenerator {
 				entry.setTitle(title);
 				entries.add(entry);
 			}
-		}
-		
-		for (Code contextCode : codes) {
-			link = new LinkType();
-			link.setRel("alternate");
-			link.setType("html");
-			link.setHreflang(lang);
-			link.setTitle(contextCode.getDisplayName());
-			subTopics = new StringBuilder(baseLink);
-			subTopics.append(CodeConstants.SUBTOPIC_CODE);
-			subTopics.append("=");
-			subTopics.append(contextCode.getCode());
-			subTopics.append("&");
-			subTopics.append(CodeConstants.SUBTOPIC_CODESYSTEM);
-			subTopics.append("=");
-			subTopics.append(contextCode.getCodeSystem());
-			subTopics.append("&");
-			subTopics.append(CodeConstants.SUBTOPIC_DISPLAYNAME);
-			subTopics.append("=");
-			subTopics.append(contextCode.getDisplayName());
-			link.setHref(subTopics.toString());
-			entry = new EntryType();
-			entry.setUpdated(getUpdateTime());
-			entry.setLang(lang);
-			IdType entryID = new IdType();
-			entryID.setValue("urn:uuid:"+UUID.randomUUID());
-			entry.setId(entryID);
-			TextType title = new TextType();
-			title.setType("text");
-			title.getValue().add(contextCode.getDisplayName());
-			entry.getCategory().addAll(entryLevelCategoryList);
-			entry.getCategory().addAll(convertCodeIntoCategory(contextCode,CodeConstants.SUBTOPIC_CODE,
-					CodeConstants.SUBTOPIC_CODESYSTEM,CodeConstants.SUBTOPIC_DISPLAYNAME));
-			entry.getLink().add(link);
-			entry.setTitle(title);
-			entries.add(entry);
 		}
 		return entries;
 	}
