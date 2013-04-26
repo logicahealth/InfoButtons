@@ -3,7 +3,7 @@
 /bin/
 target/
 /infobutton-kbschema/src/main/java/edu/duke/mc/cfm/dci/infobutton/schemas/kb/
- 
+/test/resources/ 
 # OS Files #
 .DS_Store
  
