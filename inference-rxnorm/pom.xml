@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.utah.openinfobutton</groupId>
   <artifactId>inference-rxnorm</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.4</version>
   <name>RXNorm REST API Client</name>
   <description>RXNorm REST API Client</description>
     

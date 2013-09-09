@@ -10,7 +10,7 @@ $Date:: 2011-02-24 1#$:  Date of last commit
     <groupId>edu.duke.mc.cfm.dci</groupId>
     <artifactId>infobutton-service</artifactId>
     <packaging>war</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.4</version>
     <name>infobutton-service</name>
     <url>http://maven.apache.org</url>
    <properties>
