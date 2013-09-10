@@ -8,7 +8,7 @@ $Date:: 2011-01-13 1#$:  Date of last commit
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.hl7.v3</groupId>
   <artifactId>infobutton-schema</artifactId>
-  <version>1.4</version>
+  <version>0.0.1-SNAPSHOT</version>
   <build>
   	<plugins>
   		<plugin>

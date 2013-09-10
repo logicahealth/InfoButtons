@@ -8,7 +8,7 @@ $Date:: 2011-01-28 1#$:  Date of last commit
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.duke.mc.cfm.dci</groupId>
   <artifactId>infobutton-kbschema</artifactId>
-  <version>1.4</version>
+  <version>0.0.1-SNAPSHOT</version>
   <name>infobutton-kbschema</name>
   <description>Knowledge base schema</description>
   <build>

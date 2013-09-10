@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.utah.openinfobutton</groupId>
   <artifactId>infobutton-externalresources</artifactId>
-  <version>1.4</version>
+  <version>0.0.1-SNAPSHOT</version>
   <name>External Resources handles module</name>
   <description>Decoupling the handling of external resources from Business Logic</description>
   <properties>
