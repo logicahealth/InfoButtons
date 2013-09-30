@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.utah.openinfobutton</groupId>
   <artifactId>infobutton-externalresources</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.4</version>
   <name>External Resources handles module</name>
   <description>Decoupling the handling of external resources from Business Logic</description>
   <properties>
@@ -47,13 +47,13 @@
 	    <dependency>
 	  	  <groupId>org.hl7.v3</groupId>
 	  	  <artifactId>infobutton-schema</artifactId>
-	  	  <version>0.0.1-SNAPSHOT</version>
+	  	  <version>1.4</version>
 	  	  <scope>compile</scope>
 	    </dependency>
 	    <dependency>
 	  	  <groupId>edu.duke.mc.cfm.dci</groupId>
 	  	  <artifactId>infobutton-kbschema</artifactId>
-	  	  <version>0.0.1-SNAPSHOT</version>
+	  	  <version>1.4</version>
 	  	  <scope>compile</scope>
 	    </dependency>
         <dependency>
@@ -163,7 +163,7 @@
        <dependency>
        	<groupId>edu.duke.mc.cfm.dci</groupId>
        	<artifactId>infobutton-db</artifactId>
-       	<version>0.0.1-SNAPSHOT</version>
+       	<version>1.4</version>
        	<scope>compile</scope>
        </dependency>
        <dependency>
@@ -231,12 +231,12 @@
        <dependency>
        	<groupId>edu.utah.openinfobutton</groupId>
        	<artifactId>inference-rxnorm</artifactId>
-       	<version>0.0.1-SNAPSHOT</version>
+       	<version>1.4</version>
        </dependency>
        <dependency>
        	<groupId>UTSMetathesaurus</groupId>
        	<artifactId>UTSMetathesaurus</artifactId>
-       	<version>0.0.1-SNAPSHOT</version>
+       	<version>1.4</version>
        	<type>jar</type>
        	<scope>compile</scope>
        </dependency>

@@ -10,7 +10,7 @@ $Date:: 2011-02-24 1#$:  Date of last commit
     <groupId>edu.duke.mc.cfm.dci</groupId>
     <artifactId>infobutton-service</artifactId>
     <packaging>war</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.4</version>
     <name>infobutton-service</name>
     <url>http://maven.apache.org</url>
    <properties>
@@ -53,13 +53,13 @@ $Date:: 2011-02-24 1#$:  Date of last commit
 	    <dependency>
 	  	  <groupId>org.hl7.v3</groupId>
 	  	  <artifactId>infobutton-schema</artifactId>
-	  	  <version>0.0.1-SNAPSHOT</version>
+	  	  <version>1.4</version>
 	  	  <scope>compile</scope>
 	    </dependency>
 	    <dependency>
 	  	  <groupId>edu.duke.mc.cfm.dci</groupId>
 	  	  <artifactId>infobutton-kbschema</artifactId>
-	  	  <version>0.0.1-SNAPSHOT</version>
+	  	  <version>1.4</version>
 	  	  <scope>compile</scope>
 	    </dependency>
         <dependency>
@@ -170,7 +170,7 @@ $Date:: 2011-02-24 1#$:  Date of last commit
        <dependency>
        	<groupId>edu.duke.mc.cfm.dci</groupId>
        	<artifactId>infobutton-db</artifactId>
-       	<version>0.0.1-SNAPSHOT</version>
+       	<version>1.4</version>
        	<scope>compile</scope>
        </dependency>
        <dependency>
@@ -238,12 +238,12 @@ $Date:: 2011-02-24 1#$:  Date of last commit
        <dependency>
        	<groupId>edu.utah.openinfobutton</groupId>
        	<artifactId>inference-rxnorm</artifactId>
-       	<version>0.0.1-SNAPSHOT</version>
+       	<version>1.4</version>
        </dependency>
        <dependency>
        	<groupId>edu.utah.openinfobutton</groupId>
        	<artifactId>infobutton-externalresources</artifactId>
-       	<version>0.0.1-SNAPSHOT</version>
+       	<version>1.4</version>
        </dependency>
        <dependency>
       	<groupId>com.google.code.gson</groupId>
