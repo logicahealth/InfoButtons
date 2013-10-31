@@ -1,0 +1,18 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.openinfobutton</groupId>
+  <artifactId>oib-request</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>oib-request</name>
+    <modules>
+        <module>oib-request-inference-rxnorm</module>
+        <module>uts-metathesaurus</module>
+        <module>oib-profile-schema</module>
+        <module>oib-ext-resources</module>
+        <module>oib-request-schema</module>
+        <module>oib-request-service</module>
+        <module>oib-request-db</module>
+    </modules>
+</project>

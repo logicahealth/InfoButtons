@@ -1,0 +1,156 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+  <groupId>UTSMetathesaurus</groupId>
+  <artifactId>uts-metathesaurus</artifactId>
+  <version>1.4</version>
+  <name>uts-metathesaurus</name>
+    <repositories>
+  		<repository>
+			<id>further</id>
+			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository> 	   
+   </repositories>
+ 
+ 	<pluginRepositories>
+		<pluginRepository>
+			<id>further</id>
+			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		
+		<pluginRepository>
+       <id>maven2-repository.dev.java.net</id>
+       <url>http://download.java.net/maven/2/</url>
+     </pluginRepository>
+     
+	</pluginRepositories> 
+	
+
+  <build>
+  <plugins>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>jaxws-maven-plugin</artifactId>
+      <executions>
+          
+        <execution>
+          <id>FirstWsdl</id>
+          <goals>
+            <goal>wsimport</goal>
+          </goals>
+          <configuration>
+            <wsdlUrls>
+              <wsdlUrl>
+                https://uts-ws.nlm.nih.gov/services/nwsContent?wsdl
+              </wsdlUrl>
+            </wsdlUrls>
+            <packageName>UtsMetathesaurusContent </packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
+             <keep>true</keep>
+	      <genWsdl>true</genWsdl>
+          </configuration>
+          
+         </execution>
+          <execution>
+              <id>SecondWsdl</id>
+              <goals>
+            <goal>wsimport</goal>
+          </goals>
+          <configuration>
+            <wsdlUrls>
+              <wsdlUrl>
+                https://uts-ws.nlm.nih.gov/services/nwsSecurity?wsdl
+              </wsdlUrl>
+            </wsdlUrls>
+            <packageName>UtsSecurity</packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
+             <keep>true</keep>
+	      <genWsdl>true</genWsdl>
+          </configuration>
+          </execution>
+           <execution>
+              <id>ThirdWsdl</id>
+              <goals>
+            <goal>wsimport</goal>
+          </goals>
+          <configuration>
+            <wsdlUrls>
+              <wsdlUrl>
+                https://uts-ws.nlm.nih.gov/services/nwsMetadata?wsdl
+              </wsdlUrl>
+            </wsdlUrls>
+            <packageName>UtsMetathesaurusMetaData </packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
+             <keep>true</keep>
+	      <genWsdl>true</genWsdl>
+          </configuration>
+          </execution>
+             <execution>
+              <id>FourthWsdl</id>
+              <goals>
+            <goal>wsimport</goal>
+          </goals>
+          <configuration>
+            <wsdlUrls>
+              <wsdlUrl>
+                https://uts-ws.nlm.nih.gov/services/nwsFinder?wsdl
+              </wsdlUrl>
+            </wsdlUrls>
+            <packageName>UtsMetathesaurusFinder  </packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
+             <keep>true</keep>
+	      <genWsdl>true</genWsdl>
+          </configuration>
+          </execution>
+           <execution>
+              <id>FifthWsdl</id>
+              <goals>
+            <goal>wsimport</goal>
+          </goals>
+          <configuration>
+            <wsdlUrls>
+              <wsdlUrl>
+                https://uts-ws.nlm.nih.gov/services/nwsHistory?wsdl
+              </wsdlUrl>
+            </wsdlUrls>
+            <packageName>UtsMetathesaurusHistory</packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
+             <keep>true</keep>
+	      <genWsdl>true</genWsdl>
+          </configuration>
+          </execution>
+          <execution>
+              <id>SixthWsdl</id>
+              <goals>
+            <goal>wsimport</goal>
+          </goals>
+          <configuration>
+            <wsdlUrls>
+              <wsdlUrl>
+                https://uts-ws.nlm.nih.gov/services/nwsSemanticNetwork?wsdl
+              </wsdlUrl>
+            </wsdlUrls>
+            <packageName>UtsSemNet</packageName>
+            <sourceDestDir>src/main/java</sourceDestDir>
+             <keep>true</keep>
+	      <genWsdl>true</genWsdl>
+          </configuration>
+          </execution>
+        </executions>
+        
+    </plugin>
+   </plugins>
+</build>
+  
+</project>
