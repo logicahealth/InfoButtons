@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/Users/rick/apps/infobutton-projects/rxnorm-rest-model/../../../Desktop/rxnormrest.xsd" uri="src/main/resources/jaxb/rxNormRestModelBinding/rxnormrest.xsd"/>
+</catalog>
