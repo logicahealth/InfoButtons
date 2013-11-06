@@ -2,6 +2,7 @@ package org.openinfobutton.service.dao.impl;
 
 import java.util.Set;
 import junit.framework.TestCase;
+import org.openinfobutton.app.model.Code;
 import org.openinfobutton.service.IndexService;
 
 /**
@@ -36,10 +37,10 @@ public class CodeExpanderUtsHelperTest extends TestCase {
 //        String codeSystem = IndexService.SNOMED_CODE_SYSTEM_OID;
 //        String code = "47505003";
 //        CodeExpanderUtsHelper instance = new CodeExpanderUtsHelper();
-//        Set<String> codes = instance.getExpansionCodes(codeSystem, code);
+//        Set<Code> codes = instance.getExpansionCodes(codeSystem, code);
 //        
-//        for ( String eCode:codes ) {
-//            System.out.println(code + " hasExpCode=" + eCode);
+//        for ( Code eCode:codes ) {
+//            System.out.println(code + " hasExpCode=" + eCode.getCode());
 //        }
 //        
 //        assertTrue( codes.size() > 0 );

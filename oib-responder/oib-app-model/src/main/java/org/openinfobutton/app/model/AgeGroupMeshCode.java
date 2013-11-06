@@ -15,8 +15,8 @@ public class AgeGroupMeshCode {
     public final static String ADOLESCENT_13_TO_18_YEARS = "D000293";
     public final static String YOUNG_ADULT_19_TO_24_YEARS = "D055815";
     public final static String ADULT_19_TO_44_YEARS = "D000328";
-    public final static String AGED_56_TO_79_YEARS = "D000368";
     public final static String MIDDLE_AGED_45_TO_64_YEARS = "D008875";
+    public final static String AGED_56_TO_79_YEARS = "D000368";
     public final static String OLD_80_YEARS_AND_ABOVE = "D000369";
 
     public static boolean isValidCode(String code) {

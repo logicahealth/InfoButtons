@@ -10,6 +10,7 @@ import gov.nih.nlm.rxnav.rest.model.Tty;
 import java.util.HashMap; 
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import org.openinfobutton.app.model.Code;
 import org.openinfobutton.service.dao.CodeExpanderDao;
@@ -23,9 +24,22 @@ import org.springframework.web.client.RestTemplate;
  */
 @Repository
 public class CodeExpanderDaoImpl implements CodeExpanderDao {
+        
+    private Properties utsProperties;
 
     private Set<String> rxNormExpansionTermTypes;
+
+    public CodeExpanderDaoImpl() {
+    }
     
+    public CodeExpanderDaoImpl( Properties utsProperties ) {
+        this.utsProperties = utsProperties;
+    }
+
+    public void setUtsProperties(Properties utsProperties) {
+        this.utsProperties = utsProperties;
+    }
+
     public void setRxNormExpansionTermTypes(Set<String> rxNormExpansionTermTypes) {
         this.rxNormExpansionTermTypes = rxNormExpansionTermTypes;
     }
@@ -109,16 +123,16 @@ public class CodeExpanderDaoImpl implements CodeExpanderDao {
 
     public Set<Code> getExpansionIcd9Codes(String code) {
 
-        CodeExpanderUtsHelper utsHelper = new CodeExpanderUtsHelper();
-        Set<Code> codes = utsHelper.getExpansionCodes( CodeExpanderDao.ICD9_CODE_SYSTEM_OID, code);
+        CodeExpanderUtsHelper codeExpanderUtsHelper = new CodeExpanderUtsHelper( utsProperties );
+        Set<Code> codes = codeExpanderUtsHelper.getExpansionCodes( CodeExpanderDao.ICD9_CODE_SYSTEM_OID, code);
         
         return codes;
     }
 
     public Set<Code> getExpansionSnomedCodes(String code) {
 
-        CodeExpanderUtsHelper utsHelper = new CodeExpanderUtsHelper();
-        Set<Code> codes = utsHelper.getExpansionCodes( CodeExpanderDao.SNOMED_CODE_SYSTEM_OID, code);
+        CodeExpanderUtsHelper codeExpanderUtsHelper = new CodeExpanderUtsHelper( utsProperties );
+        Set<Code> codes = codeExpanderUtsHelper.getExpansionCodes( CodeExpanderDao.SNOMED_CODE_SYSTEM_OID, code);
         
         return codes;        
     

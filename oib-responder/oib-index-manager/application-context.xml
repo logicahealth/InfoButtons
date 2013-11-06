@@ -20,11 +20,10 @@
     
     <bean id="propertyConfigurer" 
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="../../app.properties"/>
+          p:location="../../../app.properties"/>
     
-    <bean id="utsProperties"
-          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="properties">
+    <bean id="codeExpanderDao" class="org.openinfobutton.service.dao.impl.CodeExpanderDaoImpl">
+        <property name="utsProperties">
             <props>
                 <prop key="username">${uts.username}</prop>
                 <prop key="password">${uts.password}</prop>

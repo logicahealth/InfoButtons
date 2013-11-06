@@ -1,5 +1,6 @@
 package org.openinfobutton.service.dao.impl;
 
+
 import gov.nih.nlm.uts.webservice.content.AtomClusterRelationDTO;
 import gov.nih.nlm.uts.webservice.content.Psf;
 import gov.nih.nlm.uts.webservice.content.SourceAtomClusterDTO;
@@ -16,7 +17,6 @@ import java.util.Properties;
 import java.util.Set;
 import org.openinfobutton.app.model.Code;
 import org.openinfobutton.service.dao.CodeExpanderDao;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class CodeExpanderUtsHelper {
 
-    @Autowired
     private Properties utsProperties;
     
     private Set<Code> expansionCodes;
@@ -34,6 +33,10 @@ public class CodeExpanderUtsHelper {
     
     public CodeExpanderUtsHelper( Properties properties ) {
         utsProperties = properties;        
+    }
+
+    public void setUtsProperties(Properties utsProperties) {
+        this.utsProperties = utsProperties;
     }
 
     public Set<Code> getExpansionCodes(String codeSystem, String code) {

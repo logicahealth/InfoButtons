@@ -13,7 +13,7 @@ public class OibIndexManagerApp {
         final ApplicationContext applicationContext = new FileSystemXmlApplicationContext("/application-context.xml");
         IndexService indexService = (IndexService) applicationContext.getBean(IndexService.class);
         
-//        indexService.refreshAllAssetIndexes( IndexService.SNOMED_CODE_SYSTEM_OID );
+        indexService.refreshAllAssetIndexes( IndexService.ICD9_CODE_SYSTEM_OID );
 
     }
 }
