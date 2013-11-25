@@ -40,27 +40,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link UtsFault }
+     * Create an instance of {@link GetProxyGrantTicket }
      * 
      */
-    public UtsFault createUtsFault() {
-        return new UtsFault();
-    }
-
-    /**
-     * Create an instance of {@link ValidateProxyTicketResponse }
-     * 
-     */
-    public ValidateProxyTicketResponse createValidateProxyTicketResponse() {
-        return new ValidateProxyTicketResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetProxyTicketResponse }
-     * 
-     */
-    public GetProxyTicketResponse createGetProxyTicketResponse() {
-        return new GetProxyTicketResponse();
+    public GetProxyGrantTicket createGetProxyGrantTicket() {
+        return new GetProxyGrantTicket();
     }
 
     /**
@@ -72,19 +56,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetProxyGrantTicketResponse }
+     * Create an instance of {@link ValidateProxyTicketResponse }
      * 
      */
-    public GetProxyGrantTicketResponse createGetProxyGrantTicketResponse() {
-        return new GetProxyGrantTicketResponse();
+    public ValidateProxyTicketResponse createValidateProxyTicketResponse() {
+        return new ValidateProxyTicketResponse();
     }
 
     /**
-     * Create an instance of {@link GetProxyGrantTicket }
+     * Create an instance of {@link UtsFault }
      * 
      */
-    public GetProxyGrantTicket createGetProxyGrantTicket() {
-        return new GetProxyGrantTicket();
+    public UtsFault createUtsFault() {
+        return new UtsFault();
     }
 
     /**
@@ -93,6 +77,22 @@ public class ObjectFactory {
      */
     public ValidateProxyTicket createValidateProxyTicket() {
         return new ValidateProxyTicket();
+    }
+
+    /**
+     * Create an instance of {@link GetProxyGrantTicketResponse }
+     * 
+     */
+    public GetProxyGrantTicketResponse createGetProxyGrantTicketResponse() {
+        return new GetProxyGrantTicketResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetProxyTicketResponse }
+     * 
+     */
+    public GetProxyTicketResponse createGetProxyTicketResponse() {
+        return new GetProxyTicketResponse();
     }
 
     /**

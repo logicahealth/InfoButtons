@@ -44,7 +44,7 @@ $Date:: 2011-01-13 1#$:  Date of last commit
   <dependencies>
       <dependency>
 	  	  <groupId>edu.duke.mc.cfm.dci</groupId>
-	  	  <artifactId>infobutton-kbschema</artifactId>
+	  	  <artifactId>oib-profile-schema</artifactId>
 	  	  <version>1.4</version>
 	  	  <scope>compile</scope>
 	    </dependency>

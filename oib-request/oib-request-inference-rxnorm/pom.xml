@@ -50,7 +50,7 @@
   	</dependency>
   	<dependency>
   		<groupId>org.hl7.v3</groupId>
-  		<artifactId>infobutton-schema</artifactId>
+  		<artifactId>oib-request-schema</artifactId>
   		<version>1.4</version>
   	</dependency>
   </dependencies>

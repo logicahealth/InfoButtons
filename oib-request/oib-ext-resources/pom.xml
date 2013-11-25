@@ -46,13 +46,13 @@
         </dependency>
 	    <dependency>
 	  	  <groupId>org.hl7.v3</groupId>
-	  	  <artifactId>infobutton-schema</artifactId>
+	  	  <artifactId>oib-request-schema</artifactId>
 	  	  <version>1.4</version>
 	  	  <scope>compile</scope>
 	    </dependency>
 	    <dependency>
 	  	  <groupId>edu.duke.mc.cfm.dci</groupId>
-	  	  <artifactId>infobutton-kbschema</artifactId>
+	  	  <artifactId>oib-profile-schema</artifactId>
 	  	  <version>1.4</version>
 	  	  <scope>compile</scope>
 	    </dependency>
@@ -162,7 +162,7 @@
        </dependency>
        <dependency>
        	<groupId>edu.duke.mc.cfm.dci</groupId>
-       	<artifactId>infobutton-db</artifactId>
+       	<artifactId>oib-request-db</artifactId>
        	<version>1.4</version>
        	<scope>compile</scope>
        </dependency>
@@ -230,12 +230,12 @@
        </dependency>
        <dependency>
        	<groupId>edu.utah.openinfobutton</groupId>
-       	<artifactId>inference-rxnorm</artifactId>
+       	<artifactId>oib-request-inference-rxnorm</artifactId>
        	<version>1.4</version>
        </dependency>
        <dependency>
        	<groupId>UTSMetathesaurus</groupId>
-       	<artifactId>UTSMetathesaurus</artifactId>
+       	<artifactId>uts-metathesaurus</artifactId>
        	<version>1.4</version>
        	<type>jar</type>
        	<scope>compile</scope>
