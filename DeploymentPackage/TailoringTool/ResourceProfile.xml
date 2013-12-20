@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?altova_sps ResourceAuhtoring.sps?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+	<header id="1">
+		<title/>
+		<versionControl publicationDate=""/>
+	</header>
+	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
+		<authorizedOrganizations>
+			<authorizedOrganization name="" id=""/>
+		</authorizedOrganizations>
+		<contexts>
+			<context id="1" name="">
+				<contextDefinition>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration>
+								<code code="" codeSystem=""/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<conceptOfInterest match="false" search="true"/>
+					<subTopics>
+						<subTopic linkName=""/>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url=""/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>
