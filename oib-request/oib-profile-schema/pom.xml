@@ -6,7 +6,7 @@ $Date:: 2011-01-28 1#$:  Date of last commit
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
- <groupId>edu.duke.mc.cfm.dci</groupId>
+ <groupId>org.openinfobutton</groupId>
   <artifactId>oib-profile-schema</artifactId>
   <version>1.4</version>
   <name>oib-profile-schema</name>
@@ -28,7 +28,7 @@ $Date:: 2011-01-28 1#$:  Date of last commit
 				<schemaDirectory>src/main/resources</schemaDirectory>
 				<schemaFiles>ResourceProfile-v2.8_LITE.xsd</schemaFiles>				
 				<outputDirectory>src/main/java</outputDirectory>
-				<packageName>edu.duke.mc.cfm.dci.infobutton.schemas.kb</packageName>
+				<packageName>org.openinfobutton.schemas.kb</packageName>
 			</configuration>  			
   		</plugin>
 		<plugin>

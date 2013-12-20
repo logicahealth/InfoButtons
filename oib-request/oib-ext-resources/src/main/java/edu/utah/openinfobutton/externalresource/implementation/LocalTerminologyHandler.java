@@ -2,12 +2,12 @@ package edu.utah.openinfobutton.externalresource.implementation;
 
 import java.util.List;
 
+import org.openinfobutton.schemas.kb.Code;
+import org.openinfobutton.schemas.kb.Id;
+import org.openinfobutton.schemas.kb.TerminologyInference.CodeInference.InferenceDefinition.LocalMappings.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Code;
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Id;
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.TerminologyInference.CodeInference.InferenceDefinition.LocalMappings.Mapping;
 import edu.utah.further.subsetdb.domain.Concept;
 import edu.utah.further.subsetdb.domain.Subset;
 import edu.utah.further.subsetdb.service.SubsetDbDao;

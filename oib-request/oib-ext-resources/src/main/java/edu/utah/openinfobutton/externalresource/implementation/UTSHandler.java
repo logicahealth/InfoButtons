@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.openinfobutton.schema.CodeUtility;
+import org.openinfobutton.schemas.kb.Code;
+import org.openinfobutton.schemas.kb.Id;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -18,9 +21,6 @@ import UtsMetathesaurusFinder.UtsWsFinderControllerImplService;
 import UtsSecurity.UtsFault_Exception;
 import UtsSecurity.UtsWsSecurityController;
 import UtsSecurity.UtsWsSecurityControllerImplService;
-import edu.duke.mc.cfm.dci.infobutton.CodeUtility;
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Code;
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Id;
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
 
 @Component

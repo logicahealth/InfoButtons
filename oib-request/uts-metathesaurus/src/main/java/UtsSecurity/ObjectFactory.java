@@ -40,19 +40,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetProxyGrantTicketResponse }
+     * 
+     */
+    public GetProxyGrantTicketResponse createGetProxyGrantTicketResponse() {
+        return new GetProxyGrantTicketResponse();
+    }
+
+    /**
      * Create an instance of {@link GetProxyGrantTicket }
      * 
      */
     public GetProxyGrantTicket createGetProxyGrantTicket() {
         return new GetProxyGrantTicket();
-    }
-
-    /**
-     * Create an instance of {@link GetProxyTicket }
-     * 
-     */
-    public GetProxyTicket createGetProxyTicket() {
-        return new GetProxyTicket();
     }
 
     /**
@@ -64,14 +64,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link UtsFault }
-     * 
-     */
-    public UtsFault createUtsFault() {
-        return new UtsFault();
-    }
-
-    /**
      * Create an instance of {@link ValidateProxyTicket }
      * 
      */
@@ -80,19 +72,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetProxyGrantTicketResponse }
-     * 
-     */
-    public GetProxyGrantTicketResponse createGetProxyGrantTicketResponse() {
-        return new GetProxyGrantTicketResponse();
-    }
-
-    /**
      * Create an instance of {@link GetProxyTicketResponse }
      * 
      */
     public GetProxyTicketResponse createGetProxyTicketResponse() {
         return new GetProxyTicketResponse();
+    }
+
+    /**
+     * Create an instance of {@link UtsFault }
+     * 
+     */
+    public UtsFault createUtsFault() {
+        return new UtsFault();
+    }
+
+    /**
+     * Create an instance of {@link GetProxyTicket }
+     * 
+     */
+    public GetProxyTicket createGetProxyTicket() {
+        return new GetProxyTicket();
     }
 
     /**

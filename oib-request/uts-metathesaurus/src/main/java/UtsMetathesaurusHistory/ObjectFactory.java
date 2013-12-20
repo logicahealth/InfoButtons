@@ -58,203 +58,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AtomMovementDTO }
-     * 
-     */
-    public AtomMovementDTO createAtomMovementDTO() {
-        return new AtomMovementDTO();
-    }
-
-    /**
-     * Create an instance of {@link GetMovedToConceptCuiResponse }
-     * 
-     */
-    public GetMovedToConceptCuiResponse createGetMovedToConceptCuiResponse() {
-        return new GetMovedToConceptCuiResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetConceptMerges }
-     * 
-     */
-    public GetConceptMerges createGetConceptMerges() {
-        return new GetConceptMerges();
-    }
-
-    /**
-     * Create an instance of {@link GetTermMergesResponse }
-     * 
-     */
-    public GetTermMergesResponse createGetTermMergesResponse() {
-        return new GetTermMergesResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetConceptDeletionsResponse }
-     * 
-     */
-    public GetConceptDeletionsResponse createGetConceptDeletionsResponse() {
-        return new GetConceptDeletionsResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetMergedToTermUiResponse }
-     * 
-     */
-    public GetMergedToTermUiResponse createGetMergedToTermUiResponse() {
-        return new GetMergedToTermUiResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetTermStringDeletionsResponse }
-     * 
-     */
-    public GetTermStringDeletionsResponse createGetTermStringDeletionsResponse() {
-        return new GetTermStringDeletionsResponse();
-    }
-
-    /**
      * Create an instance of {@link GetAtomMovementsResponse }
      * 
      */
     public GetAtomMovementsResponse createGetAtomMovementsResponse() {
         return new GetAtomMovementsResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetMergedToConceptCui }
-     * 
-     */
-    public GetMergedToConceptCui createGetMergedToConceptCui() {
-        return new GetMergedToConceptCui();
-    }
-
-    /**
-     * Create an instance of {@link TermDeathDTO }
-     * 
-     */
-    public TermDeathDTO createTermDeathDTO() {
-        return new TermDeathDTO();
-    }
-
-    /**
-     * Create an instance of {@link GetTermStringDeletions }
-     * 
-     */
-    public GetTermStringDeletions createGetTermStringDeletions() {
-        return new GetTermStringDeletions();
-    }
-
-    /**
-     * Create an instance of {@link GetAtomMovements }
-     * 
-     */
-    public GetAtomMovements createGetAtomMovements() {
-        return new GetAtomMovements();
-    }
-
-    /**
-     * Create an instance of {@link GetMovedToConceptCui }
-     * 
-     */
-    public GetMovedToConceptCui createGetMovedToConceptCui() {
-        return new GetMovedToConceptCui();
-    }
-
-    /**
-     * Create an instance of {@link GetTermDeletions }
-     * 
-     */
-    public GetTermDeletions createGetTermDeletions() {
-        return new GetTermDeletions();
-    }
-
-    /**
-     * Create an instance of {@link GetSourceAtomChangesResponse }
-     * 
-     */
-    public GetSourceAtomChangesResponse createGetSourceAtomChangesResponse() {
-        return new GetSourceAtomChangesResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetTermDeletionsResponse }
-     * 
-     */
-    public GetTermDeletionsResponse createGetTermDeletionsResponse() {
-        return new GetTermDeletionsResponse();
-    }
-
-    /**
-     * Create an instance of {@link TermStringDeathDTO }
-     * 
-     */
-    public TermStringDeathDTO createTermStringDeathDTO() {
-        return new TermStringDeathDTO();
-    }
-
-    /**
-     * Create an instance of {@link ChangeRecordDTO }
-     * 
-     */
-    public ChangeRecordDTO createChangeRecordDTO() {
-        return new ChangeRecordDTO();
-    }
-
-    /**
-     * Create an instance of {@link ConceptMergeDTO }
-     * 
-     */
-    public ConceptMergeDTO createConceptMergeDTO() {
-        return new ConceptMergeDTO();
-    }
-
-    /**
-     * Create an instance of {@link GetBequeathedToConceptCuis }
-     * 
-     */
-    public GetBequeathedToConceptCuis createGetBequeathedToConceptCuis() {
-        return new GetBequeathedToConceptCuis();
-    }
-
-    /**
-     * Create an instance of {@link UtsFault }
-     * 
-     */
-    public UtsFault createUtsFault() {
-        return new UtsFault();
-    }
-
-    /**
-     * Create an instance of {@link SourceAtomChangeDTO }
-     * 
-     */
-    public SourceAtomChangeDTO createSourceAtomChangeDTO() {
-        return new SourceAtomChangeDTO();
-    }
-
-    /**
-     * Create an instance of {@link GetSourceAtomChanges }
-     * 
-     */
-    public GetSourceAtomChanges createGetSourceAtomChanges() {
-        return new GetSourceAtomChanges();
-    }
-
-    /**
-     * Create an instance of {@link GetConceptBequeathals }
-     * 
-     */
-    public GetConceptBequeathals createGetConceptBequeathals() {
-        return new GetConceptBequeathals();
-    }
-
-    /**
-     * Create an instance of {@link ConceptDeathDTO }
-     * 
-     */
-    public ConceptDeathDTO createConceptDeathDTO() {
-        return new ConceptDeathDTO();
     }
 
     /**
@@ -266,11 +74,83 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetMergedToTermUi }
+     * Create an instance of {@link GetBequeathedToConceptCuis }
      * 
      */
-    public GetMergedToTermUi createGetMergedToTermUi() {
-        return new GetMergedToTermUi();
+    public GetBequeathedToConceptCuis createGetBequeathedToConceptCuis() {
+        return new GetBequeathedToConceptCuis();
+    }
+
+    /**
+     * Create an instance of {@link TermMergeDTO }
+     * 
+     */
+    public TermMergeDTO createTermMergeDTO() {
+        return new TermMergeDTO();
+    }
+
+    /**
+     * Create an instance of {@link GetMergedToConceptCui }
+     * 
+     */
+    public GetMergedToConceptCui createGetMergedToConceptCui() {
+        return new GetMergedToConceptCui();
+    }
+
+    /**
+     * Create an instance of {@link GetSourceAtomChanges }
+     * 
+     */
+    public GetSourceAtomChanges createGetSourceAtomChanges() {
+        return new GetSourceAtomChanges();
+    }
+
+    /**
+     * Create an instance of {@link GetBequeathedToConceptCuisResponse }
+     * 
+     */
+    public GetBequeathedToConceptCuisResponse createGetBequeathedToConceptCuisResponse() {
+        return new GetBequeathedToConceptCuisResponse();
+    }
+
+    /**
+     * Create an instance of {@link UtsFault }
+     * 
+     */
+    public UtsFault createUtsFault() {
+        return new UtsFault();
+    }
+
+    /**
+     * Create an instance of {@link GetMergedToConceptCuiResponse }
+     * 
+     */
+    public GetMergedToConceptCuiResponse createGetMergedToConceptCuiResponse() {
+        return new GetMergedToConceptCuiResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetConceptBequeathals }
+     * 
+     */
+    public GetConceptBequeathals createGetConceptBequeathals() {
+        return new GetConceptBequeathals();
+    }
+
+    /**
+     * Create an instance of {@link GetAtomMovements }
+     * 
+     */
+    public GetAtomMovements createGetAtomMovements() {
+        return new GetAtomMovements();
+    }
+
+    /**
+     * Create an instance of {@link GetConceptMerges }
+     * 
+     */
+    public GetConceptMerges createGetConceptMerges() {
+        return new GetConceptMerges();
     }
 
     /**
@@ -298,11 +178,51 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetBequeathedToConceptCuisResponse }
+     * Create an instance of {@link GetTermDeletionsResponse }
      * 
      */
-    public GetBequeathedToConceptCuisResponse createGetBequeathedToConceptCuisResponse() {
-        return new GetBequeathedToConceptCuisResponse();
+    public GetTermDeletionsResponse createGetTermDeletionsResponse() {
+        return new GetTermDeletionsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetMovedToConceptCuiResponse }
+     * 
+     */
+    public GetMovedToConceptCuiResponse createGetMovedToConceptCuiResponse() {
+        return new GetMovedToConceptCuiResponse();
+    }
+
+    /**
+     * Create an instance of {@link ChangeRecordDTO }
+     * 
+     */
+    public ChangeRecordDTO createChangeRecordDTO() {
+        return new ChangeRecordDTO();
+    }
+
+    /**
+     * Create an instance of {@link TermDeathDTO }
+     * 
+     */
+    public TermDeathDTO createTermDeathDTO() {
+        return new TermDeathDTO();
+    }
+
+    /**
+     * Create an instance of {@link GetTermDeletions }
+     * 
+     */
+    public GetTermDeletions createGetTermDeletions() {
+        return new GetTermDeletions();
+    }
+
+    /**
+     * Create an instance of {@link TermStringDeathDTO }
+     * 
+     */
+    public TermStringDeathDTO createTermStringDeathDTO() {
+        return new TermStringDeathDTO();
     }
 
     /**
@@ -314,19 +234,99 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TermMergeDTO }
+     * Create an instance of {@link SourceAtomChangeDTO }
      * 
      */
-    public TermMergeDTO createTermMergeDTO() {
-        return new TermMergeDTO();
+    public SourceAtomChangeDTO createSourceAtomChangeDTO() {
+        return new SourceAtomChangeDTO();
     }
 
     /**
-     * Create an instance of {@link GetMergedToConceptCuiResponse }
+     * Create an instance of {@link ConceptDeathDTO }
      * 
      */
-    public GetMergedToConceptCuiResponse createGetMergedToConceptCuiResponse() {
-        return new GetMergedToConceptCuiResponse();
+    public ConceptDeathDTO createConceptDeathDTO() {
+        return new ConceptDeathDTO();
+    }
+
+    /**
+     * Create an instance of {@link AtomMovementDTO }
+     * 
+     */
+    public AtomMovementDTO createAtomMovementDTO() {
+        return new AtomMovementDTO();
+    }
+
+    /**
+     * Create an instance of {@link GetTermStringDeletionsResponse }
+     * 
+     */
+    public GetTermStringDeletionsResponse createGetTermStringDeletionsResponse() {
+        return new GetTermStringDeletionsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetTermStringDeletions }
+     * 
+     */
+    public GetTermStringDeletions createGetTermStringDeletions() {
+        return new GetTermStringDeletions();
+    }
+
+    /**
+     * Create an instance of {@link GetMergedToTermUiResponse }
+     * 
+     */
+    public GetMergedToTermUiResponse createGetMergedToTermUiResponse() {
+        return new GetMergedToTermUiResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetMergedToTermUi }
+     * 
+     */
+    public GetMergedToTermUi createGetMergedToTermUi() {
+        return new GetMergedToTermUi();
+    }
+
+    /**
+     * Create an instance of {@link GetMovedToConceptCui }
+     * 
+     */
+    public GetMovedToConceptCui createGetMovedToConceptCui() {
+        return new GetMovedToConceptCui();
+    }
+
+    /**
+     * Create an instance of {@link ConceptMergeDTO }
+     * 
+     */
+    public ConceptMergeDTO createConceptMergeDTO() {
+        return new ConceptMergeDTO();
+    }
+
+    /**
+     * Create an instance of {@link GetSourceAtomChangesResponse }
+     * 
+     */
+    public GetSourceAtomChangesResponse createGetSourceAtomChangesResponse() {
+        return new GetSourceAtomChangesResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetTermMergesResponse }
+     * 
+     */
+    public GetTermMergesResponse createGetTermMergesResponse() {
+        return new GetTermMergesResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetConceptDeletionsResponse }
+     * 
+     */
+    public GetConceptDeletionsResponse createGetConceptDeletionsResponse() {
+        return new GetConceptDeletionsResponse();
     }
 
     /**

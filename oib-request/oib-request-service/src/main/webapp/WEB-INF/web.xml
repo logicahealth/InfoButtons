@@ -44,7 +44,7 @@ $Date:: 2010-10-01 1#$:  Date of last commit
   <servlet>
   	<servlet-name>KnowledgeRequestServlet</servlet-name>
   	<servlet-class>
-  		edu.duke.mc.cfm.dci.dss.KnowledgeRequestServlet
+  		org.openinfobutton.service.web.KnowledgeRequestServlet
   	</servlet-class>
   </servlet>
   

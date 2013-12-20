@@ -44,8 +44,11 @@
 
 	<context:component-scan base-package="edu.utah.further.subsetdb.service" />
 	<context:component-scan base-package="edu.utah.further.profiledb.service" /> 
-	<context:component-scan base-package="edu.duke.mc.cfm.dci.infobutton" />
-	<context:component-scan base-package="edu.duke.mc.cfm.dci.dss" />
+	<context:component-scan base-package="org.openinfobutton.service.profile" />
+	<context:component-scan base-package="org.openinfobutton.service.transform" />
+	<context:component-scan base-package="org.openinfobutton.service.response" />
+	<context:component-scan base-package="org.openinfobutton.service.matching" />
+	<context:component-scan base-package="org.openinfobutton.service.web" />
 	<context:component-scan base-package="edu.utah.openinfobutton.externalresource.implementation" />
 	
 	 <bean id="externalSet" class="${service.MatchExternalSetClassName}">

@@ -18,9 +18,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.openinfobutton.schema.CodeUtility;
+import org.openinfobutton.schemas.kb.Code;
 
-import edu.duke.mc.cfm.dci.infobutton.CodeUtility;
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Code;
 import edu.utah.further.core.api.xml.XmlService;
 import edu.utah.further.core.xml.jaxb.XmlServiceImpl;
 import edu.utah.openinfobutton.inference.rxnorm.schema.ApproxGroup.Candidate;

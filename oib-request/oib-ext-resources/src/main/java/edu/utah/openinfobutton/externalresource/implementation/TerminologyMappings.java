@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
+import org.openinfobutton.schemas.kb.TerminologyInference.CodeInference.InferenceDefinition.LocalMappings.Mapping;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.TerminologyInference.CodeInference.InferenceDefinition.LocalMappings.Mapping;
 
 @Lazy
 @Component

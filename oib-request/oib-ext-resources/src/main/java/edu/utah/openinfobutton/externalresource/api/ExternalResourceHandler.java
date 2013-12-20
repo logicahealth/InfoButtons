@@ -3,9 +3,10 @@ package edu.utah.openinfobutton.externalresource.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openinfobutton.schemas.kb.Code;
+import org.openinfobutton.schemas.kb.Id;
 
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Code;
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Id;
+
 
 /**
  * This interface describes the methods required for Terminology Inference Operations

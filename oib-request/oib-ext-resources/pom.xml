@@ -45,13 +45,13 @@
             <scope>provided</scope>
         </dependency>
 	    <dependency>
-	  	  <groupId>org.hl7.v3</groupId>
+	  	  <groupId>org.openinfobutton</groupId>
 	  	  <artifactId>oib-request-schema</artifactId>
 	  	  <version>1.4</version>
 	  	  <scope>compile</scope>
 	    </dependency>
 	    <dependency>
-	  	  <groupId>edu.duke.mc.cfm.dci</groupId>
+	  	  <groupId>org.openinfobutton</groupId>
 	  	  <artifactId>oib-profile-schema</artifactId>
 	  	  <version>1.4</version>
 	  	  <scope>compile</scope>
@@ -161,7 +161,7 @@
        	<scope>compile</scope>
        </dependency>
        <dependency>
-       	<groupId>edu.duke.mc.cfm.dci</groupId>
+       	<groupId>org.openinfobutton</groupId>
        	<artifactId>oib-request-db</artifactId>
        	<version>1.4</version>
        	<scope>compile</scope>

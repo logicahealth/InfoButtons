@@ -2,8 +2,9 @@ package edu.utah.openinfobutton.externalresource.api;
 
 import java.util.List;
 
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Code;
-import edu.duke.mc.cfm.dci.infobutton.schemas.kb.Id;
+import org.openinfobutton.schemas.kb.Code;
+import org.openinfobutton.schemas.kb.Id;
+
 
 /**
  * This is an interface that operates on the local DB instance
