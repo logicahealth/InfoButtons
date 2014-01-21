@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -105,7 +106,7 @@ public class KnowledgeRequestServlet extends HttpServlet {
 			transformer = tfactory.newTransformer();
 			transformer.transform(source, result);
 			String orgid= knowledgeRequest.getHolder().getRepresentedOrganization().getRoot();
-			dao.saveRequest(stringWriter.toString(), req.getRemoteAddr(), orgid);//Log written here
+			dao.saveRequest(stringWriter.toString(), req.getRemoteAddr(), orgid, req.getQueryString());//Log written here
 			AggregateKnowledgeResponse response = engine.getResponse(knowledgeRequest);
 			ctx = JAXBContext.newInstance(AggregateKnowledgeResponse.class);
 			m =ctx.createMarshaller();

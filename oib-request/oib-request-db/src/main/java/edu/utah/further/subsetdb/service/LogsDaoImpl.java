@@ -29,7 +29,7 @@ public class LogsDaoImpl implements LogsDao {
 	private SessionFactory sf ;
 	
 	@Transactional
-	public void saveRequest(String req,String clientIP,String orgID)
+	public void saveRequest(String req,String clientIP,String orgID,String origParams)
 	{
 		Date d=new Date();
 		Logs log=new Logs();
@@ -37,6 +37,7 @@ public class LogsDaoImpl implements LogsDao {
 		log.setClientIP(clientIP);
 		log.setOrgID(orgID);
 		log.setTimestamp(new Timestamp(d.getTime()));
+		log.setOrigParams(origParams);
 		
 		
 		dao.create(log);
