@@ -47,7 +47,7 @@ public class OpenInfobuttonResponderController {
         this.indexPropertyInterpretationMap = indexPropertyInterpretationMap;
     }
 
-    private void setRequiredObjects(){
+    private void setRequiredResponseObjects(){
 
         if ( this.atomFeedMetadata == null ) {
             this.atomFeedMetadata = responderService.getApplicationProperties( ATOM_FEED_KEY );
@@ -70,10 +70,13 @@ public class OpenInfobuttonResponderController {
         response.setHeader("Cache-Control", "no-cache");
         // todo: authorization - return 401 when not authorized
         
-        setRequiredObjects();
+        setRequiredResponseObjects();
         
-        // throws MissingServletRequestParameterException or IllegalArgumentException 
+        // throws IllegalArgumentException 
         Map<String, String> requestParameters = responderService.getKnowledgeRequestParameterMap(request.getParameterMap());
+        
+        // throws MissingServletRequestParameterException 
+        responderService.requestContainsRequiredParameters(requestParameters);
         Collection<Asset> matchedAssets = responderService.findAssetsByInfobuttonRequest(requestParameters);
 
         model.addAttribute("atomFeedMetadata", this.atomFeedMetadata);
@@ -103,7 +106,7 @@ public class OpenInfobuttonResponderController {
     }
     
     @ResponseStatus(value = HttpStatus.BAD_REQUEST, 
-            reason = "Missing required parameter(s): mainSearchCriteria.c.c, mainSearchCriteria.c.cs, or taskContext.c.c")  // 400
+            reason = "Missing required parameter(s): mainSearchCriteria.v.c, mainSearchCriteria.v.cs, or taskContext.c.c")  // 400
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public void handleMissingServletRequestParameterException() {
         // logic handled by annotations

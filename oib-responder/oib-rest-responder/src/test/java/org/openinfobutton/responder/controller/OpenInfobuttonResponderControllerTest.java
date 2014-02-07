@@ -21,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import org.openinfobutton.responder.service.ResponderService;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -109,8 +110,8 @@ public class OpenInfobuttonResponderControllerTest {
     @Test
     public void testOpenInfobuttonRequestHandleMissingServletRequestParameterException() throws Exception {
         
-        when( responderService.getKnowledgeRequestParameterMap( any( Map.class ) ) )
-                .thenThrow( new MissingServletRequestParameterException("testParm","testType") );
+        doThrow( new MissingServletRequestParameterException("testParm","testType") )
+                .when(responderService).requestContainsRequiredParameters( any( Map.class ) );
         
         this.mockMvc.perform(
                 post("/responder"))
@@ -169,6 +170,16 @@ public class OpenInfobuttonResponderControllerTest {
         Map<String, String> requestParameters = new HashMap<String, String>();
         requestParameters.put("mainSearchCriteria.v.c", "47505003");
         requestParameters.put("mainSearchCriteria.v.cs", "2.16.840.1.113883.6.96");
+        requestParameters.put("taskContext.c.c", "PROBLISTREV");
+
+        return requestParameters;
+    }
+
+    private Map<String, String> getInvalidMockFlatRequestParameters() {
+
+        Map<String, String> requestParameters = new HashMap<String, String>();
+        requestParameters.put("mainSearchCriteria.v.c", "47505003");
+        requestParameters.put("mainSearchCriteria", "2.16.840.1.113883.6.96");
         requestParameters.put("taskContext.c.c", "PROBLISTREV");
 
         return requestParameters;

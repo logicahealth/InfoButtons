@@ -24,10 +24,16 @@
     <dependencies>
 
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.28</version>
+        </dependency>
+
+        <!--dependency>
             <groupId>oracle</groupId>
             <artifactId>jdbc</artifactId>
             <version>11.2.0.4</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.openinfobutton</groupId>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><%response  %><%@page import="java.text.SimpleDateFormat"%><%@page contentType="text/xml; charset=UTF-8"%><%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<?xml version="1.0" encoding="UTF-8"?><%@page import="java.text.SimpleDateFormat"%><%@page contentType="text/xml; charset=UTF-8"%><%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <feed xmlns="http://www.w3.org/2005/Atom" 
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-      xml:base="${atomFeedMetadata['xml.base']}" 
       xml:lang="en" 
+      xml:base="${atomFeedMetadata['xml.base']}"       
       xsi:schemaLocation="KnowledgeResponse.xsd">
 	<title type="text">${atomFeedMetadata['title']}</title><c:if test="${not empty atomFeedMetadata['author.name'] or not empty atomFeedMetadata['author.uri']}">
 	<author><c:if test="${not empty atomFeedMetadata['author.name']}">

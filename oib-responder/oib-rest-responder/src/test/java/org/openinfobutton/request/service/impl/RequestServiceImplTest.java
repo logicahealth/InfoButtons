@@ -38,32 +38,35 @@ public class RequestServiceImplTest extends TestCase {
      * ResponderServiceImpl.
      */
     public void testGetFlatRequestMap() {
+        
         System.out.println("testGetFlatRequestMap");
+        
         Map httpRequestParameters = new HashMap();
-        String parameterName = "mainSearchCriteria.c.c";
+        String parameterName = "mainSearchCriteria.v.c";
         String parameterValue = "aCode";
         httpRequestParameters.put(parameterName, new String[]{parameterValue});
         ResponderServiceImpl instance = new ResponderServiceImpl();
+        
         Map<String, String> expResult = new HashMap<String, String>();
         expResult.put(parameterName, parameterValue);
-        Map result;
-        try {
-            result = instance.getKnowledgeRequestParameterMap(httpRequestParameters);
-            assertEquals(expResult, result);
-        } catch (MissingServletRequestParameterException ex) {
-            Logger.getLogger(RequestServiceImplTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        Map result = instance.getKnowledgeRequestParameterMap(httpRequestParameters);
+        assertEquals(expResult, result);
     }
 
     public void testInvalidArgumentGetFlatRequestMap() {
+        
         System.out.println("testInvalidArgumentGetFlatRequestMap");
+        
         Map httpRequestParameters = new HashMap();
-        String parameterName = "mainSearchCriteria.c.c";
+        String parameterName = "mainSearchCriteria.v.c";
         String parameterValue = "aCode";
         httpRequestParameters.put(parameterName, new String[]{parameterValue, parameterValue}); // two values should fail
         ResponderServiceImpl instance = new ResponderServiceImpl();
+        
         Map<String, String> expResult = new HashMap<String, String>();
         expResult.put(parameterName, parameterValue);
+        
         try {
             Map result = instance.getKnowledgeRequestParameterMap(httpRequestParameters); // should throw excpetion
             fail("Should have thrown an InvalidArgumentException");
