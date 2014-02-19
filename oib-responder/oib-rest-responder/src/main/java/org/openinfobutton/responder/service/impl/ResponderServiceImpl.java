@@ -125,13 +125,7 @@ public class ResponderServiceImpl implements ResponderService {
     }
 
     @Override
-    @Transactional
-    public int validateRequest(Map<String, String> requestParameters) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Map<String, String> getKnowledgeRequestParameterMap(Map httpRequestParameters) throws MissingServletRequestParameterException {
+    public Map<String, String> getKnowledgeRequestParameterMap(Map httpRequestParameters) {
 
         Map<String, String> requestParameters = new HashMap<String, String>();
 
@@ -154,28 +148,46 @@ public class ResponderServiceImpl implements ResponderService {
             }
 
         }
-
-        containsRequiredParameters(requestParameters);
         
         return requestParameters;
     }
-    
-    private void containsRequiredParameters(Map<String, String> requestParameters) throws MissingServletRequestParameterException {
+ 
+    @Override
+    @Transactional
+    public boolean requestContainsRequiredParameters(Map<String, String> requestParameters) throws MissingServletRequestParameterException {
         
         StringBuffer errorMessage = new StringBuffer();
         
-        if ( requestParameters.get("mainSearchCriteria.c.c") != null ) {
-            errorMessage.append("mainSearchCriteria.c.c: ");
+        Collection<RequestParameter> requiredRequestParmeters = responderRequestParameterDao.getRequiredOpenInfobuttonRequestParameters();
+        
+        int i = 0;
+        for (RequestParameter requiredRequestParmeter:requiredRequestParmeters) {
+            if ( ! requestParameters.containsKey( requiredRequestParmeter.getParameterName() ) ) {
+                if ( i > 1 ) {
+                    errorMessage.append(", ");
+                }
+                errorMessage.append( requiredRequestParmeter.getParameterName() );
+                i++;
+            }
         }
-        else if ( requestParameters.get("mainSearchCriteria.c.cs") != null ) {
-            errorMessage.append("mainSearchCriteria.c.cs: ");            
-        }
-        else if ( requestParameters.get("taskContext.c.c") != null ) {
-            errorMessage.append("taskContext.c.c: ");            
-        }
+
+        if ( errorMessage.length() > 0 ) {
             
-        else
-            throw new MissingServletRequestParameterException(errorMessage.toString(),"is/are required. ");
+            String messagePrefix = null;
+            String messageSuffix = null;
+            if ( i > 1 ) {
+                messagePrefix = " are";
+                messageSuffix = "s.";
+            }
+            else {
+                messagePrefix = " is a";
+                messageSuffix = ".";
+            }
+                
+            throw new MissingServletRequestParameterException(errorMessage.toString(), messagePrefix + " required request parameter" + messageSuffix);            
+        }
+        
+        return true;
         
     }
 
@@ -206,4 +218,5 @@ public class ResponderServiceImpl implements ResponderService {
         return responderAssetDao.findByInfobuttonRequest(requestParameters);
         
     }
+
 }
