@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- DWXMLSource="responseSample.xml" -->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:ns2="urn:hl7-org:v3" xmlns:ns3="http://www.w3.org/2005/Atom:atom">
 	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+	<xsl:param name="response_uuid"></xsl:param>
 	<xsl:template match="/">
 		<html>
 			<head>
@@ -263,6 +264,8 @@
 						</style>
 						<![endif]-->
 				]]></xsl:text>
+				<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+				<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
                 <script type="text/javascript">
  					function isIE () {
 						var myNav = navigator.userAgent.toLowerCase();
@@ -315,8 +318,13 @@
 						else {
 							window.open(url);
 						}
+						
+						$.post("http://localhost:8080/infobutton-service/log", { type: "resourceRequest", requestUUID: $('#requestUUID').val(), url: url});
 					}
 				]]></script>
+				<input type="hidden" id="requestUUID">
+					 <xsl:attribute name="value"><xsl:value-of select="$response_uuid"/></xsl:attribute>
+				</input>
 				<div id="wrapper">
 					<!-- begin innerWrapper -->
 					<div id="innerWrapper">

@@ -35,6 +35,7 @@ CREATE TABLE `logs` (
   `clientIP` varchar(45) NOT NULL,
   `orgID` varchar(45) NOT NULL,
   `origParams` varchar(4000),
+  `requestUUID` varchar(45) NOT NULL,
   PRIMARY KEY  (`logsId`)
 ) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

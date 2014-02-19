@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Enumeration;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -106,7 +107,7 @@ public class KnowledgeRequestServlet extends HttpServlet {
 			transformer = tfactory.newTransformer();
 			transformer.transform(source, result);
 			String orgid= knowledgeRequest.getHolder().getRepresentedOrganization().getRoot();
-			dao.saveRequest(stringWriter.toString(), req.getRemoteAddr(), orgid, req.getQueryString());//Log written here
+			String requestUUID = dao.saveRequest(stringWriter.toString(), req.getRemoteAddr(), orgid, req.getQueryString());//Log written here
 			AggregateKnowledgeResponse response = engine.getResponse(knowledgeRequest);
 			ctx = JAXBContext.newInstance(AggregateKnowledgeResponse.class);
 			m =ctx.createMarshaller();
@@ -155,6 +156,7 @@ public class KnowledgeRequestServlet extends HttpServlet {
             	transformer = tfactory.newTransformer(new StreamSource(getServletContext().getResourceAsStream("/WEB-INF/xslts/"+transformation + ".xslt")));
             	stringWriter=new StringWriter();
             	result = new StreamResult(stringWriter);
+                transformer.setParameter("response_uuid", requestUUID);
             	transformer.transform(source, result);
             	out.println(stringWriter.getBuffer().toString());
             }

@@ -48,6 +48,13 @@ $Date:: 2010-10-01 1#$:  Date of last commit
   	</servlet-class>
   </servlet>
   
+  <servlet>
+  	<servlet-name>LogServlet</servlet-name>
+  	<servlet-class>
+  		org.openinfobutton.request.service.LogServlet
+  	</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>CXFServlet</servlet-name>
     <url-pattern>/knowledgeRequest/*</url-pattern>
@@ -56,6 +63,11 @@ $Date:: 2010-10-01 1#$:  Date of last commit
   <servlet-mapping>
   	<servlet-name>KnowledgeRequestServlet</servlet-name>
   	<url-pattern>/infoRequest</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>LogServlet</servlet-name>
+  	<url-pattern>/log</url-pattern>
   </servlet-mapping>
 
 </web-app>

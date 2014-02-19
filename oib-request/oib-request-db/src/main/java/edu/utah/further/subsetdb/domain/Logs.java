@@ -48,6 +48,9 @@ public class Logs implements PersistentEntity<Long> {
 	@Column(name = "origParams", nullable = true)
 	public String origParams;
 
+	@Column(name = "requestUUID", nullable = true)
+	public String requestUUID;
+
 	
 	// ========================= IMPLEMENTATION: PersistentEntity ==========
 
@@ -108,12 +111,12 @@ public class Logs implements PersistentEntity<Long> {
 	public void setOrigParams(String origParams) {
 		this.origParams = origParams;
 	}
-	
 
+	public String getRequestUUID() {
+		return requestUUID;
+	}
 
-	
-
-	
-	
-	
+	public void setRequestUUID(String requestUUID) {
+		this.requestUUID = requestUUID;
+	}
 }

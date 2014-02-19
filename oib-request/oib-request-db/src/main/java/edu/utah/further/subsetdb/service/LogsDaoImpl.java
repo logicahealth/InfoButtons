@@ -2,6 +2,7 @@ package edu.utah.further.subsetdb.service;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.UUID;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -29,7 +30,7 @@ public class LogsDaoImpl implements LogsDao {
 	private SessionFactory sf ;
 	
 	@Transactional
-	public void saveRequest(String req,String clientIP,String orgID,String origParams)
+	public String saveRequest(String req,String clientIP,String orgID,String origParams)
 	{
 		Date d=new Date();
 		Logs log=new Logs();
@@ -38,9 +39,10 @@ public class LogsDaoImpl implements LogsDao {
 		log.setOrgID(orgID);
 		log.setTimestamp(new Timestamp(d.getTime()));
 		log.setOrigParams(origParams);
-		
+		String uuid = UUID.randomUUID().toString();
+		log.setRequestUUID(uuid);
 		
 		dao.create(log);
-	
+		return uuid;
 	}
 }
