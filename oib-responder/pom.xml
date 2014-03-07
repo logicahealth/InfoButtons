@@ -4,10 +4,31 @@
     
     <groupId>org.openinfobutton</groupId>
     <artifactId>oib-responder</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.2</version>
     <packaging>pom</packaging>
     <name>oib-responder</name>
-    
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+ 
+    <build>
+        <finalName>openInfobutton</finalName>
+        <plugins>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            
+        </plugins>
+    </build>
+     
     <modules>
         <module>oib-rest-responder</module>
         <module>rxnorm-rest-model</module>
@@ -15,6 +36,6 @@
         <module>oib-app-model</module>
         <module>oib-app-service</module>
         <module>oib-index-manager</module>
-  </modules>
+    </modules>
   
 </project>
