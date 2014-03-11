@@ -7,7 +7,20 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>oib-responder</name>
-    
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <modules>
         <module>oib-rest-responder</module>
         <module>rxnorm-rest-model</module>
@@ -16,5 +29,5 @@
         <module>oib-app-service</module>
         <module>oib-index-manager</module>
   </modules>
-  
+
 </project>

@@ -15,6 +15,19 @@
     <name>oib-index-manager</name>
     <url>http://www.openinfobutton.org</url>
   
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>3.2.3.RELEASE</spring.version>
@@ -24,10 +37,16 @@
     <dependencies>
 
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.28</version>
+        </dependency>
+
+        <!--dependency>
             <groupId>oracle</groupId>
             <artifactId>jdbc</artifactId>
             <version>11.2.0.4</version>
-        </dependency>
+        </dependency -->
 
         <dependency>
             <groupId>org.openinfobutton</groupId>

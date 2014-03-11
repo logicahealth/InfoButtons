@@ -9,6 +9,36 @@
     <name>oib-rest-responder</name>
     <url>http://maven.apache.org</url>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <configuration>
+                        <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                    </configuration>
+                </plugin>
+
+        </plugins>
+    </build>
+
     <properties>
         <spring.version>3.2.3.RELEASE</spring.version>
         <hibernate.version>4.2.0.Final</hibernate.version>
@@ -85,10 +115,16 @@
         </dependency>
         
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.28</version>
+        </dependency>
+
+        <!--dependency>
             <groupId>oracle</groupId>
             <artifactId>jdbc</artifactId>
             <version>11.2.0.4</version>
-        </dependency>
+        </dependency -->
 
         <!-- TESTING Dependencies -->
         <dependency>
@@ -141,32 +177,4 @@
         
     </dependencies>
     
-        <build>
-            <finalName>openInfobutton</finalName>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                    </configuration>
-                </plugin>
-            
-                <plugin>            
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <configuration>
-                        <webXml>src/main/webapp/WEB-INF/web.xml</webXml>        
-                    </configuration>
-                </plugin>
-            
-            </plugins>
-        </build>
-        <!--repositories>
-            <repository>
-                <id>unknown-jars-temp-repo</id>
-                <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
-                <url>file:${project.basedir}/lib</url>
-            </repository>
-        </repositories-->
 </project>
