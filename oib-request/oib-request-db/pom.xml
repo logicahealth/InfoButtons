@@ -32,10 +32,34 @@
 	</pluginRepositories> 
 	
 	<dependencies>
+       <dependency>
+       	<groupId>org.springframework</groupId>
+       	<artifactId>spring-jdbc</artifactId>
+       	<version>3.1.1.RELEASE</version>
+       	<type>jar</type>
+       	<scope>compile</scope>
+       </dependency>
+       <dependency>
+       	<groupId>org.springframework</groupId>
+       	<artifactId>spring-orm</artifactId>
+       	<version>3.1.1.RELEASE</version>
+       	<type>jar</type>
+       	<scope>compile</scope>
+       </dependency>
 		<dependency>
 			<groupId>edu.utah.further.core</groupId>
 			<artifactId>core-data</artifactId>
-			<version>1.3.0-SNAPSHOT</version>
+			<version>1.4.0-SNAPSHOT</version>
+		    <exclusions>
+		    	<exclusion>
+		    		<artifactId>spring-jdbc</artifactId>
+		    		<groupId>org.springframework</groupId>
+		    	</exclusion>
+		    	<exclusion>
+		    		<artifactId>spring-orm</artifactId>
+		    		<groupId>org.springframework</groupId>
+		    	</exclusion>
+		    </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.derby</groupId>
@@ -45,7 +69,7 @@
 		<dependency>
 			<groupId>edu.utah.further.core</groupId>
 			<artifactId>core-test</artifactId>
-			<version>1.3.0-SNAPSHOT</version>
+			<version>1.4.0-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

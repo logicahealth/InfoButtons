@@ -28,8 +28,8 @@ public class ObjectFactory {
     private final static QName _GetSemanticNetworkRelationLabelRelationsForPair_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticNetworkRelationLabelRelationsForPair");
     private final static QName _GetAllSemanticNetworkRelationLabelRelations_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getAllSemanticNetworkRelationLabelRelations");
     private final static QName _GetSemanticNetworkRelationLabel_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticNetworkRelationLabel");
-    private final static QName _GetSemanticNetworkRelationLabelResponse_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticNetworkRelationLabelResponse");
     private final static QName _GetSemanticNetworkRelationLabelRelationsResponse_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticNetworkRelationLabelRelationsResponse");
+    private final static QName _GetSemanticNetworkRelationLabelResponse_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticNetworkRelationLabelResponse");
     private final static QName _GetInverseSemanticTypeRelations_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getInverseSemanticTypeRelations");
     private final static QName _GetSemanticTypeRelations_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticTypeRelations");
     private final static QName _GetInheritedSemanticTypeRelationsResponse_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getInheritedSemanticTypeRelationsResponse");
@@ -58,8 +58,8 @@ public class ObjectFactory {
     private final static QName _GetSemanticTypeRelationsResponse_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticTypeRelationsResponse");
     private final static QName _GetSemanticTypeRelationResponse_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticTypeRelationResponse");
     private final static QName _GetSemanticNetworkRelationLabelRelation_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticNetworkRelationLabelRelation");
-    private final static QName _GetSemanticTypeRelation_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticTypeRelation");
     private final static QName _GetSemanticTypeRelationsForPair_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticTypeRelationsForPair");
+    private final static QName _GetSemanticTypeRelation_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getSemanticTypeRelation");
     private final static QName _GetAllSemanticTypesResponse_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getAllSemanticTypesResponse");
     private final static QName _GetAllSemanticTypeRelationsResponse_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getAllSemanticTypeRelationsResponse");
     private final static QName _GetInheritedSemanticNetworkRelationLabelRelationsResponse_QNAME = new QName("http://webservice.uts.umls.nlm.nih.gov/", "getInheritedSemanticNetworkRelationLabelRelationsResponse");
@@ -76,43 +76,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SemanticNetworkRelationLabelRelationDTO }
+     * Create an instance of {@link GetInverseSemanticTypeRelationsResponse }
      * 
      */
-    public SemanticNetworkRelationLabelRelationDTO createSemanticNetworkRelationLabelRelationDTO() {
-        return new SemanticNetworkRelationLabelRelationDTO();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticTypeRelations }
-     * 
-     */
-    public GetSemanticTypeRelations createGetSemanticTypeRelations() {
-        return new GetSemanticTypeRelations();
-    }
-
-    /**
-     * Create an instance of {@link GetAllSemanticTypeRelations }
-     * 
-     */
-    public GetAllSemanticTypeRelations createGetAllSemanticTypeRelations() {
-        return new GetAllSemanticTypeRelations();
-    }
-
-    /**
-     * Create an instance of {@link GetAllSemanticTypes }
-     * 
-     */
-    public GetAllSemanticTypes createGetAllSemanticTypes() {
-        return new GetAllSemanticTypes();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticTypeGroupResponse }
-     * 
-     */
-    public GetSemanticTypeGroupResponse createGetSemanticTypeGroupResponse() {
-        return new GetSemanticTypeGroupResponse();
+    public GetInverseSemanticTypeRelationsResponse createGetInverseSemanticTypeRelationsResponse() {
+        return new GetInverseSemanticTypeRelationsResponse();
     }
 
     /**
@@ -124,219 +92,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetAllSemanticTypeGroups }
+     * Create an instance of {@link GetAllSemanticTypeRelations }
      * 
      */
-    public GetAllSemanticTypeGroups createGetAllSemanticTypeGroups() {
-        return new GetAllSemanticTypeGroups();
-    }
-
-    /**
-     * Create an instance of {@link GetInverseSemanticNetworkRelationLabelRelations }
-     * 
-     */
-    public GetInverseSemanticNetworkRelationLabelRelations createGetInverseSemanticNetworkRelationLabelRelations() {
-        return new GetInverseSemanticNetworkRelationLabelRelations();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticTypeRelation }
-     * 
-     */
-    public GetSemanticTypeRelation createGetSemanticTypeRelation() {
-        return new GetSemanticTypeRelation();
-    }
-
-    /**
-     * Create an instance of {@link GetInverseInheritedSemanticTypeRelations }
-     * 
-     */
-    public GetInverseInheritedSemanticTypeRelations createGetInverseInheritedSemanticTypeRelations() {
-        return new GetInverseInheritedSemanticTypeRelations();
-    }
-
-    /**
-     * Create an instance of {@link SemanticTypeGroupDTO }
-     * 
-     */
-    public SemanticTypeGroupDTO createSemanticTypeGroupDTO() {
-        return new SemanticTypeGroupDTO();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticTypesByGroup }
-     * 
-     */
-    public GetSemanticTypesByGroup createGetSemanticTypesByGroup() {
-        return new GetSemanticTypesByGroup();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticTypeResponse }
-     * 
-     */
-    public GetSemanticTypeResponse createGetSemanticTypeResponse() {
-        return new GetSemanticTypeResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticNetworkRelationLabelRelationResponse }
-     * 
-     */
-    public GetSemanticNetworkRelationLabelRelationResponse createGetSemanticNetworkRelationLabelRelationResponse() {
-        return new GetSemanticNetworkRelationLabelRelationResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetInheritedSemanticNetworkRelationLabelRelations }
-     * 
-     */
-    public GetInheritedSemanticNetworkRelationLabelRelations createGetInheritedSemanticNetworkRelationLabelRelations() {
-        return new GetInheritedSemanticNetworkRelationLabelRelations();
-    }
-
-    /**
-     * Create an instance of {@link GetInverseInheritedSemanticNetworkRelationLabelRelations }
-     * 
-     */
-    public GetInverseInheritedSemanticNetworkRelationLabelRelations createGetInverseInheritedSemanticNetworkRelationLabelRelations() {
-        return new GetInverseInheritedSemanticNetworkRelationLabelRelations();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticNetworkRelationLabelRelationsResponse }
-     * 
-     */
-    public GetSemanticNetworkRelationLabelRelationsResponse createGetSemanticNetworkRelationLabelRelationsResponse() {
-        return new GetSemanticNetworkRelationLabelRelationsResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticTypeRelationsResponse }
-     * 
-     */
-    public GetSemanticTypeRelationsResponse createGetSemanticTypeRelationsResponse() {
-        return new GetSemanticTypeRelationsResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetAllSemanticNetworkRelationLabelRelations }
-     * 
-     */
-    public GetAllSemanticNetworkRelationLabelRelations createGetAllSemanticNetworkRelationLabelRelations() {
-        return new GetAllSemanticNetworkRelationLabelRelations();
-    }
-
-    /**
-     * Create an instance of {@link GetAllSemanticTypeRelationsResponse }
-     * 
-     */
-    public GetAllSemanticTypeRelationsResponse createGetAllSemanticTypeRelationsResponse() {
-        return new GetAllSemanticTypeRelationsResponse();
-    }
-
-    /**
-     * Create an instance of {@link UtsFault }
-     * 
-     */
-    public UtsFault createUtsFault() {
-        return new UtsFault();
-    }
-
-    /**
-     * Create an instance of {@link GetInheritedSemanticTypeRelations }
-     * 
-     */
-    public GetInheritedSemanticTypeRelations createGetInheritedSemanticTypeRelations() {
-        return new GetInheritedSemanticTypeRelations();
-    }
-
-    /**
-     * Create an instance of {@link GetAllSemanticNetworkRelationLabelRelationsResponse }
-     * 
-     */
-    public GetAllSemanticNetworkRelationLabelRelationsResponse createGetAllSemanticNetworkRelationLabelRelationsResponse() {
-        return new GetAllSemanticNetworkRelationLabelRelationsResponse();
-    }
-
-    /**
-     * Create an instance of {@link SemanticTypeRelationDTO }
-     * 
-     */
-    public SemanticTypeRelationDTO createSemanticTypeRelationDTO() {
-        return new SemanticTypeRelationDTO();
-    }
-
-    /**
-     * Create an instance of {@link SemanticTypeDTO }
-     * 
-     */
-    public SemanticTypeDTO createSemanticTypeDTO() {
-        return new SemanticTypeDTO();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticTypeGroup }
-     * 
-     */
-    public GetSemanticTypeGroup createGetSemanticTypeGroup() {
-        return new GetSemanticTypeGroup();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticTypeRelationsForPair }
-     * 
-     */
-    public GetSemanticTypeRelationsForPair createGetSemanticTypeRelationsForPair() {
-        return new GetSemanticTypeRelationsForPair();
-    }
-
-    /**
-     * Create an instance of {@link SemanticNetworkRelationLabelDTO }
-     * 
-     */
-    public SemanticNetworkRelationLabelDTO createSemanticNetworkRelationLabelDTO() {
-        return new SemanticNetworkRelationLabelDTO();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticNetworkRelationLabelRelation }
-     * 
-     */
-    public GetSemanticNetworkRelationLabelRelation createGetSemanticNetworkRelationLabelRelation() {
-        return new GetSemanticNetworkRelationLabelRelation();
-    }
-
-    /**
-     * Create an instance of {@link GetInverseSemanticNetworkRelationLabelRelationsResponse }
-     * 
-     */
-    public GetInverseSemanticNetworkRelationLabelRelationsResponse createGetInverseSemanticNetworkRelationLabelRelationsResponse() {
-        return new GetInverseSemanticNetworkRelationLabelRelationsResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetInverseInheritedSemanticTypeRelationsResponse }
-     * 
-     */
-    public GetInverseInheritedSemanticTypeRelationsResponse createGetInverseInheritedSemanticTypeRelationsResponse() {
-        return new GetInverseInheritedSemanticTypeRelationsResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticNetworkRelationLabelRelations }
-     * 
-     */
-    public GetSemanticNetworkRelationLabelRelations createGetSemanticNetworkRelationLabelRelations() {
-        return new GetSemanticNetworkRelationLabelRelations();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticNetworkRelationLabelRelationsForPairResponse }
-     * 
-     */
-    public GetSemanticNetworkRelationLabelRelationsForPairResponse createGetSemanticNetworkRelationLabelRelationsForPairResponse() {
-        return new GetSemanticNetworkRelationLabelRelationsForPairResponse();
+    public GetAllSemanticTypeRelations createGetAllSemanticTypeRelations() {
+        return new GetAllSemanticTypeRelations();
     }
 
     /**
@@ -348,43 +108,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetSemanticNetworkRelationLabelRelationsForPair }
+     * Create an instance of {@link GetSemanticTypeGroup }
      * 
      */
-    public GetSemanticNetworkRelationLabelRelationsForPair createGetSemanticNetworkRelationLabelRelationsForPair() {
-        return new GetSemanticNetworkRelationLabelRelationsForPair();
+    public GetSemanticTypeGroup createGetSemanticTypeGroup() {
+        return new GetSemanticTypeGroup();
     }
 
     /**
-     * Create an instance of {@link GetInverseInheritedSemanticNetworkRelationLabelRelationsResponse }
+     * Create an instance of {@link SemanticNetworkRelationLabelDTO }
      * 
      */
-    public GetInverseInheritedSemanticNetworkRelationLabelRelationsResponse createGetInverseInheritedSemanticNetworkRelationLabelRelationsResponse() {
-        return new GetInverseInheritedSemanticNetworkRelationLabelRelationsResponse();
+    public SemanticNetworkRelationLabelDTO createSemanticNetworkRelationLabelDTO() {
+        return new SemanticNetworkRelationLabelDTO();
     }
 
     /**
-     * Create an instance of {@link GetSemanticNetworkRelationLabelResponse }
+     * Create an instance of {@link UtsFault }
      * 
      */
-    public GetSemanticNetworkRelationLabelResponse createGetSemanticNetworkRelationLabelResponse() {
-        return new GetSemanticNetworkRelationLabelResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetSemanticTypesByGroupResponse }
-     * 
-     */
-    public GetSemanticTypesByGroupResponse createGetSemanticTypesByGroupResponse() {
-        return new GetSemanticTypesByGroupResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetAllSemanticTypesResponse }
-     * 
-     */
-    public GetAllSemanticTypesResponse createGetAllSemanticTypesResponse() {
-        return new GetAllSemanticTypesResponse();
+    public UtsFault createUtsFault() {
+        return new UtsFault();
     }
 
     /**
@@ -396,11 +140,75 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetInheritedSemanticTypeRelationsResponse }
+     * Create an instance of {@link GetSemanticTypeRelationsResponse }
      * 
      */
-    public GetInheritedSemanticTypeRelationsResponse createGetInheritedSemanticTypeRelationsResponse() {
-        return new GetInheritedSemanticTypeRelationsResponse();
+    public GetSemanticTypeRelationsResponse createGetSemanticTypeRelationsResponse() {
+        return new GetSemanticTypeRelationsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticType }
+     * 
+     */
+    public GetSemanticType createGetSemanticType() {
+        return new GetSemanticType();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticNetworkRelationLabelRelations }
+     * 
+     */
+    public GetSemanticNetworkRelationLabelRelations createGetSemanticNetworkRelationLabelRelations() {
+        return new GetSemanticNetworkRelationLabelRelations();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticTypesByGroupResponse }
+     * 
+     */
+    public GetSemanticTypesByGroupResponse createGetSemanticTypesByGroupResponse() {
+        return new GetSemanticTypesByGroupResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAllSemanticTypes }
+     * 
+     */
+    public GetAllSemanticTypes createGetAllSemanticTypes() {
+        return new GetAllSemanticTypes();
+    }
+
+    /**
+     * Create an instance of {@link GetInverseInheritedSemanticTypeRelationsResponse }
+     * 
+     */
+    public GetInverseInheritedSemanticTypeRelationsResponse createGetInverseInheritedSemanticTypeRelationsResponse() {
+        return new GetInverseInheritedSemanticTypeRelationsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetInverseSemanticNetworkRelationLabelRelations }
+     * 
+     */
+    public GetInverseSemanticNetworkRelationLabelRelations createGetInverseSemanticNetworkRelationLabelRelations() {
+        return new GetInverseSemanticNetworkRelationLabelRelations();
+    }
+
+    /**
+     * Create an instance of {@link GetInheritedSemanticNetworkRelationLabelRelations }
+     * 
+     */
+    public GetInheritedSemanticNetworkRelationLabelRelations createGetInheritedSemanticNetworkRelationLabelRelations() {
+        return new GetInheritedSemanticNetworkRelationLabelRelations();
+    }
+
+    /**
+     * Create an instance of {@link GetInverseInheritedSemanticNetworkRelationLabelRelationsResponse }
+     * 
+     */
+    public GetInverseInheritedSemanticNetworkRelationLabelRelationsResponse createGetInverseInheritedSemanticNetworkRelationLabelRelationsResponse() {
+        return new GetInverseInheritedSemanticNetworkRelationLabelRelationsResponse();
     }
 
     /**
@@ -409,6 +217,206 @@ public class ObjectFactory {
      */
     public GetSemanticNetworkRelationLabel createGetSemanticNetworkRelationLabel() {
         return new GetSemanticNetworkRelationLabel();
+    }
+
+    /**
+     * Create an instance of {@link GetInverseSemanticNetworkRelationLabelRelationsResponse }
+     * 
+     */
+    public GetInverseSemanticNetworkRelationLabelRelationsResponse createGetInverseSemanticNetworkRelationLabelRelationsResponse() {
+        return new GetInverseSemanticNetworkRelationLabelRelationsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAllSemanticNetworkRelationLabels }
+     * 
+     */
+    public GetAllSemanticNetworkRelationLabels createGetAllSemanticNetworkRelationLabels() {
+        return new GetAllSemanticNetworkRelationLabels();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticTypesByGroup }
+     * 
+     */
+    public GetSemanticTypesByGroup createGetSemanticTypesByGroup() {
+        return new GetSemanticTypesByGroup();
+    }
+
+    /**
+     * Create an instance of {@link SemanticTypeDTO }
+     * 
+     */
+    public SemanticTypeDTO createSemanticTypeDTO() {
+        return new SemanticTypeDTO();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticTypeRelations }
+     * 
+     */
+    public GetSemanticTypeRelations createGetSemanticTypeRelations() {
+        return new GetSemanticTypeRelations();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticNetworkRelationLabelRelationsForPairResponse }
+     * 
+     */
+    public GetSemanticNetworkRelationLabelRelationsForPairResponse createGetSemanticNetworkRelationLabelRelationsForPairResponse() {
+        return new GetSemanticNetworkRelationLabelRelationsForPairResponse();
+    }
+
+    /**
+     * Create an instance of {@link SemanticTypeRelationDTO }
+     * 
+     */
+    public SemanticTypeRelationDTO createSemanticTypeRelationDTO() {
+        return new SemanticTypeRelationDTO();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticNetworkRelationLabelRelationResponse }
+     * 
+     */
+    public GetSemanticNetworkRelationLabelRelationResponse createGetSemanticNetworkRelationLabelRelationResponse() {
+        return new GetSemanticNetworkRelationLabelRelationResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetInheritedSemanticTypeRelationsResponse }
+     * 
+     */
+    public GetInheritedSemanticTypeRelationsResponse createGetInheritedSemanticTypeRelationsResponse() {
+        return new GetInheritedSemanticTypeRelationsResponse();
+    }
+
+    /**
+     * Create an instance of {@link SemanticNetworkRelationLabelRelationDTO }
+     * 
+     */
+    public SemanticNetworkRelationLabelRelationDTO createSemanticNetworkRelationLabelRelationDTO() {
+        return new SemanticNetworkRelationLabelRelationDTO();
+    }
+
+    /**
+     * Create an instance of {@link GetInverseInheritedSemanticNetworkRelationLabelRelations }
+     * 
+     */
+    public GetInverseInheritedSemanticNetworkRelationLabelRelations createGetInverseInheritedSemanticNetworkRelationLabelRelations() {
+        return new GetInverseInheritedSemanticNetworkRelationLabelRelations();
+    }
+
+    /**
+     * Create an instance of {@link GetAllSemanticNetworkRelationLabelRelations }
+     * 
+     */
+    public GetAllSemanticNetworkRelationLabelRelations createGetAllSemanticNetworkRelationLabelRelations() {
+        return new GetAllSemanticNetworkRelationLabelRelations();
+    }
+
+    /**
+     * Create an instance of {@link GetAllSemanticTypeGroupsResponse }
+     * 
+     */
+    public GetAllSemanticTypeGroupsResponse createGetAllSemanticTypeGroupsResponse() {
+        return new GetAllSemanticTypeGroupsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetInheritedSemanticTypeRelations }
+     * 
+     */
+    public GetInheritedSemanticTypeRelations createGetInheritedSemanticTypeRelations() {
+        return new GetInheritedSemanticTypeRelations();
+    }
+
+    /**
+     * Create an instance of {@link GetInheritedSemanticNetworkRelationLabelRelationsResponse }
+     * 
+     */
+    public GetInheritedSemanticNetworkRelationLabelRelationsResponse createGetInheritedSemanticNetworkRelationLabelRelationsResponse() {
+        return new GetInheritedSemanticNetworkRelationLabelRelationsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticNetworkRelationLabelRelationsForPair }
+     * 
+     */
+    public GetSemanticNetworkRelationLabelRelationsForPair createGetSemanticNetworkRelationLabelRelationsForPair() {
+        return new GetSemanticNetworkRelationLabelRelationsForPair();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticNetworkRelationLabelRelationsResponse }
+     * 
+     */
+    public GetSemanticNetworkRelationLabelRelationsResponse createGetSemanticNetworkRelationLabelRelationsResponse() {
+        return new GetSemanticNetworkRelationLabelRelationsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticNetworkRelationLabelRelation }
+     * 
+     */
+    public GetSemanticNetworkRelationLabelRelation createGetSemanticNetworkRelationLabelRelation() {
+        return new GetSemanticNetworkRelationLabelRelation();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticTypeGroupResponse }
+     * 
+     */
+    public GetSemanticTypeGroupResponse createGetSemanticTypeGroupResponse() {
+        return new GetSemanticTypeGroupResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticTypeRelation }
+     * 
+     */
+    public GetSemanticTypeRelation createGetSemanticTypeRelation() {
+        return new GetSemanticTypeRelation();
+    }
+
+    /**
+     * Create an instance of {@link GetAllSemanticNetworkRelationLabelRelationsResponse }
+     * 
+     */
+    public GetAllSemanticNetworkRelationLabelRelationsResponse createGetAllSemanticNetworkRelationLabelRelationsResponse() {
+        return new GetAllSemanticNetworkRelationLabelRelationsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetSemanticTypeRelationsForPair }
+     * 
+     */
+    public GetSemanticTypeRelationsForPair createGetSemanticTypeRelationsForPair() {
+        return new GetSemanticTypeRelationsForPair();
+    }
+
+    /**
+     * Create an instance of {@link GetAllSemanticTypesResponse }
+     * 
+     */
+    public GetAllSemanticTypesResponse createGetAllSemanticTypesResponse() {
+        return new GetAllSemanticTypesResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAllSemanticTypeRelationsResponse }
+     * 
+     */
+    public GetAllSemanticTypeRelationsResponse createGetAllSemanticTypeRelationsResponse() {
+        return new GetAllSemanticTypeRelationsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetInverseInheritedSemanticTypeRelations }
+     * 
+     */
+    public GetInverseInheritedSemanticTypeRelations createGetInverseInheritedSemanticTypeRelations() {
+        return new GetInverseInheritedSemanticTypeRelations();
     }
 
     /**
@@ -428,43 +436,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetSemanticType }
+     * Create an instance of {@link GetSemanticNetworkRelationLabelResponse }
      * 
      */
-    public GetSemanticType createGetSemanticType() {
-        return new GetSemanticType();
+    public GetSemanticNetworkRelationLabelResponse createGetSemanticNetworkRelationLabelResponse() {
+        return new GetSemanticNetworkRelationLabelResponse();
     }
 
     /**
-     * Create an instance of {@link GetInverseSemanticTypeRelationsResponse }
+     * Create an instance of {@link SemanticTypeGroupDTO }
      * 
      */
-    public GetInverseSemanticTypeRelationsResponse createGetInverseSemanticTypeRelationsResponse() {
-        return new GetInverseSemanticTypeRelationsResponse();
+    public SemanticTypeGroupDTO createSemanticTypeGroupDTO() {
+        return new SemanticTypeGroupDTO();
     }
 
     /**
-     * Create an instance of {@link GetAllSemanticTypeGroupsResponse }
+     * Create an instance of {@link GetSemanticTypeResponse }
      * 
      */
-    public GetAllSemanticTypeGroupsResponse createGetAllSemanticTypeGroupsResponse() {
-        return new GetAllSemanticTypeGroupsResponse();
+    public GetSemanticTypeResponse createGetSemanticTypeResponse() {
+        return new GetSemanticTypeResponse();
     }
 
     /**
-     * Create an instance of {@link GetInheritedSemanticNetworkRelationLabelRelationsResponse }
+     * Create an instance of {@link GetAllSemanticTypeGroups }
      * 
      */
-    public GetInheritedSemanticNetworkRelationLabelRelationsResponse createGetInheritedSemanticNetworkRelationLabelRelationsResponse() {
-        return new GetInheritedSemanticNetworkRelationLabelRelationsResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetAllSemanticNetworkRelationLabels }
-     * 
-     */
-    public GetAllSemanticNetworkRelationLabels createGetAllSemanticNetworkRelationLabels() {
-        return new GetAllSemanticNetworkRelationLabels();
+    public GetAllSemanticTypeGroups createGetAllSemanticTypeGroups() {
+        return new GetAllSemanticTypeGroups();
     }
 
     /**
@@ -504,21 +504,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetSemanticNetworkRelationLabelResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice.uts.umls.nlm.nih.gov/", name = "getSemanticNetworkRelationLabelResponse")
-    public JAXBElement<GetSemanticNetworkRelationLabelResponse> createGetSemanticNetworkRelationLabelResponse(GetSemanticNetworkRelationLabelResponse value) {
-        return new JAXBElement<GetSemanticNetworkRelationLabelResponse>(_GetSemanticNetworkRelationLabelResponse_QNAME, GetSemanticNetworkRelationLabelResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetSemanticNetworkRelationLabelRelationsResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservice.uts.umls.nlm.nih.gov/", name = "getSemanticNetworkRelationLabelRelationsResponse")
     public JAXBElement<GetSemanticNetworkRelationLabelRelationsResponse> createGetSemanticNetworkRelationLabelRelationsResponse(GetSemanticNetworkRelationLabelRelationsResponse value) {
         return new JAXBElement<GetSemanticNetworkRelationLabelRelationsResponse>(_GetSemanticNetworkRelationLabelRelationsResponse_QNAME, GetSemanticNetworkRelationLabelRelationsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetSemanticNetworkRelationLabelResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.uts.umls.nlm.nih.gov/", name = "getSemanticNetworkRelationLabelResponse")
+    public JAXBElement<GetSemanticNetworkRelationLabelResponse> createGetSemanticNetworkRelationLabelResponse(GetSemanticNetworkRelationLabelResponse value) {
+        return new JAXBElement<GetSemanticNetworkRelationLabelResponse>(_GetSemanticNetworkRelationLabelResponse_QNAME, GetSemanticNetworkRelationLabelResponse.class, null, value);
     }
 
     /**
@@ -774,21 +774,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetSemanticTypeRelation }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice.uts.umls.nlm.nih.gov/", name = "getSemanticTypeRelation")
-    public JAXBElement<GetSemanticTypeRelation> createGetSemanticTypeRelation(GetSemanticTypeRelation value) {
-        return new JAXBElement<GetSemanticTypeRelation>(_GetSemanticTypeRelation_QNAME, GetSemanticTypeRelation.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetSemanticTypeRelationsForPair }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservice.uts.umls.nlm.nih.gov/", name = "getSemanticTypeRelationsForPair")
     public JAXBElement<GetSemanticTypeRelationsForPair> createGetSemanticTypeRelationsForPair(GetSemanticTypeRelationsForPair value) {
         return new JAXBElement<GetSemanticTypeRelationsForPair>(_GetSemanticTypeRelationsForPair_QNAME, GetSemanticTypeRelationsForPair.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetSemanticTypeRelation }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.uts.umls.nlm.nih.gov/", name = "getSemanticTypeRelation")
+    public JAXBElement<GetSemanticTypeRelation> createGetSemanticTypeRelation(GetSemanticTypeRelation value) {
+        return new JAXBElement<GetSemanticTypeRelation>(_GetSemanticTypeRelation_QNAME, GetSemanticTypeRelation.class, null, value);
     }
 
     /**

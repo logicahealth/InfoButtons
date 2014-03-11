@@ -7,6 +7,7 @@ import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.TerminologyInference.CodeInference.InferenceDefinition.LocalMappings.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import edu.utah.further.subsetdb.domain.Concept;
 import edu.utah.further.subsetdb.domain.Subset;
@@ -14,6 +15,7 @@ import edu.utah.further.subsetdb.service.SubsetDbDao;
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
 import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
 
+@Component
 public class LocalTerminologyHandler implements TerminologyHandler {
 
 	@Autowired

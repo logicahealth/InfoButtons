@@ -27,7 +27,7 @@ public class ResourceProfileLoaderNew {
 
 	@Autowired
 	@Qualifier("pDao")
-	private  ProfilesDao pdao; 
+	private ProfilesDao pdao; 
 	
 	@SuppressWarnings("boxing") 
 	public ArrayList<KnowledgeResourceProfile> getProfiles() {

@@ -41,7 +41,7 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
+            <version>7.0</version>
             <scope>provided</scope>
         </dependency>
 	    <dependency>
@@ -62,48 +62,6 @@
             <version>3.8.2</version>
             <scope>test</scope>
         </dependency>
-	    <dependency>
-		    <groupId>org.apache.cxf</groupId>
-		    <artifactId>cxf-rt-frontend-jaxws</artifactId>
-		    <version>2.2.7</version>
-		    <exclusions>
-		    	<exclusion>
-		    		<artifactId>spring-beans</artifactId>
-		    		<groupId>org.springframework</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>spring-context</artifactId>
-		    		<groupId>org.springframework</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>spring-core</artifactId>
-		    		<groupId>org.springframework</groupId>
-		    	</exclusion>
-		    </exclusions>
-	    </dependency>
-	    <dependency>
-		    <groupId>org.apache.cxf</groupId>
-		    <artifactId>cxf-rt-transports-http</artifactId>
-		    <version>2.2.7</version>
-		    <exclusions>
-		    	<exclusion>
-		    		<artifactId>spring-beans</artifactId>
-		    		<groupId>org.springframework</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>spring-context</artifactId>
-		    		<groupId>org.springframework</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>spring-core</artifactId>
-		    		<groupId>org.springframework</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>spring-web</artifactId>
-		    		<groupId>org.springframework</groupId>
-		    	</exclusion>
-		    </exclusions>
-	    </dependency>
 	    <dependency>
            <groupId>log4j</groupId>
            <artifactId>log4j</artifactId>
@@ -253,8 +211,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -3,14 +3,26 @@
  ******************************************************************************/
 package org.openinfobutton.service.matching;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.hamcrest.MatcherAssert;
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.containsString;
+
+import org.openinfobutton.schema.KnowledgeRequest;
+import org.openinfobutton.service.fixture.OibServiceTestFixture;
+import org.openinfobutton.service.utility.WebServiceUtility;
+import org.openinfobutton.service.web.KnowledgeRequestEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * ...
@@ -26,24 +38,47 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Dec 11, 2013
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations =
-{ "/core-data-annotation-context.xml", "/core-data-datasource-context.xml",
-		"/core-profile-datasource-context.xml" })
-public class ContextMatcherTest
+public class ContextMatcherTest extends OibServiceTestFixture
 {
+	
 	@Autowired
-	@Qualifier("simpleJdbcTemplate")
-	protected SimpleJdbcTemplate jdbcTemplate;
+	KnowledgeRequestEngine engine;
 	
 	@Test
-	public void assertNumberProfiles() {
+	public void cysticICD9RequestTest(){
 		
-		assertEquals(countRowsInTable("resource_profiles"), 4);
+		KnowledgeRequest request = WebServiceUtility.getServiceRequest(cystitisICD9Request());
+		final String xml = marshallXML(engine.getResponse(request));
+		Assert.assertThat(xml, containsString("http://www.nlm.nih.gov/medlineplus/bladderdiseases.html"));
+		Assert.assertThat(xml, containsString("http://www.elsinfobutton.com/info/1030?taskContext.c.c=PROBLISTREV&amp;taskContext.c.cs=2.16.840.1.113883.5.4&amp;mainSearchCriteria.v.c=595.9&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.103&amp;mainSearchCriteria.v.dn=Cystitis&amp;"));
+		Assert.assertThat(xml, containsString("http://www.uptodate.com/online/content/search.do?searchType=HL7&amp;taskContext.c.c=PROBLISTREV&amp;taskContext.c.cs=2.16.840.1.113883.5.4&amp;ageGroup.v.c=D008875&amp;ageGroup.v.cs=2.16.840.1.113883.6.177&amp;patientPerson.administrativeGenderCode.c=F&amp;patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1&amp;mainSearchCriteria.v.c=595.9&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.103&amp;mainSearchCriteria.v.dn=Cystitis&amp;subTopic.v.c=Q000175&amp;subTopic.v.cs=2.16.840.1.113883.6.177&amp;subTopic.v.dn=Diagnosis"));
+		Assert.assertThat(xml, containsString("http://www.google.com/search?hl=en&amp;btnI=Im+Feeling+Lucky&amp;q=Cystitis+site:www.mayoclinic.com/health/&amp;"));
+		Assert.assertThat(xml, containsString("http://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text]"));
+		
 	}
 	
-	protected final int countRowsInTable(final String tableName)
-	{
-		return jdbcTemplate.queryForInt("SELECT COUNT(0) from " + tableName);
+	@Test
+	public void cysticUMLSRequestTest(){
+		
+		KnowledgeRequest request = WebServiceUtility.getServiceRequest(cystitisUMLSRequest());
+		final String xml = marshallXML(engine.getResponse(request));
+		Assert.assertThat(xml, containsString("http://www.uptodate.com/online/content/search.do?searchType=HL7&amp;taskContext.c.c=PROBLISTREV&amp;taskContext.c.cs=2.16.840.1.113883.5.4&amp;ageGroup.v.c=D008875&amp;ageGroup.v.cs=2.16.840.1.113883.6.177&amp;patientPerson.administrativeGenderCode.c=F&amp;patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1&amp;mainSearchCriteria.v.c=595.0&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.103&amp;mainSearchCriteria.v.dn=Acute cystitis&amp;subTopic.v.c=Q000175&amp;subTopic.v.cs=2.16.840.1.113883.6.177&amp;subTopic.v.dn=Diagnosis"));
+	}
+	
+	@Test
+	public void clopidogrelRxNormRequestTest(){
+		
+		KnowledgeRequest request = WebServiceUtility.getServiceRequest(clopidogrelRxNormRequest());
+		final String xml = marshallXML(engine.getResponse(request));
+		Assert.assertThat(xml, containsString("http://www.uptodate.com/online/content/search.do?searchType=HL7&amp;taskContext.c.c=MEDOE&amp;taskContext.c.cs=2.16.840.1.113883.5.4&amp;ageGroup.v.c=D008875&amp;ageGroup.v.cs=2.16.840.1.113883.6.177&amp;patientPerson.administrativeGenderCode.c=F&amp;patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1&amp;mainSearchCriteria.v.c=32968&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.88&amp;mainSearchCriteria.v.dn=clopidogrel&amp;"));
+	}
+	
+	@Test
+	public void neurofibromatosisSubsetRequestTest(){
+		
+		KnowledgeRequest request = WebServiceUtility.getServiceRequest(neurofibromatosisSubsetRequest());
+		final String xml = marshallXML(engine.getResponse(request));
+		Assert.assertThat(xml, containsString("http://www.google.com/search?hl=en&amp;btnI=Im+Feeling+Lucky&amp;q=Neurofibromatosis+site:http://ghr.nlm.nih.gov/&amp;"));
+		Assert.assertThat(xml, containsString("http://www.google.com/search?hl=en&amp;btnI=Im+Feeling+Lucky&amp;q=ICD-9+237.7+site:www.medicalhomeportal.org&amp;"));
 	}
 }

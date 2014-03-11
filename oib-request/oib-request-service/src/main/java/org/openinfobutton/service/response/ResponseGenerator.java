@@ -222,11 +222,11 @@ public class ResponseGenerator {
 			Result result = new StreamResult(stringWriter);
 			TransformerFactory tfactory = TransformerFactory.newInstance();
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			InputStream mapInput = classLoader.getResourceAsStream("/removeNamespaces.xsl");
+			InputStream mapInput = classLoader.getResourceAsStream("removeNamespaces.xsl");
 			Transformer transformer = tfactory.newTransformer(new StreamSource(mapInput));
 			transformer.transform(xmlSource, result);
 			xmlSource = new StreamSource(new StringReader(stringWriter.getBuffer().toString()));
-			mapInput = classLoader.getResourceAsStream("/convertingCategory.xsl");
+			mapInput = classLoader.getResourceAsStream("convertingCategory.xsl");
 			transformer = tfactory.newTransformer(new StreamSource(mapInput));
 			stringWriter=new StringWriter();
 			result = new StreamResult(stringWriter);

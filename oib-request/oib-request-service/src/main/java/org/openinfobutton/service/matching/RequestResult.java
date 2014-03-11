@@ -76,8 +76,7 @@ public class RequestResult implements Comparable<RequestResult>{
 	}
 
 
-	@Override 
-	public int compareTo (RequestResult r) {
+	public int compareTo(RequestResult r) {
 		
 		return (this.header.getTitle()).compareTo(r.getHeader().getTitle());
 	}

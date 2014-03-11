@@ -40,38 +40,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetProxyGrantTicketResponse }
-     * 
-     */
-    public GetProxyGrantTicketResponse createGetProxyGrantTicketResponse() {
-        return new GetProxyGrantTicketResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetProxyGrantTicket }
-     * 
-     */
-    public GetProxyGrantTicket createGetProxyGrantTicket() {
-        return new GetProxyGrantTicket();
-    }
-
-    /**
-     * Create an instance of {@link ValidateProxyTicketResponse }
-     * 
-     */
-    public ValidateProxyTicketResponse createValidateProxyTicketResponse() {
-        return new ValidateProxyTicketResponse();
-    }
-
-    /**
-     * Create an instance of {@link ValidateProxyTicket }
-     * 
-     */
-    public ValidateProxyTicket createValidateProxyTicket() {
-        return new ValidateProxyTicket();
-    }
-
-    /**
      * Create an instance of {@link GetProxyTicketResponse }
      * 
      */
@@ -88,11 +56,43 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetProxyGrantTicket }
+     * 
+     */
+    public GetProxyGrantTicket createGetProxyGrantTicket() {
+        return new GetProxyGrantTicket();
+    }
+
+    /**
+     * Create an instance of {@link ValidateProxyTicket }
+     * 
+     */
+    public ValidateProxyTicket createValidateProxyTicket() {
+        return new ValidateProxyTicket();
+    }
+
+    /**
      * Create an instance of {@link GetProxyTicket }
      * 
      */
     public GetProxyTicket createGetProxyTicket() {
         return new GetProxyTicket();
+    }
+
+    /**
+     * Create an instance of {@link ValidateProxyTicketResponse }
+     * 
+     */
+    public ValidateProxyTicketResponse createValidateProxyTicketResponse() {
+        return new ValidateProxyTicketResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetProxyGrantTicketResponse }
+     * 
+     */
+    public GetProxyGrantTicketResponse createGetProxyGrantTicketResponse() {
+        return new GetProxyGrantTicketResponse();
     }
 
     /**
