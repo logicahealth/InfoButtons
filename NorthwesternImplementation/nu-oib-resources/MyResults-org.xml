@@ -1,0 +1,49 @@
+ï»¿<?xml version="1.0" encoding="UTF-8"?>
+
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../models/ResourceProfile-v2.8_LITE.xsd">
+	<header id="1">
+		<title>MyResults.org</title>
+		<profileDescription>Patient education</profileDescription>
+		<versionControl publicationDate="2013-10-06T00:00:00"></versionControl>
+	</header>
+	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false" urlStyle="DIRTY">
+		<authorizedOrganizations>
+			<authorizedOrganization name="Northwestern University" id="2.16.840.1.113883.3.1951"/>
+		</authorizedOrganizations>
+		<contexts>
+			<context name="Access to disease modules from problem list review and entry. Pediatric population." id="1">
+				<contextDefinition>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="MEDOE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="Medication list review" code="MLREV"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<conceptOfInterest match="false" search="true">
+						<searchParameter source="displayName">
+						  <syntaxOnResource nonHl7CompliantName="searchword"/>
+						</searchParameter>
+					</conceptOfInterest>
+					<subTopics>
+					  <subTopic linkName="Patient education">
+							<searchParameter>
+							  <valueSource>
+									<searchCode>
+										<code displayName="Patient education" codeSystem="2.16.840.1.113883.6.177" code=""/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://www.myresults.org/index.php/component/search/?"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

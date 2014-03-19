@@ -1,0 +1,71 @@
+ï»¿<?xml version="1.0" encoding="UTF-8"?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+	<header id="3">
+		<title>MedlinePlus</title>
+		<profileDescription>Patient education content from NLM</profileDescription>
+		<versionControl publicationDate="2010-06-29T04:00:00"></versionControl>
+	</header>
+	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="true">
+		<authorizedOrganizations>
+			<authorizedOrganization name="Northwestern University" id="2.16.840.1.113883.3.1951"></authorizedOrganization>
+		</authorizedOrganizations>
+		<supportedTerminologies>
+			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMED-CT"/>
+			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
+			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
+			<supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC"/>
+		</supportedTerminologies> 
+		<contexts>
+			<context name="Medication knowledge from order entry (OE) and medication list (MLREV). Patient is the knowledge consumer" id="1">
+				<contextDefinition>
+					<patientGender match="false" search="true"></patientGender>
+					<patientAgeGroup match="false" search="true"></patientAgeGroup>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PATINFO"></code>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PROBLISTE"></code>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PROBLISTREV"></code>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="LABRREV"></code>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<informationRecipientLanguage match="false" search="true"></informationRecipientLanguage>
+					<informationRecipientUserType match="false" search="true"></informationRecipientUserType>
+					<conceptOfInterest match="false" search="true"></conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Patient education"></subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://apps2.nlm.nih.gov/medlineplus/services/mpconnect_service.cfm?"></knowledgeRequestServiceLocation>
+				</knowledgeRequestService>
+			</context>
+			<context name="Medication knowledge from order entry (OE) and medication list (MLREV). Patient is the knowledge consumer" id="1">
+				<contextDefinition>
+					<patientGender match="false" search="true"></patientGender>
+					<patientAgeGroup match="false" search="true"></patientAgeGroup>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="Order entry" code="MEDOE"></code>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="Medication list review" code="MLREV"></code>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<informationRecipientLanguage match="false" search="true"></informationRecipientLanguage>
+					<informationRecipientUserType match="false" search="true"></informationRecipientUserType>
+					<conceptOfInterest match="false" search="true">
+						<outputDisplayNameTransformation id="getDrugCode" name="getDrugCode"></outputDisplayNameTransformation>
+					</conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Patient education"></subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://apps2.nlm.nih.gov/medlineplus/services/mpconnect_service.cfm?"></knowledgeRequestServiceLocation>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

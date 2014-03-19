@@ -1,0 +1,47 @@
+ï»¿<?xml version="1.0" encoding="UTF-8"?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+	<header id="3">
+		<title>eMERGE PGx</title>
+		<profileDescription>Physician and patient education content for the eMERGE PGx study</profileDescription>
+		<versionControl publicationDate="2013-10-03T04:00:00"></versionControl>
+	</header>
+	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
+		<authorizedOrganizations>
+			<authorizedOrganization name="Northwestern University" id="2.16.840.1.113883.3.1951"></authorizedOrganization>
+		</authorizedOrganizations>
+		<supportedTerminologies>
+			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMED-CT"/>
+			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
+			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
+			<supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC"/>
+			<supportedTerminology id="2.16.840.1.113883.6.163" name="MedDRA"/>
+		</supportedTerminologies> 
+		<contexts>
+			<context name="Review of labs or medications, ordering medications, or generally viewing patient information." id="1">
+				<contextDefinition>
+					<patientGender match="false" search="true"></patientGender>
+					<patientAgeGroup match="false" search="true"></patientAgeGroup>
+					<task match="true" search="true">
+						<matchingDomain>
+							<enumeration includeDescendants="true">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PATINFO"></code>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="MEDOE"></code>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="LABRREV"></code>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="MLREV"></code>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<informationRecipientLanguage match="false" search="true"></informationRecipientLanguage>
+					<informationRecipientUserType match="false" search="true"></informationRecipientUserType>
+					<conceptOfInterest match="false" search="true"></conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Fact Sheets" />
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://vdevstage1.nmff.org/Clinical/Web/ClinicalKnowledgeManager/Topics/Search?"></knowledgeRequestServiceLocation>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>
