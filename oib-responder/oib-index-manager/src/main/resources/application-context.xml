@@ -20,25 +20,25 @@
     
     <bean id="propertyConfigurer" 
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="src/main/resources/app.properties"/>
+          p:location="jdbc.properties"/>
     
     <bean id="codeExpanderDao" class="org.openinfobutton.service.dao.impl.CodeExpanderDaoImpl">
-        <property name="utsProperties">
-            <props>
-                <prop key="username">${uts.username}</prop>
-                <prop key="password">${uts.password}</prop>
-                <prop key="serviceName">${uts.serviceName}</prop>
-                <prop key="umlsRelease">${uts.umlsRelease}</prop>
-            </props>
-        </property>
+        <property name="utsProperties" ref="utsProperties"/>
     </bean>
-          
+
+    <bean id="utsProperties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location">
+            <value>classpath:uts.properties</value>
+        </property>        
+    </bean>
+    
     <bean id="dataSource"
-          class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-          p:driverClassName="${jdbc.driverClassName}"
-          p:url="${jdbc.url}" 
-          p:username="${jdbc.username}"
-          p:password="${jdbc.password}" />
+         class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+         p:driverClassName="${jdbc.driverClassName}"
+         p:url="${jdbc.url}" 
+         p:username="${jdbc.username}"
+         p:password="${jdbc.password}" />
 
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
