@@ -68,7 +68,7 @@ public class OpenInfobuttonResponderController {
             throws MissingServletRequestParameterException, HttpMediaTypeNotSupportedException, IllegalArgumentException {
 
         response.setHeader("Cache-Control", "no-cache");
-        // todo: authorization - return 401 when not authorized
+        // todo: if authorization is required return 401 when not authorized
         
         setRequiredResponseObjects();
         
