@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `profilesdbprod` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `profilesdbprod`;
 -- phpMyAdmin SQL Dump
 -- version 3.3.9
 -- http://www.phpmyadmin.net
