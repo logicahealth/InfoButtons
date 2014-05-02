@@ -1,0 +1,106 @@
+-------------------------------------------------------------------------
+(c) 2011-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
+Contact: <andrew.iskander@utah.edu>
+Biomedical Informatics
+421 Wakara Way, Ste 140
+Salt Lake City, UT 84108-3514
+(801) 581-4080
+-------------------------------------------------------------------------
+
+Build Guide For OpenInfobutton Manager
+
+1 - Initial Setup
+2 - Building
+3 - Building with CMake
+
+Initial Setup
+-------------
+
+1) Clone the entire Innovation-182 branch you'd like to build. 
+
+2) Install JDK 7.0, which can be downloaded from 
+   http://www.oracle.com/technetwork/java/javase/downloads/index.html
+   Use version of 1.7.0_17 JDK or higher.
+
+3) Make sure that your JAVA_HOME environment variable is set to the newly
+   installed JDK location, and that your PATH includes %JAVA_HOME%\bin
+   (windows) or $JAVA_HOME$/bin (unix).
+
+4) Install Maven 3.0, which can be downloaded from 
+   http://maven.apache.org/download.html. Make sure that your PATH includes 
+   the $MVN_HOME/bin directory. 
+   
+5) Install a MySQL 5.0 server instance on the server you're building.
+   http://dev.mysql.com/downloads/mysql/
+   
+6) If you are behind a proxy, keep in mind that additional setup will be
+   required as the build process and the service itself requires an unhindered 
+   connection to the internet.
+
+7) Obtain a UTS account from here, 
+   https://uts.nlm.nih.gov/home.html
+   
+
+Building
+--------
+
+1) Execute all the SQL scripts found in the Innovations-182/sqlWithInsert directory. 
+
+   Additionally, execture the SQL script found in Innovations-182/sqlDump/prodoib_logs.sql. 
+
+2) Navigate back to the oib-request module directory (this directory)
+
+3) Check the database connection parameter strings found in the following properties files,
+
+   oib-request-service/src/main/webapp/WEB-INF/serviceParams.properties
+  
+   oib-request-service/src/test/resources/serviceParams.properties
+   
+   Ensure they match the connection parameters configured for your local server.
+   
+4) In the same files, set the parameter strings for an active UTS account.
+
+5) Run
+
+         $> mvn clean install
+
+   This will compile the OpenInfobutton Manager and run all of the tests in the 
+   oib-request source module. Alternatively, you can run
+
+         $> mvn install -Dmaven.test.skip=true
+
+   This will compile OpenInfobutton without running the tests in case you encounter problems
+   with the database connections or have not yet obtained a UTS account.
+
+   It usually takes some time for maven to download required dependencies 
+   in the first build.
+
+6) Upon a completed build, the WAR will be found under the oib-request-service/target directory. 
+   Simply deploy it to a functional Java EE servlet container and you should be able to
+   start firing requests at it.
+   
+Building with CMake
+--------
+
+1) The OpenInfobutton Manager module includes a CMakeLists.txt file. If you use a recent
+   version of CMake in your development environment, you simply have check the MySQL connection
+   parameters in the following files,
+   
+   oib-request-service/src/main/webapp/WEB-INF/CMakeLists.txt
+   
+   oib-request-service/src/main/webapp/WEB-INF/serviceParams.properties
+  
+   oib-request-service/src/test/resources/serviceParams.properties
+   
+   and the execute the following commands from the module directory,
+   
+   cmake CMakeLists.txt
+   
+   ctest
+   
+   This should exectute the SQL scripts and build the project as well. 
+   
+   
+   
+   
+   
