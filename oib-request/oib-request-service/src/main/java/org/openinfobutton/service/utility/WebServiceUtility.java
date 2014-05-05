@@ -39,20 +39,6 @@ import org.openinfobutton.schema.SeverityObservation;
 import org.openinfobutton.schema.TaskContext;
 import org.openinfobutton.schemas.kb.Code;
 
-/**
- * ...
- * <p>
- * -----------------------------------------------------------------------------------<br>
- * (c) 2008-2014 Open Infobutton Project, Health Sciences IT, University of Utah<br>
- * Contact: {@code <andrew.iskander@utah.edu>}<br>
- * Biomedical Informatics, 26 South 2000 East<br>
- * Room 5775 HSEB, Salt Lake City, UT 84112<br>
- * Day Phone: 1-801-581-4080<br>
- * -----------------------------------------------------------------------------------
- *
- * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Mar 11, 2014
- */
 public class WebServiceUtility
 {
 	/**

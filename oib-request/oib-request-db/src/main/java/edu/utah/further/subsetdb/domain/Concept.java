@@ -36,21 +36,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import edu.utah.further.core.api.data.PersistentEntity;
 import edu.utah.further.core.api.lang.Final;
 
-/**
- * A simple persistent entity.
- * <p>
- * -------------------------------------------------------------------------<br>
- * (c) 2008-2011 FURTHeR Project, AVP Health Sciences IT Office, University of
- * Utah<br>
- * Contact: Dr. Scott Narus {@code <scott.narus@hsc.utah.edu>}<br>
- * Biomedical Informatics, 26 South 2000 East<br>
- * Room 5775 HSEB, Salt Lake City, UT 84112<br>
- * Day Phone: 1-801-213-3288<br>
- * -------------------------------------------------------------------------
- * 
- * @author Oren E. Livne {@code <oren.livne@utah.edu>}
- * @version Oct 10, 2008
- */
 @Entity
 @Table(name = "concept")
 public class Concept implements PersistentEntity<Long> {
