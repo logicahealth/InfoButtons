@@ -24,6 +24,11 @@ public class ResponderRequestParameterDaoImpl extends DaoBase<RequestParameter> 
     List<RequestParameter> supportedOpenInfobuttonRequestParameters = null;
 
     @Override
+    public Collection<RequestParameter> getRequiredOpenInfobuttonRequestParameters() {
+        return this.getOpenInfobuttonRequestParametersByMinCardinality(1);
+    }
+    
+    @Override
     public void setAllOpenInfobuttonRequestParameters(List<RequestParameter> supportedOpenInfobuttonRequestParameters) {
         this.supportedOpenInfobuttonRequestParameters = supportedOpenInfobuttonRequestParameters;
     }
@@ -46,7 +51,7 @@ public class ResponderRequestParameterDaoImpl extends DaoBase<RequestParameter> 
     }
 
     @Override
-    public Collection<RequestParameter> getOpenInfobuttonRequestParametersByMinCardinality(int minCardinality, String version) {
+    public Collection<RequestParameter> getOpenInfobuttonRequestParametersByMinCardinality(int minCardinality) {
         return getSessionFactory()
                 .getCurrentSession()
                 .createCriteria(RequestParameter.class)

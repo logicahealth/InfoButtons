@@ -15,8 +15,10 @@ public interface ResponderRequestParameterDao extends IRequestParameterDao {
 
     List<RequestParameter> getSupportedOpenInfobuttonRequestParametersOrdered();
 
-    Collection<RequestParameter> getOpenInfobuttonRequestParametersByMinCardinality( int minCardinality, String version );
-    
+    Collection<RequestParameter> getOpenInfobuttonRequestParametersByMinCardinality( int minCardinality );
+
+    Collection<RequestParameter> getRequiredOpenInfobuttonRequestParameters();
+
     RequestParameter getOpenInfobuttonRequestParameterByName( String paramaterName);
 
 }

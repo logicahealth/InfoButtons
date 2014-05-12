@@ -32,7 +32,7 @@ public class CodeExpanderUtsHelper {
     }
     
     public CodeExpanderUtsHelper( Properties properties ) {
-        utsProperties = properties;        
+        this.utsProperties = properties;        
     }
 
     public void setUtsProperties(Properties utsProperties) {
@@ -64,7 +64,7 @@ public class CodeExpanderUtsHelper {
 
         try {
             myAtomClusterRelations =
-                    utsContentService.getSourceDescriptorSourceDescriptorRelations(getSecurityTicket(), utsProperties.getProperty("umlsRelease"), code, "ICD9CM", myPsf);
+                    utsContentService.getSourceDescriptorSourceDescriptorRelations(getSecurityTicket(), utsProperties.getProperty("uts.umlsRelease"), code, "ICD9CM", myPsf);
         } catch (UtsFault_Exception e) {
             e.printStackTrace();
         }
@@ -98,10 +98,10 @@ public class CodeExpanderUtsHelper {
 
         try {
 
-            conceptAtomCluster = utsContentService.getCode(getSecurityTicket(), utsProperties.getProperty("umlsRelease"), code, "SNOMEDCT");
+            conceptAtomCluster = utsContentService.getCode(getSecurityTicket(), utsProperties.getProperty("uts.umlsRelease"), code, "SNOMEDCT");
 
             myRelations =
-                    utsContentService.getSourceConceptSourceConceptRelations(getSecurityTicket(), utsProperties.getProperty("umlsRelease"), code, "SNOMEDCT", myPsf);
+                    utsContentService.getSourceConceptSourceConceptRelations(getSecurityTicket(), utsProperties.getProperty("uts.umlsRelease"), code, "SNOMEDCT", myPsf);
 
         } catch (UtsFault_Exception e) {
             e.printStackTrace();
@@ -131,8 +131,8 @@ public class CodeExpanderUtsHelper {
         UtsWsSecurityController securityService = (new UtsWsSecurityControllerImplService()).getUtsWsSecurityControllerImplPort();
 
         try {
-            String ticketGrantingTicket = securityService.getProxyGrantTicket(utsProperties.getProperty("username"), utsProperties.getProperty("password"));
-            singleUseTicket = securityService.getProxyTicket(ticketGrantingTicket, utsProperties.getProperty("serviceName"));
+            String ticketGrantingTicket = securityService.getProxyGrantTicket(utsProperties.getProperty("uts.username"), utsProperties.getProperty("uts.password"));
+            singleUseTicket = securityService.getProxyTicket(ticketGrantingTicket, utsProperties.getProperty("uts.serviceName"));
         } catch (Exception e) {
             e.printStackTrace();
         }
