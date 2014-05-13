@@ -46,7 +46,7 @@ Building
 
 1) Execute all the SQL scripts found in the Innovations-182/sqlWithInsert directory. 
 
-   Additionally, execture the SQL script found in Innovations-182/sqlDump/prodoib_logs.sql. 
+   Additionally, execute the SQL script found in Innovations-182/sqlDump/prodoib_logs.sql. 
 
 2) Navigate back to the oib-request module directory (this directory)
 
