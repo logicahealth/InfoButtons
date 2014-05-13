@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?altova_sps ResourceAuhtoring.sps?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+	<!-- https://www.merck-manual-infobutton.com/mminfbtn/search.do?mainSearchCriteria.v.cs=2.16.840.1.113883.6.42&mainSearchCriteria.v.dn=Salmonella enteritis&mainSearchCriteria.v.c=003.1&assignedEntity.name.r=PortlandVA&assignedEntity.certificateText.r=test1234&taskContext.c.c=PROBLISTREV&subTopic.v.c=Q000175&subTopic.v.cs=2.16.840.1.113883.6.177&subTopic.v.dn=diagnosis -->
+	<header id="4">
+		<title>Merck Manual</title>
+		<profileDescription>.</profileDescription>
+		<versionControl publicationDate="2011-05-24T00:00:00"/>
+	</header>
+	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="true">
+		<authorizedOrganizations>
+			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
+			<authorizedOrganization id="MBL" name="Marine Biology Laboratory"/>
+		</authorizedOrganizations>
+		<supportedTerminologies>
+			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
+		</supportedTerminologies>
+		<contexts>
+			<context name="Knowledge on conditions from problem list review and entry" id="1">
+				<contextDefinition>
+					<task match="true" search="true">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<performerKnowledgeUserType match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.110" displayName="Provider" code="PROV"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>
+					<conceptOfInterest match="false" search="true"/>
+<subTopics>
+	<subTopic linkName="Diagnosis">						
+		<searchParameter>								
+			<valueSource>
+				<searchCode>
+					<code code="Q000175" codeSystem="2.16.840.1.113883.6.177" displayName="Diagnosis"/>
+				</searchCode>
+			</valueSource>
+		</searchParameter>
+	</subTopic>
+	<subTopic linkName="Treatment">						
+		<searchParameter>								
+			<valueSource>
+				<searchCode>
+					<code code="Q000175" codeSystem="2.16.840.1.113883.6.177" displayName="Treatment"/>
+				</searchCode>
+			</valueSource>
+		</searchParameter>
+	</subTopic>
+<subTopic linkName="Diagnosis">						
+		<searchParameter>								
+			<valueSource>
+				<searchCode>
+					<code code="Q000628" codeSystem="2.16.840.1.113883.6.177" displayName="Diagnosis"/>
+				</searchCode>
+			</valueSource>
+		</searchParameter>
+	</subTopic>
+<subTopic linkName="Symptoms and Signs">						
+		<searchParameter>								
+			<valueSource>
+				<searchCode>
+					<code code="Q000175" codeSystem="2.16.840.1.113883.6.177" displayName="Symptoms and Signs"/>
+				</searchCode>
+			</valueSource>
+		</searchParameter>
+	</subTopic>
+</subTopics>	
+					
+					
+						<!--
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.6.177" displayName="Symptoms and Signs" code="Q000175"/>
+								</enumerationItem>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.6.177" displayName="Classification" code="Q000145"/>
+								</enumerationItem>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.6.177" displayName="Complications" code="Q000150"/>
+								</enumerationItem>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.6.177" displayName="Patient Education" code="Q000193"/>
+								</enumerationItem>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.6.177" displayName="Epidemiology" code="Q000453"/>
+								</enumerationItem>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.6.177" displayName="Pathology" code="Q000473"/>
+								</enumerationItem>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.6.177" displayName="Pathophysiology" code="Q000503"/>
+								</enumerationItem>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.6.177" displayName="Prevention" code="Q000517"/>
+								</enumerationItem>
+								<enumerationItem>
+									<code codeSystem="2.16.840.1.113883.6.177" displayName="Risk Factors" code="D012307"/>
+								</enumerationItem>
+-->
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="https://www.merck-manual-infobutton.com/mminfbtn/search.do?assignedEntity.name.r=PortlandVA&amp;assignedEntity.certificateText.r=pass1234&amp;"/>
+				</knowledgeRequestService>
+			</context>
+<!--			<context name="Patient education information from problem list" id="2">
+				<contextDefinition>
+					<task match="true" search="true">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PROBLISTE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PROBLISTREV"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<conceptOfInterest match="false" search="true"/>
+					<subTopics>						
+						<subTopic linkName="Home Edition (Patient Education)">
+							<searchParameter>
+								<valueSource>
+									<searchCode>
+										<code code="2.16.840.1.113883.6.177" codeSystem="D010353" displayName="Patient education"/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="https://www.merck-manual-infobutton.com/mminfbtn/search.do?assignedEntity.name.r=PortlandVA&amp;assignedEntity.certificateText.r=pass1234&amp;"/>
+				</knowledgeRequestService>
+			</context>
+-->
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

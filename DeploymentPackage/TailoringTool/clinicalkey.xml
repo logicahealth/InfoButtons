@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?altova_sps ResourceAuhtoring.sps?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+	<header id="313">
+		<title>Clinical Key</title>
+		<profileDescription>Provides definitions for infobutton links associated with problem list, medication list, and order entry.</profileDescription>
+		<versionControl publicationDate="2011-02-15T19:27:00"/>
+	</header>
+	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="false" urlStyle="DIRTY">
+		<authorizedOrganizations>
+			<authorizedOrganization name="Intermountain Healthcare" id="2.16.840.1.113883.3.15"/>
+		</authorizedOrganizations>
+		<contexts>
+			<context name="Drug information" id="1">
+				<contextDefinition>
+					<patientGender match="false" search="false"/>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="Order entry" code="OE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="MEDOE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="Medication list review" code="MLREV"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<performerKnowledgeUserType match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.110" displayName="" code="PROV"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>
+					<conceptOfInterest match="false" search="true">
+						<searchParameter source="displayName">
+							<syntaxOnResource nonHl7CompliantName="mainSearchCriteria.v.dn"/>
+						</searchParameter>
+					</conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Overview">
+							<searchParameter>
+								<valueSource>
+									<searchCode>
+										<code codeSystem="2.16.840.1.113883.6.177" displayName="Overview" code="Overview"/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="https://www.clinicalkey.com/search/hl7?"/>
+				</knowledgeRequestService>
+			</context>
+			<context name="Disease information" id="2">
+				<contextDefinition>
+					<patientAgeGroup match="false" search="false"/>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="DIAGLISTE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="DIAGLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PROBLISTE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PROBLISTREV"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<performerKnowledgeUserType match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.110" displayName="" code="PROV"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>
+					<conceptOfInterest match="false" search="true">
+						<searchParameter source="displayName">
+							<syntaxOnResource nonHl7CompliantName="mainSearchCriteria.v.dn"/>
+						</searchParameter>
+					</conceptOfInterest>					
+					<subTopics>
+						<subTopic linkName="Overview">
+							<searchParameter>
+								<valueSource>
+									<searchCode>
+										<code codeSystem="2.16.840.1.113883.6.177" displayName="Overview" code="Overview"/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="https://www.clinicalkey.com/search/hl7?"/>
+				</knowledgeRequestService>
+			</context>
+			<context name="Knowledge on lab tests" id="3">
+				<contextDefinition>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="laboratory results review" code="LABRREV"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<performerKnowledgeUserType match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.110" displayName="" code="PROV"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>					
+					<conceptOfInterest match="false" search="true">
+						<searchParameter source="displayName">
+							<syntaxOnResource nonHl7CompliantName="mainSearchCriteria.v.dn"/>
+						</searchParameter>
+					</conceptOfInterest>									
+					<subTopics>
+						<subTopic linkName="Overview">
+							<searchParameter>
+								<valueSource>
+									<searchCode>
+										<code codeSystem="2.16.840.1.113883.6.177" displayName="Overview" code="Overview"/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+					</subTopics>				
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="https://www.clinicalkey.com/search/hl7?"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

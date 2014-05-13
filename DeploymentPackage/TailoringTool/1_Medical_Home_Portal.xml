@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?altova_sps ResourceAuhtoring.sps?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+	<header id="1">
+		<title>MedicalHome Portal</title>
+		<versionControl publicationDate="2011-05-20T00:00:00"/>
+	</header>
+	<profileDefinition>
+		<authorizedOrganizations>
+			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
+			<authorizedOrganization id="1.3.6.1.4.1.5884" name="University of Utah"/>
+			<authorizedOrganization id="1.3.6.1.4.1.34810" name="Intermountain Healthcare"/>
+		</authorizedOrganizations>
+		<supportedTerminologies>
+			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
+		</supportedTerminologies>
+		<contexts>
+			<context name="Access to disease modules from problem list review and entry. Pediatric population." id="1" hl7Compliant="false" urlStyle="DIRTY">
+				<contextDefinition>
+					<patientAgeGroup match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.6.177" code="D007231"/>
+								<code codeSystem="2.16.840.1.113883.6.177" code="D007223"/>
+								<code codeSystem="2.16.840.1.113883.6.177" code="D002675"/>
+								<code codeSystem="2.16.840.1.113883.6.177" code="D002648"/>
+								<code codeSystem="2.16.840.1.113883.6.177" code="D000293"/>
+							</enumeration>
+						</matchingDomain>
+					</patientAgeGroup>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<conceptOfInterest search="true" match="true">
+						<matchingDomain>
+							<enumeration includeDescendants="true">
+								<code codeSystem="2.16.840.1.113883.6.103" code="317" displayName="Mild mental retardation "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="318" displayName="Other specified mental retardation "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="277.5" displayName="Mucopolysaccharidosis (all types)"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="759.89" displayName="Angelman syndrome "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="307.23" displayName="Tourette syndrome "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="758.0" displayName="Down syndrome"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="277.85" displayName="Disorders of fatty acid oxidation "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="359.1" displayName="hereditary progressive muscular dystrophy (Duchenne and Becker Muscular Dystrophy)"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="741" displayName="Spina bifida (Neural Tube Defects)"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="343" displayName="Cerebral palsy "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="579.0 " displayName="celiac disease "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="952" displayName="spinal cord injury "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="907.0" displayName="Late effect of intracranial injury"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="330.8" displayName="Rett syndrome"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="759.83" displayName="Fragile X syndrome "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="237.7" displayName="Neurofibromatosis"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="345.6" displayName="Infantile spasms "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="555" displayName="Regional Enteritis (IBD)"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="556" displayName="Ulcerative Enterocolitis (IBD)"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="359.21" displayName="myotonic muscular dystrophy type 1"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="359.22" displayName="myotonic muscular dystrophy type 2"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="317" displayName="Mental Retardation (MR), mild "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="318.0 " displayName="MR, moderate"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="318.1" displayName="MR, severe "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="318.2" displayName="MR, profound "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="319" displayName="MR, NOS "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="299.0" displayName="Autistic disorder, Infantile autism, Primary autism "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="299.9" displayName="Pervasive developmental disorder NOS"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="299.8" displayName="Other pervasive developmental disorders (Asperger disorder) "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="296" displayName="Major Depressive Disorder. Fourth and fifth digits required, see explanation below"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="300.4" displayName="Dysthymic Disorder "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="311" displayName="Depressive Disorder NOS "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="296.90 " displayName="Mood Disorder NOS "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="309.0 " displayName="Adjustment Disorder with Depressed Mood "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="309.28" displayName="Adjustment Disorder with Mixed Anxious and Depressed Mood "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="758.9" displayName="Conditions due to anomaly of unspecified chromosome (Cornelia de Lange Syndrome"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="759.81" displayName="Prader-Willi syndrome"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="335" displayName="Spinal muscular atrophy, unspecified "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="493" displayName="Asthma "/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="314.0 " displayName="Attention deficit disorder "/>
+							</enumeration>
+						</matchingDomain>
+						<searchParameter source="code">
+							<syntaxOnResource nonHl7CompliantName="q" valuePrefix="ICD-9+" valueSuffix="+site:www.medicalhomeportal.org"/>
+						</searchParameter>
+					</conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Disease Module"/>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://www.google.com/search?hl=en&amp;btnI=Im+Feeling+Lucky&amp;"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

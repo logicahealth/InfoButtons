@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?altova_sps ResourceAuhtoring.sps?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+	<header id="1">
+		<title>BestPractice</title>
+		<profileDescription>Provides Point of Care, Evidence-based knowledge.</profileDescription>
+		<versionControl publicationDate="2012-09-19T00:00:00"/>
+	</header>
+	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
+		<authorizedOrganizations>
+			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
+		</authorizedOrganizations>
+		<supportedTerminologies>
+			<supportedTerminology id="2.16.840.1.113883.6.3" name="ICD10"/>
+		</supportedTerminologies>
+		<contexts>
+			<context name="Condition monographs for providers" id="1">
+				<contextDefinition>
+					<task match="true" search="true">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PROBLISTE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="DIAGLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="DIAGLISTE"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<performerKnowledgeUserType search="true" match="true">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code code="PROV" codeSystem="2.16.840.1.113883.5.110" displayName="Provider"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>
+					<informationRecipientUserType search="true" match="true">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code code="PROV" codeSystem="2.16.840.1.113883.5.110" displayName="Provider"/>
+							</enumeration>
+						</matchingDomain>
+					</informationRecipientUserType>
+					<conceptOfInterest match="false" search="true"/>
+					<subTopics>
+						<subTopic linkName="Clinical practices"/>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://bestpractice.bmj.com/best-practice/HL7InfoButton.html?"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>
