@@ -2,7 +2,7 @@ package org.openinfobutton.content.indexer;
 
 import org.openinfobutton.service.IndexService;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class OibIndexManagerApp {
 
@@ -10,7 +10,7 @@ public class OibIndexManagerApp {
 
         System.out.println("OpenInfobutton Content Index Manager");
 
-        final ApplicationContext applicationContext = new FileSystemXmlApplicationContext("/application-context.xml");
+        final ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
         IndexService indexService = (IndexService) applicationContext.getBean(IndexService.class);
         
         indexService.refreshAllAssetIndexes( IndexService.ICD9_CODE_SYSTEM_OID );

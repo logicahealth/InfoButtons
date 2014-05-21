@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?altova_sps ..\models\ResourceAuthoring.sps?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../models/ResourceProfile-v2.6_LITE.xsd">
+	<header id="4">
+		<title>BMJ Best Practice</title>
+		<profileDescription>.</profileDescription>
+		<versionControl publicationDate="2011-09-16T00:00:00"></versionControl>
+	</header>
+	<profileDefinition>
+		<authorizedOrganizations>
+			<authorizedOrganization name="Marine Biology Laboratory" id="MBL"/>
+		</authorizedOrganizations>
+		<contexts>
+			<context name="Knowledge on conditions from problem list review and entry" id="1" hl7Compliant="false" urlStyle="DIRTY">
+				<contextDefinition>
+					<task match="true" search="true">
+					  <matchingDomain>
+							<enumeration includeDescendants="false">
+									<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+								 <code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+							</enumeration>
+						</matchingDomain>
+						<searchParameter source="code">
+						  <syntaxOnResource nonHl7CompliantName="taskContext.c.c"/>
+						</searchParameter>
+					</task>
+					<performerKnowledgeUserType match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+									<code codeSystem="2.16.840.1.113883.5.110" displayName="Provider" code="PROV"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>
+					<conceptOfInterest match="false" search="true" >
+					<searchParameter source="code">
+						<syntaxOnResource nonHl7CompliantName="mainSearchCriteria.v.c" valueSuffix="&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.3"/>
+					</searchParameter>
+						<outputCodeTransformation id="TerminologyInference_to_ICD9CM" name="Mapping to ICD9CM codes"/>
+					</conceptOfInterest>
+					<subTopics>
+					  <subTopic linkName="Disease Topic">
+							<searchParameter>
+								<valueSource>
+									<searchCode>
+										<code codeSystem="2.16.840.1.113883.6.177" displayName="Disease Topic" code=""/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://bestpractice.bmj.com/best-practice/hL7InfoButton.html?holder.assignedEntity.name=bmjuser%40bmjgroup.com&amp;holder.assignedEntity.certificateText=leprosy367&amp;informationRecipient=PROV&amp;performer=PROV&amp;"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

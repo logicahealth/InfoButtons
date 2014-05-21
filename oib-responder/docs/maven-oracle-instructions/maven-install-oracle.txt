@@ -1,0 +1,5 @@
+Download Oracle jars from Oracle and install to your maven repository as follows:
+
+mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0 -Dpackaging=jar
+mvn install:install-file -Dfile=orai18n.jar -DgroupId=com.oracle -DartifactId=orai18n -Dversion=12.1.0 -Dpackaging=jar
+mvn install:install-file -Dfile=xdb6.jar -DgroupId=com.oracle -DartifactId=xdb6 -Dversion=12.1.0 -Dpackaging=jar

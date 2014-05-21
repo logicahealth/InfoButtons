@@ -1,6 +1,18 @@
-/*******************************************************************************
- * Source File: RxNormData.java
- ******************************************************************************/
+/**
+ * ...
+ * <p>
+ * -----------------------------------------------------------------------------------<br>
+ * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah<br>
+ * Contact: {@code <andrew.iskander@utah.edu>}<br>
+ * Biomedical Informatics<br>
+ * 421 Wakara Way, Ste 140
+ * Salt Lake City, UT 84108-3514<br>
+ * Day Phone: 1-801-581-4080<br>
+ * -----------------------------------------------------------------------------------
+ *
+ * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
+ * @version May 5, 2014
+ */
 package edu.utah.openinfobutton.inference.rxnorm.schema;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,20 +21,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-/**
- * ...
- * <p>
- * -----------------------------------------------------------------------------------<br>
- * (c) 2008-2012 FURTHeR Project, Health Sciences IT, University of Utah<br>
- * Contact: {@code <further@utah.edu>}<br>
- * Biomedical Informatics, 26 South 2000 East<br>
- * Room 5775 HSEB, Salt Lake City, UT 84112<br>
- * Day Phone: 1-801-581-4080<br>
- * -----------------------------------------------------------------------------------
- *
- * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Aug 13, 2012
- */
 @XmlRootElement(namespace="", name="rxnormdata")
 @XmlType(name="")
 @XmlAccessorType(XmlAccessType.FIELD)

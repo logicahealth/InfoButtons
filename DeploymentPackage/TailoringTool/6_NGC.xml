@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?altova_sps ResourceAuhtoring.sps?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+	<header id="2">
+		<title>National Guideline Clearinghouse</title>
+		<profileDescription>NGC is a comprehensive database of evidence-based clinical practice guidelines and related documents. NGC is an initiative of the Agency for 
+		Healthcare Research and Quality (AHRQ), U.S. Department of Health and Human Services. NGC was originally created by AHRQ in partnership with the American Medical Association and the American Association of Health Plans 
+		(now America's Health Insurance Plans [AHIP]).</profileDescription>
+		<versionControl publicationDate="2011-09-20T00:00:00"/>
+	</header>
+	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false" urlStyle="DIRTY">
+		<authorizedOrganizations>
+			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
+			<authorizedOrganization id="MBL" name="Marine Biology Laboratory"/>
+		</authorizedOrganizations>
+		<contexts>
+			<context name="Links from medications list / order entry; problem list and entry." id="1">
+				<contextDefinition>
+<!--					<patientGender match="false" search="true">
+						<searchParameter source="code">
+							<syntaxOnResource nonHl7CompliantName="107"/>
+						</searchParameter>
+						<outputCodeTransformation id="To_NGC"/>
+					</patientGender>
+					<patientAgeGroup match="false" search="true">
+						<searchParameter source="code">
+							<syntaxOnResource nonHl7CompliantName="106"/>
+						</searchParameter>
+						<outputCodeTransformation id="To_NGC"/>
+					</patientAgeGroup>
+-->
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="medication order entry" code="MEDOE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="medication list review" code="MLREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry" code="PROBLISTE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review" code="PROBLISTREV"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<performerKnowledgeUserType match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.110" displayName="Provider" code="PROV"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>
+					<conceptOfInterest match="false" search="true">
+						<searchParameter source="displayName">
+							<syntaxOnResource nonHl7CompliantName="term"/>
+						</searchParameter>
+					</conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Guidelines">
+							<searchParameter>
+								<valueSource>
+									<searchCode>
+										<code displayName="Guidelines" code="" codeSystem="NGC"/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://www.guideline.gov/search/search.aspx?"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

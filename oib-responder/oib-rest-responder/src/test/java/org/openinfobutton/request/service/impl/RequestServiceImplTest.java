@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.openinfobutton.request.service.impl;
 
 import org.openinfobutton.responder.service.impl.ResponderServiceImpl;
@@ -10,8 +6,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import junit.framework.TestCase;
+import static junit.framework.TestCase.assertEquals;
 import org.openinfobutton.app.model.RequestParameter;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 
 /**
  *
@@ -34,69 +34,53 @@ public class RequestServiceImplTest extends TestCase {
     }
 
     /**
-     * Test of getAllOpenInfobuttonRequestParametersByVersion method, of class
+     * Test of getKnowledgeRequestParameterMap method, of class
      * ResponderServiceImpl.
      */
-//    public void testGetAllOpenInfobuttonRequestParametersByVersion() {
-//        System.out.println("getAllOpenInfobuttonRequestParametersByVersion");
-//        String version = "";
-//        ResponderServiceImpl instance = new ResponderServiceImpl();
-//        Collection expResult = null;
-//        Collection result = instance.getAllOpenInfobuttonRequestParametersByVersion(version);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-    /**
-     * Test of validateRequest method, of class ResponderServiceImpl.
-     */
-//    public void testValidateRequest() {
-//        System.out.println("validateRequest");
-//        Map<String, String> requestParameters = null;
-//        ResponderServiceImpl instance = new ResponderServiceImpl();
-//        int expResult = 0;
-//        int result = instance.validateRequest(requestParameters);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-    /**
-     * Test of getFlatRequestMapFromHttpRequestParameterMap method, of class
-     * ResponderServiceImpl.
-     */
-    public void testGetFlatRequestMapFromHttpRequestParameterMap() {
-        System.out.println("testGetFlatRequestMapFromHttpRequestParameterMap");
+    public void testGetFlatRequestMap() {
+        
+        System.out.println("testGetFlatRequestMap");
+        
         Map httpRequestParameters = new HashMap();
-        String parameterName = "mainSearchCriteria.c.c";
+        String parameterName = "mainSearchCriteria.v.c";
         String parameterValue = "aCode";
         httpRequestParameters.put(parameterName, new String[]{parameterValue});
         ResponderServiceImpl instance = new ResponderServiceImpl();
+        
         Map<String, String> expResult = new HashMap<String, String>();
         expResult.put(parameterName, parameterValue);
-        Map result = instance.getFlatRequestMapFromHttpRequestParameterMap(httpRequestParameters);
+        
+        Map result = instance.getKnowledgeRequestParameterMap(httpRequestParameters);
         assertEquals(expResult, result);
     }
 
-    public void testInvalidArgumentGetFlatRequestMapFromHttpRequestParameterMap() {
-        System.out.println("testInvalidArgumentGetFlatRequestMapFromHttpRequestParameterMap");
+    public void testInvalidArgumentGetFlatRequestMap() {
+        
+        System.out.println("testInvalidArgumentGetFlatRequestMap");
+        
         Map httpRequestParameters = new HashMap();
-        String parameterName = "mainSearchCriteria.c.c";
+        String parameterName = "mainSearchCriteria.v.c";
         String parameterValue = "aCode";
         httpRequestParameters.put(parameterName, new String[]{parameterValue, parameterValue}); // two values should fail
         ResponderServiceImpl instance = new ResponderServiceImpl();
+        
         Map<String, String> expResult = new HashMap<String, String>();
         expResult.put(parameterName, parameterValue);
+        
         try {
-            Map result = instance.getFlatRequestMapFromHttpRequestParameterMap(httpRequestParameters); // should throw excpetion
+            Map result = instance.getKnowledgeRequestParameterMap(httpRequestParameters); // should throw excpetion
             fail("Should have thrown an InvalidArgumentException");
         } catch (IllegalArgumentException e) {
             assertTrue(true);
+        } catch ( Exception ee ) {
+            ee.printStackTrace();
+            fail("Should have thrown IllegalArgumentException.");
         }
     }
 
-    public void testGetOpenInfobuttonRequestParameterTypeCodeMap() {
+    public void testGetIndexInterpretationMap() {
 
-        System.out.println("testGetOpenInfobuttonRequestParameterTypeCodeMap");
+        System.out.println("testGetIndexInterpretationMap");
         
         RequestParameter p = new RequestParameter();
         p.setRequestParameterId(new BigDecimal(0));
@@ -143,7 +127,7 @@ public class RequestServiceImplTest extends TestCase {
         pc.add(p4);
         
         ResponderServiceImpl service = new ResponderServiceImpl();
-        Map<String,Map<String,String>> params = service.getOpenInfobuttonRequestParameterTypeCodeMap( pc );
+        Map<String,Map<String,String>> params = service.getIndexPropertyInterpretationMap( pc );
 
         for ( String param:params.keySet() ) {
             Map<String,String> paramTypeMap = params.get(param);

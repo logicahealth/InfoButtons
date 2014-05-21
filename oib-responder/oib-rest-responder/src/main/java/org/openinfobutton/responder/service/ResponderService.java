@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import org.openinfobutton.app.model.Asset;
+import org.openinfobutton.app.model.RequestParameter;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 
 /**
  *
@@ -14,14 +16,14 @@ public interface ResponderService {
 
     Set<String> getRxNormQueryExpansionTermTypes();
 
-    Map<String, String> getFlatRequestMapFromHttpRequestParameterMap(Map httpRequestParameters);
+    Map<String, String> getKnowledgeRequestParameterMap(Map httpRequestParameters);
 
-    Map<String, Map<String, String>> getRequestParameterDbMap();
+    Map<String, Map<String, String>> getIndexPropertyInterpretationMap();
 
     Collection<Asset> findAssetsByInfobuttonRequest(Map<String, String> requestParameters);
 
-    Properties getAppProperties(String propertyGroup);
-
-    int validateRequest(Map<String, String> requestParameters);
+    Properties getApplicationProperties(String propertyGroup);
+    
+    boolean requestContainsRequiredParameters(Map<String, String> requestParameters) throws MissingServletRequestParameterException;
     
 }

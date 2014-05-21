@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?altova_sps ResourceAuhtoring.sps?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+	<!--
+http://hldemo.ebscohost.com/HL72EHOST/translate.jsp?user=hl7demo&amp;password=ebsco&amp;product=Dynamed&amp;EHOST=true
+&performer=PROV
+&informationRecipient=PROV
+&age.v.v=47
+&age.v.u=a
+&taskContext.c.c=PROBLISTREV
+&mainSearchCriteria.v.cs=2.16.840.1.113883.6.103
+&mainSearchCriteria.v.c=250.00
+&mainSearchCriteria.v.dn=Diabetes Mellitus Type 2
+&subTopic.v.cs=2.16.840.1.113883.6.177
+&subTopic.v.c=Q000628
+
+-->
+	<header id="7">
+		<title>DynaMed</title>
+		<profileDescription>Profile for Dynamed</profileDescription>
+		<versionControl publicationDate="2010-10-15T16:27:00"></versionControl>
+	</header>
+	<profileDefinition>
+		<authorizedOrganizations>
+			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
+		</authorizedOrganizations>
+		<contexts>
+			<context name="Knowledge on conditions and medications from problem list review and entry, order entry, and meds list" id="1" hl7Compliant="true" urlStyle="DIRTY">
+				<contextDefinition>
+					<patientGender match="false" search="true"/>
+					<patientAgeGroup match="false" search="true"/>
+					<task match="true" search="true">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+									<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+							    <code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+							</enumeration>
+						</matchingDomain>
+						<searchParameter source="code">
+						  <syntaxOnResource nonHl7CompliantName="taskContext.c.c"/>
+						</searchParameter>
+					</task>
+					<conceptOfInterest match="false" search="true"/>
+					<subTopics>
+  <!--								<enumerationItem>
+									<code displayName="Topic summary"/>
+								</enumerationItem> -->
+						<subTopic linkName="Diagnosis">
+							<searchParameter>
+							  <valueSource>
+									<searchCode>
+										<code displayName="Diagnosis" code="Q000175" codeSystem="2.16.840.1.113883.6.177"/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+						<subTopic linkName="Treatment">
+							<searchParameter>
+							  <valueSource>
+									<searchCode>
+										<code codeSystem="2.16.840.1.113883.6.177" displayName="Treatment" code="Q000628"/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+						<subTopic linkName="Causes &amp; risk factors">
+							<searchParameter>
+							  <valueSource>
+									<searchCode>
+										<code codeSystem="2.16.840.1.113883.6.177" displayName="Causes &amp; risk factors" code="Q000209"/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+						<subTopic linkName="Prognosis">
+							<searchParameter>
+							  <valueSource>
+									<searchCode>
+										<code codeSystem="2.16.840.1.113883.6.177" displayName="Prognosis" code="D011379"/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://hldemo.ebscohost.com/HL72EHOST/translate.jsp?user=dmeditors&amp;password=medicine&amp;performer=PROV&amp;product=Dynamed&amp;EHOST=true&amp;"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

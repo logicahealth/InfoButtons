@@ -20,6 +20,7 @@ import org.openinfobutton.responder.service.ResponderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 
 /**
  *
@@ -59,7 +60,7 @@ public class ResponderServiceImpl implements ResponderService {
         
         rxNormQueryExpansionTermTypes = new HashSet<String>();
         
-        Properties valueSetIds = getAppProperties("app.valueset.id");
+        Properties valueSetIds = getApplicationProperties("app.valueset.id");
         String rxNormQueryExpansionValueSetId = (String)valueSetIds.get("RXNORM_QUERY_EXPANSION_TERM_TYPE_CODES");
         List<ValueSetCode> valueSet = responderValueSetDao.getValueSetCodes( new BigDecimal( rxNormQueryExpansionValueSetId ) );
                 
@@ -71,9 +72,9 @@ public class ResponderServiceImpl implements ResponderService {
         
     }
     
-    public Map<String, Map<String, String>> getOpenInfobuttonRequestParameterTypeCodeMap(Collection<RequestParameter> requestParameters) {
+    public Map<String, Map<String, String>> getIndexPropertyInterpretationMap(Collection<RequestParameter> requestParameters) {
 
-        if ( requestParameterCodeMap != null ) { // only retrieve data from the db and configure once when empty, doesn't change
+        if ( requestParameterCodeMap != null ) { // if already built, don't need to rebuild; static
             return requestParameterCodeMap;
         }
 
@@ -111,26 +112,20 @@ public class ResponderServiceImpl implements ResponderService {
 
     @Override
     @Transactional
-    public Map<String, Map<String, String>> getRequestParameterDbMap() {
+    public Map<String, Map<String, String>> getIndexPropertyInterpretationMap() {
         
-        if ( requestParameterCodeMap != null ) { // only retrieve from the db and configure once when empty, doesn't change
+        if ( requestParameterCodeMap != null ) { // if already built, don't need to rebuild; static
             return requestParameterCodeMap;
         }
         
         Collection<RequestParameter> requestParameters = responderRequestParameterDao.getSupportedOpenInfobuttonRequestParametersOrdered();
 
-        return getOpenInfobuttonRequestParameterTypeCodeMap(requestParameters);
+        return getIndexPropertyInterpretationMap(requestParameters);
 
     }
 
     @Override
-    @Transactional
-    public int validateRequest(Map<String, String> requestParameters) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Map<String, String> getFlatRequestMapFromHttpRequestParameterMap(Map httpRequestParameters) {
+    public Map<String, String> getKnowledgeRequestParameterMap(Map httpRequestParameters) {
 
         Map<String, String> requestParameters = new HashMap<String, String>();
 
@@ -140,26 +135,65 @@ public class ResponderServiceImpl implements ResponderService {
             String[] parameterValues = (String[]) httpRequestParameters.get(parameterNameString);
 
             int i = 0;
-            for (String parameterValue : parameterValues) {
+            for (String parameterValue : parameterValues) { // multiple parameters with the same name are not supported by the specification
 
                 if (i == 0) {
                     requestParameters.put(parameterNameString, parameterValue);
                 } else {
                     throw new IllegalArgumentException("Invalid request argument: there are mutiple values for " + parameterNameString
                             + ". Parameters that support multple values require an index number appended to the end of the parameter name."
-                            + " For example, when there are two values for 'mainSearchCriteria.c.c', the second parameter name is 'mainsearchCriteria.c.c1'.");
+                            + " Example: Two values for 'mainSearchCriteria.c.c' requires a second parameter 'mainsearchCriteria.c.c1'.");
                 }
                 i++;
             }
 
         }
-
+        
         return requestParameters;
+    }
+ 
+    @Override
+    @Transactional
+    public boolean requestContainsRequiredParameters(Map<String, String> requestParameters) throws MissingServletRequestParameterException {
+        
+        StringBuffer errorMessage = new StringBuffer();
+        
+        Collection<RequestParameter> requiredRequestParmeters = responderRequestParameterDao.getRequiredOpenInfobuttonRequestParameters();
+        
+        int i = 0;
+        for (RequestParameter requiredRequestParmeter:requiredRequestParmeters) {
+            if ( ! requestParameters.containsKey( requiredRequestParmeter.getParameterName() ) ) {
+                if ( i > 1 ) {
+                    errorMessage.append(", ");
+                }
+                errorMessage.append( requiredRequestParmeter.getParameterName() );
+                i++;
+            }
+        }
+
+        if ( errorMessage.length() > 0 ) {
+            
+            String messagePrefix = null;
+            String messageSuffix = null;
+            if ( i > 1 ) {
+                messagePrefix = " are";
+                messageSuffix = "s.";
+            }
+            else {
+                messagePrefix = " is a";
+                messageSuffix = ".";
+            }
+                
+            throw new MissingServletRequestParameterException(errorMessage.toString(), messagePrefix + " required request parameter" + messageSuffix);            
+        }
+        
+        return true;
+        
     }
 
     @Override
     @Transactional
-    public Properties getAppProperties(String propertyGroup ) {
+    public Properties getApplicationProperties(String propertyGroup ) {
         
         if ( appProperties != null ) { // only retrieve from the db and configure once when empty, doesn't change
             return appProperties;
@@ -184,4 +218,5 @@ public class ResponderServiceImpl implements ResponderService {
         return responderAssetDao.findByInfobuttonRequest(requestParameters);
         
     }
+
 }
