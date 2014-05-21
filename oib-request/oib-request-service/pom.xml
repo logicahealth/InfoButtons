@@ -15,6 +15,16 @@ $Date:: 2011-02-24 1#$:  Date of last commit
     <url>http://maven.apache.org</url>
    <properties>
        <dts-version>3.5.0</dts-version>
+              
+		<datasource1.url>jdbc:mysql://localhost:3306/prodoib</datasource1.url>
+		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
+		<datasource1.user>root</datasource1.user>
+		<datasource1.password>password</datasource1.password>
+		
+		<datasource2.url>jdbc:mysql://localhost:3306/profilesdbprod</datasource2.url>
+		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
+		<datasource2.user>root</datasource2.user>
+		<datasource2.password>password</datasource2.password>
    </properties>
  
    <repositories>
@@ -221,6 +231,38 @@ $Date:: 2011-02-24 1#$:  Date of last commit
 		
    </dependencies>
     <build>
+	    <resources>
+		    <resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>serviceParams.properties</include>										
+				</includes>
+			</resource>
+		    <resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>serviceParams.properties</exclude>										
+				</excludes>
+			</resource>
+	    </resources>
+		<testResources>
+		  <testResource>
+		    <directory>src/test/resources</directory>
+			<filtering>true</filtering>
+			<includes>
+				<include>serviceParams.properties</include>										
+			</includes>
+		  </testResource>
+		  <testResource>
+		    <directory>src/test/resources</directory>
+			<filtering>false</filtering>
+			<excludes>
+				<exclude>serviceParams.properties</exclude>										
+			</excludes>
+		  </testResource>
+		</testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -230,6 +272,14 @@ $Date:: 2011-02-24 1#$:  Date of last commit
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/${project.build.finalName}</path>
+				</configuration>
+			</plugin>
             <plugin>
             	<groupId>org.codehaus.mojo</groupId>
             	<artifactId>aspectj-maven-plugin</artifactId>
