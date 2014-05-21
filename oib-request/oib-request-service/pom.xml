@@ -25,6 +25,9 @@ $Date:: 2011-02-24 1#$:  Date of last commit
 		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
 		<datasource2.user>root</datasource2.user>
 		<datasource2.password>password</datasource2.password>
+		
+		<umls.username></umls.username>
+		<umls.password></umls.password>
    </properties>
  
    <repositories>
