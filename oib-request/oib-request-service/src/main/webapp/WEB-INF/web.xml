@@ -15,9 +15,9 @@ $Date:: 2010-10-01 1#$:  Date of last commit
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-    WEB-INF/core-data-annotation-context.xml
-    WEB-INF/core-data-datasource-context.xml
-    WEB-INF/core-profile-datasource-context.xml
+    classpath:core-data-annotation-context.xml
+    classpath:core-data-datasource-context.xml
+    classpath:core-profile-datasource-context.xml
     </param-value>
   </context-param>
   
