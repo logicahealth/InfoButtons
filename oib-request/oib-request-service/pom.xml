@@ -26,8 +26,8 @@ $Date:: 2011-02-24 1#$:  Date of last commit
 		<datasource2.user>root</datasource2.user>
 		<datasource2.password>password</datasource2.password>
 		
-		<umls.username>gdelfiol</umls.username>
-		<umls.password>*WoodsHole2011</umls.password>
+		<umls.username></umls.username>
+		<umls.password></umls.password>
    </properties>
  
    <repositories>
