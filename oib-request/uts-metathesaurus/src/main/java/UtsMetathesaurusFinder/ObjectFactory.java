@@ -1,18 +1,3 @@
-/**
- * ...
- * <p>
- * -----------------------------------------------------------------------------------<br>
- * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah<br>
- * Contact: {@code <andrew.iskander@utah.edu>}<br>
- * Biomedical Informatics<br>
- * 421 Wakara Way, Ste 140
- * Salt Lake City, UT 84108-3514<br>
- * Day Phone: 1-801-581-4080<br>
- * -----------------------------------------------------------------------------------
- *
- * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version May 5, 2014
- */
 
 package UtsMetathesaurusFinder;
 
@@ -61,19 +46,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FindAtomsResponse }
+     * Create an instance of {@link FindSourceConceptsResponse }
      * 
      */
-    public FindAtomsResponse createFindAtomsResponse() {
-        return new FindAtomsResponse();
+    public FindSourceConceptsResponse createFindSourceConceptsResponse() {
+        return new FindSourceConceptsResponse();
     }
 
     /**
-     * Create an instance of {@link FindSourceDescriptors }
+     * Create an instance of {@link UiLabelRootSource }
      * 
      */
-    public FindSourceDescriptors createFindSourceDescriptors() {
-        return new FindSourceDescriptors();
+    public UiLabelRootSource createUiLabelRootSource() {
+        return new UiLabelRootSource();
     }
 
     /**
@@ -85,11 +70,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetCount }
+     * Create an instance of {@link FindAtomsResponse }
      * 
      */
-    public GetCount createGetCount() {
-        return new GetCount();
+    public FindAtomsResponse createFindAtomsResponse() {
+        return new FindAtomsResponse();
     }
 
     /**
@@ -101,19 +86,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FindCodes }
+     * Create an instance of {@link GetCount }
      * 
      */
-    public FindCodes createFindCodes() {
-        return new FindCodes();
-    }
-
-    /**
-     * Create an instance of {@link FindSourceConceptsResponse }
-     * 
-     */
-    public FindSourceConceptsResponse createFindSourceConceptsResponse() {
-        return new FindSourceConceptsResponse();
+    public GetCount createGetCount() {
+        return new GetCount();
     }
 
     /**
@@ -122,54 +99,6 @@ public class ObjectFactory {
      */
     public FindConcepts createFindConcepts() {
         return new FindConcepts();
-    }
-
-    /**
-     * Create an instance of {@link FindSourceDescriptorsResponse }
-     * 
-     */
-    public FindSourceDescriptorsResponse createFindSourceDescriptorsResponse() {
-        return new FindSourceDescriptorsResponse();
-    }
-
-    /**
-     * Create an instance of {@link FindConceptsResponse }
-     * 
-     */
-    public FindConceptsResponse createFindConceptsResponse() {
-        return new FindConceptsResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetCountResponse }
-     * 
-     */
-    public GetCountResponse createGetCountResponse() {
-        return new GetCountResponse();
-    }
-
-    /**
-     * Create an instance of {@link FindSourceConcepts }
-     * 
-     */
-    public FindSourceConcepts createFindSourceConcepts() {
-        return new FindSourceConcepts();
-    }
-
-    /**
-     * Create an instance of {@link UiLabel }
-     * 
-     */
-    public UiLabel createUiLabel() {
-        return new UiLabel();
-    }
-
-    /**
-     * Create an instance of {@link UiLabelRootSource }
-     * 
-     */
-    public UiLabelRootSource createUiLabelRootSource() {
-        return new UiLabelRootSource();
     }
 
     /**
@@ -186,6 +115,62 @@ public class ObjectFactory {
      */
     public FindAtoms createFindAtoms() {
         return new FindAtoms();
+    }
+
+    /**
+     * Create an instance of {@link FindSourceDescriptors }
+     * 
+     */
+    public FindSourceDescriptors createFindSourceDescriptors() {
+        return new FindSourceDescriptors();
+    }
+
+    /**
+     * Create an instance of {@link GetCountResponse }
+     * 
+     */
+    public GetCountResponse createGetCountResponse() {
+        return new GetCountResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindConceptsResponse }
+     * 
+     */
+    public FindConceptsResponse createFindConceptsResponse() {
+        return new FindConceptsResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindSourceDescriptorsResponse }
+     * 
+     */
+    public FindSourceDescriptorsResponse createFindSourceDescriptorsResponse() {
+        return new FindSourceDescriptorsResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindCodes }
+     * 
+     */
+    public FindCodes createFindCodes() {
+        return new FindCodes();
+    }
+
+    /**
+     * Create an instance of {@link FindSourceConcepts }
+     * 
+     */
+    public FindSourceConcepts createFindSourceConcepts() {
+        return new FindSourceConcepts();
+    }
+
+    /**
+     * Create an instance of {@link UiLabel }
+     * 
+     */
+    public UiLabel createUiLabel() {
+        return new UiLabel();
     }
 
     /**

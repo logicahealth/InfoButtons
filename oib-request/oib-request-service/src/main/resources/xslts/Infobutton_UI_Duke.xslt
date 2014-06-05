@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:ns2="urn:hl7-org:v3" xmlns:ns3="http://www.w3.org/2005/Atom:atom" xmlns:metal="http://xml.zope.org/namespaces/metal">
-	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+<xsl:stylesheet version="2.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:ns2="urn:hl7-org:v3"
+	xmlns:ns3="http://www.w3.org/2005/Atom:atom" xmlns:metal="http://xml.zope.org/namespaces/metal">
+	<xsl:output method="html" version="1.0" encoding="UTF-8"
+		indent="yes" />
 	<xsl:template match="/">
-	   <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"></xsl:text>
+		<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"></xsl:text>
 		<html>
 			<head metal:define-macro="dumcl_head">
-				<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-				<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8"/>
-				<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+				<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+				<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+				<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 				<title>QuickSearch Results</title>
 				<style type="text/css">
 				
@@ -226,19 +230,21 @@
   </style>
 				<![endif]-->
 				]]></xsl:text>
-				<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"/>
+				<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" />
 				<script type="text/javascript">
 					function start() {
-						window.resizeTo(1250, 1000);
-						setContent('<xsl:value-of select="//feed[1]/entry[1]/link/@href"/>');
+					window.resizeTo(1250, 1000);
+					setContent('
+					<xsl:value-of select="//feed[1]/entry[1]/link/@href" />
+					');
 					}
-					
+
 					function closeWindow() {
-						  var searchWin =  window.opener;
-						  if (searchWin != null) {
-							searchWin.focus();
-						  }
-						  self.close();      
+					var searchWin = window.opener;
+					if (searchWin != null) {
+					searchWin.focus();
+					}
+					self.close();
 					}
 
 				</script>
@@ -270,14 +276,16 @@
 				]]></script>
 				<div id="banner" class="secondary">
 					<div id="dukemedicine">
-						<div id="banner_block1"/>
+						<div id="banner_block1" />
 						<div id="banner_block3">
-							<img src="http://www.mclibrary.duke.edu/images/Duke-Shield-W.gif" alt="Duke Medicine Shield"/>
+							<img src="http://www.mclibrary.duke.edu/images/Duke-Shield-W.gif"
+								alt="Duke Medicine Shield" />
 						</div>
 					</div>
-					<div id="rotating_image"/>
+					<div id="rotating_image" />
 					<a href="/" style="display: block;padding-top:15px;">
-						<img src="http://www.mclibrary.duke.edu/images/DUMC-Library-Logo.gif" alt="Duke University Medical Center Library"/>
+						<img src="http://www.mclibrary.duke.edu/images/DUMC-Library-Logo.gif"
+							alt="Duke University Medical Center Library" />
 					</a>
 				</div>
 				<div class="top_middle_nav">
@@ -288,7 +296,8 @@
 							</a>
 						</li>
 						<li>
-							<a href="http://catalog.library.duke.edu/F?func=find-b-0&amp;local_base=journals">
+							<a
+								href="http://catalog.library.duke.edu/F?func=find-b-0&amp;local_base=journals">
 								<strong>All Journals</strong>
 							</a>
 						</li>
@@ -317,25 +326,32 @@
 				<div class="linkDiv">
 					<xsl:for-each select="//feed">
 						<h3>
-							<xsl:value-of select="title"/>
+							<xsl:value-of select="title" />
 						</h3>
 						<ul>
 							<xsl:for-each select="entry">
 								<li>
 									<a href="javascript:void(0);">
-										<xsl:attribute name="onclick">setContent('<xsl:value-of select="link/@href"/>');</xsl:attribute>
+										<xsl:attribute name="onclick">setContent('<xsl:value-of
+											select="link/@href" />');</xsl:attribute>
 										<!-- <xsl:value-of select="category/subTopic/value/@displayName"/> -->
-										<xsl:value-of select="title"/>
+										<xsl:value-of select="title" />
 									</a>
 								</li>
 							</xsl:for-each>
 						</ul>
 					</xsl:for-each>
-				    <h3 id="feedback" ><strong><a style="color: red" href="http://www.mclibrary.duke.edu/subject/feedback">Did OuickSearch HELP?</a></strong></h3>
-				    <h3 id="closewindow"><a href="http://www.mclibrary.duke.edu/tools/clinical/ClinSearch">Return to Search Screen</a></h3>
+					<h3 id="feedback">
+						<strong>
+							<a style="color: red" href="http://www.mclibrary.duke.edu/subject/feedback">Did OuickSearch HELP?</a>
+						</strong>
+					</h3>
+					<h3 id="closewindow">
+						<a href="http://www.mclibrary.duke.edu/tools/clinical/ClinSearch">Return to Search Screen</a>
+					</h3>
 				</div>
 				<div class="infoDiv">
-					<iframe id="contentPanel"/>
+					<iframe id="contentPanel" />
 				</div>
 			</body>
 		</html>

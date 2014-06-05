@@ -2,8 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:jaxws="http://cxf.apache.org/jaxws"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
@@ -18,80 +17,86 @@
 	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
 
-<!-- 	<import resource="classpath:META-INF/cxf/cxf.xml" /> -->
-<!-- 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /> -->
-<!-- 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" /> -->
+	<!-- <import resource="classpath:META-INF/cxf/cxf.xml" /> -->
+	<!-- <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /> -->
+	<!-- <import resource="classpath:META-INF/cxf/cxf-servlet.xml" /> -->
 
-<!-- 	<jaxws:endpoint  -->
-<!-- 	  id="infobutton-service"  -->
-<!-- 	  implementor="edu.duke.mc.cfm.dci.dss.EvaluationImpl" -->
-<!-- 	  address="/evaluate.dss.omg.org" -->
-<!-- 	  serviceName="dss:DecisionSupportService" -->
-<!-- 	  endpointName="dss:evaluate" -->
-<!-- 	  xmlns:dss="urn:evaluate.dss.omg.org" -->
-<!-- 	  wsdlLocation="wsdl/DssEvaluation.wsdl"> -->
-<!-- 	</jaxws:endpoint> -->
-
-	<!-- =========================================== -->
-	<!-- Properties files                            -->
-	<!-- =========================================== -->
-	
-	<!--
-		Property file locations: suppressed here because it might override the
-		main context file's resources. The main context is responsible for
-		defining them.
-	-->
+	<!-- <jaxws:endpoint -->
+	<!-- id="infobutton-service" -->
+	<!-- implementor="edu.duke.mc.cfm.dci.dss.EvaluationImpl" -->
+	<!-- address="/evaluate.dss.omg.org" -->
+	<!-- serviceName="dss:DecisionSupportService" -->
+	<!-- endpointName="dss:evaluate" -->
+	<!-- xmlns:dss="urn:evaluate.dss.omg.org" -->
+	<!-- wsdlLocation="wsdl/DssEvaluation.wsdl"> -->
+	<!-- </jaxws:endpoint> -->
 
 	<!-- =========================================== -->
-	<!-- Annotation configuration                    -->
+	<!-- Properties files -->
+	<!-- =========================================== -->
+
+	<!-- Property file locations: suppressed here because it might override 
+		the main context file's resources. The main context is responsible for defining 
+		them. -->
+
+	<!-- =========================================== -->
+	<!-- Annotation configuration -->
 	<!-- =========================================== -->
 
 	<context:annotation-config />
 
 	<!-- =========================================== -->
-	<!-- Data Layer                                  -->
+	<!-- Data Layer -->
 	<!-- =========================================== -->
 
-	
-	<!--
-		Data source: reads a properties file and injects them into a DBCP DS
-		Second datasource for Resource Profiles
-	-->
-	<bean id="profiledataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
-      <property name="driverClass"><value>${datasource2.driver}</value></property> 
-      <property name="jdbcUrl"><value>${datasource2.url}</value></property> 
-      <property name="user"><value>${datasource2.user}</value></property> 
-      <property name="password"><value>${datasource2.password}</value></property> 
-      <property name="testConnectionOnCheckin"><value>true</value></property>
-      <property name="maxStatements"><value>50</value></property>
-      <property name="idleConnectionTestPeriod"><value>300</value></property>
-    </bean>
-	
 
-	
+	<!-- Data source: reads a properties file and injects them into a DBCP DS 
+		Second datasource for Resource Profiles -->
+	<bean id="profiledataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass">
+			<value>${datasource2.driver}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource2.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource2.user}</value>
+		</property>
+		<property name="password">
+			<value>${datasource2.password}</value>
+		</property>
+		<property name="testConnectionOnCheckin">
+			<value>true</value>
+		</property>
+		<property name="maxStatements">
+			<value>50</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>300</value>
+		</property>
+	</bean>
 
-<!-- Session factory -->
-	<!-- Session Factory for the second datasource-->
+
+
+
+	<!-- Session factory -->
+	<!-- Session Factory for the second datasource -->
 	<bean id="profilesessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="profiledataSource" />
 
-		<!--
-			Hibernate configuration properties (read from a properties file)
-		-->
+		<!-- Hibernate configuration properties (read from a properties file) -->
 		<property name="hibernateProperties">
 			<bean
 				class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-				
+
 				<property name="locations">
 					<list>
-						<!--
-							hibernate.config.file, datasource.config.file should be defined
-							somewhere in the spring.properties layers
-						-->
+						<!-- hibernate.config.file, datasource.config.file should be defined 
+							somewhere in the spring.properties layers -->
 						<value>WEB-INF/classes/hibernate.properties
 						</value>
-				</list>
+					</list>
 				</property>
 			</bean>
 		</property>
@@ -101,13 +106,11 @@
 			<bean class="org.hibernate.cfg.DefaultNamingStrategy" />
 		</property>
 
-		<!--
-			Reads package-level Hibernate annotations. Unfortunately, this has to
-			be manually maintained for all model packages
-		-->
+		<!-- Reads package-level Hibernate annotations. Unfortunately, this has 
+			to be manually maintained for all model packages -->
 		<property name="annotatedPackages">
 			<list>
-<!-- 				<value>edu.utah.further.core.data.oracle.type</value> -->
+				<!-- <value>edu.utah.further.core.data.oracle.type</value> -->
 			</list>
 		</property>
 
@@ -119,19 +122,16 @@
 		</property>
 	</bean>
 
-<!-- 	Hibernate data access template -->
+	<!-- Hibernate data access template -->
 	<bean id="profilehibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="profilesessionFactory" />
 	</bean>
 
 	<!-- =========================================== -->
-	<!-- Transaction management                      -->
+	<!-- Transaction management -->
 	<!-- =========================================== -->
 
-	<!--
-		Enable the configuration of transactional behavior based on
-		annotations
-	-->
+	<!-- Enable the configuration of transactional behavior based on annotations -->
 	<tx:annotation-driven />
 
 	<!-- a PlatformTransactionManager is still required -->
@@ -141,29 +141,29 @@
 	</bean>
 
 
-	
-<!--    <bean id="daoEager" class="edu.utah.further.core.data.service.DaoHibernateEagerImpl" > -->
-<!--    		<property name="sessionFactory" ref="sessionFactory"></property> -->
-<!--    </bean> -->
 
-<!--    <bean class="edu.utah.further.core.data.service.DaoHibernateEagerImpl"> -->
-<!--    <constructor-arg ref="profilesessionFactory"/> -->
-<!--    </bean> -->
-   
-   <bean id="profilesDao" class="edu.utah.further.core.data.service.DaoHibernateImpl">
-   <constructor-arg ref="profilesessionFactory"/>
-   </bean>
-   <bean id="pDao" class="edu.utah.further.profiledb.service.ProfilesDaoImpl"> </bean>
+	<!-- <bean id="daoEager" class="edu.utah.further.core.data.service.DaoHibernateEagerImpl" 
+		> -->
+	<!-- <property name="sessionFactory" ref="sessionFactory"></property> -->
+	<!-- </bean> -->
+
+	<!-- <bean class="edu.utah.further.core.data.service.DaoHibernateEagerImpl"> -->
+	<!-- <constructor-arg ref="profilesessionFactory"/> -->
+	<!-- </bean> -->
+
+	<bean id="profilesDao" class="edu.utah.further.core.data.service.DaoHibernateImpl">
+		<constructor-arg ref="profilesessionFactory" />
+	</bean>
+	<bean id="pDao" class="edu.utah.further.profiledb.service.ProfilesDaoImpl">
+	</bean>
 	<!-- =========================================== -->
-	<!-- FURTHeR data layer                          -->
+	<!-- FURTHeR data layer -->
 	<!-- =========================================== -->
 
-	<!--
-		Component auto-detection configuration in the data layer package. Must
-		come AFTER sessionFactory is declared for some strange reason when
-		deployed to the ESB.
-	-->
-<!-- 	<context:component-scan base-package="edu.utah.further.core.data" /> -->
-	<context:component-scan base-package="edu.utah.further.profiledb.service" /> 
-	
+	<!-- Component auto-detection configuration in the data layer package. Must 
+		come AFTER sessionFactory is declared for some strange reason when deployed 
+		to the ESB. -->
+	<!-- <context:component-scan base-package="edu.utah.further.core.data" /> -->
+	<context:component-scan base-package="edu.utah.further.profiledb.service" />
+
 </beans>

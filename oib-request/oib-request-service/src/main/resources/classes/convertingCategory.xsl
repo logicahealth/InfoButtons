@@ -33,7 +33,7 @@
                 </xsl:attribute>
 			</category>
 			<category scheme="mainSearchCriteria.v.dn">
-				 <xsl:attribute name="term">
+				<xsl:attribute name="term">
              		<xsl:value-of select="$feedMSC/@displayName" />
          		 </xsl:attribute>
 			</category>
@@ -41,24 +41,28 @@
 		<xsl:if test="mainSearchCriteria/severityObservation">
 			<category scheme="severityObservation.interpretationCode.c">
 				<xsl:attribute name="term">
-	              <xsl:value-of select="$category/mainSearchCriteria/severityObservation/@code" />
+	              <xsl:value-of
+					select="$category/mainSearchCriteria/severityObservation/@code" />
 	            </xsl:attribute>
 			</category>
 			<category scheme="severityObservation.interpretationCode.cs">
 				<xsl:attribute name="term">
-                  <xsl:value-of select="$category/mainSearchCriteria/severityObservation/@codeSystem" />
+                  <xsl:value-of
+					select="$category/mainSearchCriteria/severityObservation/@codeSystem" />
                 </xsl:attribute>
 			</category>
 			<category scheme="severityObservation.interpretationCode.dn">
-				 <xsl:attribute name="term">
-             		<xsl:value-of select="$category/mainSearchCriteria/severityObservation/@displayName" />
+				<xsl:attribute name="term">
+             		<xsl:value-of
+					select="$category/mainSearchCriteria/severityObservation/@displayName" />
          		 </xsl:attribute>
 			</category>
 		</xsl:if>
 		<xsl:if test="informationRecipient">
 			<category scheme="informationRecipient">
 				<xsl:attribute name="term">
-	              <xsl:value-of select="$category/informationRecipient/*/@classCode" />
+	              <xsl:value-of
+					select="$category/informationRecipient/*/@classCode" />
                 </xsl:attribute>
 			</category>
 		</xsl:if>

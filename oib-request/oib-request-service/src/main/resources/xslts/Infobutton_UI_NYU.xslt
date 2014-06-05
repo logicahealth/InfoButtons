@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- DWXMLSource="responseSample.xml" -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:ns2="urn:hl7-org:v3" xmlns:ns3="http://www.w3.org/2005/Atom:atom">
-	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+<xsl:stylesheet version="2.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:ns2="urn:hl7-org:v3"
+	xmlns:ns3="http://www.w3.org/2005/Atom:atom">
+	<xsl:output method="html" version="1.0" encoding="UTF-8"
+		indent="yes" />
 	<xsl:template match="/">
 		<html>
 			<head>
@@ -163,27 +167,31 @@
 						</style>
 						<![endif]-->
 				]]></xsl:text>
-			<!--</head>-->
-			<!--<body class="u_style">-->
-				<script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-                
-                <script type="text/javascript"><![CDATA[
+				<!--</head> -->
+				<!--<body class="u_style"> -->
+				<script type="text/javascript"
+					src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+				<script type="text/javascript"><![CDATA[
 					 $(document).ready(function() {  $(".header").click(function () {  window.location = 'http://hsl.med.nyu.edu';  });  });
 				]]></script>
-                
-                <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-                
-                <script type="text/javascript">
+
+				<script src="http://code.jquery.com/jquery-latest.min.js"
+					type="text/javascript"></script>
+
+				<script type="text/javascript">
 					function start() {
-						window.resizeTo(1250, 1000);
-						setContent('<xsl:value-of select="//feed[1]/entry[1]/link/@href"/>');
+					window.resizeTo(1250, 1000);
+					setContent('
+					<xsl:value-of select="//feed[1]/entry[1]/link/@href" />
+					');
 					}
 				</script>
-                </head>
-                
-                
-   <body onLoad="start();">
-   <script type="text/javascript"><![CDATA[
+			</head>
+
+
+			<body onLoad="start();">
+				<script type="text/javascript"><![CDATA[
 				function setContent(url) {
 	if (url.search("medlineplus") == -1) {
 		var contentPanel = document.getElementById("contentPanel");
@@ -208,38 +216,46 @@ function gup( name )
 }
 					
 				]]></script>
-   
-   
-   <div class="header">
-<div class="logo"></div>
-</div>
-<div class="linkDiv">
 
-<p class="search_term">Resources for: <strong><xsl:value-of select="//feed[1]/subtitle"/></strong></p>
-   
-							<xsl:for-each select="//feed">
-								
-									<h3><xsl:value-of select="title"/></h3>
-									<div>
-										<ul>
-											<xsl:for-each select="entry">
-												<li>
-													<a href="javascript:void(0);">
-														<xsl:attribute name="onclick">setContent('<xsl:value-of select="link/@href"/>');</xsl:attribute>
-														<!-- <xsl:value-of select="category/subTopic/value/@displayName"/> -->
-														<xsl:value-of select="title"/>
-													</a>
-												</li>
-											</xsl:for-each>
-										</ul>
-									</div>
+
+				<div class="header">
+					<div class="logo"></div>
+				</div>
+				<div class="linkDiv">
+
+					<p class="search_term">
+						Resources for:
+						<strong>
+							<xsl:value-of select="//feed[1]/subtitle" />
+						</strong>
+					</p>
+
+					<xsl:for-each select="//feed">
+
+						<h3>
+							<xsl:value-of select="title" />
+						</h3>
+						<div>
+							<ul>
+								<xsl:for-each select="entry">
+									<li>
+										<a href="javascript:void(0);">
+											<xsl:attribute name="onclick">setContent('<xsl:value-of
+												select="link/@href" />');</xsl:attribute>
+											<!-- <xsl:value-of select="category/subTopic/value/@displayName"/> -->
+											<xsl:value-of select="title" />
+										</a>
+									</li>
 								</xsl:for-each>
-							
+							</ul>
 						</div>
-						<div class="infoDiv">
-                        <iframe id="contentPanel" frameborder="0"></iframe>
-                        </div>
-                        
+					</xsl:for-each>
+
+				</div>
+				<div class="infoDiv">
+					<iframe id="contentPanel" frameborder="0"></iframe>
+				</div>
+
 			</body>
 		</html>
 	</xsl:template>

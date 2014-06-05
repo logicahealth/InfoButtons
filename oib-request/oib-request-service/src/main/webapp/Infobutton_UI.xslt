@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:ns2="urn:hl7-org:v3" xmlns:ns3="http://www.w3.org/2005/Atom:atom">
-	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+<xsl:stylesheet version="2.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:ns2="urn:hl7-org:v3"
+	xmlns:ns3="http://www.w3.org/2005/Atom:atom">
+	<xsl:output method="html" version="1.0" encoding="UTF-8"
+		indent="yes" />
 	<xsl:template match="/">
 		<html>
 			<head>
@@ -93,7 +97,7 @@
 						}
 
 					]]></style>
-					<xsl:text disable-output-escaping="yes">
+				<xsl:text disable-output-escaping="yes">
 					<![CDATA[
 				<!--[if IE 7 ]> 
 					<style type="text/css">
@@ -133,16 +137,18 @@
 				]]>
 				</xsl:text>
 
-				<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"/> 
+				<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" />
 				<script type="text/javascript">
 					function start() {
-						window.resizeTo(1250, 1000);
-						setContent('<xsl:value-of select="//ns3:feed[1]/ns3:entry[1]/ns3:link/@href"/>');
+					window.resizeTo(1250, 1000);
+					setContent('
+					<xsl:value-of select="//ns3:feed[1]/ns3:entry[1]/ns3:link/@href" />
+					');
 					}
-				</script>  
+				</script>
 			</head>
 
-		<body onload="start();">
+			<body onload="start();">
 				<script type="text/javascript">
 				<![CDATA[
 					function setContent(url) {
@@ -170,17 +176,22 @@
 					});
 				]]>
 				</script>
-				<div class="header"><div class="logo"/></div>
+				<div class="header">
+					<div class="logo" />
+				</div>
 				<div class="linkDiv">
 					<xsl:for-each select="//ns3:feed">
-						<h3><xsl:value-of select="ns3:title"/></h3>
+						<h3>
+							<xsl:value-of select="ns3:title" />
+						</h3>
 						<ul>
 							<xsl:for-each select="ns3:entry">
 								<li>
 									<a href="javascript:void(0);">
-										<xsl:attribute name="onclick">setContent('<xsl:value-of select="ns3:link/@href"/>');</xsl:attribute>
+										<xsl:attribute name="onclick">setContent('<xsl:value-of
+											select="ns3:link/@href" />');</xsl:attribute>
 										<!-- <xsl:value-of select="ns3:category/ns2:subTopic/ns2:value/@displayName"/> -->
-										<xsl:value-of select="ns3:title"/>
+										<xsl:value-of select="ns3:title" />
 									</a>
 								</li>
 							</xsl:for-each>
@@ -188,7 +199,7 @@
 					</xsl:for-each>
 				</div>
 				<div class="infoDiv">
-					<iframe id="contentPanel"/>
+					<iframe id="contentPanel" />
 				</div>
 			</body>
 		</html>

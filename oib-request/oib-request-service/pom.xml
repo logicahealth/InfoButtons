@@ -26,8 +26,8 @@ $Date:: 2011-02-24 1#$:  Date of last commit
 		<datasource2.user>root</datasource2.user>
 		<datasource2.password>password</datasource2.password>
 		
-		<umls.username></umls.username>
-		<umls.password></umls.password>
+		<umls.username>gdelfiol</umls.username>
+		<umls.password>*WoodsHole2011</umls.password>
    </properties>
  
    <repositories>
@@ -313,6 +313,54 @@ $Date:: 2011-02-24 1#$:  Date of last commit
                     <target>1.7</target>
                 </configuration>
             </plugin>
+			<plugin>
+			  <groupId>org.jacoco</groupId>
+			  <artifactId>jacoco-maven-plugin</artifactId>
+			  <version>0.7.1.201405082137</version>
+	          <configuration>
+	           <destfile>${basedir}/target/coverage-reports/jacoco-unit.exec</destfile>
+	          </configuration>			
+			    <executions>
+			      <!-- prepare agent for measuring integration tests -->
+			      <execution>
+			        <id>pre-unit-test</id>
+			        <goals>
+			          <goal>prepare-agent</goal>
+			        </goals>
+			        <configuration>
+			          <destFile>${project.build.directory}/coverage-reports/jacoco-unit.exec</destFile>
+			          <propertyName>surefireArgLine</propertyName>
+			        </configuration>
+			      </execution>
+			      <execution>
+			        <id>post-unit-test</id>
+			        <phase>test</phase>
+			        <goals>
+			          <goal>report</goal>
+			        </goals>
+			        <configuration>
+	                <dataFile>${project.build.directory}/coverage-reports/jacoco-unit.exec</dataFile>
+	                <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+			        </configuration>
+			      </execution>
+			    </executions>
+			</plugin>
+	      <plugin>
+	        <artifactId>maven-surefire-plugin</artifactId>
+	        <version>2.10</version>
+		    <configuration>
+		        <argLine>${surefireArgLine}</argLine>
+		    </configuration>
+	        <executions>
+	          <execution>
+	            <id>default-test</id>
+	            <phase>test</phase>
+	            <goals>
+	              <goal>test</goal>
+	            </goals>
+	          </execution>
+	        </executions>
+	      </plugin>
         </plugins>
         <finalName>infobutton-service</finalName>
     </build>

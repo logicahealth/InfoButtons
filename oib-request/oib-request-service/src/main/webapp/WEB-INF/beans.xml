@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-$Rev:: 1102          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2010-10-01 1#$:  Date of last commit
--->
+<!-- $Rev:: 1102 $: Revision of last commit $Author:: ai28 $: Author of last 
+	commit $Date:: 2010-10-01 1#$: Date of last commit -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop" 
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -28,20 +23,16 @@ $Date:: 2010-10-01 1#$:  Date of last commit
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<jaxws:endpoint 
-	  id="infobutton-service" 
-	  implementor="edu.duke.mc.cfm.dci.dss.EvaluationImpl"
-	  address="/evaluate.dss.omg.org"
-	  serviceName="dss:DecisionSupportService"
-	  endpointName="dss:evaluate"
-	  xmlns:dss="urn:evaluate.dss.omg.org"
-	  wsdlLocation="wsdl/DssEvaluation.wsdl">
+	<jaxws:endpoint id="infobutton-service"
+		implementor="edu.duke.mc.cfm.dci.dss.EvaluationImpl" address="/evaluate.dss.omg.org"
+		serviceName="dss:DecisionSupportService" endpointName="dss:evaluate"
+		xmlns:dss="urn:evaluate.dss.omg.org" wsdlLocation="wsdl/DssEvaluation.wsdl">
 	</jaxws:endpoint>
-	
+
 	<context:annotation-config />
-	<context:component-scan base-package="edu.utah.further.subsetdb.service" /> 
-	<context:component-scan base-package="edu.utah.further.profiledb.service" /> 
-<!-- 	<context:component-scan base-package="edu.utah.further.core.data" /d> -->
-	
-	
+	<context:component-scan base-package="edu.utah.further.subsetdb.service" />
+	<context:component-scan base-package="edu.utah.further.profiledb.service" />
+	<!-- <context:component-scan base-package="edu.utah.further.core.data" /d> -->
+
+
 </beans>
