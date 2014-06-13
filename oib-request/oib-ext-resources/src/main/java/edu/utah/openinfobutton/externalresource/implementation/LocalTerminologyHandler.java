@@ -1,17 +1,15 @@
 /**
- * ...
- * <p>
- * -----------------------------------------------------------------------------------<br>
- * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah<br>
- * Contact: {@code <andrew.iskander@utah.edu>}<br>
- * Biomedical Informatics<br>
+ * -----------------------------------------------------------------------------------
+ * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
+ * Contact: {@code <andrew.iskander@utah.edu>}
+ * Biomedical Informatics
  * 421 Wakara Way, Ste 140
- * Salt Lake City, UT 84108-3514<br>
- * Day Phone: 1-801-581-4080<br>
+ * Salt Lake City, UT 84108-3514
+ * Day Phone: 1-801-581-4080
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version May 5, 2014
+ * @version Jun 13, 2014
  */
 package edu.utah.openinfobutton.externalresource.implementation;
 
@@ -21,7 +19,6 @@ import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.TerminologyInference.CodeInference.InferenceDefinition.LocalMappings.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import edu.utah.further.subsetdb.domain.Concept;
