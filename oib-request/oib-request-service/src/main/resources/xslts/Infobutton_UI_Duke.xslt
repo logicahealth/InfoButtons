@@ -241,7 +241,8 @@
 
 					function closeWindow() {
 					var searchWin = window.opener;
-					if (searchWin != null) {
+					if
+					(searchWin != null) {
 					searchWin.focus();
 					}
 					self.close();

@@ -28,7 +28,8 @@
 					left:0px;
 					width:200px;
 					height: 730px;
-					border: solid 1px black;
+					border: solid 1px
+					black;
 					background-color: #DFDDE8;
 					font-family:Frutiger, Arial;
 					font-size:10pt;
@@ -40,7 +41,8 @@
 					font-size:10pt
 					}
 
-					.linkDiv a:visited, a:link, a:active
+					.linkDiv
+					a:visited, a:link, a:active
 					{
 					color: grey;
 					border: none;
@@ -50,9 +52,11 @@
 					font-weight: bold;
 					}
 
-					.linkDiv ul li a:link, .linkDiv ul li a:visited, .linkDiv ul li a:active
+					.linkDiv ul li
+					a:link, .linkDiv ul li a:visited, .linkDiv ul li a:active
 					{
-					color: black;
+					color:
+					black;
 					border: none;
 					outline: none;
 					font-weight: normal;
