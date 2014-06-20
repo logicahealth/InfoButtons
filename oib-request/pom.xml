@@ -6,6 +6,14 @@
   <version>1.4-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>oib-request</name>
+  
+    <scm>
+		<connection>scm:git:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</connection>
+		<developerConnection>scm:svn:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</developerConnection>
+		<url>https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</url>
+	</scm>
+  
+  
     <modules>
         <module>oib-profile-schema</module>
         <module>oib-request-schema</module>
