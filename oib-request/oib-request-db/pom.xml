@@ -83,7 +83,7 @@
 	
     <scm>
 		<connection>scm:git:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</connection>
-		<developerConnection>scm:svn:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</developerConnection>
+		<developerConnection>scm:git:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</developerConnection>
 		<url>https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</url>
 	</scm>
 	
