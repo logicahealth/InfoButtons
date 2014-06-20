@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openinfobutton</groupId>
 	<artifactId>oib-request-db</artifactId>
-<version>1.4</version>
+	<version>1.4-SNAPSHOT</version>
 	
    <repositories>
   		<repository>
@@ -49,7 +49,7 @@
 		<dependency>
 			<groupId>edu.utah.further.core</groupId>
 			<artifactId>core-data</artifactId>
-			<version>1.4.0-SNAPSHOT</version>
+			<version>1.4.0</version>
 		    <exclusions>
 		    	<exclusion>
 		    		<artifactId>spring-jdbc</artifactId>
@@ -69,7 +69,7 @@
 		<dependency>
 			<groupId>edu.utah.further.core</groupId>
 			<artifactId>core-test</artifactId>
-			<version>1.4.0-SNAPSHOT</version>
+			<version>1.4.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
