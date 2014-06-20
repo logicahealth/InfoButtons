@@ -58,11 +58,11 @@
   		<version>${openinfobutton.version}</version>
   	</dependency>
   </dependencies>
-  <scm>
-	<connection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/inference-rxnorm</connection>
-	<developerConnection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/inference-rxnorm</developerConnection>
-	<url>https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/inference-rxnorm</url>
-  </scm>
+    <scm>
+		<connection>scm:git:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</connection>
+		<developerConnection>scm:svn:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</developerConnection>
+		<url>https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</url>
+	</scm>
 	<build>
 		<plugins>
 			<plugin>

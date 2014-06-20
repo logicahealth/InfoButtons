@@ -54,10 +54,10 @@ $Date:: 2011-01-13 1#$:  Date of last commit
 	    </dependency>
   </dependencies>
   
-  <scm>
-	<connection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-schema</connection>
-	<developerConnection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-schema</developerConnection>
-	<url>https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-schema</url>
-  </scm>
+    <scm>
+		<connection>scm:git:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</connection>
+		<developerConnection>scm:svn:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</developerConnection>
+		<url>https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</url>
+	</scm>
     <name>oib-request-schema</name>
 </project>
