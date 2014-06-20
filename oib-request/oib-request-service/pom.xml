@@ -12,10 +12,10 @@ $Date:: 2011-02-24 1#$:  Date of last commit
 	<artifactId>oib-request</artifactId>
 	<version>1.4-SNAPSHOT</version>
   </parent>
-    <groupId>org.openinfobutton</groupId>
+
     <artifactId>oib-request-service</artifactId>
     <packaging>war</packaging>
-    <version>1.4-SNAPSHOT</version>
+
     <name>oib-request-service</name>
     <url>http://maven.apache.org</url>
    <properties>
