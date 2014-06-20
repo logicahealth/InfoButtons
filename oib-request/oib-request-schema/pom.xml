@@ -15,9 +15,6 @@ $Date:: 2011-01-13 1#$:  Date of last commit
 
   <artifactId>oib-request-schema</artifactId>
   
-  <properties>
-  	<openinfobutton.version>1.4-SNAPSHOT</openinfobutton.version>
-  </properties>
   <build>
   	<plugins>
   		<plugin>

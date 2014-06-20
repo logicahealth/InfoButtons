@@ -21,7 +21,6 @@ $Date:: 2011-02-24 1#$:  Date of last commit
    <properties>
        <dts-version>3.5.0</dts-version>
         
-        <openinfobutton.version>1.4-SNAPSHOT</openinfobutton.version>
         <org.jacoco.version>0.7.1.201405082137</org.jacoco.version>
         
 		<datasource1.url>jdbc:mysql://localhost:3306/prodoib</datasource1.url>

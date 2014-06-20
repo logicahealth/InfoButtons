@@ -13,10 +13,6 @@
   <name>oib-request-inference-rxnorm</name>
   <description>RXNorm REST API Client</description>
     
-  <properties>
-  	<openinfobutton.version>1.4-SNAPSHOT</openinfobutton.version>
-  </properties>
-    
     <repositories>
  		<repository>
 		<id>further</id>

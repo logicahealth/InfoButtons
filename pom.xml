@@ -1,20 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-  	<groupId>org.openinfobutton</groupId>
-	<artifactId>oib-parent</artifactId>
-	<version>1.4-SNAPSHOT</version>
-  </parent>
-  <artifactId>oib-request</artifactId>
+  <groupId>org.openinfobutton</groupId>
+  <artifactId>oib-parent</artifactId>
+  <version>1.4-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>oib-request</name>
   
     <scm>
 		<connection>scm:git:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</connection>
 		<developerConnection>scm:git:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</developerConnection>
 		<url>https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</url>
 	</scm>
+  <properties>
+  	<openinfobutton.version>1.4-SNAPSHOT</openinfobutton.version>
+  </properties>
   
   <build>
   	<pluginManagement>
@@ -29,12 +28,6 @@
   </build>
   
     <modules>
-        <module>oib-profile-schema</module>
-        <module>oib-request-schema</module>
-        <module>oib-request-db</module>
-        <module>oib-request-inference-rxnorm</module>
-        <module>uts-metathesaurus</module>
-        <module>oib-ext-resources</module>
-        <module>oib-request-service</module>
+        <module>oib-request</module>
     </modules>
 </project>
