@@ -9,7 +9,7 @@ $Date:: 2011-02-24 1#$:  Date of last commit
    <parent>
 	<groupId>org.openinfobutton</groupId>
 	<artifactId>oib-request</artifactId>
-	<version>1.4-M1</version>
+	<version>1.4-SNAPSHOT</version>
   </parent>
 
     <artifactId>oib-request-service</artifactId>

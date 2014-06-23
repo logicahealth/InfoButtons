@@ -3,7 +3,7 @@
   <parent>
   	<groupId>org.openinfobutton</groupId>
 	<artifactId>oib-parent</artifactId>
-	<version>1.4-M1</version>
+	<version>1.4-SNAPSHOT</version>
   </parent>
   <artifactId>oib-request</artifactId>
   <packaging>pom</packaging>
