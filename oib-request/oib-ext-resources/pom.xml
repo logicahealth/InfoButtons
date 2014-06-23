@@ -54,14 +54,10 @@
 	    <dependency>
 	  	  <groupId>org.openinfobutton</groupId>
 	  	  <artifactId>oib-request-schema</artifactId>
-	  	  <version>${openinfobutton.version}</version>
-	  	  <scope>compile</scope>
 	    </dependency>
 	    <dependency>
 	  	  <groupId>org.openinfobutton</groupId>
 	  	  <artifactId>oib-profile-schema</artifactId>
-	  	  <version>${openinfobutton.version}</version>
-	  	  <scope>compile</scope>
 	    </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -128,8 +124,6 @@
        <dependency>
        	<groupId>org.openinfobutton</groupId>
        	<artifactId>oib-request-db</artifactId>
-       	<version>${openinfobutton.version}</version>
-       	<scope>compile</scope>
        </dependency>
        <dependency>
        	<groupId>org.apache.commons</groupId>
@@ -196,14 +190,10 @@
        <dependency>
        	<groupId>edu.utah.openinfobutton</groupId>
        	<artifactId>oib-request-inference-rxnorm</artifactId>
-       	<version>${openinfobutton.version}</version>
        </dependency>
        <dependency>
        	<groupId>UTSMetathesaurus</groupId>
        	<artifactId>uts-metathesaurus</artifactId>
-       	<version>${openinfobutton.version}</version>
-       	<type>jar</type>
-       	<scope>compile</scope>
        </dependency>
   </dependencies>
     

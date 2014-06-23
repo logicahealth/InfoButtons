@@ -51,8 +51,6 @@ $Date:: 2011-01-13 1#$:  Date of last commit
       <dependency>
 	  	  <groupId>org.openinfobutton</groupId>
 	  	  <artifactId>oib-profile-schema</artifactId>
-	  	  <version>${openinfobutton.version}</version>
-	  	  <scope>compile</scope>
 	    </dependency>
   </dependencies>
   

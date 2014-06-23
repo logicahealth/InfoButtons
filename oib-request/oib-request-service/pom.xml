@@ -73,14 +73,10 @@ $Date:: 2011-02-24 1#$:  Date of last commit
 	    <dependency>
 	  	  <groupId>org.openinfobutton</groupId>
 	  	  <artifactId>oib-request-schema</artifactId>
-	  	  <version>${openinfobutton.version}</version>
-	  	  <scope>compile</scope>
 	    </dependency>
 	    <dependency>
 	  	  <groupId>org.openinfobutton</groupId>
 	  	  <artifactId>oib-profile-schema</artifactId>
-	  	  <version>${openinfobutton.version}</version>
-	  	  <scope>compile</scope>
 	    </dependency>
 	    
        <dependency>
@@ -136,7 +132,6 @@ $Date:: 2011-02-24 1#$:  Date of last commit
        <dependency>
        	<groupId>org.openinfobutton</groupId>
        	<artifactId>oib-request-db</artifactId>
-       	<version>${openinfobutton.version}</version>
        	<scope>compile</scope>
        </dependency>
        <dependency>
@@ -204,12 +199,10 @@ $Date:: 2011-02-24 1#$:  Date of last commit
        <dependency>
        	<groupId>edu.utah.openinfobutton</groupId>
        	<artifactId>oib-request-inference-rxnorm</artifactId>
-       	<version>${openinfobutton.version}</version>
        </dependency>
        <dependency>
        	<groupId>edu.utah.openinfobutton</groupId>
        	<artifactId>oib-ext-resources</artifactId>
-       	<version>${openinfobutton.version}</version>
        </dependency>
        <dependency>
       	<groupId>com.google.code.gson</groupId>

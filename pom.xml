@@ -17,16 +17,69 @@
   
   <build>
   	<pluginManagement>
-	  	<plugins>
-	      <plugin>
-	        <groupId>org.apache.maven.plugins</groupId>
-	        <artifactId>maven-release-plugin</artifactId>
-	        <version>2.5</version>
-	      </plugin>
-	    </plugins>
+	  <plugins>
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-release-plugin</artifactId>
+      <version>2.5</version>
+        <dependencies>
+	    <dependency>
+	          <groupId>org.apache.maven.scm</groupId>
+		        <artifactId>maven-scm-provider-gitexe</artifactId>
+			      <version>1.9</version>
+			          </dependency>
+				    </dependencies>
+				    </plugin>
+	  </plugins>
   	</pluginManagement>
   </build>
-  
+  <dependencyManagement>
+  <dependencies>
+   <dependency>
+  <groupId>edu.utah.openinfobutton</groupId>
+  <artifactId>oib-ext-resources</artifactId>
+  <version>${openinfobutton.version}</version>
+   </dependency>
+   <dependency>
+  <groupId>org.openinfobutton</groupId>
+  <artifactId>oib-profile-schema</artifactId>
+  <version>${openinfobutton.version}</version>
+   </dependency>
+   <dependency>
+  <groupId>org.openinfobutton</groupId>
+  <artifactId>oib-profile-schema</artifactId>
+  <version>${openinfobutton.version}</version>
+   </dependency>
+   <dependency>
+  <groupId>org.openinfobutton</groupId>
+  <artifactId>oib-request-db</artifactId>
+  <version>${openinfobutton.version}</version>
+   </dependency>
+   <dependency>
+  <groupId>edu.utah.openinfobutton</groupId>
+  <artifactId>oib-request-inference-rxnorm</artifactId>
+  <version>${openinfobutton.version}</version>
+   </dependency>
+     
+   <dependency>
+  <groupId>org.openinfobutton</groupId>
+  <artifactId>oib-request-schema</artifactId>
+  <version>${openinfobutton.version}</version>
+   </dependency>
+   
+   <dependency>
+  <groupId>org.openinfobutton</groupId>
+  <artifactId>oib-request-service</artifactId>
+  <version>${openinfobutton.version}</version>
+   </dependency>
+   
+   <dependency>
+  <groupId>UTSMetathesaurus</groupId>
+  <artifactId>uts-metathesaurus</artifactId>
+  <version>${openinfobutton.version}</version>
+   </dependency>
+    </dependencies> 
+  </dependencyManagement>
     <modules>
         <module>oib-request</module>
     </modules>

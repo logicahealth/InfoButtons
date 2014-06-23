@@ -58,7 +58,6 @@
   	<dependency>
   		<groupId>org.openinfobutton</groupId>
   		<artifactId>oib-request-schema</artifactId>
-  		<version>${openinfobutton.version}</version>
   	</dependency>
   </dependencies>
 	<build>
