@@ -1,86 +1,87 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.openinfobutton</groupId>
-  <artifactId>oib-parent</artifactId>
-  <version>1.4-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  
-    <scm>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.openinfobutton</groupId>
+	<artifactId>oib-parent</artifactId>
+	<version>1.4-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<scm>
 		<connection>scm:git:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</connection>
 		<developerConnection>scm:git:https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</developerConnection>
 		<url>https://tools.regenstrief.org/stash/scm/hl7t/openinfobutton</url>
-	  <tag>HEAD</tag>
-  </scm>
-  <properties>
-  	<openinfobutton.version>1.4-SNAPSHOT</openinfobutton.version>
-  </properties>
-  
-  <build>
-  	<pluginManagement>
-	  <plugins>
-<plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-release-plugin</artifactId>
-      <version>2.5</version>
-        <dependencies>
-	    <dependency>
-	          <groupId>org.apache.maven.scm</groupId>
-		        <artifactId>maven-scm-provider-gitexe</artifactId>
-			      <version>1.9</version>
-			          </dependency>
-				    </dependencies>
-				    </plugin>
-	  </plugins>
-  	</pluginManagement>
-  </build>
-  <dependencyManagement>
-  <dependencies>
-   <dependency>
-  <groupId>edu.utah.openinfobutton</groupId>
-  <artifactId>oib-ext-resources</artifactId>
-  <version>${openinfobutton.version}</version>
-   </dependency>
-   <dependency>
-  <groupId>org.openinfobutton</groupId>
-  <artifactId>oib-profile-schema</artifactId>
-  <version>${openinfobutton.version}</version>
-   </dependency>
-   <dependency>
-  <groupId>org.openinfobutton</groupId>
-  <artifactId>oib-profile-schema</artifactId>
-  <version>${openinfobutton.version}</version>
-   </dependency>
-   <dependency>
-  <groupId>org.openinfobutton</groupId>
-  <artifactId>oib-request-db</artifactId>
-  <version>${openinfobutton.version}</version>
-   </dependency>
-   <dependency>
-  <groupId>edu.utah.openinfobutton</groupId>
-  <artifactId>oib-request-inference-rxnorm</artifactId>
-  <version>${openinfobutton.version}</version>
-   </dependency>
-     
-   <dependency>
-  <groupId>org.openinfobutton</groupId>
-  <artifactId>oib-request-schema</artifactId>
-  <version>${openinfobutton.version}</version>
-   </dependency>
-   
-   <dependency>
-  <groupId>org.openinfobutton</groupId>
-  <artifactId>oib-request-service</artifactId>
-  <version>${openinfobutton.version}</version>
-   </dependency>
-   
-   <dependency>
-  <groupId>UTSMetathesaurus</groupId>
-  <artifactId>uts-metathesaurus</artifactId>
-  <version>${openinfobutton.version}</version>
-   </dependency>
-    </dependencies> 
-  </dependencyManagement>
-    <modules>
-        <module>oib-request</module>
-    </modules>
+		<tag>HEAD</tag>
+	</scm>
+	<properties>
+		<openinfobutton.version>1.4-SNAPSHOT</openinfobutton.version>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-provider-gitexe</artifactId>
+							<version>1.9</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>edu.utah.openinfobutton</groupId>
+				<artifactId>oib-ext-resources</artifactId>
+				<version>${openinfobutton.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openinfobutton</groupId>
+				<artifactId>oib-profile-schema</artifactId>
+				<version>${openinfobutton.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openinfobutton</groupId>
+				<artifactId>oib-profile-schema</artifactId>
+				<version>${openinfobutton.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openinfobutton</groupId>
+				<artifactId>oib-request-db</artifactId>
+				<version>${openinfobutton.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.utah.openinfobutton</groupId>
+				<artifactId>oib-request-inference-rxnorm</artifactId>
+				<version>${openinfobutton.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openinfobutton</groupId>
+				<artifactId>oib-request-schema</artifactId>
+				<version>${openinfobutton.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openinfobutton</groupId>
+				<artifactId>oib-request-service</artifactId>
+				<version>${openinfobutton.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>UTSMetathesaurus</groupId>
+				<artifactId>uts-metathesaurus</artifactId>
+				<version>${openinfobutton.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<modules>
+		<module>oib-request</module>
+	</modules>
 </project>
