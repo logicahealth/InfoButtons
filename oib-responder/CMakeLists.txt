@@ -4,7 +4,12 @@ cmake_minimum_required(VERSION 2.6)
 project(OIB_RESPONDER Java)
 include(CTest)
 find_package(Java)
- 
+
+
+option(OIB_STYLE "Use the Checkstyle Plugin to check for SAC errors" OFF)
+option(OIB_COVERAGE "Use the Jacoco Plugin to calculate code coverage" OFF)
+
+find_program(MAVEN_EXECUTABLE mvn )
 
 add_custom_target(LicenseCheck
                   COMMAND mvn license:check
@@ -15,15 +20,25 @@ add_custom_target(OIB_RESPONDER ALL
 add_custom_target(OIB_RESPONDERPack
                   COMMAND mvn clean package
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-
-find_program(MAVEN_EXECUTABLE mvn )
+if(OIB_STYLE)
+  configure_file(${OIB_RESPONDER_SOURCE_DIR}/checkstyle-reporter.cmake.in ${OIB_RESPONDER_BINARY_DIR}/checkstyle.cmake @ONLY)
+  set(check_dirs "./oib-rest-responder/\;./oib-app-model/\;./oib-app-service/\;./oib-index-manager\;./rxnorm-rest-model"
+      CACHE STRING "semicolon (;) separated directories to report on for Checkstyle")
+  add_test(NAME Checkstyle COMMAND ${CMAKE_COMMAND} -DSearchDirs=${check_dirs} -P ${OIB_RESPONDER_BINARY_DIR}/checkstyle.cmake
+           WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR})
+  set_tests_properties(Checkstyle PROPERTIES FAIL_REGULAR_EXPRESSION "Line [0-9]+:") 
+elseif(OIB_COVERAGE)
+  add_test(NAME Coverage 
+           COMMAND "${MAVEN_EXECUTABLE}" test
+           WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR})
+else()
 
 file(GLOB_RECURSE oibAppModelTests ${OIB_RESPONDER_SOURCE_DIR}/oib-app-model/src/test/**/*.java)
 
 foreach(test ${oibAppModelTests})
         get_filename_component(testname ${test} NAME_WE)
         add_test(NAME MVN${testname}_OIB_APP_MODEL WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/oib-app-model
-                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} test)
+                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
 endforeach()
 
 file(GLOB_RECURSE oibAppServiceTests ${OIB_RESPONDER_SOURCE_DIR}/oib-app-service/src/test/**/*.java)
@@ -31,7 +46,7 @@ file(GLOB_RECURSE oibAppServiceTests ${OIB_RESPONDER_SOURCE_DIR}/oib-app-service
 foreach(test ${oibAppMServiceTests})
         get_filename_component(testname ${test} NAME_WE)
         add_test(NAME MVN${testname}_OIB_APP_SERVICE WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/oib-app-service
-                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} test)
+                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
 endforeach()
 
 file(GLOB_RECURSE oibIndexManagerTests ${OIB_RESPONDER_SOURCE_DIR}/oib-index-manager/src/test/**/*.java)
@@ -39,7 +54,7 @@ file(GLOB_RECURSE oibIndexManagerTests ${OIB_RESPONDER_SOURCE_DIR}/oib-index-man
 foreach(test ${oibIndexManagerTests})
         get_filename_component(testname ${test} NAME_WE)
         add_test(NAME MVN${testname}_OIB_INDEX_MANAGER WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/oib-index-manager
-                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} test)
+                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
 endforeach()
 
 file(GLOB_RECURSE oibRestResponderTests ${OIB_RESPONDER_SOURCE_DIR}/oib-rest-responder/src/test/**/*.java)
@@ -47,7 +62,7 @@ file(GLOB_RECURSE oibRestResponderTests ${OIB_RESPONDER_SOURCE_DIR}/oib-rest-res
 foreach(test ${oibRestResponderTests})
         get_filename_component(testname ${test} NAME_WE)
         add_test(NAME MVN${testname}_OIB_REST_RESPONDER WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/oib-rest-responder
-                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} test)
+                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
 endforeach()
 
 file(GLOB_RECURSE rxNormRestModelTests ${OIB_RESPONDER_SOURCE_DIR}/rxnorm-rest-model/src/test/**/*.java)
@@ -55,7 +70,7 @@ file(GLOB_RECURSE rxNormRestModelTests ${OIB_RESPONDER_SOURCE_DIR}/rxnorm-rest-m
 foreach(test ${rxNormRestModelTests})
         get_filename_component(testname ${test} NAME_WE)
         add_test(NAME MVN${testname}_RXNORM_REST_MODEL WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/rxnorm-rest-model
-                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} test)
+                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
 endforeach()
 
 file(GLOB_RECURSE utsWebClientTests ${OIB_RESPONDER_SOURCE_DIR}/uts-ws-client/src/test/**/*.java)
@@ -65,3 +80,4 @@ file(GLOB_RECURSE utsWebClientTests ${OIB_RESPONDER_SOURCE_DIR}/uts-ws-client/sr
 #        add_test(NAME MVN${testname}_UTS_WEB_CLIENT WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/uts-web-client
 #                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} test)
 #endforeach()
+endif()
