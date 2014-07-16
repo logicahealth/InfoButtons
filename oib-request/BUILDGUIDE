@@ -50,17 +50,28 @@ Building
 
 2) Navigate back to the oib-request module directory (this directory)
 
-3) Check the database connection parameter strings found in the following properties files,
+3) The oib-request-service module's pom.xml includes the following properties block,
 
-   oib-request-service/src/main/webapp/WEB-INF/serviceParams.properties
-  
-   oib-request-service/src/test/resources/serviceParams.properties
+   <properties>
+       <dts-version>3.5.0</dts-version>
+              
+		<datasource1.url>jdbc:mysql://localhost:3306/prodoib</datasource1.url>
+		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
+		<datasource1.user>root</datasource1.user>
+		<datasource1.password>password</datasource1.password>
+		
+		<datasource2.url>jdbc:mysql://localhost:3306/profilesdbprod</datasource2.url>
+		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
+		<datasource2.user>root</datasource2.user>
+		<datasource2.password>password</datasource2.password>
+		
+		<umls.username></umls.username>
+		<umls.password></umls.password>
+   </properties>
    
-   Ensure they match the connection parameters configured for your local server.
-   
-4) In the same files, set the parameter strings for an active UTS account.
+   Set these to match your local database connection parameters and UTS account.
 
-5) Run
+4) Run
 
          $> mvn clean install
 
@@ -75,9 +86,12 @@ Building
    It usually takes some time for maven to download required dependencies 
    in the first build.
 
-6) Upon a completed build, the WAR will be found under the oib-request-service/target directory. 
+5) Upon a completed build, the WAR will be found under the oib-request-service/target directory. 
    Simply deploy it to a functional Java EE servlet container and you should be able to
-   start firing requests at it.
+   start firing requests at it. Alternatively, you can also use the following maven command to start an
+   instance of the manager in a self contained Tomcat 7 container.
+   
+   mvn clean tomcat7:run-war -Ddatasource1.password=mypass -Ddatasource2.password=mypass -DskipTests
    
 Building with CMake
 --------
@@ -88,9 +102,7 @@ Building with CMake
    
    oib-request-service/src/main/webapp/WEB-INF/CMakeLists.txt
    
-   oib-request-service/src/main/webapp/WEB-INF/serviceParams.properties
-  
-   oib-request-service/src/test/resources/serviceParams.properties
+   oib-request-service/pom.xml
    
    and the execute the following commands from the module directory,
    
