@@ -9,20 +9,27 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package edu.utah.further.subsetdb.service;
 
-
-
 import edu.utah.further.core.api.context.Api;
 
-
-
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface LogsDao.
+ */
 @Api
-public interface LogsDao {
-		
-	public void saveRequest(String req,String clip,String org);
-	
-	
+public interface LogsDao
+{
+
+    /**
+     * Save request.
+     *
+     * @param req the req
+     * @param clip the clip
+     * @param org the org
+     */
+    public void saveRequest( String req, String clip, String org );
+
 }

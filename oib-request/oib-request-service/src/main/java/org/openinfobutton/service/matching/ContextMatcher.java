@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package org.openinfobutton.service.matching;
 
@@ -30,72 +30,111 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
 import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
 
-@Configurable(preConstruction = true)
-public abstract class ContextMatcher {
-	
-	public abstract Boolean MatchContext();
-	
-	Logger log = Logger.getLogger(ContextMatcher.class.getName());
-	@Autowired
-	@Qualifier("externalSet")
-	private TerminologyHandler ESHandler;
-	@Autowired
-	ExternalResourceHandler handler;
-	@Autowired
-	TransformCode tc;
-	protected Boolean CodeMatch(Code c, CodedContextElement context,
-			List<String> supportedCodeSystems,boolean runTerminologyInference, KnowledgeRequest request) {
-		
-		Code code = c;
-		Boolean match = false;
-		if (context != null && context.isMatch()) 
-		{
-			if(runTerminologyInference)
-				code = tc.transformInput(context,code,supportedCodeSystems,request);
-			List<Code> codes;
-			if (context.getMatchingDomain().getEnumeration() != null) 
-			{
-				codes = getCodeListFromContext(context);
-				for (Code contextCode : codes) 
-				{
-					if (code.getCodeSystem().equals(contextCode.getCodeSystem())) 
-					{
-						if (code.getCode().equals(contextCode.getCode())) 
-						{
-							match = true;
-							break;
-						}
-					}
-				}
-				if(context.getMatchingDomain().getEnumeration().isIncludeDescendants()&&!match)
-				{
-					for (Code contextCode : codes) 
-					{
-						if(handler.isDescendant(code,contextCode))
-						{
-							match=true;
-							log.debug(code.getCode()+" is a Descendant of "+contextCode.getCode());
-							break;
-						}
-					}
-				}
-			} 
-			else 
-			{
-				List<Id> subsetIdList=context.getMatchingDomain().getExternalValueSet();
-				match = ESHandler.isSubsetMember(code,subsetIdList);
-			}
-		} else {
-			match = true;
-		}
-		return match;
-	}
-	
-	private List<Code> getCodeListFromContext(CodedContextElement context) {
-		
-		List<Code> codes = new ArrayList<Code>();
-		CDset codeset = context.getMatchingDomain().getEnumeration();
-		codes = codeset.getCode();
-		return codes;
-	}
+/**
+ * The Class ContextMatcher.
+ */
+@Configurable( preConstruction = true )
+public abstract class ContextMatcher
+{
+
+    /**
+     * Match context.
+     *
+     * @return the boolean
+     */
+    public abstract Boolean MatchContext();
+
+    /** The log. */
+    Logger log = Logger.getLogger( ContextMatcher.class.getName() );
+
+    /** The ES handler. */
+    @Autowired
+    @Qualifier( "externalSet" )
+    private TerminologyHandler ESHandler;
+
+    /** The handler. */
+    @Autowired
+    ExternalResourceHandler handler;
+
+    /** The tc. */
+    @Autowired
+    TransformCode tc;
+
+    /**
+     * Code match.
+     *
+     * @param c the c
+     * @param context the context
+     * @param supportedCodeSystems the supported code systems
+     * @param runTerminologyInference the run terminology inference
+     * @param request the request
+     * @return the boolean
+     */
+    protected final Boolean CodeMatch( Code c, CodedContextElement context, List<String> supportedCodeSystems,
+                                 boolean runTerminologyInference, KnowledgeRequest request )
+    {
+
+        Code code = c;
+        Boolean match = false;
+        if ( context != null && context.isMatch() )
+        {
+            if ( runTerminologyInference )
+            {
+                code = tc.transformInput( context, code, supportedCodeSystems, request );
+            }
+            List<Code> codes;
+            if ( context.getMatchingDomain().getEnumeration() != null )
+            {
+                codes = getCodeListFromContext( context );
+                for ( final Code contextCode : codes )
+                {
+                    if ( code.getCodeSystem().equals( contextCode.getCodeSystem() ) )
+                    {
+                        if ( code.getCode().equals( contextCode.getCode() ) )
+                        {
+                            match = true;
+                            break;
+                        }
+                    }
+                }
+                if ( context.getMatchingDomain().getEnumeration().isIncludeDescendants() && !match )
+                {
+                    for ( final Code contextCode : codes )
+                    {
+                        if ( handler.isDescendant( code, contextCode ) )
+                        {
+                            match = true;
+                            log.debug( code.getCode() + " is a Descendant of " + contextCode.getCode() );
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                final List<Id> subsetIdList = context.getMatchingDomain().getExternalValueSet();
+                match = ESHandler.isSubsetMember( code, subsetIdList );
+            }
+        }
+        else
+        {
+            match = true;
+        }
+        return match;
+    }
+
+    /**
+     * Gets the code list from context.
+     *
+     * @param context the context
+     * @return the code list from context
+     */
+    private List<Code> getCodeListFromContext( CodedContextElement context )
+    {
+
+        List<Code> codes = new ArrayList<Code>();
+        final CDset codeset = context.getMatchingDomain().getEnumeration();
+        codes = codeset.getCode();
+        return codes;
+    }
 }

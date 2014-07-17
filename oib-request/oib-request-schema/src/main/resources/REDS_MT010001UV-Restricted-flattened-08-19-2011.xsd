@@ -183,7 +183,8 @@
 				minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>
-						The text or phrase used as the basis for the coding.
+						The text or phrase used as the basis for the
+						coding.
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
@@ -193,7 +194,8 @@
 				<xs:documentation>
 					The plain code symbol defined by the code system.
 					For example, "784.0" is the code symbol of the ICD-9
-					code "784.0" for headache.
+					code "784.0"
+					for headache.
 				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
@@ -207,7 +209,8 @@
 		<xs:attribute name="displayName" type="st" use="required">
 			<xs:annotation>
 				<xs:documentation>
-					A name or title for the code, under which the sending
+					A name or title for the code, under which the
+					sending
 					system shows the code value to its users.
 				</xs:documentation>
 			</xs:annotation>
@@ -235,7 +238,8 @@
 		<xs:attribute name="unit" type="cs" use="required">
 			<xs:annotation>
 				<xs:documentation>
-					The unit of measure specified in the Unified Code for
+					The unit of measure specified in the Unified Code
+					for
 					Units of Measure (UCUM)
 					[http://aurora.rg.iupui.edu/UCUM].
 				</xs:documentation>
@@ -248,7 +252,8 @@
 		<xs:attribute name="root" type="uid" use="required">
 			<xs:annotation>
 				<xs:documentation>
-					A unique identifier that guarantees the global uniqueness
+					A unique identifier that guarantees the global
+					uniqueness
 					of the instance identifier. The root alone may be the
 					entire instance identifier.
 				</xs:documentation>
@@ -257,7 +262,8 @@
 		<xs:attribute name="extension" type="st" use="optional">
 			<xs:annotation>
 				<xs:documentation>
-					A character string as a unique identifier within the
+					A character string as a unique identifier within
+					the
 					scope of the identifier root.
 				</xs:documentation>
 			</xs:annotation>
@@ -266,11 +272,14 @@
 			use="optional">
 			<xs:annotation>
 				<xs:documentation>
-					A human readable name or mnemonic for the assigning
+					A human readable name or mnemonic for the
+					assigning
 					authority. This name may be provided solely for the
 					convenience of unaided humans interpreting an value
-					and can have no computational meaning. Note: no
-					automated processing must depend on the assigning
+					and can have no
+					computational meaning. Note: no
+					automated processing must depend on
+					the assigning
 					authority name to be present in any form.
 				</xs:documentation>
 			</xs:annotation>
@@ -292,10 +301,13 @@
 	<xs:simpleType name="st">
 		<xs:annotation>
 			<xs:documentation>
-				The character string data type stands for text data,
+				The character string data type stands for text
+				data,
 				primarily intended for machine processing (e.g.,
-				sorting, querying, indexing, etc.) Used for names,
-				symbols, and formal expressions.
+				sorting,
+				querying, indexing, etc.) Used for names,
+				symbols, and formal
+				expressions.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -305,10 +317,13 @@
 	<xs:simpleType name="cs">
 		<xs:annotation>
 			<xs:documentation>
-				Coded data in its simplest form, consists of a code.
+				Coded data in its simplest form, consists of a
+				code.
 				The code system and code system version is fixed by
-				the context in which the value occurs. is used
-				for coded attributes that have a single HL7-defined
+				the context
+				in which the value occurs. is used
+				for coded attributes that have a
+				single HL7-defined
 				value set.
 			</xs:documentation>
 		</xs:annotation>
@@ -319,18 +334,24 @@
 	<xs:simpleType name="uid">
 		<xs:annotation>
 			<xs:documentation>
-				A unique identifier string is a character string which
+				A unique identifier string is a character string
+				which
 				identifies an object in a globally unique and timeless
-				manner. The allowable formats and values and procedures
-				of this data type are strictly controlled by HL7. At this
-				time, user-assigned identifiers may be certain character
+				manner.
+				The allowable formats and values and procedures
+				of this data type are
+				strictly controlled by HL7. At this
+				time, user-assigned identifiers
+				may be certain character
 				representations of ISO Object Identifiers ()
 				and DCE
 				Universally Unique Identifiers ().
 				HL7 also reserves
-				the right to assign other forms of UIDs (,
+				the right
+				to assign other forms of UIDs (,
 				such as mnemonic
-				identifiers for code systems.
+				identifiers for code
+				systems.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="oid uuid ruid" />
@@ -367,9 +388,12 @@
 				Internet standard RFC 1738
 				[http://www.ietf.org/rfc/rfc1738.txt]. The
 				URL specifies the protocol and the contact point defined
-				by that protocol for the resource. Notable uses of the
-				telecommunication address data type are for telephone and
-				telefax numbers, e-mail addresses, Hypertext references,
+				by that
+				protocol for the resource. Notable uses of the
+				telecommunication
+				address data type are for telephone and
+				telefax numbers, e-mail
+				addresses, Hypertext references,
 				FTP references, etc.
 			</xs:documentation>
 		</xs:annotation>
@@ -378,7 +402,8 @@
 	<xs:simpleType name="ts">
 		<xs:annotation>
 			<xs:documentation>
-				A quantity specifying a point on the axis of natural time.
+				A quantity specifying a point on the axis of
+				natural time.
 				A point in time is most often represented as a calendar
 				expression.
 			</xs:documentation>
@@ -391,7 +416,8 @@
 	<xs:complexType name="TS.Lite">
 		<xs:annotation>
 			<xs:documentation>
-				A quantity specifying a point on the axis of natural time.
+				A quantity specifying a point on the axis of
+				natural time.
 				A point in time is most often represented as a calendar
 				expression.
 			</xs:documentation>
@@ -404,12 +430,17 @@
 	<xs:complexType name="QTY" abstract="true">
 		<xs:annotation>
 			<xs:documentation> is an abstract generalization
-				for all data types (1) whose value set has an order
-				relation (less-or-equal) and (2) where difference is
-				defined in all of the data type's totally ordered value
+				for all data types
+				(1) whose value set has an order
+				relation (less-or-equal) and (2)
+				where difference is
+				defined in all of the data type's totally ordered
+				value
 				subsets. The quantity type abstraction is needed in
-				defining certain other types, such as the interval and
-				the probability distribution.
+				defining
+				certain other types, such as the interval and
+				the probability
+				distribution.
 			</xs:documentation>
 			<xs:appinfo>
 				<diff>QTY</diff>
@@ -419,11 +450,15 @@
 	<xs:simpleType name="int">
 		<xs:annotation>
 			<xs:documentation>
-				Integer numbers (-1,0,1,2, 100, 3398129, etc.) are precise
+				Integer numbers (-1,0,1,2, 100, 3398129, etc.) are
+				precise
 				numbers that are results of counting and enumerating.
-				Integer numbers are discrete, the set of integers is
-				infinite but countable. No arbitrary limit is imposed on
-				the range of integer numbers. Two NULL flavors are
+				Integer
+				numbers are discrete, the set of integers is
+				infinite but countable.
+				No arbitrary limit is imposed on
+				the range of integer numbers. Two
+				NULL flavors are
 				defined for the positive and negative infinity.
 			</xs:documentation>
 		</xs:annotation>
@@ -432,16 +467,22 @@
 	<xs:simpleType name="real">
 		<xs:annotation>
 			<xs:documentation>
-				Fractional numbers. Typically used whenever quantities
+				Fractional numbers. Typically used whenever
+				quantities
 				are measured, estimated, or computed from other real
 				numbers. The typical representation is decimal, where
-				the number of significant decimal digits is known as the
-				precision. Real numbers are needed beyond integers
-				whenever quantities of the real world are measured,
+				the number of
+				significant decimal digits is known as the
+				precision. Real numbers
+				are needed beyond integers
+				whenever quantities of the real world are
+				measured,
 				estimated, or computed from other real numbers. The term
 				"Real number" in this specification is used to mean
-				that fractional values are covered without necessarily
-				implying the full set of the mathematical real numbers.
+				that fractional
+				values are covered without necessarily
+				implying the full set of the
+				mathematical real numbers.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="xs:decimal xs:double" />

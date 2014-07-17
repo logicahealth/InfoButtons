@@ -40,19 +40,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ValidateProxyTicket }
+     * Create an instance of {@link GetProxyGrantTicket }
      * 
      */
-    public ValidateProxyTicket createValidateProxyTicket() {
-        return new ValidateProxyTicket();
+    public GetProxyGrantTicket createGetProxyGrantTicket() {
+        return new GetProxyGrantTicket();
     }
 
     /**
-     * Create an instance of {@link GetProxyTicketResponse }
+     * Create an instance of {@link GetProxyGrantTicketResponse }
      * 
      */
-    public GetProxyTicketResponse createGetProxyTicketResponse() {
-        return new GetProxyTicketResponse();
+    public GetProxyGrantTicketResponse createGetProxyGrantTicketResponse() {
+        return new GetProxyGrantTicketResponse();
     }
 
     /**
@@ -72,19 +72,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetProxyGrantTicketResponse }
+     * Create an instance of {@link ValidateProxyTicket }
      * 
      */
-    public GetProxyGrantTicketResponse createGetProxyGrantTicketResponse() {
-        return new GetProxyGrantTicketResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetProxyGrantTicket }
-     * 
-     */
-    public GetProxyGrantTicket createGetProxyGrantTicket() {
-        return new GetProxyGrantTicket();
+    public ValidateProxyTicket createValidateProxyTicket() {
+        return new ValidateProxyTicket();
     }
 
     /**
@@ -93,6 +85,14 @@ public class ObjectFactory {
      */
     public GetProxyTicket createGetProxyTicket() {
         return new GetProxyTicket();
+    }
+
+    /**
+     * Create an instance of {@link GetProxyTicketResponse }
+     * 
+     */
+    public GetProxyTicketResponse createGetProxyTicketResponse() {
+        return new GetProxyTicketResponse();
     }
 
     /**

@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package edu.utah.further.subsetdb.service;
 
@@ -17,13 +17,38 @@ import edu.utah.further.core.api.context.Api;
 import edu.utah.further.subsetdb.domain.Concept;
 import edu.utah.further.subsetdb.domain.Subset;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface SubsetDbDao.
+ */
 @Api
-public interface SubsetDbDao {
-	
-	public Boolean isConceptInSubset (Long conceptid, Long subsetid); 
-	
-	public Concept getConceptByCodeAndCodeSystem(String code, String codesystem);
-	
-	public Subset getSubsetByName (String subsetName);
-	
+public interface SubsetDbDao
+{
+
+    /**
+     * Checks if is concept in subset.
+     *
+     * @param conceptid the conceptid
+     * @param subsetid the subsetid
+     * @return the boolean
+     */
+    public Boolean isConceptInSubset( Long conceptid, Long subsetid );
+
+    /**
+     * Gets the concept by code and code system.
+     *
+     * @param code the code
+     * @param codesystem the codesystem
+     * @return the concept by code and code system
+     */
+    public Concept getConceptByCodeAndCodeSystem( String code, String codesystem );
+
+    /**
+     * Gets the subset by name.
+     *
+     * @param subsetName the subset name
+     * @return the subset by name
+     */
+    public Subset getSubsetByName( String subsetName );
+
 }

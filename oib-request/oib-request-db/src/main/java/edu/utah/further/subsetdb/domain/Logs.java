@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 
 package edu.utah.further.subsetdb.domain;
@@ -24,99 +24,147 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import edu.utah.further.core.api.data.PersistentEntity;
-import edu.utah.further.core.api.lang.Final;
 
-
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Logs.
+ */
 @Entity
-@Table(name = "logs")
-public class Logs implements PersistentEntity<Long> {
-	// ========================= CONSTANTS =================================
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	// ========================= FIELDS ====================================
-	
-	/**
-	 * The unique identifier of this entity.
-	 */
-	@Id
-	//@Final
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long logsId;
-	
-	@Column(name = "request", nullable = true,columnDefinition="MEDIUMTEXT")
-	public String request;
-	
-	@Column(name = "timestamp", nullable = true)
-	public Timestamp timestamp;
-	
-	@Column(name = "clientIP", nullable = true)
-	public String clientIP;
-	
-	@Column(name = "orgID", nullable = true)
-	public String orgID;
-	
-	// ========================= IMPLEMENTATION: PersistentEntity ==========
+@Table( name = "logs" )
+public class Logs
+    implements PersistentEntity<Long>
+{
+    // ========================= CONSTANTS =================================
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return logsId;
-	}
-	
-	
-	public void setLogsId(Long logsId) {
-		this.logsId = logsId;
-	}
+    // ========================= FIELDS ====================================
 
+    /**
+     * The unique identifier of this entity.
+     */
+    @Id
+    // @Final
+    @GeneratedValue( strategy = GenerationType.AUTO )
+    public Long logsId;
 
+    /** The request. */
+    @Column( name = "request", nullable = true, columnDefinition = "MEDIUMTEXT" )
+    public String request;
 
-	public String getRequest() {
-		return request;
-	}
+    /** The timestamp. */
+    @Column( name = "timestamp", nullable = true )
+    public Timestamp timestamp;
 
-	public void setRequest(String request) {
-		this.request = request;
-	}
+    /** The client ip. */
+    @Column( name = "clientIP", nullable = true )
+    public String clientIP;
 
+    /** The org id. */
+    @Column( name = "orgID", nullable = true )
+    public String orgID;
 
-	public Timestamp getTimestamp() {
-		return timestamp;
-	}
+    // ========================= IMPLEMENTATION: PersistentEntity ==========
 
+    /*
+     * (non-Javadoc)
+     * @see edu.utah.further.core.api.discrete.HasIdentifier#getId()
+     */
+    @Override
+    public Long getId()
+    {
+        // TODO Auto-generated method stub
+        return logsId;
+    }
 
-	public void setTimestamp(Timestamp timestamp2) {
-		this.timestamp = timestamp2;
-	}
+    /**
+     * Sets the logs id.
+     *
+     * @param logsId the new logs id
+     */
+    public void setLogsId( Long logsId )
+    {
+        this.logsId = logsId;
+    }
 
+    /**
+     * Gets the request.
+     *
+     * @return the request
+     */
+    public String getRequest()
+    {
+        return request;
+    }
 
-	public String getClientIP() {
-		return clientIP;
-	}
+    /**
+     * Sets the request.
+     *
+     * @param request the new request
+     */
+    public void setRequest( String request )
+    {
+        this.request = request;
+    }
 
+    /**
+     * Gets the timestamp.
+     *
+     * @return the timestamp
+     */
+    public Timestamp getTimestamp()
+    {
+        return timestamp;
+    }
 
-	public void setClientIP(String clientIP) {
-		this.clientIP = clientIP;
-	}
+    /**
+     * Sets the timestamp.
+     *
+     * @param timestamp2 the new timestamp
+     */
+    public void setTimestamp( Timestamp timestamp2 )
+    {
+        this.timestamp = timestamp2;
+    }
 
+    /**
+     * Gets the client ip.
+     *
+     * @return the client ip
+     */
+    public String getClientIP()
+    {
+        return clientIP;
+    }
 
-	public String getOrgID() {
-		return orgID;
-	}
+    /**
+     * Sets the client ip.
+     *
+     * @param clientIP the new client ip
+     */
+    public void setClientIP( String clientIP )
+    {
+        this.clientIP = clientIP;
+    }
 
+    /**
+     * Gets the org id.
+     *
+     * @return the org id
+     */
+    public String getOrgID()
+    {
+        return orgID;
+    }
 
-	public void setOrgID(String orgID) {
-		this.orgID = orgID;
-	}
+    /**
+     * Sets the org id.
+     *
+     * @param orgID the new org id
+     */
+    public void setOrgID( String orgID )
+    {
+        this.orgID = orgID;
+    }
 
-
-	
-
-
-	
-
-	
-	
-	
 }

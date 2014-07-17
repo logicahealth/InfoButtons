@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package org.openinfobutton.service.web;
 
@@ -29,48 +29,68 @@ import org.openinfobutton.service.response.ResponseGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KnowledgeRequestEngine.
+ */
 @Component
-public class KnowledgeRequestEngine {
+public class KnowledgeRequestEngine
+{
 
-	@Autowired
-	ResponseGenerator rg;
-	/**
-	 * 
-	 * @param knowledgeRequest built from the input request parameters
-	 * @return Document which contains the aggregateKnowledgeResponse after processing the infobutton request
-	 */
-	public AggregateKnowledgeResponse getResponse(KnowledgeRequest knowledgeRequest) {
-		List<RequestResult> result = returnResult(knowledgeRequest);
-		Collections.sort(result);
-		AggregateKnowledgeResponse responseType = new AggregateKnowledgeResponse();
-		try {
-			if (!result.isEmpty()) 
-				responseType = rg.returnResponse(knowledgeRequest, result);
-		} catch (DatatypeConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return responseType;
-	}
+    /** The rg. */
+    @Autowired
+    ResponseGenerator rg;
 
-	/**
-	 * Based on the knowledge Request, access and task checks are done.
-	 * Then based on the qualified resource profiles, matching is done to produce the results.
-	 * @param request
-	 * @return List of Results
-	 */
-	private List<RequestResult> returnResult(KnowledgeRequest request) {
-		
-		List<RequestResult> result = new ArrayList<RequestResult>();
-		if (AccessCheckHandler.handleRequest(request)) {
-			return result;
-		} else if (TaskCheckHandler.handleRequest(request)) {
-			return result;
-		} else {
-			ContextProfileHandler contextProfileHandlerObject = new ContextProfileHandler();
-			result = contextProfileHandlerObject.handleRequest(request);
-			return result;
-		}	
-	}
+    /**
+     * Gets the response.
+     *
+     * @param knowledgeRequest built from the input request parameters
+     * @return Document which contains the aggregateKnowledgeResponse after processing the infobutton request
+     */
+    public AggregateKnowledgeResponse getResponse( KnowledgeRequest knowledgeRequest )
+    {
+        final List<RequestResult> result = returnResult( knowledgeRequest );
+        Collections.sort( result );
+        AggregateKnowledgeResponse responseType = new AggregateKnowledgeResponse();
+        try
+        {
+            if ( !result.isEmpty() )
+            {
+                responseType = rg.returnResponse( knowledgeRequest, result );
+            }
+        }
+        catch ( final DatatypeConfigurationException e )
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return responseType;
+    }
+
+    /**
+     * Based on the knowledge Request, access and task checks are done. Then based on the qualified resource profiles,
+     * matching is done to produce the results.
+     *
+     * @param request the request
+     * @return List of Results
+     */
+    private List<RequestResult> returnResult( KnowledgeRequest request )
+    {
+
+        List<RequestResult> result = new ArrayList<RequestResult>();
+        if ( AccessCheckHandler.handleRequest( request ) )
+        {
+            return result;
+        }
+        else if ( TaskCheckHandler.handleRequest( request ) )
+        {
+            return result;
+        }
+        else
+        {
+            final ContextProfileHandler contextProfileHandlerObject = new ContextProfileHandler();
+            result = contextProfileHandlerObject.handleRequest( request );
+            return result;
+        }
+    }
 }

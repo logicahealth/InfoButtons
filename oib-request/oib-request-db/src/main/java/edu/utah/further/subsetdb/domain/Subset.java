@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package edu.utah.further.subsetdb.domain;
 
@@ -27,138 +27,215 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import edu.utah.further.core.api.data.PersistentEntity;
 import edu.utah.further.core.api.lang.Final;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Subset.
+ */
 @Entity
-@Table(name = "subset")
-public class Subset implements PersistentEntity<Long> {
-	// ========================= CONSTANTS =================================
+@Table( name = "subset" )
+public class Subset
+    implements PersistentEntity<Long>
+{
+    // ========================= CONSTANTS =================================
 
-	/**
-	 * @serial Serializable version identifier.
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * The Constant serialVersionUID.
+     *
+     * @serial Serializable version identifier.
+     */
+    private static final long serialVersionUID = 1L;
 
-	// ========================= FIELDS ====================================
+    // ========================= FIELDS ====================================
 
-	/**
-	 * The unique identifier of this entity.
-	 */
-	@Id
-	@Final
-	public Long subsetId;
+    /**
+     * The unique identifier of this entity.
+     */
+    @Id
+    @Final
+    public Long subsetId;
 
-	/**
-	 * Name of subset.
-	 */
-	@Column(name = "name", nullable = true)
-	private String name;
+    /**
+     * Name of subset.
+     */
+    @Column( name = "name", nullable = true )
+    private String name;
 
-	/**
-	 * Description of subset
-	 */
-	@Column(name = "description", nullable = true)
-	private String description;
-	
-	/**
-	 * Internal concept id
-	 */
-	@Column(name = "internalconceptid", nullable = true)
-	private Integer internalConceptId;
-	
-	/**
-	 * Methodology concept id
-	 */
-	@Column(name = "methodologyconceptid", nullable = true)
-	private String methodologyConceptId;
+    /** Description of subset. */
+    @Column( name = "description", nullable = true )
+    private String description;
 
-	// ========================= CONSTRUCTORS ==============================
+    /** Internal concept id. */
+    @Column( name = "internalconceptid", nullable = true )
+    private Integer internalConceptId;
 
-	// ========================= IMPLEMENTATION: Object ====================
+    /** Methodology concept id. */
+    @Column( name = "methodologyconceptid", nullable = true )
+    private String methodologyConceptId;
 
-	/**
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public final boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final Subset that = (Subset) obj;
-		return new EqualsBuilder().append(this.subsetId,
-				that.subsetId).isEquals();
-	}
+    // ========================= CONSTRUCTORS ==============================
 
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public final int hashCode() {
-		return new HashCodeBuilder().append(subsetId).toHashCode();
-	}
+    // ========================= IMPLEMENTATION: Object ====================
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this, SHORT_WITH_SPACES_STYLE)
-				.append("subsetId", subsetId).append("name", name)
-				.append("description", description).append("internalconceptid", internalConceptId)
-				.append("methodologyconceptid", methodologyConceptId).toString();
-	}
+    /**
+     * Equals.
+     *
+     * @param obj the obj
+     * @return true, if successful
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public final boolean equals( final Object obj )
+    {
+        if ( this == obj )
+        {
+            return true;
+        }
+        if ( obj == null )
+        {
+            return false;
+        }
+        if ( getClass() != obj.getClass() )
+        {
+            return false;
+        }
+        final Subset that = (Subset) obj;
+        return new EqualsBuilder().append( this.subsetId, that.subsetId ).isEquals();
+    }
 
-	// ========================= IMPLEMENTATION: PersistentEntity ==========
+    /**
+     * Hash code.
+     *
+     * @return the int
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public final int hashCode()
+    {
+        return new HashCodeBuilder().append( subsetId ).toHashCode();
+    }
 
-	/**
-	 * @return
-	 * @see edu.utah.further.core.util.data.PersistentEntity#getId()
-	 */
+    /**
+     * To string.
+     *
+     * @return the string
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString()
+    {
+        return new ToStringBuilder( this, SHORT_WITH_SPACES_STYLE ).
+                        append( "subsetId", subsetId ).append( "name", name ).
+                        append( "description",description ).
+                        append( "internalconceptid",internalConceptId ).
+                        append( "methodologyconceptid",methodologyConceptId ).
+                        toString();
+    }
 
-	public Long getId() {
-		return subsetId;
-	}
+    // ========================= IMPLEMENTATION: PersistentEntity ==========
 
-	public void setSubsetId(Long subsetId) {
-		this.subsetId = subsetId;
-	}
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     * @see edu.utah.further.core.util.data.PersistentEntity#getId()
+     */
 
-	public String getName() {
-		return name;
-	}
+    @Override
+    public Long getId()
+    {
+        return subsetId;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Sets the subset id.
+     *
+     * @param subsetId the new subset id
+     */
+    public void setSubsetId( Long subsetId )
+    {
+        this.subsetId = subsetId;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
+    public String getName()
+    {
+        return name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * Sets the name.
+     *
+     * @param name the new name
+     */
+    public void setName( String name )
+    {
+        this.name = name;
+    }
 
-	public Integer getInternalConceptId() {
-		return internalConceptId;
-	}
+    /**
+     * Gets the description.
+     *
+     * @return the description
+     */
+    public String getDescription()
+    {
+        return description;
+    }
 
-	public void setInternalConceptId(Integer internalConceptId) {
-		this.internalConceptId = internalConceptId;
-	}
+    /**
+     * Sets the description.
+     *
+     * @param description the new description
+     */
+    public void setDescription( String description )
+    {
+        this.description = description;
+    }
 
-	public String getMethodologyConceptId() {
-		return methodologyConceptId;
-	}
+    /**
+     * Gets the internal concept id.
+     *
+     * @return the internal concept id
+     */
+    public Integer getInternalConceptId()
+    {
+        return internalConceptId;
+    }
 
-	public void setMethodologyConceptId(String methodologyConceptId) {
-		this.methodologyConceptId = methodologyConceptId;
-	}
+    /**
+     * Sets the internal concept id.
+     *
+     * @param internalConceptId the new internal concept id
+     */
+    public void setInternalConceptId( Integer internalConceptId )
+    {
+        this.internalConceptId = internalConceptId;
+    }
 
-	// ========================= IMPLEMENTATION: Person ====================
+    /**
+     * Gets the methodology concept id.
+     *
+     * @return the methodology concept id
+     */
+    public String getMethodologyConceptId()
+    {
+        return methodologyConceptId;
+    }
+
+    /**
+     * Sets the methodology concept id.
+     *
+     * @param methodologyConceptId the new methodology concept id
+     */
+    public void setMethodologyConceptId( String methodologyConceptId )
+    {
+        this.methodologyConceptId = methodologyConceptId;
+    }
+
+    // ========================= IMPLEMENTATION: Person ====================
 
 }

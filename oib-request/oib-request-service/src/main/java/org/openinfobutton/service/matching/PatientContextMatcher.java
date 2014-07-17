@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package org.openinfobutton.service.matching;
 
@@ -20,35 +20,64 @@ import org.openinfobutton.schema.Patient;
 import org.openinfobutton.schema.PatientContext;
 import org.openinfobutton.schemas.kb.CodedContextElement;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PatientContextMatcher.
+ */
+public class PatientContextMatcher
+    extends ContextMatcher
+{
 
-public class PatientContextMatcher extends ContextMatcher {
+    /** The patient context. */
+    public PatientContext patientContext;
 
-	public PatientContext patientContext;
-	public CodedContextElement patientGender;
-	public CodedContextElement patientAge;
-	KnowledgeRequest request;
-	List<String> supportedCodeSystems;
-	
-	public PatientContextMatcher(CodedContextElement patientGender, 
-			CodedContextElement patientAge,	KnowledgeRequest request,List<String> supportedCodeSystems) {
-		
-		this.patientContext = request.getPatientContext();
-		this.patientGender = patientGender;
-		this.patientAge = patientAge;
-		this.request = request;
-		this.supportedCodeSystems = supportedCodeSystems;
-	}
+    /** The patient gender. */
+    public CodedContextElement patientGender;
 
+    /** The patient age. */
+    public CodedContextElement patientAge;
 
-	@Override
-	public Boolean MatchContext() {
-		Patient patient = patientContext.getPatient();
-		if (!CodeMatch(patient.getGender(), patientGender, supportedCodeSystems,false, request)) {
-			return false;
-		}
-		if (!CodeMatch(patient.getAgeGroup(), patientAge, supportedCodeSystems,false, request)) {
-			return false;
-		}
-		return true;
-	}
+    /** The request. */
+    KnowledgeRequest request;
+
+    /** The supported code systems. */
+    List<String> supportedCodeSystems;
+
+    /**
+     * Instantiates a new patient context matcher.
+     *
+     * @param patientGender the patient gender
+     * @param patientAge the patient age
+     * @param request the request
+     * @param supportedCodeSystems the supported code systems
+     */
+    public PatientContextMatcher( CodedContextElement patientGender, CodedContextElement patientAge,
+                                  KnowledgeRequest request, List<String> supportedCodeSystems )
+    {
+
+        this.patientContext = request.getPatientContext();
+        this.patientGender = patientGender;
+        this.patientAge = patientAge;
+        this.request = request;
+        this.supportedCodeSystems = supportedCodeSystems;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.openinfobutton.service.matching.ContextMatcher#MatchContext()
+     */
+    @Override
+    public Boolean MatchContext()
+    {
+        final Patient patient = patientContext.getPatient();
+        if ( !CodeMatch( patient.getGender(), patientGender, supportedCodeSystems, false, request ) )
+        {
+            return false;
+        }
+        if ( !CodeMatch( patient.getAgeGroup(), patientAge, supportedCodeSystems, false, request ) )
+        {
+            return false;
+        }
+        return true;
+    }
 }

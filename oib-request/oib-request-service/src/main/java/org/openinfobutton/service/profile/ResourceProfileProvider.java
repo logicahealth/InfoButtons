@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package org.openinfobutton.service.profile;
 
@@ -18,45 +18,79 @@ import java.util.List;
 
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ResourceProfileProvider.
+ */
+public final class ResourceProfileProvider
+{
 
-public class ResourceProfileProvider {
-	
-	private static ResourceProfileProvider instance;
-	
-	private List<KnowledgeResourceProfile> profiles;
+    /** The instance. */
+    private static ResourceProfileProvider instance;
 
-	private ResourceProfileProvider () {
-		
-		profiles = new ArrayList<KnowledgeResourceProfile>();
-		ResourceProfileLoaderNew rpn = new ResourceProfileLoaderNew();
-		profiles.addAll(rpn.getProfiles());
-	}
-	
-	public static ResourceProfileProvider getInstance() {
+    /** The profiles. */
+    private List<KnowledgeResourceProfile> profiles;
 
-		if (instance == null) {
-			
-			instance = new ResourceProfileProvider();
-		}
-		
-		return instance;
-	}
-	
-	public List<KnowledgeResourceProfile> getProfiles() {
-		
-		return profiles;
-	}
-	
-	public void setProfiles (List<KnowledgeResourceProfile> profiles) {
-		
-		this.profiles = profiles;
-		if (profiles.isEmpty()) {
-			resetInstance();
-		}
-	}
-	
-	public static void resetInstance() {
-		
-		instance = null;
-	}
+    /**
+     * Instantiates a new resource profile provider.
+     */
+    private ResourceProfileProvider()
+    {
+
+        profiles = new ArrayList<KnowledgeResourceProfile>();
+        final ResourceProfileLoaderNew rpn = new ResourceProfileLoaderNew();
+        profiles.addAll( rpn.getProfiles() );
+    }
+
+    /**
+     * Gets the single instance of ResourceProfileProvider.
+     *
+     * @return single instance of ResourceProfileProvider
+     */
+    public static ResourceProfileProvider getInstance()
+    {
+
+        if ( instance == null )
+        {
+
+            instance = new ResourceProfileProvider();
+        }
+
+        return instance;
+    }
+
+    /**
+     * Gets the profiles.
+     *
+     * @return the profiles
+     */
+    public List<KnowledgeResourceProfile> getProfiles()
+    {
+
+        return profiles;
+    }
+
+    /**
+     * Sets the profiles.
+     *
+     * @param profiles the new profiles
+     */
+    public void setProfiles( List<KnowledgeResourceProfile> profiles )
+    {
+
+        this.profiles = profiles;
+        if ( profiles.isEmpty() )
+        {
+            resetInstance();
+        }
+    }
+
+    /**
+     * Reset instance.
+     */
+    public static void resetInstance()
+    {
+
+        instance = null;
+    }
 }

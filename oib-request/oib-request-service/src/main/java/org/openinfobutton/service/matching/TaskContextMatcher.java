@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package org.openinfobutton.service.matching;
 
@@ -20,27 +20,50 @@ import org.openinfobutton.schema.TaskContext;
 import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.CodedContextElement;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TaskContextMatcher.
+ */
+public class TaskContextMatcher
+    extends ContextMatcher
+{
 
+    /** The task context. */
+    public TaskContext taskContext;
 
-public class TaskContextMatcher extends ContextMatcher{
+    /** The context. */
+    public CodedContextElement context;
 
-	public TaskContext taskContext;
-	public CodedContextElement context;
-	KnowledgeRequest request;
-	List<String> supportedCodeSystems;
-	
-	public TaskContextMatcher(CodedContextElement context,
-			KnowledgeRequest request, List<String> supportedCodeSystems) {
-		this.context = context;
-		this.taskContext = request.getTaskContext();
-		this.supportedCodeSystems = supportedCodeSystems;
-	}
+    /** The request. */
+    KnowledgeRequest request;
 
-	@Override
-	public Boolean MatchContext() {
-		Boolean match = false;
-		Code code = taskContext.getCode();
-		match = CodeMatch(code,context,supportedCodeSystems,false,request);
-		return match;
-	}
+    /** The supported code systems. */
+    List<String> supportedCodeSystems;
+
+    /**
+     * Instantiates a new task context matcher.
+     *
+     * @param context the context
+     * @param request the request
+     * @param supportedCodeSystems the supported code systems
+     */
+    public TaskContextMatcher( CodedContextElement context, KnowledgeRequest request, List<String> supportedCodeSystems )
+    {
+        this.context = context;
+        this.taskContext = request.getTaskContext();
+        this.supportedCodeSystems = supportedCodeSystems;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.openinfobutton.service.matching.ContextMatcher#MatchContext()
+     */
+    @Override
+    public Boolean MatchContext()
+    {
+        Boolean match = false;
+        final Code code = taskContext.getCode();
+        match = CodeMatch( code, context, supportedCodeSystems, false, request );
+        return match;
+    }
 }

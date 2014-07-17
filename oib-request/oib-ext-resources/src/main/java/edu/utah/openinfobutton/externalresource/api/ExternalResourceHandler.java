@@ -9,13 +9,14 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package edu.utah.openinfobutton.externalresource.api;
 
 import java.util.ArrayList;
 import org.openinfobutton.schemas.kb.Code;
 
+// TODO: Auto-generated Javadoc
 /**
  * This interface describes the methods required for Terminology Inference Operations UTS/Apelon/MetaMap specific
  * implementations can be given.

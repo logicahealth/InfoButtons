@@ -9,18 +9,35 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package edu.utah.further.profiledb.service;
 
-import java.io.File;
-
 import edu.utah.further.core.api.context.Api;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ProfilesDao.
+ */
 @Api
-public interface ProfilesDao {
+public interface ProfilesDao
+{
 
-	public void getResourceProfile(long id,int status,FileandMarker fm);
+    /**
+     * Gets the resource profile.
+     *
+     * @param id the id
+     * @param status the status
+     * @param fm the fm
+     * @return the resource profile
+     */
+    public void getResourceProfile( long id, int status, FileandMarker fm );
 
-	public long count(int status);
+    /**
+     * Count.
+     *
+     * @param status the status
+     * @return the long
+     */
+    public long count( int status );
 }

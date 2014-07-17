@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package org.openinfobutton.service.transform;
 
@@ -19,26 +19,38 @@ import org.openinfobutton.schemas.kb.Code;
 
 import edu.utah.openinfobutton.inference.rxnorm.service.RxNormService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum NamedCodeInferences.
+ */
 public enum NamedCodeInferences
 {
-	getRxNormCode
-	{
-		@Override
-		public Code getCodeFromDisplayName(final Code code)
-		{
-				try
-				{
-					return RxNormService.getCode(code);
-				}
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					return code;
-				}
-		}
-				
-	};
-	
-	public abstract Code getCodeFromDisplayName(final Code code);
+    
+    /** The get rx norm code. */
+    getRxNormCode
+    {
+        @Override
+        public Code getCodeFromDisplayName( final Code code )
+        {
+            try
+            {
+                return RxNormService.getCode( code );
+            }
+            catch ( final IOException e )
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return code;
+            }
+        }
+
+    };
+
+    /**
+     * Gets the code from display name.
+     *
+     * @param code the code
+     * @return the code from display name
+     */
+    public abstract Code getCodeFromDisplayName( final Code code );
 }

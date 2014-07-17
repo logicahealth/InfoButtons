@@ -61,7 +61,8 @@ public class OpenInfobuttonResponderControllerTest {
     @Test
     public void testOpenInfobuttonRequestHandlerReturnsAtomPage() throws Exception {
 
-        when( responderService.getKnowledgeRequestParameterMap( any( Map.class ) ) ).thenReturn( getValidMockFlatRequestParameters() );
+        when( responderService.getKnowledgeRequestParameterMap( 
+              any( Map.class ) ) ).thenReturn( getValidMockFlatRequestParameters() );
         
         this.mockMvc.perform(
                 post("/responder"))
@@ -73,7 +74,8 @@ public class OpenInfobuttonResponderControllerTest {
     @Test
     public void testOpenInfobuttonRequestHandlerReturnsNoCache() throws Exception {
 
-        when( responderService.getKnowledgeRequestParameterMap( any( Map.class ) ) ).thenReturn( getValidMockFlatRequestParameters() );
+        when( responderService.getKnowledgeRequestParameterMap( 
+              any( Map.class ) ) ).thenReturn( getValidMockFlatRequestParameters() );
         
         this.mockMvc.perform(
                 post("/responder"))
@@ -85,7 +87,8 @@ public class OpenInfobuttonResponderControllerTest {
     @Test
     public void testOpenInfobuttonRequestHandlerReturnsHtmlPage() throws Exception {
 
-        when( responderService.getKnowledgeRequestParameterMap( any( Map.class ) ) ).thenReturn( getValidMockFlatRequestParametersWithHtmlParameter() );
+        when( responderService.getKnowledgeRequestParameterMap( 
+              any( Map.class ) ) ).thenReturn( getValidMockFlatRequestParametersWithHtmlParameter() );
         
         this.mockMvc.perform(
                 post("/responder"))

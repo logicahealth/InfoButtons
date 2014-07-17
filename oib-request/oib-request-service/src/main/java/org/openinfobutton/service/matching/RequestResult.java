@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package org.openinfobutton.service.matching;
 
@@ -21,76 +21,143 @@ import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile.ProfileDefinition.SupportedTerminologies;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RequestResult.
+ */
+public class RequestResult
+    implements Comparable<RequestResult>
+{
 
+    /** The contexts. */
+    private final List<Context> contexts;
 
-public class RequestResult implements Comparable<RequestResult>{
-	
-	private List <Context> contexts;
-	private KnowledgeResourceProfile.Header header;
-	private KnowledgeResourceProfile.ProfileDefinition profileDefinition;
-	private List<String> supportedCodeSystems;
-	public RequestResult(KnowledgeResourceProfile profile) {
-		
-		contexts = new ArrayList<Context>();
-		this.header = profile.getHeader();
-		this.profileDefinition = profile.getProfileDefinition();
-		SupportedTerminologies supportedTerminologies =profile.getProfileDefinition().getSupportedTerminologies();
-		List<Id> terminologyList = new ArrayList<Id>();
-		supportedCodeSystems = new ArrayList<String>();
-		if(supportedTerminologies!=null)
-		{
-			terminologyList = supportedTerminologies.getSupportedTerminology();
-			for(int i=0;i<terminologyList.size();i++)
-			{
-				String cs = terminologyList.get(i).getId();
-				supportedCodeSystems.add(cs);
-			}
-		}
-	}
-	
-	public String getUrlStyle()
-	{
-		return profileDefinition.getUrlStyle();
-	}
-	
-	public boolean isHl7URLCompliant()
-	{
-		return profileDefinition.isHl7URLCompliant();
-	}
-	
-	public boolean isHl7KnowledgeResponseCompliant()
-	{
-		return profileDefinition.isHl7KnowledgeResponseCompliant();
-	}
-	
-	public void addResult(Context context) {
-		
-		contexts.add(context);
-	}
-	
-	public List<Context> getContexts() {
-		
-		return contexts;
-	}
-	
-	public KnowledgeResourceProfile.Header getHeader() {
-		
-		return header;
-	}
-	
-	
-	public List<String> getSupportedCodeSystems() {
-		return supportedCodeSystems;
-	}
+    /** The header. */
+    private final KnowledgeResourceProfile.Header header;
 
+    /** The profile definition. */
+    private final KnowledgeResourceProfile.ProfileDefinition profileDefinition;
 
-	public void setSupportedCodeSystems(List<String> supportedCodeSystems) {
-		this.supportedCodeSystems = supportedCodeSystems;
-	}
+    /** The supported code systems. */
+    private List<String> supportedCodeSystems;
 
+    /**
+     * Instantiates a new request result.
+     *
+     * @param profile the profile
+     */
+    public RequestResult( KnowledgeResourceProfile profile )
+    {
 
-	public int compareTo(RequestResult r) {
-		
-		return (this.header.getTitle()).compareTo(r.getHeader().getTitle());
-	}
+        contexts = new ArrayList<Context>();
+        this.header = profile.getHeader();
+        this.profileDefinition = profile.getProfileDefinition();
+        final SupportedTerminologies supportedTerminologies =
+            profile.getProfileDefinition().getSupportedTerminologies();
+        List<Id> terminologyList = new ArrayList<Id>();
+        supportedCodeSystems = new ArrayList<String>();
+        if ( supportedTerminologies != null )
+        {
+            terminologyList = supportedTerminologies.getSupportedTerminology();
+            for ( int i = 0; i < terminologyList.size(); i++ )
+            {
+                final String cs = terminologyList.get( i ).getId();
+                supportedCodeSystems.add( cs );
+            }
+        }
+    }
+
+    /**
+     * Gets the url style.
+     *
+     * @return the url style
+     */
+    public String getUrlStyle()
+    {
+        return profileDefinition.getUrlStyle();
+    }
+
+    /**
+     * Checks if is hl7 url compliant.
+     *
+     * @return true, if is hl7 url compliant
+     */
+    public boolean isHl7URLCompliant()
+    {
+        return profileDefinition.isHl7URLCompliant();
+    }
+
+    /**
+     * Checks if is hl7 knowledge response compliant.
+     *
+     * @return true, if is hl7 knowledge response compliant
+     */
+    public boolean isHl7KnowledgeResponseCompliant()
+    {
+        return profileDefinition.isHl7KnowledgeResponseCompliant();
+    }
+
+    /**
+     * Adds the result.
+     *
+     * @param context the context
+     */
+    public void addResult( Context context )
+    {
+
+        contexts.add( context );
+    }
+
+    /**
+     * Gets the contexts.
+     *
+     * @return the contexts
+     */
+    public List<Context> getContexts()
+    {
+
+        return contexts;
+    }
+
+    /**
+     * Gets the header.
+     *
+     * @return the header
+     */
+    public KnowledgeResourceProfile.Header getHeader()
+    {
+
+        return header;
+    }
+
+    /**
+     * Gets the supported code systems.
+     *
+     * @return the supported code systems
+     */
+    public List<String> getSupportedCodeSystems()
+    {
+        return supportedCodeSystems;
+    }
+
+    /**
+     * Sets the supported code systems.
+     *
+     * @param supportedCodeSystems the new supported code systems
+     */
+    public void setSupportedCodeSystems( List<String> supportedCodeSystems )
+    {
+        this.supportedCodeSystems = supportedCodeSystems;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo( RequestResult r )
+    {
+
+        return ( this.header.getTitle() ).compareTo( r.getHeader().getTitle() );
+    }
 }

@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
- <modelVersion>4.0.0</modelVersion>
-  <groupId>edu.utah.openinfobutton</groupId>
-  <artifactId>oib-ext-resources</artifactId>
-  <version>1.4</version>
-  <name>oib-ext-resources</name>
-  <description>Decoupling the handling of external resources from Business Logic</description>
-  <properties>
-       <dts-version>3.5.0</dts-version>
-        <jacoco.version>0.7.0.201403182114</jacoco.version>
-   </properties>
-  
-  <repositories>
-  		<repository>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>edu.utah.openinfobutton</groupId>
+	<artifactId>oib-ext-resources</artifactId>
+	<version>1.4</version>
+	<name>oib-ext-resources</name>
+	<description>Decoupling the handling of external resources from Business Logic</description>
+	<properties>
+		<dts-version>3.5.0</dts-version>
+		<jacoco.version>0.7.0.201403182114</jacoco.version>
+	</properties>
+
+	<repositories>
+		<repository>
 			<id>further</id>
 			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
 			<releases>
@@ -21,10 +21,10 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
-		</repository> 	   
-   </repositories>
- 
- 	<pluginRepositories>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
 		<pluginRepository>
 			<id>further</id>
 			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
@@ -35,178 +35,178 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
-	</pluginRepositories> 
-  
-  
-  <dependencies>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
-	    <dependency>
-	  	  <groupId>org.openinfobutton</groupId>
-	  	  <artifactId>oib-request-schema</artifactId>
-	  	  <version>1.4</version>
-	  	  <scope>compile</scope>
-	    </dependency>
-	    <dependency>
-	  	  <groupId>org.openinfobutton</groupId>
-	  	  <artifactId>oib-profile-schema</artifactId>
-	  	  <version>1.4</version>
-	  	  <scope>compile</scope>
-	    </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.2</version>
-            <scope>test</scope>
-        </dependency>
-	    <dependency>
-           <groupId>log4j</groupId>
-           <artifactId>log4j</artifactId>
-           <version>1.2.9</version>
-           <scope>compile</scope>
-       </dependency>
-       <dependency>
-           <groupId>xstream</groupId>
-           <artifactId>xstream</artifactId>
-           <version>1.1.2</version>
-           <scope>compile</scope>
-       </dependency>
-       <dependency>
-           <groupId>xpp3</groupId>
-           <artifactId>xpp3</artifactId>
-           <version>1.1.4c</version>
-           <scope>runtime</scope>
-       </dependency>
-       <dependency>
-           <groupId>xalan</groupId>
-           <artifactId>xalan</artifactId>
-           <version>2.6.0</version>
-       </dependency>
-	   <dependency>
-           <groupId>com.microsoft.sqlserver</groupId>
-           <artifactId>sqljdbc4</artifactId>
-           <version>2.0</version>
-           <scope>runtime</scope>
-       </dependency>
-       <dependency>
-           <groupId>com.intersystems</groupId>
-           <artifactId>cachedb</artifactId>
-           <version>2009.1</version>
-           <scope>runtime</scope>
-       </dependency>
-       <dependency>
-       	<groupId>xerces</groupId>
-       	<artifactId>xercesImpl</artifactId>
-       	<version>2.9.1</version>
-       	<type>jar</type>
-       	<scope>compile</scope>
-       </dependency>
-       <dependency>
-       	<groupId>commons-configuration</groupId>
-       	<artifactId>commons-configuration</artifactId>
-       	<version>1.6</version>
-       	<type>jar</type>
-       	<scope>compile</scope>
-       </dependency>
-       <dependency>
-       	<groupId>com.oracle</groupId>
-       	<artifactId>ojdbc6</artifactId>
-       	<version>11.1.0.7.0</version>
-       	<type>jar</type>
-       	<scope>compile</scope>
-       </dependency>
-       <dependency>
-       	<groupId>org.openinfobutton</groupId>
-       	<artifactId>oib-request-db</artifactId>
-       	<version>1.4</version>
-       	<scope>compile</scope>
-       </dependency>
-       <dependency>
-       	<groupId>org.apache.commons</groupId>
-       	<artifactId>commons-math</artifactId>
-       	<version>2.2</version>
-       	<type>jar</type>
-       	<scope>compile</scope>
-       </dependency>
-       <dependency>
-       	<groupId>org.aspectj</groupId>
-       	<artifactId>aspectjrt</artifactId>
-       	<version>1.6.10</version>
-       	<type>jar</type>
-       	<scope>compile</scope>
-       </dependency>
-       <dependency>
-       	<groupId>org.springframework</groupId>
-       	<artifactId>org.springframework.aspects</artifactId>
-       	<version>3.1.1.RELEASE</version>
-       	<type>jar</type>
-       	<scope>compile</scope>
-       </dependency>
-       <dependency>
-       	<groupId>org.springframework</groupId>
-       	<artifactId>org.springframework.web</artifactId>
-       	<version>3.1.1.RELEASE</version>
-       	<type>jar</type>
-       	<scope>compile</scope>
-       </dependency>
-       <dependency>
-       	<groupId>org.slf4j</groupId>
-       	<artifactId>com.springsource.slf4j.log4j</artifactId>
-       	<version>1.6.1</version>
-       	<type>jar</type>
-       	<scope>compile</scope>
-       </dependency>
-       <dependency>
-       	<groupId>org.slf4j</groupId>
-       	<artifactId>com.springsource.slf4j.api</artifactId>
-       	<version>1.6.1</version>
-       	<type>jar</type>
-       	<scope>compile</scope>
-       </dependency>
-       <dependency>
-       	<groupId>org.springframework</groupId>
-       	<artifactId>spring-beans</artifactId>
-       	<version>3.1.1.RELEASE</version>
-       </dependency>
-       <dependency>
-       	<groupId>org.springframework</groupId>
-       	<artifactId>spring-context</artifactId>
-       	<version>3.1.1.RELEASE</version>
-       </dependency>
-       <dependency>
-       	<groupId>org.springframework</groupId>
-       	<artifactId>spring-tx</artifactId>
-       	<version>3.1.1.RELEASE</version>
-       </dependency>
-       <dependency>
-       	<groupId>c3p0</groupId>
-       	<artifactId>c3p0</artifactId>
-       	<version>0.9.1.2</version>
-       </dependency>
-       <dependency>
-       	<groupId>edu.utah.openinfobutton</groupId>
-       	<artifactId>oib-request-inference-rxnorm</artifactId>
-       	<version>1.4</version>
-       </dependency>
-       <dependency>
-       	<groupId>UTSMetathesaurus</groupId>
-       	<artifactId>uts-metathesaurus</artifactId>
-       	<version>1.4</version>
-       	<type>jar</type>
-       	<scope>compile</scope>
-       </dependency>
-  </dependencies>
-    
-    <scm>
+	</pluginRepositories>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>oib-request-schema</artifactId>
+			<version>1.4</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>oib-profile-schema</artifactId>
+			<version>1.4</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.9</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.1.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>xpp3</groupId>
+			<artifactId>xpp3</artifactId>
+			<version>1.1.4c</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>2.0</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.intersystems</groupId>
+			<artifactId>cachedb</artifactId>
+			<version>2009.1</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.9.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.6</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.1.0.7.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>oib-request-db</artifactId>
+			<version>1.4</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math</artifactId>
+			<version>2.2</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.6.10</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.aspects</artifactId>
+			<version>3.1.1.RELEASE</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.web</artifactId>
+			<version>3.1.1.RELEASE</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>com.springsource.slf4j.log4j</artifactId>
+			<version>1.6.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>com.springsource.slf4j.api</artifactId>
+			<version>1.6.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>3.1.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>3.1.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>3.1.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.utah.openinfobutton</groupId>
+			<artifactId>oib-request-inference-rxnorm</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>UTSMetathesaurus</groupId>
+			<artifactId>uts-metathesaurus</artifactId>
+			<version>1.4</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+	<scm>
 		<connection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-ExternalResources</connection>
 		<developerConnection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-ExternalResources</developerConnection>
 		<url>https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-ExternalResources</url>
 	</scm>
-    
+
 	<build>
 		<plugins>
 			<plugin>
@@ -216,60 +216,60 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
-                <executions>
-                    <execution>
-                        <id>default-prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>default-prepare-agent-integration</id>
-                        <goals>
-                            <goal>prepare-agent-integration</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>default-report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>default-report-integration</id>
-                        <goals>
-                            <goal>report-integration</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>default-check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <!-- implmentation is needed only for Maven 2 -->
-                                <rule implementation="org.jacoco.maven.RuleConfiguration">
-                                    <element>BUNDLE</element>
-                                    <limits>
-                                        <!-- implmentation is needed only for Maven 2 -->
-                                        <limit implementation="org.jacoco.report.check.Limit">
-                                            <counter>COMPLEXITY</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.05</minimum>
-                                        </limit>
-                                    </limits>
-                                </rule>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-                </plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-prepare-agent-integration</id>
+						<goals>
+							<goal>prepare-agent-integration</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report-integration</id>
+						<goals>
+							<goal>report-integration</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<!-- implmentation is needed only for Maven 2 -->
+								<rule implementation="org.jacoco.maven.RuleConfiguration">
+									<element>BUNDLE</element>
+									<limits>
+										<!-- implmentation is needed only for Maven 2 -->
+										<limit implementation="org.jacoco.report.check.Limit">
+											<counter>COMPLEXITY</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.05</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

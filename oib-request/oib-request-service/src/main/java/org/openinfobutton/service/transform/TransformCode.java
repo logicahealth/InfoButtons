@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package org.openinfobutton.service.transform;
 
@@ -35,142 +35,190 @@ import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
 import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
 import edu.utah.openinfobutton.externalresource.implementation.TerminologyMappings;
 
-
+/**
+ * The Class TransformCode.
+ */
 @Component
-public class TransformCode {
-	
-	@Value("${service.terminologyLocation}") 
-	String terminologyInferenceLocation;
-	@Autowired
-	ExternalResourceHandler handler;
-	@Autowired
-	TerminologyMappings terminologyMappings;
-	@Autowired
-	@Qualifier("externalSet")
-	private TerminologyHandler ESHandler;
-	List<Mapping> validMappings;
-	
-	/**
-	 * 
-	 * @param element required for rxnorm
-	 * @param code the code that we are trying to transform
-	 * @param supportedCodeSystems from the profile
-	 * @param request the already transformed codes are stored in the request
-	 * @return
-	 */
-	public  Code transformInput(CodedContextElement element, Code code, List<String> supportedCodeSystems, KnowledgeRequest request )
-	{
-		if(supportedCodeSystems.size()>0)
-		{
-			if(supportedCodeSystems.contains(code.getCodeSystem()))
-				return code;
-			else if(request.getSearchCodes().size()>0)
-			{
-				ArrayList<Code> searchCodes = request.getSearchCodes();
-				for(Code c:searchCodes)
-				{
-					if(supportedCodeSystems.contains(c.getCodeSystem()))
-						return c;
-				}
-			}
-			else
-			{
-				//do mappings
-				validMappings=terminologyMappings.getValidMappings();
-				for(int i=0;i<validMappings.size();i++)
-				{
-					Mapping m=validMappings.get(i);
-					if((m.getSourceValue().equals(code.getCodeSystem()))&&(supportedCodeSystems.contains(m.getTargetValue())))
-					{
-						//new method will transform into m.gettarget
-						code.setCodeSystemName(m.getSourceName());
-						Code transformedCode= ESHandler.transformCode(code,m.getTargetValue());
-						if(transformedCode!=null)
-						{
-							request.addSearchCode(transformedCode);
-							return transformedCode;
-						}
-					}
-				}
-				
-			}
-		}
-		
-		if (element.getOutputDisplayNameTransformation() != null)
-		{
-			String id = element.getOutputDisplayNameTransformation().getId();
-			TerminologyInference inference = getTerminologyInference(id);
-			Code newCode = NamedCodeInferences.valueOf(inference.getCallInferenceByName()).getCodeFromDisplayName(code);
-			return newCode;
-		}
-		else
-		{
-			return code;
-		}		
-	}
+public class TransformCode
+{
 
-	public  Code transformOutput( CodedContextElement element,  Code code ,List<String> supportedCodeSystems, KnowledgeRequest request ) {
-		
-		if(supportedCodeSystems.size()>0)
-		{
-			if(supportedCodeSystems.contains(code.getCodeSystem()))
-				return code;
-			else if(request.getSearchCodes().size()>0)
-			{
-				ArrayList<Code> searchCodes = request.getSearchCodes();
-				for(Code c:searchCodes)
-				{
-					if(supportedCodeSystems.contains(c.getCodeSystem()))
-						return c;
-				}
-			}
-			else
-			{
-				//do mappings
-				validMappings=terminologyMappings.getValidMappings();
-				for(int i=0;i<validMappings.size();i++)
-				{
-					Mapping m=validMappings.get(i);
-					if((m.getSourceValue().equals(code.getCodeSystem()))&&(supportedCodeSystems.contains(m.getTargetValue())))
-					{
-						//new method will transform into m.gettarget
-						code.setCodeSystemName(m.getSourceName());
-						Code transformedCode= ESHandler.transformCode(code,m.getTargetValue());
-						if(transformedCode!=null)
-							return transformedCode;
-					}
-				}
-				
-			}
-		}
-	
-		if (element.getOutputDisplayNameTransformation() != null)
-		{
-			String id = element.getOutputDisplayNameTransformation().getId();
-			TerminologyInference inference = getTerminologyInference(id);
-			Code newCode = NamedCodeInferences.valueOf(inference.getCallInferenceByName()).getCodeFromDisplayName(code);
-			return newCode;
-		}
-		else
-		{
-			return code;
-		}
-	}
-	
-	private TerminologyInference getTerminologyInference (final String id)
-	{
-		TerminologyInference inference = new TerminologyInference();
-		try {
-			
-			JAXBContext context = JAXBContext.newInstance(TerminologyInference.class);
-			Unmarshaller u = context.createUnmarshaller();
-			File profile = new File(terminologyInferenceLocation + "/" + id + ".xml");
-			inference = (TerminologyInference)u.unmarshal(profile);
-		} catch (JAXBException e) {
-		
-			e.printStackTrace();
-		}
-		return inference;
-	}
+    /** The terminology inference location. */
+    @Value( "${service.terminologyLocation}" )
+    String terminologyInferenceLocation;
+
+    /** The handler. */
+    @Autowired
+    ExternalResourceHandler handler;
+
+    /** The terminology mappings. */
+    @Autowired
+    TerminologyMappings terminologyMappings;
+
+    /** The ES handler. */
+    @Autowired
+    @Qualifier( "externalSet" )
+    private TerminologyHandler ESHandler;
+
+    /** The valid mappings. */
+    List<Mapping> validMappings;
+
+    /**
+     * Transform input.
+     *
+     * @param element required for rxnorm
+     * @param code the code that we are trying to transform
+     * @param supportedCodeSystems from the profile
+     * @param request the already transformed codes are stored in the request
+     * @return the code
+     */
+    public Code transformInput( CodedContextElement element, Code code, List<String> supportedCodeSystems,
+                                KnowledgeRequest request )
+    {
+        if ( supportedCodeSystems.size() > 0 )
+        {
+            if ( supportedCodeSystems.contains( code.getCodeSystem() ) )
+            {
+                return code;
+            }
+            else if ( request.getSearchCodes().size() > 0 )
+            {
+                final ArrayList<Code> searchCodes = request.getSearchCodes();
+                for ( final Code c : searchCodes )
+                {
+                    if ( supportedCodeSystems.contains( c.getCodeSystem() ) )
+                    {
+                        return c;
+                    }
+                }
+            }
+            else
+            {
+                // do mappings
+                validMappings = terminologyMappings.getValidMappings();
+                for ( int i = 0; i < validMappings.size(); i++ )
+                {
+                    final Mapping m = validMappings.get( i );
+                    if ( ( m.getSourceValue().equals( code.getCodeSystem() ) )
+                        && ( supportedCodeSystems.contains( m.getTargetValue() ) ) )
+                    {
+                        // new method will transform into m.gettarget
+                        code.setCodeSystemName( m.getSourceName() );
+                        final Code transformedCode = ESHandler.transformCode( code, m.getTargetValue() );
+                        if ( transformedCode != null )
+                        {
+                            request.addSearchCode( transformedCode );
+                            return transformedCode;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        if ( element.getOutputDisplayNameTransformation() != null )
+        {
+            final String id = element.getOutputDisplayNameTransformation().getId();
+            final TerminologyInference inference = getTerminologyInference( id );
+            final Code newCode =
+                NamedCodeInferences.valueOf( inference.getCallInferenceByName() ).getCodeFromDisplayName( code );
+            return newCode;
+        }
+        else
+        {
+            return code;
+        }
+    }
+
+    /**
+     * Transform output.
+     *
+     * @param element the element
+     * @param code the code
+     * @param supportedCodeSystems the supported code systems
+     * @param request the request
+     * @return the code
+     */
+    public Code transformOutput( CodedContextElement element, Code code, List<String> supportedCodeSystems,
+                                 KnowledgeRequest request )
+    {
+
+        if ( supportedCodeSystems.size() > 0 )
+        {
+            if ( supportedCodeSystems.contains( code.getCodeSystem() ) )
+            {
+                return code;
+            }
+            else if ( request.getSearchCodes().size() > 0 )
+            {
+                final ArrayList<Code> searchCodes = request.getSearchCodes();
+                for ( final Code c : searchCodes )
+                {
+                    if ( supportedCodeSystems.contains( c.getCodeSystem() ) )
+                    {
+                        return c;
+                    }
+                }
+            }
+            else
+            {
+                // do mappings
+                validMappings = terminologyMappings.getValidMappings();
+                for ( int i = 0; i < validMappings.size(); i++ )
+                {
+                    final Mapping m = validMappings.get( i );
+                    if ( ( m.getSourceValue().equals( code.getCodeSystem() ) )
+                        && ( supportedCodeSystems.contains( m.getTargetValue() ) ) )
+                    {
+                        // new method will transform into m.gettarget
+                        code.setCodeSystemName( m.getSourceName() );
+                        final Code transformedCode = ESHandler.transformCode( code, m.getTargetValue() );
+                        if ( transformedCode != null )
+                        {
+                            return transformedCode;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        if ( element.getOutputDisplayNameTransformation() != null )
+        {
+            final String id = element.getOutputDisplayNameTransformation().getId();
+            final TerminologyInference inference = getTerminologyInference( id );
+            final Code newCode =
+                NamedCodeInferences.valueOf( inference.getCallInferenceByName() ).getCodeFromDisplayName( code );
+            return newCode;
+        }
+        else
+        {
+            return code;
+        }
+    }
+
+    /**
+     * Gets the terminology inference.
+     *
+     * @param id the id
+     * @return the terminology inference
+     */
+    private TerminologyInference getTerminologyInference( final String id )
+    {
+        TerminologyInference inference = new TerminologyInference();
+        try
+        {
+
+            final JAXBContext context = JAXBContext.newInstance( TerminologyInference.class );
+            final Unmarshaller u = context.createUnmarshaller();
+            final File profile = new File( terminologyInferenceLocation + "/" + id + ".xml" );
+            inference = (TerminologyInference) u.unmarshal( profile );
+        }
+        catch ( final JAXBException e )
+        {
+
+            e.printStackTrace();
+        }
+        return inference;
+    }
 
 }

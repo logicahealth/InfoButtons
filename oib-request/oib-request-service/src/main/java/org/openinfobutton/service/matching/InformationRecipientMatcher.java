@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jun 13, 2014
+ * @version Jul 15, 2014
  */
 package org.openinfobutton.service.matching;
 
@@ -19,40 +19,78 @@ import org.openinfobutton.schema.InformationRecipient;
 import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.schemas.kb.CodedContextElement;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InformationRecipientMatcher.
+ */
+public class InformationRecipientMatcher
+    extends ContextMatcher
+{
 
+    /** The information recipient. */
+    public InformationRecipient informationRecipient;
 
-public class InformationRecipientMatcher extends ContextMatcher {
+    /** The information recipient language. */
+    public CodedContextElement informationRecipientLanguage;
 
-	public InformationRecipient informationRecipient;
-	public CodedContextElement informationRecipientLanguage;
-	public CodedContextElement informationRecipientDiscipline;
-	public CodedContextElement informationRecipientKnowledgeUserType;
-	List<String> supportedCodeSystems;
-	KnowledgeRequest request;
-	
-	public InformationRecipientMatcher (CodedContextElement informationRecipientLanguage, CodedContextElement informationRecipientDiscipline,
-			CodedContextElement informationRecipientKnowledgeUserType, KnowledgeRequest request,List<String> supportedCodeSystems) {
-		
-		this.informationRecipientLanguage = informationRecipientLanguage;
-		this.informationRecipientDiscipline = informationRecipientDiscipline;
-		this.informationRecipientKnowledgeUserType = informationRecipientKnowledgeUserType;
-		this.informationRecipient = request.getInformationRecipient();
-		this.request= request;
-		this.supportedCodeSystems=supportedCodeSystems;
-	}
-	
-	@Override
-	public Boolean MatchContext() {
-		if (!CodeMatch(informationRecipient.getProviderOrPatient(), informationRecipientKnowledgeUserType, supportedCodeSystems,false, request)) {
-			return false;
-		}
-		if (!CodeMatch(informationRecipient.getLanguage(), informationRecipientLanguage, supportedCodeSystems,false, request)) {
-			return false;
-		}
-		if (!CodeMatch(informationRecipient.getHealthCareProvider(), informationRecipientDiscipline, supportedCodeSystems,false, request)) {
-			return false;
-		}
-		return true; 
-	}
+    /** The information recipient discipline. */
+    public CodedContextElement informationRecipientDiscipline;
+
+    /** The information recipient knowledge user type. */
+    public CodedContextElement informationRecipientKnowledgeUserType;
+
+    /** The supported code systems. */
+    List<String> supportedCodeSystems;
+
+    /** The request. */
+    KnowledgeRequest request;
+
+    /**
+     * Instantiates a new information recipient matcher.
+     *
+     * @param informationRecipientLanguage the information recipient language
+     * @param informationRecipientDiscipline the information recipient discipline
+     * @param informationRecipientKnowledgeUserType the information recipient knowledge user type
+     * @param request the request
+     * @param supportedCodeSystems the supported code systems
+     */
+    public InformationRecipientMatcher( CodedContextElement informationRecipientLanguage,
+                                        CodedContextElement informationRecipientDiscipline,
+                                        CodedContextElement informationRecipientKnowledgeUserType,
+                                        KnowledgeRequest request, List<String> supportedCodeSystems )
+    {
+
+        this.informationRecipientLanguage = informationRecipientLanguage;
+        this.informationRecipientDiscipline = informationRecipientDiscipline;
+        this.informationRecipientKnowledgeUserType = informationRecipientKnowledgeUserType;
+        this.informationRecipient = request.getInformationRecipient();
+        this.request = request;
+        this.supportedCodeSystems = supportedCodeSystems;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.openinfobutton.service.matching.ContextMatcher#MatchContext()
+     */
+    @Override
+    public Boolean MatchContext()
+    {
+        if ( !CodeMatch( informationRecipient.getProviderOrPatient(), informationRecipientKnowledgeUserType,
+                         supportedCodeSystems, false, request ) )
+        {
+            return false;
+        }
+        if ( !CodeMatch( informationRecipient.getLanguage(), informationRecipientLanguage, supportedCodeSystems, false,
+                         request ) )
+        {
+            return false;
+        }
+        if ( !CodeMatch( informationRecipient.getHealthCareProvider(), informationRecipientDiscipline,
+                         supportedCodeSystems, false, request ) )
+        {
+            return false;
+        }
+        return true;
+    }
 
 }

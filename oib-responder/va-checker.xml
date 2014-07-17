@@ -56,8 +56,6 @@
 
     <module name="TreeWalker">
 
-        <property name="cacheFile" value="${checkstyle.cache.file}"/>
-
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
         <module name="JavadocMethod">
@@ -205,12 +203,16 @@
         <!-- Miscellaneous other checks.                   -->
         <!-- See http://checkstyle.sf.net/config_misc.html -->
         <module name="TodoComment"/>
-        <module name="CyclomaticComplexity"/>
+		<module name="CyclomaticComplexity">
+			<property name="max" value="15"/>
+		</module>
         <module name="ClassFanOutComplexity"/>
         <module name="AnonInnerLength">
           <property name="max" value="40"/>
         </module>
-
+       
     </module>
-
+		<module name="SuppressionFilter">
+		    <property name="file" value="${config_loc}/suppressions.xml"/>
+		</module>
 </module>
