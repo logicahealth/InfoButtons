@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+    <suppress checks="[a-zA-Z0-9]*" files=".*.xslt"/>
+	<suppress checks="[a-zA-Z0-9]*" files=".*.xml"/>
+	<suppress checks="[a-zA-Z0-9]*" files=".*.xsd"/>
+	<suppress checks="[a-zA-Z0-9]*" files=".*.xjb"/>
+	<suppress checks="[a-zA-Z0-9]*" files=".*.xsl"/>
+	<suppress checks="[a-zA-Z0-9]*" files=".*.sql"/>
+	<suppress checks="[a-zA-Z0-9]*" files=".*.properties"/>
+	<suppress checks="[a-zA-Z0-9]*" files="org[\\/]openinfobutton[\\/]schemas[\\/]kb[\\/]"/>
+	<suppress checks="[a-zA-Z0-9]*" files="org[\\/]hl7[\\/]v3[\\/]"/>
+	<suppress checks="[a-zA-Z0-9]*" files="UtsMetathesaurusContent"/>
+	<suppress checks="[a-zA-Z0-9]*" files="UtsMetathesaurusFinder"/>
+	<suppress checks="[a-zA-Z0-9]*" files="UtsMetathesaurusHistor"/>
+	<suppress checks="[a-zA-Z0-9]*" files="UtsMetathesaurusMetaData"/>
+	<suppress checks="[a-zA-Z0-9]*" files="UtsSecurity"/>
+	<suppress checks="[a-zA-Z0-9]*" files="UtsSemNet"/>
+	<suppress checks="[a-zA-Z0-9]*" files="gov[\\/]nih[\\/]nlm[\\/]uts[\\/]webservice[\\/]content[\\/]"/>
+	<suppress checks="[a-zA-Z0-9]*" files="gov[\\/]nih[\\/]nlm[\\/]uts[\\/]webservice[\\/]finder[\\/]"/>
+	<suppress checks="[a-zA-Z0-9]*" files="gov[\\/]nih[\\/]nlm[\\/]uts[\\/]webservice[\\/]history[\\/]"/>
+	<suppress checks="[a-zA-Z0-9]*" files="gov[\\/]nih[\\/]nlm[\\/]uts[\\/]webservice[\\/]metadata[\\/]"/>
+	<suppress checks="[a-zA-Z0-9]*" files="gov[\\/]nih[\\/]nlm[\\/]uts[\\/]webservice[\\/]security[\\/]"/>
+	<suppress checks="[a-zA-Z0-9]*" files="gov[\\/]nih[\\/]nlm[\\/]uts[\\/]webservice[\\/]semnet[\\/]"/>
+	<suppress checks="[a-zA-Z0-9]*" files="examples[\\/]"/>
+	<suppress checks="[a-zA-Z0-9]*" files="gov[\\/]nih[\\/]nlm[\\/]rxnav[\\/]rest[\\/]model[\\/]"/>
+</suppressions>
