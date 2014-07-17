@@ -1,7 +1,7 @@
 Innovation-182
 ==============
 
-Please note that this code is a collaboration among many different Universities. This is the current development branch and contains the snapshot for release 1.5. The changes from the master branch include,
+Please note that this code is a collaboration among many different Universities. This is the current master branch and contains the most stable version of the application. The changes for the master branch include,
 
 -Refactored modules into a logical build hierarchy that can be compiled from a single POM
 -Refactored individual classes so they are now organized into logical package names
@@ -12,8 +12,10 @@ Please note that this code is a collaboration among many different Universities.
 -Unit tests for basic Profile matching
 -Unit tests for transform execution
 -Unit tests for response parsing
+-Includes a CMake build file to quickly build and test the code
+
 
 
 Repository for Innovation 182 - Context Sensitive InfoButtons
 
-Last Modified December 20, 2013 by Andrew Iskander
+Last Modified July 17, 2014 by Andrew Iskander
