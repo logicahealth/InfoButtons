@@ -16,7 +16,7 @@ package org.openinfobutton.service.dao;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
-import org.openinfobutton.app.dao.IAssetDao;
+import org.openinfobutton.app.dao.AssetDaoI;
 import org.openinfobutton.app.model.Asset;
 import org.openinfobutton.app.model.AssetProperty;
 
@@ -27,7 +27,7 @@ import org.openinfobutton.app.model.AssetProperty;
  * @author rick
  */
 public interface ServiceAssetDao
-    extends IAssetDao
+    extends AssetDaoI
 {
 
     /**

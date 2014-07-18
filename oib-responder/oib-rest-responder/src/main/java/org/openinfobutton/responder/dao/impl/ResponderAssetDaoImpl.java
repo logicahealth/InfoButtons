@@ -1,16 +1,3 @@
-/**
- * -----------------------------------------------------------------------------------
- * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
- * Contact: {@code <andrew.iskander@utah.edu>}
- * Biomedical Informatics
- * 421 Wakara Way, Ste 140
- * Salt Lake City, UT 84108-3514
- * Day Phone: 1-801-581-4080
- * -----------------------------------------------------------------------------------
- *
- * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jul 15, 2014
- */
 package org.openinfobutton.responder.dao.impl;
 
 import java.util.Collection;
@@ -29,323 +16,268 @@ import org.openinfobutton.service.dao.CodeExpanderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ResponderAssetDaoImpl.
  *
  * @author rick
  */
 @Repository
-public class ResponderAssetDaoImpl
-    extends DaoBase<Asset>
-    implements ResponderAssetDao
-{
+public class ResponderAssetDaoImpl extends DaoBase<Asset> implements ResponderAssetDao {
 
-    /** The max supported query criteria. */
     private int maxSupportedQueryCriteria = 950;
 
-    /** The code expander dao. */
     @Autowired
     private CodeExpanderDao codeExpanderDao;
 
-    /*
-     * (non-Javadoc)
-     * @see org.openinfobutton.responder.dao.ResponderAssetDao#findByInfobuttonRequest(java.util.Map)
-     */
     @Override
-    public Collection<Asset> findByInfobuttonRequest( Map<String, String> requestParameters )
-    {
-        return getHqlQueryFromOpenInfobuttonButtonRequest( requestParameters ).list();
+    public Collection<Asset> findByInfobuttonRequest(Map<String, String> requestParameters) {
+
+        Query hqlQuery = getHqlQueryFromOpenInfobuttonButtonRequest(requestParameters);
+
+        return hqlQuery.list();
     }
 
-    /**
-     * Sets the max supported query criteria.
-     *
-     * @param maxSupportedQueryCriteria the new max supported query criteria
-     */
-    public void setMaxSupportedQueryCriteria( int maxSupportedQueryCriteria )
-    {
+    public void setMaxSupportedQueryCriteria(int maxSupportedQueryCriteria) {
         this.maxSupportedQueryCriteria = maxSupportedQueryCriteria;
     }
 
     /**
-     * Builds the HQL search query. Assumes valid request parameters - no direct error handling/checking.
-     * 
+     * Builds the HQL search query. Assumes valid request parameters - no direct
+     * error handling/checking.
+     *
      * @param requestParameters the infobutton standard parameters and values
      * @return the Hibernate Query to the caller
      */
+    private Query getHqlQueryFromOpenInfobuttonButtonRequest(Map<String, String> requestParameters) {
 
-    private Query getHqlQueryFromOpenInfobuttonButtonRequest( Map<String, String> requestParameters )
-    {
-
-        final StringBuilder mainSearchAdditionalPhrases = new StringBuilder();
-        final Map<String, String> hqlParameters = new HashMap<String, String>();
-        final Map<String, Set<String>> hqlParamatersForInPhrases = new HashMap<String, Set<String>>();
+        StringBuilder mainSearchAdditionalPhrases = new StringBuilder();
+        Map<String, String> hqlParameters = new HashMap<String, String>();
+        Map<String, Set<String>> hqlParamatersForInPhrases = new HashMap<String, Set<String>>();
         int aliasIndex = 5; // for alias count to ensure they are unique in the subqueries
 
-        final StringBuilder subTopicPhrase =
-            getHqlCriterionForParameterWithOptionalIndex( requestParameters, hqlParameters, "subTopic.v.c",
-                                                          "subTopic.v", "subTopicCode", aliasIndex++ );
+        StringBuilder subTopicPhrase = getHqlCriterionForParameterWithOptionalIndex(
+                requestParameters,
+                hqlParameters,
+                "subTopic.v.c",
+                "subTopic.v",
+                "subTopicCode", aliasIndex++);
 
-        final StringBuilder agePhrase =
-            getHqlCriterionForAge( requestParameters, hqlParamatersForInPhrases, "age.v.v", "age.v.u", "ageGroup.v",
-                                   "convertedAgeGroups", aliasIndex++ );
+        StringBuilder agePhrase = getHqlCriterionForAge(
+                requestParameters,
+                hqlParamatersForInPhrases,
+                "age.v.v",
+                "age.v.u",
+                "ageGroup.v",
+                "convertedAgeGroups",
+                aliasIndex++);
 
-        final StringBuilder ageGroupPhrase =
-            getHqlCriterionForParameterWithOptionalIndex( requestParameters, hqlParameters, "ageGroup.v.c",
-                                                          "ageGroup.v", "ageGroupCode", aliasIndex++ );
+        StringBuilder ageGroupPhrase = getHqlCriterionForParameterWithOptionalIndex(
+                requestParameters,
+                hqlParameters,
+                "ageGroup.v.c",
+                "ageGroup.v",
+                "ageGroupCode", aliasIndex++);
 
-        final StringBuilder administrativeGenderCodePhrase =
-            getHqlCriterionForParameterWithOptionalIndex( requestParameters, hqlParameters,
-                                                          "patientPerson.administrativeGenderCode.c",
-                                                          "patientPerson.administrativeGenderCode", "genderCode",
-                                                          aliasIndex++ );
+        StringBuilder administrativeGenderCodePhrase = getHqlCriterionForParameterWithOptionalIndex(
+                requestParameters,
+                hqlParameters,
+                "patientPerson.administrativeGenderCode.c",
+                "patientPerson.administrativeGenderCode",
+                "genderCode", aliasIndex++);
 
-        final StringBuilder informationRecipientPhrase =
-            getHqlCriterionForParameterWithOptionalIndex( requestParameters, hqlParameters, "informationRecipient",
-                                                          "informationRecipient", "informationRecipientCode",
-                                                          aliasIndex++ );
+        StringBuilder informationRecipientPhrase = getHqlCriterionForParameterWithOptionalIndex(
+                requestParameters,
+                hqlParameters,
+                "informationRecipient",
+                "informationRecipient",
+                "informationRecipientCode", aliasIndex++);
 
-        final StringBuilder performerPhrase =
-            getHqlCriterionForParameterWithOptionalIndex( requestParameters, hqlParameters, "performer", "performer",
-                                                          "performerCode", aliasIndex++ );
+        StringBuilder performerPhrase = getHqlCriterionForParameterWithOptionalIndex(
+                requestParameters,
+                hqlParameters,
+                "performer",
+                "performer",
+                "performerCode", aliasIndex++);
 
-        final StringBuilder encounterPhrase =
-            getHqlCriterionForParameterWithOptionalIndex( requestParameters, hqlParameters, "encounter.c.c",
-                                                          "encounter.c", "encounterCode", aliasIndex++ );
+        StringBuilder encounterPhrase = getHqlCriterionForParameterWithOptionalIndex(
+                requestParameters,
+                hqlParameters,
+                "encounter.c.c",
+                "encounter.c",
+                "encounterCode", aliasIndex++);
 
-        final StringBuilder mainSearchCriterion =
-            getHqlMainSerchCriteria( requestParameters, hqlParameters, hqlParamatersForInPhrases, aliasIndex++ );
+        StringBuilder mainSearchCriterion
+                = getHqlMainSerchCriteria(requestParameters, hqlParameters, hqlParamatersForInPhrases, aliasIndex++);
 
-        final String taskContext = requestParameters.get( "taskContext.c.c" );
+        String taskContext = requestParameters.get("taskContext.c.c");
 
-        final StringBuilder hsql = new StringBuilder();
-        hsql.append( "select a from Asset a \n" );
-        hsql.append( "where 1 = 1 \n" );
-        hsql.append( mainSearchCriterion.toString() );
-        hsql.append( mainSearchAdditionalPhrases.toString() );
-        hsql.append( "and a in (select p1.asset from " +
-                "AssetProperty p1 where p1.propertyName = " +
-                "'taskContext.c' and p1.code = :taskContext ) \n" );
-        hsql.append( subTopicPhrase.toString() );
-        hsql.append( administrativeGenderCodePhrase.toString() );
-        hsql.append( agePhrase.toString() );
-        hsql.append( ageGroupPhrase.toString() );
-        hsql.append( informationRecipientPhrase.toString() );
-        hsql.append( performerPhrase.toString() );
-        hsql.append( encounterPhrase.toString() );
+        StringBuilder hsql = new StringBuilder();
+        hsql.append("select a from Asset a \n");
+        hsql.append("where 1 = 1 \n");
+        hsql.append(mainSearchCriterion.toString());
+        hsql.append(mainSearchAdditionalPhrases.toString());
+        hsql.append("and a in (select p1.asset from AssetProperty p1 where p1.propertyName = 'taskContext.c' and p1.code = :taskContext ) \n");
+        hsql.append(subTopicPhrase.toString());
+        hsql.append(administrativeGenderCodePhrase.toString());
+        hsql.append(agePhrase.toString());
+        hsql.append(ageGroupPhrase.toString());
+        hsql.append(informationRecipientPhrase.toString());
+        hsql.append(performerPhrase.toString());
+        hsql.append(encounterPhrase.toString());
 
-        System.out.println( hsql.toString() );
+        System.out.println(hsql.toString());
 
-        final Query query = getSessionFactory().getCurrentSession().createQuery( hsql.toString() );
-        query.setParameter( "taskContext", taskContext );
+        Query query = getSessionFactory().getCurrentSession().createQuery(hsql.toString());
+        query.setParameter("taskContext", taskContext);
 
-        for ( final String parameterName : hqlParameters.keySet() )
-        {
-            query.setParameter( parameterName, hqlParameters.get( parameterName ) );
+        for (String parameterName : hqlParameters.keySet()) {
+            query.setParameter(parameterName, hqlParameters.get(parameterName));
         }
 
-        for ( final String parameterName : hqlParamatersForInPhrases.keySet() )
-        {
-            query.setParameterList( parameterName, hqlParamatersForInPhrases.get( parameterName ) );
+        for (String parameterName : hqlParamatersForInPhrases.keySet()) {
+            query.setParameterList(parameterName, hqlParamatersForInPhrases.get(parameterName));
         }
 
         return query;
 
     }
 
-    /**
-     * Gets the hql criterion for parameter with optional index.
-     *
-     * @param requestParameters the request parameters
-     * @param hqlParameters the hql parameters
-     * @param codeParameterName the code parameter name
-     * @param dbPropertyName the db property name
-     * @param hqlParameterName the hql parameter name
-     * @param aliasIndex the alias index
-     * @return the hql criterion for parameter with optional index
-     */
-    private StringBuilder getHqlCriterionForParameterWithOptionalIndex( Map<String, String> requestParameters,
-                                                                        Map<String, String> hqlParameters,
-                                                                        String codeParameterName,
-                                                                        String dbPropertyName, String hqlParameterName,
-                                                                        int aliasIndex )
-    {
+    private StringBuilder getHqlCriterionForParameterWithOptionalIndex(
+            Map<String, String> requestParameters,
+            Map<String, String> hqlParameters,
+            String codeParameterName,
+            String dbPropertyName,
+            String hqlParameterName,
+            int aliasIndex) {
 
-        final StringBuilder queryPhrase = new StringBuilder();
-        final String aliasIndex2 = aliasIndex + "" + aliasIndex;
+        StringBuilder queryPhrase = new StringBuilder();
+        String aliasIndex2 = aliasIndex + "" + aliasIndex;
 
-        if ( requestParameters.get( codeParameterName ) != null )
-        {
+        if (requestParameters.get(codeParameterName) != null) {
 
-            queryPhrase.append( 
-                        " and ( a in ( \n" ).append( "         select p" )
-                        .append( aliasIndex ).append( ".asset from AssetProperty p" ).
-                        append( aliasIndex ).append( " \n" ).append( "         where p" ).
-                        append( aliasIndex ).append( ".propertyName = '" ).append( dbPropertyName ).
-                        append( "' \n" ).append( "           and p" ).append( aliasIndex ).
-                        append( ".code = :" ).append( hqlParameterName ).append( ") \n" ).
-                        append( "     or a not in ( \n" ).append( "         select p" ).
-                        append( aliasIndex2 ).append( ".asset from AssetProperty p" ).
-                        append( aliasIndex2 ).append( " \n" ).append( "         where p" ).
-                        append( aliasIndex2 ).append( ".propertyName = '" ).append( dbPropertyName ).
-                        append( "') \n" ).append( " ) \n" );
+            queryPhrase
+                    .append(" and ( a in ( \n")
+                    .append("         select p").append(aliasIndex).append(".asset from AssetProperty p").append(aliasIndex).append(" \n")
+                    .append("         where p").append(aliasIndex).append(".propertyName = '").append(dbPropertyName).append("' \n")
+                    .append("           and p").append(aliasIndex).append(".code = :").append(hqlParameterName).append(") \n")
+                    .append("     or a not in ( \n")
+                    .append("         select p").append(aliasIndex2).append(".asset from AssetProperty p").append(aliasIndex2).append(" \n")
+                    .append("         where p").append(aliasIndex2).append(".propertyName = '").append(dbPropertyName).append("') \n")
+                    .append(" ) \n");
 
-            hqlParameters.put( hqlParameterName, requestParameters.get( codeParameterName ) );
+            hqlParameters.put(hqlParameterName, requestParameters.get(codeParameterName));
         }
 
         return queryPhrase;
     }
 
-    /**
-     * Gets the hql main serch criteria.
-     *
-     * @param requestParameters the request parameters
-     * @param hqlParameters the hql parameters
-     * @param hqlInPhraseParameters the hql in phrase parameters
-     * @param aliasIndex the alias index
-     * @return the hql main serch criteria
-     */
-    private StringBuilder getHqlMainSerchCriteria( Map<String, String> requestParameters,
-                                                   Map<String, String> hqlParameters,
-                                                   Map<String, Set<String>> hqlInPhraseParameters, int aliasIndex )
-    {
+    private StringBuilder getHqlMainSerchCriteria(
+            Map<String, String> requestParameters,
+            Map<String, String> hqlParameters,
+            Map<String, Set<String>> hqlInPhraseParameters,
+            int aliasIndex) {
 
-        final StringBuilder queryPhrase = new StringBuilder();
+        StringBuilder queryPhrase = new StringBuilder();
         String mainSearchCriteriaCode = null;
         String mainSearchCriteriaCodeSystem = null;
         int criteriaIndex = 0;
         boolean moreCriteria = true;
 
         // and ((m) or (m1) or (m2) ... )
-        while ( moreCriteria && criteriaIndex <= maxSupportedQueryCriteria )
-        {
+        while (moreCriteria && criteriaIndex <= maxSupportedQueryCriteria) {
 
-            if ( criteriaIndex == 0 )
-            {
-                queryPhrase.append( " and ( \n" );
-                mainSearchCriteriaCode = requestParameters.get( "mainSearchCriteria.v.c" );
-                mainSearchCriteriaCodeSystem = requestParameters.get( "mainSearchCriteria.v.cs" );
-            }
-            else
-            {
-                mainSearchCriteriaCode = requestParameters.get( "mainSearchCriteria.v.c" + criteriaIndex );
-                mainSearchCriteriaCodeSystem = requestParameters.get( "mainSearchCriteria.v.cs" + criteriaIndex );
+            if (criteriaIndex == 0) {
+                queryPhrase.append(" and ( \n");
+                mainSearchCriteriaCode = requestParameters.get("mainSearchCriteria.v.c");
+                mainSearchCriteriaCodeSystem = requestParameters.get("mainSearchCriteria.v.cs");
+            } else {
+                mainSearchCriteriaCode = requestParameters.get("mainSearchCriteria.v.c" + criteriaIndex);
+                mainSearchCriteriaCodeSystem = requestParameters.get("mainSearchCriteria.v.cs" + criteriaIndex);
             }
 
-            if ( mainSearchCriteriaCode != null )
-            {
+            if (mainSearchCriteriaCode != null) {
 
-                if ( criteriaIndex > 0 )
-                {
-                    queryPhrase.append( " or \n" );
+                if (criteriaIndex > 0) {
+                    queryPhrase.append(" or \n");
                 }
-                queryPhrase.append( "(a.assetId in \n" ).append( "(select p" ).append( aliasIndex ).
-                append( ".asset from AssetProperty p" ).append( aliasIndex ).append( " \n" ).
-                append( " where (p" ).append( aliasIndex ).append( ".propertyName = 'mainSearchCriteria.v' \n" ).
-                append( "   and p" ).append( aliasIndex ).append( ".codeSystem = :mainSearchCriteriaCodeSystem \n" );
+                queryPhrase
+                        .append("(a.assetId in \n")
+                        .append("(select p").append(aliasIndex).append(".asset from AssetProperty p").append(aliasIndex).append(" \n")
+                        .append(" where (p").append(aliasIndex).append(".propertyName = 'mainSearchCriteria.v' \n")
+                        .append("   and p").append(aliasIndex).append(".codeSystem = :mainSearchCriteriaCodeSystem \n");
 
-                hqlParameters.put( "mainSearchCriteriaCodeSystem", mainSearchCriteriaCodeSystem );
+                hqlParameters.put("mainSearchCriteriaCodeSystem", mainSearchCriteriaCodeSystem);
 
-                if ( CodeExpanderDao.RXNORM_CODE_SYSTEM_OID.equals( mainSearchCriteriaCodeSystem ) )
-                {
+                if (CodeExpanderDao.RXNORM_CODE_SYSTEM_OID.equals(mainSearchCriteriaCodeSystem)) {
 
-                    final String hqlParameterName = "mainSearchCriteriaCodeList" + criteriaIndex;
-                    queryPhrase.append( "   and p" ).append( aliasIndex ).append( ".code in (:" ).
-                    append( hqlParameterName ).append( "))) \n ) \n" );
-                    final Set<Code> expansionCodes =
-                        codeExpanderDao.getExpansionCodes( CodeExpanderDao.RXNORM_CODE_SYSTEM_OID,
-                                                           mainSearchCriteriaCode );
-                    final Set<String> codes = getCodesOnly( expansionCodes );
-                    hqlInPhraseParameters.put( hqlParameterName, codes );
+                    String hqlParameterName = "mainSearchCriteriaCodeList" + criteriaIndex;
+                    queryPhrase.append("   and p").append(aliasIndex).append(".code in (:").append(hqlParameterName).append("))) \n ) \n");
+                    Set<Code> expansionCodes = codeExpanderDao.getExpansionCodes(CodeExpanderDao.RXNORM_CODE_SYSTEM_OID, mainSearchCriteriaCode);
+                    Set<String> codes = getCodesOnly(expansionCodes);
+                    hqlInPhraseParameters.put(hqlParameterName, codes);
 
-                }
-                else
-                {
-                    final String hqlParameterName = "mainSearchCriteriaCode" + criteriaIndex;
-                    queryPhrase.append( "   and p" ).append( aliasIndex ).append( ".code = :" ).
-                    append( hqlParameterName ).append( ")) \n ) \n" );
-                    hqlParameters.put( hqlParameterName, mainSearchCriteriaCode );
+                } else {
+                    String hqlParameterName = "mainSearchCriteriaCode" + criteriaIndex;
+                    queryPhrase.append("   and p").append(aliasIndex).append(".code = :").append(hqlParameterName).append(")) \n ) \n");
+                    hqlParameters.put(hqlParameterName, mainSearchCriteriaCode);
                 }
 
-            }
-            else
-            {
+            } else {
                 moreCriteria = false;
             }
 
             criteriaIndex++;
         }
 
-        queryPhrase.append( " ) \n" );
+        queryPhrase.append(" ) \n");
 
         return queryPhrase;
     }
 
-    /**
-     * Gets the hql criterion for age.
-     *
-     * @param requestParameters the request parameters
-     * @param hqlInPhraseParameters the hql in phrase parameters
-     * @param ageParameterName the age parameter name
-     * @param ageUnitsParameterName the age units parameter name
-     * @param dbPropertyName the db property name
-     * @param hqlParameterName the hql parameter name
-     * @param aliasIndex the alias index
-     * @return the hql criterion for age
-     */
-    private StringBuilder getHqlCriterionForAge( Map<String, String> requestParameters,
-                                                 Map<String, Set<String>> hqlInPhraseParameters,
-                                                 String ageParameterName, String ageUnitsParameterName,
-                                                 String dbPropertyName, String hqlParameterName, int aliasIndex )
-    {
+    private StringBuilder getHqlCriterionForAge(
+            Map<String, String> requestParameters,
+            Map<String, Set<String>> hqlInPhraseParameters,
+            String ageParameterName,
+            String ageUnitsParameterName,
+            String dbPropertyName,
+            String hqlParameterName,
+            int aliasIndex) {
 
-        final StringBuilder queryPhrase = new StringBuilder();
-        final String aliasIndex2 = aliasIndex + "" + aliasIndex;
-        final String ageValue = requestParameters.get( ageParameterName );
-        final String ageUnitsCode = requestParameters.get( ageUnitsParameterName );
+        StringBuilder queryPhrase = new StringBuilder();
+        String aliasIndex2 = aliasIndex + "" + aliasIndex;
+        String ageValue = requestParameters.get(ageParameterName);
+        String ageUnitsCode = requestParameters.get(ageUnitsParameterName);
 
-        if ( ageValue != null && ageUnitsCode != null )
-        {
+        if (ageValue != null && ageUnitsCode != null) {
 
-            final List<Code> hqlAgeGroupCodes =
-                AgeToAgeGroupConversionHelper.ageToAgeGroup( Integer.parseInt( ageValue ), ageUnitsCode );
+            List<Code> hqlAgeGroupCodes = AgeToAgeGroupConversionHelper.ageToAgeGroup(Integer.parseInt(ageValue), ageUnitsCode);
 
-            final Set<String> hqlAgeGroupCodesSet = new HashSet<String>();
-            for ( final Code ageGroupCode : hqlAgeGroupCodes )
-            {
-                hqlAgeGroupCodesSet.add( ageGroupCode.getCode() );
+            Set<String> hqlAgeGroupCodesSet = new HashSet<String>();
+            for (Code ageGroupCode : hqlAgeGroupCodes) {
+                hqlAgeGroupCodesSet.add(ageGroupCode.getCode());
             }
 
-            queryPhrase.append( " and ( a in ( \n" ).append( "         select p" ).
-            append( aliasIndex ).append( ".asset from AssetProperty p" ).append( aliasIndex ).
-            append( " \n" ).append( "         where p" ).append( aliasIndex ).append( ".propertyName = '" ).
-            append( dbPropertyName ).append( "' \n" ).append( "           and p" ).append( aliasIndex ).
-            append( ".code in (:" ).append( hqlParameterName ).append( ")) \n" ).append( "     or a not in ( \n" ).
-            append( "         select p" ).append( aliasIndex2 ).append( ".asset from AssetProperty p" ).
-            append( aliasIndex2 ).append( " \n" ).append( "         where p" ).append( aliasIndex2 ).
-            append( ".propertyName = '" ).append( dbPropertyName ).append( "') \n" ).append( " ) \n" );
+            queryPhrase
+                    .append(" and ( a in ( \n")
+                    .append("         select p").append(aliasIndex).append(".asset from AssetProperty p").append(aliasIndex).append(" \n")
+                    .append("         where p").append(aliasIndex).append(".propertyName = '").append(dbPropertyName).append("' \n")
+                    .append("           and p").append(aliasIndex).append(".code in (:").append(hqlParameterName).append(")) \n")
+                    .append("     or a not in ( \n")
+                    .append("         select p").append(aliasIndex2).append(".asset from AssetProperty p").append(aliasIndex2).append(" \n")
+                    .append("         where p").append(aliasIndex2).append(".propertyName = '").append(dbPropertyName).append("') \n")
+                    .append(" ) \n");
 
-            hqlInPhraseParameters.put( hqlParameterName, hqlAgeGroupCodesSet );
+            hqlInPhraseParameters.put(hqlParameterName, hqlAgeGroupCodesSet);
         }
 
         return queryPhrase;
     }
 
-    /**
-     * Gets the codes only.
-     *
-     * @param codes the codes
-     * @return the codes only
-     */
-    private Set<String> getCodesOnly( Set<Code> codes )
-    {
+    private Set<String> getCodesOnly(Set<Code> codes) {
 
-        final Set<String> codesOnly = new HashSet<String>();
+        Set<String> codesOnly = new HashSet<String>();
 
-        for ( final Code code_ : codes )
-        {
-            codesOnly.add( code_.getCode() );
+        for (Code code_ : codes) {
+            codesOnly.add(code_.getCode());
         }
 
         return codesOnly;

@@ -1,6 +1,5 @@
 package examples;
 
-import com.sun.org.apache.bcel.internal.classfile.Code;
 import gov.nih.nlm.uts.webservice.content.AtomClusterRelationDTO;
 import gov.nih.nlm.uts.webservice.content.Psf;
 import gov.nih.nlm.uts.webservice.content.SourceAtomClusterDTO;
@@ -48,8 +47,8 @@ public class UtsExampleMain {
         myPsf.getIncludedRelationLabels().add("PAR");
 
         try {
-            myAtomClusterRelations =
-                    utsContentService.getSourceDescriptorSourceDescriptorRelations(getSecurityTicket(), umlsRelease, code, "ICD9CM", myPsf);
+            myAtomClusterRelations
+                    = utsContentService.getSourceDescriptorSourceDescriptorRelations(getSecurityTicket(), umlsRelease, code, "ICD9CM", myPsf);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,15 +59,15 @@ public class UtsExampleMain {
             String otherAtomClusterUi = myAtomClusterRelationDTO.getRelatedAtomCluster().getUi();
             String otherAtomClusterName = myAtomClusterRelationDTO.getRelatedAtomCluster().getDefaultPreferredName();
             String otherAtomClusterRel = myAtomClusterRelationDTO.getRelationLabel();
-            
+
             System.out.println(level + ":" + otherAtomClusterRel + ":" + code + " hasChild " + otherAtomClusterUi + " " + otherAtomClusterName);
-            
+
             getIcd9Children(level + 1, otherAtomClusterUi);
         }
 
     }
 
-        private void getSnomedChildren(int level, String code) {
+    private void getSnomedChildren(int level, String code) {
 
         UtsWsContentController utsContentService = (new UtsWsContentControllerImplService()).getUtsWsContentControllerImplPort();
         SourceAtomClusterDTO conceptAtomCluster = null;
@@ -80,8 +79,8 @@ public class UtsExampleMain {
 
             conceptAtomCluster = utsContentService.getCode(getSecurityTicket(), umlsRelease, code, "SNOMEDCT");
 
-            myRelations =
-                    utsContentService.getSourceConceptSourceConceptRelations(getSecurityTicket(), umlsRelease, code, "SNOMEDCT", myPsf);
+            myRelations
+                    = utsContentService.getSourceConceptSourceConceptRelations(getSecurityTicket(), umlsRelease, code, "SNOMEDCT", myPsf);
 
         } catch (UtsFault_Exception e) {
             e.printStackTrace();
@@ -92,10 +91,10 @@ public class UtsExampleMain {
             AtomClusterRelationDTO myRelation = myRelations.get(i);
             String cuiCode = myRelation.getRelatedAtomCluster().getUi();
             String cuiPreferredName = myRelation.getRelatedAtomCluster().getDefaultPreferredName();
-            
-            System.out.println("Snomed CUI = " + cuiCode + " meaning " + cuiPreferredName );
 
-            getSnomedChildren(level + 1, cuiCode );
+            System.out.println("Snomed CUI = " + cuiCode + " meaning " + cuiPreferredName);
+
+            getSnomedChildren(level + 1, cuiCode);
         }
 
     }
@@ -126,7 +125,7 @@ public class UtsExampleMain {
         System.out.println("============== START ====================");
 
         utsWebService.getIcd9Children(1, "482");
-        utsWebService.getSnomedChildren(1,"47505003");
+        utsWebService.getSnomedChildren(1, "47505003");
 
         System.out.println("=============== END =====================");
 

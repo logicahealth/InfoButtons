@@ -1,11 +1,8 @@
 /**
  * -----------------------------------------------------------------------------------
- * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
- * Contact: {@code <andrew.iskander@utah.edu>}
- * Biomedical Informatics
- * 421 Wakara Way, Ste 140
- * Salt Lake City, UT 84108-3514
- * Day Phone: 1-801-581-4080
+ * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of
+ * Utah Contact: {@code <andrew.iskander@utah.edu>} Biomedical Informatics 421
+ * Wakara Way, Ste 140 Salt Lake City, UT 84108-3514 Day Phone: 1-801-581-4080
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
@@ -19,26 +16,32 @@ package org.openinfobutton.app.model;
  *
  * @author rick
  */
-public class Code
-{
+public class Code {
 
-    /** The code. */
+    /**
+     * The code.
+     */
     private String code;
 
-    /** The display name. */
+    /**
+     * The display name.
+     */
     private String displayName;
 
-    /** The code system oid. */
+    /**
+     * The code system oid.
+     */
     private String codeSystemOid;
 
-    /** The code system display name. */
+    /**
+     * The code system display name.
+     */
     private String codeSystemDisplayName;
 
     /**
      * Instantiates a new code.
      */
-    public Code()
-    {
+    public Code() {
     }
 
     /**
@@ -47,8 +50,7 @@ public class Code
      * @param codeSystemOid the code system oid
      * @param code the code
      */
-    public Code( String codeSystemOid, String code )
-    {
+    public Code(String codeSystemOid, String code) {
         this.code = code;
         this.codeSystemOid = codeSystemOid;
     }
@@ -58,8 +60,7 @@ public class Code
      *
      * @return the code
      */
-    public String getCode()
-    {
+    public String getCode() {
         return code;
     }
 
@@ -68,8 +69,7 @@ public class Code
      *
      * @return the code system oid
      */
-    public String getCodeSystemOid()
-    {
+    public String getCodeSystemOid() {
         return codeSystemOid;
     }
 
@@ -78,8 +78,7 @@ public class Code
      *
      * @param codeSystemOid the new code system oid
      */
-    public void setCodeSystemOid( String codeSystemOid )
-    {
+    public void setCodeSystemOid(String codeSystemOid) {
         this.codeSystemOid = codeSystemOid;
     }
 
@@ -88,8 +87,7 @@ public class Code
      *
      * @return the code system display name
      */
-    public String getCodeSystemDisplayName()
-    {
+    public String getCodeSystemDisplayName() {
         return codeSystemDisplayName;
     }
 
@@ -98,8 +96,7 @@ public class Code
      *
      * @param codeSystemDisplayName the new code system display name
      */
-    public void setCodeSystemDisplayName( String codeSystemDisplayName )
-    {
+    public void setCodeSystemDisplayName(String codeSystemDisplayName) {
         this.codeSystemDisplayName = codeSystemDisplayName;
     }
 
@@ -108,8 +105,7 @@ public class Code
      *
      * @param code the new code
      */
-    public void setCode( String code )
-    {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -118,8 +114,7 @@ public class Code
      *
      * @return the display name
      */
-    public String getDisplayName()
-    {
+    public String getDisplayName() {
         return displayName;
     }
 
@@ -128,8 +123,7 @@ public class Code
      *
      * @param displayName the new display name
      */
-    public void setDisplayName( String displayName )
-    {
+    public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
 
@@ -138,18 +132,13 @@ public class Code
      * @see java.lang.Object#hashCode()
      */
     @Override
-    public int hashCode()
-    {
-
-        if ( code != null && codeSystemOid != null )
-        {
+    public int hashCode() {
+        if (code != null && codeSystemOid != null) {
             return code.hashCode() + codeSystemOid.hashCode();
-        }
-        else if ( code != null && codeSystemOid == null )
-        {
+        } else if (code != null && codeSystemOid == null) {
             return code.hashCode();
         }
-        return this.hashCode();
+        return 0;
     }
 
     /*
@@ -157,15 +146,11 @@ public class Code
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object obj )
-    {
+    public boolean equals(Object obj) {
 
-        if ( code != null && codeSystemOid != null )
-        {
+        if (code != null && codeSystemOid != null) {
             return this.hashCode() == obj.hashCode();
-        }
-        else if ( code != null && codeSystemOid == null )
-        {
+        } else if (code != null && codeSystemOid == null) {
             return code.hashCode() == obj.hashCode();
         }
 

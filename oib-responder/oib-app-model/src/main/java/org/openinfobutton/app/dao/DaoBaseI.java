@@ -13,25 +13,45 @@
  */
 package org.openinfobutton.app.dao;
 
-import java.util.List;
-import org.openinfobutton.app.model.AppProperty;
+import java.io.Serializable;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IAppPropertyDao.
+ * The Interface DaoBaseI.
  *
- * @author rick
+ * @author rick Base interface for basic DAO operations Generic Dao pattern
+ * @param <T> the generic type
  */
-public interface IAppPropertyDao
-    extends IDaoBase<AppProperty>
+public interface DaoBaseI<T>
 {
 
     /**
-     * Gets the app property group.
+     * Save.
      *
-     * @param propertyGroup the property group
-     * @return the app property group
+     * @param domain the domain
      */
-    List<AppProperty> getAppPropertyGroup( String propertyGroup );
+    public void save( T domain );
+
+    /**
+     * Update.
+     *
+     * @param domain the domain
+     */
+    public void update( T domain );
+
+    /**
+     * Delete.
+     *
+     * @param domain the domain
+     */
+    public void delete( T domain );
+
+    /**
+     * Gets the.
+     *
+     * @param id the id
+     * @return the t
+     */
+    public T get( Serializable id );
 
 }
