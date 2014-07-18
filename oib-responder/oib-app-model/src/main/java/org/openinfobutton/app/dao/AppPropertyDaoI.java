@@ -13,27 +13,25 @@
  */
 package org.openinfobutton.app.dao;
 
-import java.math.BigDecimal;
 import java.util.List;
-import org.openinfobutton.app.model.ValueSet;
-import org.openinfobutton.app.model.ValueSetCode;
+import org.openinfobutton.app.model.AppProperty;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IValueSetDao.
+ * The Interface AppPropertyDaoI.
  *
  * @author rick
  */
-public interface IValueSetDao
-    extends IDaoBase<ValueSet>
+public interface AppPropertyDaoI
+    extends DaoBaseI<AppProperty>
 {
 
     /**
-     * Gets the value set codes.
+     * Gets the app property group.
      *
-     * @param valueSetId the value set id
-     * @return the value set codes
+     * @param propertyGroup the property group
+     * @return the app property group
      */
-    List<ValueSetCode> getValueSetCodes( BigDecimal valueSetId );
+    List<AppProperty> getAppPropertyGroup( String propertyGroup );
 
 }

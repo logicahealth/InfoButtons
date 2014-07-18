@@ -13,15 +13,27 @@
  */
 package org.openinfobutton.app.dao;
 
-import org.openinfobutton.app.model.RequestParameter;
+import java.math.BigDecimal;
+import java.util.List;
+import org.openinfobutton.app.model.ValueSet;
+import org.openinfobutton.app.model.ValueSetCode;
 
+// TODO: Auto-generated Javadoc
 /**
- * The Interface IRequestParameterDao.
+ * The Interface ValueSetDaoI.
  *
  * @author rick
  */
-public interface IRequestParameterDao
-    extends IDaoBase<RequestParameter>
+public interface ValueSetDaoI
+    extends DaoBaseI<ValueSet>
 {
+
+    /**
+     * Gets the value set codes.
+     *
+     * @param valueSetId the value set id
+     * @return the value set codes
+     */
+    List<ValueSetCode> getValueSetCodes( BigDecimal valueSetId );
 
 }

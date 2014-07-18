@@ -26,7 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @param <T> the generic type
  */
 public abstract class DaoBase<T>
-    implements IDaoBase<T>
+    implements DaoBaseI<T>
 {
 
     /** The entity class. */
@@ -70,7 +70,7 @@ public abstract class DaoBase<T>
 
     /*
      * (non-Javadoc)
-     * @see org.openinfobutton.app.dao.IDaoBase#delete(java.lang.Object)
+     * @see org.openinfobutton.app.dao.DaoBaseI#delete(java.lang.Object)
      */
     @Override
     public void delete( T domain )
@@ -80,7 +80,7 @@ public abstract class DaoBase<T>
 
     /*
      * (non-Javadoc)
-     * @see org.openinfobutton.app.dao.IDaoBase#save(java.lang.Object)
+     * @see org.openinfobutton.app.dao.DaoBaseI#save(java.lang.Object)
      */
     @Override
     public void save( T domain )
@@ -91,7 +91,7 @@ public abstract class DaoBase<T>
 
     /*
      * (non-Javadoc)
-     * @see org.openinfobutton.app.dao.IDaoBase#update(java.lang.Object)
+     * @see org.openinfobutton.app.dao.DaoBaseI#update(java.lang.Object)
      */
     @Override
     public void update( T domain )
@@ -101,7 +101,7 @@ public abstract class DaoBase<T>
 
     /*
      * (non-Javadoc)
-     * @see org.openinfobutton.app.dao.IDaoBase#get(java.io.Serializable)
+     * @see org.openinfobutton.app.dao.DaoBaseI#get(java.io.Serializable)
      */
     @Override
     public T get( Serializable id )

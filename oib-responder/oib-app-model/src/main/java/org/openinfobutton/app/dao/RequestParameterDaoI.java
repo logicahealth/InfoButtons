@@ -13,15 +13,15 @@
  */
 package org.openinfobutton.app.dao;
 
-import org.openinfobutton.app.model.Asset;
+import org.openinfobutton.app.model.RequestParameter;
 
 /**
- * The Interface IAssetDao.
+ * The Interface RequestParameterDaoI.
  *
  * @author rick
  */
-public interface IAssetDao
-    extends IDaoBase<Asset>
+public interface RequestParameterDaoI
+    extends DaoBaseI<RequestParameter>
 {
 
 }

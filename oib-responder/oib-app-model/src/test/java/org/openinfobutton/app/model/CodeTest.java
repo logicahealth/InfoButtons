@@ -25,11 +25,50 @@ public class CodeTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
     }
+    
+    public void testCodeConstructor() {
+        System.out.println("testSetGetCode");
+        Code code = new Code("csOid","code1234");
+        String expResult = "code1234";
+        assertTrue( expResult.equals(code.getCode()) && "csOid".equals(code.getCodeSystemOid()));
+    }
+
+    public void testSetGetCode() {
+        System.out.println("testSetGetCode");
+        Code code = new Code();
+        code.setCode("code1");
+        String expResult = "code1";
+        assertTrue( expResult.equals(code.getCode()) );
+    }
+
+    public void testSetGetDisplayName() {
+        System.out.println("testSetGetDisplayName");
+        Code code = new Code();
+        code.setDisplayName("dispName");
+        String expResult = "dispName";
+        assertTrue( expResult.equals(code.getDisplayName()) );        
+    }
+
+    public void testSetCodeSystemOid() {
+        System.out.println("testSetCodeSystemOid");
+        Code code = new Code();
+        code.setCodeSystemOid("oid.oid");
+        String expResult = "oid.oid";
+        assertTrue( expResult.equals(code.getCodeSystemOid()));
+    }
+
+    public void testSetGetCodeSystemDisplay() {
+        System.out.println("testSetGetCodeSystemDisplay");
+        Code code = new Code();
+        code.setCodeSystemDisplayName("csDisplay");
+        String expResult = "csDisplay";
+        assertTrue(expResult.equals(code.getCodeSystemDisplayName()));
+    }
 
     /**
      * Test of hashCode method, of class Code.
      */
-    public void testHashCodeWithCodeAndCdeSystem() {
+    public void testHashCodeWithCodeAndCodeSystem() {
         System.out.println("hashCode");
         Code code1 = new Code();
         code1.setCode("123");
@@ -147,6 +186,12 @@ public class CodeTest extends TestCase {
         codes.add(code1);
         codes.add(code2);
         assertTrue( codes.size() == 2 );
+    }
+    
+    public void testHashCodeNoVals() {
+        System.out.println("No vals set");
+        Code code1 = new Code();
+        assertTrue( code1.hashCode() == 0 );
     }
     
        

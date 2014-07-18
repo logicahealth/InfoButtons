@@ -10,30 +10,19 @@ import org.openinfobutton.service.IndexService;
  * @author rick
  */
 public class CodeExpanderUtsHelperTest extends TestCase {
-    
-    public CodeExpanderUtsHelperTest(String testName) {
-        super(testName);
-    }
-    
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
 
     public void testExpansionCodeStub() {
-        assertTrue( true );
+        // this was neccesary to keep this test file.  The test below is useful 
+        // during development ...
+
+        assertTrue(true);
     }
-    
+
     /**
-     * Test of getExpansionCodes method, of class CodeExpanderUtsHelper. 
-     * Requires full integration and setup to run
-     *  - not good for compile time regression and or unit testing
-     *  - good for sanity testing during development to validate settings and external functionality
+     * Test of getExpansionCodes method, of class CodeExpanderUtsHelper.
+     * Requires full integration and setup to run - not good for compile time
+     * regression and or unit testing - good for sanity testing during
+     * development to validate settings and external functionality
      */
 //    public void testGetExpansionCodes() {
 //        System.out.println("getExpansionCodes");
@@ -54,6 +43,5 @@ public class CodeExpanderUtsHelperTest extends TestCase {
 //        for ( Code eCode:codes ) {
 //            System.out.println(code + " hasExpCode=" + eCode.getCode());
 //        }
-        
 //    }
 }
