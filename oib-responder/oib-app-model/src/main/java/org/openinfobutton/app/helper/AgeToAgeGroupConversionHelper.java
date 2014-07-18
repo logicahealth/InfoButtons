@@ -18,7 +18,6 @@ import java.util.List;
 import org.openinfobutton.app.model.AgeGroupMeshCode;
 import org.openinfobutton.app.model.AgeUnitUcumCode;
 import org.openinfobutton.app.model.Code;
-import org.openinfobutton.schema.CodeUtility;
 
 // TODO: Auto-generated Javadoc
 /**
