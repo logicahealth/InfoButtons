@@ -15,11 +15,17 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 public interface ResponderService {
 
     Set<String> getRxNormQueryExpansionTermTypes();
+
     Map<String, String> getKnowledgeRequestParameterMap(Map httpRequestParameters);
+
     Map<String, Map<String, String>> getIndexPropertyInterpretationMap();
+
     Collection<Asset> findAssetsByInfobuttonRequest(Map<String, String> requestParameters);
+
     Properties getApplicationProperties(String propertyGroup);
+
     boolean requestContainsRequiredParameters(Map<String, String> requestParameters) throws MissingServletRequestParameterException;
+
     Map<String, Map<String, String>> getIndexPropertyInterpretationMap(Collection<RequestParameter> requestParameters);
-    
+
 }

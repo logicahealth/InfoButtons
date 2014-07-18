@@ -10,7 +10,7 @@ import org.openinfobutton.app.model.Asset;
  * @author rick
  */
 public interface ResponderAssetDao extends AssetDaoI {
- 
-    Collection<Asset> findByInfobuttonRequest( Map<String,String> requestParameters );
-    
+
+    Collection<Asset> findByInfobuttonRequest(Map<String, String> requestParameters);
+
 }

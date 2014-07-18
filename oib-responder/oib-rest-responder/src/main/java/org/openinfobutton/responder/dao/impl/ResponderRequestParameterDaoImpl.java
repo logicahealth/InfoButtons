@@ -16,14 +16,14 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ResponderRequestParameterDaoImpl extends DaoBase<RequestParameter> implements ResponderRequestParameterDao {
-    
+
     List<RequestParameter> supportedOpenInfobuttonRequestParameters = null;
 
     @Override
     public Collection<RequestParameter> getRequiredOpenInfobuttonRequestParameters() {
         return this.getOpenInfobuttonRequestParametersByMinCardinality(1);
     }
-    
+
     @Override
     public void setAllOpenInfobuttonRequestParameters(List<RequestParameter> supportedOpenInfobuttonRequestParameters) {
         this.supportedOpenInfobuttonRequestParameters = supportedOpenInfobuttonRequestParameters;
@@ -36,13 +36,13 @@ public class ResponderRequestParameterDaoImpl extends DaoBase<RequestParameter> 
             supportedOpenInfobuttonRequestParameters = getSessionFactory()
                     .getCurrentSession()
                     .createCriteria(RequestParameter.class)
-                    .add( Restrictions.isNotNull("parameterRoot") )
-                    .add( Restrictions.isNotNull("parameterName") )
-                    .add( Restrictions.isNotNull("typeCode") )
+                    .add(Restrictions.isNotNull("parameterRoot"))
+                    .add(Restrictions.isNotNull("parameterName"))
+                    .add(Restrictions.isNotNull("typeCode"))
                     .addOrder(Order.asc("parameterName"))
                     .list();
         }
-        
+
         return supportedOpenInfobuttonRequestParameters;
     }
 

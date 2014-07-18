@@ -8,5 +8,4 @@ import org.openinfobutton.app.dao.ValueSetDaoI;
  */
 public interface ResponderValueSetDao extends ValueSetDaoI {
 
-    
 }

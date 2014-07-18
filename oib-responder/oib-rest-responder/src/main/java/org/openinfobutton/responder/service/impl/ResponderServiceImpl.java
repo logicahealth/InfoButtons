@@ -40,12 +40,11 @@ public class ResponderServiceImpl implements ResponderService {
     private Properties appProperties;
     private Set<String> rxNormQueryExpansionTermTypes;
 
-    @Autowired 
+    @Autowired
     public void setResponderRequestParameterDao(ResponderRequestParameterDao responderRequestParameterDao) {
         this.responderRequestParameterDao = responderRequestParameterDao;
     }
 
-    
     @Autowired
     public void setResponderAssetDao(ResponderAssetDao responderAssetDao) {
         this.responderAssetDao = responderAssetDao;

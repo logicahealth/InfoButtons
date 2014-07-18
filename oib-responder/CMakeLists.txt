@@ -49,14 +49,6 @@ foreach(test ${oibAppMServiceTests})
                  COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
 endforeach()
 
-file(GLOB_RECURSE oibIndexManagerTests ${OIB_RESPONDER_SOURCE_DIR}/oib-index-manager/src/test/**/*.java)
-
-foreach(test ${oibIndexManagerTests})
-        get_filename_component(testname ${test} NAME_WE)
-        add_test(NAME MVN${testname}_OIB_INDEX_MANAGER WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/oib-index-manager
-                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
-endforeach()
-
 file(GLOB_RECURSE oibRestResponderTests ${OIB_RESPONDER_SOURCE_DIR}/oib-rest-responder/src/test/**/*.java)
 
 foreach(test ${oibRestResponderTests})
@@ -65,19 +57,4 @@ foreach(test ${oibRestResponderTests})
                  COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
 endforeach()
 
-file(GLOB_RECURSE rxNormRestModelTests ${OIB_RESPONDER_SOURCE_DIR}/rxnorm-rest-model/src/test/**/*.java)
-
-foreach(test ${rxNormRestModelTests})
-        get_filename_component(testname ${test} NAME_WE)
-        add_test(NAME MVN${testname}_RXNORM_REST_MODEL WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/rxnorm-rest-model
-                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
-endforeach()
-
-file(GLOB_RECURSE utsWebClientTests ${OIB_RESPONDER_SOURCE_DIR}/uts-ws-client/src/test/**/*.java)
-
-# foreach(test ${utsWebClientTests})
-#        get_filename_component(testname ${test} NAME_WE)
-#        add_test(NAME MVN${testname}_UTS_WEB_CLIENT WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/uts-web-client
-#                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} test)
-#endforeach()
 endif()

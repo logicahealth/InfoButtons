@@ -22,13 +22,13 @@ public class SanityTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
     }
-    
+
     public void testEmptyMap() {
-        
-        Map<String,String> map = new HashMap<String,String>();
-        
-        assertTrue( map.get("whatever") == null );
-        
+
+        Map<String, String> map = new HashMap<String, String>();
+
+        assertTrue(map.get("whatever") == null);
+
     }
 
 }

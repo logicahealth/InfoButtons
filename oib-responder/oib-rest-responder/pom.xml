@@ -45,17 +45,29 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5</version>
             </plugin>
-
-            <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>2.0.5</version>
-                <configuration>
-                    <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
-                    <changeLogFile>src/main/resources/liquibase/master.xml</changeLogFile>
-                </configuration>
-            </plugin>
             
+<!--            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.12.1</version>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <configLocation>va-checker.xml</configLocation>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>false</failsOnError>
+                            <linkXRef>false</linkXRef>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>            -->
+
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -269,8 +281,8 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.12.1</version>
                 <configuration>
-                    <!--configLocation>config/sun_checks.xml</configLocation-->
                     <configLocation>va-checker.xml</configLocation>
                 </configuration>
             </plugin>

@@ -13,14 +13,14 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ResponderAppPropertyDaoImpl extends DaoBase<AppProperty> implements ResponderAppPropertyDao {
-    
+
     @Override
-    public List<AppProperty> getAppPropertyGroup( String propertyGroup ) {
+    public List<AppProperty> getAppPropertyGroup(String propertyGroup) {
         return getSessionFactory()
                 .getCurrentSession()
                 .createCriteria(AppProperty.class)
                 .add(Restrictions.eq("propertyGroup", propertyGroup))
                 .list();
     }
-    
+
 }

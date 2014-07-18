@@ -28,13 +28,13 @@ public class OpenInfobuttonResponderController {
     public static final String ATOM_PAGE = "searchResultsAtom";
     public static final String HTML_PAGE = "searchResultsHtml";
     public static final String ATOM_FEED_KEY = "atom.feed";
-    
+
     @Autowired
     private ResponderService responderService;
-    
+
     private Properties atomFeedMetadata;
     private Map<String, Map<String, String>> indexPropertyInterpretationMap;
-    
+
     public void setResponderService(ResponderService responderService) {
         this.responderService = responderService;
     }
@@ -43,16 +43,16 @@ public class OpenInfobuttonResponderController {
         this.atomFeedMetadata = atomFeedMetadata;
     }
 
-    public void setIndexPropertyInterpretationMap(Map<String, Map<String, String>> indexPropertyInterpretationMap) {
+    public void setIndexPropertyInterpretationMap(final Map<String, Map<String, String>> indexPropertyInterpretationMap) {
         this.indexPropertyInterpretationMap = indexPropertyInterpretationMap;
     }
 
-    private void setRequiredResponseObjects(){
+    private void setRequiredResponseObjects() {
 
-        if ( this.atomFeedMetadata == null ) {
-            this.atomFeedMetadata = responderService.getApplicationProperties( ATOM_FEED_KEY );
+        if (this.atomFeedMetadata == null) {
+            this.atomFeedMetadata = responderService.getApplicationProperties(ATOM_FEED_KEY);
         }
-        if ( this.indexPropertyInterpretationMap == null ) {
+        if (this.indexPropertyInterpretationMap == null) {
             this.indexPropertyInterpretationMap = responderService.getIndexPropertyInterpretationMap();
         }
 
@@ -63,19 +63,29 @@ public class OpenInfobuttonResponderController {
         return INDEX_PAGE;
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     * @throws MissingServletRequestParameterException
+     * @throws HttpMediaTypeNotSupportedException
+     * @throws IllegalArgumentException
+     */
     @RequestMapping("/responder")
-    public String openInfobuttonRequestHandler(HttpServletRequest request, HttpServletResponse response, ModelMap model)
+    public String openInfobuttonRequestHandler(final HttpServletRequest request, final HttpServletResponse response, final ModelMap model)
             throws MissingServletRequestParameterException, HttpMediaTypeNotSupportedException, IllegalArgumentException {
 
         response.setHeader("Cache-Control", "no-cache");
         // todo: if authorization is required return 401 when not authorized
-        
+
         setRequiredResponseObjects();
-        
-        // throws IllegalArgumentException 
+
+        // throws IllegalArgumentException
         Map<String, String> requestParameters = responderService.getKnowledgeRequestParameterMap(request.getParameterMap());
-        
-        // throws MissingServletRequestParameterException 
+
+        // throws MissingServletRequestParameterException
         responderService.requestContainsRequiredParameters(requestParameters);
         Collection<Asset> matchedAssets = responderService.findAssetsByInfobuttonRequest(requestParameters);
 
@@ -98,25 +108,25 @@ public class OpenInfobuttonResponderController {
 
     }
 
-    @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE, 
+    @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE,
             reason = "Requested knowedgeResourceType not supported.")
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public void handleHttpMediaTypeNotSupportedException() {
         // logic handled by annotations
     }
-    
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST, 
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST,
             reason = "Missing required parameter(s): mainSearchCriteria.v.c, mainSearchCriteria.v.cs, or taskContext.c.c")  // 400
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public void handleMissingServletRequestParameterException() {
         // logic handled by annotations
     }
-    
+
     @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Illegal argument: each parameter name must be distict.  "
             + "Parameters that support cardinality greater than 1 require distinct trailing numeric values.")  // 400
     @ExceptionHandler(IllegalArgumentException.class)
     public void handleIllegalArgumentException() {
         // logic handled by annotations
     }
-    
+
 }

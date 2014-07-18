@@ -41,8 +41,7 @@ public class ResponderAssetDaoImpl extends DaoBase<Asset> implements ResponderAs
     }
 
     /**
-     * Builds the HQL search query. Assumes valid request parameters - no direct
-     * error handling/checking.
+     * Builds the HQL search query. Assumes valid request parameters - no direct error handling/checking.
      *
      * @param requestParameters the infobutton standard parameters and values
      * @return the Hibernate Query to the caller
@@ -244,8 +243,8 @@ public class ResponderAssetDaoImpl extends DaoBase<Asset> implements ResponderAs
 
         StringBuilder queryPhrase = new StringBuilder();
         String aliasIndex2 = aliasIndex + "" + aliasIndex;
-        String ageValue = requestParameters.get(ageParameterName);
-        String ageUnitsCode = requestParameters.get(ageUnitsParameterName);
+        final String ageValue = requestParameters.get(ageParameterName);
+        final String ageUnitsCode = requestParameters.get(ageUnitsParameterName);
 
         if (ageValue != null && ageUnitsCode != null) {
 

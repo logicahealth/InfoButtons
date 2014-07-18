@@ -10,15 +10,15 @@ import org.openinfobutton.app.model.RequestParameter;
  * @author rick
  */
 public interface ResponderRequestParameterDao extends RequestParameterDaoI {
- 
+
     void setAllOpenInfobuttonRequestParameters(List<RequestParameter> allOpenInfobuttonRequestParameters);
 
     List<RequestParameter> getSupportedOpenInfobuttonRequestParametersOrdered();
 
-    Collection<RequestParameter> getOpenInfobuttonRequestParametersByMinCardinality( int minCardinality );
+    Collection<RequestParameter> getOpenInfobuttonRequestParametersByMinCardinality(int minCardinality);
 
     Collection<RequestParameter> getRequiredOpenInfobuttonRequestParameters();
 
-    RequestParameter getOpenInfobuttonRequestParameterByName( String paramaterName);
+    RequestParameter getOpenInfobuttonRequestParameterByName(String paramaterName);
 
 }
