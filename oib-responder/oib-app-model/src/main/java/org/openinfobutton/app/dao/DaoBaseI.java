@@ -19,7 +19,7 @@ import java.io.Serializable;
 /**
  * The Interface DaoBaseI.
  *
- * @author rick Base interface for basic DAO operations Generic Dao pattern
+ * @author Rick BradshawBradshawBase interface for basic DAO operations Generic Dao pattern
  * @param <T> the generic type
  */
 public interface DaoBaseI<T>

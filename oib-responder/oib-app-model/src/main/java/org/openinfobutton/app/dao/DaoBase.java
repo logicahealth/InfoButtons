@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * The Class DaoBase.
  *
- * @author rick Generic Dao pattern
+ * @author Rick BradshawBradshawGeneric Dao pattern
  * @param <T> the generic type
  */
 public abstract class DaoBase<T>

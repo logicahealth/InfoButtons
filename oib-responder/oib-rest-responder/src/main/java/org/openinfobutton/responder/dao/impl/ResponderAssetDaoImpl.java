@@ -1,5 +1,31 @@
 package org.openinfobutton.responder.dao.impl;
 
+/*
+ * #%L
+ * Project:  oib-rest-responder
+ * Director: Guilherme Del Fiol, MD, PhD
+ *           University of Utah
+ *           Biomedical Informatics
+ *           421 Wakara Way, Suite 140
+ *           Salt Lake City, UT 84108-3514
+ * Phone:    801-581-4080
+ * %%
+ * Copyright (C) 2010 - 2014 University of Utah
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,7 +44,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author rick
+ * @author Rick Bradshaw
  */
 @Repository
 public class ResponderAssetDaoImpl extends DaoBase<Asset> implements ResponderAssetDao {
@@ -28,6 +54,11 @@ public class ResponderAssetDaoImpl extends DaoBase<Asset> implements ResponderAs
     @Autowired
     private CodeExpanderDao codeExpanderDao;
 
+    /**
+     *
+     * @param requestParameters
+     * @return
+     */
     @Override
     public Collection<Asset> findByInfobuttonRequest(Map<String, String> requestParameters) {
 
@@ -36,12 +67,17 @@ public class ResponderAssetDaoImpl extends DaoBase<Asset> implements ResponderAs
         return hqlQuery.list();
     }
 
+    /**
+     *
+     * @param maxSupportedQueryCriteria
+     */
     public void setMaxSupportedQueryCriteria(int maxSupportedQueryCriteria) {
         this.maxSupportedQueryCriteria = maxSupportedQueryCriteria;
     }
 
     /**
-     * Builds the HQL search query. Assumes valid request parameters - no direct error handling/checking.
+     * Builds the HQL search query. Assumes valid request parameters - no direct
+     * error handling/checking.
      *
      * @param requestParameters the infobutton standard parameters and values
      * @return the Hibernate Query to the caller

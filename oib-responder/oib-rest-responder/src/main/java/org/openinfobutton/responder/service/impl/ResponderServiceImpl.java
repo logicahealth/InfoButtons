@@ -1,5 +1,31 @@
 package org.openinfobutton.responder.service.impl;
 
+/*
+ * #%L
+ * Project:  oib-rest-responder
+ * Director: Guilherme Del Fiol, MD, PhD
+ *           University of Utah
+ *           Biomedical Informatics
+ *           421 Wakara Way, Suite 140
+ *           Salt Lake City, UT 84108-3514
+ * Phone:    801-581-4080
+ * %%
+ * Copyright (C) 2010 - 2014 University of Utah
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,7 +52,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 
 /**
  *
- * @author rick
+ * @author Rick Bradshaw
  */
 @Service
 public class ResponderServiceImpl implements ResponderService {
@@ -40,30 +66,54 @@ public class ResponderServiceImpl implements ResponderService {
     private Properties appProperties;
     private Set<String> rxNormQueryExpansionTermTypes;
 
+    /**
+     *
+     * @param responderRequestParameterDao
+     */
     @Autowired
     public void setResponderRequestParameterDao(ResponderRequestParameterDao responderRequestParameterDao) {
         this.responderRequestParameterDao = responderRequestParameterDao;
     }
 
+    /**
+     *
+     * @param responderAssetDao
+     */
     @Autowired
     public void setResponderAssetDao(ResponderAssetDao responderAssetDao) {
         this.responderAssetDao = responderAssetDao;
     }
 
+    /**
+     *
+     * @param responderValueSetDao
+     */
     @Autowired
     public void setResponderValueSetDao(ResponderValueSetDao responderValueSetDao) {
         this.responderValueSetDao = responderValueSetDao;
     }
 
+    /**
+     *
+     * @param responderAppPropertyDao
+     */
     @Autowired
     public void setResponderAppPropertyDao(ResponderAppPropertyDao responderAppPropertyDao) {
         this.responderAppPropertyDao = responderAppPropertyDao;
     }
 
+    /**
+     *
+     * @param appProperties
+     */
     public void setAppProperties(Properties appProperties) {
         this.appProperties = appProperties;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     @Transactional
     public Set<String> getRxNormQueryExpansionTermTypes() {
@@ -86,6 +136,11 @@ public class ResponderServiceImpl implements ResponderService {
 
     }
 
+    /**
+     *
+     * @param requestParameters
+     * @return
+     */
     @Override
     public Map<String, Map<String, String>> getIndexPropertyInterpretationMap(Collection<RequestParameter> requestParameters) {
 
@@ -133,6 +188,10 @@ public class ResponderServiceImpl implements ResponderService {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     @Transactional
     public Map<String, Map<String, String>> getIndexPropertyInterpretationMap() {
@@ -147,6 +206,11 @@ public class ResponderServiceImpl implements ResponderService {
 
     }
 
+    /**
+     *
+     * @param httpRequestParameters
+     * @return
+     */
     @Override
     public Map<String, String> getKnowledgeRequestParameterMap(Map httpRequestParameters) {
 
@@ -175,6 +239,12 @@ public class ResponderServiceImpl implements ResponderService {
         return requestParameters;
     }
 
+    /**
+     *
+     * @param requestParameters
+     * @return
+     * @throws MissingServletRequestParameterException
+     */
     @Override
     @Transactional
     public boolean requestContainsRequiredParameters(Map<String, String> requestParameters) throws MissingServletRequestParameterException {
@@ -214,6 +284,11 @@ public class ResponderServiceImpl implements ResponderService {
 
     }
 
+    /**
+     *
+     * @param propertyGroup
+     * @return
+     */
     @Override
     @Transactional
     public Properties getApplicationProperties(String propertyGroup) {
@@ -234,6 +309,11 @@ public class ResponderServiceImpl implements ResponderService {
 
     }
 
+    /**
+     *
+     * @param requestParameters
+     * @return
+     */
     @Override
     @Transactional
     public Collection<Asset> findAssetsByInfobuttonRequest(Map<String, String> requestParameters) {

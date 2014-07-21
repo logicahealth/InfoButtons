@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author rick - Tests are stubs to be added to when the in-memory db
+ * @author Rick BradshawBradshaw- Tests are stubs to be added to when the in-memory db
  * implementation is complete. Tests validate spring IOC is working via a test
  * context. Business logic can't be tested until db is fully operational. May be
  * better suited for integration tests.

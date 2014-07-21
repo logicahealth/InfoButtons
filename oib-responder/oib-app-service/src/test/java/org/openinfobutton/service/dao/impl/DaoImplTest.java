@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author rick - Tests are stubs to be added to when the in-memory db
+ * @author Rick BradshawBradshaw- Tests are stubs to be added to when the in-memory db
  * implementation is improved. Tests validate spring IOC is working via a test
  * context. Business logic can't be tested until db is fully operational. May be
  * better suited for integration tests.
