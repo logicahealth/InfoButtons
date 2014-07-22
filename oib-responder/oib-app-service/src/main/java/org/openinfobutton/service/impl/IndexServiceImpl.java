@@ -1,18 +1,30 @@
-/**
- * -----------------------------------------------------------------------------------
- * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
- * Contact: {@code <andrew.iskander@utah.edu>}
- * Biomedical Informatics
- * 421 Wakara Way, Ste 140
- * Salt Lake City, UT 84108-3514
- * Day Phone: 1-801-581-4080
- * -----------------------------------------------------------------------------------
- *
- * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jul 15, 2014
- */
 package org.openinfobutton.service.impl;
 
+/*
+ * #%L
+ * Project:  oib-app-service
+ * Director: Guilherme Del Fiol, MD, PhD
+ *           University of Utah
+ *           Biomedical Informatics
+ *           421 Wakara Way, Suite 140
+ *           Salt Lake City, UT 84108-3514
+ * Phone:    801-581-4080
+ * %%
+ * Copyright (C) 2010 - 2014 University of Utah
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
@@ -31,7 +43,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class IndexServiceImpl.
  *
@@ -39,22 +50,29 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class IndexServiceImpl
-    implements IndexService
-{
+        implements IndexService {
 
-    /** The service asset dao. */
+    /**
+     * The service asset dao.
+     */
     @Autowired
     ServiceAssetDao serviceAssetDao;
 
-    /** The value set dao. */
+    /**
+     * The value set dao.
+     */
     @Autowired
     ValueSetDao valueSetDao;
 
-    /** The app property dao. */
+    /**
+     * The app property dao.
+     */
     @Autowired
     AppPropertyDao appPropertyDao;
 
-    /** The code expander dao. */
+    /**
+     * The code expander dao.
+     */
     @Autowired
     CodeExpanderDao codeExpanderDao;
 
@@ -64,13 +82,12 @@ public class IndexServiceImpl
      */
     @Override
     @Transactional
-    public List<ValueSetCode> getSupportedCodeExpansionCodeSystems()
-    {
+    public List<ValueSetCode> getSupportedCodeExpansionCodeSystems() {
 
-        final Properties appProperties = appPropertyDao.getAppProperties( "app.valueset.id" );
-        final String expansionCodeValueSetId = appProperties.getProperty( "SUPPORTED_EXPANSION_CODE_SYSTEMS" );
-        final List<ValueSetCode> supportedCodes =
-            valueSetDao.getValueSetCodes( new BigDecimal( expansionCodeValueSetId ) );
+        final Properties appProperties = appPropertyDao.getAppProperties("app.valueset.id");
+        final String expansionCodeValueSetId = appProperties.getProperty("SUPPORTED_EXPANSION_CODE_SYSTEMS");
+        final List<ValueSetCode> supportedCodes
+                = valueSetDao.getValueSetCodes(new BigDecimal(expansionCodeValueSetId));
 
         return supportedCodes;
     }
@@ -81,9 +98,8 @@ public class IndexServiceImpl
      */
     @Override
     @Transactional
-    public Set<Code> getExpansionCodes( String codeSystem, String code )
-    {
-        return codeExpanderDao.getExpansionCodes( codeSystem, code );
+    public Set<Code> getExpansionCodes(String codeSystem, String code) {
+        return codeExpanderDao.getExpansionCodes(codeSystem, code);
     }
 
     /*
@@ -92,9 +108,8 @@ public class IndexServiceImpl
      */
     @Override
     @Transactional
-    public int refreshAssetIndex( BigDecimal assetId )
-    {
-        throw new UnsupportedOperationException( "Not supported yet." );
+    public int refreshAssetIndex(BigDecimal assetId) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /*
@@ -103,44 +118,40 @@ public class IndexServiceImpl
      */
     @Override
     @Transactional
-    public int refreshAssetIndex( BigDecimal assetId, String codeSystem )
-    {
+    public int refreshAssetIndex(BigDecimal assetId, String codeSystem) {
 
-        serviceAssetDao.deleteAssetPropertiesByGeneratedByCodeAndCodeSystem( assetId, codeSystem,
-                                                                             GENERATED_BY_ONTOLOGY_RELATIONSHIP );
+        serviceAssetDao.deleteAssetPropertiesByGeneratedByCodeAndCodeSystem(assetId, codeSystem,
+                GENERATED_BY_ONTOLOGY_RELATIONSHIP);
 
-        final Asset asset = serviceAssetDao.get( assetId );
+        final Asset asset = serviceAssetDao.get(assetId);
         final List<AssetProperty> assetProperties = asset.getAssetProperties();
-        int maxPropertyGroupNumber = serviceAssetDao.findMaxAssetPropertyGroup( assetId );
+        int maxPropertyGroupNumber = serviceAssetDao.findMaxAssetPropertyGroup(assetId);
 
-        for ( final AssetProperty assetProperty : assetProperties )
-        {
+        for (final AssetProperty assetProperty : assetProperties) {
 
             final String propertyCodeSystem = assetProperty.getCodeSystem();
 
-            if ( propertyCodeSystem != null && propertyCodeSystem.equals( codeSystem ) )
-            {
+            if (propertyCodeSystem != null && propertyCodeSystem.equals(codeSystem)) {
 
-                final Set<Code> expansionCodes =
-                    codeExpanderDao.getExpansionCodes( codeSystem, assetProperty.getCode() );
+                final Set<Code> expansionCodes
+                        = codeExpanderDao.getExpansionCodes(codeSystem, assetProperty.getCode());
 
-                for ( final Code newCode : expansionCodes )
-                {
+                for (final Code newCode : expansionCodes) {
 
-                    System.out.println( asset + "===> Indexing code=" + newCode.getCode() + " "
-                        + newCode.getDisplayName() );
+                    System.out.println(asset + "===> Indexing code=" + newCode.getCode() + " "
+                            + newCode.getDisplayName());
 
                     final AssetProperty newAssetProperty = new AssetProperty();
-                    newAssetProperty.setAsset( assetProperty.getAsset() );
-                    newAssetProperty.setPropertyName( "mainSearchCriteria.v" );
-                    newAssetProperty.setCodeSystem( newCode.getCodeSystemOid() );
-                    newAssetProperty.setCode( newCode.getCode() );
-                    newAssetProperty.setDisplayName( newCode.getDisplayName() );
-                    newAssetProperty.setPropertyGroupNumber( new BigInteger( "" + ++maxPropertyGroupNumber ) );
-                    newAssetProperty.setPropertyType( "CODE" );
-                    newAssetProperty.setGeneratedByCode( GENERATED_BY_ONTOLOGY_RELATIONSHIP );
+                    newAssetProperty.setAsset(assetProperty.getAsset());
+                    newAssetProperty.setPropertyName("mainSearchCriteria.v");
+                    newAssetProperty.setCodeSystem(newCode.getCodeSystemOid());
+                    newAssetProperty.setCode(newCode.getCode());
+                    newAssetProperty.setDisplayName(newCode.getDisplayName());
+                    newAssetProperty.setPropertyGroupNumber(new BigInteger("" + ++maxPropertyGroupNumber));
+                    newAssetProperty.setPropertyType("CODE");
+                    newAssetProperty.setGeneratedByCode(GENERATED_BY_ONTOLOGY_RELATIONSHIP);
 
-                    serviceAssetDao.addAssetProperty( newAssetProperty );
+                    serviceAssetDao.addAssetProperty(newAssetProperty);
                 }
             }
 
@@ -155,9 +166,8 @@ public class IndexServiceImpl
      */
     @Override
     @Transactional
-    public int refreshAllAssetIndexes()
-    {
-        throw new UnsupportedOperationException( "Not supported yet." );
+    public int refreshAllAssetIndexes() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /*
@@ -166,15 +176,13 @@ public class IndexServiceImpl
      */
     @Override
     @Transactional
-    public int refreshAllAssetIndexes( String codeSystem )
-    {
+    public int refreshAllAssetIndexes(String codeSystem) {
 
-        final List<Asset> assets = serviceAssetDao.findAssetsByPropertyCodeSystem( codeSystem );
+        final List<Asset> assets = serviceAssetDao.findAssetsByPropertyCodeSystem(codeSystem);
 
-        for ( final Asset asset : assets )
-        {
-            System.out.println( "Refreshing asset (" + asset.getAssetId() + ") " + asset.getDisplayName() );
-            refreshAssetIndex( asset.getAssetId(), codeSystem );
+        for (final Asset asset : assets) {
+            System.out.println("Refreshing asset (" + asset.getAssetId() + ") " + asset.getDisplayName());
+            refreshAssetIndex(asset.getAssetId(), codeSystem);
         }
 
         return 1;

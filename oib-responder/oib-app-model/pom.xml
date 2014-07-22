@@ -42,6 +42,25 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.7</version>
+                <configuration>
+                    <excludes>
+                        <exclude>${basedir}/**/README</exclude>
+                        <exclude>${basedir}/src/test/resources/**</exclude>
+                        <exclude>${basedir}/src/main/resources/**</exclude>
+                        <exclude>${basedir}/src/license/**</exclude>
+                    </excludes>                            
+                    <licenseName>apache_v2</licenseName>
+                    <organizationName>University of Utah</organizationName>
+                    <inceptionYear>2010</inceptionYear>                           
+                    <descriptionTemplate>${basedir}/src/license/oib-license-signature.ftl</descriptionTemplate>
+                </configuration>
+            </plugin>            
+            
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>

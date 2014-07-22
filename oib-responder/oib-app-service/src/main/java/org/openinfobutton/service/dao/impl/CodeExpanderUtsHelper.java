@@ -1,18 +1,30 @@
-/**
- * -----------------------------------------------------------------------------------
- * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
- * Contact: {@code <andrew.iskander@utah.edu>}
- * Biomedical Informatics
- * 421 Wakara Way, Ste 140
- * Salt Lake City, UT 84108-3514
- * Day Phone: 1-801-581-4080
- * -----------------------------------------------------------------------------------
- *
- * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jul 15, 2014
- */
 package org.openinfobutton.service.dao.impl;
 
+/*
+ * #%L
+ * Project:  oib-app-service
+ * Director: Guilherme Del Fiol, MD, PhD
+ *           University of Utah
+ *           Biomedical Informatics
+ *           421 Wakara Way, Suite 140
+ *           Salt Lake City, UT 84108-3514
+ * Phone:    801-581-4080
+ * %%
+ * Copyright (C) 2010 - 2014 University of Utah
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 import gov.nih.nlm.uts.webservice.content.AtomClusterRelationDTO;
 import gov.nih.nlm.uts.webservice.content.Psf;
 import gov.nih.nlm.uts.webservice.content.SourceAtomClusterDTO;
@@ -30,26 +42,27 @@ import java.util.Set;
 import org.openinfobutton.app.model.Code;
 import org.openinfobutton.service.dao.CodeExpanderDao;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CodeExpanderUtsHelper.
  *
  * @author rick
  */
-public class CodeExpanderUtsHelper
-{
+public class CodeExpanderUtsHelper {
 
-    /** The uts properties. */
+    /**
+     * The uts properties.
+     */
     private Properties utsProperties;
 
-    /** The expansion codes. */
+    /**
+     * The expansion codes.
+     */
     private Set<Code> expansionCodes;
 
     /**
      * Instantiates a new code expander uts helper.
      */
-    public CodeExpanderUtsHelper()
-    {
+    public CodeExpanderUtsHelper() {
     }
 
     /**
@@ -57,8 +70,7 @@ public class CodeExpanderUtsHelper
      *
      * @param properties the properties
      */
-    public CodeExpanderUtsHelper( Properties properties )
-    {
+    public CodeExpanderUtsHelper(Properties properties) {
         this.utsProperties = properties;
     }
 
@@ -67,8 +79,7 @@ public class CodeExpanderUtsHelper
      *
      * @param utsProperties the new uts properties
      */
-    public void setUtsProperties( Properties utsProperties )
-    {
+    public void setUtsProperties(Properties utsProperties) {
         this.utsProperties = utsProperties;
     }
 
@@ -79,24 +90,18 @@ public class CodeExpanderUtsHelper
      * @param code the code
      * @return the expansion codes
      */
-    public Set<Code> getExpansionCodes( String codeSystem, String code )
-    {
+    public Set<Code> getExpansionCodes(String codeSystem, String code) {
 
         expansionCodes = new HashSet<Code>();
 
-        if ( CodeExpanderDao.SNOMED_CODE_SYSTEM_OID.equals( codeSystem ) )
-        {
-            getSnomedChildren( 1, code );
-        }
-        else if ( CodeExpanderDao.ICD9_CODE_SYSTEM_OID.equals( codeSystem ) )
-        {
-            getIcd9Children( 1, code );
-        }
-        else
-        {
-            throw new UnsupportedOperationException( "Code system " + codeSystem
-                + " is not supported by the current UTS implementation." ); // To change body of generated methods,
-                                                                            // choose Tools | Templates.
+        if (CodeExpanderDao.SNOMED_CODE_SYSTEM_OID.equals(codeSystem)) {
+            getSnomedChildren(1, code);
+        } else if (CodeExpanderDao.ICD9_CODE_SYSTEM_OID.equals(codeSystem)) {
+            getIcd9Children(1, code);
+        } else {
+            throw new UnsupportedOperationException("Code system " + codeSystem
+                    + " is not supported by the current UTS implementation."); // To change body of generated methods,
+            // choose Tools | Templates.
         }
 
         return expansionCodes;
@@ -109,43 +114,38 @@ public class CodeExpanderUtsHelper
      * @param code the code
      * @return the icd9 children
      */
-    private void getIcd9Children( int level, String code )
-    {
+    private void getIcd9Children(int level, String code) {
 
-        final UtsWsContentController utsContentService =
-            ( new UtsWsContentControllerImplService() ).getUtsWsContentControllerImplPort();
+        final UtsWsContentController utsContentService
+                = (new UtsWsContentControllerImplService()).getUtsWsContentControllerImplPort();
 
         List<AtomClusterRelationDTO> myAtomClusterRelations = new ArrayList<AtomClusterRelationDTO>();
         final Psf myPsf = new Psf();
-        myPsf.getIncludedRelationLabels().add( "PAR" );
+        myPsf.getIncludedRelationLabels().add("PAR");
 
-        try
-        {
-            myAtomClusterRelations =
-                utsContentService.getSourceDescriptorSourceDescriptorRelations( getSecurityTicket(),
-                                                                                utsProperties.getProperty( "uts.umlsRelease" ),
-                                                                                code, "ICD9CM", myPsf );
-        }
-        catch ( final UtsFault_Exception e )
-        {
+        try {
+            myAtomClusterRelations
+                    = utsContentService.getSourceDescriptorSourceDescriptorRelations(getSecurityTicket(),
+                            utsProperties.getProperty("uts.umlsRelease"),
+                            code, "ICD9CM", myPsf);
+        } catch (final UtsFault_Exception e) {
             e.printStackTrace();
         }
 
-        for ( int i = 0; i < myAtomClusterRelations.size(); i++ )
-        {
+        for (int i = 0; i < myAtomClusterRelations.size(); i++) {
 
-            final AtomClusterRelationDTO myAtomClusterRelationDTO = myAtomClusterRelations.get( i );
+            final AtomClusterRelationDTO myAtomClusterRelationDTO = myAtomClusterRelations.get(i);
             final String cuiCode = myAtomClusterRelationDTO.getRelatedAtomCluster().getUi();
             final String cuiPreferredName = myAtomClusterRelationDTO.getRelatedAtomCluster().getDefaultPreferredName();
 
             final Code code_ = new Code();
-            code_.setCode( cuiCode );
-            code_.setDisplayName( cuiPreferredName );
-            code_.setCodeSystemOid( CodeExpanderDao.ICD9_CODE_SYSTEM_OID );
-            code_.setCodeSystemDisplayName( "ICD-9 CM" );
+            code_.setCode(cuiCode);
+            code_.setDisplayName(cuiPreferredName);
+            code_.setCodeSystemOid(CodeExpanderDao.ICD9_CODE_SYSTEM_OID);
+            code_.setCodeSystemDisplayName("ICD-9 CM");
 
-            expansionCodes.add( code_ );
-            getIcd9Children( level + 1, cuiCode );
+            expansionCodes.add(code_);
+            getIcd9Children(level + 1, cuiCode);
 
         }
 
@@ -158,49 +158,44 @@ public class CodeExpanderUtsHelper
      * @param code the code
      * @return the snomed children
      */
-    private void getSnomedChildren( int level, String code )
-    {
+    private void getSnomedChildren(int level, String code) {
 
-        final UtsWsContentController utsContentService =
-            ( new UtsWsContentControllerImplService() ).getUtsWsContentControllerImplPort();
+        final UtsWsContentController utsContentService
+                = (new UtsWsContentControllerImplService()).getUtsWsContentControllerImplPort();
         SourceAtomClusterDTO conceptAtomCluster = null;
         List<AtomClusterRelationDTO> myRelations = null;
         final Psf myPsf = new Psf();
-        myPsf.getIncludedRelationLabels().add( "PAR" );
+        myPsf.getIncludedRelationLabels().add("PAR");
 
-        try
-        {
+        try {
 
-            conceptAtomCluster =
-                utsContentService.getCode( getSecurityTicket(), utsProperties.getProperty( "uts.umlsRelease" ), code,
-                                           "SNOMEDCT" );
+            conceptAtomCluster
+                    = utsContentService.getCode(getSecurityTicket(), utsProperties.getProperty("uts.umlsRelease"), code,
+                            "SNOMEDCT");
 
-            myRelations =
-                utsContentService.getSourceConceptSourceConceptRelations( getSecurityTicket(),
-                                                                          utsProperties.getProperty( "uts.umlsRelease" ),
-                                                                          code, "SNOMEDCT", myPsf );
+            myRelations
+                    = utsContentService.getSourceConceptSourceConceptRelations(getSecurityTicket(),
+                            utsProperties.getProperty("uts.umlsRelease"),
+                            code, "SNOMEDCT", myPsf);
 
-        }
-        catch ( final UtsFault_Exception e )
-        {
+        } catch (final UtsFault_Exception e) {
             e.printStackTrace();
         }
 
-        for ( int i = 0; i < myRelations.size(); i++ )
-        {
+        for (int i = 0; i < myRelations.size(); i++) {
 
-            final AtomClusterRelationDTO myRelation = myRelations.get( i );
+            final AtomClusterRelationDTO myRelation = myRelations.get(i);
             final String cuiCode = myRelation.getRelatedAtomCluster().getUi();
             final String cuiPreferredName = myRelation.getRelatedAtomCluster().getDefaultPreferredName();
 
             final Code code_ = new Code();
-            code_.setCode( cuiCode );
-            code_.setDisplayName( cuiPreferredName );
-            code_.setCodeSystemOid( CodeExpanderDao.SNOMED_CODE_SYSTEM_OID );
-            code_.setCodeSystemDisplayName( "SNOMED CT" );
+            code_.setCode(cuiCode);
+            code_.setDisplayName(cuiPreferredName);
+            code_.setCodeSystemOid(CodeExpanderDao.SNOMED_CODE_SYSTEM_OID);
+            code_.setCodeSystemDisplayName("SNOMED CT");
 
-            expansionCodes.add( code_ );
-            getSnomedChildren( level + 1, cuiCode );
+            expansionCodes.add(code_);
+            getSnomedChildren(level + 1, cuiCode);
         }
 
     }
@@ -210,23 +205,19 @@ public class CodeExpanderUtsHelper
      *
      * @return the security ticket
      */
-    private String getSecurityTicket()
-    {
+    private String getSecurityTicket() {
 
         String singleUseTicket = null;
-        final UtsWsSecurityController securityService =
-            ( new UtsWsSecurityControllerImplService() ).getUtsWsSecurityControllerImplPort();
+        final UtsWsSecurityController securityService
+                = (new UtsWsSecurityControllerImplService()).getUtsWsSecurityControllerImplPort();
 
-        try
-        {
-            final String ticketGrantingTicket =
-                securityService.getProxyGrantTicket( utsProperties.getProperty( "uts.username" ),
-                                                     utsProperties.getProperty( "uts.password" ) );
-            singleUseTicket =
-                securityService.getProxyTicket( ticketGrantingTicket, utsProperties.getProperty( "uts.serviceName" ) );
-        }
-        catch ( final Exception e )
-        {
+        try {
+            final String ticketGrantingTicket
+                    = securityService.getProxyGrantTicket(utsProperties.getProperty("uts.username"),
+                            utsProperties.getProperty("uts.password"));
+            singleUseTicket
+                    = securityService.getProxyTicket(ticketGrantingTicket, utsProperties.getProperty("uts.serviceName"));
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 

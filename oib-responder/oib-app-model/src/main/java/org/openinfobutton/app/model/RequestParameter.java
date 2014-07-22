@@ -1,17 +1,30 @@
-/**
- * -----------------------------------------------------------------------------------
- * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
- * Contact: {@code <andrew.iskander@utah.edu>}
- * Biomedical Informatics
- * 421 Wakara Way, Ste 140
- * Salt Lake City, UT 84108-3514
- * Day Phone: 1-801-581-4080
- * -----------------------------------------------------------------------------------
- *
- * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jul 15, 2014
- */
 package org.openinfobutton.app.model;
+
+/*
+ * #%L
+ * Project:  oib-app-model
+ * Director: Guilherme Del Fiol, MD, PhD
+ *           University of Utah
+ *           Biomedical Informatics
+ *           421 Wakara Way, Suite 140
+ *           Salt Lake City, UT 84108-3514
+ * Phone:    801-581-4080
+ * %%
+ * Copyright (C) 2010 - 2014 University of Utah
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -25,71 +38,84 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RequestParameter.
  *
  * @author rick
  */
 @Entity
-@Table( name = "OIB_REQUEST_PARAMETER" )
+@Table(name = "OIB_REQUEST_PARAMETER")
 @XmlRootElement
-@NamedQueries( {
-    @NamedQuery( name = "RequestParameter.findAll", query = "SELECT o FROM RequestParameter o" ),
-    @NamedQuery( name = "RequestParameter.findByRequestParameterId", 
-                query = "SELECT o FROM RequestParameter o WHERE o.requestParameterId = :requestParameterId" ),
-    @NamedQuery( name = "RequestParameter.findByParameterName", 
-                query = "SELECT o FROM RequestParameter o WHERE o.parameterName = :parameterName" ),
-    @NamedQuery( name = "RequestParameter.findByParameterDescription", 
-                query = "SELECT o FROM RequestParameter o WHERE o.parameterDescription = :parameterDescription" ),
-    @NamedQuery( name = "RequestParameter.findByCardinalityMin", 
-                query = "SELECT o FROM RequestParameter o WHERE o.cardinalityMin = :cardinalityMin" ),
-    @NamedQuery( name = "RequestParameter.findByCardinalityMax", 
-                query = "SELECT o FROM RequestParameter o WHERE o.cardinalityMax = :cardinalityMax" ) } )
+@NamedQueries({
+    @NamedQuery(name = "RequestParameter.findAll", query = "SELECT o FROM RequestParameter o"),
+    @NamedQuery(name = "RequestParameter.findByRequestParameterId",
+            query = "SELECT o FROM RequestParameter o WHERE o.requestParameterId = :requestParameterId"),
+    @NamedQuery(name = "RequestParameter.findByParameterName",
+            query = "SELECT o FROM RequestParameter o WHERE o.parameterName = :parameterName"),
+    @NamedQuery(name = "RequestParameter.findByParameterDescription",
+            query = "SELECT o FROM RequestParameter o WHERE o.parameterDescription = :parameterDescription"),
+    @NamedQuery(name = "RequestParameter.findByCardinalityMin",
+            query = "SELECT o FROM RequestParameter o WHERE o.cardinalityMin = :cardinalityMin"),
+    @NamedQuery(name = "RequestParameter.findByCardinalityMax",
+            query = "SELECT o FROM RequestParameter o WHERE o.cardinalityMax = :cardinalityMax")})
 public class RequestParameter
-    implements Serializable
-{
+        implements Serializable {
 
-    /** The Constant serialVersionUID. */
+    /**
+     * The Constant serialVersionUID.
+     */
     private static final long serialVersionUID = 1L;
 
     // @Max(value=?) @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce
     // field validation
-    /** The request parameter id. */
+    /**
+     * The request parameter id.
+     */
     @Id
-    @Basic( optional = false )
-    @Column( name = "REQUEST_PARAMETER_ID" )
+    @Basic(optional = false)
+    @Column(name = "REQUEST_PARAMETER_ID")
     private BigDecimal requestParameterId;
 
-    /** The parameter name. */
-    @Column( name = "PARAMETER_NAME" )
+    /**
+     * The parameter name.
+     */
+    @Column(name = "PARAMETER_NAME")
     private String parameterName;
 
-    /** The parameter root. */
-    @Column( name = "PARAMETER_ROOT" )
+    /**
+     * The parameter root.
+     */
+    @Column(name = "PARAMETER_ROOT")
     private String parameterRoot;
 
-    /** The type code. */
-    @Column( name = "TYPE_CD" )
+    /**
+     * The type code.
+     */
+    @Column(name = "TYPE_CD")
     private String typeCode;
 
-    /** The parameter description. */
-    @Column( name = "PARAMETER_DSC" )
+    /**
+     * The parameter description.
+     */
+    @Column(name = "PARAMETER_DSC")
     private String parameterDescription;
 
-    /** The cardinality min. */
-    @Column( name = "CARDINALITY_MIN" )
+    /**
+     * The cardinality min.
+     */
+    @Column(name = "CARDINALITY_MIN")
     private Long cardinalityMin;
 
-    /** The cardinality max. */
-    @Column( name = "CARDINALITY_MAX" )
+    /**
+     * The cardinality max.
+     */
+    @Column(name = "CARDINALITY_MAX")
     private BigInteger cardinalityMax;
 
     /**
      * Instantiates a new request parameter.
      */
-    public RequestParameter()
-    {
+    public RequestParameter() {
     }
 
     /**
@@ -97,8 +123,7 @@ public class RequestParameter
      *
      * @param requestParameterId the request parameter id
      */
-    public RequestParameter( BigDecimal requestParameterId )
-    {
+    public RequestParameter(BigDecimal requestParameterId) {
         this.requestParameterId = requestParameterId;
     }
 
@@ -107,8 +132,7 @@ public class RequestParameter
      *
      * @return the request parameter id
      */
-    public BigDecimal getRequestParameterId()
-    {
+    public BigDecimal getRequestParameterId() {
         return requestParameterId;
     }
 
@@ -117,8 +141,7 @@ public class RequestParameter
      *
      * @param requestParameterId the new request parameter id
      */
-    public void setRequestParameterId( BigDecimal requestParameterId )
-    {
+    public void setRequestParameterId(BigDecimal requestParameterId) {
         this.requestParameterId = requestParameterId;
     }
 
@@ -127,8 +150,7 @@ public class RequestParameter
      *
      * @return the parameter name
      */
-    public String getParameterName()
-    {
+    public String getParameterName() {
         return parameterName;
     }
 
@@ -137,8 +159,7 @@ public class RequestParameter
      *
      * @param parameterName the new parameter name
      */
-    public void setParameterName( String parameterName )
-    {
+    public void setParameterName(String parameterName) {
         this.parameterName = parameterName;
     }
 
@@ -147,8 +168,7 @@ public class RequestParameter
      *
      * @return the parameter root
      */
-    public String getParameterRoot()
-    {
+    public String getParameterRoot() {
         return parameterRoot;
     }
 
@@ -157,8 +177,7 @@ public class RequestParameter
      *
      * @param parameterRoot the new parameter root
      */
-    public void setParameterRoot( String parameterRoot )
-    {
+    public void setParameterRoot(String parameterRoot) {
         this.parameterRoot = parameterRoot;
     }
 
@@ -167,8 +186,7 @@ public class RequestParameter
      *
      * @return the type code
      */
-    public String getTypeCode()
-    {
+    public String getTypeCode() {
         return typeCode;
     }
 
@@ -177,8 +195,7 @@ public class RequestParameter
      *
      * @param typeCode the new type code
      */
-    public void setTypeCode( String typeCode )
-    {
+    public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
     }
 
@@ -187,8 +204,7 @@ public class RequestParameter
      *
      * @return the parameter description
      */
-    public String getParameterDescription()
-    {
+    public String getParameterDescription() {
         return parameterDescription;
     }
 
@@ -197,8 +213,7 @@ public class RequestParameter
      *
      * @param parameterDescription the new parameter description
      */
-    public void setParameterDescription( String parameterDescription )
-    {
+    public void setParameterDescription(String parameterDescription) {
         this.parameterDescription = parameterDescription;
     }
 
@@ -207,8 +222,7 @@ public class RequestParameter
      *
      * @return the cardinality min
      */
-    public Long getCardinalityMin()
-    {
+    public Long getCardinalityMin() {
         return cardinalityMin;
     }
 
@@ -217,8 +231,7 @@ public class RequestParameter
      *
      * @param cardinalityMin the new cardinality min
      */
-    public void setCardinalityMin( Long cardinalityMin )
-    {
+    public void setCardinalityMin(Long cardinalityMin) {
         this.cardinalityMin = cardinalityMin;
     }
 
@@ -227,8 +240,7 @@ public class RequestParameter
      *
      * @return the cardinality max
      */
-    public BigInteger getCardinalityMax()
-    {
+    public BigInteger getCardinalityMax() {
         return cardinalityMax;
     }
 
@@ -237,8 +249,7 @@ public class RequestParameter
      *
      * @param cardinalityMax the new cardinality max
      */
-    public void setCardinalityMax( BigInteger cardinalityMax )
-    {
+    public void setCardinalityMax(BigInteger cardinalityMax) {
         this.cardinalityMax = cardinalityMax;
     }
 
@@ -247,10 +258,9 @@ public class RequestParameter
      * @see java.lang.Object#hashCode()
      */
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
-        hash += ( requestParameterId != null ? requestParameterId.hashCode() : 0 );
+        hash += (requestParameterId != null ? requestParameterId.hashCode() : 0);
         return hash;
     }
 
@@ -259,17 +269,14 @@ public class RequestParameter
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object object )
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if ( !( object instanceof RequestParameter ) )
-        {
+        if (!(object instanceof RequestParameter)) {
             return false;
         }
         final RequestParameter other = (RequestParameter) object;
-        if ( ( this.requestParameterId == null && other.requestParameterId != null )
-            || ( this.requestParameterId != null && !this.requestParameterId.equals( other.requestParameterId ) ) )
-        {
+        if ((this.requestParameterId == null && other.requestParameterId != null)
+                || (this.requestParameterId != null && !this.requestParameterId.equals(other.requestParameterId))) {
             return false;
         }
         return true;
@@ -280,8 +287,7 @@ public class RequestParameter
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "org.openinfobutton.request.model.RequestParameter[ requestParameterId=" + requestParameterId + " ]";
     }
 

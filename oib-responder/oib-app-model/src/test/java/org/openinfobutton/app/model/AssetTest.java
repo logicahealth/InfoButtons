@@ -1,10 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.openinfobutton.app.model;
+
+/*
+ * #%L
+ * Project:  oib-app-model
+ * Director: Guilherme Del Fiol, MD, PhD
+ *           University of Utah
+ *           Biomedical Informatics
+ *           421 Wakara Way, Suite 140
+ *           Salt Lake City, UT 84108-3514
+ * Phone:    801-581-4080
+ * %%
+ * Copyright (C) 2010 - 2014 University of Utah
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -17,16 +37,16 @@ import junit.framework.TestCase;
  * @author rick
  */
 public class AssetTest extends TestCase {
-    
+
     public AssetTest(String testName) {
         super(testName);
     }
-    
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
@@ -54,7 +74,6 @@ public class AssetTest extends TestCase {
         BigDecimal result = instance.getAssetId();
         assertEquals(expResult, result);
     }
-
 
     /**
      * Test of getNamespaceCd method, of class Asset.
@@ -123,7 +142,7 @@ public class AssetTest extends TestCase {
     public void testSetGetAssetProperties() {
         System.out.println("getAssetProperties");
         Asset instance = new Asset();
-        
+
         List<AssetProperty> testList = new ArrayList<AssetProperty>();
         AssetProperty testAssetProperty = new AssetProperty();
         testAssetProperty.setAssetPropertyId(BigDecimal.ONE);
@@ -143,7 +162,7 @@ public class AssetTest extends TestCase {
 
         Asset instance2 = new Asset();
         instance2.setAssetId(BigDecimal.ONE);
-        
+
         assertEquals(instance.hashCode(), instance2.hashCode());
     }
 
@@ -154,7 +173,7 @@ public class AssetTest extends TestCase {
 
         Asset instance2 = new Asset();
         instance2.setAssetId(null);
-        
+
         assertTrue(instance.hashCode() != instance2.hashCode());
     }
 
@@ -168,8 +187,8 @@ public class AssetTest extends TestCase {
 
         Asset instance2 = new Asset();
         instance2.setAssetId(BigDecimal.ONE);
-        
-        assertTrue( instance.equals(instance2) );
+
+        assertTrue(instance.equals(instance2));
     }
 
     public void testEquals2() {
@@ -177,40 +196,40 @@ public class AssetTest extends TestCase {
         Asset instance = new Asset(BigDecimal.ONE);
 
         Asset instance2 = new Asset();
-        
-        assertTrue( !instance.equals(instance2) );
+
+        assertTrue(!instance.equals(instance2));
     }
 
     public void testEquals3() {
         System.out.println("equals");
         Asset instance = new Asset(BigDecimal.ONE);
         Object instance2 = new Object();
-        
-        assertTrue( !instance.equals(instance2) );
+
+        assertTrue(!instance.equals(instance2));
     }
 
     public void testEquals4() {
         System.out.println("equals");
         Asset instance = new Asset(BigDecimal.ONE);
         Asset instance2 = new Asset(BigDecimal.TEN);
-        
-        assertTrue( !instance.equals(instance2) );
+
+        assertTrue(!instance.equals(instance2));
     }
 
     public void testEquals5() {
         System.out.println("equals");
         Asset instance = new Asset(BigDecimal.ONE);
         Asset instance2 = new Asset(null);
-        
-        assertTrue( !instance.equals(instance2) );
+
+        assertTrue(!instance.equals(instance2));
     }
 
     public void testEquals6() {
         System.out.println("equals");
         Asset instance = new Asset(BigDecimal.ONE);
         Asset instance2 = new Asset(null);
-        
-        assertTrue( !instance2.equals(instance) );
+
+        assertTrue(!instance2.equals(instance));
     }
 
     /**
@@ -224,5 +243,5 @@ public class AssetTest extends TestCase {
         String result = instance.toString();
         assertEquals(expResult, result);
     }
-    
+
 }
