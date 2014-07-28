@@ -1,17 +1,30 @@
-/**
- * -----------------------------------------------------------------------------------
- * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
- * Contact: {@code <andrew.iskander@utah.edu>}
- * Biomedical Informatics
- * 421 Wakara Way, Ste 140
- * Salt Lake City, UT 84108-3514
- * Day Phone: 1-801-581-4080
- * -----------------------------------------------------------------------------------
- *
- * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jul 15, 2014
- */
 package org.openinfobutton.app.model;
+
+/*
+ * #%L
+ * Project:  oib-app-model
+ * Director: Guilherme Del Fiol, MD, PhD
+ *           University of Utah
+ *           Biomedical Informatics
+ *           421 Wakara Way, Suite 140
+ *           Salt Lake City, UT 84108-3514
+ * Phone:    801-581-4080
+ * %%
+ * Copyright (C) 2010 - 2014 University of Utah
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -26,46 +39,58 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ValueSet.
  *
  * @author rick
  */
 @Entity
-@Table( name = "OIB_VALUE_SET" )
+@Table(name = "OIB_VALUE_SET")
 @XmlRootElement
 public class ValueSet
-    implements Serializable
-{
+        implements Serializable {
 
-    /** The Constant serialVersionUID. */
+    /**
+     * The Constant serialVersionUID.
+     */
     private static final long serialVersionUID = 1L;
 
-    /** The value set id. */
+    /**
+     * The value set id.
+     */
     @Id
-    @Basic( optional = false )
-    @Column( name = "VALUE_SET_ID" )
+    @Basic(optional = false)
+    @Column(name = "VALUE_SET_ID")
     private BigDecimal valueSetId;
 
-    /** The value set type code. */
-    @Column( name = "VALUE_SET_TYPE_CD" )
+    /**
+     * The value set type code.
+     */
+    @Column(name = "VALUE_SET_TYPE_CD")
     private String valueSetTypeCode;
 
-    /** The value set oid. */
-    @Column( name = "VALUE_SET_OID" )
+    /**
+     * The value set oid.
+     */
+    @Column(name = "VALUE_SET_OID")
     private String valueSetOid;
 
-    /** The value set display name. */
-    @Column( name = "VALUE_SET_DISPLAY_NAME" )
+    /**
+     * The value set display name.
+     */
+    @Column(name = "VALUE_SET_DISPLAY_NAME")
     private String valueSetDisplayName;
 
-    /** The value set uri. */
-    @Column( name = "VALUE_SET_URI" )
+    /**
+     * The value set uri.
+     */
+    @Column(name = "VALUE_SET_URI")
     private String valueSetUri;
 
-    /** The value set codes. */
-    @OneToMany( fetch = FetchType.EAGER, mappedBy = "valueSetId" )
+    /**
+     * The value set codes.
+     */
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "valueSetId")
     private Collection<ValueSetCode> valueSetCodes;
 
     /**
@@ -73,8 +98,7 @@ public class ValueSet
      *
      * @return the value set id
      */
-    public BigDecimal getValueSetId()
-    {
+    public BigDecimal getValueSetId() {
         return valueSetId;
     }
 
@@ -83,8 +107,7 @@ public class ValueSet
      *
      * @param valueSetId the new value set id
      */
-    public void setValueSetId( BigDecimal valueSetId )
-    {
+    public void setValueSetId(BigDecimal valueSetId) {
         this.valueSetId = valueSetId;
     }
 
@@ -93,8 +116,7 @@ public class ValueSet
      *
      * @return the value set type code
      */
-    public String getValueSetTypeCode()
-    {
+    public String getValueSetTypeCode() {
         return valueSetTypeCode;
     }
 
@@ -103,8 +125,7 @@ public class ValueSet
      *
      * @param valueSetTypeCode the new value set type code
      */
-    public void setValueSetTypeCode( String valueSetTypeCode )
-    {
+    public void setValueSetTypeCode(String valueSetTypeCode) {
         this.valueSetTypeCode = valueSetTypeCode;
     }
 
@@ -113,8 +134,7 @@ public class ValueSet
      *
      * @return the value set oid
      */
-    public String getValueSetOid()
-    {
+    public String getValueSetOid() {
         return valueSetOid;
     }
 
@@ -123,8 +143,7 @@ public class ValueSet
      *
      * @param valueSetOid the new value set oid
      */
-    public void setValueSetOid( String valueSetOid )
-    {
+    public void setValueSetOid(String valueSetOid) {
         this.valueSetOid = valueSetOid;
     }
 
@@ -133,8 +152,7 @@ public class ValueSet
      *
      * @return the value set display name
      */
-    public String getValueSetDisplayName()
-    {
+    public String getValueSetDisplayName() {
         return valueSetDisplayName;
     }
 
@@ -143,8 +161,7 @@ public class ValueSet
      *
      * @param valueSetDisplayName the new value set display name
      */
-    public void setValueSetDisplayName( String valueSetDisplayName )
-    {
+    public void setValueSetDisplayName(String valueSetDisplayName) {
         this.valueSetDisplayName = valueSetDisplayName;
     }
 
@@ -153,8 +170,7 @@ public class ValueSet
      *
      * @return the value set uri
      */
-    public String getValueSetUri()
-    {
+    public String getValueSetUri() {
         return valueSetUri;
     }
 
@@ -163,8 +179,7 @@ public class ValueSet
      *
      * @param valueSetUri the new value set uri
      */
-    public void setValueSetUri( String valueSetUri )
-    {
+    public void setValueSetUri(String valueSetUri) {
         this.valueSetUri = valueSetUri;
     }
 
@@ -174,8 +189,7 @@ public class ValueSet
      * @return the value set codes
      */
     @XmlTransient
-    public Collection<ValueSetCode> getValueSetCodes()
-    {
+    public Collection<ValueSetCode> getValueSetCodes() {
         return valueSetCodes;
     }
 
@@ -184,8 +198,7 @@ public class ValueSet
      *
      * @param valueSetCodes the new value set codes
      */
-    public void setValueSetCodes( Collection<ValueSetCode> valueSetCodes )
-    {
+    public void setValueSetCodes(Collection<ValueSetCode> valueSetCodes) {
         this.valueSetCodes = valueSetCodes;
     }
 
@@ -194,10 +207,9 @@ public class ValueSet
      * @see java.lang.Object#hashCode()
      */
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
-        hash += ( valueSetId != null ? valueSetId.hashCode() : 0 );
+        hash += (valueSetId != null ? valueSetId.hashCode() : 0);
         return hash;
     }
 
@@ -206,17 +218,14 @@ public class ValueSet
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object object )
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if ( !( object instanceof ValueSet ) )
-        {
+        if (!(object instanceof ValueSet)) {
             return false;
         }
         final ValueSet other = (ValueSet) object;
-        if ( ( this.valueSetId == null && other.valueSetId != null )
-            || ( this.valueSetId != null && !this.valueSetId.equals( other.valueSetId ) ) )
-        {
+        if ((this.valueSetId == null && other.valueSetId != null)
+                || (this.valueSetId != null && !this.valueSetId.equals(other.valueSetId))) {
             return false;
         }
         return true;
@@ -227,9 +236,8 @@ public class ValueSet
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "org.openinfobutton.responder.model.ValueSet[ valueSetId=" + valueSetId + "\t" + valueSetDisplayName
-            + " ]";
+                + " ]";
     }
 }

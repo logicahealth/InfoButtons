@@ -1,17 +1,30 @@
-/**
- * -----------------------------------------------------------------------------------
- * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
- * Contact: {@code <andrew.iskander@utah.edu>}
- * Biomedical Informatics
- * 421 Wakara Way, Ste 140
- * Salt Lake City, UT 84108-3514
- * Day Phone: 1-801-581-4080
- * -----------------------------------------------------------------------------------
- *
- * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version Jul 15, 2014
- */
 package org.openinfobutton.app.model;
+
+/*
+ * #%L
+ * Project:  oib-app-model
+ * Director: Guilherme Del Fiol, MD, PhD
+ *           University of Utah
+ *           Biomedical Informatics
+ *           421 Wakara Way, Suite 140
+ *           Salt Lake City, UT 84108-3514
+ * Phone:    801-581-4080
+ * %%
+ * Copyright (C) 2010 - 2014 University of Utah
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -22,54 +35,70 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ValueSetCode.
  *
  * @author rick
  */
 @Entity
-@Table( name = "OIB_VALUE_SET_CODE" )
+@Table(name = "OIB_VALUE_SET_CODE")
 @XmlRootElement
 public class ValueSetCode
-    implements Serializable
-{
+        implements Serializable {
 
-    /** The Constant serialVersionUID. */
+    /**
+     * The Constant serialVersionUID.
+     */
     private static final long serialVersionUID = 1L;
 
-    /** The value set code id. */
+    /**
+     * The value set code id.
+     */
     @Id
-    @Basic( optional = false )
-    @Column( name = "VALUE_SET_CODE_ID" )
+    @Basic(optional = false)
+    @Column(name = "VALUE_SET_CODE_ID")
     private BigDecimal valueSetCodeId;
 
-    /** The value set id. */
-    @Column( name = "VALUE_SET_ID" )
+    /**
+     * The value set id.
+     */
+    @Column(name = "VALUE_SET_ID")
     private BigDecimal valueSetId;
 
-    /** The code. */
-    @Column( name = "CODE" )
+    /**
+     * The code.
+     */
+    @Column(name = "CODE")
     private String code;
 
-    /** The code system oid. */
-    @Column( name = "CODE_SYSTEM_OID" )
+    /**
+     * The code system oid.
+     */
+    @Column(name = "CODE_SYSTEM_OID")
     private String codeSystemOid;
 
-    /** The code display name. */
-    @Column( name = "CODE_DISPLAY_NAME" )
+    /**
+     * The code display name.
+     */
+    @Column(name = "CODE_DISPLAY_NAME")
     private String codeDisplayName;
 
-    /** The list order. */
-    @Column( name = "LIST_ORDER" )
+    /**
+     * The list order.
+     */
+    @Column(name = "LIST_ORDER")
     private Integer listOrder;
 
-    /** The parent value set code id. */
-    @Column( name = "PARENT_VALUE_SET_CODE_ID" )
+    /**
+     * The parent value set code id.
+     */
+    @Column(name = "PARENT_VALUE_SET_CODE_ID")
     private BigDecimal parentValueSetCodeId;
 
-    /** The code uri. */
-    @Column( name = "CODE_URI" )
+    /**
+     * The code uri.
+     */
+    @Column(name = "CODE_URI")
     private String codeUri;
 
     /**
@@ -77,8 +106,7 @@ public class ValueSetCode
      *
      * @return the value set code id
      */
-    public BigDecimal getValueSetCodeId()
-    {
+    public BigDecimal getValueSetCodeId() {
         return valueSetCodeId;
     }
 
@@ -87,8 +115,7 @@ public class ValueSetCode
      *
      * @param valueSetCodeId the new value set code id
      */
-    public void setValueSetCodeId( BigDecimal valueSetCodeId )
-    {
+    public void setValueSetCodeId(BigDecimal valueSetCodeId) {
         this.valueSetCodeId = valueSetCodeId;
     }
 
@@ -97,8 +124,7 @@ public class ValueSetCode
      *
      * @return the value set id
      */
-    public BigDecimal getValueSetId()
-    {
+    public BigDecimal getValueSetId() {
         return valueSetId;
     }
 
@@ -107,8 +133,7 @@ public class ValueSetCode
      *
      * @param valueSetId the new value set id
      */
-    public void setValueSetId( BigDecimal valueSetId )
-    {
+    public void setValueSetId(BigDecimal valueSetId) {
         this.valueSetId = valueSetId;
     }
 
@@ -117,8 +142,7 @@ public class ValueSetCode
      *
      * @return the code
      */
-    public String getCode()
-    {
+    public String getCode() {
         return code;
     }
 
@@ -127,8 +151,7 @@ public class ValueSetCode
      *
      * @param code the new code
      */
-    public void setCode( String code )
-    {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -137,8 +160,7 @@ public class ValueSetCode
      *
      * @return the code system oid
      */
-    public String getCodeSystemOid()
-    {
+    public String getCodeSystemOid() {
         return codeSystemOid;
     }
 
@@ -147,8 +169,7 @@ public class ValueSetCode
      *
      * @param codeSystemOid the new code system oid
      */
-    public void setCodeSystemOid( String codeSystemOid )
-    {
+    public void setCodeSystemOid(String codeSystemOid) {
         this.codeSystemOid = codeSystemOid;
     }
 
@@ -157,8 +178,7 @@ public class ValueSetCode
      *
      * @return the code display name
      */
-    public String getCodeDisplayName()
-    {
+    public String getCodeDisplayName() {
         return codeDisplayName;
     }
 
@@ -167,8 +187,7 @@ public class ValueSetCode
      *
      * @param codeDisplayName the new code display name
      */
-    public void setCodeDisplayName( String codeDisplayName )
-    {
+    public void setCodeDisplayName(String codeDisplayName) {
         this.codeDisplayName = codeDisplayName;
     }
 
@@ -177,8 +196,7 @@ public class ValueSetCode
      *
      * @return the list order
      */
-    public Integer getListOrder()
-    {
+    public Integer getListOrder() {
         return listOrder;
     }
 
@@ -187,8 +205,7 @@ public class ValueSetCode
      *
      * @param listOrder the new list order
      */
-    public void setListOrder( Integer listOrder )
-    {
+    public void setListOrder(Integer listOrder) {
         this.listOrder = listOrder;
     }
 
@@ -197,8 +214,7 @@ public class ValueSetCode
      *
      * @return the parent value set code id
      */
-    public BigDecimal getParentValueSetCodeId()
-    {
+    public BigDecimal getParentValueSetCodeId() {
         return parentValueSetCodeId;
     }
 
@@ -207,8 +223,7 @@ public class ValueSetCode
      *
      * @param parentValueSetCodeId the new parent value set code id
      */
-    public void setParentValueSetCodeId( BigDecimal parentValueSetCodeId )
-    {
+    public void setParentValueSetCodeId(BigDecimal parentValueSetCodeId) {
         this.parentValueSetCodeId = parentValueSetCodeId;
     }
 
@@ -217,8 +232,7 @@ public class ValueSetCode
      *
      * @return the code uri
      */
-    public String getCodeUri()
-    {
+    public String getCodeUri() {
         return codeUri;
     }
 
@@ -227,8 +241,7 @@ public class ValueSetCode
      *
      * @param codeUri the new code uri
      */
-    public void setCodeUri( String codeUri )
-    {
+    public void setCodeUri(String codeUri) {
         this.codeUri = codeUri;
     }
 
@@ -237,10 +250,9 @@ public class ValueSetCode
      * @see java.lang.Object#hashCode()
      */
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
-        hash += ( valueSetCodeId != null ? valueSetCodeId.hashCode() : 0 );
+        hash += (valueSetCodeId != null ? valueSetCodeId.hashCode() : 0);
         return hash;
     }
 
@@ -249,17 +261,14 @@ public class ValueSetCode
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals( Object object )
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if ( !( object instanceof ValueSetCode ) )
-        {
+        if (!(object instanceof ValueSetCode)) {
             return false;
         }
         final ValueSetCode other = (ValueSetCode) object;
-        if ( ( this.valueSetCodeId == null && other.valueSetCodeId != null )
-            || ( this.valueSetCodeId != null && !this.valueSetCodeId.equals( other.valueSetCodeId ) ) )
-        {
+        if ((this.valueSetCodeId == null && other.valueSetCodeId != null)
+                || (this.valueSetCodeId != null && !this.valueSetCodeId.equals(other.valueSetCodeId))) {
             return false;
         }
         return true;
@@ -270,10 +279,9 @@ public class ValueSetCode
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "org.openinfobutton.responder.model.ValueSetCode[ valueSetCodeId=" + valueSetCodeId + "\t"
-            + codeDisplayName + " ]";
+                + codeDisplayName + " ]";
     }
 
 }
