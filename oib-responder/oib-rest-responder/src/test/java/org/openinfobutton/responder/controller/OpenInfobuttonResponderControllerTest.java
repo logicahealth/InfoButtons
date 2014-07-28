@@ -1,5 +1,33 @@
 package org.openinfobutton.responder.controller;
 
+/*
+ * #%L
+ * Project: oib-rest-responder
+ * Inception Year: 2,010
+ * Director: 
+ * Guilherme Del Fiol, MD, PhD
+ * University of Utah
+ * Biomedical Informatics
+ * 421 Wakara Way, Ste 140
+ * Salt Lake City, UT 84108-3514
+ * Phone: 801-581-4080
+ * %%
+ * Copyright (C) 2010 - 2014 University of Utah
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,10 +61,10 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 public class OpenInfobuttonResponderControllerTest {
 
     private MockMvc mockMvc;
-    
+
     @Mock
     private ResponderService responderService;
-    
+
     @InjectMocks
     private OpenInfobuttonResponderController openInfobuttonResponderController;
 
@@ -61,36 +89,36 @@ public class OpenInfobuttonResponderControllerTest {
     @Test
     public void testOpenInfobuttonRequestHandlerReturnsAtomPage() throws Exception {
 
-        when( responderService.getKnowledgeRequestParameterMap( any( Map.class ) ) ).thenReturn( getValidMockFlatRequestParameters() );
-        
+        when(responderService.getKnowledgeRequestParameterMap(any(Map.class))).thenReturn(getValidMockFlatRequestParameters());
+
         this.mockMvc.perform(
                 post("/responder"))
                 .andExpect(status().isOk())
-                .andExpect(forwardedUrl( OpenInfobuttonResponderController.ATOM_PAGE ));
+                .andExpect(forwardedUrl(OpenInfobuttonResponderController.ATOM_PAGE));
 
     }
 
     @Test
     public void testOpenInfobuttonRequestHandlerReturnsNoCache() throws Exception {
 
-        when( responderService.getKnowledgeRequestParameterMap( any( Map.class ) ) ).thenReturn( getValidMockFlatRequestParameters() );
-        
+        when(responderService.getKnowledgeRequestParameterMap(any(Map.class))).thenReturn(getValidMockFlatRequestParameters());
+
         this.mockMvc.perform(
                 post("/responder"))
                 .andExpect(status().isOk())
-                .andExpect( header().string("Cache-Control","no-cache") );
+                .andExpect(header().string("Cache-Control", "no-cache"));
 
     }
 
     @Test
     public void testOpenInfobuttonRequestHandlerReturnsHtmlPage() throws Exception {
 
-        when( responderService.getKnowledgeRequestParameterMap( any( Map.class ) ) ).thenReturn( getValidMockFlatRequestParametersWithHtmlParameter() );
-        
+        when(responderService.getKnowledgeRequestParameterMap(any(Map.class))).thenReturn(getValidMockFlatRequestParametersWithHtmlParameter());
+
         this.mockMvc.perform(
                 post("/responder"))
                 .andExpect(status().isOk())
-                .andExpect(forwardedUrl( OpenInfobuttonResponderController.HTML_PAGE ));
+                .andExpect(forwardedUrl(OpenInfobuttonResponderController.HTML_PAGE));
 
     }
 
@@ -98,9 +126,9 @@ public class OpenInfobuttonResponderControllerTest {
     public void testOpenInfobuttonRequestHandleHttpMediaTypeNotSupportedException() throws Exception {
 
         // should cause HttpMediaTypeNotSupportedException
-        when( responderService.getKnowledgeRequestParameterMap( any( Map.class ) ) )
-                .thenReturn( getInValidMockFlatRequestKnowledgeResponseTypeParameter() ); 
-                
+        when(responderService.getKnowledgeRequestParameterMap(any(Map.class)))
+                .thenReturn(getInValidMockFlatRequestKnowledgeResponseTypeParameter());
+
         this.mockMvc.perform(
                 post("/responder"))
                 .andExpect(status().isUnsupportedMediaType());
@@ -109,10 +137,10 @@ public class OpenInfobuttonResponderControllerTest {
 
     @Test
     public void testOpenInfobuttonRequestHandleMissingServletRequestParameterException() throws Exception {
-        
-        doThrow( new MissingServletRequestParameterException("testParm","testType") )
-                .when(responderService).requestContainsRequiredParameters( any( Map.class ) );
-        
+
+        doThrow(new MissingServletRequestParameterException("testParm", "testType"))
+                .when(responderService).requestContainsRequiredParameters(any(Map.class));
+
         this.mockMvc.perform(
                 post("/responder"))
                 .andExpect(status().isBadRequest());
@@ -121,14 +149,14 @@ public class OpenInfobuttonResponderControllerTest {
 
     @Test
     public void testOibRequestHandleIllegalArgumentException() throws Exception {
-        
-        when( responderService.getKnowledgeRequestParameterMap( any( Map.class ) ) )
-                .thenThrow( new IllegalArgumentException("Testing IllegalArgumentException") );
+
+        when(responderService.getKnowledgeRequestParameterMap(any(Map.class)))
+                .thenThrow(new IllegalArgumentException("Testing IllegalArgumentException"));
 
         this.mockMvc.perform(
                 post("/responder"))
-                .andExpect( status().isBadRequest() );
-                  
+                .andExpect(status().isBadRequest());
+
     }
 
     private Map<String, Map<String, String>> getValidMockIndexPropertyMap() {
