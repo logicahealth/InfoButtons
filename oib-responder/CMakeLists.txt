@@ -22,8 +22,7 @@ add_custom_target(OIB_RESPONDERPack
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 if(OIB_STYLE)
   configure_file(${OIB_RESPONDER_SOURCE_DIR}/checkstyle-reporter.cmake.in ${OIB_RESPONDER_BINARY_DIR}/checkstyle.cmake @ONLY)
-  set(check_dirs "./oib-rest-responder/\;./oib-app-model/\;./oib-app-service/\;./oib-index-manager\;./rxnorm-rest-model"
-      CACHE STRING "semicolon (;) separated directories to report on for Checkstyle")
+  set(check_dirs "." CACHE STRING "semicolon (;) separated directories to report on for Checkstyle")
   add_test(NAME Checkstyle COMMAND ${CMAKE_COMMAND} -DSearchDirs=${check_dirs} -P ${OIB_RESPONDER_BINARY_DIR}/checkstyle.cmake
            WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR})
   set_tests_properties(Checkstyle PROPERTIES FAIL_REGULAR_EXPRESSION "Line [0-9]+:") 
@@ -33,23 +32,7 @@ elseif(OIB_COVERAGE)
            WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR})
 else()
 
-file(GLOB_RECURSE oibAppModelTests ${OIB_RESPONDER_SOURCE_DIR}/oib-app-model/src/test/**/*.java)
-
-foreach(test ${oibAppModelTests})
-        get_filename_component(testname ${test} NAME_WE)
-        add_test(NAME MVN${testname}_OIB_APP_MODEL WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/oib-app-model
-                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
-endforeach()
-
-file(GLOB_RECURSE oibAppServiceTests ${OIB_RESPONDER_SOURCE_DIR}/oib-app-service/src/test/**/*.java)
-
-foreach(test ${oibAppMServiceTests})
-        get_filename_component(testname ${test} NAME_WE)
-        add_test(NAME MVN${testname}_OIB_APP_SERVICE WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/oib-app-service
-                 COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
-endforeach()
-
-file(GLOB_RECURSE oibRestResponderTests ${OIB_RESPONDER_SOURCE_DIR}/oib-rest-responder/src/test/**/*.java)
+file(GLOB_RECURSE oibRestResponderTests ${OIB_RESPONDER_SOURCE_DIR}/src/test/**/*.java)
 
 foreach(test ${oibRestResponderTests})
         get_filename_component(testname ${test} NAME_WE)
