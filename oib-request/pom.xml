@@ -7,11 +7,9 @@
   <packaging>pom</packaging>
   <name>oib-request</name>
     <modules>
-        <module>oib-profile-schema</module>
         <module>oib-request-schema</module>
         <module>oib-request-db</module>
         <module>oib-request-inference-rxnorm</module>
-        <module>uts-metathesaurus</module>
         <module>oib-ext-resources</module>
         <module>oib-request-service</module>
     </modules>
