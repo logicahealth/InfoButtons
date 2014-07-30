@@ -36,7 +36,7 @@ file(GLOB_RECURSE oibRestResponderTests ${OIB_RESPONDER_SOURCE_DIR}/src/test/**/
 
 foreach(test ${oibRestResponderTests})
         get_filename_component(testname ${test} NAME_WE)
-        add_test(NAME MVN${testname}_OIB_REST_RESPONDER WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}/oib-responder
+        add_test(NAME MVN${testname}_OIB_REST_RESPONDER WORKING_DIRECTORY ${OIB_RESPONDER_SOURCE_DIR}
                  COMMAND "${MAVEN_EXECUTABLE}" -Dtest=${testname} -Djacoco.skip=true test)
 endforeach()
 

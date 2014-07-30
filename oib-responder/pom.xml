@@ -19,8 +19,8 @@
     
     <repositories>
         <repository>
-            <id>mvn.project.repo</id>
-            <name>mvn-project</name>
+            <id>project.local</id>
+            <name>project</name>
             <url>file:${project.basedir}/mvn-proj-repo</url>
         </repository>
     </repositories>
@@ -135,13 +135,13 @@
         <dependency>
             <groupId>org.openinfobutton</groupId>
             <artifactId>oib-app-model</artifactId>
-            <version>0.2</version>
+            <version>0.21</version>
         </dependency>
 
         <dependency>
             <groupId>org.openinfobutton</groupId>
             <artifactId>oib-app-service</artifactId>
-            <version>0.2</version>
+            <version>0.21</version>
         </dependency>
 
         <dependency>
