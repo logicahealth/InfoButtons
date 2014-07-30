@@ -42,7 +42,7 @@ find_program(MAVEN_EXECUTABLE mvn )
 if(OIB_STYLE)
 
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/checkstyle-reporter.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/checkstyle.cmake @ONLY)
-  set(check_dirs "./oib-ext-resources/\;./oib-profile-schema/\;./oib-request-db/\;./oib-request-service\;./oib-request-inference-rxnorm\;./oib-request-schema"
+  set(check_dirs "./oib-ext-resources/\;./oib-request-db/\;./oib-request-service\;./oib-request-inference-rxnorm\;./oib-request-schema"
       CACHE STRING "Semicolon (;) separated list of directories to report Checkstyle Errors for")
   add_test(NAME Checkstyle COMMAND ${CMAKE_COMMAND} -DSearchDirs=${check_dirs} -P ${CMAKE_CURRENT_BINARY_DIR}/checkstyle.cmake
          WORKING_DIRECTORY ${OIB_REQUEST_SOURCE_DIR})
