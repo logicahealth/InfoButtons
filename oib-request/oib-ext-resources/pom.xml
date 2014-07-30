@@ -22,6 +22,13 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+		
+    <repository>
+        <id>project.local</id>
+        <name>project</name>
+        <url>file:${project.basedir}/oibrepo</url>
+    </repository>
+    
 	</repositories>
 
 	<pluginRepositories>
@@ -52,12 +59,6 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.openinfobutton</groupId>
-			<artifactId>oib-profile-schema</artifactId>
-			<version>1.4</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.2</version>
@@ -84,7 +85,7 @@
 		<dependency>
 			<groupId>xalan</groupId>
 			<artifactId>xalan</artifactId>
-			<version>2.6.0</version>
+			<version>2.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
@@ -198,6 +199,26 @@
 			<version>1.4</version>
 			<type>jar</type>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.legsem.legstar</groupId>
+			<artifactId>legstar-jaxws-clients</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>2.2.8</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.ws</groupId>
+			<artifactId>jaxws-api</artifactId>
+			<version>2.2.8</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-tools</artifactId>
+			<version>2.2.8</version>
 		</dependency>
 	</dependencies>
 

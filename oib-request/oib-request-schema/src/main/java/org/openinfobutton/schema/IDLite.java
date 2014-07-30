@@ -144,4 +144,5 @@ public class IDLite
         jaxBElement.setAssigningAuthorityName( id.getAssigningAuthorityName() );
         return jaxBElement;
     }
+   
 }
