@@ -15,7 +15,6 @@ package org.infobutton.schema.test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,14 +22,7 @@ import java.util.Map;
 
 import org.hl7.v3.CategoryType;
 import org.hl7.v3.REDSMT010001UVKnowledgeRequestNotification;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.openinfobutton.schema.Code;
-import org.openinfobutton.schema.CodeConstants;
 import org.openinfobutton.schema.CodeUtility;
 import org.openinfobutton.schema.Encounter;
 import org.openinfobutton.schema.Holder;
@@ -43,7 +35,6 @@ import org.openinfobutton.schema.PatientContext;
 import org.openinfobutton.schema.Performer;
 import org.openinfobutton.schema.SeverityObservation;
 import org.openinfobutton.schema.TaskContext;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * The Class OIBSchemaConstructorTest.

@@ -36,7 +36,6 @@ import edu.utah.openinfobutton.inference.rxnorm.schema.RelatedGroup;
 import edu.utah.openinfobutton.inference.rxnorm.schema.RelatedGroup.ConceptGroup.ConceptProperties;
 import edu.utah.openinfobutton.inference.rxnorm.schema.RxNormData;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RxNormService.
  */
@@ -73,7 +72,7 @@ public final class RxNormService
      * @return the code
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    public static Code getCode( final Code code )
+    public static Code getTransformedCode( final Code code )
         throws IOException
     {
 

@@ -14,6 +14,13 @@
 	</properties>
 
 	<repositories>
+	
+	    <repository>
+	        <id>project.local</id>
+	        <name>project</name>
+	        <url>file:${project.basedir}/repo</url>
+	    </repository>
+	    
 		<repository>
 			<id>further</id>
 			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
@@ -24,6 +31,7 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+	    
 	</repositories>
 
 	<pluginRepositories>
@@ -54,6 +62,28 @@
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-schema</artifactId>
 			<version>1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>edu.utah.openinfobutton</groupId>
+			<artifactId>rxnorm-api-schema</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
+		<!-- TESTING -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<!-- <groupId>org.junit</groupId> -->
+			<groupId>junit</groupId>
+			<!-- <artifactId>com.springsource.org.junit</artifactId> -->
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+			<version>4.10</version>
 		</dependency>
 	</dependencies>
 	<scm>

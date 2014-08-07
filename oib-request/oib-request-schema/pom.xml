@@ -15,6 +15,13 @@
 	</properties>
 	
 	<repositories>
+
+	    <repository>
+	        <id>project.local</id>
+	        <name>project</name>
+	        <url>file:${project.basedir}/repo</url>
+	    </repository>
+	    
 		<repository>
 			<id>further</id>
 			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
@@ -25,13 +32,6 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-
-	    <!--other repositories if any-->
-	    <repository>
-	        <id>project.local</id>
-	        <name>project</name>
-	        <url>file:${project.basedir}/repo</url>
-	    </repository>
 	</repositories>
 	
 	<pluginRepositories>

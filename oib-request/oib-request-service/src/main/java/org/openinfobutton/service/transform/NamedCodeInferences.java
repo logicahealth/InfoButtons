@@ -19,7 +19,6 @@ import org.openinfobutton.schemas.kb.Code;
 
 import edu.utah.openinfobutton.inference.rxnorm.service.RxNormService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Enum NamedCodeInferences.
  */
@@ -34,7 +33,7 @@ public enum NamedCodeInferences
         {
             try
             {
-                return RxNormService.getCode( code );
+                return RxNormService.getTransformedCode( code );
             }
             catch ( final IOException e )
             {

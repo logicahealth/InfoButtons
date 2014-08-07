@@ -23,8 +23,8 @@
 		<datasource2.user>root</datasource2.user>
 		<datasource2.password>password</datasource2.password>
 
-		<umls.username></umls.username>
-		<umls.password></umls.password>
+		<umls.username>VitaVantage</umls.username>
+		<umls.password>1Vitavantage</umls.password>
 		<spring.version>3.2.3.RELEASE</spring.version>
 		<hibernate.version>4.2.0.Final</hibernate.version>
 		<jacoco.version>0.7.0.201403182114</jacoco.version>

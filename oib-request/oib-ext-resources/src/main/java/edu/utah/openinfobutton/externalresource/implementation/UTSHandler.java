@@ -109,7 +109,7 @@ public class UTSHandler
             {
                 final AtomDTO myAtomDTO = myAtoms.get( i );
                 retCode = CodeUtility.getCode();
-                ;
+                
                 retCode.setCode( myAtomDTO.getCode().getUi() );
                 break;
             }
@@ -319,7 +319,6 @@ public class UTSHandler
         }
         catch ( final UtsMetathesaurusContent.UtsFault_Exception e )
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return false;
