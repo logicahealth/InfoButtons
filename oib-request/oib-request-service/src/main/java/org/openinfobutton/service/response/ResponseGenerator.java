@@ -272,7 +272,7 @@ public class ResponseGenerator
                 generateBaseLink( urlBase, context.getContextDefinition(), supportedCodeSystems, null );
             final DefaultHttpClient httpClient = new DefaultHttpClient();
             final URL url = new URL( baseLink.toString() );
-            final URI uri = new URI( url.getProtocol(), url.getHost(), url.getPath(), url.getQuery(), null );
+            final URI uri = new URI( url.getProtocol(), null, url.getHost(), url.getPort(), url.getPath(), url.getQuery(), null );
             final HttpGet getRequest = new HttpGet( uri.toString() );
             getRequest.addHeader( "accept", "application/xml" );
             HttpResponse response;
