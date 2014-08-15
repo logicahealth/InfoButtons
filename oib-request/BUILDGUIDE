@@ -50,20 +50,20 @@ Building
 
 2) Navigate back to the oib-request module directory (this directory)
 
-3) The oib-request-service module's pom.xml includes the following properties block,
+3) The oib-request master module's pom.xml includes the following properties block,
 
    <properties>
        <dts-version>3.5.0</dts-version>
               
 		<datasource1.url>jdbc:mysql://localhost:3306/prodoib</datasource1.url>
 		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
-		<datasource1.user>root</datasource1.user>
-		<datasource1.password>password</datasource1.password>
+		<datasource1.user></datasource1.user>
+		<datasource1.password></datasource1.password>
 		
 		<datasource2.url>jdbc:mysql://localhost:3306/profilesdbprod</datasource2.url>
 		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
-		<datasource2.user>root</datasource2.user>
-		<datasource2.password>password</datasource2.password>
+		<datasource2.user></datasource2.user>
+		<datasource2.password></datasource2.password>
 		
 		<umls.username></umls.username>
 		<umls.password></umls.password>
@@ -97,12 +97,12 @@ Building with CMake
 --------
 
 1) The OpenInfobutton Manager module includes a CMakeLists.txt file. If you use a recent
-   version of CMake in your development environment, you simply have check the MySQL connection
+   version of CMake in your development environment, you simply have to check the MySQL connection
    parameters in the following files,
    
-   oib-request-service/src/main/webapp/WEB-INF/CMakeLists.txt
+   oib-request/CMakeLists.txt
    
-   oib-request-service/pom.xml
+   oib-request/pom.xml
    
    and the execute the following commands from the module directory,
    
