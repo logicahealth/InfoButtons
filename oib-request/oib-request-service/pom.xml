@@ -180,7 +180,7 @@
 			<version>1.4</version>
 		</dependency>
 		<dependency>
-			<groupId>edu.utah.openinfobutton</groupId>
+			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-ext-resources</artifactId>
 			<version>1.4</version>
 		</dependency>

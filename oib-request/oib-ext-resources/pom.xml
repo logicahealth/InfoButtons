@@ -6,7 +6,6 @@
       <version>1.4-SNAPSHOT</version>
     </parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.openinfobutton</groupId>
 	<artifactId>oib-ext-resources</artifactId>
 	<version>1.4</version>
 	<name>oib-ext-resources</name>
