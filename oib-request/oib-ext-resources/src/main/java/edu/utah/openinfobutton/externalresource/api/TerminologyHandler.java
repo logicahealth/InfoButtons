@@ -18,7 +18,6 @@ import java.util.List;
 import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.Id;
 
-// TODO: Auto-generated Javadoc
 /**
  * This is an interface that operates on the local DB instance to do value set matching.
  * 

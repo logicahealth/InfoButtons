@@ -27,7 +27,6 @@ import edu.utah.further.subsetdb.service.SubsetDbDao;
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
 import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LocalTerminologyHandler.
  */

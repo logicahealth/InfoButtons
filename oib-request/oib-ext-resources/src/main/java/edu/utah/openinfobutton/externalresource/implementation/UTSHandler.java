@@ -35,7 +35,6 @@ import UtsSecurity.UtsWsSecurityController;
 import UtsSecurity.UtsWsSecurityControllerImplService;
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UTSHandler.
  */

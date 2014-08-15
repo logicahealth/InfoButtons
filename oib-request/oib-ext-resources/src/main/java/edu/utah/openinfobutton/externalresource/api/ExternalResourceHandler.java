@@ -16,7 +16,6 @@ package edu.utah.openinfobutton.externalresource.api;
 import java.util.ArrayList;
 import org.openinfobutton.schemas.kb.Code;
 
-// TODO: Auto-generated Javadoc
 /**
  * This interface describes the methods required for Terminology Inference Operations UTS/Apelon/MetaMap specific
  * implementations can be given.

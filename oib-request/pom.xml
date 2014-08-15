@@ -6,6 +6,26 @@
   <version>1.4-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>oib-request</name>
+ 	<properties>
+		<dts-version>3.5.0</dts-version>
+
+		<datasource1.url>jdbc:mysql://localhost:3306/prodoib</datasource1.url>
+		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
+		<datasource1.user></datasource1.user>
+		<datasource1.password></datasource1.password>
+
+		<datasource2.url>jdbc:mysql://localhost:3306/profilesdbprod</datasource2.url>
+		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
+		<datasource2.user></datasource2.user>
+		<datasource2.password></datasource2.password>
+
+		<umls.username></umls.username>
+		<umls.password></umls.password>
+		<spring.version>3.2.3.RELEASE</spring.version>
+		<hibernate.version>4.2.0.Final</hibernate.version>
+		<jacoco.version>0.7.0.201403182114</jacoco.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
     <modules>
         <module>oib-request-schema</module>
         <module>oib-request-db</module>

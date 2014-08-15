@@ -27,7 +27,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import edu.utah.further.core.api.data.PersistentEntity;
 import edu.utah.further.core.api.lang.Final;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Subset.
  */

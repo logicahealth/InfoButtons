@@ -31,7 +31,6 @@ import edu.utah.further.core.api.context.Implementation;
 import edu.utah.further.core.api.data.Dao;
 import edu.utah.further.profiledb.domain.Profiles;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ProfilesDaoImpl.
  */
@@ -48,7 +47,8 @@ public class ProfilesDaoImpl
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.further.profiledb.service.ProfilesDao#getResourceProfile(long, int, edu.utah.further.profiledb.service.FileandMarker)
+     * @see edu.utah.further.profiledb.service.ProfilesDao#getResourceProfile(long, int, 
+     *                              edu.utah.further.profiledb.service.FileandMarker)
      */
     @Override
     @Transactional

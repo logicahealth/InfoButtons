@@ -25,7 +25,6 @@ import javax.persistence.Table;
 
 import edu.utah.further.core.api.data.PersistentEntity;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Profiles.
  */
