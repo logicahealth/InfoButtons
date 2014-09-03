@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.openinfobutton</groupId>
   <artifactId>oib-request</artifactId>
-  <version>1.4-SNAPSHOT</version>
+  <version>1.6-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>oib-request</name>
  	<properties>
@@ -11,16 +10,16 @@
 
 		<datasource1.url>jdbc:mysql://localhost:3306/prodoib</datasource1.url>
 		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
-		<datasource1.user></datasource1.user>
-		<datasource1.password></datasource1.password>
+		<datasource1.user />
+		<datasource1.password />
 
 		<datasource2.url>jdbc:mysql://localhost:3306/profilesdbprod</datasource2.url>
 		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
-		<datasource2.user></datasource2.user>
-		<datasource2.password></datasource2.password>
+		<datasource2.user />
+		<datasource2.password />
 
-		<umls.username></umls.username>
-		<umls.password></umls.password>
+		<umls.username />
+		<umls.password />
 		<spring.version>3.2.3.RELEASE</spring.version>
 		<hibernate.version>4.2.0.Final</hibernate.version>
 		<jacoco.version>0.7.0.201403182114</jacoco.version>
@@ -33,4 +32,10 @@
         <module>oib-ext-resources</module>
         <module>oib-request-service</module>
     </modules>
+    
+	<scm>
+		<connection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</connection>
+		<developerConnection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</developerConnection>
+		<url>https://github.com/VHAINNOVATIONS/InfoButtons.git</url>
+	</scm>
 </project>

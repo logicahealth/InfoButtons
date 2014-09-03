@@ -1,12 +1,11 @@
 <!-- $Rev:: 2217 $: Revision of last commit $Author:: ai28 $: Author of last 
 	commit $Date:: 2011-02-24 1#$: Date of last commit -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
       <groupId>org.openinfobutton</groupId>
       <artifactId>oib-request</artifactId>
-      <version>1.4-SNAPSHOT</version>
+      <version>1.6-SNAPSHOT</version>
     </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openinfobutton</groupId>
@@ -346,9 +345,9 @@
 	</build>
 
 	<scm>
-		<connection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-service</connection>
-		<developerConnection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-service</developerConnection>
-		<url>https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-service</url>
+		<connection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</connection>
+		<developerConnection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</developerConnection>
+		<url>https://github.com/VHAINNOVATIONS/InfoButtons.git</url>
 	</scm>
 
 </project>
