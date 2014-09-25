@@ -118,5 +118,13 @@ public class ProfilesDaoImpl
         count = no.size();
         return count;
     }
+    
+       @Transactional
+       public List<Profiles> getProfiles()
+       {
+           
+           List<Profiles> profiles = dao.findAll(Profiles.class);
+           return profiles;
+       }
 
 }

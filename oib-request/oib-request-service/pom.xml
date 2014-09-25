@@ -8,7 +8,6 @@
       <version>1.6-SNAPSHOT</version>
     </parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.openinfobutton</groupId>
 	<artifactId>oib-request-service</artifactId>
 	<packaging>war</packaging>
 	<version>1.4</version>
@@ -51,6 +50,13 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-schema</artifactId>
+			<version>1.4</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>oib-core</artifactId>
 			<version>1.4</version>
 			<scope>compile</scope>
 		</dependency>

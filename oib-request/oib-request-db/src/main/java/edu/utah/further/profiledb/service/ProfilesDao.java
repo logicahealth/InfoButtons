@@ -13,7 +13,10 @@
  */
 package edu.utah.further.profiledb.service;
 
+import java.util.List;
+
 import edu.utah.further.core.api.context.Api;
+import edu.utah.further.profiledb.domain.Profiles;
 
 /**
  * The Interface ProfilesDao.
@@ -39,4 +42,6 @@ public interface ProfilesDao
      * @return the long
      */
     public long count( int status );
+    
+    public List<Profiles> getProfiles();
 }

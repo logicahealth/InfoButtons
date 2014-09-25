@@ -37,6 +37,13 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>oib-core</artifactId>
+			<version>1.4</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>3.1.1.RELEASE</version>

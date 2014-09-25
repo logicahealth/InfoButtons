@@ -119,9 +119,4 @@ Building with CMake
    
    ctest
    
-   This should exectute the SQL scripts and build the project as well. 
-   
-   
-   
-   
-   
+   This should exectute the SQL scripts and build the project as well.
