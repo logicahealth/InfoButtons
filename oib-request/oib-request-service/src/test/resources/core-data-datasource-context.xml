@@ -84,7 +84,7 @@
 							hibernate.config.file, datasource.config.file should be defined
 							somewhere in the spring.properties layers
 						-->
-						<value>/hibernate.properties
+						<value>classpath:hibernate.properties
 						</value>
 				</list>
 				</property>

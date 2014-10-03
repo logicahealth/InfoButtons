@@ -24,7 +24,7 @@
 	<!--  <context:property-placeholder location="classpath*:*-.properties" />-->
 
 <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="location" value="/serviceParams.properties"/>
+    <property name="location" value="classpath:serviceParams.properties"/>
        </bean>
 	<!-- =========================================== -->
 	<!-- Annotation configuration                    -->
