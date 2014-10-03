@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?altova_sps ResourceAuhtoring.sps?>
-<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="313">
 		<title>Clinical Key</title>
 		<profileDescription>Provides definitions for infobutton links associated with problem list, medication list, and order entry.</profileDescription>

@@ -52,19 +52,21 @@
 							border: none;
 							outline: none;
 							font-weight: normal;
+							background-color: #F3F1E6;
 						}
-
-/* ? does not work */						
-						.linkDiv ul li a:active
+												
+						.linkDiv ul li a:visited
 						{
-							color: fuchsia;
-							border: none;
-							outline: none;
-							font-weight: normal;
+						   background-color: green;
 						}
 						
-/* ? does not work */						
-						.linkDiv ul li a:visited
+						.linkDiv ul li a:hover
+						{
+						   color: yellow;
+						   background-color: #D16800;
+						}
+						
+						.linkDiv ul li a:active
 						{
 							color: fuchsia;
 							border: none;
@@ -203,20 +205,6 @@
 							window.open(url);
 						}
 					}
-					$(document).ready(function() {
-						$(".linkDiv ul li a").hover(function() {
-							$(this).css("color", "#D16800"); /* menu item forecolor, DURING hover event*/
-						}, function() {
-							$(this).css("color", "blue");   /* menu item forecolor, AFTER hover event*/
-						});
-				
-						$(".linkDiv ul li").hover(function() {
-							$(this).css("background-color", "transparent");  /* menu item bgcolor, DURING hover event*/
-						}, function() {
-							$(this).css("background-color", "transparent");  /* menu item bgcolor, AFTER hover event*/
-						});
-						
-					});
 				]]>
 				</script>
 				<div class="header"><div class="logo"/></div>

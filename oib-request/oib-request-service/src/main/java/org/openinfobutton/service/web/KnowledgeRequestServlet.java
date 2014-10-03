@@ -170,7 +170,7 @@ public class KnowledgeRequestServlet
                 transformer =
                     tfactory.newTransformer( new StreamSource(req.getSession().
                                              getServletContext().getResourceAsStream( 
-                                             "/WEB-INF/xslts/" + transformation + ".xslt")));
+                                             "/WEB-INF/classes/xslts/" + transformation + ".xslt")));
                 stringWriter = new StringWriter();
                 result = new StreamResult( stringWriter );
                 transformer.transform( source, result );

@@ -46,7 +46,7 @@ public final class RxNormService
     private static final String RXNORM_REST_URL = "http://rxnav.nlm.nih.gov/REST/";
 
     /** The Constant APPROX_TERM_ARG. */
-    private static final String APPROX_TERM_ARG = "approx?term=";
+    private static final String APPROX_TERM_ARG = "approximateTerm?term=";
 
     /** The Constant RXCUI_ARG. */
     private static final String RXCUI_ARG = "rxcui/";

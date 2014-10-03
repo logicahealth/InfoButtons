@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?altova_sps ResourceAuhtoring.sps?>
-<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.9_LITE.xsd">
 	<header id="1">
 		<title>Genetics Home Reference</title>
 		<profileDescription>Information on geneti conditions.</profileDescription>
-		<versionControl publicationDate="2011-10-24T00:00:00"></versionControl>
+		<versionControl publicationDate="2011-10-24T00:00:00"/>
 	</header>
-	<profileDefinition>
+	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false" urlStyle="DIRTY">
 		<authorizedOrganizations>
 			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
 			<authorizedOrganization id="1.3.6.1.4.1.5884" name="University of Utah"/>
 		</authorizedOrganizations>
 		<supportedTerminologies>
 			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
-		</supportedTerminologies> 
+		</supportedTerminologies>
 		<contexts>
-			<context name="Access to condition modules from problem list review and entry. " id="1" hl7Compliant="false" urlStyle="DIRTY">
+			<context name="Access to condition modules from problem list review and entry. " id="1">
 				<contextDefinition>
 					<task match="true" search="false">
 						<matchingDomain>
 							<enumeration includeDescendants="false">
-									<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
-								  <code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
 							</enumeration>
 						</matchingDomain>
 					</task>
 					<conceptOfInterest match="true" search="true">
-					  <matchingDomain>
+						<matchingDomain>
 							<enumeration includeDescendants="false">
 								<code codeSystem="2.16.840.1.113883.6.103" code="277.5" displayName="Mucopolysaccharidosis (all types)"/>
 								<code codeSystem="2.16.840.1.113883.6.103" code="759.89" displayName="Angelman syndrome "/>
@@ -34,7 +33,7 @@
 								<code codeSystem="2.16.840.1.113883.6.103" code="758.0" displayName="Down syndrome"/>
 								<code codeSystem="2.16.840.1.113883.6.103" code="277.85" displayName="Disorders of fatty acid oxidation "/>
 								<code codeSystem="2.16.840.1.113883.6.103" code="359.1" displayName="hereditary progressive muscular dystrophy (Duchenne and Becker Muscular Dystrophy)"/>
-  								<code codeSystem="2.16.840.1.113883.6.103" code="741" displayName="Spina bifida (Neural Tube Defects)"/>
+								<code codeSystem="2.16.840.1.113883.6.103" code="741" displayName="Spina bifida (Neural Tube Defects)"/>
 								<code codeSystem="2.16.840.1.113883.6.103" code="579.0 " displayName="celiac disease "/>
 								<code codeSystem="2.16.840.1.113883.6.103" code="330.8" displayName="Rett syndrome"/>
 								<code codeSystem="2.16.840.1.113883.6.103" code="759.83" displayName="Fragile X syndrome "/>
@@ -46,11 +45,11 @@
 							</enumeration>
 						</matchingDomain>
 						<searchParameter source="displayName">
-						  <syntaxOnResource nonHl7CompliantName="q" valueSuffix="+site:http://ghr.nlm.nih.gov/"/>
+							<syntaxOnResource nonHl7CompliantName="q" valueSuffix="+site:http://ghr.nlm.nih.gov/"/>
 						</searchParameter>
 					</conceptOfInterest>
 					<subTopics>
-					  <subTopic linkName="Genetic conditions"></subTopic>
+						<subTopic linkName="Genetic conditions"/>
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
