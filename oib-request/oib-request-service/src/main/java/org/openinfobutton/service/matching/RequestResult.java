@@ -19,7 +19,8 @@ import java.util.List;
 import org.openinfobutton.schemas.kb.Context;
 import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
-import org.openinfobutton.schemas.kb.KnowledgeResourceProfile.ProfileDefinition.SupportedTerminologies;
+import org.openinfobutton.schemas.kb.ProfileDefinition;
+import org.openinfobutton.schemas.kb.ProfileDefinition.SupportedTerminologies;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -36,7 +37,7 @@ public class RequestResult
     private final KnowledgeResourceProfile.Header header;
 
     /** The profile definition. */
-    private final KnowledgeResourceProfile.ProfileDefinition profileDefinition;
+    private final ProfileDefinition profileDefinition;
 
     /** The supported code systems. */
     private List<String> supportedCodeSystems;

@@ -97,7 +97,7 @@ public abstract class ContextMatcher
                         }
                     }
                 }
-                if ( context.getMatchingDomain().getEnumeration().isIncludeDescendants() && !match )
+                if ( context.getMatchingDomain().getEnumeration().getIncludeDescendants() && !match )
                 {
                     for ( final Code contextCode : codes )
                     {

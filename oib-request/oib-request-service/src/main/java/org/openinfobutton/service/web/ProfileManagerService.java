@@ -31,6 +31,7 @@ import edu.utah.further.profiledb.domain.Profiles;
  * @version May 5, 2014
  */
 @Controller
+@RequestMapping("/manager")
 public class ProfileManagerService
 {
     
@@ -38,28 +39,22 @@ public class ProfileManagerService
     @Qualifier("pDao")
     private ProfilesDao pdao; 
     
-    @RequestMapping(produces="application/json", value = "/manager/profiles", method = RequestMethod.GET)
+    @RequestMapping(produces="application/json", value = "/profiles", method = RequestMethod.GET)
     @ResponseBody
-    public List<String> getProfiles() {
+    public List<Profiles> getProfiles() {
         
-        List<String> profiles = new ArrayList<String>();
+        List<Profiles> profiles = new ArrayList<Profiles>();
         try 
         {
             
-            for (Profiles profile : pdao.getProfiles())
-            {
-                byte[] bdata = profile.getContent().getBytes(1, (int) profile.getContent().length());
-                String s = new String(bdata);
-                profiles.add(s);
-            }
+           profiles = pdao.getProfiles();
         } 
         catch (Exception e) 
         {
             
             String eMessage = "Error connecting to database and getting profiles";
             System.err.println(eMessage);
-            profiles.add(eMessage);
-            return profiles;
+
         }
         
         return profiles;

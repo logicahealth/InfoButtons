@@ -21,6 +21,7 @@ import org.openinfobutton.schema.IDLite;
 import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
+import org.openinfobutton.schemas.kb.ProfileDefinition;
 import org.openinfobutton.service.profile.ResourceProfileProvider;
 
 // TODO: Auto-generated Javadoc
@@ -91,7 +92,7 @@ public final class AccessCheckHandler
 
         Boolean match = false;
 
-        final List<KnowledgeResourceProfile.ProfileDefinition.AuthorizedOrganizations.AuthorizedOrganization> 
+        final List<ProfileDefinition.AuthorizedOrganizations.AuthorizedOrganization> 
             authorizedOrganizations =
             profile.getProfileDefinition().getAuthorizedOrganizations().getAuthorizedOrganization();
         final int authCount = authorizedOrganizations.size();

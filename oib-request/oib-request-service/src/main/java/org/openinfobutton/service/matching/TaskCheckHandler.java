@@ -22,7 +22,7 @@ import org.openinfobutton.schemas.kb.CodedContextElement;
 import org.openinfobutton.schemas.kb.Context;
 import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
-import org.openinfobutton.schemas.kb.KnowledgeResourceProfile.ProfileDefinition.SupportedTerminologies;
+import org.openinfobutton.schemas.kb.ProfileDefinition.SupportedTerminologies;
 import org.openinfobutton.service.profile.ResourceProfileProvider;
 
 // TODO: Auto-generated Javadoc

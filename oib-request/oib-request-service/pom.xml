@@ -10,7 +10,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>oib-request-service</artifactId>
 	<packaging>war</packaging>
-	<version>1.4</version>
 	<name>oib-request-service</name>
 	<url>http://maven.apache.org</url>
 
@@ -50,14 +49,7 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-schema</artifactId>
-			<version>1.4</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openinfobutton</groupId>
-			<artifactId>oib-core</artifactId>
-			<version>1.4</version>
+			<version>1.6-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -114,7 +106,7 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-db</artifactId>
-			<version>1.4</version>
+			<version>1.6-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -180,7 +172,7 @@
 			<version>0.9.1.2</version>
 		</dependency>
 		<dependency>
-			<groupId>edu.utah.openinfobutton</groupId>
+			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-inference-rxnorm</artifactId>
 			<version>1.4</version>
 		</dependency>

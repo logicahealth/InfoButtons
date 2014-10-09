@@ -23,6 +23,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.openinfobutton.service.json.BlobJsonSerializer;
+
 import edu.utah.further.core.api.data.PersistentEntity;
 
 /**
@@ -176,6 +179,7 @@ public class Profiles
      *
      * @return the content
      */
+    @JsonSerialize(using=BlobJsonSerializer.class)
     public Blob getContent()
     {
         return content;

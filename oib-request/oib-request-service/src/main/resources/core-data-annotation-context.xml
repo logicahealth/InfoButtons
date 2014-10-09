@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+ <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util" 
 	xsi:schemaLocation="
-	http://java.sun.com/xml/ns/javaee 
-	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.1.xsd
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 	http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+	http://www.springframework.org/schema/util  
+    http://www.springframework.org/schema/util/spring-util-3.1.xsd
 	">
+	
 
-
-	<!-- http://www.springframework.org/schema/beans/spring-beans-3.0.xsd -->
+<!-- http://www.springframework.org/schema/beans/spring-beans-3.0.xsd -->
 
 	<!-- =========================================== -->
-	<!-- Properties files -->
+	<!-- Properties files                            -->
 	<!-- =========================================== -->
 
 	<!-- Property file locations -->
-	<!-- <context:property-placeholder location="classpath*:*-.properties" /> -->
+	<!--  <context:property-placeholder location="classpath*:*-.properties" />-->
 
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:serviceParams.properties" />
-	</bean>
+<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="location" value="classpath:serviceParams.properties"/>
+       </bean>
 	<!-- =========================================== -->
-	<!-- Annotation configuration -->
+	<!-- Annotation configuration                    -->
 	<!-- =========================================== -->
 
 	<context:annotation-config />
-
-	<!-- Activate production implementations in the core utility module -->
+	<mvc:annotation-driven />
+	<!--
+		Activate production implementations in the core utility module
+	-->
 	<context:component-scan base-package="edu.utah.further.core">
 		<context:exclude-filter type="annotation"
 			expression="edu.utah.further.core.api.context.Stub" />
@@ -45,16 +49,35 @@
 
 	<context:component-scan base-package="edu.utah.further.subsetdb.service" />
 	<context:component-scan base-package="edu.utah.further.profiledb.service" />
-	<context:component-scan
-		base-package="edu.utah.openinfobutton.externalresource.implementation" />
-	<bean id="externalSet" class="${service.MatchExternalSetClassName}">
-	</bean>
+    <context:component-scan base-package="edu.utah.openinfobutton.externalresource.implementation" /> 
+    <bean id="externalSet" class="${service.MatchExternalSetClassName}"> </bean>
 	<context:component-scan base-package="org.openinfobutton.service.profile" />
 	<context:component-scan base-package="org.openinfobutton.service.transform" />
 	<context:component-scan base-package="org.openinfobutton.service.response" />
 	<context:component-scan base-package="org.openinfobutton.service.matching" />
 	<context:component-scan base-package="org.openinfobutton.service.web" />
-
-
+	
 	<context:spring-configured />
+	  <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />  
+	        <!--  
+            Configures view for returning JSON to the client  
+      -->  
+      <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">  
+           <property name="contentType" value="text/plain"/>  
+      </bean>  
+      <!--  
+            maps handler methods based on HTTP paths
+      -->  
+      <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+           <property name="messageConverters">  
+                <util:list id="beanList">  
+                     <ref bean="jsonMessageConverter"/>  
+                </util:list>  
+           </property>  
+      </bean>  
+      <!--  
+            Converts JSON to POJO and vice versa  
+      -->  
+      <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+	
 </beans>

@@ -63,6 +63,7 @@ import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.CodedContextElement;
 import org.openinfobutton.schemas.kb.Context;
+import org.openinfobutton.schemas.kb.KnowledgeRequestService;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.schemas.kb.SubTopic;
 import org.openinfobutton.schemas.kb.SyntaxOnResource;
@@ -445,9 +446,9 @@ public class ResponseGenerator
         final StringBuilder str = new StringBuilder( urlBase );
         if ( context.getKnowledgeRequestService().getAttributes() != null )
         {
-            final List<Context.KnowledgeRequestService.Attributes.Attribute> parameters =
+            final List<KnowledgeRequestService.Attributes.Attribute> parameters =
                 context.getKnowledgeRequestService().getAttributes().getAttribute();
-            for ( final Context.KnowledgeRequestService.Attributes.Attribute attribute : parameters )
+            for ( final KnowledgeRequestService.Attributes.Attribute attribute : parameters )
             {
                 str.append( attribute.getName() );
                 str.append( ( urlStyle.equals( "CLEAN" ) ) ? "/" : "=" );

@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-schema</artifactId>
-			<version>1.4</version>
+			<version>1.6-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -188,7 +188,7 @@
 			<version>0.9.1.2</version>
 		</dependency>
 		<dependency>
-			<groupId>edu.utah.openinfobutton</groupId>
+			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-inference-rxnorm</artifactId>
 			<version>1.4</version>
 		</dependency>
