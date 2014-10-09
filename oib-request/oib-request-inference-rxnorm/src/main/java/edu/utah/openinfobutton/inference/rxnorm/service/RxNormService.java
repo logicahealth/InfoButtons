@@ -31,7 +31,7 @@ import org.openinfobutton.schemas.kb.Code;
 
 import edu.utah.further.core.api.xml.XmlService;
 import edu.utah.further.core.xml.jaxb.XmlServiceImpl;
-import edu.utah.openinfobutton.inference.rxnorm.schema.ApproxGroup.Candidate;
+import edu.utah.openinfobutton.inference.rxnorm.schema.ApproximateGroup.Candidate;
 import edu.utah.openinfobutton.inference.rxnorm.schema.RelatedGroup;
 import edu.utah.openinfobutton.inference.rxnorm.schema.RelatedGroup.ConceptGroup.ConceptProperties;
 import edu.utah.openinfobutton.inference.rxnorm.schema.RxNormData;
@@ -46,7 +46,7 @@ public final class RxNormService
     private static final String RXNORM_REST_URL = "http://rxnav.nlm.nih.gov/REST/";
 
     /** The Constant APPROX_TERM_ARG. */
-    private static final String APPROX_TERM_ARG = "approx?term=";
+    private static final String APPROX_TERM_ARG = "approximateTerm?term=";
 
     /** The Constant RXCUI_ARG. */
     private static final String RXCUI_ARG = "rxcui/";
@@ -112,7 +112,7 @@ public final class RxNormService
         try
         {
             final RxNormData data = xmlService.unmarshal( response, RxNormData.class );
-            candidates = data.getApproxGroup().getCandidates();
+            candidates = data.getApproximateGroup().getCandidates();
         }
         catch ( final JAXBException e )
         {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?altova_sps ResourceAuhtoring.sps?>
-<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.9_LITE.xsd">
 	<header id="1100">
 		<title>DailyMed</title>
 		<profileDescription>FDA drug labels</profileDescription>
@@ -11,8 +10,11 @@
 			<authorizedOrganization name="University of Washington" id="1.3.6.1.4.1.150"/>
 			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
 			<authorizedOrganization name="Northwestern University" id="2.16.840.1.113883.3.1951"/>
-			<authorizedOrganization name="MBL" id="MBL"/>
 		</authorizedOrganizations>
+		<supportedTerminologies>
+			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
+		</supportedTerminologies>
+
 		<contexts>
 			<context name="Knowledge on pharmacogenetic information from medication order entry" id="1">
 				<contextDefinition>

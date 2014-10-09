@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?altova_sps ResourceAuhtoring.sps?>
-<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.9_LITE.xsd">
 	<header id="1">
 		<title>MayoClinic</title>
 		<profileDescription>Patient education</profileDescription>
 		<versionControl publicationDate="2012-05-31T00:00:00"></versionControl>
 	</header>
-	<profileDefinition>
+	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="false" urlStyle="DIRTY">
 		<authorizedOrganizations>
 			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
 			<authorizedOrganization id="1.3.6.1.4.1.5884" name="University of Utah"/>
 			<authorizedOrganization id="1.3.6.1.4.1.34810" name="Intermountain Healthcare"/>
+			<authorizedOrganization name="Axeium" id="http://axeium.net"/>
 		</authorizedOrganizations>
 		<contexts>
-			<context name="Access to disease modules from problem list review and entry. Pediatric population." id="1" hl7Compliant="false" urlStyle="DIRTY">
+			<context name="Access to disease modules from problem list review and entry. Pediatric population." id="1">
 				<contextDefinition>
 					<task match="true" search="false">
 						<matchingDomain>

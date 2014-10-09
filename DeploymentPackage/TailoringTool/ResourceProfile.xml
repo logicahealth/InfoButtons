@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?altova_sps ResourceAuhtoring.sps?>
-<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.8_LITE.xsd">
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.9_LITE.xsd">
 	<header id="1">
-		<title/>
-		<versionControl publicationDate=""/>
+		<title>Add title</title>
+		<profileDescription>Add description</profileDescription>
+		<versionControl publicationDate="2014-01-01T00:00:00Z"/>
 	</header>
-	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
+	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false">
 		<authorizedOrganizations>
 			<authorizedOrganization name="" id=""/>
 		</authorizedOrganizations>
@@ -21,7 +22,7 @@
 					</task>
 					<conceptOfInterest match="false" search="true"/>
 					<subTopics>
-						<subTopic linkName=""/>
+						<subTopic linkName=" "/>
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>

@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.openinfobutton</groupId>
+    <artifactId>oib-request</artifactId>
+    <version>1.4-SNAPSHOT</version>
+  </parent>
+  <artifactId>oib-core</artifactId>
+  <name>OIB Core Utility Module</name>
+  <description>OIB Core Utility Module</description>
+  
+  	<repositories>
+		<repository>
+			<id>further</id>
+			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>further</id>
+			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+  
+  <dependencies>
+  		<dependency>  
+            <groupId>org.codehaus.jackson</groupId>  
+            <artifactId>jackson-mapper-asl</artifactId>  
+            <version>1.9.13</version>  
+        </dependency>
+</dependencies>
+</project>
+
