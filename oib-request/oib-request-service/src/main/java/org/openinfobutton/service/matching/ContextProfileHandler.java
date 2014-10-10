@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.schemas.kb.Context;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
+import org.openinfobutton.schemas.kb.ProfileDefinition.AuthorizedOrganizations.AuthorizedOrganization;
 import org.openinfobutton.service.profile.ResourceProfileProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -94,6 +95,7 @@ public class ContextProfileHandler
         log.debug( "    SupportedCS " + supportedCodeSystems );
         final List<Context> contexts = profile.getProfileDefinition().getContexts().getContext();
         final int count = contexts.size();
+        setOrganizationSpecificParameters(result, profile.getProfileDefinition().getAuthorizedOrganizations().getAuthorizedOrganization());
         Context context;
         for ( int x = 0; x < count; x++ )
         {
@@ -155,5 +157,25 @@ public class ContextProfileHandler
             result.addResult( context );
         }
         return result;
+    }
+    
+    private void setOrganizationSpecificParameters(final RequestResult result, List<AuthorizedOrganization> authorizedOrganizations)
+    {
+        result.setOrganizationURL( null );
+        result.setUseAssignedAuthorizedPerson( false );
+        for (AuthorizedOrganization org : authorizedOrganizations)
+        {
+            if (request.getHolder().getRepresentedOrganization().getRoot().equals( org.getId() ))
+            {
+                if (org.getUsesAssignedAuthorizedPerson() != null)
+                {
+                    result.setUseAssignedAuthorizedPerson( org.getUsesAssignedAuthorizedPerson() );
+                }
+                if (org.getKnowledgeRequestServiceLocation() != null)
+                {
+                    result.setOrganizationURL( org.getKnowledgeRequestServiceLocation().getUrl());
+                }
+            }
+        }
     }
 }

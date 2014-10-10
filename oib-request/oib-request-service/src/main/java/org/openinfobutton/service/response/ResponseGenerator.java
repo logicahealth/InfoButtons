@@ -139,12 +139,14 @@ public class ResponseGenerator
         feed.setSubtitle( subTitle );
         feed.setUpdated( getUpdateTime() );
         final int count = contexts.size();
+        String baseUrl = result.getOrganizationURL();
+        boolean useAuthorizedPerson = result.getUseAssignedAuthorizedPerson();
         if ( result.isHl7URLCompliant() && result.isHl7KnowledgeResponseCompliant() )
         {
             FeedType feedFromResource = null;
             for ( int x = 0; x < count; x++ )
             {
-                feedFromResource = parseAndCreateEntries( contexts.get( x ), result.getSupportedCodeSystems() );
+                feedFromResource = parseAndCreateEntries( contexts.get( x ), baseUrl, result.getSupportedCodeSystems(), useAuthorizedPerson );
                 feed.getEntry().addAll( feedFromResource.getEntry() );
             }
             /**
@@ -180,16 +182,16 @@ public class ResponseGenerator
             {
                 for ( int x = 0; x < count; x++ )
                 {
-                    feed.getEntry().addAll( createEntries( contexts.get( x ), result.getSupportedCodeSystems(), lang ) );
+                    feed.getEntry().addAll( createEntries( contexts.get( x ), baseUrl, result.getSupportedCodeSystems(), lang, useAuthorizedPerson ) );
                 }
             }
             else
             {
                 for ( int x = 0; x < count; x++ )
                 {
-                    feed.getEntry().addAll( createNonHL7CompliantEntries( contexts.get( x ),
+                    feed.getEntry().addAll( createNonHL7CompliantEntries( contexts.get( x ), baseUrl,
                                                                           result.getSupportedCodeSystems(),
-                                                                          result.getUrlStyle(), lang ) );
+                                                                          result.getUrlStyle(), lang, useAuthorizedPerson ) );
                 }
             }
         }
@@ -263,14 +265,25 @@ public class ResponseGenerator
      * @param supportedCodeSystems to generate the base link
      * @return the entire feed in the form of xml
      */
-    private FeedType parseAndCreateEntries( Context context, List<String> supportedCodeSystems )
+    private FeedType parseAndCreateEntries( Context context, String orgURL, List<String> supportedCodeSystems, boolean useAuthorizedPerson )
     {
         FeedType feedType = new FeedType();
         try
         {
-            final String urlBase = context.getKnowledgeRequestService().getKnowledgeRequestServiceLocation().getUrl();
+            String urlBase = context.getKnowledgeRequestService().getKnowledgeRequestServiceLocation().getUrl();
+            if (orgURL != null)
+            {
+                urlBase = orgURL;
+            }           
             final StringBuilder baseLink =
                 generateBaseLink( urlBase, context.getContextDefinition(), supportedCodeSystems, null );
+            if (useAuthorizedPerson && !request.getHolder().getAssignedAuthorizedPerson().getRoot().isEmpty())
+            {
+                baseLink.append( CodeConstants.HOLDER_AUTHORIZEDPERSON );
+                baseLink.append( "=" );
+                baseLink.append( request.getHolder().getAssignedAuthorizedPerson().getRoot() );
+                baseLink.append( "&" );
+            }
             final DefaultHttpClient httpClient = new DefaultHttpClient();
             final URL url = new URL( baseLink.toString() );
             final URI uri = new URI( url.getProtocol(), null, url.getHost(), url.getPort(), url.getPath(), url.getQuery(), null );
@@ -335,15 +348,25 @@ public class ResponseGenerator
         return feedType;
     }
 
-    private List<EntryType> createEntries( Context context, List<String> supportedCodeSystems, String lang )
+    private List<EntryType> createEntries( Context context, String orgURL, List<String> supportedCodeSystems, String lang, boolean useAuthorizedPerson )
     {
 
         final List<EntryType> entries = new ArrayList<EntryType>();
-        final String urlBase = context.getKnowledgeRequestService().getKnowledgeRequestServiceLocation().getUrl();
+        String urlBase = context.getKnowledgeRequestService().getKnowledgeRequestServiceLocation().getUrl();
+        if (orgURL != null)
+        {
+            urlBase = orgURL;
+        }            
         final List<CategoryType> entryLevelCategoryList = new ArrayList<CategoryType>();
         final StringBuilder baseLink =
             generateBaseLink( urlBase, context.getContextDefinition(), supportedCodeSystems, entryLevelCategoryList );
-
+        if (useAuthorizedPerson && !request.getHolder().getAssignedAuthorizedPerson().getRoot().isEmpty())
+        {
+            baseLink.append( CodeConstants.HOLDER_AUTHORIZEDPERSON );
+            baseLink.append( "=" );
+            baseLink.append( request.getHolder().getAssignedAuthorizedPerson().getRoot() );
+            baseLink.append( "&" );
+        }
         StringBuilder subTopics = new StringBuilder();
         LinkType link;
         EntryType entry;
@@ -437,12 +460,16 @@ public class ResponseGenerator
         return categoryList;
     }
 
-    private List<EntryType> createNonHL7CompliantEntries( Context context, List<String> supportedCodeSystems,
-                                                          String urlStyle, String lang )
+    private List<EntryType> createNonHL7CompliantEntries( Context context, String orgURL, List<String> supportedCodeSystems,
+                                                          String urlStyle, String lang, boolean useAuthorizedPerson )
     {
 
         final List<EntryType> entries = new ArrayList<EntryType>();
-        final String urlBase = context.getKnowledgeRequestService().getKnowledgeRequestServiceLocation().getUrl();
+        String urlBase = context.getKnowledgeRequestService().getKnowledgeRequestServiceLocation().getUrl();
+        if (orgURL != null)
+        {
+            urlBase = orgURL;
+        }    
         final StringBuilder str = new StringBuilder( urlBase );
         if ( context.getKnowledgeRequestService().getAttributes() != null )
         {
@@ -459,6 +486,13 @@ public class ResponseGenerator
         final StringBuilder baseLink =
             generateNonHL7CompliantBaseLink( str.toString(), context.getContextDefinition(), urlStyle,
                                              supportedCodeSystems );
+        if (useAuthorizedPerson && !request.getHolder().getAssignedAuthorizedPerson().getRoot().isEmpty())
+        {
+            baseLink.append( CodeConstants.HOLDER_AUTHORIZEDPERSON );
+            baseLink.append( "=" );
+            baseLink.append( request.getHolder().getAssignedAuthorizedPerson().getRoot() );
+            baseLink.append( "&" );
+        }
         StringBuilder subTopics = new StringBuilder();
         LinkType link;
         EntryType entry;

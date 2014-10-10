@@ -41,6 +41,12 @@ public class RequestResult
 
     /** The supported code systems. */
     private List<String> supportedCodeSystems;
+    
+    /** Organization specific base URL */
+    private String organizationURL;
+    
+    /** Use Assigned Authorized Person **/
+    private boolean useAssignedAuthorizedPerson;
 
     /**
      * Instantiates a new request result.
@@ -160,5 +166,45 @@ public class RequestResult
     {
 
         return ( this.header.getTitle() ).compareTo( r.getHeader().getTitle() );
+    }
+
+    /**
+     * Return the organizationURL property.
+     *
+     * @return the organizationURL
+     */
+    public String getOrganizationURL()
+    {
+        return organizationURL;
+    }
+
+    /**
+     * Set a new value for the organizationURL property.
+     *
+     * @param organizationURL the organizationURL to set
+     */
+    public void setOrganizationURL( String organizationURL )
+    {
+        this.organizationURL = organizationURL;
+    }
+
+    /**
+     * Return the useAssignedAuthorizedPerson property.
+     *
+     * @return the useAssignedAuthorizedPerson
+     */
+    public boolean getUseAssignedAuthorizedPerson()
+    {
+        return useAssignedAuthorizedPerson;
+    }
+
+    /**
+     * Set a new value for the useAssignedAuthorizedPerson property.
+     *
+     * @param useAssignedAuthorizedPerson the useAssignedAuthorizedPerson to set
+     */
+    public void setUseAssignedAuthorizedPerson( boolean useAssignedAuthorizedPerson )
+    {
+        this.useAssignedAuthorizedPerson = useAssignedAuthorizedPerson;
     }
 }
