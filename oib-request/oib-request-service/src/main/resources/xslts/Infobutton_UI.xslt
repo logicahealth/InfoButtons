@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- DWXMLSource="responseSample.xml" -->
-<xsl:stylesheet version="2.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:ns2="urn:hl7-org:v3"
-	xmlns:ns3="http://www.w3.org/2005/Atom:atom">
-	<xsl:output method="html" version="1.0" encoding="UTF-8"
-		indent="yes" />
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions">
+	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
 	<xsl:template match="/">
 		<html>
 			<head>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 				<title> OpenInfobutton</title>
 				<style type="text/css"><![CDATA[
 						@charset "UTF-8";
@@ -20,7 +17,7 @@
 								font: 100.01% Arial, Helvetica, "Trebuchet MS",Verdana, sans-serif;
 								background: #666 url(/images/background/page-bg.gif) repeat;
 								color: #000;
-								text-align: center;
+								text-align: left;
 							}
 							h1 { padding: 0.85em 0 0.5em 0; }
 							h2, h3 { padding: 0.5em 0 0.2em 0; }
@@ -47,8 +44,7 @@
 							strong { font-weight: bold; color: #333; }
 							em { font-style: italic; }
 							a { font-weight: normal; }
-							a:link { color: #8f5917; text-decoration: underline; }
-							a:visited { color: #666; text-decoration: underline; }
+							a:link { color: #8f5917; text-decoration: underline; display: inline;}
 							a:focus, a:hover, a:active { color: #600; text-decoration: none; }
 							hr {
 								border: 0;
@@ -177,17 +173,13 @@
 								list-style: none;
 								padding: 0;
 								margin: 10px 0 15px 0;
-								/*margin: 0;
-								padding: 0;*/
-								
 							}
 							* html #sideColumn1 ul {
 								height: 1%;					/* IE6 fix to give list "hasLayout" */
 							}
 							#sideColumn1 ul li{
-								padding: 0;
+								padding: 2;
 								display: block; /* Fix for IE excessive space between list items */
-								padding: 3;
 								border-bottom: none;
 								/*border-bottom: 2px solid #7e0000;*/
 							}
@@ -248,36 +240,21 @@
 							}
 
 					]]></style>
-				<xsl:text disable-output-escaping="yes"><![CDATA[
-						<!--[if lt IE 7]>
-						<style type="text/css">
-						.col{height:1000em;}
-						.u_style #wrapper {width: 58em;}
-						/*ie5 needs this */
-						#footer,#header {height:1px}
-						</style>
-						<![endif]-->
-						
-						<!-- The code block below is a conditional comment for IE7 and newer. -->
-						<!--[if gte IE 7]>
-						<style type="text/css">
-						.u_style #headerRight div a {zoom: 1;}
-						</style>
-						<![endif]-->
-				]]></xsl:text>
-				<script type="text/javascript">
-
+                <script type="text/javascript">
 					function start() {
-					window.resizeTo(1250, 1000);
-					setContent('
-					<xsl:value-of select="//feed[1]/entry[1]/link/@href" />
-					');
+						window.resizeTo(1250, 1000);
+						setContent('<xsl:value-of select="//feed[1]/entry[1]/link/@href"/>', '<xsl:value-of select="//feed[1]/entry[1]/id"/>');
 					}
-				</script>
+				</script>  
 			</head>
 			<body class="u_style" onload="start();">
 				<script type="text/javascript"><![CDATA[
-					function setContent(url) {
+					function setContent(url, linkId) {
+						var selectedLinks = document.getElementsByClassName('selected'), i;
+						for (var i = 0; i < selectedLinks.length; i ++) {
+						    selectedLinks[i].style.display = 'none';
+						}
+						document.getElementById(linkId).style.display = 'inline';
 						if (url.search("medlineplus") == -1) {
 							var contentPanel = document.getElementById("contentPanel");
 							contentPanel.src = url;
@@ -287,66 +264,45 @@
 						}
 					}
 				]]></script>
+				
 				<div id="wrapper">
-					<!--begin #header -->
-					<div id="header">
-						<div id="headerWrapper">
-							<div id="headerLeft">
-								<!--<a href="http://www.utah.edu"> <img src="images/header/HSC_logo.gif" 
-									alt="U of U Campus Organization" width="270" height="65" border="0"/> </a> -->
-
-							</div>
-						</div>
-						<div id="headerNavBar">
-
-						</div>
-					</div>
+				</div>
 					<!-- begin innerWrapper -->
 					<div id="innerWrapper">
 						<!-- begin #sideColumn1 -->
 						<div id="sideColumn1">
-
-							<xsl:for-each select="//feed">
-
-								<h3>
-									<xsl:value-of select="title" />
-								</h3>
-								<div>
-									<ul>
-										<xsl:for-each select="entry">
-											<li>
-												<a href="javascript:void(0);">
-													<xsl:attribute name="onclick">setContent('<xsl:value-of
-														select="link/@href" />');</xsl:attribute>
-													<!-- <xsl:value-of select="ns3:category/ns2:subTopic/ns2:value/@displayName"/> -->
-													<xsl:value-of select="title" />
-												</a>
-											</li>
-										</xsl:for-each>
-									</ul>
-								</div>
-							</xsl:for-each>
-
+							
+								<xsl:for-each select="//feed">
+								
+									<h3><xsl:value-of select="title"/></h3>
+									<div>
+										<ul>
+											<xsl:for-each select="entry">
+												<li>
+													<a href="javascript:void(0);">
+														<xsl:attribute name="onclick">setContent('<xsl:value-of select="link/@href"/>','<xsl:value-of select="id"/>');</xsl:attribute>
+														<xsl:value-of select="title"/>
+													</a>
+													<div class="selected" style="display:none">
+														<xsl:attribute name="id"><xsl:value-of select="id"/></xsl:attribute>
+														<img src="images/tick_white.png"></img>							
+													</div>
+												</li>
+											</xsl:for-each>
+										</ul>
+									</div>
+								</xsl:for-each>
+							
 						</div>
 						<div id="content">
-							<iframe id="contentPanel" width="995" height="750"
-								scrolling="auto" />
+							<iframe id="contentPanel" width="995" height="750" scrolling="auto"/>
 							<!-- end #content -->
 						</div>
-						<div class="clearer" />
-						<div class="col side1" />
-						<div class="col mid" />
+						<div class="clearer"/>
+						<div class="col side1"/>
+						<div class="col mid"/>
 					</div>
-					<div id="footer">
-						<!--<ul> <li>The University of Utah</li> <li>Department of Biomedical 
-							Informatics</li> <li>801.Phone.Number</li> </ul> <ul> <li> <a href="http://www.utah.edu/" 
-							target="_blank">The University of Utah</a> </li> <li> <a href="mailto:contact-email@utah.edu">Webmaster</a> 
-							</li> <li> <a href="http://www.utah.edu/disclaimer/index.html" target="_blank">Disclaimer</a> 
-							</li> <li> <a href="http://www.utah.edu/privacy/" target="_blank">Privacy</a> 
-							</li> </ul> -->
-					</div>
-				</div>
-
+					
 			</body>
 		</html>
 	</xsl:template>
