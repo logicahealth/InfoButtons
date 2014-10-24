@@ -1,6 +1,8 @@
 # oib-site-lite-rest-server
 Test REST server the oib-site-lite-ui project.  Connects to/queries the OIB databases (see dependencies)
 
+## Pre-Install Tasks
+Run the db-update-script.sql
 
 ## Dependencies
 * Installation of node
