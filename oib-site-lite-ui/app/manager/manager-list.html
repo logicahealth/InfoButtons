@@ -1,0 +1,20 @@
+<H2>Configured Infobutton Search Engines</H2>
+
+<div class="row text-center">
+    <div class="container-fluid" ng-controller="ProfileCtrl">
+        <div class="row text-cnter" ng-repeat="profileLink in profileLinks">
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="{{profileLink.logo}}" alt="{{profileLink.title}} logo" style="max-height: 60px;">
+                    <div class="caption">
+                        <h3>{{profileLink.title}}</h3>
+                        <p>{{profileLink.description}}</p>
+                        <p>
+                            <a href="#" class="btn btn-primary">Configure</a> <a href="#" class="btn btn-default">More Info</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

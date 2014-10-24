@@ -1,0 +1,57 @@
+{
+  "name": "jasminewd",
+  "description": "WebDriverJS adapter for Jasmine.",
+  "homepage": "https://github.com/angular/jasminewd",
+  "keywords": [
+    "test",
+    "testing",
+    "webdriver",
+    "webdriverjs",
+    "selenium",
+    "jasmine"
+  ],
+  "author": {
+    "name": "Julie Ralph",
+    "email": "ju.ralph@gmail.com"
+  },
+  "devDependencies": {
+    "jshint": "2.5.0",
+    "minijasminenode": "1.1.0",
+    "selenium-webdriver": "2.42.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/angular/jasminewd.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "pretest": "jshint index.js spec",
+    "test": "node node_modules/.bin/minijasminenode spec/adapterSpec.js"
+  },
+  "license": "MIT",
+  "version": "1.0.4",
+  "gitHead": "b77f440a3af6d7830e18f63ae5dbff4cbf80c14f",
+  "bugs": {
+    "url": "https://github.com/angular/jasminewd/issues"
+  },
+  "_id": "jasminewd@1.0.4",
+  "_shasum": "e0231cb009ab5b8c835fd805ec6c90df4193bb43",
+  "_from": "jasminewd@1.0.4",
+  "_npmVersion": "1.4.14",
+  "_npmUser": {
+    "name": "juliemr",
+    "email": "ju.ralph@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "juliemr",
+      "email": "ju.ralph@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "e0231cb009ab5b8c835fd805ec6c90df4193bb43",
+    "tarball": "http://registry.npmjs.org/jasminewd/-/jasminewd-1.0.4.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/jasminewd/-/jasminewd-1.0.4.tgz"
+}

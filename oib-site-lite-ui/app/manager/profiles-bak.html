@@ -1,0 +1,64 @@
+<div class="container" ng-controller="ProfileCtrl">
+
+<h4 style="margin-left: 1.5em;">Configured Search Engines</h4>
+<hr/>
+
+    <div class="well" ng-repeat="profileLink in profileLinks">
+        <div class="row">
+            <div class="col-md-1">
+                <img src="{{profileLink.logo}}" alt="{{profileLink.title}} logo" style="max-height: 40px; max-width: 100px;">
+            </div>
+            <!--            <div class="col-md-2">
+                            <h4>{{profileLink.title}}</h4>
+                        </div>-->
+            <div class="col-md-7" style="margin-left: 2em;">
+                <p>{{profileLink.description}}</p>
+            </div>
+            <div class="col-md-3 text-right">
+                <a href="#/editProfile/{{profileLink.cha}}" class="btn btn-primary btn-sm">Configure</a> <a href="#" class="btn btn-default btn-sm">More Info</a>
+            </div>
+        </div>
+    </div>
+
+    <h4 style="margin-left: 1.5em;">Available Downloads</h4>
+    <hr/>
+
+    <div class="well" ng-repeat="cloudProfileLink in cloudProfileLinks">
+        <div class="row">
+            <div class="col-md-2">
+                <h4><span class="label label-primary">{{cloudProfileLink.title}}</span></h4>
+            </div>
+            <div class="col-md-6" style="margin-left: 2em;">
+                <p>{{cloudProfileLink.description}}</p>
+            </div>
+            <div class="col-md-3 text-right">
+                <a href="#" class="btn btn-success btn-sm">Download</a>
+                <a href="#" class="btn btn-default btn-sm">More Info</a>
+            </div>
+        </div>
+    </div>
+
+    <pre>Local = {{profileLinks| json}}</pre>
+    <pre>Cloud = {{cloudProfileLinks| json}}</pre>
+
+</div>
+
+<!--<h4 style="margin-left: 1.5em;">Downloads</h4>
+<hr/>
+
+<div class="container" ng-controller="CloudProfileCtrl">
+    <div class="well" ng-repeat="cloudProfileLink in cloudProfileLinks">
+        <div class="row">
+            <div class="col-md-2">
+                <h4><span class="label label-primary">{{cloudProfileLink.title}}</span></h4>
+            </div>
+            <div class="col-md-6" style="margin-left: 2em;">
+                <p>{{cloudProfileLink.description}}</p>
+            </div>
+            <div class="col-md-3 text-right">
+                <a href="#" class="btn btn-success btn-sm">Download</a>
+                <a href="#" class="btn btn-default btn-sm">More Info</a>
+            </div>
+        </div>
+    </div>
+</div>-->

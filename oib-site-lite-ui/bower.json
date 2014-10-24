@@ -1,0 +1,15 @@
+{
+  "name": "oib-site-lite-ui",
+  "description": "A starter project for AngularJS",
+  "version": "0.1.0",
+  "homepage": "http://localhost:8000/app/#/home",
+  "license": "Apache 2.0",
+  "private": true,
+  "dependencies": {
+    "angular": "1.2.x",
+    "angular-route": "1.2.x",
+    "angular-resource": "1.2.x",
+    "angular-loader": "1.2.x",
+    "angular-mocks": "~1.2.x"
+  }
+}
