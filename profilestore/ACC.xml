@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ResourceProfile-v2.9_LITE.xsd">
+	<header id="4">
+		<title>American College of Cardiology</title>
+		<profileDescription>CardioSource site</profileDescription>
+		<versionControl publicationDate="2013-04-18T00:00:00"/>
+	</header>
+	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="false" urlStyle="DIRTY">
+		<authorizedOrganizations>
+			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
+			<authorizedOrganization id="1.3.6.1.4.1.5884" name="University of Utah"/>
+		</authorizedOrganizations>
+		<supportedTerminologies>
+			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
+		</supportedTerminologies>
+		<contexts>
+			<context name="" id="1">
+				<contextDefinition>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<performerKnowledgeUserType match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.110" code="PROV"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>
+					<conceptOfInterest match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.6.103" code="428" displayName="Heart failure"/>
+							</enumeration>
+						</matchingDomain>
+					</conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Drug dosing quick reference"/>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://www.cardiosource.org/en/Science-And-Quality/Quality-Programs/PINNACLE-Network/Quality-and-Performance-Improvement/HF-Toolkit/HF-Medication-Table.aspx"/>
+				</knowledgeRequestService>
+			</context>
+			<context name="" id="1">
+				<contextDefinition>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<performerKnowledgeUserType match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.110" code="PROV"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>
+					<conceptOfInterest match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.6.103" code="428" displayName="Heart failure"/>
+							</enumeration>
+						</matchingDomain>
+					</conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Treatment recommendations"/>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://content.onlinejacc.org/article.aspx?articleid=1391403#4Treatment:Recommendations"/>
+				</knowledgeRequestService>
+			</context>
+			<!--			<context name="" id="1" hl7Compliant="false" urlStyle="DIRTY">
+
+				<contextDefinition>
+
+					<task match="true" search="true">
+
+						<matchingDomain>
+
+							<enumeration includeDescendants="false">
+
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+
+							</enumeration>
+
+						</matchingDomain>
+
+					</task>
+
+					<conceptOfInterest match="true" search="true">
+
+						<matchingDomain>
+
+							<enumeration includeDescendants="false">
+
+								<code codeSystem="2.16.840.1.113883.6.103" code="428" displayName="Heart failure"/>
+
+							</enumeration>
+
+						</matchingDomain>
+
+						<searchParameter source="displayName">
+
+							<syntaxOnResource nonHl7CompliantName="query"/>							
+
+						</searchParameter>
+
+					</conceptOfInterest>
+
+					<subTopics>
+
+						<subTopic linkName="ACC Guidelines"/>
+
+					</subTopics>
+
+				</contextDefinition>
+
+				<knowledgeRequestService>
+
+					<knowledgeRequestServiceLocation url="http://search.cardiosource.org/vivisimo/cgi-bin/query-meta.exe?v:sources=acc-bundle&amp;v:project=acc&amp;"/>
+
+					<knowledgeRequestServiceLocation url="http://search.cardiosource.org/vivisimo/cgi-bin/query-meta.exe?&amp;v:sources=acc-bundle&amp;v:project=acc&amp;binning-state=group%3d%3dClinical%20Documents%2fGuidelines%0asource%3d%3dGuidelines&amp;"/>
+
+				</knowledgeRequestService>
+
+			</context> -->
+			<context name="" id="1">
+				<contextDefinition>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<conceptOfInterest match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="true">
+								<code codeSystem="2.16.840.1.113883.6.103" code="428" displayName="Heart failure"/>
+							</enumeration>
+						</matchingDomain>
+					</conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Patient education"/>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="https://www.cardiosmart.org/Healthwise/hw44/415/hw44415"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

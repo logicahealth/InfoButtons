@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<knowledgeResourceProfile>
+	<header id="3">
+		<title>Krames</title>
+		<profileDescription>Patient education content</profileDescription>
+		<versionControl publicationDate="2014-08-15T04:00:00"/>
+	</header>
+	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
+		<authorizedOrganizations>
+			<authorizedOrganization name="University of Utah" id="1.3.6.1.4.1.5884"/>
+			<authorizedOrganization name="Lehigh Valley Health Network" id="http://lvhn.org"/>
+		</authorizedOrganizations>
+		<supportedTerminologies>
+			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
+			<supportedTerminology id="2.16.840.1.113883.6.42" name="ICD9"/>
+			<supportedTerminology id="2.16.840.1.113883.6.3" name="ICD10"/>
+			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMED-CT"/>
+			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
+			<supportedTerminology id="2.16.840.1.113883.6.69" name="NDC"/>
+			<supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC"/>
+			<supportedTerminology id="2.16.840.1.113883.6.82" name="CPT"/>
+		</supportedTerminologies>
+		<contexts>
+			<context name="Patient education information from problems" id="1">
+				<contextDefinition>
+					<patientGender match="false" search="true"/>
+					<patientAgeGroup match="false" search="true"/>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" code="PROBLISTE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" code="LABRREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" code="MEDOE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" code="MLREV"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<informationRecipientLanguage match="false" search="true"/>
+					<informationRecipientUserType match="false" search="true"/>
+					<conceptOfInterest match="false" search="true"/>
+					<subTopics>
+						<subTopic linkName="Patient education"/>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://clinical35.staywellsolutionsonline.com/infobutton/search.pg?"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>
