@@ -118,7 +118,7 @@ public class KnowledgeRequestServlet
             transformer = tfactory.newTransformer();
             transformer.transform( source, result );
             final String orgid = knowledgeRequest.getHolder().getRepresentedOrganization().getRoot();
-            dao.saveRequest( stringWriter.toString(), req.getRemoteAddr(), orgid );// Log written here
+			String requestUUID = dao.saveRequest(stringWriter.toString(), req.getRemoteAddr(), orgid, req.getQueryString());//Log written here
             final AggregateKnowledgeResponse response = engine.getResponse( knowledgeRequest );
             ctx = JAXBContext.newInstance( AggregateKnowledgeResponse.class );
             m = ctx.createMarshaller();
@@ -173,6 +173,7 @@ public class KnowledgeRequestServlet
                                              "/WEB-INF/classes/xslts/" + transformation + ".xslt")));
                 stringWriter = new StringWriter();
                 result = new StreamResult( stringWriter );
+                transformer.setParameter("response_uuid", requestUUID);
                 transformer.transform( source, result );
                 out.println( stringWriter.getBuffer().toString() );
             }

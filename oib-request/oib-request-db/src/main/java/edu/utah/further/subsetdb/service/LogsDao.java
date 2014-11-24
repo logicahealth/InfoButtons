@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-package edu.utah.further.subsetdb.service;
-
-
-
-import edu.utah.further.core.api.context.Api;
-
-
-
-@Api
-public interface LogsDao {
-		
-	public String saveRequest(String req,String clip,String org,String origParams);
-	
-	
-}
-=======
 /**
  * -----------------------------------------------------------------------------------
  * (c) 2010-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
@@ -30,24 +13,24 @@ public interface LogsDao {
  */
 package edu.utah.further.subsetdb.service;
 
-import edu.utah.further.core.api.context.Api;
 
-// TODO: Auto-generated Javadoc
+import edu.utah.further.core.api.context.Api;
+//TODO: Auto-generated Javadoc
 /**
- * The Interface LogsDao.
- */
+* The Interface LogsDao.
+*/
 @Api
 public interface LogsDao
 {
 
-    /**
-     * Save request.
-     *
-     * @param req the req
-     * @param clip the clip
-     * @param org the org
-     */
-    public void saveRequest( String req, String clip, String org );
-
+ /**
+  * Save request.
+  *
+  * @param req the req
+  * @param clip the clip
+  * @param org the org
+  */
+	public String saveRequest(String req,String clip,String org,String origParams);
+	
+	
 }
->>>>>>> upstream/master

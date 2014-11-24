@@ -60,7 +60,7 @@ public class ValueSetAndLogsDbTest
     @Before
     public void insertLogEntry() {
         
-        logsDao.saveRequest( "TEST", "1.1.1.1", "TEST" );
+        logsDao.saveRequest( "TEST", "1.1.1.1", "TEST", "TEST" );
     }
     
     @Test
