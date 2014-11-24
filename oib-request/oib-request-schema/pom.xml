@@ -1,59 +1,161 @@
-<!--
-$Rev:: 1902          $:  Revision of last commit
-$Author:: ai28       $:  Author of last commit
-$Date:: 2011-01-13 1#$:  Date of last commit
--->
+<!-- $Rev:: 1902 $: Revision of last commit $Author:: ai28 $: Author of last 
+	commit $Date:: 2011-01-13 1#$: Date of last commit -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
- <modelVersion>4.0.0</modelVersion>
-  <groupId>org.hl7.v3</groupId>
-  <artifactId>oib-request-schema</artifactId>
-  <version>1.4</version>
-  <build>
-  	<plugins>
-  		<plugin>
-  			<groupId>org.codehaus.mojo</groupId>
-  			<artifactId>jaxb2-maven-plugin</artifactId>
-  			<version>1.3</version>
-  			<executions>
-  				<execution>
-  					<goals>
-  						<goal>xjc</goal>
-  					</goals>
-  				</execution>
-  			</executions>
-			<configuration>
-				<schemaDirectory>src/main/resources/</schemaDirectory>
-				<schemaFiles>KnowledgeResponse.xsd,binding.xjb,REDS_MT010001UV-Restricted-flattened-08-19-2011.xsd</schemaFiles>				
-				<outputDirectory>src/main/java</outputDirectory>
-				<packageName>org.hl7.v3</packageName>
-				<clearOutputDir>false</clearOutputDir>
-			</configuration>  			
-  		</plugin>
-		<plugin>
-			<inherited>true</inherited>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<configuration>
-				<source>1.6</source>
-				<target>1.6</target>
-			</configuration>
-		</plugin>	
-  	</plugins>
-  </build>
-  <dependencies>
-      <dependency>
-	  	  <groupId>edu.duke.mc.cfm.dci</groupId>
-	  	  <artifactId>oib-profile-schema</artifactId>
-	  	  <version>1.4</version>
-	  	  <scope>compile</scope>
-	    </dependency>
-  </dependencies>
-  
-  <scm>
-	<connection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-schema</connection>
-	<developerConnection>scm:svn:https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-schema</developerConnection>
-	<url>https://svn.chpc.utah.edu/repo/openinfobutton/trunk/party3/infobutton/infobutton-schema</url>
-  </scm>
-    <name>oib-request-schema</name>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.openinfobutton</groupId>
+	<artifactId>oib-request-schema</artifactId>
+	<version>1.4</version>
+	<properties>
+		<spring.version>3.2.3.RELEASE</spring.version>
+		<hibernate.version>4.2.0.Final</hibernate.version>
+		<jacoco.version>0.7.0.201403182114</jacoco.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<repositories>
+
+	    <repository>
+	        <id>project.local</id>
+	        <name>project</name>
+	        <url>file:${project.basedir}/repo</url>
+	    </repository>
+	    
+		<repository>
+			<id>further</id>
+			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>further</id>
+			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-prepare-agent-integration</id>
+						<goals>
+							<goal>prepare-agent-integration</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report-integration</id>
+						<goals>
+							<goal>report-integration</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<!-- implmentation is needed only for Maven 2 -->
+								<rule implementation="org.jacoco.maven.RuleConfiguration">
+									<element>BUNDLE</element>
+									<limits>
+										<!-- implmentation is needed only for Maven 2 -->
+										<limit implementation="org.jacoco.report.check.Limit">
+											<counter>COMPLEXITY</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.05</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+
+		
+			<dependency>
+			    <groupId>org.openinfobutton</groupId>
+			    <artifactId>oib-request-jaxb</artifactId>
+			    <version>1.4</version>
+			</dependency>
+			
+		<dependency>			
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>oib-profile-schema</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
+		<!-- TESTING -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<!-- <groupId>org.junit</groupId> -->
+			<groupId>junit</groupId>
+			<!-- <artifactId>com.springsource.org.junit</artifactId> -->
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+			<version>4.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.test</artifactId>
+			<scope>test</scope>
+			<version>3.1.1.RELEASE</version>
+		</dependency>
+		
+	</dependencies>
+
+	<scm>
+		<connection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</connection>
+		<developerConnection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</developerConnection>
+		<url>https://github.com/VHAINNOVATIONS/InfoButtons.git</url>
+	</scm>
+	<name>oib-request-schema</name>
 </project>

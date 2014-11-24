@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregateKnowledgeResponse xml:lang="en">
+<feed xml:lang="en">
+<title type="text">MayoClinic</title>
+<subtitle type="text">Cystitis</subtitle>
+<updated>2014-03-11T10:08:31.426-06:00</updated>
+<category scheme="taskContext.c.c" term="PROBLISTREV"/>
+<category scheme="mainSearchCriteria.v.c" term="595.9"/>
+<category scheme="mainSearchCriteria.v.cs" term="2.16.840.1.113883.6.103"/>
+<category scheme="mainSearchCriteria.v.dn" term="Cystitis"/>
+<id>urn:uuid:565a6d0e-6ebb-4599-ba34-abd48aee9b40</id>
+<entry xml:lang="en">
+<title type="text">Patient education</title>
+<link href="http://www.google.com/search?hl=en&amp;btnI=Im+Feeling+Lucky&amp;q=Cystitis+site:www.mayoclinic.com/health/&amp;" hreflang="en" rel="alternate" title="Patient education" type="html"/>
+<id>urn:uuid:caa4850c-c5e6-4afd-830c-50279fbdba4c</id>
+<updated>2014-03-11T10:08:31.426-06:00</updated>
+</entry>
+</feed>
+<feed>
+<title type="text">MedlinePlus</title>
+<subtitle type="text">Cystitis</subtitle>
+<updated>2014-03-11T10:08:31.426-06:00</updated>
+<category scheme="REDS_MT010001UV" term="MATCHED"/>
+<category scheme="mainSearchCriteria.v.c" term="595.9"/>
+<category scheme="mainSearchCriteria.v.cs" term="2.16.840.1.113883.6.103"/>
+<category scheme="mainSearchCriteria.v.dn" term="Cystitis"/>
+<category scheme="informationRecipient" term="PAT"/>
+<id>urn:uuid:9bde5f84-2ec4-4a98-b92f-12e2a62df126</id>
+<entry>
+<title>Bladder Diseases</title>
+<link href="http://www.nlm.nih.gov/medlineplus/bladderdiseases.html" rel="alternate"/>
+<id>tag: nlm.nih.gov, 2014-11-03:/medlineplus/bladderdiseases.html</id>
+<updated>2014-03-11T08:03:31Z</updated>
+<summary type="html">&lt;p>The bladder is a hollow organ in your lower abdomen that stores urine. Many conditions can affect your bladder. Some common ones are&lt;/p>&lt;ul>&lt;li>Cystitis - inflammation of the bladder, often from an &lt;a href="http://www.nlm.nih.gov/medlineplus/urinarytractinfections.html">infection&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/urinaryincontinence.html">Urinary incontinence&lt;/a> - loss of bladder control&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/overactivebladder.html">Overactive bladder&lt;/a> - a condition in which the bladder squeezes urine out at the wrong time&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/interstitialcystitis.html">Interstitial cystitis&lt;/a> - a chronic problem that causes bladder pain and frequent, urgent urination&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/bladdercancer.html">Bladder cancer&lt;/a>&lt;/li>&lt;/ul>&lt;p>Doctors diagnose bladder diseases using different tests. These include urine tests, x-rays, and an examination of the bladder wall with a scope called a cystoscope. Treatment depends on the cause of the problem. It may include medicines and, in severe cases, surgery. &lt;/p> &lt;p class="NLMattribution">	NIH: National Institute of Diabetes and Digestive and Kidney Diseases&lt;/p> &lt;p class="NLMrelatedLinks">&lt;ul>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/003902.htm">Bladder biopsy&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/002238.htm">Bladder outlet obstruction&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/001275.htm">Bladder stones&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/000514.htm">Cystitis - noninfectious&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/003904.htm">Cystometric study&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/003903.htm">Cystoscopy&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/patientinstructions/000140.htm">Indwelling catheter care&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/003782.htm">Intravenous pyelogram&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/patientinstructions/000141.htm">Kegel exercises - self-care&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/000754.htm">Neurogenic bladder&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/007362.htm">Pelvic CT scan&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/003832.htm">Radionuclide cystogram&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/003783.htm">Retrograde cystography&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/patientinstructions/000144.htm">Self catheterization - female&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/patientinstructions/000143.htm">Self catheterization - male&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/patientinstructions/000145.htm">Suprapubic catheter care&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/001063.htm">Traumatic injury of the bladder and urethra&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/003981.htm">Urinary catheters&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/patientinstructions/000146.htm">Urinary incontinence products - self-care&lt;/a>&lt;/li>&lt;li>&lt;a href="http://kidney.niddk.nih.gov/Kudiseases/pubs/UrinaryRetention/UrinaryRetention_508.pdf">Urinary Retention&lt;/a> - NIH (National Institute of Diabetes and Digestive and Kidney Diseases)&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/patientinstructions/000142.htm">Urine drainage bags&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/patientinstructions/000477.htm">Urostomy - stoma and skin care&lt;/a>&lt;/li>&lt;li>&lt;a href="http://www.nlm.nih.gov/medlineplus/ency/article/003784.htm">Voiding cystourethrogram&lt;/a>&lt;/li>&lt;/ul>&lt;/p></summary>
+</entry>
+</feed>
+<feed xml:lang="en">
+<title type="text">Mosby's Skills</title>
+<subtitle type="text">Cystitis</subtitle>
+<updated>2014-03-11T10:08:31.781-06:00</updated>
+<category scheme="taskContext.c.c" term="PROBLISTREV"/>
+<category scheme="performer" term="PROV"/>
+<category scheme="mainSearchCriteria.v.c" term="595.9"/>
+<category scheme="mainSearchCriteria.v.cs" term="2.16.840.1.113883.6.103"/>
+<category scheme="mainSearchCriteria.v.dn" term="Cystitis"/>
+<id>urn:uuid:472dcdde-6567-41f8-b757-544eb8349f97</id>
+<entry xml:lang="en">
+<title type="text">Topic summary</title>
+<link href="http://www.elsinfobutton.com/info/1030?taskContext.c.c=PROBLISTREV&amp;taskContext.c.cs=2.16.840.1.113883.5.4&amp;mainSearchCriteria.v.c=595.9&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.103&amp;mainSearchCriteria.v.dn=Cystitis&amp;" hreflang="en" rel="alternate" title="Topic summary" type="html"/>
+<id>urn:uuid:7861ac5b-eb25-4d0d-b106-1acd3e26ceb7</id>
+<updated>2014-03-11T10:08:31.781-06:00</updated>
+</entry>
+</feed>
+<feed xml:lang="en">
+<title type="text">PubMed Clinical Queries</title>
+<subtitle type="text">Cystitis</subtitle>
+<updated>2014-03-11T10:08:31.781-06:00</updated>
+<category scheme="taskContext.c.c" term="PROBLISTREV"/>
+<category scheme="informationRecipient" term="PROV"/>
+<category scheme="mainSearchCriteria.v.c" term="595.9"/>
+<category scheme="mainSearchCriteria.v.cs" term="2.16.840.1.113883.6.103"/>
+<category scheme="mainSearchCriteria.v.dn" term="Cystitis"/>
+<id>urn:uuid:c853a68c-62b4-4bd1-95fa-6bc875de860c</id>
+<entry xml:lang="en">
+<title type="text">Systematic reviews</title>
+<link href="http://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND "2000/04/23"[PDat] : "2100/04/19"[PDat] AND "humans"[MeSH Terms] AND jsubsetaim[text]&amp;myncbishare=uutahlib&amp;holding=uutahlib_fft&amp;term=(Cystitis)&amp;term=systematic[sb]" hreflang="en" rel="alternate" title="Systematic reviews" type="html"/>
+<id>urn:uuid:b355b044-cddb-4541-9adf-36c1e6f48ee5</id>
+<updated>2014-03-11T10:08:31.781-06:00</updated>
+</entry>
+<entry xml:lang="en">
+<title type="text">Therapy</title>
+<link href="http://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND "2000/04/23"[PDat] : "2100/04/19"[PDat] AND "humans"[MeSH Terms] AND jsubsetaim[text]&amp;myncbishare=uutahlib&amp;holding=uutahlib_fft&amp;term=(Cystitis)&amp;term=Therapy/Narrow[filter]" hreflang="en" rel="alternate" title="Therapy" type="html"/>
+<id>urn:uuid:739db2e9-c9f1-4c84-8fa5-1aebcb8d09f4</id>
+<updated>2014-03-11T10:08:31.781-06:00</updated>
+</entry>
+<entry xml:lang="en">
+<title type="text">Diagnosis</title>
+<link href="http://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND "2000/04/23"[PDat] : "2100/04/19"[PDat] AND "humans"[MeSH Terms] AND jsubsetaim[text]&amp;myncbishare=uutahlib&amp;holding=uutahlib_fft&amp;term=(Cystitis)&amp;term=Diagnosis/Narrow[filter]" hreflang="en" rel="alternate" title="Diagnosis" type="html"/>
+<id>urn:uuid:fabc95a5-b7ff-41f4-96db-de2672a0e5e6</id>
+<updated>2014-03-11T10:08:31.782-06:00</updated>
+</entry>
+</feed>
+<feed xml:lang="en">
+<title type="text">UpToDate</title>
+<subtitle type="text">Cystitis</subtitle>
+<updated>2014-03-11T10:08:31.782-06:00</updated>
+<category scheme="patientPerson.administrativeGenderCode.c" term="F"/>
+<category scheme="ageGroup.v.c" term="D008875"/>
+<category scheme="ageGroup.v.cs" term="2.16.840.1.113883.6.177"/>
+<category scheme="taskContext.c.c" term="PROBLISTREV"/>
+<category scheme="performer" term="PROV"/>
+<category scheme="mainSearchCriteria.v.c" term="595.9"/>
+<category scheme="mainSearchCriteria.v.cs" term="2.16.840.1.113883.6.103"/>
+<category scheme="mainSearchCriteria.v.dn" term="Cystitis"/>
+<id>urn:uuid:899973f7-3b5e-4024-b753-828eded56100</id>
+<entry xml:lang="en">
+<title type="text">Diagnosis</title>
+<link href="http://www.uptodate.com/online/content/search.do?searchType=HL7&amp;taskContext.c.c=PROBLISTREV&amp;taskContext.c.cs=2.16.840.1.113883.5.4&amp;ageGroup.v.c=D008875&amp;ageGroup.v.cs=2.16.840.1.113883.6.177&amp;patientPerson.administrativeGenderCode.c=F&amp;patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1&amp;mainSearchCriteria.v.c=595.9&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.103&amp;mainSearchCriteria.v.dn=Cystitis&amp;subTopic.v.c=Q000175&amp;subTopic.v.cs=2.16.840.1.113883.6.177&amp;subTopic.v.dn=Diagnosis" hreflang="en" rel="alternate" title="Diagnosis" type="html"/>
+<id>urn:uuid:5009b403-eca9-4122-8b66-250e7433a248</id>
+<updated>2014-03-11T10:08:31.782-06:00</updated>
+<category scheme="subTopic.v.c" term="Q000175"/>
+<category scheme="subTopic.v.cs" term="2.16.840.1.113883.6.177"/>
+<category scheme="subTopic.v.dn" term="Diagnosis"/>
+</entry>
+<entry xml:lang="en">
+<title type="text">Treatment</title>
+<link href="http://www.uptodate.com/online/content/search.do?searchType=HL7&amp;taskContext.c.c=PROBLISTREV&amp;taskContext.c.cs=2.16.840.1.113883.5.4&amp;ageGroup.v.c=D008875&amp;ageGroup.v.cs=2.16.840.1.113883.6.177&amp;patientPerson.administrativeGenderCode.c=F&amp;patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1&amp;mainSearchCriteria.v.c=595.9&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.103&amp;mainSearchCriteria.v.dn=Cystitis&amp;subTopic.v.c=Q000628&amp;subTopic.v.cs=2.16.840.1.113883.6.177&amp;subTopic.v.dn=Treatment" hreflang="en" rel="alternate" title="Treatment" type="html"/>
+<id>urn:uuid:b9ca83be-f2de-4e8b-ae5a-c715af35f11a</id>
+<updated>2014-03-11T10:08:31.782-06:00</updated>
+<category scheme="subTopic.v.c" term="Q000628"/>
+<category scheme="subTopic.v.cs" term="2.16.840.1.113883.6.177"/>
+<category scheme="subTopic.v.dn" term="Treatment"/>
+</entry>
+<entry xml:lang="en">
+<title type="text">Symptoms and Signs</title>
+<link href="http://www.uptodate.com/online/content/search.do?searchType=HL7&amp;taskContext.c.c=PROBLISTREV&amp;taskContext.c.cs=2.16.840.1.113883.5.4&amp;ageGroup.v.c=D008875&amp;ageGroup.v.cs=2.16.840.1.113883.6.177&amp;patientPerson.administrativeGenderCode.c=F&amp;patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1&amp;mainSearchCriteria.v.c=595.9&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.103&amp;mainSearchCriteria.v.dn=Cystitis&amp;subTopic.v.c=Q000175&amp;subTopic.v.cs=2.16.840.1.113883.6.177&amp;subTopic.v.dn=Symptoms and Signs" hreflang="en" rel="alternate" title="Symptoms and Signs" type="html"/>
+<id>urn:uuid:fc5ddea1-272b-4d25-88cf-1fd5dcb69e31</id>
+<updated>2014-03-11T10:08:31.782-06:00</updated>
+<category scheme="subTopic.v.c" term="Q000175"/>
+<category scheme="subTopic.v.cs" term="2.16.840.1.113883.6.177"/>
+<category scheme="subTopic.v.dn" term="Symptoms and Signs"/>
+</entry>
+</feed>
+</aggregateKnowledgeResponse>

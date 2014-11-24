@@ -6,19 +6,18 @@ $Author:: ai28       $:  Author of last commit
 $Date:: 2010-10-01 1#$:  Date of last commit
 -->
 
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-        http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-    id="services" version="2.5">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+  version="3.0">
   
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-    WEB-INF/core-data-annotation-context.xml
-    WEB-INF/core-data-datasource-context.xml
-     WEB-INF/core-profile-datasource-context.xml
+    classpath:core-data-annotation-context.xml
+    classpath:core-data-datasource-context.xml
+    classpath:core-profile-datasource-context.xml
     </param-value>
   </context-param>
   
@@ -28,23 +27,11 @@ $Date:: 2010-10-01 1#$:  Date of last commit
 	</listener-class>
   </listener>
   
- <listener>
-	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-</listener> 
-
-  
   <servlet>
-    <servlet-name>CXFServlet</servlet-name>
-    <servlet-class>
-			org.apache.cxf.transport.servlet.CXFServlet
-		</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  
-  <servlet>
-  	<servlet-name>KnowledgeRequestServlet</servlet-name>
+    <display-name>KnowledgeRequestServlet</display-name>
+  	<servlet-name>knowledgeRequestServlet</servlet-name>
   	<servlet-class>
-  		edu.duke.mc.cfm.dci.dss.KnowledgeRequestServlet
+  		org.springframework.web.context.support.HttpRequestHandlerServlet
   	</servlet-class>
   </servlet>
   
@@ -56,12 +43,7 @@ $Date:: 2010-10-01 1#$:  Date of last commit
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>CXFServlet</servlet-name>
-    <url-pattern>/knowledgeRequest/*</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-  	<servlet-name>KnowledgeRequestServlet</servlet-name>
+  	<servlet-name>knowledgeRequestServlet</servlet-name>
   	<url-pattern>/infoRequest</url-pattern>
   </servlet-mapping>
   

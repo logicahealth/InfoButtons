@@ -1,0 +1,204 @@
+<html xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<title>OpenInfobutton</title>
+<link href="css/sp.css" rel="stylesheet" type="text/css">
+<script src="js/script.js" type="text/javascript"></script><script type="text/javascript">
+						var arrConcept = [];
+						arrConcept.push(['PROBLISTREV', '', 'Problem list review', '']);
+						arrConcept.push(['MEDOE', '', 'Medication list review', '']);
+						arrConcept.push(['LABRREV', '', 'Laboratory results review', '']);
+						arrConcept.push(['10071615', '2.16.840.1.113883.6.163', 'Clopidogrel poor metaboliser', '']);
+						arrConcept.push(['10071616', '2.16.840.1.113883.6.163', 'Clopidogrel intermediate metaboliser', '']);
+						arrConcept.push(['446.4', '2.16.840.1.113883.6.103', 'Wegeners Granulomatosis', '']);
+						arrConcept.push(['250.00', '2.16.840.1.113883.6.103', 'Diabetes mellitus type 2', '']);
+						arrConcept.push(['595.9', '2.16.840.1.113883.6.103', 'Cystitis', '']);
+						arrConcept.push(['530.1', '2.16.840.1.113883.6.103', 'Gastroesophageal reflux', '']);
+						arrConcept.push(['237.7', '2.16.840.1.113883.6.103', 'Neurofibromatosis', '']);
+						arrConcept.push(['346.90', '2.16.840.1.113883.6.103', 'Migraine headache', '']);
+						arrConcept.push(['372.00', '2.16.840.1.113883.6.103', 'Acute Conjunctivitis', '']);
+						arrConcept.push(['309888', '2.16.840.1.113883.6.88', 'Digoxin', 'Digoxin (Lanoxin) 125Mcg, Tablet, Oral']);
+						arrConcept.push(['310672', '2.16.840.1.113883.6.88', 'Haloperidol', 'Haloperidol (Haldol), 5 Mg, Tablet, Oral']);
+						arrConcept.push(['261370', '2.16.840.1.113883.6.88', 'Rofecoxib', 'Rofecoxib (Vioxx), 50 Mg, Tablet, Oral']);
+						arrConcept.push(['855346', '2.16.840.1.113883.6.88', 'Warfarin', 'Warfarin (Coumadin) 7.5Mg, Tablet, Oral']);
+						arrConcept.push(['749196', '2.16.840.1.113883.6.88', 'Clopidogrel', 'Clopidogrel 300 MG Oral Tablet']);
+						arrConcept.push(['312860', '2.16.840.1.113883.6.88', 'Rosiglitazone', 'Rosiglitazone (Avandia), 4Mg, Tablet, Oral']);
+						arrConcept.push(['208098', '2.16.840.1.113883.6.88', 'Tramadol', 'Tramadol Hcl (Ultram), 50mg, Tablet, Oral']);
+						arrConcept.push(['706956', '2.16.840.1.113883.6.88', 'Tamsulosin', 'Tamsulosin Hcl (Flomax), 0.4Mg, Cap.Sr 24H, Oral']);
+						arrConcept.push(['10535-3', '2.16.840.1.113883.6.1', 'Digoxin', 'Serum digoxin']);
+						arrConcept.push(['9342-7', '2.16.840.1.113883.6.1', 'Total cholesterol', '']);
+						arrConcept.push(['2823-3', '2.16.840.1.113883.6.1', 'Serum potassium', 'K']);
+						arrConcept.push(['2951-2', '2.16.840.1.113883.6.1', 'Serum sodium', 'Na']);
+						arrConcept.push(['1988-5', '2.16.840.1.113883.6.1', 'C Reactive Protein', '']);
+						arrConcept.push(['4548-4', '2.16.840.1.113883.6.1', 'HbA1c', '']);
+						
+						var arrXslt = [];
+						arrXslt.push(['1.3.6.1.4.1.3768', 'Infobutton_UI_VA']);
+						arrXslt.push(['MBL', 'Infobutton_UI_VA']);
+						arrXslt.push(['1.3.6.1.4.1.4275', 'Infobutton_UI_Duke']);
+						arrXslt.push(['1.3.6.1.4.1.9328', 'Infobutton_UI_VA']);
+						arrXslt.push(['1.3.6.1.4.1.150', 'Infobutton_UI_UW']);
+						arrXslt.push(['1.3.6.1.4.1.5884', 'Infobutton_UI']);
+						arrXslt.push(['AMIA', 'Infobutton_UI']);
+						arrXslt.push(['1.3.6.1.4.1.88', 'Infobutton_UI_NYU']);
+						arrXslt.push(['2.16.840.1.113883.3.1951', 'Infobutton_UI_NU']);
+						
+					function getCs(code){
+						for (i in arrConcept) {
+							if (arrConcept[i][0] == code){
+								return arrConcept[i][1];
+							}
+						}
+					}
+					
+					function getDn(code){
+						for (j in arrConcept) {
+							if (arrConcept[j][0] == code){
+								return arrConcept[j][2];
+							}
+						}
+					}
+
+					function getOt(code){
+						for (j in arrConcept) {
+							if (arrConcept[j][0] == code){
+								return arrConcept[j][3];
+							}
+						}
+					}
+
+					function getXslt(orgOid){
+						for (j in arrXslt) {
+							if (arrXslt[j][0] == orgOid){
+								return arrXslt[j][1];
+							}
+						}
+					}
+
+					
+					function callIM(gender, age, task, mainSearchCriteriaC, labAbnormalFlag){
+						var baseUrl = 'http://localhost:8080/infobutton-service/infoRequest?';
+						var organizationOID = document.getElementById("organizationId").value;
+						var organization = 'representedOrganization.id.root=' + organizationOID;
+
+						var genderParam = '&patientPerson.administrativeGenderCode.c=' + gender + '' ;
+						var ageParam = '&age.v.v=' + age + '&age.v.u=a';
+						var taskParam = '&taskContext.c.c=' + task;
+						
+						var mainSearchCriteriaParam = '&mainSearchCriteria.v.c=' + mainSearchCriteriaC + '&mainSearchCriteria.v.cs=' + getCs(mainSearchCriteriaC) + '&mainSearchCriteria.v.dn=' + getDn(mainSearchCriteriaC);
+					
+						//var severityObservationParam;
+						//if (labAbnormalFlag != null){
+						//	severityObservationParam = '&interpretationCode.c.c=' + labAbnormalFlag;
+						//}
+						
+						var performerParam = '&informationRecipient.languageCode.c=en&performer=PROV';
+						
+						var xslt = '&xsltTransform=' + getXslt(organizationOID);
+						
+						var url = baseUrl + organization + genderParam + ageParam 
+							+ taskParam + mainSearchCriteriaParam + performerParam + xslt;
+						var winRef = window.open(url, '', 'width=970, height=670, status=no, location=no, toolbar=no, scrollbars=no, resizable=yes');
+						//document.getElementById('urlDisplay').value = url;
+						return false;
+					}
+				</script>
+</head>
+<body>
+<div id="shadow">
+<div id="shadow2">
+<div id="header"></div>
+<div id="main">
+<h2>Electronic Health Record
+	<select name="organizationId" id="organizationId">
+		<option value="2.16.840.1.113883.3.1951">Northwestern University</option>
+	</select>
+ </h2>
+<table>
+<tbody><tr>
+<td class="label">Age</td><td><input id="age" value="47" size="2" name="age"></td>
+</tr>
+<tr>
+<td class="label">Gender</td><td><select id="gender" value="F" name="gender"><option selected="selected" value="F">F</option><option value="M">M</option></select></td>
+</tr>
+<tr>
+<td class="label">Medication Prescribing</td><td>
+<ul>
+<li>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Clopidogrel poor metaboliser<a href="#" onclick="callIM(gender.value, age.value, 'PROBLISTREV', '10071615', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+<li>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Clopidogrel intermediate metaboliser<a href="#" onclick="callIM(gender.value, age.value, 'PROBLISTREV', '10071616', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="label">Problem list</td><td>
+<ul>
+<li>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Wegeners Granulomatosis<a href="#" onclick="callIM(gender.value, age.value, 'PROBLISTREV', '446.4', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+<li>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Diabetes mellitus type 2<a href="#" onclick="callIM(gender.value, age.value, 'PROBLISTREV', '250.00', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+<li>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Cystitis<a href="#" onclick="callIM(gender.value, age.value, 'PROBLISTREV', '595.9', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+<li>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Gastroesophageal reflux<a href="#" onclick="callIM(gender.value, age.value, 'PROBLISTREV', '530.1', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+<li>Add problem<select name="problem" id="problem"><option selected="selected" value="237.7">Neurofibromatosis type 1</option><option value="346.90">Migraine headache</option><option value="372.00">Acute Conjunctivitis</option></select><a href="#" onclick="callIM(gender.value, age.value, 'PROBLISTREV', problem.value, '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="label">Medications</td><td>
+<ul>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Haloperidol (Haldol), 5 Mg, Tablet, Oral<a href="#" onclick="callIM(gender.value, age.value, 'MEDOE', '310672', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+
+<li>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Rosiglitazone (Avandia), 4Mg, Tablet, Oral<a href="#" onclick="callIM(gender.value, age.value, 'MEDOE', '312860', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+<li>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Warfarin (Coumadin) 7.5Mg, Tablet, Oral<a href="#" onclick="callIM(gender.value, age.value, 'MEDOE', '855346', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+<li>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Clopidogrel 300 MG Oral Tablet<a href="#" onclick="callIM(gender.value, age.value, 'MEDOE', '749196', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+
+</ul>
+</td>
+</tr>
+<tr>
+<td class="label">Lab results</td><td>
+<ul>
+<li>
+Serum digoxin 1.5 mg/dl <font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial">N</font> 
+<a href="#" onclick="callIM(gender.value, age.value, 'LABRREV', '10535-3', 'N');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+<li>
+Total cholesterol 300 mg/dl<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial">H</font> <a href="#" onclick="callIM(gender.value, age.value, 'LABRREV', '9342-7', 'H');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+<li>
+K 2.8 mEq/l <font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial">L</font> <a href="#" onclick="callIM(gender.value, age.value, 'LABRREV', '2823-3', 'L');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a></li>
+<li>
+Na 127 mEq/l <font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial">L</font> <a href="#" onclick="callIM(gender.value, age.value, 'LABRREV', '2951-2', 'L');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a></li>
+<li>
+C Reactive Protein 555 ug/dl <font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial">H</font> <a href="#" onclick="callIM(gender.value, age.value, 'LABRREV', '1988-5', 'H');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+<li>
+HbA1c 8.2% <font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial">H</font> <a href="#" onclick="callIM(gender.value, age.value, 'LABRREV', '4548-4', 'H');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+</ul>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+
+
+</body></html>

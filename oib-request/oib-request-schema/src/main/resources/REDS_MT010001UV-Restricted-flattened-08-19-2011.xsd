@@ -1,71 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-	<!--Restricted version of the HL7 Infobutton Schema. 1) Fixed values for all classCode and moodCode attributes; 2) Fixed values of all code and codeSystem attributes that have immutable value; 3) Made required all code and codeSystem attributes of code elements that are part of OBS classes. -->
-	<xs:element name="REDS_MT010001UV.knowledgeRequestNotification" type="REDS_MT010001UV.KnowledgeRequestNotification"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified">
+	<!--Restricted version of the HL7 Infobutton Schema. 1) Fixed values for 
+		all classCode and moodCode attributes; 2) Fixed values of all code and codeSystem 
+		attributes that have immutable value; 3) Made required all code and codeSystem 
+		attributes of code elements that are part of OBS classes. -->
+	<xs:element name="REDS_MT010001UV.knowledgeRequestNotification"
+		type="REDS_MT010001UV.KnowledgeRequestNotification" />
 	<xs:complexType name="REDS_MT010001UV.Age">
 		<xs:sequence>
-			<xs:element name="value" type="PQ.value.unit" form="qualified"/>
+			<xs:element name="value" type="PQ.value.unit" form="qualified" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.AgeGroup">
 		<xs:sequence>
-			<xs:element name="value" type="CD.Lite" form="qualified"/>
+			<xs:element name="value" type="CD.Lite" form="qualified" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.AssignedEntity">
 		<xs:sequence>
-			<xs:element name="name" type="ST.Lite" form="qualified" minOccurs="0"/>
-			<xs:element name="certificateText" type="ED.Lite" form="qualified" minOccurs="0"/>
-			<xs:element name="assignedAuthorizedPerson" type="REDS_MT010001UV.AuthorizedPerson" form="qualified" nillable="true" minOccurs="0"/>
-			<xs:element name="representedOrganization" type="REDS_MT010001UV.Organization" form="qualified" nillable="true" minOccurs="0"/>
+			<xs:element name="name" type="ST.Lite" form="qualified"
+				minOccurs="0" />
+			<xs:element name="certificateText" type="ED.Lite" form="qualified"
+				minOccurs="0" />
+			<xs:element name="assignedAuthorizedPerson" type="REDS_MT010001UV.AuthorizedPerson"
+				form="qualified" nillable="true" minOccurs="0" />
+			<xs:element name="representedOrganization" type="REDS_MT010001UV.Organization"
+				form="qualified" nillable="true" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.AuthorizedPerson">
 		<xs:sequence>
-			<xs:element name="id" type="II.Lite" form="qualified" maxOccurs="unbounded"/>
+			<xs:element name="id" type="II.Lite" form="qualified"
+				maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.Encounter">
 		<xs:sequence>
-			<xs:element name="code" type="CD.Lite" form="qualified" minOccurs="0"/>
-			<xs:element name="serviceDeliveryLocation" type="REDS_MT010001UV.ServiceDeliveryLocation" form="qualified" nillable="true" minOccurs="0"/>
+			<xs:element name="code" type="CD.Lite" form="qualified"
+				minOccurs="0" />
+			<xs:element name="serviceDeliveryLocation" type="REDS_MT010001UV.ServiceDeliveryLocation"
+				form="qualified" nillable="true" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.HealthCareProvider">
 		<xs:sequence>
-			<xs:element name="code" type="CD.Lite" form="qualified" minOccurs="0"/>
-			<xs:element name="healthCarePerson" type="REDS_MT010001UV.Person" form="qualified" nillable="true" minOccurs="0"/>
+			<xs:element name="code" type="CD.Lite" form="qualified"
+				minOccurs="0" />
+			<xs:element name="healthCarePerson" type="REDS_MT010001UV.Person"
+				form="qualified" nillable="true" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.Holder">
 		<xs:sequence>
-			<xs:element name="assignedEntity" type="REDS_MT010001UV.AssignedEntity" form="qualified" nillable="true"/>
+			<xs:element name="assignedEntity" type="REDS_MT010001UV.AssignedEntity"
+				form="qualified" nillable="true" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.InformationRecipient">
 		<xs:choice>
-			<xs:element name="healthCareProvider" type="REDS_MT010001UV.HealthCareProvider" form="qualified" nillable="true"/>
-			<xs:element name="patient" type="REDS_MT010001UV.Patient" form="qualified" nillable="true"/>
+			<xs:element name="healthCareProvider" type="REDS_MT010001UV.HealthCareProvider"
+				form="qualified" nillable="true" />
+			<xs:element name="patient" type="REDS_MT010001UV.Patient"
+				form="qualified" nillable="true" />
 		</xs:choice>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.KnowledgeRequestNotification">
 		<xs:sequence>
-			<xs:element name="id" type="II.Lite" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="effectiveTime" type="TS.Lite" form="qualified" minOccurs="0"/>
-			<xs:element name="patientContext" type="REDS_MT010001UV.PatientContext" form="qualified" nillable="true" minOccurs="0"/>
-			<xs:element name="holder" type="REDS_MT010001UV.Holder" form="qualified" nillable="true" minOccurs="0"/>
-			<xs:element name="performer" type="REDS_MT010001UV.Performer" form="qualified" nillable="true" minOccurs="0"/>
-			<xs:element name="informationRecipient" type="REDS_MT010001UV.InformationRecipient" form="qualified" nillable="true" minOccurs="0"/>
-			<xs:element name="taskContext" type="REDS_MT010001UV.TaskContext" form="qualified" nillable="true"/>
-			<xs:element name="subTopic" type="REDS_MT010001UV.SubTopic" form="qualified" nillable="true" minOccurs="0"/>
-			<xs:element name="mainSearchCriteria" type="REDS_MT010001UV.MainSearchCriteria" form="qualified" nillable="true"/>
-			<xs:element name="encounter" type="REDS_MT010001UV.Encounter" form="qualified" nillable="true" minOccurs="0"/>
+			<xs:element name="id" type="II.Lite" form="qualified"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="effectiveTime" type="TS.Lite" form="qualified"
+				minOccurs="0" />
+			<xs:element name="patientContext" type="REDS_MT010001UV.PatientContext"
+				form="qualified" nillable="true" minOccurs="0" />
+			<xs:element name="holder" type="REDS_MT010001UV.Holder"
+				form="qualified" nillable="true" minOccurs="0" />
+			<xs:element name="performer" type="REDS_MT010001UV.Performer"
+				form="qualified" nillable="true" minOccurs="0" />
+			<xs:element name="informationRecipient" type="REDS_MT010001UV.InformationRecipient"
+				form="qualified" nillable="true" minOccurs="0" />
+			<xs:element name="taskContext" type="REDS_MT010001UV.TaskContext"
+				form="qualified" nillable="true" />
+			<xs:element name="subTopic" type="REDS_MT010001UV.SubTopic"
+				form="qualified" nillable="true" minOccurs="0" />
+			<xs:element name="mainSearchCriteria" type="REDS_MT010001UV.MainSearchCriteria"
+				form="qualified" nillable="true" />
+			<xs:element name="encounter" type="REDS_MT010001UV.Encounter"
+				form="qualified" nillable="true" minOccurs="0" />
 			<xs:element name="executionMode" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:enumeration value="TEST"/>
-						<xs:enumeration value="DEVELOPMENT"/>
-						<xs:enumeration value="PRODUCTION"/>
+						<xs:enumeration value="TEST" />
+						<xs:enumeration value="DEVELOPMENT" />
+						<xs:enumeration value="PRODUCTION" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -73,69 +100,78 @@
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.LanguageCommunication">
 		<xs:sequence>
-			<xs:element name="languageCode" type="CD.Lite" form="qualified"/>
+			<xs:element name="languageCode" type="CD.Lite" form="qualified" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.Location">
-		<xs:sequence/>
+		<xs:sequence />
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.MainSearchCriteria">
 		<xs:sequence>
-			<xs:element name="value" type="CD.Lite" form="qualified"/>
-			<xs:element name="severityObservation" type="REDS_MT010001UV.SeverityObservation" form="qualified" nillable="true" minOccurs="0"/>
+			<xs:element name="value" type="CD.Lite" form="qualified" />
+			<xs:element name="severityObservation" type="REDS_MT010001UV.SeverityObservation"
+				form="qualified" nillable="true" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.Organization">
 		<xs:sequence>
-			<xs:element name="id" type="II.Lite" form="qualified" maxOccurs="unbounded"/>
+			<xs:element name="id" type="II.Lite" form="qualified"
+				maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.Patient">
 		<xs:sequence>
-			<xs:element name="patientPerson" type="REDS_MT010001UV.Person" form="qualified" nillable="true" minOccurs="0"/>
+			<xs:element name="patientPerson" type="REDS_MT010001UV.Person"
+				form="qualified" nillable="true" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.PatientContext">
 		<xs:sequence>
-			<xs:element name="administrativeGenderCode" type="CD.Lite" form="qualified" minOccurs="0"/>
+			<xs:element name="administrativeGenderCode" type="CD.Lite"
+				form="qualified" minOccurs="0" />
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element name="age" type="REDS_MT010001UV.Age" form="qualified" nillable="true"/>
-				<xs:element name="ageGroup" type="REDS_MT010001UV.AgeGroup" form="qualified" nillable="true"/>
+				<xs:element name="age" type="REDS_MT010001UV.Age" form="qualified"
+					nillable="true" />
+				<xs:element name="ageGroup" type="REDS_MT010001UV.AgeGroup"
+					form="qualified" nillable="true" />
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.PatientPerson">
-		<xs:sequence/>
+		<xs:sequence />
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.Performer">
 		<xs:choice>
-			<xs:element name="healthCareProvider" type="REDS_MT010001UV.HealthCareProvider" form="qualified" nillable="true"/>
-			<xs:element name="patient" type="REDS_MT010001UV.Patient" form="qualified" nillable="true"/>
+			<xs:element name="healthCareProvider" type="REDS_MT010001UV.HealthCareProvider"
+				form="qualified" nillable="true" />
+			<xs:element name="patient" type="REDS_MT010001UV.Patient"
+				form="qualified" nillable="true" />
 		</xs:choice>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.Person">
 		<xs:sequence>
-			<xs:element name="languageCommunication" type="REDS_MT010001UV.LanguageCommunication" form="qualified" nillable="true" maxOccurs="unbounded"/>
+			<xs:element name="languageCommunication" type="REDS_MT010001UV.LanguageCommunication"
+				form="qualified" nillable="true" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.ServiceDeliveryLocation">
 		<xs:sequence>
-			<xs:element name="id" type="II.Lite" form="qualified"/>
+			<xs:element name="id" type="II.Lite" form="qualified" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.SeverityObservation">
 		<xs:sequence>
-			<xs:element name="interpretationCode" type="CD.Lite" form="qualified"/>
+			<xs:element name="interpretationCode" type="CD.Lite" form="qualified" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.SubTopic">
 		<xs:sequence>
-			<xs:element name="value" type="CD.Lite" form="qualified"/>
+			<xs:element name="value" type="CD.Lite" form="qualified" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="REDS_MT010001UV.TaskContext">
 		<xs:sequence>
-			<xs:element name="code" type="CD.Lite" form="qualified"/>
+			<xs:element name="code" type="CD.Lite" form="qualified" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="CD.Lite">
@@ -143,43 +179,47 @@
 			<xs:documentation>Attribute displayName required</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="originalText" type="ED.Lite" form="qualified" minOccurs="0">
+			<xs:element name="originalText" type="ED.Lite" form="qualified"
+				minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>
-                        The text or phrase used as the basis for the coding.
-                     </xs:documentation>
+						The text or phrase used as the basis for the
+						coding.
+					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="code" type="cs" use="required">
 			<xs:annotation>
 				<xs:documentation>
-                     The plain code symbol defined by the code system.
-                     For example, "784.0" is the code symbol of the ICD-9
-                     code "784.0" for headache.
-                  </xs:documentation>
+					The plain code symbol defined by the code system.
+					For example, "784.0" is the code symbol of the ICD-9
+					code "784.0"
+					for headache.
+				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="codeSystem" type="uid" use="required">
 			<xs:annotation>
 				<xs:documentation>
-                     Specifies the code system that defines the code.
-                  </xs:documentation>
+					Specifies the code system that defines the code.
+				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="displayName" type="st" use="required">
 			<xs:annotation>
 				<xs:documentation>
-                     A name or title for the code, under which the sending
-                     system shows the code value to its users.
-                  </xs:documentation>
+					A name or title for the code, under which the
+					sending
+					system shows the code value to its users.
+				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="codeSystemName" type="st" use="optional">
 			<xs:annotation>
 				<xs:documentation>
-                     A common name of the coding system.
-                  </xs:documentation>
+					A common name of the coding system.
+				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -190,181 +230,218 @@
 		<xs:attribute name="value" type="real" use="required">
 			<xs:annotation>
 				<xs:documentation>
-                     The magnitude of the quantity measured in terms of
-                     the unit.
-                  </xs:documentation>
+					The magnitude of the quantity measured in terms of
+					the unit.
+				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="unit" type="cs" use="required">
 			<xs:annotation>
 				<xs:documentation>
-                     The unit of measure specified in the Unified Code for
-                     Units of Measure (UCUM)
-                     [http://aurora.rg.iupui.edu/UCUM].
-                  </xs:documentation>
+					The unit of measure specified in the Unified Code
+					for
+					Units of Measure (UCUM)
+					[http://aurora.rg.iupui.edu/UCUM].
+				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<xs:complexType name="ST.Lite" mixed="true"/>
-	<xs:complexType name="ED.Lite" mixed="true"/>
+	<xs:complexType name="ST.Lite" mixed="true" />
+	<xs:complexType name="ED.Lite" mixed="true" />
 	<xs:complexType name="II.Lite">
 		<xs:attribute name="root" type="uid" use="required">
 			<xs:annotation>
 				<xs:documentation>
-                     A unique identifier that guarantees the global uniqueness
-                     of the instance identifier. The root alone may be the
-                     entire instance identifier.
-                  </xs:documentation>
+					A unique identifier that guarantees the global
+					uniqueness
+					of the instance identifier. The root alone may be the
+					entire instance identifier.
+				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="extension" type="st" use="optional">
 			<xs:annotation>
 				<xs:documentation>
-                     A character string as a unique identifier within the
-                     scope of the identifier root.
-                  </xs:documentation>
+					A character string as a unique identifier within
+					the
+					scope of the identifier root.
+				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="assigningAuthorityName" type="st" use="optional">
+		<xs:attribute name="assigningAuthorityName" type="st"
+			use="optional">
 			<xs:annotation>
 				<xs:documentation>
-                     A human readable name or mnemonic for the assigning
-                     authority. This name may be provided solely for the
-                     convenience of unaided humans interpreting an  value
-                     and can have no computational meaning. Note: no
-                     automated processing must depend on the assigning
-                     authority name to be present in any form.
-                  </xs:documentation>
+					A human readable name or mnemonic for the
+					assigning
+					authority. This name may be provided solely for the
+					convenience of unaided humans interpreting an value
+					and can have no
+					computational meaning. Note: no
+					automated processing must depend on
+					the assigning
+					authority name to be present in any form.
+				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<xs:element name="informationRecipient" type="REDS_MT010001UV.InformationRecipient" nillable="true"/>
-	<xs:element name="taskContext" type="REDS_MT010001UV.TaskContext" nillable="true"/>
-	<xs:element name="subTopic" type="REDS_MT010001UV.SubTopic" nillable="true"/>
-	<xs:element name="mainSearchCriteria" type="REDS_MT010001UV.MainSearchCriteria" nillable="true"/>
-	<xs:element name="performer" type="REDS_MT010001UV.Performer" nillable="true"/>
-	<xs:element name="patientContext" type="REDS_MT010001UV.PatientContext" nillable="true"/>
-	<xs:element name="encounter" type="REDS_MT010001UV.Encounter"/>
+	<xs:element name="informationRecipient" type="REDS_MT010001UV.InformationRecipient"
+		nillable="true" />
+	<xs:element name="taskContext" type="REDS_MT010001UV.TaskContext"
+		nillable="true" />
+	<xs:element name="subTopic" type="REDS_MT010001UV.SubTopic"
+		nillable="true" />
+	<xs:element name="mainSearchCriteria" type="REDS_MT010001UV.MainSearchCriteria"
+		nillable="true" />
+	<xs:element name="performer" type="REDS_MT010001UV.Performer"
+		nillable="true" />
+	<xs:element name="patientContext" type="REDS_MT010001UV.PatientContext"
+		nillable="true" />
+	<xs:element name="encounter" type="REDS_MT010001UV.Encounter" />
 	<xs:simpleType name="st">
 		<xs:annotation>
 			<xs:documentation>
-            The character string data type stands for text data,
-            primarily intended for machine processing (e.g.,
-            sorting, querying, indexing, etc.) Used for names,
-            symbols, and formal expressions.
-         </xs:documentation>
+				The character string data type stands for text
+				data,
+				primarily intended for machine processing (e.g.,
+				sorting,
+				querying, indexing, etc.) Used for names,
+				symbols, and formal
+				expressions.
+			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:minLength value="1"/>
+			<xs:minLength value="1" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="cs">
 		<xs:annotation>
 			<xs:documentation>
-            Coded data in its simplest form, consists of a code.
-            The code system and code system version is fixed by 
-            the context in which the  value occurs.  is used
-            for coded attributes that have a single HL7-defined
-            value set.
-         </xs:documentation>
+				Coded data in its simplest form, consists of a
+				code.
+				The code system and code system version is fixed by
+				the context
+				in which the value occurs. is used
+				for coded attributes that have a
+				single HL7-defined
+				value set.
+			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:token">
-			<xs:pattern value="[^\s]+"/>
+			<xs:pattern value="[^\s]+" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="uid">
 		<xs:annotation>
 			<xs:documentation>
-            A unique identifier string is a character string which
-            identifies an object in a globally unique and timeless
-            manner. The allowable formats and values and procedures
-            of this data type are strictly controlled by HL7. At this
-            time, user-assigned identifiers may be certain character
-            representations of ISO Object Identifiers ()
-            and DCE
-            Universally Unique Identifiers ().
-            HL7 also reserves
-            the right to assign other forms of UIDs (,
-            such as mnemonic
-            identifiers for code systems.
-         </xs:documentation>
+				A unique identifier string is a character string
+				which
+				identifies an object in a globally unique and timeless
+				manner.
+				The allowable formats and values and procedures
+				of this data type are
+				strictly controlled by HL7. At this
+				time, user-assigned identifiers
+				may be certain character
+				representations of ISO Object Identifiers ()
+				and DCE
+				Universally Unique Identifiers ().
+				HL7 also reserves
+				the right
+				to assign other forms of UIDs (,
+				such as mnemonic
+				identifiers for code
+				systems.
+			</xs:documentation>
 		</xs:annotation>
-		<xs:union memberTypes="oid uuid ruid"/>
+		<xs:union memberTypes="oid uuid ruid" />
 	</xs:simpleType>
 	<xs:simpleType name="oid">
 		<xs:annotation>
-			<xs:documentation/>
+			<xs:documentation />
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:pattern value="[0-2](\.(0|[1-9][0-9]*))*"/>
+			<xs:pattern value="[0-2](\.(0|[1-9][0-9]*))*" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="uuid">
 		<xs:annotation>
-			<xs:documentation/>
+			<xs:documentation />
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:pattern value="[0-9a-zA-Z]{8}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{12}"/>
+			<xs:pattern
+				value="[0-9a-zA-Z]{8}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{12}" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ruid">
 		<xs:annotation>
-			<xs:documentation/>
+			<xs:documentation />
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:pattern value="[A-Za-z][A-Za-z0-9\-]*"/>
+			<xs:pattern value="[A-Za-z][A-Za-z0-9\-]*" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="url">
 		<xs:annotation>
 			<xs:documentation>
-            A telecommunications address  specified according to
-            Internet standard RFC 1738
-            [http://www.ietf.org/rfc/rfc1738.txt]. The
-            URL specifies the protocol and the contact point defined
-            by that protocol for the resource.  Notable uses of the
-            telecommunication address data type are for telephone and
-            telefax numbers, e-mail addresses, Hypertext references,
-            FTP references, etc.
-         </xs:documentation>
+				A telecommunications address specified according to
+				Internet standard RFC 1738
+				[http://www.ietf.org/rfc/rfc1738.txt]. The
+				URL specifies the protocol and the contact point defined
+				by that
+				protocol for the resource. Notable uses of the
+				telecommunication
+				address data type are for telephone and
+				telefax numbers, e-mail
+				addresses, Hypertext references,
+				FTP references, etc.
+			</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:anyURI"/>
+		<xs:restriction base="xs:anyURI" />
 	</xs:simpleType>
 	<xs:simpleType name="ts">
 		<xs:annotation>
 			<xs:documentation>
-            A quantity specifying a point on the axis of natural time.
-            A point in time is most often represented as a calendar
-            expression.
-         </xs:documentation>
+				A quantity specifying a point on the axis of
+				natural time.
+				A point in time is most often represented as a calendar
+				expression.
+			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:pattern value="[0-9]{1,8}|([0-9]{9,14}|[0-9]{14,14}\.[0-9]+)([+\-][0-9]{1,4})?"/>
+			<xs:pattern
+				value="[0-9]{1,8}|([0-9]{9,14}|[0-9]{14,14}\.[0-9]+)([+\-][0-9]{1,4})?" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="TS.Lite">
 		<xs:annotation>
 			<xs:documentation>
-            A quantity specifying a point on the axis of natural time.
-            A point in time is most often represented as a calendar
-            expression.
-         </xs:documentation>
+				A quantity specifying a point on the axis of
+				natural time.
+				A point in time is most often represented as a calendar
+				expression.
+			</xs:documentation>
 			<xs:appinfo>
 				<diff>PQ</diff>
 			</xs:appinfo>
 		</xs:annotation>
-		<xs:attribute name="value" type="ts" use="optional"/>
+		<xs:attribute name="value" type="ts" use="optional" />
 	</xs:complexType>
 	<xs:complexType name="QTY" abstract="true">
 		<xs:annotation>
 			<xs:documentation> is an abstract generalization
-            for all data types (1) whose value set has an order
-            relation (less-or-equal) and (2) where difference is
-            defined in all of the data type's totally ordered value
-            subsets.  The quantity type abstraction is needed in
-            defining certain other types, such as the interval and
-            the probability distribution.
-         </xs:documentation>
+				for all data types
+				(1) whose value set has an order
+				relation (less-or-equal) and (2)
+				where difference is
+				defined in all of the data type's totally ordered
+				value
+				subsets. The quantity type abstraction is needed in
+				defining
+				certain other types, such as the interval and
+				the probability
+				distribution.
+			</xs:documentation>
 			<xs:appinfo>
 				<diff>QTY</diff>
 			</xs:appinfo>
@@ -373,31 +450,41 @@
 	<xs:simpleType name="int">
 		<xs:annotation>
 			<xs:documentation>
-            Integer numbers (-1,0,1,2, 100, 3398129, etc.) are precise
-            numbers that are results of counting and enumerating.
-            Integer numbers are discrete, the set of integers is
-            infinite but countable.  No arbitrary limit is imposed on
-            the range of integer numbers. Two NULL flavors are
-            defined for the positive and negative infinity.
-         </xs:documentation>
+				Integer numbers (-1,0,1,2, 100, 3398129, etc.) are
+				precise
+				numbers that are results of counting and enumerating.
+				Integer
+				numbers are discrete, the set of integers is
+				infinite but countable.
+				No arbitrary limit is imposed on
+				the range of integer numbers. Two
+				NULL flavors are
+				defined for the positive and negative infinity.
+			</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:integer"/>
+		<xs:restriction base="xs:integer" />
 	</xs:simpleType>
 	<xs:simpleType name="real">
 		<xs:annotation>
 			<xs:documentation>
-            Fractional numbers. Typically used whenever quantities
-            are measured, estimated, or computed from other real
-            numbers.  The typical representation is decimal, where
-            the number of significant decimal digits is known as the
-            precision. Real numbers are needed beyond integers
-            whenever quantities of the real world are measured,
-            estimated, or computed from other real numbers. The term
-            "Real number" in this specification is used to mean
-            that fractional values are covered without necessarily
-            implying the full set of the mathematical real numbers.
-         </xs:documentation>
+				Fractional numbers. Typically used whenever
+				quantities
+				are measured, estimated, or computed from other real
+				numbers. The typical representation is decimal, where
+				the number of
+				significant decimal digits is known as the
+				precision. Real numbers
+				are needed beyond integers
+				whenever quantities of the real world are
+				measured,
+				estimated, or computed from other real numbers. The term
+				"Real number" in this specification is used to mean
+				that fractional
+				values are covered without necessarily
+				implying the full set of the
+				mathematical real numbers.
+			</xs:documentation>
 		</xs:annotation>
-		<xs:union memberTypes="xs:decimal xs:double"/>
+		<xs:union memberTypes="xs:decimal xs:double" />
 	</xs:simpleType>
 </xs:schema>

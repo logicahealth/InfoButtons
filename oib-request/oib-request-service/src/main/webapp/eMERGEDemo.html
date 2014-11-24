@@ -1,0 +1,219 @@
+<html xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<title>OpenInfobutton</title>
+<link href="css/sp.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+						var arrConcept = [];
+						arrConcept.push(['PROBLISTREV', '', 'Problem list review', '']);
+						arrConcept.push(['MLREV', '', 'Medication list review', '']);
+						arrConcept.push(['MEDOE', '', 'Medication order entry', '']);
+						arrConcept.push(['LABRREV', '', 'Laboratory results review', '']);
+						arrConcept.push(['10071614', '2.16.840.1.113883.6.163', 'Clopidogrel normal metabolizer', '']);
+						arrConcept.push(['10071615', '2.16.840.1.113883.6.163', 'Clopidogrel poor metabolizer', '']);
+						arrConcept.push(['10071616', '2.16.840.1.113883.6.163', 'Clopidogrel intermediate metabolizer', '']);
+						arrConcept.push(['10071617', '2.16.840.1.113883.6.163', 'Clopidogrel rapid metabolizer', '']);
+						arrConcept.push(['10071618', '2.16.840.1.113883.6.163', 'Clopidogrel ultrarapid metabolizer', '']);
+						arrConcept.push(['749196', '2.16.840.1.113883.6.88', 'Clopidogrel', 'Clopidogrel 300 MG Oral Tablet']);
+						
+						var arrXslt = [];
+						arrXslt.push(['2.16.840.1.113883.3.1951', 'Infobutton_UI_NU']);
+						
+					function getCs(code){
+						for (i in arrConcept) {
+							if (arrConcept[i][0] == code){
+								return arrConcept[i][1];
+							}
+						}
+					}
+					
+					function getDn(code){
+						for (j in arrConcept) {
+							if (arrConcept[j][0] == code){
+								return arrConcept[j][2];
+							}
+						}
+					}
+
+					function getOt(code){
+						for (j in arrConcept) {
+							if (arrConcept[j][0] == code){
+								return arrConcept[j][3];
+							}
+						}
+					}
+
+					function getXslt(orgOid){
+						for (j in arrXslt) {
+							if (arrXslt[j][0] == orgOid){
+								return arrXslt[j][1];
+							}
+						}
+					}
+
+					
+					function callIM(gender, age, task, mainSearchCriteriaC, labAbnormalFlag){
+						var baseUrl = 'http://vfsmopeninfo01.fsm.northwestern.edu/infoRequest?';
+						var organizationOID = document.getElementById("organizationId").value;
+						var organization = 'representedOrganization.id.root=' + organizationOID;
+
+						var genderParam = '&patientPerson.administrativeGenderCode.c=' + gender + '' ;
+						var ageParam = '&age.v.v=' + age + '&age.v.u=a';
+						var taskParam = '&taskContext.c.c=' + task;
+						
+						var mainSearchCriteriaParam = '&mainSearchCriteria.v.c=' + mainSearchCriteriaC + '&mainSearchCriteria.v.cs=' + getCs(mainSearchCriteriaC) + '&mainSearchCriteria.v.dn=' + getDn(mainSearchCriteriaC);
+					
+						//var severityObservationParam;
+						//if (labAbnormalFlag != null){
+						//	severityObservationParam = '&interpretationCode.c.c=' + labAbnormalFlag;
+						//}
+						
+						var performerParam = '&informationRecipient.languageCode.c=en&performer=PROV';
+						
+						var xslt = '&xsltTransform=' + getXslt(organizationOID);
+						
+						var url = baseUrl + organization + genderParam + ageParam 
+							+ taskParam + mainSearchCriteriaParam + performerParam + xslt;
+						var winRef = window.open(url, '', 'width=970, height=670, status=no, location=no, toolbar=no, scrollbars=no, resizable=yes');
+						//document.getElementById('urlDisplay').value = url;
+						return false;
+					}
+				</script>
+</head>
+<body>
+<div id="shadow" style="width: 800px;">
+<div id="shadow2">
+<div id="main">
+	<h2>Electronic Health Record</h2>
+	<table>
+	<tbody>
+	<tr>
+	<td class="label">Age</td><td><input id="age" value="47" size="2" name="age"></td>
+	</tr>
+	<tr>
+	<td class="label">Gender</td><td><select id="gender" value="F" name="gender"><option selected="selected" value="F">F</option><option value="M">M</option></select></td>
+	</tr>
+	</tbody>
+	</table>
+
+	<div style="height: 100px;" >&nbsp;</div>
+	<h3>Clinical Decision Support - Medication Order Entry</h3>
+	<input name="organizationId" id="organizationId" value="2.16.840.1.113883.3.1951" type="hidden" />
+	<table style="border: 1px solid #FFCC00; padding: 0px; margin: 0px;">
+		<tr style="padding: 0px;">
+			<td style="font-size: 0.8em; background-color: #FFCC00;">
+				<span style="color: red; font-weight: bold; float: left; padding-right: 7px; font-size: 1.2em;">!</span>
+				<span style="float: left;">
+				<b>
+					Genetic test results indicate patient may be a <a href="javascript:void(0);" onclick="callIM(gender.value, age.value, 'MEDOE', '10071615', '');">poor metabolizer of clopidogrel</a>.
+					<a href="javascript:void(0);" onclick="callIM(gender.value, age.value, 'MEDOE', '10071615', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+					<br/>
+					Consider alterntative - medication may be ineffective if prescribed.
+				</b>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: #FFFFCC;">
+				<table style="font-size: 0.75em; background-color: #FFFFCC;">
+				  <tr>
+				  	<td style="width: 140px; color: grey; background-color: #FFFFCC;">
+				  		Acknowledge reason:
+				  	</td>
+				  	<td colspan="2" style="background-color: #FFFFCC;">
+				  		<input id="acknowledge" type="text" style="width: 400px;"/>
+				  	</td>
+				  </tr>
+				  <tr>
+				  	<td style="background-color: #FFFFCC;"></td>
+				  	<td style="background-color: #FFFFCC;"><input type="submit" value="Discussed result with patient"/></td>
+				  	<td style="background-color: #FFFFCC;"/>
+				  </tr>
+				  <tr>
+				  	<td colspan="2" style="background-color: #FFFFCC;">
+				  		<ul style="color: navy; padding-top: 10px;">
+					  		<li>Click here to add "Clopidogrel poor metabolizer" to Prob List</li>
+					  		<li>Click here to view Medications</li>
+					  		<li>Click here to change therapy or order a consultation</li>
+					  		<li>Clopidogrel Genetic Results Fact Sheet</li>
+				  		</ul>
+				  	</td>
+				  	<td style="background-color: #FFFFCC;"/>
+				  </tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+<div style="font-style: italic; padding-top: 10px;">
+Infobuttons can be helpful in the context of active decision support.  Here, we provide an infobutton
+link in a CDS alert generated when prescribing clopidogrel for someone who is a poor metabolizer.
+</div>
+
+<div style="height: 200px;" >&nbsp;</div>
+<h3>Problem List Review</h3>
+<table>
+<tbody>
+<tr>
+<td class="label">Problem List</td><td>
+<ul>
+<li>
+	Clopidogrel poor metabolizer (predicted) <a href="javascript:void(0);" onclick="callIM(gender.value, age.value, 'PROBLISTREV', '10071615', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+</ul>
+</td>
+</tr>
+</tbody></table>
+<div style="font-style: italic; padding-top: 10px;">
+Using the context of the problem list, we show information related to a specific phenotype.
+</div>
+
+
+
+<div style="height: 200px;" >&nbsp;</div>
+<h3>Medication Review</h3>
+<table>
+<tbody>
+<tr>
+<td class="label">Problem List</td><td>
+<ul>
+<li>
+	<select name="problem" id="problem">
+		<option selected="selected" value="10071614">CYP2C19 normal metabolizer status</option>
+		<option value="10071615">CYP2C19 slow metabolizer status</option>
+		<option value="10071616">CYP2C19 intermediate metabolizer status</option>
+		<option value="10071617">CYP2C19 rapid metabolizer status</option>
+		<option value="10071618">CYP2C19 ultrarapid metabolizer status</option>
+	</select>
+	<br/>
+	<span style="font-size: 0.75em;">(For demo purposes - select what the phenotype should be)</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="label">Medications</td><td>
+<li>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Clopidogrel 300 MG Oral Tablet (Medication only)<a href="javascript:void(0);" onclick="callIM(gender.value, age.value, 'MLREV', '749196', '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+<li>
+<font style="font-color:red;font-weight:bold;font-size:12pt;font-family:arial"></font> Clopidogrel 300 MG Oral Tablet (Metabolizer status)<a href="javascript:void(0);" onclick="callIM(gender.value, age.value, 'MLREV', problem.value, '');"> <img title="OpenInfobutton" src="images/infobutton_icon.png"> </a>
+</li>
+
+</ul>
+</td>
+</tr>
+</tbody></table>
+<div style="font-style: italic; padding-top: 10px;">
+Here we show the difference between an infobutton link that is generated just for the medication, and an infobutton
+link that is generated for the medication and a genotype result (represented in the problem list).  This is an example
+where the EHR could generate more specific infobutton links, given the full context of the patient's medical history.
+</div>
+
+<div style="height: 200px;" >&nbsp;</div>
+</div>
+</div>
+</div>
+
+
+</body></html>
