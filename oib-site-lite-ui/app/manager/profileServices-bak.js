@@ -64,7 +64,7 @@ uuidGenerator.factory("idGenerator", function () {
     }
 });
 
-oibManagerServiceModule.service('ProfileService', ['$http', '$resource', 'idGenerator', function ($http, $resource, idGenerator) {
+oibManagerServiceModule.service('CloudProfileService', ['$http', '$resource', 'idGenerator', function ($http, $resource, idGenerator) {
 
         this.getNewId = function () {
             return idGenerator.getNewUuid();

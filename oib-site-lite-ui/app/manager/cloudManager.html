@@ -1,7 +1,7 @@
 <p>Infobutton Cloud Profiles</p>
 
-<ul ng-controller="ManagerCloudProfileCtrl">
-    <li ng-repeat="cloudLink in cloudLinks" class="thumbnail oibProfile-listing">
-        <a href="#/oibProfile/{{cloudLink.url}}">{{cloudLink.name}}</a>
+<ul ng-controller="CloudProfileCtrl">
+    <li ng-repeat="cloudProfileLink in cloudProfileLinks" class="thumbnail oibProfile-listing">
+        <a href="#/oibProfile/{{cloudProfileLink.url}}">{{cloudProfileLink.name}}</a>
     </li>
 </ul>
