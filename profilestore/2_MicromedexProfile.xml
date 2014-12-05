@@ -2,7 +2,7 @@
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="5">
 		<title>Micromedex</title>
-		<profileDescription>Provides a broad coverage of medication knowledge. Subscribed by most of the VHA facilities</profileDescription>
+		<profileDescription>Provides a broad coveradge of medication knowledge. Subscribed by most of the VHA facilities</profileDescription>
 		<versionControl publicationDate="2010-03-19T08:56:00"/>
 	</header>
 	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="true">
