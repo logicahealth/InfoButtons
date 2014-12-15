@@ -10,7 +10,7 @@
 			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
 		</authorizedOrganizations>
 		<contexts>
-			<context name="Medication knowledge from order entry (OE) and medication list (MLREV). Provider only contnt" id="1">
+			<context name="Medication knowledge from order entry (OE) and medication list (MLREV). Provider only content" id="1">
 				<contextDefinition>
 					<patientGender match="false" search="true"/>
 					<task match="true" search="false">
