@@ -10,6 +10,7 @@
     "angular-route": "1.2.x",
     "angular-resource": "1.2.x",
     "angular-loader": "1.2.x",
+    "angular-utf8-base64": "0.0.x",
     "angular-mocks": "~1.2.x"
   }
 }
