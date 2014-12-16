@@ -1,6 +1,6 @@
 <div class="container" ng-controller="ProfileCtrl">
 
-<h3>Configured OpenInfobutton Service Profiles</h3>
+<h3>Custom OpenInfobutton Service Profiles</h3>
 <hr/>
 
     <div class="well" ng-repeat="profile in localProfiles">
@@ -17,7 +17,7 @@
                 <p>Status: {{profile.status_dsc}}</p>
             </div>
             <div class="col-md-2 text-right">
-                <a href="#/editProfile/{{profile.id}}" class="btn btn-primary btn-sm">Configure</a> 
+                <a href="#/editProfile/{{profile.id}}" class="btn btn-primary btn-sm">Configure</a>
                 <a href="#" class="btn btn-default btn-sm">More Info</a>
             </div>
         </div>

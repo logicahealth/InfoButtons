@@ -1,7 +1,59 @@
-<p>Infobutton Cloud Profiles</p>
+<div class="container" ng-controller="CloudProfileCtrl">
 
-<ul ng-controller="CloudProfileCtrl">
-    <li ng-repeat="cloudProfileLink in cloudProfileLinks" class="thumbnail oibProfile-listing">
-        <a href="#/oibProfile/{{cloudProfileLink.url}}">{{cloudProfileLink.name}}</a>
-    </li>
-</ul>
+<h3>Infobutton Cloud Profiles</h3>
+<hr/>
+    <div class="well" ng-repeat="localCloudProfile in localCloudProfiles | orderBy: version | filter:needsUpdate()">
+        <div class="row">
+            <div class="col-md-3">
+                <!--Suggest adding logos/images for each profile - see next line -->
+                <img src="{{localCloudProfile.image_url}}" alt="{{localCloudProfile.title}} logo" style="max-height: 80px; max-width: 200px;">
+                <!--<img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{profile.name}} logo" style="max-height: 40px; max-width: 100px;">-->
+            </div>
+            <div class="col-md-3" style="margin-left: 2em;">
+                <p>{{localCloudProfile.name}}: v{{localCloudProfile.published}}</p>
+            </div>
+            <div class="col-md-2 text-right">
+                <button ng-click="update(localCloudProfile)" class="btn btn-primary btn-sm">Update</button>
+                <a href="{{localCloudProfile.gitUrl}}" class="btn btn-default btn-sm">More Info</a>
+            </div>
+        </div>
+    </div>
+    <div class="well" ng-repeat="localCloudProfile in localCloudProfiles | orderBy: version | filter:isUpdated()">
+        <div class="row">
+            <div class="col-md-3">
+                <!--Suggest adding logos/images for each profile - see next line -->
+                <img src="{{localCloudProfile.image_url}}" alt="{{localCloudProfile.title}} logo" style="max-height: 80px; max-width: 200px;">
+                <!--<img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{profile.name}} logo" style="max-height: 40px; max-width: 100px;">-->
+            </div>
+            <div class="col-md-3" style="margin-left: 2em;">
+                <p>{{localCloudProfile.name}}: v{{localCloudProfile.published}}</p>
+            </div>
+            <div class="col-md-2 text-right">
+                <span>Current</span>
+                <a href="{{localCloudProfile.gitUrl}}" class="btn btn-default btn-sm">More Info</a>
+            </div>
+        </div>
+    </div>
+    <div class="well" ng-repeat="cloudProfileLink in cloudProfileLinks | orderBy: version | filter:notInstalled(localCloudProfiles)">
+        <div class="row">
+            <div class="col-md-3">
+                <!--Suggest adding logos/images for each profile - see next line -->
+                <img src="{{cloudProfileLink.image_url}}" alt="{{cloudProfileLink.title}} logo" style="max-height: 80px; max-width: 200px;">
+                <!--<img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{profile.name}} logo" style="max-height: 40px; max-width: 100px;">-->
+            </div>
+            <div class="col-md-3" style="margin-left: 2em;">
+                <p>{{cloudProfileLink.title}}: v{{cloudProfileLink.version}}</p>
+            </div>
+            <div class="col-md-2 text-right">
+                <button ng-click="download(cloudProfileLink)" class="btn btn-primary btn-sm">Download</button>
+                <a href="{{cloudProfileLink.gitUrl}}" class="btn btn-default btn-sm">More Info</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<ul ng-controller="CloudProfileCtrl">-->
+    <!--<li ng-repeat="cloudProfileLink in cloudProfileLinks" class="thumbnail oibProfile-listing">-->
+        <!--<a href="#/oibProfile/{{cloudProfileLink.url}}">{{cloudProfileLink.name}}</a>-->
+    <!--</li>-->
+<!--</ul>-->

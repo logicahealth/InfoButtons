@@ -1,5 +1,7 @@
 'use strict';
 
+var oibManagerServiceModule = angular.module('oibManagerServiceModule', ['ngResource']);
+
 var baseCloudUrl = 'https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/contents/';
 var profileDirectoryUrl = baseCloudUrl + 'profilestore?ref=development';
 var profileContentUrl = baseCloudUrl + 'git/blobs/';
@@ -59,80 +61,96 @@ uuidGenerator.factory("idGenerator", function () {
     }
 });
 
-var getCloudProfiles = function ($http) {
+oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'idGenerator', function ($http, $resource, idGenerator) {
 
-    var profileLinkList = [];
-    $http.get(profileDirectoryUrl).success(function (data) {
+    var serviceUrlBase = 'http://localhost:3000/';
 
-        data.forEach(function (profileLink) {
+    var cloudProfileFactory = {};
 
-            // filter xml files only
-            if (profileLink.path.indexOf('.xml') === (profileLink.path.length - 4)) {
-
-                var profileUrl = baseCloudUrl + profileLink.path;
-                var profileInJson = $http.get(profileUrl).success(function (profileData) {
-
-                    var xmlContentString = atob(profileData.content);
-                    var xmlDoc = $.parseXML(xmlContentString);
-                    var $xml = $(xmlDoc);
-                    var $title = $xml.find("title");
-                    var $contexts = $xml.find("context");
-                    var attr0 = $contexts[0].attributes[0].value;
-                    if ($title.text().length > 1) {
-                        var jsonString = {'sha': profileData.sha, 'url': profileLink.url, 'title': $title.text(), 'description': attr0};
-                        profileLinkList.push(jsonString);
-                    }
-
-                });
-            }
-        });
-    });
-    return profileLinkList;
-};
-
-oibManagerServiceModule.service('CloudProfileService', ['$http', '$resource', 'idGenerator', function ($http, $resource, idGenerator) {
-
-    this.getNewId = function () {
+    cloudProfileFactory.getNewId = function () {
         return idGenerator.getNewUuid();
     };
-    this.getSiteProfiles = function () {
+    cloudProfileFactory.getSiteProfiles = function () {
         return testSiteProfiles;
     };
-    this.addSiteProfile = function (profile) {
+    cloudProfileFactory.addSiteProfile = function (profile) {
     };
-    this.deleteSiteProfile = function (profileId) {
+    cloudProfileFactory.deleteSiteProfile = function (profileId) {
     };
-    this.changeSiteProfileStatus = function (status) {
+    cloudProfileFactory.changeSiteProfileStatus = function (status) {
     };
 
-    this.getCloudProfiles = function () {
-        return getCloudProfiles($http); // $resource('manager/cloudProfiles', {}, {getProfiles: {method: 'GET', isArray: true}});
-    }
+    cloudProfileFactory.getCloudProfiles = function(base64) {
+        var profileLinkList = [];
+        var jsonString = {};
+        $http.defaults.headers.common.Authorization = 'Basic ' + base64.encode('aniskand:WND-r3700');
 
-    this.getCloudProfile = function (profileId) {
+        $http.get(profileDirectoryUrl).success(function (data) {
 
-    }
+            data.forEach(function (profileLink) {
 
-    this.getProfileFromUrl = function (sha) {
+                // filter xml files only
+                if (profileLink.path.indexOf('.xml') === (profileLink.path.length - 4)) {
 
-        var profileJsonData = {};
+                    var profileUrl = baseCloudUrl + profileLink.path + '?ref=development';
+                    var profileInJson = $http.get(profileUrl).success(function (data) {
 
-        $http.get(profileContentUrl + sha).success(function (profileData) {
+                        var xmlContentString = base64.decode(data.content);
+                        var xmlDoc = $.parseXML(xmlContentString);
+                        var $xml = $(xmlDoc);
+                        var $title = $xml.find("title");
+                        var $contexts = $xml.find("context");
+                        var $versionControl = $xml.find("versionControl");
+                        var version = $versionControl[0].attributes[0].value;
+                        var attr0 = $contexts[0].attributes[0].value;
+                        if ($title.text().length > 1) {
+                            jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': version,
+                                            'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url};
+                            profileLinkList.push(jsonString);
+                        }
 
-            var xmlContentString = atob(profileData.content);
-            var xmlDoc = $.parseXML(xmlContentString);
-            var $xml = $(xmlDoc);
-            var $title = $xml.find("title");
-            var $contexts = $xml.find("context");
-            var attr0 = $contexts[0].attributes[0].value;
-            if ($title.text().length > 1) {
-                profileJsonData = {'sha': profileData.sha, 'url': profileData.url, 'title': $title.text(), 'description': attr0, 'content': xmlContentString};
+                    });
+                }
+            });
+        });
+        return profileLinkList;
+    };
+
+    cloudProfileFactory.updateProfile = function(filename) {
+
+            $http.get(baseCloudUrl + 'profilestore/' + filename + '?ref=development').success(function (profileData) {
+
+                var xmlContentString = atob(profileData.content);
+                var xmlDoc = $.parseXML(xmlContentString);
+                var $xml = $(xmlDoc);
+                var $contexts = $xml.find("context");
+                var attr0 = $contexts[0].attributes[0].value;
+                var profileJsonString = {'sha' : profileData.sha, 'name' : filename, 'content_utf8' : xmlContentString};
+                $http.put(serviceUrlBase + 'profile/updateCloud', profileJsonString, {
+                    headers: {
+                        'Authorization' : undefined
+                    }
+                });
+            });
+    };
+
+    cloudProfileFactory.downloadProfile = function (profile) {
+        return $http.put(serviceUrlBase + 'profile/download', profile, {
+            headers: {
+                'Authorization' : undefined
             }
         });
-        return profileJsonData;
     };
 
-    this.getGitProfilesFromUrl = function () {   //return cloudProfiles;};
+    cloudProfileFactory.getLocalCloudProfiles = function () {
+        return $http.get(serviceUrlBase + 'cloudProfiles', {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
+    };
+
+    cloudProfileFactory.getGitProfilesFromUrl = function () {   //return cloudProfiles;};
 
         var profileLinkList = [];
         $http.get(profileDirectoryUrl).success(function (data) {
@@ -165,6 +183,6 @@ oibManagerServiceModule.service('CloudProfileService', ['$http', '$resource', 'i
 
     };
 
-
+    return cloudProfileFactory;
 
 }]);
