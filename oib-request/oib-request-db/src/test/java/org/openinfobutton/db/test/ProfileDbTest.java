@@ -60,12 +60,6 @@ public class ProfileDbTest
     }
     
     @Test
-    public void testCount() {
-        
-        assertEquals(19l, pdao.count(1));
-    }
-    
-    @Test
     public void testProfileRead() {
         
         FileandMarker marker = new FileandMarker();

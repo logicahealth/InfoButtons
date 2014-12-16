@@ -16,12 +16,7 @@ package edu.utah.further.profiledb.domain;
 import java.sql.Blob;
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.openinfobutton.service.json.BlobJsonSerializer;
@@ -32,7 +27,7 @@ import edu.utah.further.core.api.data.PersistentEntity;
  * The Class Profiles.
  */
 @Entity
-@Table( name = "resource_profiles" )
+@Table( name = "resource_profiles_all" )
 public class Profiles
     implements PersistentEntity<Long>
 {
@@ -56,7 +51,7 @@ public class Profiles
 
     /** The version. */
     @Column( name = "version" )
-    public int version;
+    public String version;
 
     /** The published. */
     @Column( name = "published" )
@@ -68,7 +63,8 @@ public class Profiles
     public int status;
 
     /** The content. */
-    @Column( name = "content", columnDefinition = "BLOB" )
+    @Column( name = "content")
+    @Lob
     public Blob content;
 
     // ========================= IMPLEMENTATION: PersistentEntity ==========
@@ -119,7 +115,7 @@ public class Profiles
      *
      * @return the version
      */
-    public int getVersion()
+    public String getVersion()
     {
         return version;
     }
@@ -129,7 +125,7 @@ public class Profiles
      *
      * @param version the new version
      */
-    public void setVersion( int version )
+    public void setVersion( String version )
     {
         this.version = version;
     }
