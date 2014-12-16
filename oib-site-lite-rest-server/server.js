@@ -8,7 +8,8 @@ var express = require('express'),
         host     : 'localhost',
         user     : 'root',
         password : '',
-        database : 'profilesdbprod'
+        database : 'profilesdbprod',
+		supportBigNumbers: true
     }),
 	
     responderConnectionPool = mysql.createPool({
@@ -54,6 +55,17 @@ function getProfiles(req,res) {
 	
 }
 
+function getLocalCloudProfiles(req,res) {
+
+	profileConnectionPool.getConnection( function(err,connection) {
+		connection.query('select * from profilesdbprod.resource_profiles_cloud', function(err,rows,fields) {
+			res.send(rows);
+		});
+		connection.release();
+	});
+
+}
+
 function getProfile(req,res) {
 
 	profileConnectionPool.getConnection( function(err,connection) {
@@ -92,6 +104,68 @@ function createProfile(req,res) {
 	});
 }
 
+function createCloudProfile(req,res) {
+
+	console.log("Creating new profile: " + req.body.name);
+
+	profileConnectionPool.getConnection(function (err, connection) {
+
+		var newRecord = {name: req.body.title, version: req.body.sha, status: '2', content: req.body.content_utf8};
+
+		if (req.body.image_url) {
+			newRecord.image_url = req.body.image_url;
+		}
+
+		connection.query('insert into profilesdbprod.resource_profiles_cloud set ?',
+			newRecord, function (err, result) {
+				if (err) {
+					throw err;
+				}
+				if (result) {
+					res.type('application/json')
+					res.send({"object": "profile", "name": req.body.name, "event": "created"});
+				}
+			});
+		connection.release();
+	});
+}
+
+function updateCloudProfile(req,res) {
+
+	// var errorResult = {"object":"profile","id":req.body.id,"event":"update","error":"profile id =" + req.body.id + " is not found in the database."};
+
+	profileConnectionPool.getConnection( function(err,connection) {
+
+		console.log("Updating profile name=" + req.body.title);
+
+		var updateRecord = {};
+
+		if (req.body.sha) {
+			updateRecord.version=req.body.sha;
+			console.log("\tversion:" + req.body.sha);
+		};
+		if (req.body.content_utf8) {
+			updateRecord.content=req.body.content_utf8;
+			console.log("\tcontent:...");
+		};
+
+		var name = { 'profilesdbprod.resource_profiles_cloud.name': req.body.name };
+
+		connection.query('update low_priority profilesdbprod.resource_profiles_cloud set version = ?, content=? where name = ?',
+			[req.body.sha, req.body.content_utf8, req.body.name], function(err,result) {
+				if (err) {
+					throw err;
+				}
+				if (result) {
+					res.type('application/json')
+					res.send({"object":"profile","name":req.body.name,"event":"updated"});
+				}
+			});
+
+		connection.release();
+	});
+}
+
 function updateProfile(req,res) {
 
 	// var errorResult = {"object":"profile","id":req.body.id,"event":"update","error":"profile id =" + req.body.id + " is not found in the database."};
@@ -123,7 +197,7 @@ function updateProfile(req,res) {
 			console.log("\tcontent:...");
 		};
 
-		connection.query('update profilesdbprod.resource_profiles rp set ? where id = ' + req.body.id,
+		connection.query("update profilesdbprod.resource_profiles rp set ? where id = " + req.body.id,
 			updateRecord, function(err,result) {
 				if (err) {
 					throw err;
@@ -391,11 +465,11 @@ function getRequestParametersByParameterRoot(req,res) {
 
 
 app.get('/profiles', function(req,res){ getProfiles(req,res); } );
+app.get('/cloudProfiles', function(req,res){ getLocalCloudProfiles(req,res); } );
 app.get('/profile/:id', function(req,res){ getProfile(req,res); } );
 app.put('/profile/create', function(req,res){ createProfile(req,res); });
-app.put('/profile/update', function(req,res){ updateProfile(req,res); });
-// app.delete('/profile/:id', function(req,res){ deleteProfile(req,res); });
-
+app.put('/profile/download', function(req,res){ createCloudProfile(req,res); });
+app.put('/profile/updateCloud', function(req,res){ updateCloudProfile(req,res); });
 app.get('/assets', function(req,res) { getAssets(req,res); });
 app.get('/asset/:id', function(req,res) { getAsset(req,res); });
 app.put('/asset/create', function (req,res) { createAsset(req,res); });
