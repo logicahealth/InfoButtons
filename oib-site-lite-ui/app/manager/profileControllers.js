@@ -97,7 +97,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$routeParams', 'profi
         return $scope;
     }]);
 
-oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$http', 'base64', 'cloudProfileFactory', function ($scope, $http, base64, cloudProfileFactory) {
+oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$http', '$route', 'base64', 'cloudProfileFactory', function ($scope, $http, $route, base64, cloudProfileFactory) {
 
         //$scope.cloudLinks = [{cha: "cha1.1", title: "Cloud Profile Title 1.1", description: "How about this cloud profile 1.1"}
         //    , {cha: "cha2", title: "Cloud Profile Title 2", description: "This is the extra awesome profile 2"}
@@ -129,10 +129,12 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$http', 'base64', 'c
             .error(function (error) {
                 $scope.statusMessage = 'Unable to download profile:' + error;
             });
+        $route.reload();
     }
 
     $scope.update = function (profile) {
         cloudProfileFactory.updateProfile(profile.name);
+        $route.reload();
     }
 
     $scope.notInstalled = function (localCloudProfiles) {
