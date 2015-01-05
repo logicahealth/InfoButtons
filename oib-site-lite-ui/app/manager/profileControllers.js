@@ -1,6 +1,6 @@
-'use strict';
+    'use strict';
 
-var oibManagerModule = angular.module('oibManagerModule', ['ngRoute', 'ngResource', 'ab-base64']);
+var oibManagerModule = angular.module('oibManagerModule', ['ngRoute', 'ngResource', 'ab-base64', 'ui.bootstrap']);
 
 oibManagerModule.config(['$routeProvider', function ($routeProvider) {
         $routeProvider
@@ -97,7 +97,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$routeParams', 'profi
         return $scope;
     }]);
 
-oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$http', '$route', 'base64', 'cloudProfileFactory', function ($scope, $http, $route, base64, cloudProfileFactory) {
+oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$route', 'base64', 'cloudProfileFactory', function ($scope, $modal, $http, $route, base64, cloudProfileFactory) {
 
         //$scope.cloudLinks = [{cha: "cha1.1", title: "Cloud Profile Title 1.1", description: "How about this cloud profile 1.1"}
         //    , {cha: "cha2", title: "Cloud Profile Title 2", description: "This is the extra awesome profile 2"}
@@ -121,15 +121,16 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$http', '$route', 'b
 
     $scope.cloudProfileLinks = cloudProfileLinks;
 
-    $scope.download = function (profile) {
-        cloudProfileFactory.downloadProfile(profile)
+   function downloadProfile (profile, oids) {
+        cloudProfileFactory.downloadProfile(profile, oids)
             .success(function (msg) {
                 $scope.statusMessage = msg.object + ' ' + msg.event;
+                $route.reload();
             })
             .error(function (error) {
                 $scope.statusMessage = 'Unable to download profile:' + error;
+                $route.reload();
             });
-        $route.reload();
     }
 
     $scope.update = function (profile) {
@@ -181,4 +182,137 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$http', '$route', 'b
         }
     }
 
+    var oids = [];
+    oids.push({})
+
+    $scope.items = [{name:'Veterans Administration',oid:'1.3.6.1.4.1.3768', selected: false},
+                    {name:'Marine Biology Laboratory',oid:'MBL', selected: false},
+                    {name:'National Institutes of Health',oid:'2.16.840.1.113762', selected: false},
+                    {name:'Duke University Health System',oid:'1.3.6.1.4.1.4275', selected: false},
+                    {name:'National Library of Medicine',oid:'1.3.6.1.4.1.6014', selected: false},
+                    {name:'University of Washington',oid:'1.3.6.1.4.1.150', selected: false},
+                    {name:'University of Utah',oid:'1.3.6.1.4.1.5884', selected: false},
+                    {name:'Northwestern University',oid:'2.16.840.1.113883.3.1951', selected: false},
+                    {name:'Axeium',oid:'http://axeium.net', selected: false},
+                    {name:'Lehigh Valley Health Network',oid:'http://lvhn.org', selected: false}];
+
+    $scope.openModal = function(profile) {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'modalContent.html',
+            controller: 'ModalController',
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            downloadProfile(profile,selectedItem);
+        }, function () {
+            $scope.status ='Modal dismissed at: ' + new Date();
+        });
+    };
+
     }]);
+
+    /**
+     * Checklist-model
+     * AngularJS directive for list of checkboxes
+     */
+
+    angular.module('checklist-model', [])
+        .directive('checklistModel', ['$parse', '$compile', function($parse, $compile) {
+            // contains
+            function contains(arr, item) {
+                if (angular.isArray(arr)) {
+                    for (var i = 0; i < arr.length; i++) {
+                        if (angular.equals(arr[i], item)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            // add
+            function add(arr, item) {
+                arr = angular.isArray(arr) ? arr : [];
+                for (var i = 0; i < arr.length; i++) {
+                    if (angular.equals(arr[i], item)) {
+                        return arr;
+                    }
+                }
+                arr.push(item);
+                return arr;
+            }
+
+            // remove
+            function remove(arr, item) {
+                if (angular.isArray(arr)) {
+                    for (var i = 0; i < arr.length; i++) {
+                        if (angular.equals(arr[i], item)) {
+                            arr.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+                return arr;
+            }
+
+            // http://stackoverflow.com/a/19228302/1458162
+            function postLinkFn(scope, elem, attrs) {
+                // compile with `ng-model` pointing to `checked`
+                $compile(elem)(scope);
+
+                // getter / setter for original model
+                var getter = $parse(attrs.checklistModel);
+                var setter = getter.assign;
+
+                // value added to list
+                var value = $parse(attrs.checklistValue)(scope.$parent);
+
+                // watch UI checked change
+                scope.$watch('checked', function(newValue, oldValue) {
+                    if (newValue === oldValue) {
+                        return;
+                    }
+                    var current = getter(scope.$parent);
+                    if (newValue === true) {
+                        setter(scope.$parent, add(current, value));
+                    } else {
+                        setter(scope.$parent, remove(current, value));
+                    }
+                });
+
+                // watch original model change
+                scope.$parent.$watch(attrs.checklistModel, function(newArr, oldArr) {
+                    scope.checked = contains(newArr, value);
+                }, true);
+            }
+
+            return {
+                restrict: 'A',
+                priority: 1000,
+                terminal: true,
+                scope: true,
+                compile: function(tElement, tAttrs) {
+                    if (tElement[0].tagName !== 'INPUT' || !tElement.attr('type', 'checkbox')) {
+                        throw 'checklist-model should be applied to `input[type="checkbox"]`.';
+                    }
+
+                    if (!tAttrs.checklistValue) {
+                        throw 'You should provide `checklist-value`.';
+                    }
+
+                    // exclude recursion
+                    tElement.removeAttr('checklist-model');
+
+                    // local scope var storing individual checkbox model
+                    tElement.attr('ng-model', 'checked');
+
+                    return postLinkFn;
+                }
+            };
+        }]);

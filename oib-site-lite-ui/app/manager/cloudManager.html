@@ -1,5 +1,24 @@
 <div class="container" ng-controller="CloudProfileCtrl">
 
+<script type="text/ng-template" id="modalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Select Organization ID</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <input type="checkbox" checklist-model="selection.items" checklist-value="item">
+                {{item.name}}
+            </li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">Download</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+
 <h3>Infobutton Cloud Profiles</h3>
 <hr/>
     <div class="well" ng-repeat="localCloudProfile in localCloudProfiles | orderBy: version | filter:needsUpdate()">
@@ -45,7 +64,7 @@
                 <p>{{cloudProfileLink.title}}: v{{cloudProfileLink.version}}</p>
             </div>
             <div class="col-md-2 text-right">
-                <button ng-click="download(cloudProfileLink)" class="btn btn-primary btn-sm">Download</button>
+                <button ng-click="openModal(cloudProfileLink)" class="btn btn-primary btn-sm">Download</button>
                 <a href="{{cloudProfileLink.gitUrl}}" class="btn btn-default btn-sm">More Info</a>
             </div>
         </div>
