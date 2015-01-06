@@ -197,8 +197,8 @@ function updateProfile(req,res) {
 			console.log("\tcontent:...");
 		};
 
-		connection.query("update profilesdbprod.resource_profiles rp set ? where id = " + req.body.id,
-			updateRecord, function(err,result) {
+		connection.query('update profilesdbprod.resource_profiles rp set name = ?, version = ?, status = ?, image_url = ?, content = ?,  where id = ?',
+			[req.body.name, req.body.version, req.body.status, req.body.image_url, req.body.id], function(err,result) {
 				if (err) {
 					throw err;
 				}
@@ -470,6 +470,7 @@ app.get('/profile/:id', function(req,res){ getProfile(req,res); } );
 app.put('/profile/create', function(req,res){ createProfile(req,res); });
 app.put('/profile/download', function(req,res){ createCloudProfile(req,res); });
 app.put('/profile/updateCloud', function(req,res){ updateCloudProfile(req,res); });
+app.put('/profile/update', function(req,res){ updateProfile(req,res); });
 app.get('/assets', function(req,res) { getAssets(req,res); });
 app.get('/asset/:id', function(req,res) { getAsset(req,res); });
 app.put('/asset/create', function (req,res) { createAsset(req,res); });
