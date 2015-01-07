@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<header id="1">
+		<title>PubMed</title>
+		<profileDescription>Uses the Pubmed Clinical Queries filter</profileDescription>
+		<versionControl publicationDate="2015-01-07T00:00:00"/>
+	</header>
+	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false" urlStyle="DIRTY">
+		<!-- To customize this profile to use your institution' library holdings: After downloading this profile from the store, add the following tag under the <authorizedOrganization> tag. Change the myncbishare and holding parameter values to the ones for your institution. 
+				<knowledgeRequestServiceLocation url="http://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2000/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text]&amp;myncbishare=uutahlib&amp;holding=uutahlib_fft&amp;"/>
+			-->
+		<authorizedOrganizations/>
+		<contexts>
+			<context name="Links from problem list to PubMed Clinical Queries" id="1">
+				<contextDefinition>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="diagnosis list review task" code="DIAGLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="diagnosis list entry task" code="DIAGLISTE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="clinical note review task" code="CLINNOTEREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="clinical note entry task" code="CLINNOTEE"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<performerKnowledgeUserType match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.110" code="PROV"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>
+					<conceptOfInterest match="false" search="true">
+						<searchParameter source="displayName">
+							<syntaxOnResource nonHl7CompliantName="term" valuePrefix="(" valueSuffix=")"/>
+						</searchParameter>
+					</conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Systematic reviews">
+							<searchParameter>
+								<valueSource>
+									<searchTerm>systematic[sb]</searchTerm>
+								</valueSource>
+								<syntaxOnResource nonHl7CompliantName="term"/>
+							</searchParameter>
+						</subTopic>
+						<subTopic linkName="Therapy">
+							<searchParameter>
+								<valueSource>
+									<searchTerm>Therapy/Narrow[filter]</searchTerm>
+								</valueSource>
+								<syntaxOnResource nonHl7CompliantName="term"/>
+							</searchParameter>
+						</subTopic>
+						<subTopic linkName="Diagnosis">
+							<searchParameter>
+								<valueSource>
+									<searchTerm>Diagnosis/Narrow[filter]</searchTerm>
+								</valueSource>
+								<syntaxOnResource nonHl7CompliantName="term"/>
+							</searchParameter>
+						</subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2004/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text] AND English[lang]&amp;"/>
+				</knowledgeRequestService>
+			</context>
+			<context name="Links from Medication List to therapy in PubMed Clinical Queries" id="2">
+				<contextDefinition>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" code="MEDOE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" code="MLREV"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<performerKnowledgeUserType match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.110" code="PROV"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>
+					<conceptOfInterest match="false" search="true">
+						<searchParameter source="displayName">
+							<syntaxOnResource nonHl7CompliantName="term" valuePrefix="(" valueSuffix=")"/>
+						</searchParameter>
+					</conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Therapy (RCT)">
+							<searchParameter>
+								<valueSource>
+									<searchTerm>Therapy/Narrow[filter]</searchTerm>
+								</valueSource>
+								<syntaxOnResource nonHl7CompliantName="term"/>
+							</searchParameter>
+						</subTopic>
+						<subTopic linkName="Systematic reviews">
+							<searchParameter>
+								<valueSource>
+									<searchTerm>systematic[sb]</searchTerm>
+								</valueSource>
+								<syntaxOnResource nonHl7CompliantName="term"/>
+							</searchParameter>
+						</subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2000/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text]&amp;"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

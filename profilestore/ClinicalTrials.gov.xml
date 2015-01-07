@@ -1,0 +1,68 @@
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<header id="2">
+		<title>ClinicalTrials.gov</title>
+		<profileDescription>.</profileDescription>
+		<versionControl publicationDate="2015-01-07T00:00:00"/>
+	</header>
+	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false" urlStyle="DIRTY">
+		<authorizedOrganizations/>
+		<contexts>
+			<context name="Links from problem list to conditions in clinicaltrials.gov." id="1">
+				<contextDefinition>
+					<patientGender match="false" search="true">
+						<searchParameter source="displayName">
+							<syntaxOnResource nonHl7CompliantName="gndr"/>
+						</searchParameter>
+					</patientGender>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<conceptOfInterest match="false" search="true">
+						<searchParameter source="displayName">
+							<syntaxOnResource nonHl7CompliantName="cond"/>
+						</searchParameter>
+					</conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Open trials"/>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://clinicaltrials.gov/ct2/results?recr=Open&amp;type=Intr&amp;no_unk=Y&amp;"/>
+				</knowledgeRequestService>
+			</context>
+			<context name="Links from medications list to conditions in clinicaltrials.gov." id="1">
+				<contextDefinition>
+					<patientGender match="false" search="true">
+						<searchParameter source="displayName">
+							<syntaxOnResource nonHl7CompliantName="gndr"/>
+						</searchParameter>
+					</patientGender>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="medication order entry" code="MEDOE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="medication list review" code="MLREV"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<conceptOfInterest match="false" search="true">
+						<searchParameter source="displayName">
+							<syntaxOnResource nonHl7CompliantName="intr"/>
+						</searchParameter>
+					</conceptOfInterest>
+					<subTopics>
+						<subTopic linkName="Open trials"/>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://clinicaltrials.gov/ct2/results?recr=Open&amp;type=Intr&amp;no_unk=Y&amp;"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>

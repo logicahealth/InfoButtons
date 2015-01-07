@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<header id="1">
+		<title>MayoClinic</title>
+		<profileDescription>Patient education</profileDescription>
+		<versionControl publicationDate="2015-01-07T00:00:00"/>
+	</header>
+	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="false" urlStyle="DIRTY">
+		<authorizedOrganizations/>
+		<contexts>
+			<context name="Access to disease modules from problem list review and entry. Pediatric population." id="1">
+				<contextDefinition>
+					<task match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<conceptOfInterest match="false" search="true">
+						<searchParameter source="displayName">
+						  <syntaxOnResource nonHl7CompliantName="q" valuePrefix="" valueSuffix="+site:www.mayoclinic.com/health/"/>
+						</searchParameter>
+					</conceptOfInterest>
+					<subTopics>
+					  <subTopic linkName="Patient education">
+							<searchParameter>
+							  <valueSource>
+									<searchCode>
+										<code displayName="Patient education" codeSystem="2.16.840.1.113883.6.177" code=""/>
+									</searchCode>
+								</valueSource>
+							</searchParameter>
+						</subTopic>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://www.google.com/search?hl=en&amp;btnI=Im+Feeling+Lucky&amp;"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>
