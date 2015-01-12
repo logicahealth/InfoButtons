@@ -3,7 +3,7 @@
 	<header id="3">
 		<title>Krames</title>
 		<profileDescription>Patient education content</profileDescription>
-		<versionControl publicationDate="2015-01-06T00:00:00"/>
+		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
 		<authorizedOrganizations/>
