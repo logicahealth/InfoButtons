@@ -120,12 +120,14 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
                         var $xml = $(xmlDoc);
                         var $title = $xml.find("title");
                         var $contexts = $xml.find("context");
+                        var $profileD = $xml.find("profileDescription");
+                        var profileDescription = $profileD.text();
                         var $versionControl = $xml.find("versionControl");
                         var version = $versionControl[0].attributes[0].value;
                         var attr0 = $contexts[0].attributes[0].value;
                         if ($title.text().length > 1) {
                             jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': version,
-                                            'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url};
+                                            'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url, 'profileDescription': profileDescription};
                             profileLinkList.push(jsonString);
                         }
 
@@ -136,16 +138,16 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
         return profileLinkList;
     };
 
-    cloudProfileFactory.updateProfile = function(filename) {
+    cloudProfileFactory.updateProfile = function(profile) {
 
-            $http.get(baseCloudUrl + 'profilestore/' + filename + '?ref=development').success(function (profileData) {
+            $http.get(baseCloudUrl + 'profilestore/' + profile.name + '?ref=development').success(function (profileData) {
 
                 var xmlContentString = atob(profileData.content);
                 var xmlDoc = $.parseXML(xmlContentString);
                 var $xml = $(xmlDoc);
                 var $contexts = $xml.find("context");
                 var attr0 = $contexts[0].attributes[0].value;
-                var profileJsonString = {'sha' : profileData.sha, 'name' : filename, 'content_utf8' : xmlContentString};
+                var profileJsonString = {'sha' : profileData.sha, 'name' : profile.name, 'content_utf8' : xmlContentString};
                 $http.put(serviceUrlBase + 'profile/updateCloud', profileJsonString, {
                     headers: {
                         'Authorization' : undefined
@@ -154,6 +156,13 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
             });
     };
 
+    cloudProfileFactory.updateStatus = function (profile) {
+        return $http.put(serviceUrlBase + 'profile/updateCloudStatus', profile, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
+    };
     cloudProfileFactory.downloadProfile = function (profile, oids) {
 
         var xmlDoc;

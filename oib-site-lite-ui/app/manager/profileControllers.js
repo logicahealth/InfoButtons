@@ -33,6 +33,13 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', 'profileFactory', function
         function getLocalProfiles() {
             profileFactory.getProfiles()
                     .success(function (profiles) {
+                        //profiles.forEach (function (profile) {
+                        //
+                        //    var xmlDoc = $.parseXML(profile.content_utf8);
+                        //    var $xml = $(xmlDoc);
+                        //    var $profileD = $xml.find("profileDescription");
+                        //    profile.profileDescription = $profileD.text();
+                        //});
                         $scope.localProfiles = profiles;
                     })
                     .error(function (error) {
@@ -112,6 +119,13 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
     function getLocalCloudProfiles() {
         cloudProfileFactory.getLocalCloudProfiles()
             .success(function (profiles) {
+                profiles.forEach (function (profile) {
+
+                    var xmlDoc = $.parseXML(profile.content_utf8);
+                    var $xml = $(xmlDoc);
+                    var $profileD = $xml.find("profileDescription");
+                    profile.profileDescription = $profileD.text();
+                });
                 $scope.localCloudProfiles = profiles;
             })
             .error(function (error) {
@@ -134,8 +148,14 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
     }
 
     $scope.update = function (profile) {
-        cloudProfileFactory.updateProfile(profile.name);
-        $route.reload();
+        cloudProfileFactory.updateProfile(profile);
+        confirm();
+    }
+
+    $scope.updateStatus = function (profile, status) {
+
+        profile.status = status;
+        cloudProfileFactory.updateStatus(profile);
     }
 
     $scope.notInstalled = function (localCloudProfiles) {
@@ -212,6 +232,19 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
             downloadProfile(profile,selectedItem);
         }, function () {
             $scope.status ='Modal dismissed at: ' + new Date();
+        });
+    };
+
+    function confirm() {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'confirm.html',
+            controller: 'ConfirmController'
+        });
+
+        modalInstance.result.then(
+            function () {
+                $route.reload();
         });
     };
 
