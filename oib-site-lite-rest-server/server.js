@@ -58,7 +58,7 @@ function getProfiles(req,res) {
 function getLocalCloudProfiles(req,res) {
 
 	profileConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from profilesdbprod.resource_profiles_cloud', function(err,rows,fields) {
+		connection.query('select * from profilesdbprod.resource_profiles_utf8_cloud', function(err,rows,fields) {
 			res.send(rows);
 		});
 		connection.release();
@@ -136,7 +136,7 @@ function updateCloudProfile(req,res) {
 
 	profileConnectionPool.getConnection( function(err,connection) {
 
-		console.log("Updating profile name=" + req.body.title);
+		console.log("Updating profile name=" + req.body.name);
 
 		var updateRecord = {};
 
@@ -165,6 +165,37 @@ function updateCloudProfile(req,res) {
 		connection.release();
 	});
 }
+
+function updateCloudStatus(req,res) {
+
+	// var errorResult = {"object":"profile","id":req.body.id,"event":"update","error":"profile id =" + req.body.id + " is not found in the database."};
+
+	profileConnectionPool.getConnection( function(err,connection) {
+
+		console.log("Updating profile name=" + req.body.name);
+
+		var updateRecord = {};
+
+		if (req.body.sha) {
+			updateRecord.version=req.body.status;
+			console.log("\tstatus:" + req.body.status);
+		};
+
+		connection.query('update low_priority profilesdbprod.resource_profiles_cloud set status = ? where id = ?',
+			[req.body.status, req.body.id], function(err,result) {
+				if (err) {
+					throw err;
+				}
+				if (result) {
+					res.type('application/json')
+					res.send({"object":"profile","name":req.body.name,"event":"updated status"});
+				}
+			});
+
+		connection.release();
+	});
+}
+
 
 function updateProfile(req,res) {
 
@@ -197,8 +228,8 @@ function updateProfile(req,res) {
 			console.log("\tcontent:...");
 		};
 
-		connection.query('update profilesdbprod.resource_profiles rp set name = ?, version = ?, status = ?, image_url = ?, content = ?,  where id = ?',
-			[req.body.name, req.body.version, req.body.status, req.body.image_url, req.body.id], function(err,result) {
+		connection.query('update profilesdbprod.resource_profiles rp set name = ?, version = ?, status = ?, image_url = ?, content = ? where id = ?',
+			[req.body.name, req.body.version, req.body.status, req.body.image_url, req.body.content_utf8, req.body.id], function(err,result) {
 				if (err) {
 					throw err;
 				}
@@ -470,6 +501,7 @@ app.get('/profile/:id', function(req,res){ getProfile(req,res); } );
 app.put('/profile/create', function(req,res){ createProfile(req,res); });
 app.put('/profile/download', function(req,res){ createCloudProfile(req,res); });
 app.put('/profile/updateCloud', function(req,res){ updateCloudProfile(req,res); });
+app.put('/profile/updateCloudStatus', function(req,res){ updateCloudStatus(req,res); });
 app.put('/profile/update', function(req,res){ updateProfile(req,res); });
 app.get('/assets', function(req,res) { getAssets(req,res); });
 app.get('/asset/:id', function(req,res) { getAsset(req,res); });
