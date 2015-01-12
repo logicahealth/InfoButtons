@@ -33,12 +33,40 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', 'profileFactory', function
         function getLocalProfiles() {
             profileFactory.getProfiles()
                     .success(function (profiles) {
+                        var xmlDoc;
+                        profiles.forEach (function (profile) {
+                            if (window.DOMParser)
+                            {
+                                var parser=new DOMParser();
+                                xmlDoc=parser.parseFromString(profile.content_utf8,"text/xml");
+                            }
+                            else // code for IE
+                            {
+                                xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+                                xmlDoc.async=false;
+                                xmlDoc.loadXML(profile.content_utf8);
+                            }
+                            var $xml = $(xmlDoc);
+                            var $profileD = $xml.find("profileDescription");
+                            profile.profileDescription = $profileD.text();
+                        });
                         $scope.localProfiles = profiles;
                     })
                     .error(function (error) {
                         $scope.status = 'Unable to load local profiles: ' + error;
                     });
         }
+
+        $scope.updateStatus = function (profile, status) {
+            profile.status = status;
+            profileFactory.updateProfile(profile)
+                .success(function (msg) {
+                    $scope.statusMessage = msg.object + ' ' + msg.event;
+                })
+                .error(function (error) {
+                    $scope.statusMessage = 'Unable to save profile:' + error;
+                });
+        };
 
         return $scope;
     }]);
@@ -61,12 +89,12 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$routeParams', 'profi
 
         $scope.clearDb = function () {
 
-        }
+        };
 
         $scope.clearForm = function (profile) {
             $scope.profile = {};
         
-        }
+        };
 
         $scope.create = function (profile) {
             
@@ -78,21 +106,21 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$routeParams', 'profi
                         $scope.statusMessage = 'Unable to save profile:' + error;
                     });
             
-        }
+        };
 
         $scope.update = function (profile) {
             profileFactory.updateProfile(profile)
-                    .success(function (msg) {                        
-                        $scope.statusMessage = msg.object + ' ' + msg.event;
-                    })
-                    .error(function (error) {
-                        $scope.statusMessage = 'Unable to save profile:' + error;
-                    });
-        }
+                .success(function (msg) {
+                    $scope.statusMessage = msg.object + ' ' + msg.event;
+                })
+                .error(function (error) {
+                    $scope.statusMessage = 'Unable to save profile:' + error;
+                });
+        };
 
         $scope.delete = function (profile) {
             alert("delete profile!");
-        }
+        };
 
         return $scope;
     }]);
@@ -112,6 +140,13 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
     function getLocalCloudProfiles() {
         cloudProfileFactory.getLocalCloudProfiles()
             .success(function (profiles) {
+                profiles.forEach (function (profile) {
+
+                    var xmlDoc = $.parseXML(profile.content_utf8);
+                    var $xml = $(xmlDoc);
+                    var $profileD = $xml.find("profileDescription");
+                    profile.profileDescription = $profileD.text();
+                });
                 $scope.localCloudProfiles = profiles;
             })
             .error(function (error) {
@@ -134,9 +169,15 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
     }
 
     $scope.update = function (profile) {
-        cloudProfileFactory.updateProfile(profile.name);
-        $route.reload();
-    }
+        cloudProfileFactory.updateProfile(profile);
+        confirm();
+    };
+
+    $scope.updateStatus = function (profile, status) {
+
+        profile.status = status;
+        cloudProfileFactory.updateStatus(profile);
+    };
 
     $scope.notInstalled = function (localCloudProfiles) {
 
@@ -150,7 +191,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
             });
             return x;
         }
-    }
+    };
 
     $scope.isUpdated = function () {
 
@@ -165,7 +206,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
             });
             return x;
         }
-    }
+    };
 
     $scope.needsUpdate = function () {
 
@@ -180,10 +221,10 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
             });
             return x;
         }
-    }
+    };
 
     var oids = [];
-    oids.push({})
+    oids.push({});
 
     $scope.items = [{name:'Veterans Administration',oid:'1.3.6.1.4.1.3768', selected: false},
                     {name:'Marine Biology Laboratory',oid:'MBL', selected: false},
@@ -215,7 +256,19 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
         });
     };
 
-    }]);
+    function confirm() {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'confirm.html',
+            controller: 'ConfirmController'
+        });
+
+        modalInstance.result.then(
+            function () {
+                $route.reload();
+        });
+    }
+}]);
 
     /**
      * Checklist-model

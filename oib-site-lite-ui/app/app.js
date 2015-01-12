@@ -12,6 +12,7 @@ var oibConfigurationApp = angular.module('oibConfigurationApp', [
   'oibVersionModule',
   'ui.bootstrap',
   'oibModalModule',
+  'oibConfirmModule',
   'uuidGenerator'
 ]);
 

@@ -1,24 +1,28 @@
 <div class="container" ng-controller="ProfileCtrl">
 
-<h3>Custom OpenInfobutton Service Profiles</h3>
+<h3>Custom Resources</h3>
 <hr/>
 
     <div class="well" ng-repeat="profile in localProfiles">
         <div class="row">
             <div class="col-md-3">
 <!--Suggest adding logos/images for each profile - see next line -->                 
-                <img src="{{profile.image_url}}" alt="{{profile.name}} logo" style="max-height: 80px; max-width: 200px;">
-                <!--<img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{profile.name}} logo" style="max-height: 40px; max-width: 100px;">-->
+                <!--<img src="{{profile.image_url}}" alt="{{profile.name}} logo" style="max-height: 80px; max-width: 200px;">-->
+                <img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{profile.name}} logo" style="max-height: 40px; max-width: 100px;"> <br>{{profile.name}}
             </div>
             <div class="col-md-3" style="margin-left: 2em;">
-                <p>{{profile.name}}: v{{profile.version}}</p>
+                <p>{{profile.profileDescription}}</p>
             </div>
-            <div class="col-md-1" style="margin-left: 2em;">
-                <p>Status: {{profile.status_dsc}}</p>
+            <div class="col-md-3" style="margin-left: 2em;">
+                <p><br>{{profile.version}}</p>
             </div>
-            <div class="col-md-2 text-right">
-                <a href="#/editProfile/{{profile.id}}" class="btn btn-primary btn-sm">Configure</a>
-                <a href="#" class="btn btn-default btn-sm">More Info</a>
+            <div class="text-left">
+                <a href="#/editProfile/{{profile.id}}" class="btn btn-primary">Configure</a>
+            </div>
+            <div class="btn-group text-right">
+                <label class="btn btn-success" ng-click="updateStatus(profile, 1)" ng-model="profile.status" btn-radio="1">Enabled</label>
+                <label class="btn btn-default" ng-click="updateStatus(profile, 3)" ng-model="profile.status" btn-radio="3">Disabled</label>
+                <label class="btn btn-info" ng-click="updateStatus(profile, 2)" ng-model="profile.status" btn-radio="2">Test</label>
             </div>
         </div>
     </div>
