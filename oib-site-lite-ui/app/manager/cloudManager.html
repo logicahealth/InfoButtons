@@ -1,5 +1,11 @@
 <div class="container" ng-controller="CloudProfileCtrl">
-
+<style>
+    .btn.active:enabled{
+        outline: thin dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+    }
+</style>
 <script type="text/ng-template" id="confirm.html">
     <div class="modal-body">
         Profile Updated
@@ -33,7 +39,8 @@
             <div class="col-md-3">
                 <!--Suggest adding logos/images for each profile - see next line -->
                 <!--<img src="{{localCloudProfile.image_url}}" alt="{{localCloudProfile.title}} logo" style="max-height: 80px; max-width: 200px;">-->
-                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}"><img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{localCloudProfile.name}} logo" style="max-height: 40px; max-width: 100px;"></a> <br>{{localCloudProfile.name}}
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}"><img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{localCloudProfile.name}} logo" style="max-height: 40px; max-width: 100px;"></a> <br>
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}" class="btn btn-link">{{localCloudProfile.name}}</a>
             </div>
             <div class="col-md-3" style="margin-left: 2em;">
                 <p>{{localCloudProfile.profileDescription}}</p>
@@ -41,8 +48,8 @@
             <div class="col-md-3" style="margin-left: 2em;">
                 <p><br> {{localCloudProfile.published | date:'medium'}}</p>
             </div>
-            <div class="col-md-2 text-right">
-                <button ng-click="update(localCloudProfile)" class="btn btn-primary btn-sm">Update</button>
+            <div class="">
+                <button ng-click="update(localCloudProfile)" class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>
@@ -51,7 +58,9 @@
             <div class="col-md-3">
                 <!--Suggest adding logos/images for each profile - see next line -->
                 <!--<img src="{{localCloudProfile.image_url}}" alt="{{localCloudProfile.title}} logo" style="max-height: 80px; max-width: 200px;">-->
-                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}"><img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{localCloudProfile.name}} logo" style="max-height: 40px; max-width: 100px;"></a> <br>{{localCloudProfile.name}}
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}"><img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{localCloudProfile.name}} logo" style="max-height: 40px; max-width: 100px;"></a> <br>
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}" class="btn btn-link">{{localCloudProfile.name}}</a>
+
             </div>
             <div class="col-md-3" style="margin-left: 2em;">
                 <p>{{localCloudProfile.profileDescription}}</p>
@@ -59,13 +68,10 @@
             <div class="col-md-3" style="margin-left: 2em;">
                 <p><br>{{localCloudProfile.published | date:'medium'}}</p>
             </div>
-            <div class="col-md-2 text-right">
-                <span>Current</span>
-            </div>
-            <div class="btn-group">
-                <label class="btn btn-success" ng-click="updateStatus(localCloudProfile, 1)" ng-model="localCloudProfile.status" btn-radio="1">Enabled</label>
-                <label class="btn btn-default" ng-click="updateStatus(localCloudProfile, 3)" ng-model="localCloudProfile.status" btn-radio="3">Disabled</label>
-                <label class="btn btn-info" ng-click="updateStatus(localCloudProfile, 2)" ng-model="localCloudProfile.status" btn-radio="2">Test</label>
+            <div class="btn-group" role="group" aria-label="status">
+                <button type="button" class="btn btn-success" ng-click="updateStatus(localCloudProfile, 1)" ng-model="localCloudProfile.status" btn-radio="1">Enabled</button>
+                <button type="button" class="btn btn-default" ng-click="updateStatus(localCloudProfile, 3)" ng-model="localCloudProfile.status" btn-radio="3">Disabled</button>
+                <button type="button" class="btn btn-info" ng-click="updateStatus(localCloudProfile, 2)" ng-model="localCloudProfile.status" btn-radio="2">Test</button>
             </div>
         </div>
     </div>
@@ -74,7 +80,8 @@
             <div class="col-md-3">
                 <!--Suggest adding logos/images for each profile - see next line -->
                 <!--<img src="{{cloudProfileLink.image_url}}" alt="{{cloudProfileLink.title}} logo" style="max-height: 80px; max-width: 200px;">-->
-                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{cloudProfileLink.title}}"><img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{cloudProfileLink.name}} logo" style="max-height: 40px; max-width: 100px;"></a> <br>{{cloudProfileLink.title}}
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{cloudProfileLink.title}}"><img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{cloudProfileLink.name}} logo" style="max-height: 40px; max-width: 100px;"></a> <br>
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{cloudProfileLink.title}}" class="btn btn-link">{{cloudProfileLink.title}}</a>
             </div>
             <div class="col-md-3" style="margin-left: 2em;">
                 <p>{{cloudProfileLink.profileDescription}}</p>
@@ -82,8 +89,8 @@
             <div class="col-md-3" style="margin-left: 2em;">
                 <p><br>{{cloudProfileLink.version | date:'medium'}}</p>
             </div>
-            <div class="col-md-2 text-right">
-                <button ng-click="openModal(cloudProfileLink)" class="btn btn-primary btn-sm">Download</button>
+            <div class="">
+                <button ng-click="openModal(cloudProfileLink)" class="btn btn-primary">Download</button>
             </div>
         </div>
     </div>

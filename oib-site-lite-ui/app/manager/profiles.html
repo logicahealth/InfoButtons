@@ -1,5 +1,11 @@
 <div class="container" ng-controller="ProfileCtrl">
-
+<style>
+    .btn.active:enabled{
+        outline: thin dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+    }
+</style>
 <h3>Custom Resources</h3>
 <hr/>
 
@@ -8,7 +14,9 @@
             <div class="col-md-3">
 <!--Suggest adding logos/images for each profile - see next line -->                 
                 <!--<img src="{{profile.image_url}}" alt="{{profile.name}} logo" style="max-height: 80px; max-width: 200px;">-->
-                <img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{profile.name}} logo" style="max-height: 40px; max-width: 100px;"> <br>{{profile.name}}
+                <span><a href="#/editProfile/{{profile.id}}"><img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{profile.name}} logo" style="max-height: 40px; max-width: 100px;"> </a></span>
+                <br>
+                <span><a href="#/editProfile/{{profile.id}}" class="btn btn-link">{{profile.name}}</a></span>
             </div>
             <div class="col-md-3" style="margin-left: 2em;">
                 <p>{{profile.profileDescription}}</p>
@@ -16,13 +24,10 @@
             <div class="col-md-3" style="margin-left: 2em;">
                 <p><br>{{profile.version}}</p>
             </div>
-            <div class="text-left">
-                <a href="#/editProfile/{{profile.id}}" class="btn btn-primary">Configure</a>
-            </div>
-            <div class="btn-group text-right">
-                <label class="btn btn-success" ng-click="updateStatus(profile, 1)" ng-model="profile.status" btn-radio="1">Enabled</label>
-                <label class="btn btn-default" ng-click="updateStatus(profile, 3)" ng-model="profile.status" btn-radio="3">Disabled</label>
-                <label class="btn btn-info" ng-click="updateStatus(profile, 2)" ng-model="profile.status" btn-radio="2">Test</label>
+            <div class="btn-group" role="group" aria-label="status">
+                <button type="button" class="btn btn-success" ng-click="updateStatus(profile, 1)" ng-model="profile.status" btn-radio="1">Enabled</button>
+                <button type="button" class="btn btn-default" ng-click="updateStatus(profile, 3)" ng-model="profile.status" btn-radio="3">Disabled</button>
+                <button type="button" class="btn btn-info" ng-click="updateStatus(profile, 2)" ng-model="profile.status" btn-radio="2">Test</button>
             </div>
         </div>
     </div>
