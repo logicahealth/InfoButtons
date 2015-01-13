@@ -2,7 +2,7 @@
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="4">
 		<title>Mosby's Skills</title>
-		<profileDescription>Offers nurses and nurse educators access to evidence-based skills and procedures. Content has been adapted from authoritative nursing resources with insight from leading nursing societies, and is continuously updated to reflect the latest in evidence-based practice. Over 1,000 skills are featured within specialties such as Critical Care Nursing, Emergency Nursing, Pediatric Acute and Critical Care, Maternal, Newborn, Mental Health, Neonatal, Perioperative, Oncology, and more.</profileDescription>
+		<profileDescription>Evidence-based skills and procedures for nurses and nurse educators.</profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
