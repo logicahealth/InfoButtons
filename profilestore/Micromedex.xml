@@ -13,13 +13,7 @@
 	</header>
 
 	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="true">
-
-		<authorizedOrganizations>
-
-			<authorizedOrganization name="Veterans Administration" id="1.3.6.1.4.1.3768"/>
-
-		</authorizedOrganizations>
-
+		<authorizedOrganizations/>
 		<contexts>
 
 			<context name="Medication knowledge from order entry (OE) and medication list (MLREV). Provider only content" id="1">
