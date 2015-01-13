@@ -9,6 +9,7 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
     var assetFactory = {};
 
     assetFactory.getAssets = function () {
+        $http.defaults.headers.common.Authorization = undefined;
         return $http.get(urlBase + 'assets');
     };
 
