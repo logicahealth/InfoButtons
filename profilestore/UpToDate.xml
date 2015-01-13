@@ -2,7 +2,7 @@
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1">
 		<title> UpToDate</title>
-		<profileDescription>_</profileDescription>
+		<profileDescription>Evidence-based, physician-authored clinical decision support resource.</profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
