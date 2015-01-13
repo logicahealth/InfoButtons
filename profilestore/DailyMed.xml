@@ -2,7 +2,7 @@
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1100">
 		<title>DailyMed</title>
-		<profileDescription>FDA drug labels</profileDescription>
+		<profileDescription>Trustworthy information about marketed drugs. DailyMed is the official provider of FDA label information (package inserts).</profileDescription>
 		<versionControl publicationDate="2015-01-07T14:39:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false" urlStyle="DIRTY">
