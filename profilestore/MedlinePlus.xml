@@ -2,7 +2,7 @@
 <knowledgeResourceProfile>
 	<header id="3">
 		<title>MedlinePlus</title>
-		<profileDescription>Free patient education content provided by the US National Library of Medicine. Extensive information from the National Institutes of Health and other trusted sources on over 900 diseases and conditions. Also includes a medical encyclopedia and a medical dictionary, tutorials on common conditions, tests, and treatments, health information in Spanish,  information on prescription and nonprescription drugs, health information from the media, and links to clinical trials.</profileDescription>
+		<profileDescription>Free patient education content provided by the US National Library of Medicine. </profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="true">
