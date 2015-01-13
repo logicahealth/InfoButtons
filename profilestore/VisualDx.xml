@@ -2,7 +2,7 @@
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1">
 		<title>VisualDx</title>
-		<profileDescription>Dermatology diagnosis.</profileDescription>
+		<profileDescription>Diagnostic decision support tool coupled with a library of over 100,000 peer-reviewed skin, pathology, and radiology images.</profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
