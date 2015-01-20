@@ -143,8 +143,24 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
             $http.get(baseCloudUrl + 'profilestore/' + profile.name + '?ref=development').success(function (profileData) {
 
                 var xmlContentString = atob(profileData.content);
+                var xmlProfile;
+                if (window.DOMParser)
+                {
+                    var parser=new DOMParser();
+                    xmlProfile=parser.parseFromString(profile.content_utf8,"text/xml");
+                }
+                else // code for IE
+                {
+                    xmlProfile=new ActiveXObject("Microsoft.XMLDOM");
+                    xmlProfile.async=false;
+                    xmlProfile.loadXML(profile.content_utf8);
+                }
+                var x = xmlProfile.getElementsByTagName("authorizedOrganizations")[0];
+                var xelement = new XMLSerializer().serializeToString(x);
                 var xmlDoc = $.parseXML(xmlContentString);
                 var $xml = $(xmlDoc);
+                $xml.find("authorizedOrganizations").replaceWith('Derp');
+                var xmlString = (new XMLSerializer()).serializeToString(xmlDoc);
                 var $contexts = $xml.find("context");
                 var attr0 = $contexts[0].attributes[0].value;
                 var profileJsonString = {'sha' : profileData.sha, 'name' : profile.name, 'content_utf8' : xmlContentString};
@@ -189,8 +205,8 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
             idattr = xmlDoc.createAttribute("id");
             nameattr.nodeValue = oids.items[i].name;
             idattr.nodeValue = oids.items[i].oid;
-            authorizedOrg.setAttributeNode(nameattr)
-            authorizedOrg.setAttributeNode(idattr)
+            authorizedOrg.setAttributeNode(nameattr);
+            authorizedOrg.setAttributeNode(idattr);
             authorizedOrgs.appendChild(authorizedOrg)
         }
 
