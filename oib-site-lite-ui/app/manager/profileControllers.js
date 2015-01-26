@@ -200,7 +200,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
             cloudProfileLinks.forEach(function (cloudProfileLink) {
 
                 if (localCloudProfile.name === cloudProfileLink.title) {
-                    if (localCloudProfile.version != cloudProfileLink.sha)
+                    if (localCloudProfile.version != cloudProfileLink.sha || localCloudProfile.image_url != cloudProfileLink.imgUrl)
                     x = false;
                 }
             });
