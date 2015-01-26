@@ -169,7 +169,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
     }
 
     $scope.update = function (profile) {
-        cloudProfileFactory.updateProfile(profile);
+        cloudProfileFactory.updateProfile(profile, $scope.cloudProfileLinks);
         confirm();
     };
 
@@ -215,7 +215,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
             cloudProfileLinks.forEach(function (cloudProfileLink) {
 
                 if (localCloudProfile.name === cloudProfileLink.title) {
-                    if (localCloudProfile.version != cloudProfileLink.sha)
+                    if (localCloudProfile.version != cloudProfileLink.sha || localCloudProfile.image_url != cloudProfileLink.imgUrl)
                         x = true;
                 }
             });

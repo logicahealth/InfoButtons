@@ -39,7 +39,10 @@
             <div class="col-md-3">
                 <!--Suggest adding logos/images for each profile - see next line -->
                 <!--<img src="{{localCloudProfile.image_url}}" alt="{{localCloudProfile.title}} logo" style="max-height: 80px; max-width: 200px;">-->
-                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}"><img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{localCloudProfile.name}} logo" style="max-height: 40px; max-width: 100px;"></a> <br>
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}">
+                    <img src="{{localCloudProfile.image_url}}" alt="{{localCloudProfile.name}} logo" style="max-height: 40px; max-width: 100px;">
+                    <img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" style="max-height: 40px; max-width: 100px;" ng-hide="localCloudProfile.image_url">
+                </a> <br>
                 <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}" class="btn btn-link">{{localCloudProfile.name}}</a>
             </div>
             <div class="col-md-3" style="margin-left: 2em;">
@@ -58,7 +61,10 @@
             <div class="col-md-3">
                 <!--Suggest adding logos/images for each profile - see next line -->
                 <!--<img src="{{localCloudProfile.image_url}}" alt="{{localCloudProfile.title}} logo" style="max-height: 80px; max-width: 200px;">-->
-                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}"><img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{localCloudProfile.name}} logo" style="max-height: 40px; max-width: 100px;"></a> <br>
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}">
+                    <img src="{{localCloudProfile.image_url}}" style="max-height: 40px; max-width: 100px;">
+                    <img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" style="max-height: 40px; max-width: 100px;" ng-hide="localCloudProfile.image_url">
+                </a> <br>
                 <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}" class="btn btn-link">{{localCloudProfile.name}}</a>
 
             </div>
@@ -80,7 +86,10 @@
             <div class="col-md-3">
                 <!--Suggest adding logos/images for each profile - see next line -->
                 <!--<img src="{{cloudProfileLink.image_url}}" alt="{{cloudProfileLink.title}} logo" style="max-height: 80px; max-width: 200px;">-->
-                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{cloudProfileLink.title}}"><img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" alt="{{cloudProfileLink.name}} logo" style="max-height: 40px; max-width: 100px;"></a> <br>
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{cloudProfileLink.title}}">
+                    <img src="{{cloudProfileLink.imgUrl}}" style="max-height: 40px; max-width: 100px;">
+                    <img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" style="max-height: 40px; max-width: 100px;" ng-hide="cloudProfileLink.imgUrl">
+                </a> <br>
                 <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{cloudProfileLink.title}}" class="btn btn-link">{{cloudProfileLink.title}}</a>
             </div>
             <div class="col-md-3" style="margin-left: 2em;">

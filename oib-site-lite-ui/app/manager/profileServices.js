@@ -3,6 +3,7 @@
 var oibManagerServiceModule = angular.module('oibManagerServiceModule', ['ngResource']);
 
 var baseCloudUrl = 'https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/contents/';
+var baseCommitUrl = 'https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/commits?sha=development&path=profilestore/';
 var profileDirectoryUrl = baseCloudUrl + 'profilestore?ref=development';
 var profileContentUrl = baseCloudUrl + 'git/blobs/';
 
@@ -81,7 +82,7 @@ uuidGenerator.factory("idGenerator", function () {
     }
 });
 
-oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'idGenerator', function ($http, $resource, idGenerator) {
+oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'idGenerator', '$filter', function ($http, $resource, idGenerator, $filter) {
 
     var serviceUrlBase = 'http://localhost:3000/';
 
@@ -125,12 +126,38 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
                         var $versionControl = $xml.find("versionControl");
                         var version = $versionControl[0].attributes[0].value;
                         var attr0 = $contexts[0].attributes[0].value;
-                        if ($title.text().length > 1) {
-                            jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': version,
-                                            'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url, 'profileDescription': profileDescription};
-                            profileLinkList.push(jsonString);
-                        }
-
+                        var imageUrl = $filter('limitTo')(profileLink.path, profileLink.path.length - 4);
+                        $http.get(baseCommitUrl + data.name)
+                            .success (function(commit) {
+                                $http.get(baseCloudUrl + imageUrl + '.gif'  + '?ref=development')
+                                    .success(function(image) {
+                                        imageUrl = image.download_url;
+                                        if ($title.text().length > 1) {
+                                            jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': commit[0].commit.committer.date,
+                                                'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url, 'profileDescription': profileDescription, 'imgUrl': imageUrl};
+                                            profileLinkList.push(jsonString);
+                                        }
+                                    })
+                                    .error(function() {
+                                        $http.get(baseCloudUrl + imageUrl + '.png'  + '?ref=development')
+                                            .success(function(image) {
+                                                imageUrl = image.download_url;
+                                                if ($title.text().length > 1) {
+                                                    jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': commit[0].commit.committer.date,
+                                                        'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url, 'profileDescription': profileDescription, 'imgUrl': imageUrl};
+                                                    profileLinkList.push(jsonString);
+                                                }
+                                            })
+                                            .error(function() {
+                                                imageUrl = null;
+                                                if ($title.text().length > 1) {
+                                                    jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': commit[0].commit.committer.date,
+                                                        'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url, 'profileDescription': profileDescription, 'imgUrl': imageUrl};
+                                                    profileLinkList.push(jsonString);
+                                                }
+                                            })
+                                    });
+                            });
                     });
                 }
             });
@@ -138,7 +165,7 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
         return profileLinkList;
     };
 
-    cloudProfileFactory.updateProfile = function(profile) {
+    cloudProfileFactory.updateProfile = function(profile, cloudProfileLinks) {
 
             $http.get(baseCloudUrl + 'profilestore/' + profile.name + '?ref=development').success(function (profileData) {
 
@@ -159,16 +186,25 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
                 var xelement = new XMLSerializer().serializeToString(x);
                 var xmlDoc = $.parseXML(xmlContentString);
                 var $xml = $(xmlDoc);
-                $xml.find("authorizedOrganizations").replaceWith('Derp');
+                $xml.find("authorizedOrganizations").replaceWith(xelement);
                 var xmlString = (new XMLSerializer()).serializeToString(xmlDoc);
                 var $contexts = $xml.find("context");
                 var attr0 = $contexts[0].attributes[0].value;
-                var profileJsonString = {'sha' : profileData.sha, 'name' : profile.name, 'content_utf8' : xmlContentString};
+                var imgUrl = profile.image_url;
+                cloudProfileLinks.forEach (function(profileLink) {
+                    if (profileLink.title == profile.name)
+                    {
+                        imgUrl = profileLink.imgUrl;
+                        profile.published = profileLink.version;
+                    }
+                });
+                var profileJsonString = {'sha' : profileData.sha, 'name' : profile.name, 'content_utf8' : xmlContentString, 'image_url': imgUrl, 'published': profile.published};
                 $http.put(serviceUrlBase + 'profile/updateCloud', profileJsonString, {
                     headers: {
                         'Authorization' : undefined
                     }
                 });
+
             });
     };
 
