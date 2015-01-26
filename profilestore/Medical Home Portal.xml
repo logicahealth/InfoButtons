@@ -3,7 +3,7 @@
 	<header id="1">
 		<title>MedicalHome Portal</title>
 		<profileDescription>Information for children with special healthcare needs. Developed and maintained by the University of Utah.</profileDescription>
-		<versionControl publicationDate="2015-01-07T00:00:00"/>
+		<versionControl publicationDate="2015-01-06T00:00:00"/>
 	</header>
 	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="false" urlStyle="DIRTY">
 		<authorizedOrganizations/>
