@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-	
+
 function getProfiles(req,res) {
 	
 	profileConnectionPool.getConnection( function(err,connection) {
@@ -84,7 +84,7 @@ function createProfile(req,res) {
 
 	profileConnectionPool.getConnection( function(err,connection) {
 
-		var newRecord = {name:req.body.name, version:'1', status:'2', content:req.body.content_utf8};
+		var newRecord = {name:req.body.name, version:'1', status:'2', content:req.body.content_utf8, published:req.body.version};
 		
 		if (req.body.image_url) {
 			newRecord.image_url = req.body.image_url;
@@ -110,10 +110,11 @@ function createCloudProfile(req,res) {
 
 	profileConnectionPool.getConnection(function (err, connection) {
 
-		var newRecord = {name: req.body.title, version: req.body.sha, status: '2', content: req.body.content_utf8};
+		var newRecord = {name: req.body.title, version: req.body.sha, status: '2', content: req.body.content_utf8,
+			published: req.body.version};
 
-		if (req.body.image_url) {
-			newRecord.image_url = req.body.image_url;
+		if (req.body.imgUrl) {
+			newRecord.image_url = req.body.imgUrl;
 		}
 
 		connection.query('insert into profilesdbprod.resource_profiles_cloud set ?',
@@ -151,8 +152,8 @@ function updateCloudProfile(req,res) {
 
 		var name = { 'profilesdbprod.resource_profiles_cloud.name': req.body.name };
 
-		connection.query('update low_priority profilesdbprod.resource_profiles_cloud set version = ?, content=? where name = ?',
-			[req.body.sha, req.body.content_utf8, req.body.name], function(err,result) {
+		connection.query('update low_priority profilesdbprod.resource_profiles_cloud set version = ?, content=?, image_url=?, published=? where name = ?',
+			[req.body.sha, req.body.content_utf8, req.body.image_url, req.body.published, req.body.name], function(err,result) {
 				if (err) {
 					throw err;
 				}
