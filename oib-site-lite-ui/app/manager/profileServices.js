@@ -198,7 +198,7 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
                         profile.published = profileLink.version;
                     }
                 });
-                var profileJsonString = {'sha' : profileData.sha, 'name' : profile.name, 'content_utf8' : xmlContentString, 'image_url': imgUrl, 'published': profile.published};
+                var profileJsonString = {'sha' : profileData.sha, 'name' : profile.name, 'content_utf8' : xmlString, 'image_url': imgUrl, 'published': profile.published};
                 $http.put(serviceUrlBase + 'profile/updateCloud', profileJsonString, {
                     headers: {
                         'Authorization' : undefined
