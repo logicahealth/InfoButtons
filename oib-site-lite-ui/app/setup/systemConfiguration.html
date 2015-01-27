@@ -1,0 +1,38 @@
+<style>
+    .container .btn {
+        margin-top: 25px;
+    }
+
+    .entry {
+        display:inline;
+    }
+
+    .entry.name {
+        position:fixed;
+        left:26%;
+    }
+</style>
+
+<div class="container" ng-controller="setupController">
+    <form class="form-inline">
+        <div class="form-group">
+            <div class="input-group">
+                <label for="orgId">OID / DSN</label>
+                <input type="text" class="form-control" id="orgId" ng-model="orgOid">
+            </div>
+            <div class="input-group">
+                <label for="orgName">Organization's Name</label>
+                <input type="text" class="form-control" id="orgName" ng-model="orgName">
+                <span class="input-group-btn">
+                    <button class='btn btn-default' type="button" ng-click="addOids(orgOid, orgName)">Add</button>
+                </span>
+            </div>
+            <section>
+            <alert ng-repeat="alert in alerts" type="info" close="closeAlert($index)">
+                    <div class="entry">{{alert.orgOid}}</div><div class="entry name">{{alert.orgName}}</div>
+            </alert>
+            </section>
+        </div>
+    </form>
+    </div>
+</div>

@@ -226,16 +226,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
     var oids = [];
     oids.push({});
 
-    $scope.items = [{name:'Veterans Administration',oid:'1.3.6.1.4.1.3768', selected: false},
-                    {name:'Marine Biology Laboratory',oid:'MBL', selected: false},
-                    {name:'National Institutes of Health',oid:'2.16.840.1.113762', selected: false},
-                    {name:'Duke University Health System',oid:'1.3.6.1.4.1.4275', selected: false},
-                    {name:'National Library of Medicine',oid:'1.3.6.1.4.1.6014', selected: false},
-                    {name:'University of Washington',oid:'1.3.6.1.4.1.150', selected: false},
-                    {name:'University of Utah',oid:'1.3.6.1.4.1.5884', selected: false},
-                    {name:'Northwestern University',oid:'2.16.840.1.113883.3.1951', selected: false},
-                    {name:'Axeium',oid:'http://axeium.net', selected: false},
-                    {name:'Lehigh Valley Health Network',oid:'http://lvhn.org', selected: false}];
+    $scope.items = JSON.parse(localStorage.getItem("oids"));
 
     $scope.openModal = function(profile) {
 

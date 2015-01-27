@@ -4,6 +4,7 @@ var oibConfigurationApp = angular.module('oibConfigurationApp', [
   'ngRoute',
   'ngResource',
   'ab-base64',
+  'setupControllers',
   'oibManagerModule',
   'oibManagerServiceModule',
   'oibAssetServiceModule',

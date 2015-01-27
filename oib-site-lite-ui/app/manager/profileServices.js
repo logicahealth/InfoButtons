@@ -239,8 +239,8 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
             authorizedOrg = xmlDoc.createElement('authorizedOrganization');
             nameattr = xmlDoc.createAttribute("name");
             idattr = xmlDoc.createAttribute("id");
-            nameattr.nodeValue = oids.items[i].name;
-            idattr.nodeValue = oids.items[i].oid;
+            nameattr.nodeValue = oids.items[i].orgName;
+            idattr.nodeValue = oids.items[i].orgOid;
             authorizedOrg.setAttributeNode(nameattr);
             authorizedOrg.setAttributeNode(idattr);
             authorizedOrgs.appendChild(authorizedOrg)
