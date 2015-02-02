@@ -9,7 +9,7 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
 
     $scope.hostName = localStorage.getItem("hostName");
 
-    $scope.profileStorePath = localStorage.getItem("profileStorePath");
+    $scope.profilestore = localStorage.getItem("profileStorePath");
 
     $scope.addOids = function(orgOid, orgName) {
 
@@ -46,9 +46,9 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
         localStorage.setItem("gitRepo", gitRepo);
     };
 
-    $scope.setProfileStorePath = function(profileStorePath) {
+    $scope.setProfileStorePath = function(profilestore) {
 
-        localStorage.setItem("profileStorePath", profileStorePath);
+        localStorage.setItem("profileStorePath", profilestore);
     };
 
     $scope.changeGitUser = function() {
