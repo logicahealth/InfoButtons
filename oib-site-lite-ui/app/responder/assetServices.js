@@ -4,7 +4,7 @@ var oibAssetServiceModule = angular.module('oibAssetServiceModule', []);
 
 oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
-    var urlBase = 'http://localhost:3000/';
+    var urlBase = 'http://' + localStorage.getItem('hostName') + ':3000/';
 //    var urlBase = 'http://service.oib.utah.edu:8080/infobutton-service-dev/manager/';
     var assetFactory = {};
 

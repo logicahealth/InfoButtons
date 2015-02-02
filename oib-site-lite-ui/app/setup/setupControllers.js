@@ -1,7 +1,15 @@
-var setupControllers = angular.module('setupControllers', ['ui.bootstrap']);
+var setupControllers = angular.module('setupControllers', ['ui.bootstrap', 'ui.router']);
 
-setupControllers.controller('setupController', function ($scope) {
-    $scope.alerts = JSON.parse(localStorage.getItem("oids"));
+setupControllers.controller('setupController', function ($scope, $state, loginModal) {
+    $scope.oids = JSON.parse(localStorage.getItem("oids"));
+
+    $scope.gitUser = JSON.parse(localStorage.getItem("gitUser"));
+
+    $scope.gitRepo = localStorage.getItem("gitRepo");
+
+    $scope.hostName = localStorage.getItem("hostName");
+
+    $scope.profileStorePath = localStorage.getItem("profileStorePath");
 
     $scope.addOids = function(orgOid, orgName) {
 
@@ -17,22 +25,49 @@ setupControllers.controller('setupController', function ($scope) {
         var oid = {orgOid:orgOid, orgName:orgName, selected: false};
         oids.push(oid);
         localStorage.setItem("oids", JSON.stringify(oids));
-        $scope.alerts = oids;
+        $scope.oids = oids;
     };
 
-    $scope.closeAlert = function(index) {
+    $scope.deleteOid = function(index) {
 
         var oids = JSON.parse(localStorage.getItem("oids"));
         oids.splice(index, 1);
         localStorage.setItem("oids", JSON.stringify(oids));
-        $scope.alerts = oids;
+        $scope.oids = oids;
     };
+
+    $scope.setHostName = function(hostName) {
+
+        localStorage.setItem("hostName", hostName);
+    };
+
+    $scope.setGitRepo = function(gitRepo) {
+
+        localStorage.setItem("gitRepo", gitRepo);
+    };
+
+    $scope.setProfileStorePath = function(profileStorePath) {
+
+        localStorage.setItem("profileStorePath", profileStorePath);
+    };
+
+    $scope.changeGitUser = function() {
+
+        loginModal()
+            .then(function () {
+                return $state.reload();
+            })
+            .catch(function () {
+                return $state.go('systemConfiguration');
+            });
+    }
 });
 
-setupControllers.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider
-        .when('/systemConfiguration', {
-            templateUrl: 'setup/systemConfiguration.html',
-            controller: 'setupController'
-        });
-}]);
+setupControllers.controller('LoginModalCtrl', function ($scope) {
+
+    $scope.submit = function (userName, password) {
+        var gitUser = (userName != undefined) ? {user: userName, password: password} : undefined;
+        this.$close(gitUser);
+    };
+
+});

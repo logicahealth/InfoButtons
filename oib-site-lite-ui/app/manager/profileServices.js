@@ -2,9 +2,9 @@
 
 var oibManagerServiceModule = angular.module('oibManagerServiceModule', ['ngResource']);
 
-var baseCloudUrl = 'https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/contents/';
-var baseCommitUrl = 'https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/commits?sha=development&path=profilestore/';
-var profileDirectoryUrl = baseCloudUrl + 'profilestore?ref=development';
+var baseCloudUrl = 'https://api.github.com/repos/' + localStorage.getItem('gitRepo') + '/contents/';
+var baseCommitUrl = 'https://api.github.com/repos/' + localStorage.getItem('gitRepo') + '/commits?sha=development&path=' + localStorage.getItem('profileStorePath') + '/';
+var profileDirectoryUrl = baseCloudUrl + '' + localStorage.getItem('profileStorePath') + '?ref=development';
 var profileContentUrl = baseCloudUrl + 'git/blobs/';
 
 var testCloudProfiles = [{cha: "cha1.1", title: "cloud title 1.1", description: "cloud profile 1.1"}
@@ -17,7 +17,7 @@ var testSiteProfiles = [{logo: "http://www.uptodate.com/images/UTD3_masthead.png
 
 oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
 
-    var urlBase = 'http://localhost:3000/';
+    var urlBase = 'http://' + localStorage.getItem('hostName') + ':3000/';
 //    var urlBase = 'http://service.oib.utah.edu:8080/infobutton-service-dev/manager/';
     var profileFactory = {};
 
@@ -84,7 +84,7 @@ uuidGenerator.factory("idGenerator", function () {
 
 oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'idGenerator', '$filter', function ($http, $resource, idGenerator, $filter) {
 
-    var serviceUrlBase = 'http://localhost:3000/';
+    var serviceUrlBase = 'http://' + localStorage.getItem('hostName') + ':3000/';
 
     var cloudProfileFactory = {};
 
@@ -104,7 +104,8 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
     cloudProfileFactory.getCloudProfiles = function(base64) {
         var profileLinkList = [];
         var jsonString = {};
-        $http.defaults.headers.common.Authorization = 'Basic ' + base64.encode('aniskand:WND-r3700');
+        var gitUser = JSON.parse(localStorage.getItem('gitUser'));
+        $http.defaults.headers.common.Authorization = 'Basic ' + base64.encode(gitUser.user + ':' + gitUser.password);
 
         $http.get(profileDirectoryUrl).success(function (data) {
 

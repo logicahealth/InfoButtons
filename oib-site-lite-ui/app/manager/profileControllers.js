@@ -1,26 +1,6 @@
     'use strict';
 
-var oibManagerModule = angular.module('oibManagerModule', ['ngRoute', 'ngResource', 'ab-base64', 'ui.bootstrap']);
-
-oibManagerModule.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider
-                .when('/editProfile', {
-                    templateUrl: 'manager/profileForm.html',
-                    controller: 'ProfileFormCtrl'
-                })
-                .when('/editProfile/:id', {
-                    templateUrl: 'manager/profileForm.html',
-                    controller: 'ProfileFormCtrl'
-                })
-                .when('/manager', {
-                    templateUrl: 'manager/profiles.html',
-                    controller: 'ProfileCtrl'
-                })
-                .when('/cloudManager', {
-                    templateUrl: 'manager/cloudManager.html',
-                    controller: 'CloudProfileCtrl'
-                });
-    }]);
+var oibManagerModule = angular.module('oibManagerModule', ['ui.router','ngResource', 'ab-base64', 'ui.bootstrap']);
 
 oibManagerModule.controller('ProfileCtrl', ['$scope', 'profileFactory', function ($scope, profileFactory) {
 
@@ -71,18 +51,18 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', 'profileFactory', function
         return $scope;
     }]);
 
-oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$routeParams', 'profileFactory', function ($scope, $routeParams, profileFactory) {
+oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', function ($scope, $stateParams, profileFactory) {
 
         loadProfile();
 
         function loadProfile () {
-            if ($routeParams.id) {
-                profileFactory.getProfile($routeParams.id)
+            if ($stateParams.id) {
+                profileFactory.getProfile($stateParams.id)
                     .success(function (profile) {                        
                         $scope.profile = profile;
                     })
                     .error(function (error) {
-                        $scope.status = 'Unable to load local profile ' + $routeParams.id + ': ' + error;
+                        $scope.status = 'Unable to load local profile ' + $stateParams.id + ': ' + error;
                     });
             }
         }
@@ -125,7 +105,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$routeParams', 'profi
         return $scope;
     }]);
 
-oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$route', 'base64', 'cloudProfileFactory', function ($scope, $modal, $http, $route, base64, cloudProfileFactory) {
+oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$state', 'base64', 'cloudProfileFactory', function ($scope, $modal, $http, $state, base64, cloudProfileFactory) {
 
         //$scope.cloudLinks = [{cha: "cha1.1", title: "Cloud Profile Title 1.1", description: "How about this cloud profile 1.1"}
         //    , {cha: "cha2", title: "Cloud Profile Title 2", description: "This is the extra awesome profile 2"}
@@ -160,11 +140,11 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
         cloudProfileFactory.downloadProfile(profile, oids)
             .success(function (msg) {
                 $scope.statusMessage = msg.object + ' ' + msg.event;
-                $route.reload();
+                $state.reload();
             })
             .error(function (error) {
                 $scope.statusMessage = 'Unable to download profile:' + error;
-                $route.reload();
+                $state.reload();
             });
     }
 
@@ -256,7 +236,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$r
 
         modalInstance.result.then(
             function () {
-                $route.reload();
+                $state.reload();
         });
     }
 }]);

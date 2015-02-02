@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h3 class="modal-title">Enter your GitHub Username and Password</h3>
+</div>
+<div class="modal-body">
+    <form ng-submit="submit(gitUser, gitPassword)" class="form">
+        <div class="form-group">
+            <div class="input-group">
+                <label for="gitUser">GitHub Username</label>
+                <input type="text" class="form-control" id="gitUser" ng-model="gitUser">
+            </div>
+            <div class="input-group">
+                <label for="gitPassword">GitHub Password</label>
+                <input type="text" class="form-control" id="gitPassword" ng-model="gitPassword">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
+</div>

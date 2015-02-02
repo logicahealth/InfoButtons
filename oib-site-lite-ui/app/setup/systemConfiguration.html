@@ -8,31 +8,73 @@
     }
 
     .entry.name {
-        position:fixed;
-        left:26%;
+        position:absolute;
+        left:43%;
+    }
+
+    .alert {
+        margin-bottom: 0px;
     }
 </style>
-
 <div class="container" ng-controller="setupController">
-    <form class="form-inline">
-        <div class="form-group">
-            <div class="input-group">
-                <label for="orgId">OID / DSN</label>
-                <input type="text" class="form-control" id="orgId" ng-model="orgOid">
-            </div>
-            <div class="input-group">
-                <label for="orgName">Organization's Name</label>
-                <input type="text" class="form-control" id="orgName" ng-model="orgName">
-                <span class="input-group-btn">
-                    <button class='btn btn-default' type="button" ng-click="addOids(orgOid, orgName)">Add</button>
-                </span>
-            </div>
-            <section>
-            <alert ng-repeat="alert in alerts" type="info" close="closeAlert($index)">
-                    <div class="entry">{{alert.orgOid}}</div><div class="entry name">{{alert.orgName}}</div>
-            </alert>
-            </section>
+    <h3>System Configuration</h3>
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form">
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="hostName">Server Host Name</label>
+                        <input type="text" class="form-control" id="hostName" ng-model="hostName">
+                        <span class="input-group-btn">
+                            <button class='btn btn-default' type="button" ng-click="setHostName(hostName)">Set</button>
+                        </span>
+                    </div>
+                    <div class="input-group">
+                        <label for="gitRepo">Git Repository Path</label>
+                        <input type="text" class="form-control" id="gitRepo" ng-model="gitRepo" placeholder="VHAINNOVATIONS/InfoButtons">
+                        <span class="input-group-btn">
+                            <button class='btn btn-default' type="button" ng-click="setGitRepo(gitRepo)">Set</button>
+                        </span>
+                    </div>
+                    <div class="input-group">
+                        <label for="profilestore">Profile Store Path</label>
+                        <input type="text" class="form-control" id="profilestore" ng-model="profilestore" placeholder="profilestore">
+                        <span class="input-group-btn">
+                            <button class='btn btn-default' type="button" ng-click="setProfileStorePath(profilestore)">Set</button>
+                        </span>
+                    </div>
+                    <div class="input-group">
+                        <label for="gitUser">Git Username</label>
+                        <input type="text" class="form-control" id="gitUser" ng-disabled="true" value="{{gitUser.user}}">
+                        <span class="input-group-btn">
+                            <button class='btn btn-default' type="button" ng-click="changeGitUser()">Change</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+        <div class="col-md-8">
+            <form class="form-inline">
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="orgId">OID / DSN</label>
+                        <input type="text" class="form-control" id="orgId" ng-model="orgOid">
+                    </div>
+                    <div class="input-group">
+                        <label for="orgName">Organization's Name</label>
+                        <input type="text" class="form-control" id="orgName" ng-model="orgName">
+                        <span class="input-group-btn">
+                            <button class='btn btn-default' type="button" ng-click="addOids(orgOid, orgName)">Add</button>
+                        </span>
+                    </div>
+                    <alert ng-repeat="oid in oids" type="info" close="deleteOid($index)">
+                        <div style="margin: 0 auto; position:relative;">
+                            <div class="entry">{{oid.orgOid}}</div><div class="entry name">{{oid.orgName}}</div>
+                        </div>
+                    </alert>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

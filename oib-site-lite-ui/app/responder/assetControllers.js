@@ -1,20 +1,8 @@
 'use strict';
 
-var oibAssetControllerModule = angular.module('oibAssetControllerModule', ['ngRoute']);
+var oibAssetControllerModule = angular.module('oibAssetControllerModule', ['ui.router']);
 
-oibAssetControllerModule.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider
-                .when('/responder/assets', {
-                    templateUrl: 'responder/assets.html',
-                    controller: 'AssetsCtrl'
-                })
-                .when('/responder/editAsset/:assetId', {
-                    templateUrl: 'responder/assetForm.html',
-                    controller: 'AssetsCtrl'
-                });
-    }])
-
-oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$routeParams', 'assetFactory', function ($scope, $routeParams, assetFactory) {
+oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$stateParams', 'assetFactory', function ($scope, $stateParams, assetFactory) {
 
         $scope.currentPage = 1;
         $scope.pageSize = 10;
@@ -36,13 +24,13 @@ oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$routeParams', 'as
 
     }]);
 
-oibAssetControllerModule.controller('AssetFormCtrl', ['$scope', '$routeParams', 'assetFactory', function ($scope, $routeParams, assetFactory) {
+oibAssetControllerModule.controller('AssetFormCtrl', ['$scope', '$stateParams', 'assetFactory', function ($scope, $stateParams, assetFactory) {
 
         $scope.asset = {};
         $scope.assetProperties = [];
         $scope.statusMessage = 'Messages/alerts go here ... and disappear ideally';
 
-        loadAsset($routeParams.assetId);
+        loadAsset($stateParams.assetId);
 
         function loadAsset(id) {
 
