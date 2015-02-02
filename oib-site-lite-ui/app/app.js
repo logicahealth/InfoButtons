@@ -73,6 +73,7 @@ oibConfigurationApp.run(function ($rootScope, $state, loginModal, $location) {
         localStorage.setItem("hostName", $location.host());
         localStorage.setItem("gitRepo", 'VHAINNOVATIONS/InfoButtons');
         localStorage.setItem("profileStorePath", 'profilestore');
+        localStorage.setItem("gitUser", 'undefined');
         localStorage.setItem('init','yes');
     }
 
