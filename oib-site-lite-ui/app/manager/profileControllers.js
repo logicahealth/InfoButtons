@@ -107,9 +107,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
 oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$state', 'base64', 'cloudProfileFactory', function ($scope, $modal, $http, $state, base64, cloudProfileFactory) {
 
-        //$scope.cloudLinks = [{cha: "cha1.1", title: "Cloud Profile Title 1.1", description: "How about this cloud profile 1.1"}
-        //    , {cha: "cha2", title: "Cloud Profile Title 2", description: "This is the extra awesome profile 2"}
-        //    , {cha: "cha3.1", title: "Cloud Profile Title 3.1", description: "This is cloud profile 3.1"}];
+    $scope.repoUrl = 'https://github.com/' + 'VHAINNOVATIONS/InfoButtons' + '/blob/development/' + 'profilestore' + '/';
 
     var cloudProfileLinks = [];
 

@@ -2,18 +2,10 @@
 
 var oibManagerServiceModule = angular.module('oibManagerServiceModule', ['ngResource']);
 
-var baseCloudUrl = 'https://api.github.com/repos/' + localStorage.getItem('gitRepo') + '/contents/';
-var baseCommitUrl = 'https://api.github.com/repos/' + localStorage.getItem('gitRepo') + '/commits?sha=development&path=' + localStorage.getItem('profileStorePath') + '/';
-var profileDirectoryUrl = baseCloudUrl + '' + localStorage.getItem('profileStorePath') + '?ref=development';
-var profileContentUrl = baseCloudUrl + 'git/blobs/';
-
-var testCloudProfiles = [{cha: "cha1.1", title: "cloud title 1.1", description: "cloud profile 1.1"}
-    , {cha: "cha2", title: "site title 2", description: "site profile 2"}
-    , {cha: "cha3.1", title: "cloud title 3.1", description: "cloud profile 3.1"}];
-
-var testSiteProfiles = [{logo: "http://www.uptodate.com/images/UTD3_masthead.png", cha: "c1", title: "UpToDate", description: "Evidence-based clinical decision support resources."}
-    , {logo: "http://static.pubmed.gov/portal/portal3rc.fcgi/3908092/img/546849", cha: "c2", title: "PubMed Health", description: "Information for consumers and clinicians on prevention and treatment of diseases and conditions."}
-    , {logo: "http://www.merckmanuals.com/assets/images/logo-small.png", cha: "c3", title: "Merck Manual", description: "Concise and complete medical references for doctors, medical students, and healthcare professionals."}];
+var baseRepoUrl = 'https://api.github.com/repos/' + localStorage.getItem('gitRepo');
+var baseCloudUrl = baseRepoUrl + '/contents/';
+var baseCommitUrl = baseRepoUrl + '/commits?sha=development&path=' + localStorage.getItem('profileStorePath') + '/';
+var profileDirectoryUrl = baseCloudUrl + localStorage.getItem('profileStorePath') + '?ref=development';
 
 oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
 
