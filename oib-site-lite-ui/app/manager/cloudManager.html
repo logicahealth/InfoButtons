@@ -43,7 +43,7 @@
                     <img src="{{localCloudProfile.image_url}}" logo" style="max-height: 40px; max-width: 100px;">
                     <img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" style="max-height: 40px; max-width: 100px;" ng-hide="localCloudProfile.image_url">
                 </a> <br>
-                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}" class="btn btn-link">{{localCloudProfile.name}}</a>
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}" class="btn btn-link">{{localCloudProfile.name | limitTo: localCloudProfile.name.length - 4}}</a>
             </div>
             <div class="col-md-3" style="margin-left: 2em;">
                 <p>{{localCloudProfile.profileDescription}}</p>
@@ -65,7 +65,7 @@
                     <img src="{{localCloudProfile.image_url}}" style="max-height: 40px; max-width: 100px;">
                     <img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" style="max-height: 40px; max-width: 100px;" ng-hide="localCloudProfile.image_url">
                 </a> <br>
-                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}" class="btn btn-link">{{localCloudProfile.name}}</a>
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}" class="btn btn-link">{{localCloudProfile.name | limitTo: localCloudProfile.name.length - 4}}</a>
 
             </div>
             <div class="col-md-3" style="margin-left: 2em;">
@@ -90,7 +90,7 @@
                     <img src="{{cloudProfileLink.imgUrl}}" style="max-height: 40px; max-width: 100px;">
                     <img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" style="max-height: 40px; max-width: 100px;" ng-hide="cloudProfileLink.imgUrl">
                 </a> <br>
-                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{cloudProfileLink.title}}" class="btn btn-link">{{cloudProfileLink.title}}</a>
+                <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{cloudProfileLink.title}}" class="btn btn-link">{{cloudProfileLink.title | limitTo: cloudProfileLink.title.length - 4}}</a>
             </div>
             <div class="col-md-3" style="margin-left: 2em;">
                 <p>{{cloudProfileLink.profileDescription}}</p>
