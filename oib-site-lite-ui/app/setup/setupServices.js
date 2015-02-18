@@ -1,4 +1,4 @@
-var oibSetupServices = angular.module('oibSetupServices', ['ui.bootstrap']);
+var oibSetupServices = angular.module('oibSetupServices', ['ui.bootstrap', 'ngResource', 'ab-base64']);
 
 oibSetupServices.service('loginModal', function ($modal) {
 
@@ -16,5 +16,29 @@ oibSetupServices.service('loginModal', function ($modal) {
 
         return instance.result.then(assignGitUser);
     };
+
+});
+
+oibSetupServices.service('loginService', function ($http, base64) {
+
+    var loginService = {};
+
+    loginService.checkValidUser = function (gitUser, loginModal, $loginScope) {
+        $http.get(
+            'https://api.github.com/repos/' + localStorage.getItem('gitRepo'),
+            {
+                headers: {
+                    'Authorization' : 'Basic ' + base64.encode(gitUser.user + ':' + gitUser.password)
+                }
+            }).
+            success(function () {
+                loginModal.$close(gitUser);
+            }).
+            error(function () {
+                $loginScope.invalidUser = true;
+            })
+        };
+
+    return loginService;
 
 });

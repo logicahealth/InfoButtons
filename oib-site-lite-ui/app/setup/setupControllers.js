@@ -11,6 +11,8 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
 
     $scope.profilestore = localStorage.getItem("profileStorePath");
 
+    $scope.oidRegex = /^\d+(\.\d+)*$/;
+
     $scope.addOids = function(orgOid, orgName) {
 
         var oids = localStorage.getItem("oids");
@@ -22,8 +24,10 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
         {
             oids = [];
         }
-        var oid = {orgOid:orgOid, orgName:orgName, selected: false};
-        oids.push(oid);
+        if ($scope.oidForm.$valid && !$scope.oidForm.oidFormId.$$validityState.patternMismatch) {
+            var oid = {orgOid: orgOid, orgName: orgName, selected: false};
+            oids.push(oid);
+        }
         localStorage.setItem("oids", JSON.stringify(oids));
         $scope.oids = oids;
     };
@@ -37,18 +41,22 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
     };
 
     $scope.setHostName = function(hostName) {
-
-        localStorage.setItem("hostName", hostName);
+        if ($scope.gitForm.hostPath.$valid) {
+            localStorage.setItem("hostName", hostName);
+        }
     };
 
     $scope.setGitRepo = function(gitRepo) {
 
-        localStorage.setItem("gitRepo", gitRepo);
+        if ($scope.gitForm.gitRepoPath.$valid) {
+            localStorage.setItem("gitRepo", gitRepo);
+        }
     };
 
     $scope.setProfileStorePath = function(profilestore) {
-
-        localStorage.setItem("profileStorePath", profilestore);
+        if ($scope.gitForm.profilestorePath.$valid) {
+            localStorage.setItem("profileStorePath", profilestore);
+        }
     };
 
     $scope.changeGitUser = function() {
@@ -63,11 +71,11 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
     }
 });
 
-setupControllers.controller('LoginModalCtrl', function ($scope) {
+setupControllers.controller('LoginModalCtrl', function ($scope, loginService) {
 
     $scope.submit = function (userName, password) {
         var gitUser = (userName != undefined) ? {user: userName, password: password} : undefined;
-        this.$close(gitUser);
-    };
+        loginService.checkValidUser(gitUser, this, $scope)
+    }
 
 });

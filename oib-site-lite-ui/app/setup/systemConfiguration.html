@@ -21,27 +21,27 @@
         <div class="col-md-6">
             <h3>System Configuration</h3>
             <hr/>
-            <form class="form">
+            <form class="form" name="gitForm">
                 <div class="form-group">
                     <div class="input-group">
                         <label for="hostName">Server Host Name</label>
-                        <input type="text" class="form-control" id="hostName" ng-model="hostName">
+                        <input type="text" class="form-control" id="hostName" name="hostPath" ng-model="hostName" required>
                         <span class="input-group-btn">
-                            <button class='btn btn-default' type="button" ng-click="setHostName(hostName)">Set</button>
+                            <button class='btn btn-default' type="submit" ng-click="setHostName(hostName)">Set</button>
                         </span>
                     </div>
                     <div class="input-group">
                         <label for="gitRepo">Git Repository Path</label>
-                        <input type="text" class="form-control" id="gitRepo" ng-model="gitRepo" placeholder="VHAINNOVATIONS/InfoButtons">
+                        <input type="text" class="form-control" id="gitRepo" name="gitRepoPath" ng-model="gitRepo" placeholder="VHAINNOVATIONS/InfoButtons" required>
                         <span class="input-group-btn">
-                            <button class='btn btn-default' type="button" ng-click="setGitRepo(gitRepo)">Set</button>
+                            <button class='btn btn-default' type="submit" ng-click="setGitRepo(gitRepo)">Set</button>
                         </span>
                     </div>
                     <div class="input-group">
                         <label for="profilestore">Profile Store Path</label>
-                        <input type="text" class="form-control" id="profilestore" ng-model="profilestore" placeholder="profilestore">
+                        <input type="text" class="form-control" id="profilestore" name="profilestorePath" ng-model="profilestore" placeholder="profilestore" required>
                         <span class="input-group-btn">
-                            <button class='btn btn-default' type="button" ng-click="setProfileStorePath(profilestore)">Set</button>
+                            <button class='btn btn-default' type="submit" ng-click="setProfileStorePath(profilestore)">Set</button>
                         </span>
                     </div>
                     <div class="input-group">
@@ -57,17 +57,17 @@
         <div class="col-md-8">
             <h3>Profile Configuration</h3>
             <hr/>
-            <form class="form-inline">
+            <form class="form-inline" name="oidForm">
                 <div class="form-group">
                     <div class="input-group">
                         <label for="orgId">OID / DSN</label>
-                        <input type="text" class="form-control" id="orgId" ng-model="orgOid">
+                        <input type="text" pattern="\d+(\.\d+)*" class="form-control" id="orgId" name="oidFormId" ng-model="orgOid" required>
                     </div>
                     <div class="input-group">
                         <label for="orgName">Organization's Name</label>
-                        <input type="text" class="form-control" id="orgName" ng-model="orgName">
+                        <input type="text" class="form-control" id="orgName" ng-model="orgName" required>
                         <span class="input-group-btn">
-                            <button class='btn btn-default' type="button" ng-click="addOids(orgOid, orgName)">Add</button>
+                            <button class='btn btn-default' type="submit" ng-click="addOids(orgOid, orgName)">Add</button>
                         </span>
                     </div>
                     <alert ng-repeat="oid in oids" type="info" close="deleteOid($index)">
