@@ -1,0 +1,55 @@
+-------------------------------------------------------------------------
+(c) 2011-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
+Contact: <andrew.iskander@utah.edu>
+Biomedical Informatics
+421 Wakara Way, Ste 140
+Salt Lake City, UT 84108-3514
+(801) 581-4080
+-------------------------------------------------------------------------
+
+This is a migration guide for administrators of OpenInfobutton 1.6 who would like to migrate to version 1.7 while
+maintaining their existing profile database.
+
+1 - Notes
+2 - Database Migration
+3 - Building and redeploy
+
+Notes
+-----
+
+1) 1.7 uses new default database names, however for simplicities sake, the migration scripts assumes the same database
+   names found in 1.6, while making all the other changes to the underlying tables. This means that before building you
+   must change the default database names found in the oib-service pom.xml configuration parameters.
+
+2) For running LITE, you must also set configuration parameters found in oib-site-lite-rest-server/env.json to match
+   your database names, depending on if you're using a fresh install or keeping your old profile database.
+
+Database Migration
+------------------
+
+1) The scripts assume they are being run as the root mysql user against the localhost database.
+
+2) Find the migration script found in DeploymentPackage/dbScripts/migration1617.sql , modify if necessary due to
+   differences in your environment that are assumed by the script.
+
+Building and redeploy
+---------------------
+
+1) After successfully running the migration script, you can attempt to build the latest version of the service and deploy.
+
+2) Make sure you've pulled the latest code from the source repository, and modify the following section in
+   oib-request/pom.xml to match your database names and authentication credentials.
+
+		<datasource1.url>jdbc:mysql://localhost:3306/valuesets_and_logs</datasource1.url>
+		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
+		<datasource1.user></datasource1.user>
+		<datasource1.password></datasource1.password>
+
+		<datasource2.url>jdbc:mysql://localhost:3306/resource_profile</datasource2.url>
+		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
+		<datasource2.user></datasource2.user>
+		<datasource2.password></datasource2.password>
+
+3) Build using mvn clean install and redeploy the war found in oib-request/oib-request-service/target to your java
+   servlet container.
+
