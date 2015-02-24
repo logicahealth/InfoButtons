@@ -7,6 +7,17 @@ Salt Lake City, UT 84108-3514
 (801) 581-4080
 -------------------------------------------------------------------------
 
+Changes for version 1.7
+-----------------------
+
+-changes to database naming and structure, if you would like to keep your existing profiles database, please refer to the MIGRATIONGUIDE
+found in this folder for coming from the previous version. 
+
+-Optimizations to UMLS
+
+-various bug fixes 
+
+
 Changes for version 1.6
 -----------------------
 
@@ -64,12 +75,12 @@ Building
    <properties>
        <dts-version>3.5.0</dts-version>
               
-		<datasource1.url>jdbc:mysql://localhost:3306/prodoib</datasource1.url>
+		<datasource1.url>jdbc:mysql://localhost:3306/valuesets_and_logs</datasource1.url>
 		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
 		<datasource1.user></datasource1.user>
 		<datasource1.password></datasource1.password>
 		
-		<datasource2.url>jdbc:mysql://localhost:3306/profilesdbprod</datasource2.url>
+		<datasource2.url>jdbc:mysql://localhost:3306/resource_profile</datasource2.url>
 		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
 		<datasource2.user></datasource2.user>
 		<datasource2.password></datasource2.password>
