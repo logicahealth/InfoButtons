@@ -27,7 +27,6 @@ Change Log
 
 
 1.6 RELEASE NOTES
-
 ==================
 
 -Refactored modules into a logical build hierarchy that can be compiled from a single POM
@@ -40,5 +39,3 @@ Change Log
 -Unit tests for transform execution
 -Unit tests for response parsing
 -Includes a CMake build file to quickly build and test the code
-
-Last Modified July 17, 2014 by Andrew Iskander
