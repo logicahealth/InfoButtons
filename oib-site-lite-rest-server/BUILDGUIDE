@@ -10,9 +10,9 @@ Salt Lake City, UT 84108-3514
 This simple javascript app uses node.js, Express, and a pure javascript mysql client to perform CRUD operations
 for LITE. This will eventually be replaced by java web services but is required to use LITE for now.
 
-1) Install Prerequisites
-2) Configure environment
-3) Run
+1 - Install Prerequisites
+2 - Configure environment
+3 - Run the service
 
 Install Prerequisites
 ---------------------
@@ -39,8 +39,8 @@ Configure environment
 2) Set parameters to match your development or production environment. If you followed the OIB BUILDGUIDE without
    changing any default parameters, then these should stay the same as well.
 
-Run
------------------------
+Run the service
+---------------
 
 1) Navigate to the project's root directory and execute the following command : node server.js , and you should
    see the following output if successful,

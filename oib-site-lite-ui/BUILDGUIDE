@@ -1,0 +1,82 @@
+-------------------------------------------------------------------------
+(c) 2011-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
+Contact: <andrew.iskander@utah.edu>
+Biomedical Informatics
+421 Wakara Way, Ste 140
+Salt Lake City, UT 84108-3514
+(801) 581-4080
+-------------------------------------------------------------------------
+
+Site LITE is the Librarian Infobutton Tailoring Environment for OpenInfobutton implementation sites. It is a pure
+Javascript project based on the AngularJS technology and implements a custom UI to administer an instance of OpenInfobutton.
+
+1 - Install Prerequisites
+2 - Configure environment
+3 - Run the application
+
+Install Prerequisites
+---------------------
+
+1) Build and install the OpenInfobutton web service, ensuring the resource_profile database is created
+2) Build and install the OpenInfobutton responder, or at least ensure it's database is created using the
+   'install-db.sh' script found in oib-responder/oib-rdbms-model
+3) Make sure the oib-site-lite-rest-server is installed and running or LITE will display no content.
+4) Install Javascript Dependencies
+
+    - We have two kinds of dependencies in this project: tools and angular framework code.  The tools help
+      us manage and test the application.
+
+    - We get the tools we depend upon via `npm`, the [node package manager][npm].
+
+    - We get the angular code via `bower`, a [client-side code package manager][bower].
+
+    We have preconfigured `npm` to automatically run `bower` so we can simply run: npm install
+
+    Behind the scenes this will also call `bower install' and load the angular dependencies into your app/bower_components
+    folder.
+
+    *Note that the `bower_components` folder would normally be installed in the root folder but
+    angular-seed changes this location through the `.bowerrc` file.  Putting it in the app folder makes
+    it easier to serve the files by a webserver.*
+
+Configure environment
+---------------------
+
+1) There are 2 files where you might need to make changes:
+
+    - package.json, change 'localhost' and '8000' to match the host name for your environment and the port you'd like
+      to use:
+
+     `````````````````````````````````````````````````
+     "start": "http-server -a localhost -p 8000 -c-1",
+
+     `````````````````````````````````````````````````
+     Note that the host name and port must match the "lite_server_url" parameter configured in env.json for the
+     oib-site-lite-rest-server
+
+     - app/app.js, this is where I've configured the default URLs and paths used by LITE's REST client:
+
+    `````````````````````````````````````````````````
+     localStorage.setItem("hostName", $location.host());
+     localStorage.setItem("gitRepo", 'VHAINNOVATIONS/InfoButtons');
+     localStorage.setItem("profileStorePath", 'profilestore');
+
+    `````````````````````````````````````````````````
+    These parameters are all configurable within the app itself, so it's not necessary to change them here, but you
+    can if you know what you're doing.
+
+
+Run the application
+-------------------
+
+1)We have preconfigured the project with a simple development web server.  The simplest way to start
+this server is:
+
+```
+npm start
+```
+
+Now browse to the app at `http://localhost:8000/app/index.html`
+
+For production, you can minify the entire 'app' directory and deploy the resultant file to a web server of your choice.
+
