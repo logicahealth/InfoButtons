@@ -1,22 +1,34 @@
 // server.js - basic rest services - crud methods against mysql
+
+//retrieve environment config
+var env = require('./env.json');
+
+//set environment config
+var mysql_server_hostname = env.mysql_server_hostname;
+var mysql_user = env.mysql_user;
+var mysql_pass = env.mysql_pass;
+var lite_server_url = env.lite_server_url;
+var resource_profile_db = env.resource_profile_db;
+var responder_db = env.responder_db;
+
 var express = require('express'),
     app     = express(),
     mysql   = require('mysql'),
 	bodyParser = require('body-parser'),
 
     profileConnectionPool = mysql.createPool({
-        host     : 'localhost',
-        user     : 'root',
-        password : '',
-        database : 'profilesdbprod',
+        host     : mysql_server_hostname,
+        user     : mysql_user,
+        password : mysql_pass,
+        database : resource_profile_db,
 		supportBigNumbers: true
     }),
 	
     responderConnectionPool = mysql.createPool({
-        host     : 'localhost',
-        user     : 'root',
-        password : '',
-        database : 'OIB'
+        host     : mysql_server_hostname,
+        user     : mysql_user,
+        password : mysql_pass,
+        database : responder_db
     });
 
 // configure app to use bodyParser()
@@ -28,7 +40,7 @@ app.use(bodyParser.json());
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000');
+    res.setHeader('Access-Control-Allow-Origin', lite_server_url);
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -47,7 +59,7 @@ app.use(function (req, res, next) {
 function getProfiles(req,res) {
 	
 	profileConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from profilesdbprod.resource_profiles_utf8', function(err,rows,fields) {
+		connection.query('select * from ' + resource_profile_db + '.resource_profiles_utf8', function(err,rows,fields) {
 			res.send(rows);
 		});
 		connection.release();
@@ -58,7 +70,7 @@ function getProfiles(req,res) {
 function getLocalCloudProfiles(req,res) {
 
 	profileConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from profilesdbprod.resource_profiles_utf8_cloud', function(err,rows,fields) {
+		connection.query('select * from ' + resource_profile_db + '.resource_profiles_utf8_cloud', function(err,rows,fields) {
 			res.send(rows);
 		});
 		connection.release();
@@ -69,7 +81,7 @@ function getLocalCloudProfiles(req,res) {
 function getProfile(req,res) {
 
 	profileConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from profilesdbprod.resource_profiles_utf8 where id=' + req.params.id, function(err,rows,fields) {
+		connection.query('select * from ' + resource_profile_db + '.resource_profiles_utf8 where id=' + req.params.id, function(err,rows,fields) {
 			// res.send({fields:fields,rows:rows});
 			res.send(rows[0]);
 		});
@@ -90,7 +102,7 @@ function createProfile(req,res) {
 			newRecord.image_url = req.body.image_url;
 		}
 
-		connection.query('insert into profilesdbprod.resource_profiles set ?',
+		connection.query('insert into ' + resource_profile_db + '.resource_profiles set ?',
 			newRecord, function(err,result) {
 				if (err) {
 					throw err;
@@ -117,7 +129,7 @@ function createCloudProfile(req,res) {
 			newRecord.image_url = req.body.imgUrl;
 		}
 
-		connection.query('insert into profilesdbprod.resource_profiles_cloud set ?',
+		connection.query('insert into ' + resource_profile_db + '.resource_profiles_cloud set ?',
 			newRecord, function (err, result) {
 				if (err) {
 					throw err;
@@ -150,9 +162,11 @@ function updateCloudProfile(req,res) {
 			console.log("\tcontent:...");
 		};
 
-		var name = { 'profilesdbprod.resource_profiles_cloud.name': req.body.name };
+        var oibView = resource_profile_db + '.resource_profiles_cloud.name';
 
-		connection.query('update low_priority profilesdbprod.resource_profiles_cloud set version = ?, content=?, image_url=?, published=? where name = ?',
+		var name = { oibView : req.body.name };
+
+		connection.query('update low_priority ' + resource_profile_db + '.resource_profiles_cloud set version = ?, content=?, image_url=?, published=? where name = ?',
 			[req.body.sha, req.body.content_utf8, req.body.image_url, req.body.published, req.body.name], function(err,result) {
 				if (err) {
 					throw err;
@@ -182,7 +196,7 @@ function updateCloudStatus(req,res) {
 			console.log("\tstatus:" + req.body.status);
 		};
 
-		connection.query('update low_priority profilesdbprod.resource_profiles_cloud set status = ? where id = ?',
+		connection.query('update low_priority ' + resource_profile_db + '.resource_profiles_cloud set status = ? where id = ?',
 			[req.body.status, req.body.id], function(err,result) {
 				if (err) {
 					throw err;
@@ -229,7 +243,7 @@ function updateProfile(req,res) {
 			console.log("\tcontent:...");
 		};
 
-		connection.query('update profilesdbprod.resource_profiles rp set name = ?, version = ?, status = ?, image_url = ?, content = ? where id = ?',
+		connection.query('update ' + resource_profile_db + '.resource_profiles rp set name = ?, version = ?, status = ?, image_url = ?, content = ? where id = ?',
 			[req.body.name, req.body.version, req.body.status, req.body.image_url, req.body.content_utf8, req.body.id], function(err,result) {
 				if (err) {
 					throw err;
@@ -247,7 +261,7 @@ function updateProfile(req,res) {
 function getAssets(req,res) {
 	
 	responderConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from OIB.OIB_ASSET', function(err,rows,fields) {
+		connection.query('select * from ' + responder_db + '.OIB_ASSET', function(err,rows,fields) {
 			res.send(rows);
 		});
 		connection.release();
@@ -258,7 +272,7 @@ function getAssets(req,res) {
 function getAsset(req,res) {
 
 	responderConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from OIB.OIB_ASSET where ASSET_ID=' + req.params.id, function(err,rows,fields) {
+		connection.query('select * from ' + responder_db + '.OIB_ASSET where ASSET_ID=' + req.params.id, function(err,rows,fields) {
 			res.send(rows[0]);
 		});
 		connection.release();
@@ -280,7 +294,7 @@ function createAsset(req,res) {
 			ASSET_MIME_TYPE:req.body.ASSET_MIME_TYPE
 		};
 
-		connection.query('insert into OIB.OIB_ASSET set ?',
+		connection.query('insert into ' + responder_db + '.OIB_ASSET set ?',
 			newRecord, function(err,result) {
 				if (err) {
 					throw err;
@@ -315,7 +329,7 @@ function updateAsset(req,res) {
 			updateRecord.ASSET_MIME_TYPE=req.body.ASSET_MIME_TYPE;
 		}
 
-		connection.query('update OIB.OIB_ASSET set ? where ASSET_ID=' + req.body.id,
+		connection.query('update ' + responder_db + '.OIB_ASSET set ? where ASSET_ID=' + req.body.id,
 			updateRecord, function(err,result) {
 				if (err) {
 					throw err;
@@ -332,7 +346,7 @@ function updateAsset(req,res) {
 function getAssetProperties(req,res) {
 
 	responderConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from OIB.OIB_ASSET_PROPERTY where ASSET_ID=' + req.params.assetId, function(err,rows,fields) {
+		connection.query('select * from ' + responder_db + '.OIB_ASSET_PROPERTY where ASSET_ID=' + req.params.assetId, function(err,rows,fields) {
 			res.send(rows);
 		});
 		connection.release();
@@ -343,7 +357,7 @@ function getAssetProperties(req,res) {
 function getAssetProperty(req,res) {
 
 	responderConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from OIB.OIB_ASSET_PROPERTY where ASSET_PROPERTY_ID=' + req.params.assetPropertyId, function(err,rows,fields) {
+		connection.query('select * from ' + responder_db + '.OIB_ASSET_PROPERTY where ASSET_PROPERTY_ID=' + req.params.assetPropertyId, function(err,rows,fields) {
 			res.send(rows);
 		});
 		connection.release();
@@ -366,7 +380,7 @@ function createAssetProperty(req,res) {
 	}
 
 	responderConnectionPool.getConnection( function(err,connection) {
-		connection.query('insert into OIB.OIB_ASSET_PROPERTY set ? ', newAssetProperty,
+		connection.query('insert into ' + responder_db + '.OIB_ASSET_PROPERTY set ? ', newAssetProperty,
 		 function(err,result) {
 			if (err) {
 				throw err;
@@ -408,7 +422,7 @@ function updateAssetProperty(req,res) {
 	}
 
 	responderConnectionPool.getConnection( function(err,connection) {
-		connection.query('update OIB.OIB_ASSET_PROPERTY set ? where ASSET_PROPERTY_ID=' + req.body.assetPropertyId, updateRecord,
+		connection.query('update ' + responder_db + '.OIB_ASSET_PROPERTY set ? where ASSET_PROPERTY_ID=' + req.body.assetPropertyId, updateRecord,
 			function(err,result) {
 				if (err) {
 					throw err;
@@ -426,7 +440,7 @@ function updateAssetProperty(req,res) {
 function getValueSets(req,res) {
 
 	responderConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from OIB.OIB_VALUE_SET', function(err,rows,fields) {
+		connection.query('select * from ' + responder_db + '.OIB_VALUE_SET', function(err,rows,fields) {
 			res.send(rows);
 		});
 		connection.release();
@@ -437,7 +451,7 @@ function getValueSets(req,res) {
 function getValueSet(req,res) {
 
 	responderConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from OIB.OIB_VALUE_SET_CODE where VALUE_SET_ID=' + req.params.valueSetId + ' ORDER BY LIST_ORDER ASC', function(err,rows,fields) {
+		connection.query('select * from ' + responder_db + '.OIB_VALUE_SET_CODE where VALUE_SET_ID=' + req.params.valueSetId + ' ORDER BY LIST_ORDER ASC', function(err,rows,fields) {
 			res.send(rows);
 		});
 		connection.release();
@@ -449,7 +463,7 @@ function getRequestParameters(req,res) {
 
 	responderConnectionPool.getConnection( function(err,connection) {
 		connection.query(
-			'select * from OIB.OIB_REQUEST_PARAMETER order by PARAMETER_NAME', function(err,rows,fields) {
+			'select * from ' + responder_db + '.OIB_REQUEST_PARAMETER order by PARAMETER_NAME', function(err,rows,fields) {
  		 		res.send(rows);
 		});
 		connection.release();
@@ -461,7 +475,7 @@ function getRequestParameterRoots(req,res) {
 
 	responderConnectionPool.getConnection( function(err,connection) {
 		connection.query(
-			'select distinct PARAMETER_ROOT from OIB.OIB_REQUEST_PARAMETER where PARAMETER_ROOT is not null order by PARAMETER_ROOT', function(err,rows,fields) {
+			'select distinct PARAMETER_ROOT from ' + responder_db + '.OIB_REQUEST_PARAMETER where PARAMETER_ROOT is not null order by PARAMETER_ROOT', function(err,rows,fields) {
 				res.send(rows);
 		});
 		connection.release();
@@ -473,7 +487,7 @@ function getRequestParameter(req,res) {
 
 	responderConnectionPool.getConnection( function(err,connection) {
 		connection.query(
-			'select * from OIB.OIB_REQUEST_PARAMETER where REQUEST_PARAMETER_ID=' + req.params.requestParameterId, function(err,rows,fields) {
+			'select * from ' + responder_db + '.OIB_REQUEST_PARAMETER where REQUEST_PARAMETER_ID=' + req.params.requestParameterId, function(err,rows,fields) {
 				res.send(rows);
 		});
 		connection.release();
@@ -485,7 +499,7 @@ function getRequestParametersByParameterRoot(req,res) {
 
 	responderConnectionPool.getConnection( function(err,connection) {
 		
-		var queryString = 'select * from OIB.OIB_REQUEST_PARAMETER where PARAMETER_ROOT=\'' + req.params.parameterRoot + '\' order by PARAMETER_ROOT asc, TYPE_CD asc';
+		var queryString = 'select * from ' + responder_db + '.OIB_REQUEST_PARAMETER where PARAMETER_ROOT=\'' + req.params.parameterRoot + '\' order by PARAMETER_ROOT asc, TYPE_CD asc';
 		  		
 		connection.query( queryString, function(err,rows,fields) {
 				res.send(rows);

@@ -1,0 +1,53 @@
+-------------------------------------------------------------------------
+(c) 2011-2014 OpenInfobutton Project, Biomedical Informatics, University of Utah
+Contact: <andrew.iskander@utah.edu>
+Biomedical Informatics
+421 Wakara Way, Ste 140
+Salt Lake City, UT 84108-3514
+(801) 581-4080
+-------------------------------------------------------------------------
+
+This simple javascript app uses node.js, Express, and a pure javascript mysql client to perform CRUD operations
+for LITE. This will eventually be replaced by java web services but is required to use LITE for now.
+
+1) Install Prerequisites
+2) Configure environment
+3) Run
+
+Install Prerequisites
+---------------------
+
+1) Build and install the OpenInfobutton web service, ensuring the resource_profile database is created
+2) Build and install the OpenInfobutton responder, or at least ensure it's database is created using the
+   'install-db.sh' script found in oib-responder/oib-rdbms-model
+3) Install node.js ( http://nodejs.org/download/ )
+
+Configure environment
+---------------------
+
+1) Find env.json, which includes the following default configuration,
+
+{
+  "mysql_server_hostname": "localhost",
+  "mysql_user": "root",
+  "mysql_pass": "",
+  "lite_server_url": "http://localhost:8000",
+  "resource_profile_db": "resource_profile",
+  "responder_db": "OIB"
+}
+
+2) Set parameters to match your development or production environment. If you followed the OIB BUILDGUIDE without
+   changing any default parameters, then these should stay the same as well.
+
+Run
+-----------------------
+
+1) Navigate to the project's root directory and execute the following command : node server.js , and you should
+   see the following output if successful,
+
+    ****************************************************
+
+    OpenInfobutton Rest Services Listening on port 3000
+
+    ****************************************************
+
