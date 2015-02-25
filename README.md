@@ -3,24 +3,24 @@ InfoButtons
 
 Repository for VHA Innovation 182 - Context Sensitive InfoButtons
 
-This project is a part of the Veterans Health Administration (VHA) Grassroots initiative. Infobuttons are context-sensitive links embedded in the electronic medical record. They use context such as patient demographics, user role, or clinical setting to help anticipate the needs of the clinician. This project will insert Infobuttons into CPRS at several different points and use an Infobutton Manager to customize the way resources are delivered to clinicians.
+This project is a part of the Veterans Health Administration (VHA) Grassroots initiative. Infobuttons are context-sensitive links embedded in the electronic health record (EHR). They use clinical context information from the EHR such as patient demographics, medications, diagnoses, lab results, user role, and clinical setting to help find answers to clinicians' and patients' clinical questions. This project will insert Infobuttons into eHMP and other VHA systems at several different points and use an Infobutton Manager to customize the way resources are delivered to clinicians. OpenInfobutton software has been certified through the Open Source EHR Alliance (OSEHRA) and is available through Apache 2.0 license.
 
 1.7 RELEASE NOTES
 =================
 
-The new version of OpenInfobutton introduces the first public release of the LITE web application, which allows configuration of the Infobutton Resource Profiles to be managed by a librarian, without help from the service administrator. This release also includes bug fixes for the Infobutton Service
+The new version of OpenInfobutton introduces the first public release of the LITE web application, which allows configuration of Infobutton Resource Profiles to be managed by domain experts with no IT background, such as medical librarian. This release also includes bug fixes for the Infobutton Manager service.
 
 Building
 ---------
 
-There have been a number of changes to both the naming and structure of the OIB databases. The build instructions and database scripts have been updated to reflect them. For new installations, refer to the BUILDGUIDE inside each respective module. For migration, refer to the MIGRATIONGUIDE<version> for the version you are coming from. For now, we only have migration guide for version 1.6. 
+There have been several changes to both the naming and structure of the OpenInfobutton databases. The build instructions and database scripts have been updated to reflect them. For new installations, please refer to the BUILDGUIDE inside each respective module. For migration from previous versions, please refer to the MIGRATIONGUIDE<version> for your current  version. For now, we only have a migration guide for version 1.6, but this migration guide can be also used for versions prior to 1.6. 
 
 Change Log
 ----------
 
 -Optimized UMLS services so they timeout and fail silently when a terminology request hangs for too long. Previous behavior would block the entire Infobutton Service request and potentially return server errors to the client.
 
--Added an additional web service for use by the LITE tool for configuring the service. This is still in the experimental stages and not fully functional. The current version of LITE does not use this, instead using a separate javascript web service with CRUD functions for the Infobutton database.
+-Added an additional web service for use by the LITE tool for configuring the service. This is still in the experimental stages and not fully functional. The current version of LITE does not use this web service, instead using a separate javascript web service with CRUD functions for the Infobutton database.
 
 -Initial release of LITE Tool. Refer to the BUILDGUIDE in oib-site-lite-ui and oib-site-lite-server to install. The instructions in those files are for a development instance. For production, you are encouraged to minify the /app/ directories of both projects and deploy to a web server of your choice.
 
