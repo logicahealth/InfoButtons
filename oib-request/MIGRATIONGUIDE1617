@@ -30,7 +30,10 @@ Database Migration
 1) The scripts assume they are being run as the root mysql user against the localhost database.
 
 2) Find the migration script found in DeploymentPackage/dbScripts/migration1617.sql , modify if necessary due to
-   differences in your environment that are assumed by the script.
+   differences in your environment that are assumed by the script. For example, the script assumes it is being run by the
+   root user on localhost.
+   
+3) Run the script and verify it completed with no errors.
 
 Building and redeploy
 ---------------------
