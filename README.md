@@ -15,6 +15,13 @@ Building
 
 There have been several changes to both the naming and structure of the OpenInfobutton databases. The build instructions and database scripts have been updated to reflect them. For new installations, please refer to the BUILDGUIDE inside each respective module. For migration from previous versions, please refer to the MIGRATIONGUIDE<version> for your current  version. For now, we only have a migration guide for version 1.6, but this migration guide can be also used for versions prior to 1.6. 
 
+User Guide
+----------
+
+As mentioned, this version includes the LITE web application for configuring OpenInfobutton. We've prepared a user's guide showing how to use most of it's functions,
+
+http://www.openinfobutton.org/documentation/lite-users-guide
+
 Change Log
 ----------
 
