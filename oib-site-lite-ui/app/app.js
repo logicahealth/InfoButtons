@@ -31,12 +31,18 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider) {
       .state('editProfile', {
         url: '/editProfile/:id',
         templateUrl: 'manager/profileForm.html',
-        controller: 'ProfileFormCtrl'
+        controller: 'ProfileFormCtrl',
+          data: {
+              requireGit: false
+          }
       })
       .state('manager', {
         url: '/manager',
         templateUrl: 'manager/profiles.html',
-        controller: 'ProfileCtrl'
+        controller: 'ProfileCtrl',
+          data: {
+              requireGit: false
+          }
       })
       .state('cloudManager', {
         url: '/cloudManager',
@@ -49,12 +55,18 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider) {
       .state('responder', {
         url: '/responder',
         templateUrl: 'responder/assets.html',
-        controller: 'AssetsCtrl'
+        controller: 'AssetsCtrl',
+          data: {
+              requireGit: false
+          }
       })
       .state('editAsset', {
         url: '/responder/editAsset/:assetId',
         templateUrl: 'responder/assetForm.html',
-        controller: 'AssetsCtrl'
+        controller: 'AssetsCtrl',
+          data: {
+              requireGit: false
+          }
       })
       .state('systemConfiguration', {
         url: '/systemConfiguration',

@@ -2,10 +2,10 @@
     <div class="container">
         <h2>Profile Editor</h2>
         <form class="form-horizontal" role="form" novalidate>
-            <div class="form-group">
+            <div class="form-group" ng-hide="new">
                 <label for="id" class="col-sm-2 control-label">ID:</label>
                 <div class="col-sm-10">
-                    <input id="id" class="form-control" type="text" ng-model="profile.id" />
+                    <input id="id" class="form-control" type="text" ng-model="profile.id"/>
                     <!--<input id="id" class="form-control" type="text" ng-model="profile.id" readonly/>-->
                 </div>
             </div>
@@ -21,13 +21,13 @@
                     <input id="name" class="form-control" type="text" ng-model="profile.image_url"/>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-hide="new">
                 <label for="published" class="col-sm-2 control-label">Published Date:</label>
                 <div class="col-sm-10">
                     <input id="published" class="form-control" type="text" ng-model="profile.published" disabled/>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-hide="new">
                 <label for="status" class="col-sm-2 control-label">Profile Status:</label>
                 <div class="col-sm-10">
                     <select id="status" class="form-control" type="text" ng-model="profile.status">
@@ -45,7 +45,8 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button ng-click="update(profile)" class="btn btn-success">UPDATE</button>
+                    <button ng-click="update(profile)" class="btn btn-success" ng-hide="new">UPDATE</button>
+                    <button ng-click="insert(profile)" class="btn btn-success" ng-show="new">CREATE</button>
                     <!--                    <button ng-click="clearDb(profile)" class="btn btn-default">RESET DATABASE</button>-->
                 </div>
             </div>

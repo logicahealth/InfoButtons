@@ -65,6 +65,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                         $scope.status = 'Unable to load local profile ' + $stateParams.id + ': ' + error;
                     });
             }
+            else {
+
+                $scope.new = true;
+            }
         }
 
         $scope.clearDb = function () {
@@ -95,6 +99,16 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                 })
                 .error(function (error) {
                     $scope.statusMessage = 'Unable to save profile:' + error;
+                });
+        };
+
+        $scope.insert = function (profile) {
+            profileFactory.insertProfile(profile)
+                .success(function (msg) {
+                    $scope.statusMessage = msg.object + ' ' + msg.event;
+                })
+                .error(function (error) {
+                    $scope.statusMessage = 'Unable to create profile:' + error;
                 });
         };
 
