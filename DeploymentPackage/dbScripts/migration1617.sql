@@ -1,10 +1,12 @@
-ALTER TABLE `profilesdbprod`.`resource_profiles` ADD COLUMN `image_url` VARCHAR(255) NULL AFTER `content`;
+RENAME TABLE profilesdbprod.resource_profiles TO profilesdbprod.custom_profiles;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profilesdbprod`.`resource_profiles_utf8` AS select `profilesdbprod`.`resource_profiles`.`id` AS `id`,`profilesdbprod`.`resource_profiles`.`name` AS `name`,`profilesdbprod`.`resource_profiles`.`version` AS `version`,`profilesdbprod`.`resource_profiles`.`published` AS `published`,`profilesdbprod`.`resource_profiles`.`image_url` AS `image_url`,`profilesdbprod`.`resource_profiles`.`status` AS `status`,if((`profilesdbprod`.`resource_profiles`.`status` = 1),'Active',if((`profilesdbprod`.`resource_profiles`.`status` = 2),'Testing','Inactive')) AS `status_dsc`,convert(`profilesdbprod`.`resource_profiles`.`content` using utf8) AS `content_utf8` from `profilesdbprod`.`resource_profiles`;
+ALTER TABLE `profilesdbprod`.`custom_profiles` ADD COLUMN `image_url` VARCHAR(255) NULL AFTER `content`;
 
-alter table profilesdbprod.resource_profiles change version version varchar(45);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profilesdbprod`.`v_custom_profiles` AS select `profilesdbprod`.`custom_profiles`.`id` AS `id`,`profilesdbprod`.`custom_profiles`.`name` AS `name`,`profilesdbprod`.`custom_profiles`.`version` AS `version`,`profilesdbprod`.`custom_profiles`.`published` AS `published`,`profilesdbprod`.`custom_profiles`.`image_url` AS `image_url`,`profilesdbprod`.`custom_profiles`.`status` AS `status`,if((`profilesdbprod`.`custom_profiles`.`status` = 1),'Active',if((`profilesdbprod`.`custom_profiles`.`status` = 2),'Testing','Inactive')) AS `status_dsc`,convert(`profilesdbprod`.`custom_profiles`.`content` using utf8) AS `content_utf8` from `profilesdbprod`.`custom_profiles`;
 
-CREATE TABLE resource_profiles_cloud
+alter table profilesdbprod.custom_profiles change version varchar(45);
+
+CREATE TABLE installed_store_profiles
 (
   id BIGINT NOT NULL AUTO_INCREMENT,
   name VARCHAR(45) NOT NULL,
@@ -16,9 +18,9 @@ CREATE TABLE resource_profiles_cloud
   PRIMARY KEY (id, version)
 );
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profilesdbprod`.`resource_profiles_utf8_cloud` AS select `profilesdbprod`.`resource_profiles_cloud`.`id` AS `id`,`profilesdbprod`.`resource_profiles_cloud`.`name` AS `name`,`profilesdbprod`.`resource_profiles_cloud`.`version` AS `version`,`profilesdbprod`.`resource_profiles_cloud`.`published` AS `published`,`profilesdbprod`.`resource_profiles_cloud`.`image_url` AS `image_url`,`profilesdbprod`.`resource_profiles_cloud`.`status` AS `status`,if((`profilesdbprod`.`resource_profiles_cloud`.`status` = 1),'Active',if((`profilesdbprod`.`resource_profiles_cloud`.`status` = 2),'Testing','Inactive')) AS `status_dsc`,convert(`profilesdbprod`.`resource_profiles_cloud`.`content` using utf8) AS `content_utf8` from `profilesdbprod`.`resource_profiles_cloud`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `profilesdbprod`.`v_installed_store_profiles` AS select `profilesdbprod`.`installed_store_profiles`.`id` AS `id`,`profilesdbprod`.`installed_store_profiles`.`name` AS `name`,`profilesdbprod`.`installed_store_profiles`.`version` AS `version`,`profilesdbprod`.`installed_store_profiles`.`published` AS `published`,`profilesdbprod`.`installed_store_profiles`.`image_url` AS `image_url`,`profilesdbprod`.`installed_store_profiles`.`status` AS `status`,if((`profilesdbprod`.`installed_store_profiles`.`status` = 1),'Active',if((`profilesdbprod`.`installed_store_profiles`.`status` = 2),'Testing','Inactive')) AS `status_dsc`,convert(`profilesdbprod`.`installed_store_profiles`.`content` using utf8) AS `content_utf8` from `profilesdbprod`.`installed_store_profiles`;
 
 create view profilesdbprod.resource_profiles_all as
-  select * from profilesdbprod.resource_profiles
+  select * from profilesdbprod.custom_profiles
   UNION ALL
-  select * from profilesdbprod.resource_profiles_cloud;
+  select * from profilesdbprod.installed_store_profiles
