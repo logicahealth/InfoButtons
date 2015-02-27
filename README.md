@@ -13,7 +13,13 @@ The new version of OpenInfobutton introduces the first public release of the LIT
 Building
 ---------
 
-There have been several changes to both the naming and structure of the OpenInfobutton databases. The build instructions and database scripts have been updated to reflect them. For new installations, please refer to the BUILDGUIDE inside each respective module. For migration from previous versions, please refer to the MIGRATIONGUIDE<version> for your current  version. For now, we only have a migration guide for version 1.6, but this migration guide can be also used for versions prior to 1.6. 
+There have been several changes to both the naming and structure of the OpenInfobutton databases. This release includes 4 modules:
+- Infobuton manager: oib-request
+- Infobutton responder: oib-responder
+- LITE REST web server: oib-site-lite-rest-server
+- LITE client: oib-site-lite-ui
+
+The build instructions and database scripts have been updated to reflect them. For new installations, please refer to the BUILDGUIDE inside each respective module. For migration from previous versions of the infobutton manager (oib-request module), please refer to the MIGRATIONGUIDE<version>. For now, we only have a migration guide for version 1.6, but this migration guide can be also used for versions prior to 1.6. 
 
 User Guide
 ----------
