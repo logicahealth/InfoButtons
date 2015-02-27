@@ -59,7 +59,7 @@ app.use(function (req, res, next) {
 function getProfiles(req,res) {
 	
 	profileConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from ' + resource_profile_db + '.resource_profiles_utf8', function(err,rows,fields) {
+		connection.query('select * from ' + resource_profile_db + '.v_custom_profiles', function(err,rows,fields) {
 			res.send(rows);
 		});
 		connection.release();
@@ -70,7 +70,7 @@ function getProfiles(req,res) {
 function getLocalCloudProfiles(req,res) {
 
 	profileConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from ' + resource_profile_db + '.resource_profiles_utf8_cloud', function(err,rows,fields) {
+		connection.query('select * from ' + resource_profile_db + '.v_installed_store_profiles', function(err,rows,fields) {
 			res.send(rows);
 		});
 		connection.release();
@@ -81,7 +81,7 @@ function getLocalCloudProfiles(req,res) {
 function getProfile(req,res) {
 
 	profileConnectionPool.getConnection( function(err,connection) {
-		connection.query('select * from ' + resource_profile_db + '.resource_profiles_utf8 where id=' + req.params.id, function(err,rows,fields) {
+		connection.query('select * from ' + resource_profile_db + '.v_custom_profiles where id=' + req.params.id, function(err,rows,fields) {
 			// res.send({fields:fields,rows:rows});
 			res.send(rows[0]);
 		});
@@ -113,7 +113,7 @@ function createProfile(req,res) {
 			newRecord.image_url = req.body.image_url;
 		}
 
-		connection.query('insert into ' + resource_profile_db + '.resource_profiles set ?',
+		connection.query('insert into ' + resource_profile_db + '.custom_profiles set ?',
 			newRecord, function(err,result) {
 				if (err) {
 					throw err;
@@ -140,7 +140,7 @@ function createCloudProfile(req,res) {
 			newRecord.image_url = req.body.imgUrl;
 		}
 
-		connection.query('insert into ' + resource_profile_db + '.resource_profiles_cloud set ?',
+		connection.query('insert into ' + resource_profile_db + '.installed_store_profiles set ?',
 			newRecord, function (err, result) {
 				if (err) {
 					throw err;
@@ -173,11 +173,11 @@ function updateCloudProfile(req,res) {
 			console.log("\tcontent:...");
 		};
 
-        var oibView = resource_profile_db + '.resource_profiles_cloud.name';
+        var oibView = resource_profile_db + '.installed_store_profiles.name';
 
 		var name = { oibView : req.body.name };
 
-		connection.query('update low_priority ' + resource_profile_db + '.resource_profiles_cloud set version = ?, content=?, image_url=?, published=? where name = ?',
+		connection.query('update low_priority ' + resource_profile_db + '.installed_store_profiles set version = ?, content=?, image_url=?, published=? where name = ?',
 			[req.body.sha, req.body.content_utf8, req.body.image_url, req.body.published, req.body.name], function(err,result) {
 				if (err) {
 					throw err;
@@ -207,7 +207,7 @@ function updateCloudStatus(req,res) {
 			console.log("\tstatus:" + req.body.status);
 		};
 
-		connection.query('update low_priority ' + resource_profile_db + '.resource_profiles_cloud set status = ? where id = ?',
+		connection.query('update low_priority ' + resource_profile_db + '.installed_store_profiles set status = ? where id = ?',
 			[req.body.status, req.body.id], function(err,result) {
 				if (err) {
 					throw err;
@@ -254,7 +254,7 @@ function updateProfile(req,res) {
 			console.log("\tcontent:...");
 		};
 
-		connection.query('update ' + resource_profile_db + '.resource_profiles rp set name = ?, version = ?, status = ?, image_url = ?, content = ? where id = ?',
+		connection.query('update ' + resource_profile_db + '.custom_profiles rp set name = ?, version = ?, status = ?, image_url = ?, content = ? where id = ?',
 			[req.body.name, req.body.version, req.body.status, req.body.image_url, req.body.content_utf8, req.body.id], function(err,result) {
 				if (err) {
 					throw err;

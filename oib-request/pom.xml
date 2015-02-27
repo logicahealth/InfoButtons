@@ -8,7 +8,7 @@
  	<properties>
 		<dts-version>3.5.0</dts-version>
 
-		<datasource1.url>jdbc:mysql://localhost:3306/valuesets_and_logs</datasource1.url>
+		<datasource1.url>jdbc:mysql://localhost:3306/valueset_and_log</datasource1.url>
 		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
 		<datasource1.user></datasource1.user>
 		<datasource1.password></datasource1.password>
