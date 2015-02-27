@@ -77,6 +77,7 @@ public abstract class OibServiceTestFixture
         requestParameters.put( "patientPerson.administrativeGenderCode.c", new String[] { "F" } );
         requestParameters.put( "age.v.v", new String[] { "47" } );
         requestParameters.put( "age.v.u", new String[] { "a" } );
+        requestParameters.put( "taskContext.c.cs", new String[] { "2.16.840.1.113883.5.4" } );
         requestParameters.put( "taskContext.c.c", new String[] { "PROBLISTREV" } );
         requestParameters.put( "mainSearchCriteria.v.c", new String[] { "595.9" } );
         requestParameters.put( "mainSearchCriteria.v.cs", new String[] { "2.16.840.1.113883.6.103" } );

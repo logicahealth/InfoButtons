@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.openinfobutton</groupId>
   <artifactId>oib-request</artifactId>
-  <version>1.6-SNAPSHOT</version>
+  <version>1.7-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>oib-request</name>
  	<properties>
@@ -10,13 +10,13 @@
 
 		<datasource1.url>jdbc:mysql://localhost:3306/valueset_and_log</datasource1.url>
 		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
-		<datasource1.user></datasource1.user>
-		<datasource1.password></datasource1.password>
+		<datasource1.user />
+		<datasource1.password />
 		
 		<datasource2.url>jdbc:mysql://localhost:3306/resource_profile</datasource2.url>
 		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
-		<datasource2.user></datasource2.user>
-		<datasource2.password></datasource2.password>
+		<datasource2.user />
+		<datasource2.password />
 
 		<umls.username></umls.username>
 		<umls.password></umls.password>
@@ -38,5 +38,6 @@
 		<connection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</connection>
 		<developerConnection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</developerConnection>
 		<url>https://github.com/VHAINNOVATIONS/InfoButtons.git</url>
-	</scm>
+	  <tag>HEAD</tag>
+  </scm>
 </project>

@@ -2,11 +2,11 @@
     <parent>
       <groupId>org.openinfobutton</groupId>
       <artifactId>oib-request</artifactId>
-      <version>1.6-SNAPSHOT</version>
+      <version>1.7-SNAPSHOT</version>
     </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>oib-ext-resources</artifactId>
-	<version>1.4</version>
+	<version>1.7-SNAPSHOT</version>
 	<name>oib-ext-resources</name>
 	<description>Decoupling the handling of external resources from Business Logic</description>
 
@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-schema</artifactId>
-			<version>1.6-SNAPSHOT</version>
+			<version>1.7-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -122,7 +122,7 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-db</artifactId>
-			<version>1.6-SNAPSHOT</version>
+			<version>1.7-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -190,7 +190,7 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-inference-rxnorm</artifactId>
-			<version>1.4</version>
+			<version>1.7-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>UTSMetathesaurus</groupId>
@@ -254,7 +254,8 @@
 		<connection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</connection>
 		<developerConnection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</developerConnection>
 		<url>https://github.com/VHAINNOVATIONS/InfoButtons.git</url>
-	</scm>
+	  <tag>HEAD</tag>
+  </scm>
 
 	<build>
 		<testResources>
