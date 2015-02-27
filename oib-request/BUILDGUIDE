@@ -64,9 +64,8 @@ Initial Setup
 Building
 --------
 
-1) Execute all the SQL scripts found in the Innovations-182/DeploymentPackage/sqlWithInsert directory. 
-
-   Additionally, execute the SQL script found in Innovations-182/DeploymentPackage/sqlDump/prodoib_logs.sql. 
+1) Execute all the SQL scripts found in the Innovations-182/DeploymentPackage/dbScripts directory except profilesInsert.sql.
+   That one is optional and includes a set of pre-configured resource profiles.
 
 2) Navigate back to the oib-request module directory (this directory)
 
