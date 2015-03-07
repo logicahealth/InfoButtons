@@ -63,9 +63,9 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Combined profile view
 --
 
-create view profilesdbprod.resource_profiles_all as
-  select * from profilesdbprod.custom_profiles
+create view resource_profile.resource_profiles_all as
+  select * from resource_profile.custom_profiles
   UNION ALL
-  select * from profilesdbprod.installed_store_profiles
+  select * from resource_profile.installed_store_profiles
 
 
