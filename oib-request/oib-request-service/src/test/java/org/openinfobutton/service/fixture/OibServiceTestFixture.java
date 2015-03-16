@@ -209,7 +209,7 @@ public abstract class OibServiceTestFixture
     public void assertNumberProfiles()
     {
 
-        assertEquals( countRowsInTable( "resource_profiles" ), 22 );
+        assertEquals( countRowsInTable( "custom_profiles" ), 22 );
     }
 
     @SuppressWarnings( "deprecation" )
