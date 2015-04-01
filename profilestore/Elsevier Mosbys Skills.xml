@@ -10,6 +10,7 @@
 		<supportedTerminologies>
 			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9CM"/>
 			<supportedTerminology id="2.16.840.1.113883.6.42" name="ICD9"/>
+			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMEDCT_US"/>
 		</supportedTerminologies>
 		<contexts>
 			<context name="Knowledge on conditions from problem list review and entry" id="1">
