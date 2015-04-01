@@ -9,13 +9,13 @@
 		<authorizedOrganizations/>
 		<supportedTerminologies>
 			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMEDCT_US"/>
-			<!--<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9CM"/>
+			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9CM"/>
 			<supportedTerminology id="2.16.840.1.113883.6.42" name="ICD9"/>
 			<supportedTerminology id="2.16.840.1.113883.6.3" name="ICD10"/>
 			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
 			<supportedTerminology id="2.16.840.1.113883.6.69" name="NDC"/>
 			<supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC"/>
-			<supportedTerminology id="2.16.840.1.113883.6.82" name="CPT"/>-->
+			<supportedTerminology id="2.16.840.1.113883.6.82" name="CPT"/>
 		</supportedTerminologies>
 		<contexts>
 			<context name="Patient education information from problems" id="1">
