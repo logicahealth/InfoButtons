@@ -30,7 +30,7 @@ public abstract class ExternalResourcesTestFixture
     
     final static Code CONCEPT_IN_SUBSET = CodeUtility.getCode( "351710", "2.16.840.1.113883.6.88", "Barr - Tamoxifen Citrate 20 MG Oral Tablet", "RxNorm" );
     
-    final static Code VALID_MAPPING_CONCEPT = CodeUtility.getCode( "109769000", "2.16.840.1.113883.6.96", "Necrotizing sialometaplasia", "SNOMEDCT" );
+    final static Code VALID_MAPPING_CONCEPT = CodeUtility.getCode( "109769000", "2.16.840.1.113883.6.96", "Necrotizing sialometaplasia", "SNOMEDCT_US" );
     
     final static String ICD10 = "2.16.840.1.113883.6.90";
     

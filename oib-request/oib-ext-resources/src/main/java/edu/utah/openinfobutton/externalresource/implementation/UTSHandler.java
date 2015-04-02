@@ -141,11 +141,11 @@ public class UTSHandler
             ticketGrantingTicket = getTicketGrantingTicket();
             singleUseTicket1 = securityService.getProxyTicket( ticketGrantingTicket, serviceName );
             final UtsMetathesaurusFinder.Psf myPsf = new UtsMetathesaurusFinder.Psf();
-            myPsf.getIncludedSources().add( "SNOMEDCT" );
+            myPsf.getIncludedSources().add( "SNOMEDCT_US" );
             myPsf.getIncludedSources().add( "ICD10CM" );
             myPsf.getIncludedSources().add( "ICD9CM" );
             final ArrayList<String> lookupList = new ArrayList<String>();
-            lookupList.add( "SNOMEDCT" );
+            lookupList.add( "SNOMEDCT_US" );
             lookupList.add( "ICD10CM" );
             lookupList.add( "ICD9CM" );
             myPsf.setIncludedLanguage( "ENG" );
@@ -204,7 +204,7 @@ public class UTSHandler
      */
     private String getCodeSystemId( String source )
     {
-        if ( source.equals( "SNOMEDCT" ) )
+        if ( source.equals( "SNOMEDCT_US" ) )
         {
             return "2.16.840.1.113883.6.96";
         }
@@ -229,7 +229,7 @@ public class UTSHandler
     {
         if ( source.equals( "2.16.840.1.113883.6.96" ) )
         {
-            return "SNOMEDCT";
+            return "SNOMEDCT_US";
         }
         else if ( source.equals( "2.16.840.1.113883.6.90" ) )
         {
