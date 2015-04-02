@@ -16,6 +16,8 @@
 							<enumeration includeDescendants="false">
 								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
 								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="diagnosis list review task" code="DIAGLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="diagnosis list entry task" code="DIAGLISTE"/>							
 							</enumeration>
 						</matchingDomain>
 					</task>
