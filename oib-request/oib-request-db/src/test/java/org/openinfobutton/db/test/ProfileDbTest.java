@@ -54,7 +54,7 @@ public class ProfileDbTest
     @Before
     public void insertProfile() {
         
-        String sql = "INSERT INTO resource_profiles (id, name, version, published, status, content) values (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO custom_profiles (id, name, version, published, status, content) values (?, ?, ?, ?, ?, ?)";
         Object[] params = new Object[] {300l, "TestProfile", 2, new Date(), 2, "<?xml version=\"1.0\" encoding=\"utf-8\"?><a>PROFILETEST</a>"};
         jdbcTemplate.update( sql, params );
     }
@@ -73,6 +73,6 @@ public class ProfileDbTest
     @After
     public void tearDown() {
         
-        jdbcTemplate.update( "DELETE FROM resource_profiles WHERE id = ?", new Object[] { 300l} );
+        jdbcTemplate.update( "DELETE FROM custom_profiles WHERE id = ?", new Object[] { 300l} );
     }
 }

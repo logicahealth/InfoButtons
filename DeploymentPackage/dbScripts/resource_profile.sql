@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `custom_profiles`;
 CREATE TABLE IF NOT EXISTS `custom_profiles` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `version` int(2) NOT NULL,
+  `version` varchar(45) NOT NULL,
   `published` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` int(2) NOT NULL,
   `content` longblob NOT NULL,
@@ -45,7 +45,7 @@ DROP TABLE IF EXISTS `installed_store_profiles`;
 CREATE TABLE IF NOT EXISTS `installed_store_profiles` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `version` int(2) NOT NULL,
+  `version` varchar(45) NOT NULL,
   `published` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` int(2) NOT NULL,
   `content` longblob NOT NULL,
@@ -63,9 +63,9 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Combined profile view
 --
 
-create view profilesdbprod.resource_profiles_all as
-  select * from profilesdbprod.custom_profiles
+create view resource_profile.resource_profiles_all as
+  select * from resource_profile.custom_profiles
   UNION ALL
-  select * from profilesdbprod.installed_store_profiles
+  select * from resource_profile.installed_store_profiles
 
 
