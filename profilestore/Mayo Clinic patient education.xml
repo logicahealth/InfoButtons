@@ -3,7 +3,7 @@
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1">
 		<title>MayoClinic</title>
-		<profileDescription>Freely available patient education material from the MMayo Clinic.</profileDescription>
+		<profileDescription>Freely available patient education material from the Mayo Clinic.</profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
 	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="false" urlStyle="DIRTY">
