@@ -98,6 +98,7 @@
 						<matchingDomain>
 							<enumeration includeDescendants="false">
 								<code codeSystem="2.16.840.1.113883.5.4" code="LABRREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" code="LABOE"/>
 							</enumeration>
 						</matchingDomain>
 					</task>
