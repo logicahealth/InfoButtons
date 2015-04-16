@@ -100,7 +100,7 @@ public final class AccessCheckHandler
         for ( int x = 0; x < authCount; x++ )
         {
             id = authorizedOrganizations.get( x );
-            if ( id.getId().contains(accessID) )
+            if ( accessID.contains(id.getId()) )
             {
 
                 match = true;
