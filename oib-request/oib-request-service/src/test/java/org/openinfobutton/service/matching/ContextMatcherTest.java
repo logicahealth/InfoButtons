@@ -41,7 +41,7 @@ public class ContextMatcherTest
                            containsString( "http://www.elsinfobutton.com/info/1030?taskContext.c.c=PROBLISTREV&amp;"
                                + "taskContext.c.cs=2.16.840.1.113883.5.4&amp;"
                                + "mainSearchCriteria.v.c=595.9&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.103&amp;"
-                               + "mainSearchCriteria.v.dn=Cystitis&amp;" ) );
+                               + "mainSearchCriteria.v.dn=Cystitis" ) );
         Assert.assertThat( xml,
                            containsString( "http://www.uptodate.com/online/content/search.do?searchType=HL7&amp;" +
                                  "taskContext.c.c=PROBLISTREV&amp;"
@@ -54,7 +54,7 @@ public class ContextMatcherTest
                                + "subTopic.v.c=Q000175&amp;subTopic.v.cs=2.16.840.1.113883.6.177&amp;" +
                                "subTopic.v.dn=Diagnosis" ) );
         Assert.assertThat( xml, containsString( "http://www.google.com/search?hl=en&amp;btnI=Im+Feeling+Lucky&amp;"
-            + "q=Cystitis+site:www.mayoclinic.com/health/&amp;" ) );
+            + "q=Cystitis+site:www.mayoclinic.com/health/" ) );
         Assert.assertThat( xml, containsString( "http://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text]" ) );
 
     }
@@ -66,7 +66,7 @@ public class ContextMatcherTest
         final KnowledgeRequest request = WebServiceUtility.getServiceRequest( decedentAgeRangeTest() );
         final String xml = marshallXML( engine.getResponse( request ) );
         Assert.assertThat( xml, containsString( "http://www.google.com/search?hl=en&amp;btnI=Im+Feeling+Lucky&amp;"
-                        + "q=ICD-9+237.79+site:www.medicalhomeportal.org&amp;" ) );
+                        + "q=ICD-9+237.79+site:www.medicalhomeportal.org" ) );
 
     }
 
@@ -107,7 +107,7 @@ public class ContextMatcherTest
             + "patientPerson.administrativeGenderCode.c=F&amp;"
             + "patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1&amp;"
             + "mainSearchCriteria.v.c=32968&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.88&amp;"
-            + "mainSearchCriteria.v.dn=clopidogrel&amp;" ) );
+            + "mainSearchCriteria.v.dn=clopidogrel" ) );
     }
 
     @Test
@@ -117,8 +117,8 @@ public class ContextMatcherTest
         final KnowledgeRequest request = WebServiceUtility.getServiceRequest( neurofibromatosisSubsetRequest() );
         final String xml = marshallXML( engine.getResponse( request ) );
         Assert.assertThat( xml, containsString( "http://www.google.com/search?hl=en&amp;btnI=Im+Feeling+Lucky&amp;"
-            + "q=Neurofibromatosis+site:http://ghr.nlm.nih.gov/&amp;" ) );
+            + "q=Neurofibromatosis+site:http://ghr.nlm.nih.gov/" ) );
         Assert.assertThat( xml, containsString( "http://www.google.com/search?hl=en&amp;btnI=Im+Feeling+Lucky&amp;"
-            + "q=ICD-9+237.7+site:www.medicalhomeportal.org&amp;" ) );
+            + "q=ICD-9+237.7+site:www.medicalhomeportal.org" ) );
     }
 }

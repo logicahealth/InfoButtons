@@ -57,6 +57,7 @@ import org.hl7.v3.FeedType;
 import org.hl7.v3.IdType;
 import org.hl7.v3.LinkType;
 import org.hl7.v3.TextType;
+import org.openinfobutton.exception.OIBProfileProcessingException;
 import org.openinfobutton.schema.CodeConstants;
 import org.openinfobutton.schema.CodeUtility;
 import org.openinfobutton.schema.KnowledgeRequest;
@@ -111,13 +112,19 @@ public class ResponseGenerator
         request = r;
         for ( int x = 0; x < count; x++ )
         {
-            feed = createFeed( results.get( x ) );
-            if ( !feed.getEntry().isEmpty() )
+            try {
+                feed = createFeed(results.get(x));
+                if (!feed.getEntry().isEmpty()) {
+                    final IdType feedID = new IdType();
+                    feedID.setValue("urn:uuid:" + UUID.randomUUID());
+                    feed.setId(feedID);
+                    knowledgeResponse.getFeed().add(feed);
+                }
+            }
+            catch (RuntimeException e)
             {
-                final IdType feedID = new IdType();
-                feedID.setValue( "urn:uuid:" + UUID.randomUUID() );
-                feed.setId( feedID );
-                knowledgeResponse.getFeed().add( feed );
+                log.debug("\t\tProfile Processing Error While Generating Response Caused By: " + results.get(x).getHeader().getTitle());
+                throw new OIBProfileProcessingException("Generating Response Error Caused By Configuration Problem In: " + results.get(x).getHeader().getTitle(), e);
             }
         }
         return knowledgeResponse;
@@ -277,12 +284,20 @@ public class ResponseGenerator
             }           
             final StringBuilder baseLink =
                 generateBaseLink( urlBase, context.getContextDefinition(), supportedCodeSystems, null );
+            baseLink.append( CodeConstants.HOLDER_ORGANIZATION);
+            baseLink.append( "=" );
+            baseLink.append( request.getHolder().getRepresentedOrganization().getRoot() );
+            baseLink.append( "&" );
             if (useAuthorizedPerson && !request.getHolder().getAssignedAuthorizedPerson().getRoot().isEmpty())
             {
                 baseLink.append( CodeConstants.HOLDER_AUTHORIZEDPERSON );
                 baseLink.append( "=" );
                 baseLink.append( request.getHolder().getAssignedAuthorizedPerson().getRoot() );
                 baseLink.append( "&" );
+            }
+            if (baseLink.charAt(baseLink.length()-1) == '&')
+            {
+                baseLink.deleteCharAt(baseLink.length() - 1);
             }
             final DefaultHttpClient httpClient = new DefaultHttpClient();
             final URL url = new URL( baseLink.toString() );
@@ -418,11 +433,15 @@ public class ResponseGenerator
             catch ( final NullPointerException e )
             {
                 link = new LinkType();
-                link.setRel( "alternate" );
-                link.setType( "html" );
-                link.setHreflang( lang );
+                link.setRel("alternate");
+                link.setType("html");
+                link.setHreflang(lang);
                 link.setTitle( subtopicList.get( i ).getLinkName() );
                 subTopics = new StringBuilder( baseLink );
+                if (subTopics.charAt(subTopics.length()-1) == '&')
+                {
+                    subTopics.deleteCharAt(subTopics.length()-1);
+                }
                 link.setHref( subTopics.toString() );
                 entry = new EntryType();
                 entry.setUpdated( getUpdateTime() );
@@ -522,6 +541,10 @@ public class ResponseGenerator
             {
                 subTopics.append( ( urlStyle.equals( "CLEAN" ) ) ? "/" : "=" );
                 subTopics.append( searchTerm );
+            }
+            if (subTopics.charAt(subTopics.length()-1) == '&')
+            {
+                subTopics.deleteCharAt(subTopics.length() - 1);
             }
             link.setHref( subTopics.toString() );
             entry = new EntryType();
