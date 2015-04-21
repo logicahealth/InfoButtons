@@ -41,6 +41,13 @@
             <artifactId>jackson-mapper-asl</artifactId>  
             <version>1.9.13</version>  
         </dependency>
+
+	  <dependency>
+		  <groupId>org.openinfobutton</groupId>
+		  <artifactId>oib-request-schema</artifactId>
+		  <version>1.7-SNAPSHOT</version>
+		  <scope>compile</scope>
+	  </dependency>
 </dependencies>
 
 <build>
