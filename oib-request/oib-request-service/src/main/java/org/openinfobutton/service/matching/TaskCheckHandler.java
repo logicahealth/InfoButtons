@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.openinfobutton.exception.OIBProfileProcessingException;
 import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.schemas.kb.CodedContextElement;
 import org.openinfobutton.schemas.kb.Context;
@@ -31,6 +33,9 @@ import org.openinfobutton.service.profile.ResourceProfileProvider;
  */
 public final class TaskCheckHandler
 {
+
+    /** The log. */
+    private static Logger log = Logger.getLogger( TaskCheckHandler.class.getName() );
 
     /** The profiles. */
     public static List<KnowledgeResourceProfile> profiles;
@@ -70,9 +75,14 @@ public final class TaskCheckHandler
         for ( final Iterator<KnowledgeResourceProfile> iter = profiles.iterator(); iter.hasNext(); )
         {
             profile = iter.next();
-            if ( !checkProfile( profile ) )
+            try {
+                if (!checkProfile(profile)) {
+                    iter.remove();
+                }
+            } catch (RuntimeException e)
             {
-                iter.remove();
+                log.debug("\t\tProfile Processing Error While Checking Task Caused By: " + profile.getHeader().getTitle());
+                throw new OIBProfileProcessingException("Task Matching Error Caused By Configuration Problem In: " + profile.getHeader().getTitle(), e);
             }
         }
         provider.setProfiles( profiles );

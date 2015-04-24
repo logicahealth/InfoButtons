@@ -16,6 +16,8 @@ package org.openinfobutton.service.matching;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.openinfobutton.exception.OIBProfileProcessingException;
 import org.openinfobutton.schema.Holder;
 import org.openinfobutton.schema.IDLite;
 import org.openinfobutton.schema.KnowledgeRequest;
@@ -30,6 +32,9 @@ import org.openinfobutton.service.profile.ResourceProfileProvider;
  */
 public final class AccessCheckHandler
 {
+
+    /** The log. */
+    private static Logger log = Logger.getLogger( AccessCheckHandler.class.getName() );
 
     /** The profiles. */
     public static List<KnowledgeResourceProfile> profiles;
@@ -72,9 +77,14 @@ public final class AccessCheckHandler
         for ( final Iterator<KnowledgeResourceProfile> iter = profiles.iterator(); iter.hasNext(); )
         {
             profile = iter.next();
-            if ( !checkProfile( profile ) )
+            try {
+                if (!checkProfile(profile)) {
+                    iter.remove();
+                }
+            } catch (RuntimeException e)
             {
-                iter.remove();
+                log.debug("\t\tProfile Processing Error While Doing Access Check Caused By: " + profile.getHeader().getTitle());
+                throw new OIBProfileProcessingException("Access Check Error Caused By Configuration Problem In: " + profile.getHeader().getTitle(), e);
             }
         }
         provider.setProfiles( profiles );
