@@ -1,8 +1,11 @@
 package org.openinfobutton.exception;
 
 
-import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
+/*
 
+Simple named error wrapper for exceptions that occur due to mis-configured profiles that still validate
+against the XSD.
+ */
 public class OIBProfileProcessingException extends IllegalArgumentException {
 
     private static final long serialVersionUID = 4429230597523361366L;

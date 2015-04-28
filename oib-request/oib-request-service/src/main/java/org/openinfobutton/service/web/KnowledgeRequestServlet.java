@@ -41,6 +41,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.hl7.v3.AggregateKnowledgeResponse;
 import org.hl7.v3.REDSMT010001UVKnowledgeRequestNotification;
+import org.openinfobutton.exception.OIBProfileProcessingException;
 import org.openinfobutton.schema.CodeConstants;
 import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.service.profile.ResourceProfileLoaderNew;
@@ -193,6 +194,11 @@ public class KnowledgeRequestServlet
         catch ( final ParserConfigurationException e )
         {
             e.printStackTrace();
+        }
+        catch (final OIBProfileProcessingException e)
+        {
+            out.println(e);
+            throw e;
         }
         finally
         {

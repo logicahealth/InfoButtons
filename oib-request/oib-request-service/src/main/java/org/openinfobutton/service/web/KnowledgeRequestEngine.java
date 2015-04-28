@@ -76,8 +76,8 @@ public class KnowledgeRequestEngine
      */
     private List<RequestResult> returnResult( KnowledgeRequest request )
     {
-
         List<RequestResult> result = new ArrayList<RequestResult>();
+
         if ( AccessCheckHandler.handleRequest( request ) )
         {
             return result;
