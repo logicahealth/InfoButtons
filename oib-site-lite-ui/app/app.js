@@ -8,6 +8,8 @@ var oibConfigurationApp = angular.module('oibConfigurationApp', [
   'oibSetupServices',
   'oibManagerModule',
   'oibManagerServiceModule',
+  'datatables',
+  'datatables.bootstrap',
   'oibAssetServiceModule',
   'oibAssetControllerModule',
   'oibHomeModule',

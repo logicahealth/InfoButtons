@@ -1,91 +1,24 @@
-
-<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-<script type="text/javascript" charset="utf-8">
-    $(document).ready(function () {
-        $('#example').dataTable();
-    });
-</script>
-
-
 <div class="container" ng-controller="AssetsCtrl">
     <h3>Infobutton Responder</h3>
     <hr/>
-    <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="dataTables_length" id="example_length">
-                    <label>Show 
-                        <select name="example_length" aria-controls="example" class="form-control input-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select> entries
-                    </label>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div id="example_filter" class="dataTables_filter">
-                    <label>Search:
-                        <input type="search" class="form-control input-sm" placeholder="" aria-controls="example">
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
-                    <thead>
-                        <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Namespace: click to sort" style="" aria-sort="ascending">Namespace</th>
-                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Name: click to sort" style="width: 196px;">Asset</th>
-                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Last Update: click to sort" style="">Last Update</th>
-                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="MIME Type: click to sort" style="">MIME Type</th>
-                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="URL: click to sort" style="">URL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr role="row" ng-repeat="asset in assets">
-                            <td class="">{{asset.NAMESPACE_CD}}</td>
-                            <td class=""><a href="#/responder/editAsset/{{asset.ASSET_ID}}">{{asset.DISPLAY_NAME}}</a></td>
-                            <td class="">{{asset.LAST_UPDATE_DTS}}</td>
-                            <td>{{asset.ASSET_MIME_TYPE}}</td>
-                            <td>{{asset.ASSET_URL}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-            </div>
-            <div class="col-xs-6">
-                <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                    <ul class="pagination">
-                        <li class="paginate_button previous disabled" aria-controls="example" tabindex="0" id="example_previous">
-                            <a href="#">Previous</a></li><li class="paginate_button active" aria-controls="example" tabindex="0">
-                            <a href="#">1</a>
-                        </li>
-                        <li class="paginate_button " aria-controls="example" tabindex="0"><a href="#">2</a></li>
-                        <li class="paginate_button " aria-controls="example" tabindex="0"><a href="#">3</a></li>
-                        <li class="paginate_button " aria-controls="example" tabindex="0"><a href="#">4</a></li>
-                        <li class="paginate_button " aria-controls="example" tabindex="0"><a href="#">5</a></li>
-                        <li class="paginate_button " aria-controls="example" tabindex="0"><a href="#">6</a></li>
-                        <li class="paginate_button next" aria-controls="example" tabindex="0" id="example_next"><a href="#">Next</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div><!-- end container -->
-
-<script type="text/javascript">
-            // For demo to fit into DataTables site builder...
-            $('#example')
-                    .removeClass('display')
-                    .addClass('table table-striped table-bordered');
-</script>
+    <table datatable="ng" dt-options="dtOptions" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Namespace</th>
+                <th>Asset</th>
+                <th>Last Update</th>
+                <th>MIME Type</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="asset in assets">
+                <td>{{asset.NAMESPACE_CD}}</td>
+                <td><a href="#/responder/editAsset/{{asset.ASSET_ID}}">{{asset.DISPLAY_NAME}}</a></td>
+                <td>{{asset.LAST_UPDATE_DTS}}</td>
+                <td>{{asset.ASSET_MIME_TYPE}}</td>
+                <td>{{asset.ASSET_URL}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,13 +1,13 @@
 'use strict';
 
-var oibAssetControllerModule = angular.module('oibAssetControllerModule', ['ui.router']);
+var oibAssetControllerModule = angular.module('oibAssetControllerModule', ['ui.router', 'datatables', 'datatables.bootstrap']);
 
-oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$stateParams', 'assetFactory', function ($scope, $stateParams, assetFactory) {
+oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$stateParams', 'assetFactory', 'DTOptionsBuilder', function ($scope, $stateParams, assetFactory, DTOptionsBuilder) {
 
         $scope.currentPage = 1;
         $scope.pageSize = 10;
         $scope.assets = [];
-
+        $scope.dtOptions = DTOptionsBuilder.newOptions().withBootstrap();
         loadAssets();
 
         function loadAssets() {
@@ -22,13 +22,20 @@ oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$stateParams', 'as
 
         }
 
+        $scope.update = function(asset) {
+
+            assetFactory.updateAsset(asset);
+        };
+
     }]);
 
-oibAssetControllerModule.controller('AssetFormCtrl', ['$scope', '$stateParams', 'assetFactory', function ($scope, $stateParams, assetFactory) {
+oibAssetControllerModule.controller('AssetFormCtrl', ['$scope', '$stateParams', 'assetFactory', 'DTOptionsBuilder', function ($scope, $stateParams, assetFactory, DTOptionsBuilder) {
 
         $scope.asset = {};
         $scope.assetProperties = [];
-        $scope.statusMessage = 'Messages/alerts go here ... and disappear ideally';
+        $scope.currentPage = 1;
+        $scope.pageSize = 10;
+        $scope.dtOptions = DTOptionsBuilder.newOptions().withBootstrap();
 
         loadAsset($stateParams.assetId);
 
