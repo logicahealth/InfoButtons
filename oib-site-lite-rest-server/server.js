@@ -340,8 +340,8 @@ function updateAsset(req,res) {
 			updateRecord.ASSET_MIME_TYPE=req.body.ASSET_MIME_TYPE;
 		}
 
-		connection.query('update ' + responder_db + '.OIB_ASSET set ? where ASSET_ID=' + req.body.id,
-			updateRecord, function(err,result) {
+		connection.query('update ' + responder_db + '.OIB_ASSET set DISPLAY_NAME = ?, NAMESPACE_CD = ?, ASSET_URL = ?, ASSET_MIME_TYPE = ? where ASSET_ID= ?',
+			[req.body.DISPLAY_NAME, req.body.NAMESPACE_CD, req.body.ASSET_URL, req.body.ASSET_MIME_TYPE, req.body.ASSET_ID], function(err,result) {
 				if (err) {
 					throw err;
 				}
