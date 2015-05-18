@@ -15,7 +15,7 @@
 							}
 							body  {
 								font: 100.01% Arial, Helvetica, "Trebuchet MS",Verdana, sans-serif;
-								background: #666 url(/images/background/page-bg.gif) repeat;
+								background: #666;
 								color: #000;
 								text-align: left;
 							}
@@ -137,16 +137,7 @@
 								background: #900;
 								border-right: #bb8d49 7px solid;
 							}
-							.mid { 
-								position:absolute;
-								z-index: 0;
-								left: 44%;
-								bottom : 30%;
-								width: 50%; 
-								background: #fff url(/images/background/uofu_medallion_lt.gif) bottom left no-repeat;
-							
-							}
-							
+
 							.u_style #footer {
 								clear: both;
 								position: relative;
