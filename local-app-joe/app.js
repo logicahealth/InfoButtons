@@ -62,12 +62,14 @@
             "lang":"en"}],"lang":"en"}
     ];
     var initialLink = "http://clinical35.staywellsolutionsonline.com/infobutton/search.pg?informationRecipient\u003dPROV\u0026mainSearchCriteria.v.c\u003d210.00\u0026mainSearchCriteria.v.cs\u003d2.16.840.1.113883.6.103\u0026mainSearchCriteria.v.dn\u003dDiabetes Mellitus Type 2";
-
+    var json1 = [];
 //Creates a controller for the app and sets an instance variable equal to the json that will be parsed in the html
-    app.controller("HomeController", function($sce)
+    app.controller("HomeController", ['$http', '$sce', function($http, $sce)
     {
         this.text = json;
         this.currentLink = $sce.trustAsResourceUrl(initialLink);
+
+
         this.setContent = function(url, linkId) {
             this.currentLink = $sce.trustAsResourceUrl(url);
             //Runs through and checks which links aren't selected and makes sure they don't have a check mark next to them.
@@ -76,9 +78,24 @@
                 selectedLinks[i].style.display = 'none';
             }
             document.getElementById(linkId).style.display = 'inline'; //adds the check mark to the currently selected link.
-
         };
-    });
+    }]);
 
+    app.controller("MainController",['$http', function($http) {
 
+        this.text = [];
+        var information = this;
+        $http.get("http://service.oib.utah.edu:8080/infobutton-service/" +
+            "infoRequest?representedOrganization.id.root=1.3.6.1.4.1.3768&xsltTransform=Infobutton_UI_VA&taskContext.c.c=" +
+            "PROBLISTREV&mainSearchCriteria.v.c=210.00&mainSearchCriteria.v.cs=2.16.840.1.113883.6.103&mainSearchCriteria.v.dn=Diabetes%" +
+            "20Mellitus%20Type%202&informationRecipient=PROV&performer=PROV&knowledgeResponseType=application/json").success((function (data) {
+            information.text = data;
+            json1 = information.text;
+
+            alert(json1.feed[0].title.value[0]);
+            alert(json1.feed[1].title.value[0]);
+            alert(information.text.feed[2].title.value[0]);
+
+        }));
+    }]);
 })();
