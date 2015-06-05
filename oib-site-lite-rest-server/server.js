@@ -298,9 +298,9 @@ function createAsset(req,res) {
 	profileConnectionPool.getConnection( function(err,connection) {
 
 		var newRecord = {
-			ASSET_ID:req.body.ASSET_ID,
 			DISPLAY_NAME:req.body.DISPLAY_NAME,
 			NAMESPACE_CD:req.body.NAMESPACE_CD,
+			LAST_UPDATE_DTS: new Date().toMysqlFormat(),
 			ASSET_URL:req.body.ASSET_URL,
 			ASSET_MIME_TYPE:req.body.ASSET_MIME_TYPE
 		};
@@ -340,8 +340,8 @@ function updateAsset(req,res) {
 			updateRecord.ASSET_MIME_TYPE=req.body.ASSET_MIME_TYPE;
 		}
 
-		connection.query('update ' + responder_db + '.OIB_ASSET set DISPLAY_NAME = ?, NAMESPACE_CD = ?, ASSET_URL = ?, ASSET_MIME_TYPE = ? where ASSET_ID= ?',
-			[req.body.DISPLAY_NAME, req.body.NAMESPACE_CD, req.body.ASSET_URL, req.body.ASSET_MIME_TYPE, req.body.ASSET_ID], function(err,result) {
+		connection.query('update ' + responder_db + '.OIB_ASSET set DISPLAY_NAME = ?, NAMESPACE_CD = ?, LAST_UPDATE_DTS = ?, ASSET_URL = ?, ASSET_MIME_TYPE = ? where ASSET_ID= ?',
+			[req.body.DISPLAY_NAME, req.body.NAMESPACE_CD, new Date().toMysqlFormat(), req.body.ASSET_URL, req.body.ASSET_MIME_TYPE, req.body.ASSET_ID], function(err,result) {
 				if (err) {
 					throw err;
 				}
@@ -379,19 +379,20 @@ function getAssetProperty(req,res) {
 function createAssetProperty(req,res) {
 	
 	var newAssetProperty = {
-		ASSET_PROPERTY_ID: req.body.ASSET_PROPERTY_ID, // need to come up with distributed ID strategy
-		ASSET_ID:       req.body.ASSET_ID,
-		PROP_NAME:      req.body.PROP_NAME,
-		PROP_TYPE_CD:   req.body.PROP_TYPE_CD,
-		CODE:           req.body.CODE,
-		CODE_SYSTEM:    req.body.CODE_SYSTEM,
-		DISPLAY_NAME:   req.body.DISPLAY_NAME,
-		PROP_VALUE:     req.body.PROP_VALUE,
+
+		ASSET_ID:       req.body.assetId,
+		PROP_NAME:      req.body.propName,
+		PROP_TYPE_CD:   "CODE",
+		CODE:           req.body.codes.code,
+		CODE_SYSTEM:    req.body.codeSystem.oid,
+		DISPLAY_NAME:   req.body.codes.displayName,
 		GENERATED_BY_CD:"AUTHOR"
 	}
 
 	responderConnectionPool.getConnection( function(err,connection) {
-		connection.query('insert into ' + responder_db + '.OIB_ASSET_PROPERTY set ? ', newAssetProperty,
+		connection.query('insert into ' + responder_db + '.OIB_ASSET_PROPERTY (ASSET_ID, PROP_NAME, PROP_TYPE_CD, ' +
+			'CODE, CODE_SYSTEM, DISPLAY_NAME, GENERATED_BY_CD) VALUES (?, ?, ?, ?, ?, ?, ?)', [newAssetProperty.ASSET_ID, newAssetProperty.PROP_NAME, newAssetProperty.PROP_TYPE_CD, newAssetProperty.CODE,
+			newAssetProperty.CODE_SYSTEM, newAssetProperty.DISPLAY_NAME, newAssetProperty.GENERATED_BY_CD],
 		 function(err,result) {
 			if (err) {
 				throw err;
@@ -411,30 +412,24 @@ function updateAssetProperty(req,res) {
 	var updateRecord = {};
 	
 	if (req.body.assetId) {
-		updateRecord.ASSET_ID = req.body.ASSET_ID;
+		updateRecord.ASSET_ID = req.body.assetId;
 	}
-	if (req.body.propertyName) {
-		updateRecord.PROP_NAME = req.body.PROP_NAME;
+	if (req.body.propName) {
+		updateRecord.PROP_NAME = req.body.propName;
 	}
-	if (req.body.propertyType) {
-		updateRecord.PROP_TYPE_CD = req.body.PROP_TYPE_CD;
+	if (req.body.codes.code) {
+		updateRecord.CODE = req.body.codes.code;
 	}
-	if (req.body.code) {
-		updateRecord.CODE = req.body.CODE;
+	if (req.body.codeSystem.oid) {
+		updateRecord.CODE_SYSTEM = req.body.codeSystem.oid;
 	}
-	if (req.body.codeSystem) {
-		updateRecord.CODE_SYSTEM = req.body.CODE_SYSTEM;
-	}
-	if (req.body.displayName) {
-		updateRecord.DISPLAY_NAME = req.body.DISPLAY_NAME;
-	}
-	if (req.body.propertyValue) {
-		updateRecord.PROP_VALUE = req.body.PROP_VALUE;
+	if (req.body.codes.displayName) {
+		updateRecord.DISPLAY_NAME = req.body.codes.displayName;
 	}
 
 	responderConnectionPool.getConnection( function(err,connection) {
-		connection.query('update ' + responder_db + '.OIB_ASSET_PROPERTY set ? where ASSET_PROPERTY_ID=' + req.body.assetPropertyId, updateRecord,
-			function(err,result) {
+		connection.query('update ' + responder_db + '.OIB_ASSET_PROPERTY set PROP_NAME = ?, CODE = ?, CODE_SYSTEM = ?, DISPLAY_NAME = ? where ASSET_PROPERTY_ID=?',
+			[updateRecord.PROP_NAME, updateRecord.CODE, updateRecord.CODE_SYSTEM, updateRecord.DISPLAY_NAME, updateRecord.ASSET_ID], function(err,result) {
 				if (err) {
 					throw err;
 				}
