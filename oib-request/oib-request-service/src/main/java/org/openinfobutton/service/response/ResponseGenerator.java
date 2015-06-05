@@ -14,13 +14,11 @@
 
 package org.openinfobutton.service.response;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -641,7 +639,13 @@ public class ResponseGenerator
         if ( context.getSearchParameter().getSource() != null
             && context.getSearchParameter().getSource().equals( "displayName" ) )
         {
-            searchParameter = code.getDisplayName();
+            try {
+                searchParameter = URLEncoder.encode(code.getDisplayName(), "UTF-8");
+            }
+            catch (UnsupportedEncodingException e) {
+
+                e.printStackTrace();
+            }
         }
         else
         {
@@ -761,7 +765,7 @@ public class ResponseGenerator
         return str;
     }
 
-    private static String returnParameters( Code code, String codeKey, String codeSystemKey, String displayNameKey )
+    private static String returnParameters( Code code, String codeKey, String codeSystemKey, String displayNameKey ) throws UnsupportedEncodingException
     {
 
         final StringBuilder str = new StringBuilder();
@@ -784,7 +788,13 @@ public class ResponseGenerator
 
             str.append( displayNameKey );
             str.append( "=" );
-            str.append( code.getDisplayName() );
+            try {
+                str.append(URLEncoder.encode(code.getDisplayName(), "UTF-8"));
+            }
+            catch (UnsupportedEncodingException e) {
+
+                e.printStackTrace();
+            }
             str.append( "&" );
         }
 
