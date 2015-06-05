@@ -635,7 +635,7 @@ public class ResponseGenerator
         final StringBuilder str = new StringBuilder();
 
         final SyntaxOnResource syn = context.getSearchParameter().getSyntaxOnResource();
-        String searchParameter;
+        String searchParameter = new String();
         if ( context.getSearchParameter().getSource() != null
             && context.getSearchParameter().getSource().equals( "displayName" ) )
         {
@@ -765,7 +765,7 @@ public class ResponseGenerator
         return str;
     }
 
-    private static String returnParameters( Code code, String codeKey, String codeSystemKey, String displayNameKey ) throws UnsupportedEncodingException
+    private static String returnParameters( Code code, String codeKey, String codeSystemKey, String displayNameKey )
     {
 
         final StringBuilder str = new StringBuilder();
