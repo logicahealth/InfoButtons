@@ -24,7 +24,7 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
         {
             oids = [];
         }
-        if ($scope.oidForm.$valid && !$scope.oidForm.oidFormId.$$validityState.patternMismatch) {
+        if ($scope.oidForm.$valid && !$scope.oidForm.oidFormId.$error.pattern) {
             var oid = {orgOid: orgOid, orgName: orgName, selected: false};
             oids.push(oid);
         }
