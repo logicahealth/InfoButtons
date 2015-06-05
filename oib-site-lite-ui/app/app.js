@@ -4,23 +4,27 @@ var oibConfigurationApp = angular.module('oibConfigurationApp', [
   'ui.router',
   'ngResource',
   'ab-base64',
+  'datatables',
+  'datatables.bootstrap',
+  'ngSanitize',
+  'ui.bootstrap',
+  'ui.select',
   'setupControllers',
   'oibSetupServices',
   'oibManagerModule',
   'oibManagerServiceModule',
-  'datatables',
-  'datatables.bootstrap',
   'oibAssetServiceModule',
   'oibAssetControllerModule',
   'oibHomeModule',
   'oibVersionModule',
-  'ui.bootstrap',
   'oibModalModule',
   'oibConfirmModule',
   'uuidGenerator'
 ]);
 
-oibConfigurationApp.config(function($stateProvider, $urlRouterProvider) {
+oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelectConfig) {
+
+  uiSelectConfig.theme = 'bootstrap';
 
   $urlRouterProvider.otherwise('/home');
 

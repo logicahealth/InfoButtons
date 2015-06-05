@@ -1,6 +1,6 @@
 'use strict';
 
-var oibAssetServiceModule = angular.module('oibAssetServiceModule', []);
+var oibAssetServiceModule = angular.module('oibAssetServiceModule', ['ui.bootstrap']);
 
 oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
@@ -37,7 +37,41 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
         return $http.get(urlBase + 'assetProperty/' + id);
     };
 
+    assetFactory.updateAssetProperty = function (assetProperty) {
+        return $http.put(urlBase + 'assetProperty/update', assetProperty);
+    };
+
+    assetFactory.createAssetProperty = function (assetProperty) {
+        return $http.put(urlBase + 'assetProperty/create', assetProperty);
+    };
+
     return assetFactory;
 }]);
+
+oibAssetServiceModule.service('editModal', function ($modal) {
+
+    return function(selectedProperty, assetId) {
+        var instance = $modal.open({
+            templateUrl: 'responder/editProperty.html',
+            controller: 'EditModalCtrl',
+            controllerAs: 'EditModalCtrl',
+            resolve: {
+                selectedProperty : function () {
+
+                    return selectedProperty;
+                },
+                assetId : function () {
+
+                    return assetId;
+                }
+            }
+        });
+
+        return instance.result;
+    };
+
+});
+
+
 
 

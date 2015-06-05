@@ -12,7 +12,9 @@
     "angular-loader": "1.3.x",
     "angular-utf8-base64": "0.0.x",
     "angular-mocks": "~1.2.x",
-    "angular-bootstrap": "0.11.0",
-    "angular-datatables": "0.4.x"
+    "angular-bootstrap": "0.13.0",
+    "angular-datatables": "0.4.x",
+    "angular-sanitize": "1.3.x",
+    "angular-ui-select": "0.11.x"
   }
 }
