@@ -5,6 +5,11 @@
         outline: 10px auto -webkit-focus-ring-color;
         outline-offset: -2px;
     }
+
+    .orange, .orange a {
+
+        color: #FFA500;
+    }
 </style>
 <script type="text/ng-template" id="confirm.html">
     <div class="modal-body">
@@ -25,9 +30,12 @@
             </li>
         </ul>
     </div>
-    <div class="modal-footer">
+    <div ng-hide="edit" class="modal-footer">
         <button class="btn btn-primary" ng-click="ok()">Download</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+    <div ng-show="edit" class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">Change</button>
     </div>
 </script>
 
@@ -64,7 +72,9 @@
                 <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}" target="_blank">
                     <img src="{{localCloudProfile.image_url}}" style="max-height: 40px; max-width: 100px;">
                     <img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" style="max-height: 40px; max-width: 100px;" ng-hide="localCloudProfile.image_url">
-                </a> <br>
+                </a>
+                <a class="btn navbar-btn orange glyphicon glyphicon-pencil" ng-click="editOids(localCloudProfile)"></a>
+                <br>
                 <a href="https://github.com/VHAINNOVATIONS/InfoButtons/blob/development/profilestore/{{localCloudProfile.name}}" target="_blank" class="btn btn-link">{{localCloudProfile.name | limitTo: localCloudProfile.name.length - 4}}</a>
 
             </div>

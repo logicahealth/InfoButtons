@@ -160,6 +160,18 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
             });
     }
 
+    function changeOids (profile, oids) {
+        cloudProfileFactory.changeOids(profile, oids)
+            .success(function (msg) {
+                $scope.statusMessage = msg.object + ' ' + msg.event;
+                $state.reload();
+            })
+            .error(function (error) {
+                $scope.statusMessage = 'Unable to update profile oids:' + error;
+                $state.reload();
+            });
+    }
+
     $scope.update = function (profile) {
         cloudProfileFactory.updateProfile(profile, $scope.cloudProfileLinks);
         confirm();
@@ -228,12 +240,77 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
             resolve: {
                 items: function () {
                     return $scope.items;
+                },
+                selectedOids : function () {
+                    return [];
+                },
+                edit: function () {
+
+                    return false;
                 }
             }
         });
 
         modalInstance.result.then(function (selectedItem) {
             downloadProfile(profile,selectedItem);
+        }, function () {
+            $scope.status ='Modal dismissed at: ' + new Date();
+        });
+    };
+
+    $scope.editOids = function(profile) {
+
+        var selectedOids = cloudProfileFactory.getOids(profile);
+        var profileOids = angular.copy(selectedOids);
+        var items = $scope.items;
+        var uniqueItems = [];
+        for (var i = 0; i < items.length; i++)
+        {
+            for (var c = 0; c < profileOids.length; c++)
+            {
+                if ((profileOids[c].orgOid != items[i].orgOid) || (profileOids[c].orgName != items[i].orgName))
+                {
+                    if ((c + 1) == profileOids.length)
+                    {
+                        uniqueItems.push(items[i]);
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        if (profileOids.length  == 0) {
+
+            profileOids = $scope.items;
+        }
+        else
+        {
+            for (var x = 0; x < uniqueItems.length; x++)
+            {
+                profileOids.push(uniqueItems[x]);
+            }
+        }
+        var modalInstance = $modal.open({
+            templateUrl: 'modalContent.html',
+            controller: 'ModalController',
+            resolve: {
+                items: function () {
+                    return profileOids;
+                },
+                selectedOids : function () {
+                    return selectedOids;
+                },
+                edit: function () {
+
+                    return true;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            changeOids(profile,selectedItem);
         }, function () {
             $scope.status ='Modal dismissed at: ' + new Date();
         });
@@ -261,10 +338,10 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
     angular.module('checklist-model', [])
         .directive('checklistModel', ['$parse', '$compile', function($parse, $compile) {
             // contains
-            function contains(arr, item) {
+            function contains(arr, item, comparator) {
                 if (angular.isArray(arr)) {
-                    for (var i = 0; i < arr.length; i++) {
-                        if (angular.equals(arr[i], item)) {
+                    for (var i = arr.length; i--;) {
+                        if (comparator(arr[i], item)) {
                             return true;
                         }
                     }
@@ -273,22 +350,19 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
             }
 
             // add
-            function add(arr, item) {
+            function add(arr, item, comparator) {
                 arr = angular.isArray(arr) ? arr : [];
-                for (var i = 0; i < arr.length; i++) {
-                    if (angular.equals(arr[i], item)) {
-                        return arr;
-                    }
+                if(!contains(arr, item, comparator)) {
+                    arr.push(item);
                 }
-                arr.push(item);
                 return arr;
             }
 
             // remove
-            function remove(arr, item) {
+            function remove(arr, item, comparator) {
                 if (angular.isArray(arr)) {
-                    for (var i = 0; i < arr.length; i++) {
-                        if (angular.equals(arr[i], item)) {
+                    for (var i = arr.length; i--;) {
+                        if (comparator(arr[i], item)) {
                             arr.splice(i, 1);
                             break;
                         }
@@ -305,9 +379,17 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
                 // getter / setter for original model
                 var getter = $parse(attrs.checklistModel);
                 var setter = getter.assign;
+                var checklistChange = $parse(attrs.checklistChange);
 
                 // value added to list
                 var value = $parse(attrs.checklistValue)(scope.$parent);
+
+
+                var comparator = angular.equals;
+
+                if (attrs.hasOwnProperty('checklistComparator')){
+                    comparator = $parse(attrs.checklistComparator)(scope.$parent);
+                }
 
                 // watch UI checked change
                 scope.$watch('checked', function(newValue, oldValue) {
@@ -316,16 +398,28 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
                     }
                     var current = getter(scope.$parent);
                     if (newValue === true) {
-                        setter(scope.$parent, add(current, value));
+                        setter(scope.$parent, add(current, value, comparator));
                     } else {
-                        setter(scope.$parent, remove(current, value));
+                        setter(scope.$parent, remove(current, value, comparator));
+                    }
+
+                    if (checklistChange) {
+                        checklistChange(scope);
                     }
                 });
 
+                // declare one function to be used for both $watch functions
+                function setChecked(newArr, oldArr) {
+                    scope.checked = contains(newArr, value, comparator);
+                }
+
                 // watch original model change
-                scope.$parent.$watch(attrs.checklistModel, function(newArr, oldArr) {
-                    scope.checked = contains(newArr, value);
-                }, true);
+                // use the faster $watchCollection method if it's available
+                if (angular.isFunction(scope.$parent.$watchCollection)) {
+                    scope.$parent.$watchCollection(attrs.checklistModel, setChecked);
+                } else {
+                    scope.$parent.$watch(attrs.checklistModel, setChecked, true);
+                }
             }
 
             return {
@@ -334,7 +428,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
                 terminal: true,
                 scope: true,
                 compile: function(tElement, tAttrs) {
-                    if (tElement[0].tagName !== 'INPUT' || !tElement.attr('type', 'checkbox')) {
+                    if (tElement[0].tagName !== 'INPUT' || tAttrs.type !== 'checkbox') {
                         throw 'checklist-model should be applied to `input[type="checkbox"]`.';
                     }
 
