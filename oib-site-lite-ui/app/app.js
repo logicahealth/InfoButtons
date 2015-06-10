@@ -93,6 +93,7 @@ oibConfigurationApp.run(function ($rootScope, $state, loginModal, $location) {
         localStorage.setItem("profileStorePath", 'profilestore');
         localStorage.setItem("gitUser", 'undefined');
         localStorage.setItem('init','yes');
+        localStorage.setItem('oids', []);
     }
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
