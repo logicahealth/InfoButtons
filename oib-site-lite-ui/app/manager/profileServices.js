@@ -53,6 +53,81 @@ oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
         });
     };
 
+    profileFactory.getOids = function (profile) {
+
+        var xmlProfile;
+        if (window.DOMParser)
+        {
+            var parser=new DOMParser();
+            xmlProfile=parser.parseFromString(profile.content_utf8,"text/xml");
+        }
+        else // code for IE
+        {
+            xmlProfile=new ActiveXObject("Microsoft.XMLDOM");
+            xmlProfile.async=false;
+            xmlProfile.loadXML(profile.content_utf8);
+        }
+        var x = xmlProfile.getElementsByTagName("authorizedOrganization");
+        var oids = [];
+        for (var i = 0; i < x.length; i++)
+        {
+            oids.push({orgOid : x[i].id, orgName : x[i].getAttribute("name"), selected : false})
+        }
+        return oids;
+    };
+
+    profileFactory.changeOids = function (profile, oids) {
+
+        var xmlDoc;
+        if (window.DOMParser)
+        {
+            var parser=new DOMParser();
+            xmlDoc=parser.parseFromString(profile.content_utf8,"text/xml");
+        }
+        else // code for IE
+        {
+            xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+            xmlDoc.async=false;
+            xmlDoc.loadXML(profile.content_utf8);
+        }
+        var authorizedOrgs = xmlDoc.createElement('authorizedOrganizations');
+        var authorizedOrg;
+        var nameattr;
+        var idattr;
+
+        for (var i = 0; i < oids.items.length; i++)
+        {
+            authorizedOrg = xmlDoc.createElement('authorizedOrganization');
+            nameattr = xmlDoc.createAttribute("name");
+            idattr = xmlDoc.createAttribute("id");
+            nameattr.nodeValue = oids.items[i].orgName;
+            idattr.nodeValue = oids.items[i].orgOid;
+            authorizedOrg.setAttributeNode(nameattr);
+            authorizedOrg.setAttributeNode(idattr);
+            authorizedOrgs.appendChild(authorizedOrg)
+        }
+
+        var oidsString = new XMLSerializer().serializeToString(authorizedOrgs);
+        var x = xmlDoc.getElementsByTagName("authorizedOrganizations")[0];
+        while (x.firstChild)
+        {
+            x.removeChild(x.firstChild);
+        }
+        for (var oid=authorizedOrgs.childNodes.length - 1; oid > -1; oid--)
+        {
+            x.appendChild(authorizedOrgs.getElementsByTagName("authorizedOrganization")[oid]);
+        }
+        var xelement = new XMLSerializer().serializeToString(x);
+        var newProfile = new XMLSerializer().serializeToString(xmlDoc);
+        profile.content_utf8 = newProfile;
+        var profileJsonString = {'version' : profile.version, 'name' : profile.name, 'content_utf8' : profile.content_utf8, 'image_url': profile.image_url, 'status' : profile.status, 'id' : profile.id};
+        return $http.put(urlBase + 'profile/update', profileJsonString, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
+    };
+
     return profileFactory;
 }]);
 

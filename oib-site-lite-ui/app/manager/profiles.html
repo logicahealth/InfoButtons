@@ -6,7 +6,30 @@
         outline-offset: -2px;
     }
 
+    .orange, .orange a {
+
+        color: #FFA500;
+    }
+
 </style>
+
+<script type="text/ng-template" id="modalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Select Organization ID</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <input type="checkbox" checklist-model="selection.items" checklist-value="item">
+                {{item.orgName}}
+            </li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">Change</button>
+    </div>
+</script>
+
 <h3>Custom Resources<a class="btn navbar-btn glyphicon glyphicon-plus" href="#/editProfile/"></a></h3>
 <hr/>
 
@@ -19,6 +42,7 @@
                     <img src="{{profile.image_url}}" style="max-height: 40px; max-width: 100px;">
                     <img src="http://www.openinfobutton.org/_/rsrc/1290202364539/home/project_logo.jpg" style="max-height: 40px; max-width: 100px;" ng-hide="profile.image_url">
                 </a></span>
+                <a class="btn navbar-btn orange glyphicon glyphicon-pencil" ng-click="editOids(profile)"></a>
                 <br>
                 <span><a href="#/editProfile/{{profile.id}}" class="btn btn-link">{{profile.name}}</a></span>
             </div>

@@ -2,11 +2,12 @@
 
 var oibManagerModule = angular.module('oibManagerModule', ['ui.router','ngResource', 'ab-base64', 'ui.bootstrap']);
 
-oibManagerModule.controller('ProfileCtrl', ['$scope', 'profileFactory', function ($scope, profileFactory) {
+oibManagerModule.controller('ProfileCtrl', ['$scope', '$modal', 'profileFactory', '$state', function ($scope, $modal, profileFactory, $state) {
 
         $scope.localProfiles = [];
         $scope.cloudProfiles = [];
         $scope.status;
+        $scope.items = JSON.parse(localStorage.getItem("oids"));
 
         getLocalProfiles();
 
@@ -48,7 +49,77 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', 'profileFactory', function
                 });
         };
 
-        return $scope;
+    $scope.editOids = function(profile) {
+
+        var selectedOids = profileFactory.getOids(profile);
+        var profileOids = angular.copy(selectedOids);
+        var items = $scope.items;
+        var uniqueItems = [];
+        for (var i = 0; i < items.length; i++)
+        {
+            for (var c = 0; c < profileOids.length; c++)
+            {
+                if ((profileOids[c].orgOid != items[i].orgOid) || (profileOids[c].orgName != items[i].orgName))
+                {
+                    if ((c + 1) == profileOids.length)
+                    {
+                        uniqueItems.push(items[i]);
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        if (profileOids.length  == 0) {
+
+            profileOids = $scope.items;
+        }
+        else
+        {
+            for (var x = 0; x < uniqueItems.length; x++)
+            {
+                profileOids.push(uniqueItems[x]);
+            }
+        }
+        var modalInstance = $modal.open({
+            templateUrl: 'modalContent.html',
+            controller: 'ModalController',
+            resolve: {
+                items: function () {
+                    return profileOids;
+                },
+                selectedOids : function () {
+                    return selectedOids;
+                },
+                edit: function () {
+
+                    return true;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            changeOids(profile,selectedItem);
+        }, function () {
+            $scope.status ='Modal dismissed at: ' + new Date();
+        });
+    };
+
+    function changeOids (profile, oids) {
+        profileFactory.changeOids(profile, oids)
+            .success(function (msg) {
+                $scope.statusMessage = msg.object + ' ' + msg.event;
+                $state.reload();
+            })
+            .error(function (error) {
+                $scope.statusMessage = 'Unable to update profile oids:' + error;
+                $state.reload();
+            });
+    }
+
+    return $scope;
     }]);
 
 oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', function ($scope, $stateParams, profileFactory) {
@@ -93,6 +164,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
         };
 
         $scope.update = function (profile) {
+
             profileFactory.updateProfile(profile)
                 .success(function (msg) {
                     $scope.statusMessage = msg.object + ' ' + msg.event;
