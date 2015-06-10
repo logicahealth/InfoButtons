@@ -59,7 +59,7 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$modal', 'profileFactory'
         {
             for (var c = 0; c < profileOids.length; c++)
             {
-                if ((profileOids[c].orgOid != items[i].orgOid) || (profileOids[c].orgName != items[i].orgName))
+                if ((profileOids[c].orgOid != items[i].orgOid))
                 {
                     if ((c + 1) == profileOids.length)
                     {
@@ -340,7 +340,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
         {
             for (var c = 0; c < profileOids.length; c++)
             {
-                if ((profileOids[c].orgOid != items[i].orgOid) || (profileOids[c].orgName != items[i].orgName))
+                if ((profileOids[c].orgOid != items[i].orgOid))
                 {
                     if ((c + 1) == profileOids.length)
                     {
