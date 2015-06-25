@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="MainController as MainCtrl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>SuperLite Application</title>
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" type="text/css" href="app.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-ui-select/dist/select.js"></script>
+  <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css">
+  <script src="app.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+</head>
+
+<body>
+
+<!-- Navigation bar that trades and sets the state of the app -->
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="navbar-header">
+        <a class="navbar brand" ui-sref="#"><img alt="Brand" border="0" src="images/project_logo_medium.jpg" height="60"/></a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a ui-sref="request">Request Form</a></li>
+        <li ng-show="info == true"><a ui-sref="information">Search Results</a></li>
+      </ul>
+    </nav>
+
+<!-- Container that will display whatever the current state is showing. -->
+  <div class="container-fluid">
+    <div ui-view></div>
+  </div>
+
+<!-- Progress bar that only shows up if the request has been sent -->
+    <div class="progress" ng-hide="progress==100 || progress==0">
+      <div class="progress-bar progress-bar-striped active" role="progressbar"
+           aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+        {{progress}}%
+      </div>
+    </div>
+
+</body>
+</html>

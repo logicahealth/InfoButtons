@@ -1,0 +1,184 @@
+<div class="jumbotron" ng-init="fillForm()">
+    <form id="requestForm" ng-submit="buildUrl()">
+
+        <!-- Server form element -->
+        <div class="form-group">
+            <label class="control-label" for="server">*Server:</label>
+                <select id="server" name="server" class="form-control">
+                    <option value="http://service.oib.utah.edu:8080/infobutton-service/infoRequest?">Production</option>
+                    <option value="http://155.100.240.79:8080/infobutton-service/infoRequest?">ITS-CISOPENINFO</option>
+                    <option value="http://dev-service.oib.utah.edu:8080/infobutton-service/infoRequest?">Development</option>
+                </select>
+        </div>
+
+        <!-- Execution Mode form element -->
+        <div class="form-group">
+            <label class="control-label" for="executionMode">*Execution Mode:</label>
+                <select id="executionMode" name="executionMode" class="form-control">
+                    <option value="">Production</option>
+                    <option value="TEST">ITS-CISOPENINFO</option>
+                </select>
+        </div>
+
+        <!-- Requesting Organization form element -->
+        <div class="form-group">
+            <label class="control-label" for="organizationId">*Requesting Organization:</label>
+                <select required id="organizationId" name="organizationId" class="form-control">
+                    <option value="1.3.6.1.4.1.3768&xsltTransform=Infobutton_UI_VA">Veterans Administration</option>
+                    <option value="MBL">Marine Biology Laboratory</option>
+                    <option value="1.3.6.1.4.1.4275&xsltTransform=Infobutton_UI_Duke">Duke University Health System</option>
+                    <option value="2.16.840.1.113762">National Institutes of Health</option>
+                    <option value="1.3.6.1.4.1.6014">National Library of Medicine</option>
+                    <option value="1.3.6.1.4.1.150&xsltTransform=Infobutton_UI_UW">University of Washington</option>
+                    <option value="1.3.6.1.4.1.5884">University of Utah</option>
+                    <option value="2.16.840.1.113883.3.1951">Northwestern University</option>
+                    <option value="http://axeium.net&xsltTransform=Infobutton_UI_AXEIUM">Axeium</option>
+                    <option value="http://lvhn.org">Lehigh Valley Health Network</option>
+                </select>
+        </div>
+
+        <!-- Task Context -->
+        <div class="form-group">
+            <label class="control-label" for="taskContextC">*Task Context:</label>
+            <select required name="taskContextC" id="taskContextC" class="form-control">
+                <option value=""></option>
+                <option value="LABRREV">Lab results review</option>
+                <option value="LABOE">Lab order entry</option>
+                <option value="MLREV">Medication list review</option>
+                <option value="MEDOE">Medication order entry</option>
+                <option value="PROBLISTREV">Problem list review</option>
+                <option value="PROBLISTE">Problem list entry</option>
+            </select>
+        </div>
+
+        <!-- Main Search Criteria -->
+        <div class="form-group">
+            <label class="control-label">*Main Search Criteria:</label>
+
+            <label class="control-label" for="mainSearchCriteriaC" style="margin-left: 20px; font-size: 15px;">Code:</label>
+            <input name="mainSearchCriteriaC" id="mainSearchCriteriaC" type="text" size="15">
+
+            <label class="control-label" for="mainSearchCriteriaDn" style="margin-left: 20px; font-size: 15px;">Display Name:</label>
+            <input required name="mainSearchCriteriaDn" id="mainSearchCriteriaDn" class="form-control">
+            <label class="control-label" for="mainSearchCriteriaCs" style="margin-left: 20px; font-size: 15px;">Code System:</label>
+            <select name="mainSearchCriteriaCs" id="mainSearchCriteriaCs" class="form-control">
+                <option value=""></option>
+                <option value="2.16.840.1.113883.6.103">ICD9-CM</option>
+                <option value="2.16.840.1.113883.6.90">ICD10-CM</option>
+                <option value="2.16.840.1.113883.6.1">LOINC</option>
+                <option value="2.16.840.1.113883.6.177">MeSH</option>
+                <option value="2.16.840.1.113883.6.69">National Drug Codes</option>
+                <option value="2.16.840.1.113883.6.88">RxNorm</option>
+                <option value="2.16.840.1.113883.6.96">SNOMED-CT</option>
+            </select>
+        </div>
+
+        <!-- Age -->
+        <div class="form-group">
+            <label class="control-label">Age:</label>
+
+            <label class="control-label" for="ageV" style="margin-left: 20px; font-size: 15px;">Value:</label>
+            <input name="ageV" id="ageV" type="text" size="15" style="width: 100px;">
+
+            <label class="control-label" for="ageU" style="margin-left: 20px; font-size: 15px;">Unit:</label>
+            <select name="ageU" id="ageU" class="form-control" style="margin-left: 0;">
+                <option value=""></option>
+                <option value="a">Years</option>
+                <option value="m">Months</option>
+                <option value="d">Days</option>
+            </select>
+        </div>
+
+        <!-- Age Group -->
+        <div class="form-group">
+            <label for="ageGroupC" class="control-label">Age Group:</label>
+
+            <select name="ageGroupC" id="ageGroupC" class="form-control">
+                <option value=""></option>
+                <option value="D000293">adolescent; 13-18 years</option>
+                <option value="D000328">adult; 19-44 years</option>
+                <option value="D000368">aged; 56-79 years</option>
+                <option value="D000369">aged, 80 and older; a person 80 years of age and older</option>
+                <option value="D008875">middle aged; 45-64 years</option>
+                <option value="D055815">young adult; 19-24 years</option>
+                <option value="D002648">child; 6 to 12 years</option>
+                <option value="D002675">child, preschool; 2 to 5 years</option>
+                <option value="D007223">Infant; 1 to 23 months</option>
+                <option value="D007231">infant, newborn; birth to 1 month</option>
+            </select>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+            <label for="administrativeGenderCodeC" class="control-label">Gender: </label>
+            <select name="administrativeGenderCodeC" id="administrativeGenderCodeC" class="form-control">
+                <option value=""></option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+        </div>
+
+        <!-- Care Setting -->
+        <div class="form-group">
+            <label for="encounterC" class="control-label">Care Setting: </label>
+            <select name="encounterC" id="encounterC" class="form-control">
+                <option value=""></option>
+                <option value="AMB">Outpatient</option>
+                <option value="IMP">Inpatient</option>
+                <option value="EMER">Emergency</option>
+            </select>
+        </div>
+
+        <!-- Performer -->
+        <div class="form-group">
+            <label for="performer" class="control-label">Performer:</label>
+            <select name="performer" id="performer" class="form-control">
+                <option value=""></option>
+                <option value="PROV">Healthcare Provider</option>
+                <option value="PAT">Patient</option>
+            </select>
+
+            <label class="control-label" for="performerLanguageC" style="margin-left: 20px; font-size: 15px;">Language:</label>
+            <select name="performerLanguageC" id="performerLanguageC" class="form-control">
+                <option value=""></option>
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+            </select>
+
+            <label class="control-label" for="performerDisciplineC" style="margin-left: 20px; font-size: 15px;">Discipline:</label>
+            <select name="performerDisciplineC" id="performerDisciplineC" class="form-control">
+                <option value=""></option>
+                <option value="200000000X">Physician</option>
+                <option value="163W00000X">Registered Nurse</option>
+            </select>
+        </div>
+
+        <!-- Information Recipient -->
+        <div class="form-group">
+            <label for="informationRecipient" class="control-label">Information Recipient:</label>
+            <select name="informationRecipient" id="informationRecipient" class="form-control">
+                <option value=""></option>
+                <option value="PROV">Healthcare Provider</option>
+                <option value="PAT">Patient</option>
+            </select>
+
+            <label class="control-label" for="informationRecipientLanguageC" style="margin-left: 20px; font-size: 15px;">Language:</label>
+            <select name="informationRecipientLanguageC" id="informationRecipientLanguageC" class="form-control">
+                <option value=""></option>
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+            </select>
+
+            <label class="control-label" for="informationRecipientDisciplineC" style="margin-left: 20px; font-size: 15px;">Discipline:</label>
+            <select name="informationRecipientDisciplineC" id="informationRecipientDisciplineC" class="form-control">
+                <option value=""></option>
+                <option value="200000000X">Physician</option>
+                <option value="163W00000X">Registered Nurse</option>
+            </select>
+        </div>
+
+        <div>
+                <input class="btn btn-primary" name="submit" type="submit" value="Send Request" style="margin-left: 0;">
+        </div>
+    </form>
+</div>

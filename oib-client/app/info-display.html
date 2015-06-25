@@ -1,0 +1,24 @@
+<div ng-show="displayInfo">
+    <div class="header"> <!--imports the header from style.css-->
+        <div class="logo"></div><!--imports the logo from style.css and places it in the header class-->
+    </div>
+
+    <div class="linkDiv"> <!--imports the style from style.css (This is where the links will be displayed)-->
+        <div id="demo"></div>
+        <div ng-repeat="feeds in text.feed"> <!--uses ng-repeat to run through every "entry" in the JSON output-->
+            <h3><b>{{feeds.title.value[0]}}</b></h3> <!--accesses the controller and grabs a piece of the JSON return-->
+            <ul>
+                <li ng-repeat="entries in feeds.entry"> <!-- Iterates through all the links associated with the given resource and displays them -->
+                    <!--ng-href="{{entries.link[0].href}}"-->
+                    <a href="javascript:void(0);" ng-click="setContent(entries.link[0].href,entries.id.value)" >{{entries.title.value[0]}}</a>
+                    <div style="display:none" class="selected" id="{{entries.id.value}}">
+                        <img src="images/tick_white.png"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="infoDiv">
+        <iframe ng-src="{{currentLink}}" id="contentPanel"></iframe>
+    </div>
+</div>
