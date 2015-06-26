@@ -40,7 +40,7 @@
   });
 
   //Controls the "main" functionality of the app. Namely any functionality that all states need access to.
-  app.controller("MainController",['$rootScope','$scope', '$http', '$sce', function($rootScope, $scope, $http, $sce) {
+  app.controller("MainController",['$rootScope','$scope', '$http', '$sce','$state', function($rootScope, $scope, $http, $sce, $state) {
     $rootScope.knowledgeRequest = "";
     $rootScope.parameters = {}; //Create an empty object
     $rootScope.parameters.list=[]; //Create an empty array
@@ -77,6 +77,7 @@
             $scope.currentLink = $sce.trustAsResourceUrl($scope.text.feed[0].entry[0].link[0].href);
             $rootScope.progress = 100;
             $rootScope.displayInfo = true;
+            $state.go('information');
 
           }
       );
