@@ -22,6 +22,12 @@
   height: 35px;
 }
 
+#urlBox {
+  width: 500px;
+  border: 1px solid black;
+  word-wrap: break-word;
+}
+
 .linkDiv
 {
   position:absolute;
