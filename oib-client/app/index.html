@@ -16,6 +16,8 @@
   <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/angular-ui-select/dist/select.js"></script>
+  <script src="bower_components/ng-clip/dest/ng-clip.min.js"></script>
+  <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
   <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css">
   <script src="app.js"></script>
   <script src="components/version/version.js"></script>
@@ -48,6 +50,16 @@
         {{progress}}%
       </div>
     </div>
+
+<div class="container-fluid" ng-show="$state.includes('request')">
+  Request URL:
+  <div id="urlBox" class="jumbotron">
+    <p data-ng-model="knowledgeRequest">{{knowledgeRequest}}</p>
+    <button class="btn btn-default" clip-copy="knowledgeRequest">Copy!</button>
+  </div>
+
+
+</div>
 
 </body>
 </html>

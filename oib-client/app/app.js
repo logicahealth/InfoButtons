@@ -10,11 +10,12 @@
 
 (function() {
 
-  var app = angular.module("myApp",['ui.router', 'ui.bootstrap']);
+  var app = angular.module("myApp",['ui.router', 'ui.bootstrap', 'ngClipboard']);
 
-  app.config(function($stateProvider, $urlRouterProvider,$provide) {
+  app.config(function($stateProvider, $urlRouterProvider,$provide, ngClipProvider) {
 
     $urlRouterProvider.otherwise('/Request');
+
 
     /*
      * Allows the app to change states (making controller and page switches easier)
@@ -31,7 +32,7 @@
           controller: 'LinkController'
         });
 
-
+    ngClipProvider.setPath("bower_components/zeroclipboard/dist/ZeroClipboard.swf");
     //Causes the page to auto-scroll to the top upon refresh (Fixed a bug where the page was anchored to the bottom).
     $provide.decorator('$uiViewScroll', function () {
       return function (uiViewElement) {
@@ -50,6 +51,7 @@
     $rootScope.displayInfo = false; //Display the page if it has loaded
     $rootScope.progress = 0; //Used for progress bar
 
+    $scope.$state =$state;
     $scope.text = []; //Holds the JSON response from the server
     $scope.currentLink = ""; //
 
@@ -78,7 +80,6 @@
             $rootScope.progress = 100;
             $rootScope.displayInfo = true;
             $state.go('information');
-
           }
       );
     };
@@ -223,10 +224,10 @@
             document.getElementById("executionMode").value;
       }
 
-
       $rootScope.knowledgeRequest = $scope.knowledgeRequest; //Saves the scope value to rootScope for MainController
       $rootScope.progress=25;
       $rootScope.sendInfo();
+
     };
   }]);
 
