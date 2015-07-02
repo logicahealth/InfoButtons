@@ -15,7 +15,7 @@
 
 #requestForm input {
   display: inline;
-  font-size:20px;
+  font-size:15px;
   font-weight: normal;
   margin-left:10px;
   width:250px;
@@ -23,7 +23,6 @@
 }
 
 #urlBox {
-  width: 500px;
   border: 1px solid black;
   word-wrap: break-word;
 }
@@ -128,7 +127,7 @@
 
 .jumbotron p
 {
-  font-size: 16px;
+  font-size: 15px;
 }
 
 /* navbar */
