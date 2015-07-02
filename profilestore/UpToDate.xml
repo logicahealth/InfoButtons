@@ -7,6 +7,7 @@
 	</header>
 	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
 			<authorizedOrganizations/>
+			<!--
 		<supportedTerminologies>
 			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMEDCT_US"/>
 			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9CM"/>
@@ -14,6 +15,7 @@
 			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
 			<supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC"/>
 		</supportedTerminologies>
+			-->
 		<contexts>
 			<context name="Knowledge on conditions from problem list review and entry" id="1">
 				<contextDefinition>
