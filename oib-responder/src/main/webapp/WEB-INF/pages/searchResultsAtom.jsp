@@ -26,7 +26,7 @@
       xml:lang="en" 
       xml:base="${atomFeedMetadata['xml.base']}"       
       xsi:schemaLocation="KnowledgeResponse.xsd">
-	<title type="text">${atomFeedMetadata['title']}</title><c:if test="${not empty atomFeedMetadata['author.name'] or not empty atomFeedMetadata['author.uri']}">
+	<title type="text">${fn:escapeXml(atomFeedMetadata['title'])}</title><c:if test="${not empty atomFeedMetadata['author.name'] or not empty atomFeedMetadata['author.uri']}">
 	<author><c:if test="${not empty atomFeedMetadata['author.name']}">
 		<name>${atomFeedMetadata['author.name']}</name></c:if><c:if test="${not empty atomFeedMetadata['author.uri']}">
 		<uri>${atomFeedMetadata['author.uri']}</uri></c:if>
@@ -35,12 +35,12 @@
 	<category scheme="${parameter.key}" term="${parameter.value}"/></c:forEach>
 	<id>${atomFeedMetadata['id.urn']}</id><c:forEach items="${assets}" var="asset">
 	<entry xml:lang="en">
-		<title type="text">${asset.displayName}</title>
-		<link href="${asset.assetUrl}" hreflang="en" rel="via" type="${asset.assetMimeType}" title="${asset.displayName}"/>
+		<title type="text">${fn:escapeXml(asset.displayName)}</title>
+		<link href="${asset.assetUrl}" hreflang="en" rel="via" type="${asset.assetMimeType}" title="${fn:escapeXml(asset.displayName)}"/>
 		<id>${atomFeedMetadata['entry.id.urnPrefix']}${asset.assetId}</id>
 		<updated><fmt:formatDate value="${asset.lastUpdateDate}" pattern="yyyy-MM-dd'T'HH:mm:ss"/></updated><c:forEach items="${asset.assetProperties}" var="indexProperty"><c:set var="typeMap" value="${indexPropertyInterpretationMap[indexProperty.propertyName]}"/><c:if test="${not empty typeMap['CODE'] and not empty indexProperty.code}">
 		<category scheme="${typeMap['CODE']}" term="${indexProperty.code}"/></c:if><c:if test="${not empty typeMap['CODE_SYSTEM'] and not empty indexProperty.codeSystem}">
 		<category scheme="${typeMap['CODE_SYSTEM']}" term="${indexProperty.codeSystem}"/></c:if><c:if test="${not empty typeMap['DISPLAY_NAME'] and not empty indexProperty.displayName}">
-		<category scheme="${typeMap['DISPLAY_NAME']}" term="${indexProperty.displayName}"/></c:if></c:forEach>
+		<category scheme="${typeMap['DISPLAY_NAME']}" term="${fn:escapeXml(indexProperty.displayName)}"/></c:if></c:forEach>
 	</entry></c:forEach>
 </feed>
