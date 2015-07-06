@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><%@page import="java.text.SimpleDateFormat"%><%@page contentType="text/xml; charset=UTF-8"%><%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<?xml version="1.0" encoding="UTF-8"?><%@page import="java.text.SimpleDateFormat"%><%@page contentType="text/xml; charset=UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%--
   #%L
   searchResultsAtom.jsp - oib-rest-responder - University of Utah - 2,010
