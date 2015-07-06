@@ -145,7 +145,7 @@
             '&patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1';
 
         $scope.saveRequest('genderCode','administrativeGenderCodeC','patientPerson.administrativeGenderCode.cs',
-            document.getElementById("administrativeGenderCodeC").value + '&patientPerson.administrativeGenderCode.c=');
+            document.getElementById("administrativeGenderCodeC").value);
       }
 
       if (document.getElementById("ageV").value != '') {
@@ -160,7 +160,7 @@
         $scope.knowledgeRequest = $scope.knowledgeRequest + '&ageGroup.v.c=' +
             document.getElementById("ageGroupC").value + '&ageGroup.v.cs=2.16.840.1.113883.6.177';
 
-        $scope.saveRequest('ageGroup','ageGroupC','age.v.c', document.getElementById("ageV").value + '&ageGroup.v.cs=2.16.840.1.113883.6.177');
+        $scope.saveRequest('ageGroup','ageGroupC','age.v.c', document.getElementById("ageGroupC").value);
       }
 
       if (document.getElementById("encounterC").value != '') {
@@ -191,7 +191,7 @@
             '&informationRecipient.healthCareProvider.c.cs=2.16.840.1.113883.6.101';
 
         $scope.saveRequest('infoDiscipline','informationRecipientDisciplineC','informationRecipient.healthCareProvider.c.c',
-            document.getElementById("informationRecipientDisciplineC").value + '&informationRecipient.healthCareProvider.c.cs=2.16.840.1.113883.6.101');
+            document.getElementById("informationRecipientDisciplineC").value);
       }
 
       if (document.getElementById("performer").value != '') {
@@ -216,7 +216,7 @@
             '&performer.healthCareProvider.c.cs=2.16.840.1.113883.6.101';
 
         $scope.saveRequest('performerDiscipline','performerDisciplineC','performer.healthCareProvider.c.c',
-            document.getElementById("performerDisciplineC").value + '&performer.healthCareProvider.c.cs=2.16.840.1.113883.6.101');
+            document.getElementById("performerDisciplineC").value);
       }
 
       if (document.getElementById("executionMode").value != '') {

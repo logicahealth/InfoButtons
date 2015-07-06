@@ -44,18 +44,20 @@
   </div>
 
 <!-- Progress bar that only shows up if the request has been sent -->
-    <div class="progress" ng-hide="progress==100 || progress==0">
-      <div class="progress-bar progress-bar-striped active" role="progressbar"
-           aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" style="width:50%">
-        {{progress}}%
+  <div ng-hide="progress==100 || progress==0">
+    <p class="text-center">Loading...</p>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar"
+             aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+          {{progress}}%
+        </div>
       </div>
-    </div>
-
+  </div>
 <div class="container-fluid" ng-show="$state.includes('request')">
   Request URL:
+  <button class="btn btn-default" clip-copy="knowledgeRequest">Copy!</button>
   <div id="urlBox" class="jumbotron">
-    <p data-ng-model="knowledgeRequest">{{knowledgeRequest}}</p>
-    <button class="btn btn-default" clip-copy="knowledgeRequest">Copy!</button>
+    <p style="font-size: 14px" data-ng-model="knowledgeRequest">{{knowledgeRequest}}</p>
   </div>
 
 
