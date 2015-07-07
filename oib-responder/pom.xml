@@ -139,12 +139,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.openinfobutton</groupId>
-            <artifactId>oib-app-service</artifactId>
-            <version>0.21</version>
-        </dependency>
-
-        <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>

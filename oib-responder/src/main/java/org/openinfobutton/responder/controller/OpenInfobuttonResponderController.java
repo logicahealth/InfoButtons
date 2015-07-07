@@ -26,6 +26,9 @@ package org.openinfobutton.responder.controller;
  * #L%
  */
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.ParsePosition;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
@@ -33,15 +36,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.openinfobutton.app.model.Asset;
 import org.openinfobutton.responder.service.ResponderService;
+import org.openinfobutton.service.IndexService;
+import org.openinfobutton.service.dao.AppPropertyDao;
+import org.openinfobutton.service.dao.CodeExpanderDao;
+import org.openinfobutton.service.dao.impl.CodeExpanderDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -75,6 +80,15 @@ public class OpenInfobuttonResponderController {
 
     @Autowired
     private ResponderService responderService;
+
+    @Autowired
+    private AppPropertyDao appPropertyDao;
+
+    @Autowired
+    private CodeExpanderDaoImpl codeExpanderDao;
+
+    @Autowired
+    private IndexService indexService;
 
     private Properties atomFeedMetadata;
     private Map<String, Map<String, String>> indexPropertyInterpretationMap;
@@ -166,6 +180,16 @@ public class OpenInfobuttonResponderController {
             throw new HttpMediaTypeNotSupportedException("Unsupported knowledgeResponseType: " + viewType);
         }
 
+    }
+
+    @RequestMapping(value="/assetExpander/{assetId}/codeSystem/{codeSystem}", method= RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void assetExpander(@PathVariable String assetId, @PathVariable String codeSystem)
+    {
+
+        DecimalFormat format = new DecimalFormat();
+        format.setParseBigDecimal(true);
+        indexService.refreshAssetIndex( (BigDecimal)format.parse(assetId, new ParsePosition(0)), codeSystem);
     }
 
     /**
