@@ -9,6 +9,7 @@ var oibConfigurationApp = angular.module('oibConfigurationApp', [
   'ngSanitize',
   'ui.bootstrap',
   'ui.select',
+   'ngNotify',
   'setupControllers',
   'oibSetupServices',
   'oibManagerModule',

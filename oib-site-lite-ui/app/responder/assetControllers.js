@@ -1,8 +1,8 @@
 'use strict';
 
-var oibAssetControllerModule = angular.module('oibAssetControllerModule', ['ui.router', 'datatables', 'datatables.bootstrap', 'ui.bootstrap',]);
+var oibAssetControllerModule = angular.module('oibAssetControllerModule', ['ui.router', 'datatables', 'datatables.bootstrap', 'ui.bootstrap', 'ngNotify']);
 
-oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$stateParams', 'assetFactory', 'DTOptionsBuilder', function ($scope, $stateParams, assetFactory, DTOptionsBuilder) {
+oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$state', 'ngNotify', '$stateParams', 'assetFactory', 'DTOptionsBuilder', function ($scope, $state, ngNotify, $stateParams, assetFactory, DTOptionsBuilder) {
 
         $scope.currentPage = 1;
         $scope.pageSize = 10;
@@ -26,9 +26,34 @@ oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$stateParams', 'as
 
             if (asset.ASSET_ID) {
                 assetFactory.updateAsset(asset);
+                ngNotify.set("Asset Updated");
             } else {
-                assetFactory.insertAsset(asset)
+                assetFactory.insertAsset(asset).success(function() {
+                    ngNotify.set("Asset Created");
+                    $state.go('responder');
+                });
             }
+        };
+
+        $scope.deleteAsset = function(asset) {
+
+            assetFactory.deleteAsset(asset).success(function() {
+                ngNotify.set("Asset Deleted");
+                $state.go('responder');
+            });
+        };
+
+        $scope.deleteAssetProperty = function(assetProperty) {
+
+            assetFactory.deleteAssetProperty(assetProperty).success(function() {
+                ngNotify.set("Asset Property Deleted");
+                if (assetProperty.PROP_NAME == 'mainSearchCriteria.v')
+                {
+                    assetFactory.expandAssetIndex(assetProperty.ASSET_ID, assetProperty.CODE_SYSTEM);
+                    ngNotify.set("Asset property deleted, clearing expanded concepts, please refresh...");
+                }
+                $state.reload();
+            });
         };
 
     }]);
@@ -69,7 +94,7 @@ oibAssetControllerModule.controller('AssetFormCtrl', ['$scope', '$state', '$stat
 
         $scope.editProperty = function(selectedProperty) {
 
-            editModal(selectedProperty, $stateParams.assetId)
+            editModal(selectedProperty, $stateParams.assetId, $state)
                 .then(function () {
                     return $state.reload();
                 });
@@ -77,7 +102,7 @@ oibAssetControllerModule.controller('AssetFormCtrl', ['$scope', '$state', '$stat
 
     }]);
 
-oibAssetControllerModule.controller('EditModalCtrl', ['$scope', 'selectedProperty', 'assetId', 'assetFactory', function ($scope, selectedProperty, assetId, assetFactory) {
+oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selectedProperty', 'assetId', 'assetFactory', 'ngNotify', function ($scope, $state, selectedProperty, assetId, assetFactory, ngNotify) {
 
     var selectedId;
     var newAsset = false;
@@ -222,7 +247,6 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', 'selectedPropert
                         {"name": "Information Recipient", "propName" : "informationRecipient", "codeSystem" : codeSystems[9], "codes": {"displayName" : "", "code" : ""}},
                         {"name": "Severity Observation", "propName" : "severityObservation.interpretationCode.c", "codeSystem" : codeSystems[12], "codes": observationCodes},
                         {"name": "Sub Topic", "propName" : "subTopic.v", "codeSystem" : codeSystems[7], "codes": subtopicCodes},
-                        {"name": "Country", "propName" : "locationOfInterest.c", "codeSystem" : codeSystems[13], "codes": {"displayName" : "", "code" : ""}},
                         {"name": "Main Search Criteria", "propName" : "mainSearchCriteria.v", "codeSystem" : codeSystems, "codes" : {"displayName" : "", "code" : ""}}];
 
 
@@ -231,14 +255,24 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', 'selectedPropert
         assetProperty.assetId = selectedId;
         if (newAsset) {
             assetFactory.createAssetProperty(assetProperty)
-                .success(function (assetProperty) {
+                .success(function () {
 
+                    if (assetProperty.propName == 'mainSearchCriteria.v')
+                    {
+                        assetFactory.expandAssetIndex(assetId, assetProperty.codeSystem.oid);
+                        ngNotify.set("Updating asset index, refresh to see expanded concepts....");
+                    }
                     $scope.$close(assetProperty)
                 });
         } else {
             assetFactory.updateAssetProperty(assetProperty)
-                .success(function (assetProperty) {
+                .success(function () {
 
+                    if (assetProperty.propName == 'mainSearchCriteria.v')
+                    {
+                        assetFactory.expandAssetIndex(assetId, assetProperty.codeSystem.oid);
+                        ngNotify.set("Updating asset index, refresh to see expanded concepts....");
+                    }
                     $scope.$close(assetProperty)
                 });
         }

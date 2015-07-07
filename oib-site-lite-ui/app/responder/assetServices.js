@@ -5,11 +5,14 @@ var oibAssetServiceModule = angular.module('oibAssetServiceModule', ['ui.bootstr
 oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
     var urlBase = 'http://' + localStorage.getItem('hostName') + ':3000/';
+
+    var responderExpander = 'http://' + localStorage.getItem('hostName') + ':8080/';
 //    var urlBase = 'http://service.oib.utah.edu:8080/infobutton-service-dev/manager/';
     var assetFactory = {};
 
     assetFactory.getAssets = function () {
         $http.defaults.headers.common.Authorization = undefined;
+        $http.defaults.headers.delete = { 'Content-Type' : 'application/json' };
         return $http.get(urlBase + 'assets');
     };
 
@@ -25,8 +28,12 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
         return $http.put(urlBase + 'asset/update', asset);
     };
 
-    assetFactory.deleteAsset = function (id) {
-        return $http.delete(urlBase + 'asset/delete/' + id);
+    assetFactory.deleteAsset = function (asset) {
+        return $http.put(urlBase + 'asset/deleteAsset', asset);
+    };
+
+    assetFactory.deleteAssetProperty = function (assetProperty) {
+        return $http.put(urlBase + 'asset/deleteAssetProperty', assetProperty);
     };
 
     assetFactory.getAssetPropertiesForAsset = function (assetId) {
@@ -44,6 +51,10 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
     assetFactory.createAssetProperty = function (assetProperty) {
         return $http.put(urlBase + 'assetProperty/create', assetProperty);
     };
+
+    assetFactory.expandAssetIndex = function (assetId, codeSystem) {
+        return $http.get(responderExpander + 'assetExpander/' + assetId + '/codeSystem/' + codeSystem +'/');
+    }
 
     return assetFactory;
 }]);

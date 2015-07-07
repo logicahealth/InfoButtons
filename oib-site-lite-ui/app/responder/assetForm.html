@@ -52,6 +52,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button ng-if="asset.ASSET_ID" ng-click="update(asset)" class="btn btn-success">UPDATE</button>
+                    <button ng-if="asset.ASSET_ID" ng-click="deleteAsset(asset)" class="btn btn-danger">DELETE</button>
                 </div>
                 <div class="col-sm-offset-2 col-sm-10">
                     <button ng-if="!asset.ASSET_ID" ng-click="update(asset)" class="btn btn-success">CREATE</button>
@@ -60,35 +61,37 @@
 
         </form>
 
-        <hr/>
-        <h3>Index Properties<a class="btn navbar-btn glyphicon glyphicon-plus" ng-click="editProperty(null)"></a></h3>
-        <hr/>
+        <div ng-if="asset.ASSET_ID">
+            <hr/>
+            <h3>Index Properties<a class="btn navbar-btn glyphicon glyphicon-plus" ng-click="editProperty(null)"></a></h3>
+            <hr/>
 
-        <table datatable="ng" dt-options="dtOptions" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Edit</th>
-                    <th>Property Type</th>
-                    <th>Property</th>
-                    <th>Code Label</th>
-                    <th>Code System</th>
-                    <th>Code</th>
-                    <th>Value</th>
-                    <th>Created By</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="assetProperty in assetProperties">
-                    <td><button ng-hide="assetProperty.GENERATED_BY_CD == 'GENERATED_BY_ONTOLOGY_RELATIONSHIP'" ng-click="editProperty(assetProperty)" class="btn btn-info">EDIT</button></td>
-                    <td>{{assetProperty.PROP_TYPE_CD}}</td>
-                    <td>{{assetProperty.PROP_NAME}}</td>
-                    <td>{{assetProperty.DISPLAY_NAME}}</td>
-                    <td>{{assetProperty.CODE_SYSTEM}}</td>
-                    <td>{{assetProperty.CODE}}</td>
-                    <td>{{assetProperty.PROP_VALUE}}</td>
-                    <td>{{assetProperty.GENERATED_BY_CD}}</td>
-                </tr>
-            </tbody>
-        </table>
+            <table datatable="ng" dt-options="dtOptions" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Edit</th>
+                        <th>Property Type</th>
+                        <th>Property</th>
+                        <th>Code Label</th>
+                        <th>Code System</th>
+                        <th>Code</th>
+                        <th>DELETE</th>
+                        <th>Created By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="assetProperty in assetProperties">
+                        <td><button ng-hide="assetProperty.GENERATED_BY_CD == 'GENERATED_BY_ONTOLOGY_RELATIONSHIP'" ng-click="editProperty(assetProperty)" class="btn btn-info">EDIT</button></td>
+                        <td>{{assetProperty.PROP_TYPE_CD}}</td>
+                        <td>{{assetProperty.PROP_NAME}}</td>
+                        <td>{{assetProperty.DISPLAY_NAME}}</td>
+                        <td>{{assetProperty.CODE_SYSTEM}}</td>
+                        <td>{{assetProperty.CODE}}</td>
+                        <td><button ng-if="assetProperty.GENERATED_BY_CD != 'GENERATED_BY_ONTOLOGY_RELATIONSHIP'" ng-click="deleteAssetProperty(assetProperty)" class="btn btn-danger">DELETE</button></td>
+                        <td>{{assetProperty.GENERATED_BY_CD}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
