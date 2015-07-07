@@ -321,7 +321,7 @@ function createAsset(req,res) {
 
 function updateAsset(req,res) {
 
-	console.log("Updating asset: " + req.body.displayName);
+	console.log("Updating asset: " + req.body.DISPLAY_NAME);
 
 	profileConnectionPool.getConnection( function(err,connection) {
 
@@ -347,7 +347,70 @@ function updateAsset(req,res) {
 				}
 				if (result) {
 					res.type('application/json')
-					res.send([{"object":"asset","name":req.body.displayName,"event":"updated"}]);
+					res.send([{"object":"asset","name":req.body.DISPLAY_NAME,"event":"updated"}]);
+				}
+			});
+		connection.release();
+	});
+}
+
+function deleteAsset(req, res) {
+
+	console.log("Deleting asset properties: " + req.body.DISPLAY_NAME);
+
+	profileConnectionPool.getConnection(function(err, connection) {
+
+		var assetId = req.body.ASSET_ID;
+
+		connection.query('delete from '+ responder_db + '.OIB_ASSET_PROPERTY where ASSET_ID = ?',
+			[assetId], function (err, result) {
+
+				if (err) {
+
+					throw err;
+				}
+				if (result) {
+					deleteParent(assetId);
+					res.type('application/json');
+					res.send([{"object" : "asset", "name":req.body.DISPLAY_NAME, "event":"deleted"}]);
+
+				}
+			});
+		connection.release();
+	});
+}
+
+function deleteParent(assetId) {
+
+	console.log("Deleting asset: " + assetId);
+
+	profileConnectionPool.getConnection(function(err, connection) {
+
+		connection.query('delete from '+ responder_db + '.OIB_ASSET where ASSET_ID = ?',
+			[assetId]);
+		connection.release();
+	});
+}
+
+function deleteAssetProperty(req, res) {
+
+	console.log("Deleting asset property: " + req.body.DISPLAY_NAME);
+
+	profileConnectionPool.getConnection(function(err, connection) {
+
+		var assetId = req.body.ASSET_PROPERTY_ID;
+
+		connection.query('delete from '+ responder_db + '.OIB_ASSET_PROPERTY where ASSET_PROPERTY_ID = ?',
+			[assetId], function (err, result) {
+
+				if (err) {
+
+					throw err;
+				}
+				if (result) {
+					res.type('application/json');
+					res.send([{"object" : "asset", "name":req.body.DISPLAY_NAME, "event":"deleted"}]);
+
 				}
 			});
 		connection.release();
@@ -528,6 +591,8 @@ app.get('/assets', function(req,res) { getAssets(req,res); });
 app.get('/asset/:id', function(req,res) { getAsset(req,res); });
 app.put('/asset/create', function (req,res) { createAsset(req,res); });
 app.put('/asset/update', function (req,res) { updateAsset(req,res); });
+app.put('/asset/deleteAsset', function (req, res) { deleteAsset(req,res); });
+app.put('/asset/deleteAssetProperty', function (req, res) { deleteAssetProperty(req,res); });
 
 app.get('/assetProperties/:assetId', function(req,res) { getAssetProperties(req,res); });
 app.get('/assetProperty/:assetPropertyId', function(req,res) { getAssetProperty(req,res); });
