@@ -6,7 +6,7 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
     var urlBase = 'http://' + localStorage.getItem('hostName') + ':3000/';
 
-    var responderExpander = 'http://' + localStorage.getItem('hostName') + ':8080/';
+    var responderExpander = 'http://' + localStorage.getItem('hostName') + ':8080/openInfobutton/';
 //    var urlBase = 'http://service.oib.utah.edu:8080/infobutton-service-dev/manager/';
     var assetFactory = {};
 
