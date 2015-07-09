@@ -57,17 +57,17 @@
         <div class="col-md-8">
             <h3>Profile Configuration</h3>
             <hr/>
-            <form class="form-inline" name="oidForm">
+            <form class="form-inline" name="oidForm" ng-submit="addOids(orgOid, orgName)">
                 <div class="form-group">
                     <div class="input-group">
-                        <label for="orgId">OID / DSN</label>
-                        <input type="text" pattern="\d+(\.\d+)*" class="form-control" id="orgId" name="oidFormId" ng-model="orgOid" required>
+                        <label for="orgOid">OID / DSN</label>
+                        <input type="text" pattern="\d+(\.\d+)*" class="form-control" id="orgOid" name="orgOid" ng-model="orgOid" required>
                     </div>
                     <div class="input-group">
                         <label for="orgName">Organization's Name</label>
                         <input type="text" class="form-control" id="orgName" ng-model="orgName" required>
                         <span class="input-group-btn">
-                            <button class='btn btn-default' type="submit" ng-click="addOids(orgOid, orgName)">Add</button>
+                            <button class='btn btn-default' type="submit">Add</button>
                         </span>
                     </div>
                     <alert ng-repeat="oid in oids" type="info" close="deleteOid($index)">

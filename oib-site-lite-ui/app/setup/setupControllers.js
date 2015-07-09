@@ -24,12 +24,15 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
         {
             oids = [];
         }
-        if ($scope.oidForm.$valid && !$scope.oidForm.oidFormId.$error.pattern) {
+        if ($scope.oidForm.$valid && !$scope.oidForm.orgOid.$error.pattern) {
             var oid = {orgOid: orgOid, orgName: orgName, selected: false};
             oids.push(oid);
         }
         localStorage.setItem("oids", JSON.stringify(oids));
         $scope.oids = oids;
+        $scope.oidForm.$setPristine();
+        $scope.orgOid = '';
+        $scope.orgName= '';
     };
 
     $scope.deleteOid = function(index) {
