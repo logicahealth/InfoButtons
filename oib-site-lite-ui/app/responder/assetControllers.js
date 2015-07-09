@@ -7,7 +7,7 @@ oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$state', 'ngNotify
         $scope.currentPage = 1;
         $scope.pageSize = 10;
         $scope.assets = [];
-        $scope.dtOptions = DTOptionsBuilder.newOptions().withBootstrap();
+        $scope.dtOptions = DTOptionsBuilder.newOptions().withOption('order', [2, 'desc']).withBootstrap();
         loadAssets();
 
         function loadAssets() {
@@ -149,6 +149,15 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                          {"name" : "ObservationInterpretation", "oid" : "2.16.840.1.113883.5.83"},
                          {"name" : "ISO 3166 Part 1 Country Codes, 2nd Edition, Alpha-3 ", "oid" : "1.0.3166.1.2.3"}];
 
+    var mainSearchCodes = [{"name": "ICD9-CM", "oid" : "2.16.840.1.113883.6.103"},
+                        {"name": "ICD10-CM", "oid" : "2.16.840.1.113883.6.90"},
+                        {"name": "ICD10", "oid" : "2.16.840.1.113883.6.3"},
+                        {"name": "SNOMED-CT", "oid" : "2.16.840.1.113883.6.96"},
+                        {"name": "RxNorm", "oid" : "2.16.840.1.113883.6.88"},
+                        {"name" : "MeSH" , "oid" : "2.16.840.1.113883.6.177"},
+                        {"name" : "LOINC", "oid" : "2.16.840.1.113883.6.1"},
+                        {"name" : "CPT", "oid": "2.16.840.1.113883.6.12"}]
+
     var genderCodes= [{"displayName" : "Female", "code" : "F"},
                     {"displayName" : "Male", "code" : "M"},
                     {"displayName" : "Undifferentiated", "code" : "UN"}];
@@ -237,17 +246,20 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                         {"displayName" : "Drug interaction with food", "code" : "95907004"},
                         {"displayName" : "Drug interaction with alcohol", "code" : "95906008"}];
 
-    $scope.properties = [{"name": "Task Context", "propName" : "taskContext.c", "codeSystem" : codeSystems[0], "codes": taskCodes},
-                        {"name": "Gender", "propName" : "administrativeGenderCode.c", "codeSystem" : codeSystems[6], "codes": genderCodes},
-                        {"name": "Age Groups", "propName" : "ageGroup.v", "codeSystem" : codeSystems[7], "codes": ageCodes},
-                        {"name": "Encounter", "propName" : "encounter.c", "codeSystem" : codeSystems[0], "codes": encounterCodes},
-                        {"name": "Performer Language", "propName" : "performer.languageCode.c", "codeSystem" : codeSystems[10], "codes": {"displayName" : "", "code" : ""}},
-                        {"name": "Information Recipient Language", "propName" : "informationRecipient.languageCode.c", "codeSystem" : codeSystems[10], "codes": {"displayName" : "", "code" : ""}},
-                        {"name": "Performer", "propName" : "performer", "codeSystem" : codeSystems[9], "codes": {"displayName" : "", "code" : ""}},
-                        {"name": "Information Recipient", "propName" : "informationRecipient", "codeSystem" : codeSystems[9], "codes": {"displayName" : "", "code" : ""}},
-                        {"name": "Severity Observation", "propName" : "severityObservation.interpretationCode.c", "codeSystem" : codeSystems[12], "codes": observationCodes},
-                        {"name": "Sub Topic", "propName" : "subTopic.v", "codeSystem" : codeSystems[7], "codes": subtopicCodes},
-                        {"name": "Main Search Criteria", "propName" : "mainSearchCriteria.v", "codeSystem" : codeSystems, "codes" : {"displayName" : "", "code" : ""}}];
+    var performerAndInfoRecipCodes = [{"displayName" : "Healthcare Provider", "code" : "PROV"},
+                                     {"displayName" : "Patient", "code" : "PAT"}]
+
+    $scope.properties = [{"name": "Task Context", "propName" : "taskContext.c", "codeSystem" : [codeSystems[0]], "codes": taskCodes},
+                        {"name": "Gender", "propName" : "administrativeGenderCode.c", "codeSystem" : [codeSystems[6]], "codes": genderCodes},
+                        {"name": "Age Groups", "propName" : "ageGroup.v", "codeSystem" : [codeSystems[7]], "codes": ageCodes},
+                        {"name": "Encounter", "propName" : "encounter.c", "codeSystem" : [codeSystems[0]], "codes": encounterCodes},
+                        {"name": "Performer Language", "propName" : "performer.languageCode.c", "codeSystem" : [codeSystems[10]], "codes": [{"displayName" : "", "code" : ""}]},
+                        {"name": "Information Recipient Language", "propName" : "informationRecipient.languageCode.c", "codeSystem" : [codeSystems[10]], "codes": [{"displayName" : "", "code" : ""}]},
+                        {"name": "Performer", "propName" : "performer", "codeSystem" : [codeSystems[9]], "codes": performerAndInfoRecipCodes},
+                        {"name": "Information Recipient", "propName" : "informationRecipient", "codeSystem" : [codeSystems[9]], "codes": performerAndInfoRecipCodes},
+                        {"name": "Severity Observation", "propName" : "severityObservation.interpretationCode.c", "codeSystem" : [codeSystems[12]], "codes": observationCodes},
+                        {"name": "Sub Topic", "propName" : "subTopic.v", "codeSystem" : [codeSystems[7]], "codes": subtopicCodes},
+                        {"name": "Main Search Criteria", "propName" : "mainSearchCriteria.v", "codeSystem" : mainSearchCodes, "codes" : [{"displayName" : "", "code" : ""}]}];
 
 
     $scope.editProperty = function (assetProperty) {

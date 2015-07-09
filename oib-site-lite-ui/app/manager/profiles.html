@@ -50,7 +50,7 @@
                 <p>{{profile.profileDescription}}</p>
             </div>
             <div class="col-md-3" style="margin-left: 2em;">
-                <p><br>{{profile.version}}</p>
+                <p><br>{{profile.published  | date:'medium'}}</p>
             </div>
             <div class="btn-group" role="group" aria-label="status">
                 <button type="button" class="btn btn-success" ng-click="updateStatus(profile, 1)" ng-model="profile.status" btn-radio="1">Enabled</button>
