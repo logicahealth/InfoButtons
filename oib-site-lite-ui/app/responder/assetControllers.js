@@ -249,17 +249,17 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
     var performerAndInfoRecipCodes = [{"displayName" : "Healthcare Provider", "code" : "PROV"},
                                      {"displayName" : "Patient", "code" : "PAT"}]
 
-    $scope.properties = [{"name": "Task Context", "propName" : "taskContext.c", "codeSystem" : [codeSystems[0]], "codes": taskCodes},
-                        {"name": "Gender", "propName" : "administrativeGenderCode.c", "codeSystem" : [codeSystems[6]], "codes": genderCodes},
-                        {"name": "Age Groups", "propName" : "ageGroup.v", "codeSystem" : [codeSystems[7]], "codes": ageCodes},
-                        {"name": "Encounter", "propName" : "encounter.c", "codeSystem" : [codeSystems[0]], "codes": encounterCodes},
-                        {"name": "Performer Language", "propName" : "performer.languageCode.c", "codeSystem" : [codeSystems[10]], "codes": [{"displayName" : "", "code" : ""}]},
-                        {"name": "Information Recipient Language", "propName" : "informationRecipient.languageCode.c", "codeSystem" : [codeSystems[10]], "codes": [{"displayName" : "", "code" : ""}]},
-                        {"name": "Performer", "propName" : "performer", "codeSystem" : [codeSystems[9]], "codes": performerAndInfoRecipCodes},
-                        {"name": "Information Recipient", "propName" : "informationRecipient", "codeSystem" : [codeSystems[9]], "codes": performerAndInfoRecipCodes},
-                        {"name": "Severity Observation", "propName" : "severityObservation.interpretationCode.c", "codeSystem" : [codeSystems[12]], "codes": observationCodes},
+    $scope.properties = [{"name": "Task Context", "propName" : "taskContext.c", "codeSystem" : codeSystems[0], "codes": taskCodes},
+                        {"name": "Gender", "propName" : "administrativeGenderCode.c", "codeSystem" : codeSystems[6], "codes": genderCodes},
+                        {"name": "Age Groups", "propName" : "ageGroup.v", "codeSystem" : codeSystems[7], "codes": ageCodes},
+                        {"name": "Encounter", "propName" : "encounter.c", "codeSystem" : codeSystems[0], "codes": encounterCodes},
+                        {"name": "Performer Language", "propName" : "performer.languageCode.c", "codeSystem" : codeSystems[10], "codes": {"displayName" : "", "code" : ""}},
+                        {"name": "Information Recipient Language", "propName" : "informationRecipient.languageCode.c", "codeSystem" : codeSystems[10], "codes": {"displayName" : "", "code" : ""}},
+                        {"name": "Performer", "propName" : "performer", "codeSystem" : codeSystems[9], "codes": performerAndInfoRecipCodes},
+                        {"name": "Information Recipient", "propName" : "informationRecipient", "codeSystem" : codeSystems[9], "codes": performerAndInfoRecipCodes},
+                        {"name": "Severity Observation", "propName" : "severityObservation.interpretationCode.c", "codeSystem" : codeSystems[12], "codes": observationCodes},
                         {"name": "Sub Topic", "propName" : "subTopic.v", "codeSystem" : [codeSystems[7]], "codes": subtopicCodes},
-                        {"name": "Main Search Criteria", "propName" : "mainSearchCriteria.v", "codeSystem" : mainSearchCodes, "codes" : [{"displayName" : "", "code" : ""}]}];
+                        {"name": "Main Search Criteria", "propName" : "mainSearchCriteria.v", "codeSystem" : mainSearchCodes, "codes" : {"displayName" : "", "code" : ""}}];
 
 
     $scope.editProperty = function (assetProperty) {
