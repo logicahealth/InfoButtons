@@ -54,7 +54,7 @@ public final class CodeConstants
     public static final Code TASKCONTEXT = CodeUtility.getCode( "", "2.16.840.1.113883.5.4", "", "ActCode" );
 
     /** The Constant LANGUAGE. */
-    public static final Code LANGUAGE = CodeUtility.getCode( "", "2.16.840.1.113883.6.121", "",
+    public static final Code LANGUAGE = CodeUtility.getCode( "en", "2.16.840.1.113883.6.121", "",
                                                              "ISO Tags For Human Languages" );
 
     /** The Constant ENCOUNTER. */
