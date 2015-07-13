@@ -1,0 +1,46 @@
+-------------------------------------------------------------------------
+(c) 2011-2015 OpenInfobutton Project, Biomedical Informatics, University of Utah
+Contact: <andrew.iskander@utah.edu>
+Biomedical Informatics
+421 Wakara Way, Ste 140
+Salt Lake City, UT 84108-3514
+(801) 581-4080
+-------------------------------------------------------------------------
+
+This is a migration guide for administrators of OpenInfobutton Responder 1.0 who would like to migrate to version 1.1 while
+maintaining their existing asset database.
+
+1 - Notes
+2 - Database Migration
+3 - Building, configuring, and redeploy
+
+Notes
+-----
+
+1. The database changes required include adding an AUTO_INCREMENT to the primary key columns of the OIB_ASET and OIB_ASSET_PROPERTY
+   columns. This is to faciliate adding new assets and asset properties via the LITE app.
+
+2. This release adds a new REST service endpoint for triggering asset expansion on a particular asset by the LITE
+   app. This will require a code rebuild and redeployment of the WAR.
+
+
+Database Migration
+------------------
+
+1. Run the migration script in oib-rbdms-model/migration1011.sql.
+
+Building, configuring, and redeploy
+-----------------------------------
+
+1. After retrieving the new branch from the source control repository and running the migration scripts, go to the root
+    /oib-rest-responder/ directory (the one directly above the folder this file resides in) and run,
+
+    mvn clean install
+
+    to produce a new WAR in the oib-rest-responder/targets directory.
+
+2. For the new asset expansion web service to function, you must go to the OIB_APP_PROPERTY table and set a valid UTS name
+   and password.
+
+3. After rebuilding and running the database migration, you can redeploy the WAR to your existing Tomcat server.
+
