@@ -19,10 +19,6 @@ echo "Executing create-oib-model-mysql.sql ..."
 mysql --user=$1 --password=$pwd < create-oib-model-mysql.sql
 echo "Executing oib-app-property-inserts.sql ..."
 mysql --user=$1 --password=$pwd < oib-app-property-inserts.sql
-echo "Executing oib-asset-inserts.sql ..."
-mysql --user=$1 --password=$pwd < oib-asset-inserts.sql
-echo "Executing oib-asset-property-inserts.sql ..."
-mysql --user=$1 --password=$pwd < oib-asset-property-inserts.sql
 echo "Executing oib-request-parameter-inserts ..."
 mysql --user=$1 --password=$pwd < oib-request-parameter-inserts.sql
 echo "Executing oib-value-set-inserts.sql ..."
