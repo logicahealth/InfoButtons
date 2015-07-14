@@ -117,19 +117,19 @@ public class KnowledgeRequestServlet
             TransformerFactory tfactory = TransformerFactory.newInstance();
             Transformer transformer;
             transformer = tfactory.newTransformer();
-            transformer.transform( source, result );
+            transformer.transform(source, result);
             final String orgid = knowledgeRequest.getHolder().getRepresentedOrganization().getRoot();
             dao.saveRequest( stringWriter.toString(), req.getRemoteAddr(), orgid );// Log written here
             final AggregateKnowledgeResponse response = engine.getResponse( knowledgeRequest );
-            ctx = JAXBContext.newInstance( AggregateKnowledgeResponse.class );
+            ctx = JAXBContext.newInstance(AggregateKnowledgeResponse.class);
             m = ctx.createMarshaller();
             m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, true );
             dbf = DocumentBuilderFactory.newInstance();
             dbf.setNamespaceAware( true );
             db = dbf.newDocumentBuilder();
             doc = db.newDocument();
-            m.marshal( new JAXBElement<AggregateKnowledgeResponse>( new QName( "aggregateKnowledgeResponse" ),
-                                                                    AggregateKnowledgeResponse.class, response ), doc );
+            m.marshal(new JAXBElement<AggregateKnowledgeResponse>(new QName("aggregateKnowledgeResponse"),
+                    AggregateKnowledgeResponse.class, response), doc);
             resp.setContentType( "text/html" );
             source = new DOMSource( doc );
             stringWriter = new StringWriter();
@@ -137,6 +137,7 @@ public class KnowledgeRequestServlet
             tfactory = TransformerFactory.newInstance();
             transformer = tfactory.newTransformer();
             transformer.transform( source, result );// now stringwriter has xml.
+            String finalXml = new String();
             final String knowledgeResType = req.getParameter( CodeConstants.KNOWLEDGE_RESPONSE_TYPE );
             if ( ( req.getParameter( "transform" ) != null ) || ( knowledgeResType != null ) )
             {
@@ -151,14 +152,20 @@ public class KnowledgeRequestServlet
                     else if ( knowledgeResType.equals( "text/xml" ) )
                     {
                         resp.setContentType( "text/xml" );
-                        out.println( stringWriter.getBuffer().toString() );
+                        //temp fix for conforming to output standard
+                        finalXml = stringWriter.getBuffer().toString();
+                        finalXml = finalXml.replace("<aggregateKnowledgeResponse xml:lang=\"en\">", "<aggregateKnowledgeResponse xmlns=\"http://www.w3.org/2005/Atom\" xml:lang=\"en\">");
+                        out.println( finalXml );
                     }
                 }
                 else
                 // for backward compatibility with 'transform' in URL
                 {
                     resp.setContentType( "text/xml" );
-                    out.println( stringWriter.getBuffer().toString() );
+                    //temp fix for conforming to output standard
+                    finalXml = stringWriter.getBuffer().toString();
+                    finalXml = finalXml.replace("<aggregateKnowledgeResponse xml:lang=\"en\">", "<aggregateKnowledgeResponse xmlns=\"http://www.w3.org/2005/Atom\" xml:lang=\"en\">");
+                    out.println( finalXml );
                 }
             }
             else
