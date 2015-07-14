@@ -90,7 +90,7 @@ public class MainSearchCriteria
     public MainSearchCriteria(Map<String, String[]> requestParameters, final Map<String, List<CategoryType>> categoryHashMap) {
         
         List<CategoryType> category = new ArrayList<CategoryType>();
-        final Code mainsearchCode = CodeUtility.getCode( CodeConstants.LANGUAGE );
+        final Code mainsearchCode = CodeUtility.getCode( CodeUtility.getCode());
         if ( requestParameters.containsKey( CodeConstants.MAINSEARCH_CODE ) )
         {
             mainsearchCode.setCode( requestParameters.get( CodeConstants.MAINSEARCH_CODE )[0] );
