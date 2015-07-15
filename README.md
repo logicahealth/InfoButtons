@@ -20,7 +20,7 @@ following modules:
 - LITE REST web server: oib-site-lite-rest-server
 - LITE client: oib-site-lite-ui
 
-There is a migration guide (oib-rest-responder/MIGRATION1011) for the responder that details the additional changes needed to enable the new LITE functionality. 
+There is a migration guide (oib-rest-responder/MIGRATION1011) for the responder that details the additional changes needed to enable the new LITE functionality. For those new to the responder, refer to the BUILDGUIDE (oib-rest-responder/BUILDGUIDE). 
 
 
 1.7 RELEASE NOTES
