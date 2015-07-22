@@ -91,7 +91,7 @@ public class ContextMatcherTest
             + "patientPerson.administrativeGenderCode.c=F&amp;"
             + "patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1&amp;"
             + "mainSearchCriteria.v.c=595.0&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.103&amp;"
-            + "mainSearchCriteria.v.dn=Acute cystitis&amp;subTopic.v.c=Q000175&amp;"
+            + "mainSearchCriteria.v.dn=Acute+cystitis&amp;subTopic.v.c=Q000175&amp;"
             + "subTopic.v.cs=2.16.840.1.113883.6.177&amp;subTopic.v.dn=Diagnosis" ) );
     }
 
