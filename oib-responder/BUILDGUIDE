@@ -36,7 +36,7 @@ Build Guide For OpenInfobutton Manager
 Initial Setup
 -------------
 
-1) Clone the entire Innovation-182 branch you'd like to build.
+1) Clone the entire InfoButtons branch you'd like to build.
 
 2) Install JDK 7.0, which can be downloaded from
    http://www.oracle.com/technetwork/java/javase/downloads/index.html
@@ -53,22 +53,25 @@ Initial Setup
 5) Install a MySQL 5.0 server instance on the server you're building.
    http://dev.mysql.com/downloads/mysql/
 
-6) If you are behind a proxy, keep in mind that additional setup will be
+6) Install Tomcat 7 (7.0.41 or higher is required).
+
+7) If you are behind a proxy, keep in mind that additional setup will be
    required as the build process and the service itself requires an unhindered
    connection to the internet.
 
-7) Obtain a UTS account from here,
+8) Obtain a UTS account from here,
    https://uts.nlm.nih.gov/home.html
 
 
 Building
 --------
+1) Modify the oib-app-property-inserts.sql file (found in InfoButtons/oib-responder/oib-rdbms-model) to include your UMLS username and password in the first two rows.
 
-1) Execute the install-db.sh script found in the Innovations-182/oib-responder/oib-rdbms directory.
+2) Execute the install-db.sh script found in the InfoButtons/oib-responder/oib-rdbms-model directory.  This will create a new schema, and you may need to separately grant rights to that schema for the application database account.
 
-2) Navigate back to the oib-responder module directory (this directory)
+3) Navigate back to the oib-responder module directory (this directory)
 
-3) The oib-responder requires database information to be set in the following file,
+4) The oib-responder requires database information to be set in the following file,
 
    src/main/webapp/WEB-INF/jdbc.properties
 
@@ -80,7 +83,7 @@ Building
 
    Set these to match your local database connection parameters.
 
-4) Run
+5) Run
 
          $> mvn clean install
 
@@ -95,7 +98,7 @@ Building
    It usually takes some time for maven to download required dependencies
    in the first build.
 
-5) Upon a completed build, the WAR will be found under the oib-responder/target directory.
+6) Upon a completed build, the WAR will be found under the oib-responder/target directory.
    Simply deploy it to a functional Java EE servlet container and you should be able to
    start firing requests at it. Alternatively, you can also use the following maven command to start an
    instance of the responder in a self contained Tomcat 7 container.

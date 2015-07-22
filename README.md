@@ -8,7 +8,7 @@ This project is a part of the Veterans Health Administration (VHA) Grassroots in
 1.8 RELEASE NOTES
 =================
 
-This version includes some bug fixes to the Manager, new LITE functionality for add/editing OpenInfobutton Responder assets, and an update to the Infobutton Responder to faciliate the new functionality. 
+This version includes some bug fixes to the Manager, new LITE functionality for add/editing OpenInfobutton Responder assets, and an update to the Infobutton Responder to faciliate the new functionality.
 
 Building and redeploying
 ------------------------
@@ -20,7 +20,7 @@ following modules:
 - LITE REST web server: oib-site-lite-rest-server
 - LITE client: oib-site-lite-ui
 
-There is a migration guide (oib-rest-responder/MIGRATION1011) for the responder that details the additional changes needed to enable the new LITE functionality. For those new to the responder, refer to the BUILDGUIDE (oib-rest-responder/BUILDGUIDE). 
+There is a migration guide (oib-responder/MIGRATION1011) for the responder that details the additional changes needed to enable the new LITE functionality. For those new to the responder, refer to the BUILDGUIDE (oib-responder/BUILDGUIDE).
 
 
 1.7 RELEASE NOTES
