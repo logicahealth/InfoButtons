@@ -52,6 +52,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button ng-if="asset.ASSET_ID" ng-click="update(asset)" class="btn btn-success">UPDATE</button>
+                    <button ng-if="asset.ASSET_ID" ng-click="copy(asset, assetProperties)" class="btn btn-info">COPY</button>
                     <button ng-if="asset.ASSET_ID" ng-click="deleteAsset(asset)" class="btn btn-danger">DELETE</button>
                 </div>
                 <div class="col-sm-offset-2 col-sm-10">

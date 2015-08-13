@@ -56,6 +56,24 @@ oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$state', 'ngNotify
             });
         };
 
+
+        $scope.copyAsset = function(asset, assetProperties) {
+
+            $scope.tempAssetProps = assetProperties;
+            $scope.tempAsset = asset;
+
+            $scope.tempAsset.DISPLAY_NAME += " copy";
+
+            console.log(asset);
+            console.log(assetProperties);
+            assetFactory.insertAsset($scope.tempAsset).success(function() {
+                $state.go('responder');
+                for(var i = 0; i < $scope.tempAssetProps.length; i++)
+                {
+                    console.log($scope.tempAssetProps[i]);
+                }
+            });
+        };
     }]);
 
 oibAssetControllerModule.controller('AssetFormCtrl', ['$scope', '$state', '$stateParams', 'assetFactory', 'DTOptionsBuilder', 'editModal', function ($scope, $state, $stateParams, assetFactory, DTOptionsBuilder, editModal) {
@@ -88,8 +106,6 @@ oibAssetControllerModule.controller('AssetFormCtrl', ['$scope', '$state', '$stat
                     .error(function (error) {
                         $scope.statusMessage = 'Unable to load assetProperties(' + id + '): ' + error;
                     });
-
-
         }
 
         $scope.editProperty = function(selectedProperty) {
@@ -100,12 +116,17 @@ oibAssetControllerModule.controller('AssetFormCtrl', ['$scope', '$state', '$stat
                 });
         }
 
+        $scope.copy = function(_asset, assetProps) {
+            $scope.copyAsset(_asset, assetProps);
+        }
     }]);
 
 oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selectedProperty', 'assetId', 'assetFactory', 'ngNotify', function ($scope, $state, selectedProperty, assetId, assetFactory, ngNotify) {
 
     var selectedId;
     var newAsset = false;
+
+
 
     $scope.pre_selected = {roles:[]};
     $scope.selected_items= [];
