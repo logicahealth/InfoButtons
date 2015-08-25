@@ -61,7 +61,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <label for="orgOid">OID / DSN</label>
-                        <input type="text" pattern="\d+(\.\d+)*" class="form-control" id="orgOid" name="orgOid" ng-model="orgOid" required>
+                        <input type="text" pattern="\d+(\.\d+)*|^(http(s?)://)*(\w+\.)?\w+\.\w+" class="form-control" id="orgOid" name="orgOid" ng-model="orgOid" required>
                     </div>
                     <div class="input-group">
                         <label for="orgName">Organization's Name</label>

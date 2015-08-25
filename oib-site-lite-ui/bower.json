@@ -6,7 +6,7 @@
   "license": "Apache 2.0",
   "private": true,
   "dependencies": {
-    "angular": "1.3.x",
+    "angular": "1.4.x",
     "angular-ui-router": "0.2.x",
     "angular-resource": "1.3.x",
     "angular-loader": "1.3.x",
@@ -16,6 +16,7 @@
     "angular-datatables": "0.4.x",
     "angular-sanitize": "1.3.x",
     "angular-ui-select": "0.11.x",
-    "ng-notify": "~0.6.2"
+    "ng-notify": "~0.6.2",
+    "underscore": "1.8.3"
   }
 }
