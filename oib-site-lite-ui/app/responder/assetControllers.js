@@ -181,7 +181,8 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                         {"name": "RxNorm", "oid" : "2.16.840.1.113883.6.88"},
                         {"name" : "MeSH" , "oid" : "2.16.840.1.113883.6.177"},
                         {"name" : "LOINC", "oid" : "2.16.840.1.113883.6.1"},
-                        {"name" : "CPT", "oid": "2.16.840.1.113883.6.12"}]
+                        {"name" : "CPT", "oid": "2.16.840.1.113883.6.12"},
+                        {"name" : "CDS Rules", "oid": "http://socraticgrid.org/cds/ka/ecarule"}]
 
     var genderCodes= [{"displayName" : "Female", "code" : "F", "id": "1a"},
                     {"displayName" : "Male", "code" : "M", "id": "2a"},
@@ -231,7 +232,8 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                         {"displayName" : "reminder list review", "code": "REMLREV", "id": "31c"},
                         {"displayName" : "wellness reminder list review", "code" : "WELLREMLREV", "id": "32c"},
                         {"displayName" : "risk assessment instrument", "code" : "RISKASSESS", "id": "33c"},
-                        {"displayName" : "falls risk assessment instrument", "code" : "FALLRISK", "id": "34c"}];
+                        {"displayName" : "falls risk assessment instrument", "code" : "FALLRISK", "id": "34c"},
+                        {"displayName" : "CDS Review" , "code" : "CDSREV", "id" : "35c"}];
 
     var encounterCodes = [{"displayName" : "Ambulatory", "code" : "AMB", "id": "1d"},
                         {"displayName" : "Emergency", "code" : "EMER", "id": "2d"},
