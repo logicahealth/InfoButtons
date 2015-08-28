@@ -43,7 +43,7 @@ asset_directives.directive('dropdownMultiselect', function(){
                     $scope.model = _.without($scope.model, id);
                 }
 
-                else if($scope.model.length < 1) {
+                else if($scope.model.length >= 0) {
                     $scope.model.push(obj);
                 }
                 return false;

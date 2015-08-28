@@ -26,7 +26,7 @@
                                 selected.property.propName != 'locationOfInterest.c' && selected.property.propName != 'mainSearchCriteria.v'">
 
         <dropdown-multiselect pre_selected="pre_selected.roles" model="selected_items" options="selected.property.codes"></dropdown-multiselect>
-            <pre>selected roles = {{selected_items | json}}</pre>
+            <pre>{{selected_items[0].displayName}}</pre>
         </div>
         <!--
             <ui-select ng-model="selected.property.codes">
