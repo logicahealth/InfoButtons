@@ -11,25 +11,24 @@
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Jul 15, 2014
  */
-package edu.utah.further.profiledb.domain;
+package edu.utah.further.liteprofiledb.domain;
 
-import java.sql.Blob;
-import java.sql.Timestamp;
-
-import javax.persistence.*;
-
+import edu.utah.further.core.api.data.PersistentEntity;
+import edu.utah.further.profiledb.domain.Profiles;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.openinfobutton.service.json.BlobJsonSerializer;
 
-import edu.utah.further.core.api.data.PersistentEntity;
+import javax.persistence.*;
+import java.sql.Blob;
+import java.sql.Timestamp;
 
 /**
  * The Class Profiles.
  */
 @Entity
-@Table( name = "resource_profiles_all" )
-public class Profiles
-    implements PersistentEntity<Long>
+@Table( name = "installed_store_profiles" )
+public class CloudProfiles
+        implements PersistentEntity<Long>
 {
     // ========================= CONSTANTS =================================
     /** The Constant serialVersionUID. */
@@ -214,4 +213,5 @@ public class Profiles
     {
         this.imageUrl = imageUrl;
     }
+
 }

@@ -10,11 +10,13 @@ var profileDirectoryUrl = baseCloudUrl + localStorage.getItem('profileStorePath'
 oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
 
     var urlBase = 'http://' + localStorage.getItem('hostName') + ':3000/';
+
+    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/liteManager/'
 //    var urlBase = 'http://service.oib.utah.edu:8080/infobutton-service-dev/manager/';
     var profileFactory = {};
 
     profileFactory.getProfiles = function () {
-        return $http.get(urlBase + 'profiles', {
+        return $http.get(oibManagerUrl + 'customProfiles', {
             headers: {
                 'Authorization' : undefined
             }
@@ -22,7 +24,7 @@ oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
     };
 
     profileFactory.getProfile = function (id) {
-        return $http.get(urlBase + 'profile/' + id, {
+        return $http.get(oibManagerUrl + 'getProfile/' + id, {
             headers: {
                 'Authorization' : undefined
             }
@@ -153,6 +155,8 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
 
     var serviceUrlBase = 'http://' + localStorage.getItem('hostName') + ':3000/';
 
+    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/liteManager/'
+
     var cloudProfileFactory = {};
 
     cloudProfileFactory.getNewId = function () {
@@ -265,13 +269,13 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
                 if (window.DOMParser)
                 {
                     var parser=new DOMParser();
-                    xmlProfile=parser.parseFromString(profile.content_utf8,"text/xml");
+                    xmlProfile=parser.parseFromString(profile.content,"text/xml");
                 }
                 else // code for IE
                 {
                     xmlProfile=new ActiveXObject("Microsoft.XMLDOM");
                     xmlProfile.async=false;
-                    xmlProfile.loadXML(profile.content_utf8);
+                    xmlProfile.loadXML(profile.content);
                 }
                 var x = xmlProfile.getElementsByTagName("authorizedOrganizations")[0];
                 var xelement = new XMLSerializer().serializeToString(x);
@@ -410,7 +414,7 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
     };
 
     cloudProfileFactory.getLocalCloudProfiles = function () {
-        return $http.get(serviceUrlBase + 'cloudProfiles', {
+        return $http.get(oibManagerUrl + 'cloudProfiles', {
             headers: {
                 'Authorization' : undefined
             }

@@ -18,6 +18,7 @@ $Date:: 2010-10-01 1#$:  Date of last commit
     classpath:core-data-annotation-context.xml
     classpath:core-data-datasource-context.xml
     classpath:core-profile-datasource-context.xml
+    classpath:core-liteprofile-datasource-context.xml
     </param-value>
   </context-param>
   
@@ -36,8 +37,8 @@ $Date:: 2010-10-01 1#$:  Date of last commit
   </servlet>
   
   <servlet>
-    <display-name>ManagerServices</display-name>
-  	<servlet-name>ManagerServices</servlet-name>
+    <display-name>ProfileManagerService</display-name>
+  	<servlet-name>ProfileManagerService</servlet-name>
   	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>  
     	<param-name>contextConfigLocation</param-name>  
@@ -51,9 +52,9 @@ $Date:: 2010-10-01 1#$:  Date of last commit
   	<url-pattern>/infoRequest</url-pattern>
   </servlet-mapping>
 
-  <servlet-mapping>  
-        <servlet-name>ManagerServices</servlet-name>  
-        <url-pattern>/manager/profiles</url-pattern>  
+  <servlet-mapping>
+        <servlet-name>ProfileManagerService</servlet-name>
+        <url-pattern>/*</url-pattern>
   </servlet-mapping>
 
   <filter>

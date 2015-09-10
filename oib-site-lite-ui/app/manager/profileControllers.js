@@ -19,13 +19,13 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$modal', 'profileFactory'
                             if (window.DOMParser)
                             {
                                 var parser=new DOMParser();
-                                xmlDoc=parser.parseFromString(profile.content_utf8,"text/xml");
+                                xmlDoc=parser.parseFromString(profile.content,"text/xml");
                             }
                             else // code for IE
                             {
                                 xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
                                 xmlDoc.async=false;
-                                xmlDoc.loadXML(profile.content_utf8);
+                                xmlDoc.loadXML(profile.content);
                             }
                             var $xml = $(xmlDoc);
                             var $profileD = $xml.find("profileDescription");
@@ -206,7 +206,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
             .success(function (profiles) {
                 profiles.forEach (function (profile) {
 
-                    var xmlDoc = $.parseXML(profile.content_utf8);
+                    var xmlDoc = $.parseXML(profile.content);
                     var $xml = $(xmlDoc);
                     var $profileD = $xml.find("profileDescription");
                     profile.profileDescription = $profileD.text();
@@ -276,7 +276,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
             cloudProfileLinks.forEach(function (cloudProfileLink) {
 
                 if (localCloudProfile.name === cloudProfileLink.title) {
-                    if (localCloudProfile.version != cloudProfileLink.sha || localCloudProfile.image_url != cloudProfileLink.imgUrl)
+                    if (localCloudProfile.version != cloudProfileLink.sha || localCloudProfile.imageUrl != cloudProfileLink.imgUrl)
                     x = false;
                 }
             });
@@ -291,7 +291,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
             cloudProfileLinks.forEach(function (cloudProfileLink) {
 
                 if (localCloudProfile.name === cloudProfileLink.title) {
-                    if (localCloudProfile.version != cloudProfileLink.sha || localCloudProfile.image_url != cloudProfileLink.imgUrl)
+                    if (localCloudProfile.version != cloudProfileLink.sha || localCloudProfile.imageUrl != cloudProfileLink.imgUrl)
                         x = true;
                 }
             });

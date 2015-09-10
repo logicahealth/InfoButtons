@@ -6,16 +6,16 @@ package org.openinfobutton.service.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import edu.utah.further.profiledb.service.ProfilesDao;
-import edu.utah.further.profiledb.domain.Profiles;
+import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
+import edu.utah.further.liteprofiledb.domain.CloudProfiles;
+import edu.utah.further.liteprofiledb.domain.CustomProfiles;
 
 /**
  * -----------------------------------------------------------------------------------
@@ -31,23 +31,22 @@ import edu.utah.further.profiledb.domain.Profiles;
  * @version May 5, 2014
  */
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/liteManager")
 public class ProfileManagerService
 {
     
     @Autowired
-    @Qualifier("pDao")
-    private ProfilesDao pdao; 
+    @Qualifier("lDao")
+    private LiteProfilesDao lDao;
     
-    @RequestMapping(produces="application/json", value = "/profiles", method = RequestMethod.GET)
+    @RequestMapping(produces="application/json", value = "/cloudProfiles", method = RequestMethod.GET)
     @ResponseBody
-    public List<Profiles> getProfiles() {
+    public List<CloudProfiles> getCloudProfiles() {
         
-        List<Profiles> profiles = new ArrayList<Profiles>();
-        try 
-        {
+        List<CloudProfiles> profiles = new ArrayList<>();
+        try {
             
-           profiles = pdao.getProfiles();
+           profiles = lDao.getCloudProfiles();
         } 
         catch (Exception e) 
         {
@@ -59,5 +58,43 @@ public class ProfileManagerService
         
         return profiles;
         
+    }
+
+    @RequestMapping(produces="application/json", value = "/customProfiles", method = RequestMethod.GET)
+    @ResponseBody
+    public List<CustomProfiles> getCustomProfiles() {
+
+        List<CustomProfiles> profiles = new ArrayList<>();
+        try {
+
+            profiles = lDao.getCustomProfiles();
+        }
+        catch (Exception e)
+        {
+
+            String eMessage = "Error connecting to database and getting profiles";
+            System.err.println(eMessage);
+
+        }
+
+        return profiles;
+
+    }
+
+    @RequestMapping(produces = "application/json", value = "/getProfile/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public CustomProfiles getCustomProfile(@PathVariable final Long id) {
+
+        CustomProfiles profile = new CustomProfiles();
+        try {
+
+            profile = lDao.getCustomProfile(id);
+        } catch (Exception e) {
+
+            String eMessage = "Error connecting to database and getting profile";
+            System.err.println(eMessage);
+        }
+
+        return profile;
     }
 }
