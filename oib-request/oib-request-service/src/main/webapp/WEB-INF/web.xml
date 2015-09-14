@@ -54,7 +54,7 @@ $Date:: 2010-10-01 1#$:  Date of last commit
 
   <servlet-mapping>
         <servlet-name>ProfileManagerService</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/liteManager/*</url-pattern>
   </servlet-mapping>
 
   <filter>

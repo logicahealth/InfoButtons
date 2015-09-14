@@ -30,7 +30,6 @@ import edu.utah.further.liteprofiledb.domain.CustomProfiles;
  * @version May 5, 2014
  */
 @Controller
-@RequestMapping("/liteManager")
 public class ProfileManagerService
 {
     
@@ -38,7 +37,7 @@ public class ProfileManagerService
     @Qualifier("lDao")
     private LiteProfilesDao lDao;
     
-    @RequestMapping(produces="application/json", value = "/cloudProfiles", method = RequestMethod.GET)
+    @RequestMapping(produces="application/json", value = "cloudProfiles", method = RequestMethod.GET)
     @ResponseBody
     public List<CloudProfiles> getCloudProfiles() {
         
@@ -59,7 +58,7 @@ public class ProfileManagerService
         
     }
 
-    @RequestMapping(produces="application/json", value = "/customProfiles", method = RequestMethod.GET)
+    @RequestMapping(produces="application/json", value = "customProfiles", method = RequestMethod.GET)
     @ResponseBody
     public List<CustomProfiles> getCustomProfiles() {
 
@@ -80,7 +79,7 @@ public class ProfileManagerService
 
     }
 
-    @RequestMapping(produces = "application/json", value = "/getProfile/{id}", method = RequestMethod.GET)
+    @RequestMapping(produces = "application/json", value = "getProfile/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CustomProfiles getCustomProfile(@PathVariable final Long id) {
 
@@ -97,7 +96,7 @@ public class ProfileManagerService
         return profile;
     }
 
-    @RequestMapping(value="/createProfile", method = RequestMethod.POST)
+    @RequestMapping(value="createProfile", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void createProfile (@RequestBody final CustomProfiles profile)
     {
@@ -105,7 +104,7 @@ public class ProfileManagerService
         lDao.createOrUpdateCustomProfile(profile);
     }
 
-    @RequestMapping(value="/createCloudProfile", method = RequestMethod.POST)
+    @RequestMapping(value="createCloudProfile", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void createCloudProfile (@RequestBody final CloudProfiles profile)
     {
