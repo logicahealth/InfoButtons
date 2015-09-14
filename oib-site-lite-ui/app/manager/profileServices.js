@@ -9,7 +9,7 @@ var profileDirectoryUrl = baseCloudUrl + localStorage.getItem('profileStorePath'
 
 oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
 
-    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/liteManager/infobutton-service/'
+    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/liteManager/'
     var profileFactory = {};
 
     profileFactory.getProfiles = function () {
@@ -134,7 +134,7 @@ uuidGenerator.factory("idGenerator", function () {
 
 oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'idGenerator', '$filter', function ($http, $resource, idGenerator, $filter) {
 
-    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/liteManager/infobutton-service/'
+    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/liteManager/'
 
     var cloudProfileFactory = {};
 
