@@ -14,12 +14,14 @@
 package edu.utah.further.liteprofiledb.domain;
 
 import edu.utah.further.core.api.data.PersistentEntity;
-import edu.utah.further.profiledb.domain.Profiles;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.openinfobutton.service.json.BlobJsonSerializer;
 
 import javax.persistence.*;
+import javax.sql.rowset.serial.SerialBlob;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**
@@ -27,6 +29,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table( name = "installed_store_profiles" )
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CloudProfiles
         implements PersistentEntity<Long>
 {
@@ -189,9 +192,9 @@ public class CloudProfiles
      *
      * @param content the new content
      */
-    public void setContent( Blob content )
-    {
-        this.content = content;
+    public void setContent( String content ) throws SQLException {
+
+        this.content = new SerialBlob(content.getBytes());
     }
 
     /**

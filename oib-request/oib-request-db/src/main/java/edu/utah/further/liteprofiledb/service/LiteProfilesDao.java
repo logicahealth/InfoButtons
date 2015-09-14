@@ -13,4 +13,8 @@ public interface LiteProfilesDao {
     List<CloudProfiles> getCloudProfiles();
 
     CustomProfiles getCustomProfile(Long id);
+
+    void createOrUpdateCustomProfile (CustomProfiles profile);
+
+    void createOrUpdateCloudProfile (CloudProfiles profile);
 }

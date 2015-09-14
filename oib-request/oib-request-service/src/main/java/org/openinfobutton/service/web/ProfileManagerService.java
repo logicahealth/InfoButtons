@@ -10,6 +10,8 @@ import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -96,5 +98,21 @@ public class ProfileManagerService
         }
 
         return profile;
+    }
+
+    @RequestMapping(value="/createProfile", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void createProfile (@RequestBody final CustomProfiles profile)
+    {
+
+        lDao.createOrUpdateCustomProfile(profile);
+    }
+
+    @RequestMapping(value="/createCloudProfile", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void createCloudProfile (@RequestBody final CloudProfiles profile)
+    {
+
+        lDao.createOrUpdateCloudProfile(profile);
     }
 }

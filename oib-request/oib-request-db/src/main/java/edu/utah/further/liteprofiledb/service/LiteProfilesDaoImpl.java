@@ -40,4 +40,18 @@ public class LiteProfilesDaoImpl implements LiteProfilesDao {
         CustomProfiles profile = dao.findById(CustomProfiles.class, id);
         return profile;
     }
+
+    @Transactional
+    public void createOrUpdateCustomProfile (CustomProfiles profile)
+    {
+
+        dao.update(profile);
+    }
+
+    @Transactional
+    public void createOrUpdateCloudProfile (CloudProfiles profile)
+    {
+
+        dao.update(profile);
+    }
 }

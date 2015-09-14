@@ -59,26 +59,30 @@
 	<context:component-scan base-package="org.openinfobutton.service.web" />
 	
 	<context:spring-configured />
-	  <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />  
 	        <!--  
             Configures view for returning JSON to the client  
-      -->  
-      <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">  
-           <property name="contentType" value="text/plain"/>  
-      </bean>  
+      -->
+
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>
+
+	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"></bean>
       <!--  
             maps handler methods based on HTTP paths
       -->  
-      <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
-           <property name="messageConverters">  
-                <util:list id="beanList">  
-                     <ref bean="jsonMessageConverter"/>  
+      <bean id="messageAdapter" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+           <property name="messageConverters">
+                <util:list id="beanList">
+					<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+					<bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+					<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+					<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+					<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>
+					<ref bean="jsonMessageConverter"/>
                 </util:list>  
            </property>  
       </bean>  
       <!--  
             Converts JSON to POJO and vice versa  
       -->  
-      <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
-	
+      <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
 </beans>
