@@ -7,15 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
 import edu.utah.further.liteprofiledb.domain.CloudProfiles;
 import edu.utah.further.liteprofiledb.domain.CustomProfiles;
 

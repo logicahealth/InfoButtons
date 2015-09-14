@@ -106,19 +106,11 @@
 			<bean class="org.hibernate.cfg.DefaultNamingStrategy" />
 		</property>
 
-		<!-- Reads package-level Hibernate annotations. Unfortunately, this has 
-			to be manually maintained for all model packages -->
-		<property name="annotatedPackages">
-			<list>
-				<!-- <value>edu.utah.further.core.data.oracle.type</value> -->
-			</list>
-		</property>
-
 		<!-- Mapping annotated classes using search patterns -->
 		<property name="annotatedClasses">
 			<list>
-				<value><![CDATA[edu.utah.further.liteprofiledb.domain.CloudProfiles]]></value>
 				<value><![CDATA[edu.utah.further.liteprofiledb.domain.CustomProfiles]]></value>
+				<value><![CDATA[edu.utah.further.liteprofiledb.domain.CloudProfiles]]></value>
 			</list>
 		</property>
 	</bean>
