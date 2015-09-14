@@ -9,10 +9,7 @@ var profileDirectoryUrl = baseCloudUrl + localStorage.getItem('profileStorePath'
 
 oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
 
-    var urlBase = 'http://' + localStorage.getItem('hostName') + ':3000/';
-
     var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/liteManager/'
-//    var urlBase = 'http://service.oib.utah.edu:8080/infobutton-service-dev/manager/';
     var profileFactory = {};
 
     profileFactory.getProfiles = function () {
@@ -32,23 +29,7 @@ oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
     };
 
     profileFactory.insertProfile = function (profile) {
-        return $http.put(urlBase + 'profile/create', profile, {
-            headers: {
-                'Authorization' : undefined
-            }
-        });
-    };
-
-    profileFactory.updateProfile = function (profile) {
-        return $http.put(urlBase + 'profile/update', profile, {
-            headers: {
-                'Authorization' : undefined
-            }
-        });
-    };
-
-    profileFactory.deleteProfile = function (id) {
-        return $http.delete(urlBase + 'profile/delete/' + id, {
+        return $http.post(oibManagerUrl + 'createProfile', profile, {
             headers: {
                 'Authorization' : undefined
             }
@@ -61,13 +42,13 @@ oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
         if (window.DOMParser)
         {
             var parser=new DOMParser();
-            xmlProfile=parser.parseFromString(profile.content_utf8,"text/xml");
+            xmlProfile=parser.parseFromString(profile.content,"text/xml");
         }
         else // code for IE
         {
             xmlProfile=new ActiveXObject("Microsoft.XMLDOM");
             xmlProfile.async=false;
-            xmlProfile.loadXML(profile.content_utf8);
+            xmlProfile.loadXML(profile.content);
         }
         var x = xmlProfile.getElementsByTagName("authorizedOrganization");
         var oids = [];
@@ -84,13 +65,13 @@ oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
         if (window.DOMParser)
         {
             var parser=new DOMParser();
-            xmlDoc=parser.parseFromString(profile.content_utf8,"text/xml");
+            xmlDoc=parser.parseFromString(profile.content,"text/xml");
         }
         else // code for IE
         {
             xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
             xmlDoc.async=false;
-            xmlDoc.loadXML(profile.content_utf8);
+            xmlDoc.loadXML(profile.content);
         }
         var authorizedOrgs = xmlDoc.createElement('authorizedOrganizations');
         var authorizedOrg;
@@ -122,8 +103,8 @@ oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
         var xelement = new XMLSerializer().serializeToString(x);
         var newProfile = new XMLSerializer().serializeToString(xmlDoc);
         profile.content_utf8 = newProfile;
-        var profileJsonString = {'version' : profile.version, 'name' : profile.name, 'content_utf8' : profile.content_utf8, 'image_url': profile.image_url, 'status' : profile.status, 'id' : profile.id};
-        return $http.put(urlBase + 'profile/update', profileJsonString, {
+        var profileJsonString = {'version' : profile.version, 'name' : profile.name, 'content' : profile.content_utf8, 'imageUrl': profile.imageUrl, 'status' : profile.status, 'id' : profile.id};
+        return $http.post(oibManagerUrl + 'createProfile', profileJsonString, {
             headers: {
                 'Authorization' : undefined
             }
@@ -152,8 +133,6 @@ uuidGenerator.factory("idGenerator", function () {
 });
 
 oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'idGenerator', '$filter', function ($http, $resource, idGenerator, $filter) {
-
-    var serviceUrlBase = 'http://' + localStorage.getItem('hostName') + ':3000/';
 
     var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/liteManager/'
 
@@ -243,13 +222,13 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
         if (window.DOMParser)
         {
             var parser=new DOMParser();
-            xmlProfile=parser.parseFromString(profile.content_utf8,"text/xml");
+            xmlProfile=parser.parseFromString(profile.content,"text/xml");
         }
         else // code for IE
         {
             xmlProfile=new ActiveXObject("Microsoft.XMLDOM");
             xmlProfile.async=false;
-            xmlProfile.loadXML(profile.content_utf8);
+            xmlProfile.loadXML(profile.content);
         }
         var x = xmlProfile.getElementsByTagName("authorizedOrganization");
         var oids = [];
@@ -293,8 +272,9 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
                         profile.published = profileLink.version;
                     }
                 });
-                var profileJsonString = {'sha' : profileData.sha, 'name' : profile.name, 'content_utf8' : xmlString, 'image_url': imgUrl, 'published': profile.published};
-                $http.put(serviceUrlBase + 'profile/updateCloud', profileJsonString, {
+                var profileJsonString = {'version' : profileData.sha, 'name' : profile.name, 'content' : xmlString,
+                    'imageUrl': imgUrl, 'published': profile.published, 'id' : profile.id, 'status' : profile.status};
+                $http.post(oibManagerUrl + 'createCloudProfile', profileJsonString, {
                     headers: {
                         'Authorization' : undefined
                     }
@@ -304,7 +284,7 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
     };
 
     cloudProfileFactory.updateStatus = function (profile) {
-        return $http.put(serviceUrlBase + 'profile/updateCloudStatus', profile, {
+        return $http.post(oibManagerUrl + 'createCloudProfile', profile, {
             headers: {
                 'Authorization' : undefined
             }
@@ -353,8 +333,12 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
         }
         var xelement = new XMLSerializer().serializeToString(x);
         var newProfile = new XMLSerializer().serializeToString(xmlDoc);
-        profile.content_utf8 = newProfile;
-        return $http.put(serviceUrlBase + 'profile/download', profile, {
+        profile.content = newProfile;
+        profile.imageUrl = profile.imgUrl;
+        profile.version = profile.sha;
+        profile.name = profile.title;
+        profile.status = 3;
+        return $http.post(oibManagerUrl + 'createCloudProfile', profile, {
             headers: {
                 'Authorization' : undefined
             }
@@ -366,14 +350,14 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
         var xmlDoc;
         if (window.DOMParser)
         {
-            var parser=new DOMParser();
-            xmlDoc=parser.parseFromString(profile.content_utf8,"text/xml");
+            var parser=new DOMParser()
+            xmlDoc=parser.parseFromString(profile.content,"text/xml");
         }
         else // code for IE
         {
             xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
             xmlDoc.async=false;
-            xmlDoc.loadXML(profile.content_utf8);
+            xmlDoc.loadXML(profile.content);
         }
         var authorizedOrgs = xmlDoc.createElement('authorizedOrganizations');
         var authorizedOrg;
@@ -405,8 +389,9 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
         var xelement = new XMLSerializer().serializeToString(x);
         var newProfile = new XMLSerializer().serializeToString(xmlDoc);
         profile.content_utf8 = newProfile;
-        var profileJsonString = {'sha' : profile.version, 'name' : profile.name, 'content_utf8' : profile.content_utf8, 'image_url': profile.image_url, 'published': profile.published};
-        return $http.put(serviceUrlBase + 'profile/updateCloud', profileJsonString, {
+        var profileJsonString = {'version' : profile.version, 'name' : profile.name, 'content' : profile.content_utf8,
+            'imageUrl': profile.imageUrl, 'published': profile.published, 'id' : profile.id, 'status' : profile.status};
+        return $http.post(oibManagerUrl + 'createCloudProfile', profileJsonString, {
             headers: {
                 'Authorization' : undefined
             }

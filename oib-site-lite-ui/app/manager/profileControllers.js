@@ -40,7 +40,7 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$modal', 'profileFactory'
 
         $scope.updateStatus = function (profile, status) {
             profile.status = status;
-            profileFactory.updateProfile(profile)
+            profileFactory.insertProfile(profile)
                 .success(function (msg) {
                     $scope.statusMessage = msg.object + ' ' + msg.event;
                 })
@@ -129,7 +129,8 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
         function loadProfile () {
             if ($stateParams.id) {
                 profileFactory.getProfile($stateParams.id)
-                    .success(function (profile) {                        
+                    .success(function (profile) {
+                        profile.status = profile.status.toString();
                         $scope.profile = profile;
                     })
                     .error(function (error) {
@@ -139,6 +140,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
             else {
 
                 $scope.new = true;
+                $scope.profile = {id: null, name: null, version: "1", published: null, status: 3, content: null, imageUrl: null}
             }
         }
 
@@ -165,9 +167,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
         $scope.update = function (profile) {
 
-            profileFactory.updateProfile(profile)
+            profile.published = new Date();
+            profileFactory.insertProfile(profile)
                 .success(function (msg) {
-                    $scope.statusMessage = msg.object + ' ' + msg.event;
+                    $scope.statusMessage = 'Profile Successfully Updated';
                 })
                 .error(function (error) {
                     $scope.statusMessage = 'Unable to save profile:' + error;
@@ -177,7 +180,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
         $scope.insert = function (profile) {
             profileFactory.insertProfile(profile)
                 .success(function (msg) {
-                    $scope.statusMessage = msg.object + ' ' + msg.event;
+                    $scope.statusMessage = 'Profile Successfully Created';
                 })
                 .error(function (error) {
                     $scope.statusMessage = 'Unable to create profile:' + error;
