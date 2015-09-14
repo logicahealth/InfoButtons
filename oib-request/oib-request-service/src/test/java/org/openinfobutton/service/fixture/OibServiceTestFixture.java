@@ -53,7 +53,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.w3c.dom.Document;
 
 @RunWith( SpringJUnit4ClassRunner.class )
-@ContextConfiguration( locations = { "/core-data-annotation-context.xml", "/core-data-datasource-context.xml",
+@ContextConfiguration( locations = {  "/core-liteprofile-datasource-context.xml", "/core-data-annotation-context.xml", "/core-data-datasource-context.xml",
     "/core-profile-datasource-context.xml" } )
 public abstract class OibServiceTestFixture
 {

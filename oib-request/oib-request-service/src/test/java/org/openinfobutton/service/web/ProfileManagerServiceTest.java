@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
+import edu.utah.further.liteprofiledb.domain.CustomProfiles;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,8 @@ import edu.utah.further.profiledb.domain.Profiles;
  * @version May 5, 2014
  */
 @RunWith( SpringJUnit4ClassRunner.class )
-@ContextConfiguration( locations = { "/core-data-annotation-context.xml", "/core-data-datasource-context.xml",
-                       "/core-profile-datasource-context.xml" })
+@ContextConfiguration( locations = { "/core-liteprofile-datasource-context.xml", "/core-data-annotation-context.xml", "/core-data-datasource-context.xml",
+                       "/core-profile-datasource-context.xml"})
 public class ProfileManagerServiceTest
 {
     @Autowired
@@ -40,7 +41,7 @@ public class ProfileManagerServiceTest
     @Test
     public void returnProfilesAndCheckCount(){
         
-       final List<Profiles> profiles = service.getProfiles();
+       final List<CustomProfiles> profiles = service.getCustomProfiles();
        assertNotNull(profiles);
     }
 }
