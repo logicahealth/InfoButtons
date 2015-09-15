@@ -5,35 +5,35 @@
         <div class="alert alert-info" role="alert" style="text-align: center" ng-show="statusMessage">{{statusMessage}}</div>
 
         <form class="form-horizontal" role="form" novalidate>
-            <div ng-show="asset.ASSET_ID" class="form-group">
+            <div ng-show="asset.assetId" class="form-group">
                 <label for="id" class="col-sm-2 control-label">ID:</label>
                 <div class="col-sm-10">
-                    <input disabled id="id" class="form-control" type="text" ng-model="asset.ASSET_ID" />
+                    <input disabled id="id" class="form-control" type="text" ng-model="asset.assetId" />
                     <!--<input id="id" class="form-control" type="text" ng-model="profile.id" readonly/>-->
                 </div>
             </div>
             <div class="form-group">
                 <label for="namespace" class="col-sm-2 control-label">Namespace:</label>
                 <div class="col-sm-10">
-                    <input id="namespace" class="form-control" type="text" ng-model="asset.NAMESPACE_CD"/>
+                    <input id="namespace" class="form-control" type="text" ng-model="asset.namespaceCd"/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">Name:</label>
                 <div class="col-sm-10">
-                    <input id="name" class="form-control" type="text" ng-model="asset.DISPLAY_NAME"/>
+                    <input id="name" class="form-control" type="text" ng-model="asset.displayName"/>
                 </div>
             </div>
-            <div ng-show="asset.ASSET_ID" class="form-group">
+            <div ng-show="asset.assetId" class="form-group">
                 <label for="updated_date" class="col-sm-2 control-label">Updated:</label>
                 <div class="col-sm-10">
-                    <input disabled id="updated_date" class="form-control" type="text" ng-model="asset.LAST_UPDATE_DTS" />
+                    <input disabled id="updated_date" class="form-control" type="text" ng-model="asset.lastUpdateDate" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="status" class="col-sm-2 control-label">MIME Type:</label>
                 <div class="col-sm-10">
-                    <select id="status" class="form-control" type="text" ng-model="asset.ASSET_MIME_TYPE">
+                    <select id="status" class="form-control" type="text" ng-model="asset.assetMimeType">
                         <option value="text/html">HTML</option>
                         <option value="application/pdf">PDF</option>
                         <option value="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">MS Excel XLSX</option>
@@ -46,23 +46,23 @@
             <div class="form-group">
                 <label for="content_url" class="col-sm-2 control-label">Content URL</label>
                 <div class="col-sm-10">
-                    <input id="content_url" class="form-control" type="text" ng-model="asset.ASSET_URL" />
+                    <input id="content_url" class="form-control" type="text" ng-model="asset.assetUrl" />
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button ng-if="asset.ASSET_ID" ng-click="update(asset)" class="btn btn-success">UPDATE</button>
-                    <button ng-if="asset.ASSET_ID" ng-click="copy(asset, assetProperties)" class="btn btn-info">COPY</button>
-                    <button ng-if="asset.ASSET_ID" ng-click="deleteAsset(asset)" class="btn btn-danger">DELETE</button>
+                    <button ng-if="asset.assetId" ng-click="update(asset)" class="btn btn-success">UPDATE</button>
+                    <button ng-if="asset.assetId" ng-click="copy(asset, assetProperties)" class="btn btn-info">COPY</button>
+                    <button ng-if="asset.assetId" ng-click="deleteAsset(asset)" class="btn btn-danger">DELETE</button>
                 </div>
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button ng-if="!asset.ASSET_ID" ng-click="update(asset)" class="btn btn-success">CREATE</button>
+                    <button ng-if="!asset.assetId" ng-click="update(asset)" class="btn btn-success">CREATE</button>
                 </div>
             </div>
 
         </form>
 
-        <div ng-if="asset.ASSET_ID">
+        <div ng-if="asset.assetId">
             <hr/>
             <h3>Index Properties<a class="btn navbar-btn glyphicon glyphicon-plus" ng-click="editProperty(null)"></a></h3>
             <hr/>
@@ -82,14 +82,14 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="assetProperty in assetProperties">
-                        <td><button ng-hide="assetProperty.GENERATED_BY_CD == 'GENERATED_BY_ONTOLOGY_RELATIONSHIP'" ng-click="editProperty(assetProperty)" class="btn btn-info">EDIT</button></td>
-                        <td>{{assetProperty.PROP_TYPE_CD}}</td>
-                        <td>{{assetProperty.PROP_NAME}}</td>
-                        <td>{{assetProperty.DISPLAY_NAME}}</td>
-                        <td>{{assetProperty.CODE_SYSTEM}}</td>
-                        <td>{{assetProperty.CODE}}</td>
-                        <td><button ng-if="assetProperty.GENERATED_BY_CD != 'GENERATED_BY_ONTOLOGY_RELATIONSHIP'" ng-click="deleteAssetProperty(assetProperty)" class="btn btn-danger">DELETE</button></td>
-                        <td>{{assetProperty.GENERATED_BY_CD}}</td>
+                        <td><button ng-hide="assetProperty.generatedByCode == 'GENERATED_BY_ONTOLOGY_RELATIONSHIP'" ng-click="editProperty(assetProperty)" class="btn btn-info">EDIT</button></td>
+                        <td>{{assetProperty.propertyType}}</td>
+                        <td>{{assetProperty.propertyName}}</td>
+                        <td>{{assetProperty.displayName}}</td>
+                        <td>{{assetProperty.codeSystem}}</td>
+                        <td>{{assetProperty.code}}</td>
+                        <td><button ng-if="assetProperty.generatedByCode != 'GENERATED_BY_ONTOLOGY_RELATIONSHIP'" ng-click="deleteAssetProperty(assetProperty)" class="btn btn-danger">DELETE</button></td>
+                        <td>{{assetProperty.generatedByCode}}</td>
                     </tr>
                 </tbody>
             </table>

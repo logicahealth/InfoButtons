@@ -137,13 +137,13 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
         if (!(selectedProperty == null)) {
             $scope.selected = {
                 "property": {
-                    "propName": selectedProperty.PROP_NAME,
-                    "codeSystem": {"name": selectedProperty.CODE_SYSTEM, "oid": selectedProperty.CODE_SYSTEM},
-                    "codes": {"code": selectedProperty.CODE, "displayName": selectedProperty.DISPLAY_NAME}
+                    "propName": selectedProperty.propertyName,
+                    "codeSystem": {"name": selectedProperty.codeSystem, "oid": selectedProperty.codeSystem},
+                    "codes": {"code": selectedProperty.code, "displayName": selectedProperty.displayName}
                 }
             };
 
-            selectedId = selectedProperty.ASSET_PROPERTY_ID;
+            selectedId = selectedProperty.assetPropertyId;
         } else {
             $scope.selected = {
                 "property": {

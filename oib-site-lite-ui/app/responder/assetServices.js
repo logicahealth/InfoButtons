@@ -6,18 +6,19 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
     var urlBase = 'http://' + localStorage.getItem('hostName') + ':3000/';
 
+    var responderManagerBase = 'http://' + localStorage.getItem('hostName') + ':8080/openInfobutton/assetManager/';
+
     var responderExpander = 'http://' + localStorage.getItem('hostName') + ':8080/openInfobutton/';
 //    var urlBase = 'http://service.oib.utah.edu:8080/infobutton-service-dev/manager/';
     var assetFactory = {};
 
     assetFactory.getAssets = function () {
-        $http.defaults.headers.common.Authorization = undefined;
-        $http.defaults.headers.delete = { 'Content-Type' : 'application/json' };
-        return $http.get(urlBase + 'assets');
+
+        return $http.get(responderManagerBase + 'assets');
     };
 
     assetFactory.getAsset = function (id) {
-        return $http.get(urlBase + 'asset/' + id);
+        return $http.get(responderManagerBase + 'asset/' + id);
     };
 
     assetFactory.insertAsset = function (asset) {
@@ -37,7 +38,7 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
     };
 
     assetFactory.getAssetPropertiesForAsset = function (assetId) {
-        return $http.get(urlBase + 'assetProperties/' + assetId);
+        return $http.get(responderManagerBase + 'assetProperties/' + assetId);
     };
 
     assetFactory.getAssetProperty = function (id) {

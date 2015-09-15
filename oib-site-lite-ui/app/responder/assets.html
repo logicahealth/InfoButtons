@@ -13,11 +13,11 @@
         </thead>
         <tbody>
             <tr ng-repeat="asset in assets">
-                <td>{{asset.NAMESPACE_CD}}</td>
-                <td><a href="#/responder/editAsset/{{asset.ASSET_ID}}">{{asset.DISPLAY_NAME}}</a></td>
-                <td>{{asset.LAST_UPDATE_DTS}}</td>
-                <td>{{asset.ASSET_MIME_TYPE}}</td>
-                <td>{{asset.ASSET_URL}}</td>
+                <td>{{asset.namespaceCd}}</td>
+                <td><a href="#/responder/editAsset/{{asset.assetId}}">{{asset.displayName}}</a></td>
+                <td>{{asset.lastUpdateDate | date: medium}}</td>
+                <td>{{asset.assetMimeType}}</td>
+                <td>{{asset.assetUrl}}</td>
             </tr>
         </tbody>
     </table>
