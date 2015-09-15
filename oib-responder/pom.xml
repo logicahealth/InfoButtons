@@ -131,12 +131,6 @@
     </build>
 
     <dependencies>
-        
-        <dependency>
-            <groupId>org.openinfobutton</groupId>
-            <artifactId>oib-app-model</artifactId>
-            <version>0.21</version>
-        </dependency>
 
         <dependency>
             <groupId>commons-lang</groupId>
@@ -209,6 +203,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.28</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
         </dependency>
 
         <!--dependency>

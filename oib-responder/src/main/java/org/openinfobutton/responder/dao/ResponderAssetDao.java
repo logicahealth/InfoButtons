@@ -27,6 +27,7 @@ package org.openinfobutton.responder.dao;
  */
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import org.openinfobutton.app.dao.AssetDaoI;
 import org.openinfobutton.app.model.Asset;
@@ -43,5 +44,7 @@ public interface ResponderAssetDao extends AssetDaoI {
      * @return
      */
     Collection<Asset> findByInfobuttonRequest(Map<String, String> requestParameters);
+
+    List<Asset> findAll();
 
 }

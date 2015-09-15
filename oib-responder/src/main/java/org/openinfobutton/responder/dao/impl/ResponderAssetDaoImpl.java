@@ -41,6 +41,7 @@ import org.openinfobutton.responder.dao.ResponderAssetDao;
 import org.openinfobutton.service.dao.CodeExpanderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -316,6 +317,13 @@ public class ResponderAssetDaoImpl extends DaoBase<Asset> implements ResponderAs
         }
 
         return codesOnly;
+    }
+
+    @Transactional
+    public List<Asset> findAll() {
+
+        List<Asset> assets = getSessionFactory().getCurrentSession().createCriteria(Asset.class).list();
+        return assets;
     }
 
 }
