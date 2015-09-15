@@ -4,7 +4,7 @@
 		<title>American College of Cardiology</title>
 		<profileDescription>CardioSource site</profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
-		ader>
+	</header>
 	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="false" urlStyle="DIRTY">
 		<authorizedOrganizations/>
 		<supportedTerminologies>
