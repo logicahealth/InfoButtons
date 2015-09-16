@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="313">
 		<title>Clinical Key</title>
-		<profileDescription>Provides definitions for infobutton links associated with problem list, medication list, and order entry.</profileDescription>
+		<profileDescription>ClinicalKey contains all the content previously available from MDConsult plus much more, including over 1,100 additional medical and surgical e-books, over 500 e-journals, over 13,000 Elsevier medical and surgical videos, and more than 3.7 million images.</profileDescription>
 		<versionControl publicationDate="2015-09-16T19:27:00"/>
 	</header>
 	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="true">
