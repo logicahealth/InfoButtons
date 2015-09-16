@@ -24,11 +24,13 @@ oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$state', 'ngNotify
 
         $scope.update = function(asset) {
 
-            if (asset.ASSET_ID) {
+            if (asset.assetId) {
+                asset.lastUpdateDate = new Date();
                 assetFactory.updateAsset(asset);
                 ngNotify.set("Asset Updated");
             } else {
-                assetFactory.insertAsset(asset).success(function() {
+                asset.lastUpdateDate = new Date();
+                assetFactory.updateAsset(asset).success(function() {
                     ngNotify.set("Asset Created");
                     $state.go('responder');
                 });
@@ -37,7 +39,7 @@ oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$state', 'ngNotify
 
         $scope.deleteAsset = function(asset) {
 
-            assetFactory.deleteAsset(asset).success(function() {
+            assetFactory.deleteAsset(asset.assetId).success(function() {
                 ngNotify.set("Asset Deleted");
                 $state.go('responder');
             });
@@ -45,11 +47,11 @@ oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$state', 'ngNotify
 
         $scope.deleteAssetProperty = function(assetProperty) {
 
-            assetFactory.deleteAssetProperty(assetProperty).success(function() {
+            assetFactory.deleteAssetProperty(assetProperty.assetPropertyId).success(function() {
                 ngNotify.set("Asset Property Deleted");
-                if (assetProperty.PROP_NAME == 'mainSearchCriteria.v')
+                if (assetProperty.propertyName == 'mainSearchCriteria.v')
                 {
-                    assetFactory.expandAssetIndex(assetProperty.ASSET_ID, assetProperty.CODE_SYSTEM);
+                    assetFactory.expandAssetIndex(assetProperty.asset.assetId, assetProperty.codeSystem);
                     ngNotify.set("Asset property deleted, clearing expanded concepts, please refresh...");
                 }
                 $state.reload();
@@ -300,8 +302,16 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
             assetProperty.codes = selectedItems;
         }
 
+        var entity = {};
+        entity.propertyName = assetProperty.propName;
+        entity.code = assetProperty.codes.code;
+        entity.displayName = assetProperty.codes.displayName;
+        entity.codeSystem = assetProperty.codeSystem.oid;
+        entity.propertyType = "CODE";
+        entity.generatedByCode = "AUTHOR";
+        entity.asset = {"assetId" : assetId}
         if (newAsset) {
-            assetFactory.createAssetProperty(assetProperty)
+            assetFactory.updateAssetProperty(entity)
                 .success(function () {
 
                     if (assetProperty.propName == 'mainSearchCriteria.v')
@@ -312,7 +322,8 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                     $scope.$close(assetProperty)
                 });
         } else {
-            assetFactory.updateAssetProperty(assetProperty)
+            entity.assetPropertyId = assetProperty.assetId;
+            assetFactory.updateAssetProperty(entity)
                 .success(function () {
 
                     if (assetProperty.propName == 'mainSearchCriteria.v')
@@ -323,10 +334,6 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                     $scope.$close(assetProperty);
                 });
         }
-    };
-
-    $scope.addAssetProperty = function (assetProperty) {
-        assetFactory.createAssetProperty(assetProperty);
     };
 
 }]);

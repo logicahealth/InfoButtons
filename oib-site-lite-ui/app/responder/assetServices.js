@@ -21,36 +21,24 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
         return $http.get(responderManagerBase + 'asset/' + id);
     };
 
-    assetFactory.insertAsset = function (asset) {
-        return $http.put(urlBase + 'asset/create', asset);
-    };
-
     assetFactory.updateAsset = function (asset) {
-        return $http.put(urlBase + 'asset/update', asset);
+        return $http.post(responderManagerBase + 'asset/update', asset);
     };
 
     assetFactory.deleteAsset = function (asset) {
-        return $http.put(urlBase + 'asset/deleteAsset', asset);
+        return $http.get(responderManagerBase + 'deleteAsset/' + asset);
     };
 
     assetFactory.deleteAssetProperty = function (assetProperty) {
-        return $http.put(urlBase + 'asset/deleteAssetProperty', assetProperty);
+        return $http.get(responderManagerBase + 'deleteAssetProperty/' + assetProperty);
     };
 
     assetFactory.getAssetPropertiesForAsset = function (assetId) {
         return $http.get(responderManagerBase + 'assetProperties/' + assetId);
     };
 
-    assetFactory.getAssetProperty = function (id) {
-        return $http.get(urlBase + 'assetProperty/' + id);
-    };
-
     assetFactory.updateAssetProperty = function (assetProperty) {
-        return $http.put(urlBase + 'assetProperty/update', assetProperty);
-    };
-
-    assetFactory.createAssetProperty = function (assetProperty) {
-        return $http.put(urlBase + 'assetProperty/create', assetProperty);
+        return $http.post(responderManagerBase + 'assetProperty/update', assetProperty);
     };
 
     assetFactory.expandAssetIndex = function (assetId, codeSystem) {
