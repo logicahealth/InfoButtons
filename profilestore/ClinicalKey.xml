@@ -5,6 +5,7 @@
 		<versionControl publicationDate="2015-09-16T19:27:00"/>
 	</header>
 	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="true">
+		<authorizedOrganizations/>
 		<contexts>
 			<context name="Drug information" id="1">
 				<contextDefinition>
