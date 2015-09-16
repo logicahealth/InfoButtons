@@ -5,11 +5,9 @@ import org.openinfobutton.app.model.AssetProperty;
 import org.openinfobutton.responder.dao.ResponderAssetDao;
 import org.openinfobutton.responder.dao.ResponderAssetPropertyDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -65,6 +63,23 @@ public class OpenInfobuttonAssetManagerController {
         return asset;
     }
 
+    @RequestMapping(produces="application/json", value="deleteAsset/{assetId}", method= RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAsset(@PathVariable final BigDecimal assetId)
+    {
+
+        try
+        {
+            dao.delete(assetId);
+        }
+        catch (Exception e)
+        {
+            String eMessage = "Unable to connect to database and delete asset";
+            System.err.println(eMessage);
+            e.printStackTrace();
+        }
+    }
+
     @RequestMapping(produces="application/json", value="assetProperties/{assetId}", method= RequestMethod.GET)
     @ResponseBody
     public List<AssetProperty> getAssetProperties(@PathVariable final BigDecimal assetId)
@@ -82,5 +97,47 @@ public class OpenInfobuttonAssetManagerController {
             e.printStackTrace();
         }
         return assetProperties;
+    }
+
+    @RequestMapping(produces="application/json", value="deleteAssetProperty/{assetPropertyId}", method= RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAssetProperty(@PathVariable final BigDecimal assetPropertyId)
+    {
+
+        try
+        {
+            daoP.delete(assetPropertyId);
+        }
+        catch (Exception e)
+        {
+            String eMessage = "Unable to connect to database and delete asset property";
+            System.err.println(eMessage);
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value = "asset/update", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void createOrUpdateAsset(@RequestBody Asset asset)
+    {
+        try {
+            dao.save(asset);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value = "assetProperty/update", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void createOrUpdateAssetProperty(@RequestBody AssetProperty assetProperty)
+    {
+        try {
+
+            daoP.save(assetProperty);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
