@@ -4,7 +4,7 @@
 <div class="modal-body">
     <div class="form">
         <div class="form-group">
-            <ui-select ng-model="selected.property">
+            <ui-select ng-model="selected.property" on-select="clearSelectedCodes()">
                 <ui-select-match placeholder="Select Property...">{{$select.selected.propName}}</ui-select-match>
                 <ui-select-choices repeat = "property in properties | orderBy : 'name' | filter : $select.search track by property.name" >
                     <div ng-bind-html = "property.name | highlight: $select.search"></div>
@@ -25,7 +25,7 @@
         <div class="form-group" ng-if="selected.property.propName != 'performer.languageCode.c' && selected.property.propName != 'informationRecipient.languageCode.c' &&
                                 selected.property.propName != 'locationOfInterest.c' && selected.property.propName != 'mainSearchCriteria.v'">
 
-        <dropdown-multiselect pre_selected="pre_selected.roles" model="selected_items" options="selected.property.codes"></dropdown-multiselect>
+        <dropdown-multiselect model="selected_items" options="selected.property.codes"></dropdown-multiselect>
             <div ng-repeat="item in selected_items track by item.id">
                 {{item.displayName}}
             </div>
@@ -54,7 +54,7 @@
             <input type="text" class="form-control" id="code" ng-model="selected.property.codes.code" required>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" ng-click="editProperty(selected.property, selected_items[0])">Submit</button>
+    <button type="submit" class="btn btn-primary" ng-click="editProperty(selected.property, selected_items)">Submit</button>
 </div>
 <div class="modal-footer">
     <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>

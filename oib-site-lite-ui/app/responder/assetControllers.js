@@ -59,21 +59,10 @@ oibAssetControllerModule.controller('AssetsCtrl', ['$scope', '$state', 'ngNotify
         };
 
 
-        $scope.copyAsset = function(asset, assetProperties) {
+        $scope.copyAsset = function(asset) {
 
-            $scope.tempAssetProps = assetProperties;
-            $scope.tempAsset = asset;
-
-            $scope.tempAsset.DISPLAY_NAME += " copy";
-
-            console.log(asset);
-            console.log(assetProperties);
-            assetFactory.insertAsset($scope.tempAsset).success(function() {
+            assetFactory.copyAsset(asset.assetId).success(function() {
                 $state.go('responder');
-                for(var i = 0; i < $scope.tempAssetProps.length; i++)
-                {
-                    console.log($scope.tempAssetProps[i]);
-                }
             });
         };
     }]);
@@ -128,10 +117,12 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
     var selectedId;
     var newAsset = false;
 
-
-
-    $scope.pre_selected = {roles:[]};
     $scope.selected_items= [];
+
+    $scope.clearSelectedCodes = function() {
+
+        $scope.selected_items = [];
+    }
 
     initialize();
 
@@ -141,10 +132,10 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                 "property": {
                     "propName": selectedProperty.propertyName,
                     "codeSystem": {"name": selectedProperty.codeSystem, "oid": selectedProperty.codeSystem},
-                    "codes": {"code": selectedProperty.code, "displayName": selectedProperty.displayName}
+                    "codes": [{"code": selectedProperty.code, "displayName": selectedProperty.displayName}]
                 }
             };
-
+            $scope.selected_items= [{"code": selectedProperty.code, "displayName": selectedProperty.displayName}];
             selectedId = selectedProperty.assetPropertyId;
         } else {
             $scope.selected = {
@@ -293,25 +284,37 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
 
     $scope.editProperty = function (assetProperty, selectedItems) {
 
-        selectedItems = selectedItems || 0;
+        assetProperty.assetId = selectedId;
+        var entities = [];
 
-
-       assetProperty.assetId = selectedId;
-
-        if(assetProperty.propName != 'mainSearchCriteria.v' && selectedItems!= 0) {
-            assetProperty.codes = selectedItems;
+        if( selectedItems.length != 0) {
+            for (var i = 0; i < selectedItems.length; i++)
+            {
+                var entity = {};
+                entity.propertyName = assetProperty.propName;
+                entity.code = selectedItems[i].code;
+                entity.displayName = selectedItems[i].displayName;
+                entity.codeSystem = assetProperty.codeSystem.oid;
+                entity.propertyType = "CODE";
+                entity.generatedByCode = "AUTHOR";
+                entity.asset = {"assetId" : assetId}
+                entities.push(entity);
+            }
+        }
+        else {
+            var entity = {};
+            entity.propertyName = assetProperty.propName;
+            entity.code = assetProperty.codes.code;
+            entity.displayName = assetProperty.codes.displayName;
+            entity.codeSystem = assetProperty.codeSystem.oid;
+            entity.propertyType = "CODE";
+            entity.generatedByCode = "AUTHOR";
+            entity.asset = {"assetId" : assetId}
+            entities.push(entity);
         }
 
-        var entity = {};
-        entity.propertyName = assetProperty.propName;
-        entity.code = assetProperty.codes.code;
-        entity.displayName = assetProperty.codes.displayName;
-        entity.codeSystem = assetProperty.codeSystem.oid;
-        entity.propertyType = "CODE";
-        entity.generatedByCode = "AUTHOR";
-        entity.asset = {"assetId" : assetId}
         if (newAsset) {
-            assetFactory.updateAssetProperty(entity)
+            assetFactory.updateAssetProperty(entities)
                 .success(function () {
 
                     if (assetProperty.propName == 'mainSearchCriteria.v')
@@ -322,15 +325,21 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                     $scope.$close(assetProperty)
                 });
         } else {
-            entity.assetPropertyId = assetProperty.assetId;
-            assetFactory.updateAssetProperty(entity)
+            entities[0].assetPropertyId = assetProperty.assetId;
+            assetFactory.updateAssetProperty(entities)
                 .success(function () {
 
-                    if (assetProperty.propName == 'mainSearchCriteria.v')
+                    if (assetProperty.propName == 'mainSearchCriteria.v' )
                     {
                         assetFactory.expandAssetIndex(assetId, assetProperty.codeSystem.oid);
                         ngNotify.set("Updating asset index, refresh to see expanded concepts....");
                     }
+                    else if (selectedProperty.propertyName == 'mainSearchCriteria.v')
+                    {
+                        assetFactory.expandAssetIndex(assetId, selectedProperty.codeSystem);
+                        ngNotify.set("Updating asset index, refresh to see expanded concepts....");
+                    }
+
                     $scope.$close(assetProperty);
                 });
         }

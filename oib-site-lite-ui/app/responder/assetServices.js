@@ -35,6 +35,14 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
         });
     };
 
+    assetFactory.copyAsset = function (asset) {
+        return $http.get(responderManagerBase + 'copyAsset/' + asset, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
+    };
+
     assetFactory.deleteAsset = function (asset) {
         return $http.get(responderManagerBase + 'deleteAsset/' + asset, {
             headers: {

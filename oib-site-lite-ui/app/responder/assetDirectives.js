@@ -18,20 +18,13 @@ asset_directives.directive('dropdownMultiselect', function(){
         "<li><a data-ng-click='selectAll()'><i class='icon-ok-sign'></i>  Check All</a></li>" +
         "<li><a data-ng-click='deselectAll();'><i class='icon-remove-sign'></i>  Uncheck All</a></li>" +
         "<li class='divider'></li>" +
-        "<li data-ng-repeat='option in options track by $index'> <a data-ng-click='setSelectedItem()'>{{option.displayName}}<span data-ng-class='isChecked(option.id)'></span></a></li>" +
+        "<li data-ng-repeat='option in options track by option.id'> <a data-ng-click='setSelectedItem()'>{{option.displayName}}<span data-ng-class='isChecked(option.id)'></span></a></li>" +
         "</ul>" +
         "</div>" ,
         controller: function($scope){
 
-            $scope.openDropdown = function(){
-                $scope.selected_items = [];
-                for(var i=0; i<$scope.pre_selected.length; i++){
-                    $scope.selected_items.push($scope.pre_selected[i].id);
-                }
-            };
-
             $scope.selectAll = function () {
-                $scope.model = _.pluck($scope.options, 'id');
+                $scope.model = $scope.options;
             };
             $scope.deselectAll = function() {
                 $scope.model=[];
@@ -39,8 +32,8 @@ asset_directives.directive('dropdownMultiselect', function(){
             $scope.setSelectedItem = function(){
                 var obj = this.option;
                 var id = this.option.id;
-                if (_.contains($scope.model, id)) {
-                    $scope.model = _.without($scope.model, id);
+                if (_.contains($scope.model, obj)) {
+                    $scope.model = _.without($scope.model, obj);
                 }
 
                 else if($scope.model.length >= 0) {
