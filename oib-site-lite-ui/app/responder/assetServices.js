@@ -4,8 +4,6 @@ var oibAssetServiceModule = angular.module('oibAssetServiceModule', ['ui.bootstr
 
 oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
-    var urlBase = 'http://' + localStorage.getItem('hostName') + ':3000/';
-
     var responderManagerBase = 'http://' + localStorage.getItem('hostName') + ':8080/openInfobutton/assetManager/';
 
     var responderExpander = 'http://' + localStorage.getItem('hostName') + ':8080/openInfobutton/';
@@ -14,35 +12,67 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
     assetFactory.getAssets = function () {
 
-        return $http.get(responderManagerBase + 'assets');
+        return $http.get(responderManagerBase + 'assets', {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
     };
 
     assetFactory.getAsset = function (id) {
-        return $http.get(responderManagerBase + 'asset/' + id);
+        return $http.get(responderManagerBase + 'asset/' + id, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
     };
 
     assetFactory.updateAsset = function (asset) {
-        return $http.post(responderManagerBase + 'asset/update', asset);
+        return $http.post(responderManagerBase + 'asset/update', asset, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
     };
 
     assetFactory.deleteAsset = function (asset) {
-        return $http.get(responderManagerBase + 'deleteAsset/' + asset);
+        return $http.get(responderManagerBase + 'deleteAsset/' + asset, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
     };
 
     assetFactory.deleteAssetProperty = function (assetProperty) {
-        return $http.get(responderManagerBase + 'deleteAssetProperty/' + assetProperty);
+        return $http.get(responderManagerBase + 'deleteAssetProperty/' + assetProperty, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
     };
 
     assetFactory.getAssetPropertiesForAsset = function (assetId) {
-        return $http.get(responderManagerBase + 'assetProperties/' + assetId);
+        return $http.get(responderManagerBase + 'assetProperties/' + assetId, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
     };
 
     assetFactory.updateAssetProperty = function (assetProperty) {
-        return $http.post(responderManagerBase + 'assetProperty/update', assetProperty);
+        return $http.post(responderManagerBase + 'assetProperty/update', assetProperty, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
     };
 
     assetFactory.expandAssetIndex = function (assetId, codeSystem) {
-        return $http.get(responderExpander + 'assetExpander/' + assetId + '/codeSystem/' + codeSystem +'/');
+        return $http.get(responderExpander + 'assetExpander/' + assetId + '/codeSystem/' + codeSystem +'/', {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
     }
 
     return assetFactory;
