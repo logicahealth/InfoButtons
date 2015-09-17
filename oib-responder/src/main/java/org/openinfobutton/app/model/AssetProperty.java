@@ -27,10 +27,12 @@ package org.openinfobutton.app.model;
  */
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -52,7 +54,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "OIB_ASSET_PROPERTY")
 @XmlRootElement
 public class AssetProperty
-        implements Serializable {
+        implements Serializable, Cloneable {
 
     /**
      * The Constant serialVersionUID.
@@ -355,5 +357,20 @@ public class AssetProperty
     @Override
     public String toString() {
         return "org.openinfobutton.app.model.AssetProperty[ assetPropertyId=" + assetPropertyId + " ]";
+    }
+
+    @Override
+    public Object clone() {
+
+        AssetProperty property = new AssetProperty();
+        property.setPropertyGroupNumber(this.propertyGroupNumber);
+        property.setPropertyName(this.propertyName);
+        property.setPropertyType(this.propertyType);
+        property.setCode(this.code);
+        property.setCodeSystem(this.codeSystem);
+        property.setDisplayName(this.displayName);
+        property.setPropertyValue(this.propertyValue);
+        property.setGeneratedByCode(this.generatedByCode);
+        return property;
     }
 }

@@ -63,9 +63,28 @@ public class OpenInfobuttonAssetManagerController {
         return asset;
     }
 
-    @RequestMapping(produces="application/json", value="deleteAsset/{assetId}", method= RequestMethod.GET)
+    @RequestMapping(produces="application/json", value="copyAsset/{assetId}", method= RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public void deleteAsset(@PathVariable final BigDecimal assetId)
+    public void copyAsset(@PathVariable final BigDecimal assetId)
+    {
+
+        Asset asset;
+        try
+        {
+            asset = (Asset)dao.get(assetId).clone();
+            dao.save(asset);
+        }
+        catch (Exception e)
+        {
+            String eMessage = "Unable to connect to database and copy asset";
+            System.err.println(eMessage);
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(produces="application/json", value="deleteAsset/{assetId}", method= RequestMethod.GET)
+         @ResponseStatus(HttpStatus.OK)
+         public void deleteAsset(@PathVariable final BigDecimal assetId)
     {
 
         try
@@ -106,7 +125,11 @@ public class OpenInfobuttonAssetManagerController {
 
         try
         {
-            daoP.delete(assetPropertyId);
+
+            AssetProperty property = daoP.get(assetPropertyId);
+            Asset asset = dao.get(property.getAsset().getAssetId());
+            asset.getAssetProperties().remove(property);
+            dao.save(asset);
         }
         catch (Exception e)
         {
@@ -130,11 +153,13 @@ public class OpenInfobuttonAssetManagerController {
 
     @RequestMapping(value = "assetProperty/update", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void createOrUpdateAssetProperty(@RequestBody AssetProperty assetProperty)
+    public void createOrUpdateAssetProperties(@RequestBody List<AssetProperty> assetProperties)
     {
         try {
-
-            daoP.save(assetProperty);
+            for (AssetProperty assetProperty : assetProperties)
+            {
+                daoP.save(assetProperty);
+            }
         } catch (Exception e)
         {
             e.printStackTrace();

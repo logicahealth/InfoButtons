@@ -27,14 +27,21 @@ package org.openinfobutton.app.model;
  */
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  * The Class Asset.
@@ -45,7 +52,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "OIB_ASSET")
 @XmlRootElement
 public class Asset
-        implements Serializable {
+        implements Serializable, Cloneable {
 
     /**
      * The Constant serialVersionUID.
@@ -98,7 +105,8 @@ public class Asset
     /**
      * The asset properties.
      */
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "asset", cascade=CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "asset", orphanRemoval = true)
+    @Cascade({CascadeType.DELETE, CascadeType.SAVE_UPDATE})
     private List<AssetProperty> assetProperties;
 
     /**
@@ -280,6 +288,24 @@ public class Asset
     @Override
     public String toString() {
         return "org.openinfobutton.content.model.Asset[ assetId=" + assetId + "\t" + displayName + " ]";
+    }
+
+    @Override
+    public Object clone() {
+
+        Asset asset = new Asset();
+        asset.setDisplayName("Copy of" + this.displayName);
+        asset.setLastUpdateDate(new Date());
+        List<AssetProperty> assetProperties = new ArrayList<>();
+        for (AssetProperty assetProperty : this.assetProperties)
+        {
+
+            AssetProperty assetPropertyClone = (AssetProperty)assetProperty.clone();
+            assetPropertyClone.setAsset(asset);
+            assetProperties.add(assetPropertyClone);
+        }
+        asset.setAssetProperties(assetProperties);
+        return asset;
     }
 
 }
