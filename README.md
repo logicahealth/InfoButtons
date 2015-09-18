@@ -5,6 +5,21 @@ Repository for VHA Innovation 182 - Context Sensitive InfoButtons
 
 This project is a part of the Veterans Health Administration (VHA) Grassroots initiative. Infobuttons are context-sensitive links embedded in the electronic health record (EHR). They use clinical context information from the EHR such as patient demographics, medications, diagnoses, lab results, user role, and clinical setting to help find answers to clinicians' and patients' clinical questions. This project will insert Infobuttons into eHMP and other VHA systems at several different points and use an Infobutton Manager to customize the way resources are delivered to clinicians. OpenInfobutton software has been certified through the Open Source EHR Alliance (OSEHRA) and is available through Apache 2.0 license.
 
+1.9 RELEASE NOTES
+=================
+
+This update improves the LITE backend by moving the web service endpoints to the main OIB Manager and Responder web applications. This means that in order for LITE to function, you must have a running instance of both the OIB Manager and Responder to connect to. It eliminates the need for the oib-site-lite-rest-server module, which has been removed from the repository. It also adds some additional features to LITE, including asset copying and multi-select for asset properties.
+
+Building and redeploying
+------------------------
+
+This release does not require any database changes, however v_* views in the resource_profile database are no longer needed and can be safely dropped. It does require a rebuild and redeploy of all the following modules:
+- Infobuton manager: oib-request
+- Infobutton responder: oib-responder
+- LITE client: oib-site-lite-ui
+
+As mentioned, the oib-site-lite-rest-server module is no longer needed and can be removed.
+
 1.8 RELEASE NOTES
 =================
 
