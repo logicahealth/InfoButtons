@@ -2,7 +2,7 @@
     <parent>
 	    <groupId>org.openinfobutton</groupId>
 	    <artifactId>oib-request</artifactId>
-      	<version>1.7-SNAPSHOT</version>
+      	<version>1.9-SNAPSHOT</version>
     </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openinfobutton</groupId>
@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-core</artifactId>
-			<version>1.7-SNAPSHOT</version>
+			<version>1.9-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 
