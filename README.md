@@ -5,6 +5,10 @@ Repository for VHA Innovation 182 - Context Sensitive InfoButtons
 
 This project is a part of the Veterans Health Administration (VHA) Grassroots initiative. Infobuttons are context-sensitive links embedded in the electronic health record (EHR). They use clinical context information from the EHR such as patient demographics, medications, diagnoses, lab results, user role, and clinical setting to help find answers to clinicians' and patients' clinical questions. This project will insert Infobuttons into eHMP and other VHA systems at several different points and use an Infobutton Manager to customize the way resources are delivered to clinicians. OpenInfobutton software has been certified through the Open Source EHR Alliance (OSEHRA) and is available through Apache 2.0 license.
 
+Built with:
+
+![Alt text](https://www.jetbrains.com/idea/docs/logo_intellij_idea.png "IntelliJ IDEA")
+
 1.9 RELEASE NOTES
 =================
 
