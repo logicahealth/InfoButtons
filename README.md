@@ -7,7 +7,7 @@ This project is a part of the Veterans Health Administration (VHA) Grassroots in
 
 Built with:
 
-![Alt text](https://www.jetbrains.com/idea/docs/logo_intellij_idea.png "IntelliJ IDEA")
+[![IntelliJ IDEA](https://www.jetbrains.com/idea/docs/logo_intellij_idea.png)](https://www.jetbrains.com/idea/)
 
 1.9 RELEASE NOTES
 =================
