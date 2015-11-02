@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<header id="7">
+		<title>DynaMed</title>
+		<profileDescription>Profile for Dynamed</profileDescription>
+		<versionControl publicationDate="2015-01--02T16:27:00"/>
+	</header>
+	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="true">
+		<authorizedOrganizations></authorizedOrganizations>
+		<contexts>
+			<context name="Knowledge on conditions and medications from problem list review and entry, order entry, and meds list" id="1">
+				<contextDefinition>
+					<patientGender match="false" search="true"/>
+					<patientAgeGroup match="false" search="true"/>
+					<task match="true" search="true">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+									<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
+							    <code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
+							    <code codeSystem="2.16.840.1.113883.5.4" displayName="diagnosis list entry task" code="DIAGLISTE"/>
+							    <code codeSystem="2.16.840.1.113883.5.4" displayName="diagnosis list review task" code="DIAGLISTREV"/>
+							    <code codeSystem="2.16.840.1.113883.5.4" displayName="medication list review task" code="MLREV"/>
+							    <code codeSystem="2.16.840.1.113883.5.4" displayName="medication order entry task" code="MEDOE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" code="LABRREV"/>
+
+							</enumeration>
+						</matchingDomain>
+					</task>
+					<conceptOfInterest match="false" search="true"/>
+					<subTopics>
+						<subTopic linkName="Dynamed topics"/>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://medical.ebscohost.com/HL7Translator/HL7/hl7request/dme?"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>
