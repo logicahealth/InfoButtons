@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="7">
 		<title>DynaMed</title>
-		<profileDescription>DynaMed is a clinical information resource used by physicians to answer clinical questions quickly and easily at the point of care. It includes thousands of topics that provide clinicians and educators with the evidence-based information they need to make informed decisions. Topics are updated daily as new evidence becomes available.</profileDescription>
-		<versionControl publicationDate="2015-01--02T16:27:00"/>
+		<profileDescription>Clinical information resource used by physicians to answer clinical questions quickly and easily at the point of care. It includes thousands of topics that provide clinicians and educators with the evidence-based information they need to make informed decisions.</profileDescription>
+		<versionControl publicationDate="2015-01-02T16:27:00"/>
 	</header>
 	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="true">
 		<authorizedOrganizations></authorizedOrganizations>
