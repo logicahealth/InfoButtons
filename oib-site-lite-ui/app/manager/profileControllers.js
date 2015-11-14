@@ -1,6 +1,6 @@
     'use strict';
 
-var oibManagerModule = angular.module('oibManagerModule', ['ui.router','ngResource', 'ab-base64', 'ui.bootstrap']);
+var oibManagerModule = angular.module('oibManagerModule', ['ui.router','ngResource', 'ab-base64', 'ui.bootstrap', 'pdirectives']);
 
 oibManagerModule.controller('ProfileCtrl', ['$scope', '$modal', 'profileFactory', '$state', function ($scope, $modal, profileFactory, $state) {
 
