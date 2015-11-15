@@ -442,3 +442,28 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
     return cloudProfileFactory;
 
 }]);
+
+oibManagerServiceModule.service('properties', function () {
+
+    return function(selectedProperty, assetId) {
+        var instance = $modal.open({
+            templateUrl: 'responder/editProperty.html',
+            controller: 'ProfileFormCtrl',
+            controllerAs: 'ProfileFormCtrl',
+            resolve: {
+                selectedProperty : function () {
+
+                    return selectedProperty;
+                },
+                assetId : function () {
+
+                    return assetId;
+                }
+            }
+        });
+
+        return instance.result;
+    };
+
+});
+

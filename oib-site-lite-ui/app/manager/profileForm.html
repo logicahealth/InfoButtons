@@ -38,11 +38,33 @@
                 </div>
             </div>
 
-
-
             <div class="form-group">
                 <div class="form-group">
+                    <ui-select ng-model="selected.property" on-select="clearSelectedCodes()">
+                        <ui-select-match placeholder="Select Property...">{{$select.selected.propName}}</ui-select-match>
+                        <ui-select-choices repeat = "property in properties | orderBy : 'name' | filter : $select.search track by property.name" >
+                            <div ng-bind-html = "property.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group" ng-if="selected.property.propName == 'mainSearchCriteria.v'">
+                    <ui-select ng-model="selected.property.codeSystem">
+                        <ui-select-match placeholder="Select Code System...">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat = "codeSystem in $select.selected | orderBy : 'name' | filter : $select.search track by codeSystem.name">
+                            <div ng-bind-html = "codeSystem.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+
+
+                <div class="form-group" ng-if="selected.property.propName != 'performer.languageCode.c' && selected.property.propName != 'informationRecipient.languageCode.c' &&
+                                selected.property.propName != 'locationOfInterest.c' && selected.property.propName != 'mainSearchCriteria.v'">
+
                     <dropdown-multiselect model="selected_items" options="selected.property.codes"></dropdown-multiselect>
+                    <div ng-repeat="item in selected_items track by item.id">
+                        {{item.displayName}}
+                    </div>
                 </div>
 
                 <label for="content" class="col-sm-2 control-label">Content:</label>
