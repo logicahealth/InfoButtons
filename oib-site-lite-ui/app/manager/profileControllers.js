@@ -132,7 +132,37 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
             $scope.selected_items = [];
         };
-    
+    var selectedProperty = null;
+    var assetId = null;
+
+    initialize();
+
+    function initialize() {
+        if (!(selectedProperty == null)) {
+            $scope.selected = {
+                "property": {
+                    "propName": selectedProperty.propertyName,
+                    "codeSystem": {"name": selectedProperty.codeSystem, "oid": selectedProperty.codeSystem},
+                    "codes": [{"code": selectedProperty.code, "displayName": selectedProperty.displayName}]
+                }
+            };
+            $scope.selected_items= [{"code": selectedProperty.code, "displayName": selectedProperty.displayName}];
+            selectedId = selectedProperty.assetPropertyId;
+        } else {
+            $scope.selected = {
+                "property": {
+                    "propName": null,
+                    "codeSystem": {"name": null, "oid": null},
+                    "codes": null
+                }
+            };
+
+            selectedId = assetId;
+            newAsset = true;
+
+        }
+    }
+
     var codeSystems = [{"name": "HL7 ActCode", "oid" : "2.16.840.1.113883.5.4"},
         {"name": "ICD9-CM", "oid" : "2.16.840.1.113883.6.103"},
         {"name": "ICD10-CM", "oid" : "2.16.840.1.113883.6.90"},
