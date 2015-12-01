@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group ">
                 <div class="form-group">
                     <ui-select ng-model="selected.property" on-select="clearSelectedCodes()">
                         <ui-select-match placeholder="Select Property...">{{$select.selected.propName}}</ui-select-match>
@@ -57,7 +57,7 @@
                     </ui-select>
                 </div>
 
-                <div class="form-group" ng-if="selected.property.propName != 'performer.languageCode.c' && selected.property.propName != 'informationRecipient.languageCode.c' &&
+                <div ng-if="selected.property.propName != 'performer.languageCode.c' && selected.property.propName != 'informationRecipient.languageCode.c' &&
                                 selected.property.propName != 'locationOfInterest.c' && selected.property.propName != 'mainSearchCriteria.v'">
 
                     <dropdown-multiselect model="selected_items" options="selected.property.codes"></dropdown-multiselect>
