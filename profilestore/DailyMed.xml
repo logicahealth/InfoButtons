@@ -23,8 +23,8 @@
 						</matchingDomain>
 					</task>
 					<conceptOfInterest match="false" search="true">
-						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="query" valuePrefix="NAME:(" valueSuffix=")"/>
+						<searchParameter source="code">
+							<syntaxOnResource nonHl7CompliantName="query"/>
 						</searchParameter>
 						<outputDisplayNameTransformation id="getDrugCode" name="getDrugCode"/>
 					</conceptOfInterest>
@@ -33,7 +33,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://dailymed.nlm.nih.gov/dailymed/search.cfm?adv=1&amp;labeltype=human&amp;"/>
+					<knowledgeRequestServiceLocation url="http://dailymed.nlm.nih.gov/dailymed/search.cfm?searchdb=rxcui&amp;"/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>
