@@ -36,7 +36,7 @@ public class ContextMatcherTest
 
         final KnowledgeRequest request = WebServiceUtility.getServiceRequest( cystitisICD9Request() );
         final String xml = marshallXML( engine.getResponse( request ) );
-        Assert.assertThat( xml, containsString( "http://www.nlm.nih.gov/medlineplus/bladderdiseases.html" ) );
+        Assert.assertThat( xml, containsString( "https://www.nlm.nih.gov/medlineplus/bladderdiseases.html" ) );
         Assert.assertThat( xml,
                            containsString( "http://www.elsinfobutton.com/info/1030?taskContext.c.c=PROBLISTREV&amp;"
                                + "taskContext.c.cs=2.16.840.1.113883.5.4&amp;"
@@ -91,7 +91,7 @@ public class ContextMatcherTest
             + "patientPerson.administrativeGenderCode.c=F&amp;"
             + "patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1&amp;"
             + "mainSearchCriteria.v.c=595.0&amp;mainSearchCriteria.v.cs=2.16.840.1.113883.6.103&amp;"
-            + "mainSearchCriteria.v.dn=Acute cystitis&amp;subTopic.v.c=Q000175&amp;"
+            + "mainSearchCriteria.v.dn=Acute+cystitis&amp;subTopic.v.c=Q000175&amp;"
             + "subTopic.v.cs=2.16.840.1.113883.6.177&amp;subTopic.v.dn=Diagnosis" ) );
     }
 
