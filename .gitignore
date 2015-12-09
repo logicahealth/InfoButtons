@@ -70,3 +70,9 @@ local.properties
  
 # PDT-specific
 .buildpath
+
+######################
+#IntelliJ
+######################
+.idea
+*.iml
