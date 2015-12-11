@@ -27,7 +27,7 @@ public class OibLiveServiceTest extends OibRequestTestingFixture{
                 .getForObject(
                         env.getProperty("infobutton.location") + "infoRequest?", String.class);
 
-        assertThat(OIBHtml, containsString("OpenInfobutton"));
+        assertThat(OIBHtml, containsString(env.getProperty("infobutton.expectedResponse")));
     }
 
     @Test
@@ -37,7 +37,7 @@ public class OibLiveServiceTest extends OibRequestTestingFixture{
                 .getForObject(
                         env.getProperty("infobutton.location") + "infoRequest?" + env.getProperty("infobutton.profileQuery"), String.class);
 
-        assertThat(OIBHtml, containsString("UpToDate"));
+        assertThat(OIBHtml, containsString(env.getProperty("infobutton.expectedProfile")));
     }
 
     @Test
@@ -47,6 +47,6 @@ public class OibLiveServiceTest extends OibRequestTestingFixture{
                 .getForObject(
                         env.getProperty("infobutton.location") + "infoRequest?" + env.getProperty("infobutton.terminologyQuery"), String.class);
 
-        assertThat(OIBHtml, containsString("mainSearchCriteria.v.c=250"));
+        assertThat(OIBHtml, containsString(env.getProperty("infobutton.expectedCode")));
     }
 }
