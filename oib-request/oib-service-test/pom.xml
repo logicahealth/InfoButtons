@@ -3,10 +3,115 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <parent>
+        <groupId>org.openinfobutton</groupId>
+        <artifactId>oib-request</artifactId>
+        <version>1.9-SNAPSHOT</version>
+    </parent>
     <groupId>org.openinfobutton</groupId>
     <artifactId>oib-service-test</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.9-SNAPSHOT</version>
 
 
+    <!--Testing-->
+
+    <dependencies>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.10</version>
+            </plugin>
+            <plugin>
+                <groupId>ch.fortysix</groupId>
+                <artifactId>maven-postman-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                    <failonerror>false</failonerror>
+                    <mailAltConfig>true</mailAltConfig>
+                    <mailssl>false</mailssl>
+                    <mailport>25</mailport>
+                    <from></from>
+                    <mailhost></mailhost>
+                    <mailuser></mailuser>
+                    <mailpassword></mailpassword>
+                    <receivers>
+                        <receiver></receiver>
+                    </receivers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>send surefire notification</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>surefire-mail</goal>
+                        </goals>
+                        <configuration>
+                            <subject>OIB Monitoring Test</subject>
+                            <from></from>
+                            <receivers>
+                                <receiver></receiver>
+                            </receivers>
+                            <htmlMessageFile>${project.build.directory}/site/surefire-report.html</htmlMessageFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.10</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

@@ -13,32 +13,6 @@
 	<name>oib-request-service</name>
 	<url>http://maven.apache.org</url>
 
-	<repositories>
-		<repository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -119,21 +93,7 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
-			<version>1.7.3</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.aspects</artifactId>
-			<version>3.1.1.RELEASE</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>3.1.1.RELEASE</version>
+			<version>1.8.7</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -150,21 +110,6 @@
 			<version>1.6.1</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>3.1.1.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>3.1.1.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>3.1.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>c3p0</groupId>
@@ -188,25 +133,12 @@
 			<scope>compile</scope>
 		</dependency>
 		<!-- TESTING -->
+
 		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-core</artifactId>
-			<version>1.3</version>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>oib-service-test</artifactId>
+			<version>1.9-SNAPSHOT</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<!-- <groupId>org.junit</groupId> -->
-			<groupId>junit</groupId>
-			<!-- <artifactId>com.springsource.org.junit</artifactId> -->
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-			<version>4.10</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.test</artifactId>
-			<scope>test</scope>
-			<version>3.1.1.RELEASE</version>
 		</dependency>
 
 	</dependencies>
@@ -263,20 +195,21 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.5</version>
+				<version>1.8</version>
 				<configuration>
 					<complianceLevel>1.7</complianceLevel>
 					<aspectLibraries>
-						<aspectLibrary>
-							<groupId>org.springframework</groupId>
-							<artifactId>org.springframework.aspects</artifactId>
-						</aspectLibrary>
+                        <aspectLibray>
+                            <groupId>org.springframework</groupId>
+                            <artifactId>spring-aspects</artifactId>
+                        </aspectLibray>
 					</aspectLibraries>
 				</configuration>
 				<executions>
 					<execution>
 						<goals>
 							<goal>compile</goal>
+							<goal>test-compile</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -284,7 +217,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
@@ -341,7 +273,6 @@
 		</plugins>
 		<finalName>infobutton-service</finalName>
 	</build>
-
 	<scm>
 		<connection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</connection>
 		<developerConnection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</developerConnection>
