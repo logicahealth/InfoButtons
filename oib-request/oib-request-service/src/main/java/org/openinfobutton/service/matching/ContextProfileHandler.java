@@ -169,9 +169,9 @@ public class ContextProfileHandler
         {
             if (request.getHolder().getRepresentedOrganization().getRoot().equals( org.getId() ))
             {
-                if (org.getUsesAssignedAuthorizedPerson() != null)
+                if (org.isUsesAssignedAuthorizedPerson() != null)
                 {
-                    result.setUseAssignedAuthorizedPerson( org.getUsesAssignedAuthorizedPerson() );
+                    result.setUseAssignedAuthorizedPerson( org.isUsesAssignedAuthorizedPerson() );
                 }
                 if (org.getKnowledgeRequestServiceLocation() != null)
                 {
