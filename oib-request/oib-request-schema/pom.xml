@@ -124,6 +124,12 @@
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-profile-schema</artifactId>
 			<version>1.9-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- TESTING -->
