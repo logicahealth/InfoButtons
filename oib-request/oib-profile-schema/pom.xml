@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>oib-request</artifactId>
+        <groupId>org.openinfobutton</groupId>
+        <version>1.9-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>oib-profile-schema</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jvnet.jaxb2.maven2</groupId>
+            <artifactId>maven-jaxb2-plugin</artifactId>
+            <version>0.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>net.codesup.util</groupId>
+            <artifactId>jaxb2-rich-contract-plugin</artifactId>
+            <version>1.15.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.13.1</version>
+                <executions>
+                    <execution>
+                        <id>xsd-generate</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaExcludes>
+                        <include>TerminologyInference.xsd</include>
+                    </schemaExcludes>
+                    <strict>true</strict>
+                    <verbose>true</verbose>
+                    <extension>true</extension>
+                    <removeOldOutput>true</removeOldOutput>
+                    <generateDirectory>src/main/java</generateDirectory>
+                    <generatePackage>org.openinfobutton.schemas.kb</generatePackage>
+                    <args>
+                        <arg>-Xfluent-builder</arg>
+                        <arg>-rootSelectorClassName=Select</arg>
+                        <arg>-newBuilderMethodName=builder</arg>
+                        <arg>-newCopyBuilderMethodName=newCopyBuilder</arg>
+                        <arg>-copyToMethodName=copyTo</arg>
+                        <arg>-builderFieldSuffix=_Builder</arg>
+                        <arg>-generateTools=y</arg>
+                        <arg>-narrow=n</arg>
+                        <arg>-copyPartial=y</arg>
+                        <arg>-selectorClassName=Selector</arg>
+                        <arg>-builderClassName=Builder</arg>
+                        <arg>-builderInterfaceName=BuildSupport</arg>
+                        <arg>-copyAlways=n</arg>
+                        <arg>-buildMethodName=build</arg>
+                        <arg>-endMethodName=end</arg>
+                    </args>
+                    <plugins>
+                        <plugin>
+                            <groupId>net.codesup.util</groupId>
+                            <artifactId>jaxb2-rich-contract-plugin</artifactId>
+                            <version>1.15.0</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

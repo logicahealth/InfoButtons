@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2012 rel. 2 sp1 (x64) (http://www.altova.com) by 
+	Guilherme Del Fiol (Duke University) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:altova="http://www.altova.com/xml-schema-extensions"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="terminologyInference">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="description" />
+				<xs:element name="targetCodeSystem" type="Id" />
+				<xs:element name="codeInference" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="sourceCodeSystem" type="Id">
+								<xs:annotation>
+									<xs:documentation>Defines the source code system for which a
+										particular codeInference applies.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="inferenceDefinition">
+								<xs:annotation>
+									<xs:documentation>Defiens the inference for a particular code
+										system
+									</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:choice>
+										<xs:element name="localMappings">
+											<xs:annotation>
+												<xs:documentation>Simple one-to-one code translations
+													defined locally within the resource profile instance. Used
+													for code translations that refer to a small set of codes
+													(e.g., gender, age group).
+												</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="mapping" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:attribute name="sourceValue" type="xs:string"
+																use="required" />
+															<xs:attribute name="targetValue" type="xs:string"
+																use="required" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="externalDefinition">
+											<xs:annotation>
+												<xs:documentation>Code transofrmation defined as a reference
+													to an external terminology inference definition. Used for
+													more complex transformations that involve one or more
+													semantic navigation steps.
+												</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="traverseAssociation"
+														minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:complexContent>
+																<xs:extension base="CD">
+																	<xs:attribute name="sequence" use="required" />
+																	<xs:attribute name="direction" use="required">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="DIRECT" />
+																				<xs:enumeration value="INVERSE" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute name="maxConcepts" type="xs:int" />
+																</xs:extension>
+															</xs:complexContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="codeProperty" type="Id" />
+													<xs:element name="displayNameProperty" type="Id" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:choice>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="keywordInference" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="searchCodeSystem" type="Id" />
+							<xs:element name="codeProperty" type="Id" />
+							<xs:element name="displayNameProperty" type="Id" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="callInferenceByName" type="ST"
+					minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="Id">
+		<xs:attribute name="id" use="required" />
+		<xs:attribute name="name" use="required" />
+	</xs:complexType>
+	<xs:complexType name="CD">
+		<xs:sequence>
+			<xs:element name="code">
+				<xs:complexType>
+					<xs:attribute name="code" use="required" />
+					<xs:attribute name="codeSystem" use="required" />
+					<xs:attribute name="codeSystemName" />
+					<xs:attribute name="displayName" use="required" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ST">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="description" type="ST" />
+</xs:schema>
