@@ -55,12 +55,13 @@
     <modules>
 		<module>oib-core</module>
 		<module>oib-service-test</module>
+        <module>oib-profile-schema</module>
         <module>oib-request-schema</module>
         <module>oib-request-db</module>
         <module>oib-request-inference-rxnorm</module>
         <module>oib-ext-resources</module>
         <module>oib-request-service</module>
-    </modules>
+	</modules>
     
 	<scm>
 		<connection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</connection>
