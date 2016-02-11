@@ -1,6 +1,6 @@
     'use strict';
 
-var oibManagerModule = angular.module('oibManagerModule', ['ui.router','ngResource', 'ab-base64', 'ui.bootstrap', 'directives']);
+var oibManagerModule = angular.module('oibManagerModule', ['ui.router','ngResource', 'ab-base64', 'ui.bootstrap', 'directives', 'schemaForm']);
 
 oibManagerModule.controller('ProfileCtrl', ['$scope', '$modal', 'profileFactory', '$state', function ($scope, $modal, profileFactory, $state) {
 
@@ -292,7 +292,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
         {"name": "Sub Topic", "propName" : "subTopic.v", "codeSystem" : [codeSystems[7]], "codes": subtopicCodes},
         {"name": "Main Search Criteria", "propName" : "mainSearchCriteria.v", "codeSystem" : mainSearchCodes, "codes" : {"displayName" : "", "code" : ""}}];
 
-
         loadProfile();
 
         function loadProfile () {
@@ -360,7 +359,109 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
             alert("delete profile!");
         };
 
-        return $scope;
+    $scope.schema = {
+        "id": "profile",
+        "type": "object",
+        "properties": {
+            "header": {
+                "id": "header",
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "id": "title",
+                        "type": "string"
+                    },
+                    "profileDescription": {
+                        "id": "profileDescription",
+                        "type": "string"
+                    },
+                    "versionControl": {
+                        "id": "versionControl",
+                        "type": "object",
+                        "properties": {
+                            "publicationDate": {
+                                "id": "publicationDate",
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "id": {
+                        "id": "id",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "title",
+                    "profileDescription",
+                    "versionControl",
+                    "id"
+                ]
+            },
+            "profileDefinition": {
+                "id": "profileDefinition",
+                "title": "Profile Definition",
+                "type": "object",
+                "properties": {
+                    "supportedTerminologies": {
+                        "name": "Supported Terminologies",
+                        "type": "array",
+                        "items": {
+                            "type" : "string",
+                            "title" : "name"
+                        }
+                    },
+                    "contexts": {
+                        "id": "contexts",
+                        "type": "array",
+                        "items": {
+                            "title": "Context",
+                            "type": "object",
+                            "properties" : {
+                                "id" :{
+                                    "type" : "string",
+                                    "title" : "Id"
+                                }
+                            }
+                        }
+                    },
+                    "hl7URLCompliant": {
+                        "id": "hl7URLCompliant",
+                        "type": "boolean"
+                    },
+                    "hl7KnowledgeResponseCompliant": {
+                        "id": "hl7KnowledgeResponseCompliant",
+                        "type": "boolean"
+                    },
+                    "urlStyle": {
+                        "id": "urlStyle",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "required": [
+            "header",
+            "profileDefinition"
+        ]
+    };
+
+    $scope.form = [
+        "header",
+        "profileDefinition",
+        {
+            key: "supportedTerminologies",
+            add: "Add Terminology",
+            type: "select2",
+            titleMap: [{"name": "HL7 ActCode", "value" : "2.16.840.1.113883.5.4"},
+                {"name": "ICD9-CM", "value" : "2.16.840.1.113883.6.103"},
+                {"name": "ICD10-CM", "value" : "2.16.840.1.113883.6.90"}]
+        }
+
+    ];
+
+    $scope.model = {};
+
+    return $scope;
     }]);
 
 oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$state', 'base64', 'cloudProfileFactory', function ($scope, $modal, $http, $state, base64, cloudProfileFactory) {
