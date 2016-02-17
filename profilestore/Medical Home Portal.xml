@@ -80,7 +80,7 @@
 							</enumeration>
 						</matchingDomain>-->
 						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="q" valueSuffix="+site:www.medicalhomeportal.org/diagnoses-and-conditions/"/>
+							<syntaxOnResource nonHl7CompliantName="q" valueSuffix="+site:www.medicalhomeportal.org"/>
 
 							<!--<syntaxOnResource nonHl7CompliantName="q" valuePrefix="ICD-9+Bibliography+" valueSuffix="+site:www.medicalhomeportal.org/diagnoses-and-conditions/"/>-->
 
