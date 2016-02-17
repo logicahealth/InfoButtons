@@ -43,7 +43,7 @@
 
 					<conceptOfInterest match="false" search="true">
 						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="q" valueSuffix="+site:www.medicalhomeportal.org"/>
+							<syntaxOnResource nonHl7CompliantName="q" valuePrefix="" valueSuffix="+site:www.medicalhomeportal.org"/>
 						</searchParameter>
 					</conceptOfInterest>
 					<subTopics>
