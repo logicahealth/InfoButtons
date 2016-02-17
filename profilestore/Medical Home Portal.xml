@@ -32,7 +32,7 @@
 							</enumeration>
 						</matchingDomain>
 					</task>
-					<conceptOfInterest search="true" match="true">
+					<conceptOfInterest search="true" match="false">
 						<matchingDomain>
 							<enumeration includeDescendants="false">
 								<code codeSystem="2.16.840.1.113883.6.103" code="317" displayName="Mild mental retardation "/>
