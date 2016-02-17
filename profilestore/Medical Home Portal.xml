@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1">
-		<title>MedicalHome Portal</title>
+		<title>Medical Home Portal</title>
 		<profileDescription>Information for children with special healthcare needs. Developed and maintained by the University of Utah.</profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
@@ -77,8 +77,8 @@
 								<code codeSystem="2.16.840.1.113883.6.103" code="314.0 " displayName="Attention deficit disorder "/>
 							</enumeration>
 						</matchingDomain>
-						<searchParameter source="code">
-							<syntaxOnResource nonHl7CompliantName="q" valuePrefix="ICD-9+Bibliography+" valueSuffix="+site:www.medicalhomeportal.org"/>
+						<searchParameter source="displayName">
+							<syntaxOnResource nonHl7CompliantName="q" valueSuffix="+site:www.medicalhomeportal.org"/>
 						</searchParameter>
 					</conceptOfInterest>
 					<subTopics>
