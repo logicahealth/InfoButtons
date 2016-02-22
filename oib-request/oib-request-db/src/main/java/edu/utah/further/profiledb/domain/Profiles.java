@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.*;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.openinfobutton.service.json.BlobJsonSerializer;
 
 import edu.utah.further.core.api.data.PersistentEntity;

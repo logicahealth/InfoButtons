@@ -13,9 +13,9 @@
  */
 package edu.utah.further.liteprofiledb.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.utah.further.core.api.data.PersistentEntity;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.openinfobutton.service.json.BlobJsonSerializer;
 
 import javax.persistence.*;

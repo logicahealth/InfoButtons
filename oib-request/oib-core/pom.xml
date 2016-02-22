@@ -44,10 +44,24 @@
 	  </dependency>
 
   		<dependency>  
-            <groupId>org.codehaus.jackson</groupId>  
-            <artifactId>jackson-mapper-asl</artifactId>  
-            <version>1.9.13</version>  
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.5</version>
         </dependency>
+
+
+	  <dependency>
+		  <groupId>com.fasterxml.jackson.module</groupId>
+		  <artifactId>jackson-module-jsonSchema</artifactId>
+		  <version>2.6.5</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>com.fasterxml.jackson.module</groupId>
+		  <artifactId>jackson-module-jaxb-annotations</artifactId>
+		  <version>2.6.5</version>
+	  </dependency>
+
 
 	  <dependency>
 		  <groupId>org.openinfobutton</groupId>
@@ -108,6 +122,12 @@
 		  <version>1.7.3</version>
 		  <type>jar</type>
 		  <scope>compile</scope>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-validator-annotation-processor</artifactId>
+		  <version>4.2.0.Final</version>
 	  </dependency>
 </dependencies>
 

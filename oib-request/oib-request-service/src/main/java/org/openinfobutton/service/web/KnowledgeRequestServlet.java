@@ -207,6 +207,10 @@ public class KnowledgeRequestServlet
             out.println(e);
             throw e;
         }
+        catch (final RuntimeException e)
+        {
+            e.printStackTrace();
+        }
         finally
         {
             out.close();

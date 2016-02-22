@@ -64,20 +64,21 @@
       <!--  
             maps handler methods based on HTTP paths
       -->  
-      <bean id="messageAdapter" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+      <bean id="messageAdapter" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
            <property name="messageConverters">
                 <util:list id="beanList">
+					<ref bean="jsonMessageConverter"/>
 					<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
 					<bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
 					<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
 					<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
 					<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>
-					<ref bean="jsonMessageConverter"/>
                 </util:list>  
            </property>  
       </bean>  
       <!--  
             Converts JSON to POJO and vice versa  
-      -->  
-      <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+      -->
+      <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+
 </beans>
