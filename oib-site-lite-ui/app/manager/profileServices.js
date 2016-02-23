@@ -21,10 +21,22 @@ oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
     };
 
     profileFactory.getProfile = function (id) {
-        return $http.get(oibManagerUrl + 'getProfile/' + id, {
+       return $http.get(oibManagerUrl + 'getProfile/' + id, {
             headers: {
                 'Authorization' : undefined
             }
+        }).success(function (response) {
+           return response;
+       });
+    };
+
+    profileFactory.getJSONProfile = function (id) {
+        return $http.get(oibManagerUrl + 'jsonProfile/' + id, {
+            headers: {
+                'Authorization' : undefined
+            }
+        }).success(function (response) {
+            return response;
         });
     };
 

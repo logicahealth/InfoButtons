@@ -11,7 +11,6 @@ var oibConfigurationApp = angular.module('oibConfigurationApp', [
   'ui.select',
   'ngNotify',
   'schemaForm',
-  'oibProfileFormModule',
   'setupControllers',
   'oibSetupServices',
   'oibManagerModule',
@@ -41,14 +40,6 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
         url: '/editProfile/:id',
         templateUrl: 'manager/profileForm.html',
         controller: 'ProfileFormCtrl',
-          data: {
-              requireGit: false
-          }
-      })
-      .state('profileSchemaForm', {
-          url: '/profileSchemaForm',
-          templateUrl: 'manager/schemaForm.html',
-          controller: 'ProfileFormController',
           data: {
               requireGit: false
           }
