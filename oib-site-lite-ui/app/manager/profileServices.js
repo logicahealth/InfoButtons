@@ -45,6 +45,18 @@ oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
             headers: {
                 'Authorization' : undefined
             }
+        })
+    };
+
+    profileFactory.updateProfileContent = function (profile, id) {
+        return $http.post(oibManagerUrl + 'updateCustomProfile/' + id, profile, {
+            headers: {
+                'Authorization' : undefined
+            }
+        }).success(function (response) {
+            return response;
+        }).error (function (error) {
+            return error;
         });
     };
 

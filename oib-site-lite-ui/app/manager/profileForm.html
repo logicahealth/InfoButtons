@@ -37,13 +37,6 @@
                     </select>
                 </div>
             </div>
-            <div sf-schema="jsonProfileSchema" sf-form="jsonProfileForm" sf-model="jsonProfileModel"></div>
-            <div class="form-group ">
-                <label for="content">Content:</label>
-                <div>
-                    <textarea id="content" rows="20" class="form-control" ng-model="profile.content" required></textarea>
-                </div>
-            </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" ng-click="profileForm.$valid && update(profile)" class="btn btn-success" ng-hide="new">UPDATE</button>
@@ -51,10 +44,16 @@
                     <!--                    <button ng-click="clearDb(profile)" class="btn btn-default">RESET DATABASE</button>-->
                 </div>
             </div>
-
-            <div class="alert alert-info" role="alert">{{statusMessage}}</div>
-
         </form>
+        <form ng-hide="new" sf-schema="jsonProfileSchema" sf-form="jsonProfileForm" sf-model="jsonProfileModel" ng-submit="onJSONProfileSubmit(jsonProfileForm)"></form>
+        <div class="form-group ">
+            <label for="content">Content:</label>
+            <div>
+                <textarea ng-disabled="true" id="content" rows="20" class="form-control" ng-model="profile.content" required></textarea>
+            </div>
+        </div>
+
+        <div class="alert alert-info" role="alert">{{statusMessage}}</div>
                 <!--                <pre>master = {{master| json}}</pre>-->
     </div>
 

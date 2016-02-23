@@ -15,7 +15,6 @@
     "angular-mocks": "1.4.x",
     "angular-bootstrap": "0.13.0",
     "angular-datatables": "0.4.x",
-    "angular-schema-form" : "development",
     "angular-schema-form-bootstrap" : "0.2.0",
     "angular-ui-select": "0.11.x",
     "ng-notify": "~0.6.2",

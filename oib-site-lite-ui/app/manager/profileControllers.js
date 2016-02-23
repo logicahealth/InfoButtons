@@ -3632,21 +3632,20 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                     .success(function (profile) {
                         profile.status = profile.status.toString();
                         $scope.profile = profile;
-                        profileFactory.getJSONProfile(profile.id)
-                            .success(function (jsonProfile) {
-                                $scope.jsonProfileModel = jsonProfile;
-                                $scope.$broadcast('schemaFormRedraw');
-                            });
                     })
                     .error(function (error) {
                         $scope.status = 'Unable to load local profile ' + $stateParams.id + ': ' + error;
-                        $scope.jsonProfileModel = {};
+                    });
+                profileFactory.getJSONProfile($stateParams.id)
+                    .success(function (jsonProfile) {
+                        $scope.jsonProfileModel = jsonProfile;
+                        $scope.$broadcast('schemaFormRedraw');
                     });
             }
             else {
 
                 $scope.new = true;
-                $scope.profile = {id: null, name: null, version: "1", published: null, status: 3, content: null, imageUrl: null}
+                $scope.profile = {id: null, name: null, version: "1", published: null, status: 3, content: "", imageUrl: null}
                 $scope.jsonProfileModel = {};
             }
         }
@@ -3697,6 +3696,18 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
         $scope.delete = function (profile) {
             alert("delete profile!");
         };
+
+    $scope.onJSONProfileSubmit = function(form) {
+
+            profileFactory.updateProfileContent($scope.jsonProfileModel, $stateParams.id)
+                .success(function (response) {
+                    $scope.statusMessage = 'Profile Successfully Updated';
+                    $scope.profile.content = response;
+                })
+                .error(function (error) {
+                    $scope.statusMessage = 'Unable to update profile:' + error;
+                });
+    }
 
     return $scope;
     }]);
