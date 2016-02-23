@@ -3,6 +3,7 @@
  ******************************************************************************/
 package org.openinfobutton.service.web;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.sql.SQLException;
@@ -125,19 +126,12 @@ public class ProfileManagerService
         lDao.createOrUpdateCustomProfile(profile);
     }
 
-    @RequestMapping(value="createCloudProfile", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public void createCloudProfile (@RequestBody final CloudProfiles profile)
-    {
-
-        lDao.createOrUpdateCloudProfile(profile);
-    }
-
     @RequestMapping(value="createCustomProfile", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public String createCustomProfile (@RequestBody final KnowledgeResourceProfile profile) throws JAXBException
-    {
+    public String createCustomProfile (@RequestBody final String json) throws IOException, JAXBException {
 
+        ObjectMapper mapper = createJaxbObjectMapper();
+        KnowledgeResourceProfile profile = mapper.readValue(json, KnowledgeResourceProfile.class);
         OutputStream stream;
         JAXBContext jaxbContext = JAXBContext.newInstance(KnowledgeResourceProfile.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -148,9 +142,17 @@ public class ProfileManagerService
         return sw.toString();
     }
 
+    @RequestMapping(value="createCloudProfile", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void createCloudProfile (@RequestBody final CloudProfiles profile)
+    {
+
+        lDao.createOrUpdateCloudProfile(profile);
+    }
+
     @RequestMapping(produces = "application/json", value="jsonProfile/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public KnowledgeResourceProfile getJsonProfile(@PathVariable final Long id){
+    public String getJsonProfile(@PathVariable final Long id) throws JsonProcessingException {
 
         CustomProfiles profile = new CustomProfiles();
         try {
@@ -183,7 +185,8 @@ public class ProfileManagerService
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        return jaxbProfile;
+        ObjectMapper mapper = createJaxbObjectMapper();
+        return mapper.writeValueAsString(jaxbProfile);
     }
 
     @RequestMapping(produces = "application/json", value="jsonProfileSchema", method = RequestMethod.GET)
