@@ -9,6 +9,7 @@ import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.AnnotationIntrospector;
@@ -120,25 +121,44 @@ public class ProfileManagerService
 
     @RequestMapping(value="createProfile", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void createProfile (@RequestBody final CustomProfiles profile)
-    {
+    public void createProfile (@RequestBody final CustomProfiles profile) throws JsonProcessingException {
 
+        try {
+            profile.setContent(createJaxbObjectMapper().writeValueAsString(new KnowledgeResourceProfile()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         lDao.createOrUpdateCustomProfile(profile);
     }
 
-    @RequestMapping(value="createCustomProfile", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public String createCustomProfile (@RequestBody final String json) throws IOException, JAXBException {
+    @RequestMapping(produces="application/xml", value="updateCustomProfile/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateCustomProfile ( @PathVariable final Long id, @RequestBody final String json) throws IOException, JAXBException {
 
+        CustomProfiles profile = new CustomProfiles();
+        try {
+
+            profile = lDao.getCustomProfile(id);
+        } catch (Exception e) {
+
+            String eMessage = "Error connecting to database and getting profile";
+            System.err.println(eMessage);
+        }
         ObjectMapper mapper = createJaxbObjectMapper();
-        KnowledgeResourceProfile profile = mapper.readValue(json, KnowledgeResourceProfile.class);
-        OutputStream stream;
+        KnowledgeResourceProfile jaxbProfile = mapper.readValue(json, KnowledgeResourceProfile.class);
         JAXBContext jaxbContext = JAXBContext.newInstance(KnowledgeResourceProfile.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
         StringWriter sw = new StringWriter();
-        jaxbMarshaller.marshal(profile, sw);
+        jaxbMarshaller.marshal(jaxbProfile, sw);
+        try {
+            profile.setContent(sw.toString());
+        } catch (SQLException e) {
+            System.err.println("Error updating profile content");
+            e.printStackTrace();
+        }
+        lDao.createOrUpdateCustomProfile(profile);
         return sw.toString();
     }
 
