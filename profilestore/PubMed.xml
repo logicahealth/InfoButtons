@@ -6,7 +6,7 @@
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false" urlStyle="DIRTY">
-		<!-- To customize this profile to use your institution' library holdings: After downloading this profile from the store, add the following tag under the <authorizedOrganization> tag. Change the myncbishare and holding parameter values to the ones for your institution. 
+		<!--  To customize this profile to use your institution' library holdings: After downloading this profile from the store, add the following tag under the <authorizedOrganization> tag. Change the myncbishare and holding parameter values to the ones for your institution. 
 				<knowledgeRequestServiceLocation url="http://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2000/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text]&amp;myncbishare=uutahlib&amp;holding=uutahlib_fft&amp;"/>
 			-->
 		<authorizedOrganizations/>
