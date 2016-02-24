@@ -125,13 +125,15 @@ public class ProfileManagerService
 
         StringWriter sw = new StringWriter();
 
-        try {
-            getProfileJAXBMarshaller().marshal(new KnowledgeResourceProfile(), sw);
-            profile.setContent(sw.toString());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (JAXBException e) {
-            e.printStackTrace();
+        if (profile.getId() == null) {
+            try {
+                getProfileJAXBMarshaller().marshal(new KnowledgeResourceProfile(), sw);
+                profile.setContent(sw.toString());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (JAXBException e) {
+                e.printStackTrace();
+            }
         }
         lDao.createOrUpdateCustomProfile(profile);
         return Long.toString(profile.getId());
