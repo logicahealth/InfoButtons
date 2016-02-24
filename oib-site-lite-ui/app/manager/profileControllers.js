@@ -122,7 +122,7 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$modal', 'profileFactory'
     return $scope;
     }]);
 
-oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', function ($scope, $stateParams, profileFactory) {
+oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', '$state', function ($scope, $stateParams, profileFactory, $state) {
 
      var jsonProfileSchema = {
         "type" : "object",
@@ -3688,8 +3688,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
         $scope.insert = function (profile) {
             profileFactory.insertProfile(profile)
-                .success(function (msg) {
+                .success(function (profile) {
                     $scope.statusMessage = 'Profile Successfully Created';
+                    $stateParams.id = profile;
+                    $state.reload();
                 })
                 .error(function (error) {
                     $scope.statusMessage = 'Unable to create profile:' + error;
