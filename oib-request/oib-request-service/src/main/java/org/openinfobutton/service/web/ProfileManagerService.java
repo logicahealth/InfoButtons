@@ -120,15 +120,21 @@ public class ProfileManagerService
     }
 
     @RequestMapping(value="createProfile", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public void createProfile (@RequestBody final CustomProfiles profile) throws JsonProcessingException {
+    @ResponseBody
+    public String createProfile (@RequestBody final CustomProfiles profile) {
+
+        StringWriter sw = new StringWriter();
 
         try {
-            profile.setContent(createJaxbObjectMapper().writeValueAsString(new KnowledgeResourceProfile()));
+            getProfileJAXBMarshaller().marshal(new KnowledgeResourceProfile(), sw);
+            profile.setContent(sw.toString());
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (JAXBException e) {
             e.printStackTrace();
         }
         lDao.createOrUpdateCustomProfile(profile);
+        return Long.toString(profile.getId());
     }
 
     @RequestMapping(produces="application/xml", value="updateCustomProfile/{id}", method = RequestMethod.POST)
@@ -146,12 +152,9 @@ public class ProfileManagerService
         }
         ObjectMapper mapper = createJaxbObjectMapper();
         KnowledgeResourceProfile jaxbProfile = mapper.readValue(json, KnowledgeResourceProfile.class);
-        JAXBContext jaxbContext = JAXBContext.newInstance(KnowledgeResourceProfile.class);
-        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
         StringWriter sw = new StringWriter();
-        jaxbMarshaller.marshal(jaxbProfile, sw);
+        getProfileJAXBMarshaller().marshal(jaxbProfile, sw);
         try {
             profile.setContent(sw.toString());
         } catch (SQLException e) {
@@ -199,7 +202,7 @@ public class ProfileManagerService
         try
         {
             jaxbProfile = (KnowledgeResourceProfile) u.unmarshal( profile.getContent().getBinaryStream());
-            log.debug( "Loaded Profile : " + jaxbProfile.getHeader().getTitle() );
+            log.debug( "Loaded Profile : " + profile.getName() );
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (JAXBException e) {
@@ -245,5 +248,19 @@ public class ProfileManagerService
         // make serializer use JAXB annotations (only)
         mapper.getSerializationConfig().with(introspector);
         return mapper;
+    }
+
+    private Marshaller getProfileJAXBMarshaller () {
+
+        Marshaller marshaller = null;
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(KnowledgeResourceProfile.class);
+            marshaller = jaxbContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
+        return marshaller;
     }
 }
