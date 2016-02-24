@@ -124,7 +124,7 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$modal', 'profileFactory'
 
 oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', function ($scope, $stateParams, profileFactory) {
 
-    $scope.jsonProfileSchema = {
+     var jsonProfileSchema = {
         "type" : "object",
         "id" : "urn:jsonschema:org:openinfobutton:schemas:kb:KnowledgeResourceProfile",
         "properties" : {
@@ -1863,7 +1863,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
         }
     };
 
-    $scope.jsonProfileForm = [
+    var jsonProfileForm = [
         {
             "key" : "header",
             "title" : "Header",
@@ -3638,14 +3638,17 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                     });
                 profileFactory.getJSONProfile($stateParams.id)
                     .success(function (jsonProfile) {
+                        $scope.jsonProfileSchema = jsonProfileSchema;
+                        $scope.jsonProfileForm = jsonProfileForm;
                         $scope.jsonProfileModel = jsonProfile;
-                        $scope.$broadcast('schemaFormRedraw');
                     });
             }
             else {
 
                 $scope.new = true;
                 $scope.profile = {id: null, name: null, version: "1", published: null, status: 3, content: "", imageUrl: null}
+                $scope.jsonProfileSchema = {};
+                $scope.jsonProfileForm = [];
                 $scope.jsonProfileModel = {};
             }
         }
