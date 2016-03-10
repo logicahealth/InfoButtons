@@ -22,6 +22,7 @@ import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
 import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
 import org.apache.log4j.Logger;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
+import org.openinfobutton.schemas.kb.ProfileDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -127,7 +128,8 @@ public class ProfileManagerService
 
         if (profile.getId() == null) {
             try {
-                getProfileJAXBMarshaller().marshal(new KnowledgeResourceProfile(), sw);
+                getProfileJAXBMarshaller().marshal(KnowledgeResourceProfile.builder().
+                        withProfileDefinition().withAuthorizedOrganizations().end().end().build(), sw);
                 profile.setContent(sw.toString());
             } catch (SQLException e) {
                 e.printStackTrace();
