@@ -1929,7 +1929,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                     "items" : [
                                         {
                                             "key" : "profileDefinition.contexts.context[].knowledgeRequestService.knowledgeRequestServiceLocation",
-                                            "title" : "Service",
+                                            "title" : "",
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].knowledgeRequestService.knowledgeRequestServiceLocation.url",
@@ -1961,7 +1961,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                 },
                                 {
                                     "key" : "profileDefinition.contexts.context[].contextDefinition",
-                                    "title" : "Context Definition",
+                                    "title" : "Matching Context Definitions",
                                     "items" : [
                                         {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.task",
@@ -1969,15 +1969,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain",
-                                                    "title" : "Matching Domain",
+                                                    "title" : "",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.enumeration",
-                                                            "title" : "Codes",
+                                                            "title" : "",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.enumeration.code",
-                                                                    "title" : "Code",
+                                                                    "title" : "Coded Concepts",
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.enumeration.code[].code",
@@ -2099,15 +2099,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain",
-                                                    "title" : "Matching Domain",
+                                                    "title" : "",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration",
-                                                            "title" : "Codes",
+                                                            "title" : "",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration.code",
-                                                                    "title" : "Code",
+                                                                    "title" : "Coded Concepts",
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration.code[].code",
@@ -2241,11 +2241,11 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode",
-                                                                            "title" : "Code",
+                                                                            "title" : "",
                                                                             "items" : [
                                                                                 {
                                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code",
-                                                                                    "title" : "",
+                                                                                    "title" : "Coded Concepts",
                                                                                     "items" : [
                                                                                         {
                                                                                             "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code.code",
@@ -2303,15 +2303,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain",
-                                                    "title" : "Matching Domain",
+                                                    "title" : "",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration",
-                                                            "title" : "Codes",
+                                                            "title" : "",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.code",
-                                                                    "title" : "Code",
+                                                                    "title" : "Coded Concepts",
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.code[].code",
@@ -2433,15 +2433,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain",
-                                                    "title" : "Matching Domain",
+                                                    "title" : "",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration",
-                                                            "title" : "Codes",
+                                                            "title" : "",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code",
-                                                                    "title" : "Code",
+                                                                    "title" : "Coded Concepts",
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code[].code",
@@ -2563,15 +2563,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain",
-                                                    "title" : "Matching Domain",
+                                                    "title" : "",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration",
-                                                            "title" : "Codes",
+                                                            "title" : "",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration.code",
-                                                                    "title" : "Code",
+                                                                    "title" : "Coded Concepts",
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration.code[].code",
@@ -2693,15 +2693,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain",
-                                                    "title" : "Matching Domain",
+                                                    "title" : "",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration",
-                                                            "title" : "Codes",
+                                                            "title" : "",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code",
-                                                                    "title" : "Code",
+                                                                    "title" : "Coded Concepts",
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code[].code",
@@ -2823,15 +2823,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.matchingDomain",
-                                                    "title" : "Matching Domain",
+                                                    "title" : "",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.matchingDomain.enumeration",
-                                                            "title" : "Codes",
+                                                            "title" : "",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.matchingDomain.enumeration.code",
-                                                                    "title" : "Code",
+                                                                    "title" : "Coded Concepts",
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.matchingDomain.enumeration.code[].code",
@@ -2953,15 +2953,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain",
-                                                    "title" : "Matching Domain",
+                                                    "title" : "",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration",
-                                                            "title" : "Codes",
+                                                            "title" : "",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code",
-                                                                    "title" : "Code",
+                                                                    "title" : "Coded Concepts",
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code[].code",
@@ -3083,15 +3083,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain",
-                                                    "title" : "Matching Domain",
+                                                    "title" : "",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.enumeration",
-                                                            "title" : "Codes",
+                                                            "title" : "",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.enumeration.code",
-                                                                    "title" : "Code",
+                                                                    "title" : "Coded Concepts",
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.enumeration.code[].code",
@@ -3213,15 +3213,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.matchingDomain",
-                                                    "title" : "Matching Domain",
+                                                    "title" : "",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.matchingDomain.enumeration",
-                                                            "title" : "Codes",
+                                                            "title" : "",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.matchingDomain.enumeration.code",
-                                                                    "title" : "Code",
+                                                                    "title" : "Coded Concepts",
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.matchingDomain.enumeration.code[].code",
@@ -3343,15 +3343,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain",
-                                                    "title" : "Matching Domain",
+                                                    "title" : "",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration",
-                                                            "title" : "Codes",
+                                                            "title" : "",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code",
-                                                                    "title" : "Code",
+                                                                    "title" : "Coded Concepts",
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code[].code",
