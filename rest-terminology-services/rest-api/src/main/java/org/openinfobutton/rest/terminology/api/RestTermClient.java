@@ -17,7 +17,7 @@ package org.openinfobutton.rest.terminology.api;
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version March 13, 2016
  */
-public interface RestTermClientApi {
+public interface RestTermClient {
 
     /**
      *

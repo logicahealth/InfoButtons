@@ -10,7 +10,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import org.openinfobutton.rest.terminology.api.RestTermClientApi;
+import org.openinfobutton.rest.terminology.api.RestTermClient;
 
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ import java.net.URISyntaxException;
  * Created by Andrew on 3/14/2016.
  */
 @Service
-public class UmlsRestClientImpl implements RestTermClientApi {
+public class UmlsRestClientImpl implements RestTermClient {
 
     // Logger
     private static final Logger logger = LogManager.getLogger(UmlsRestClientImpl.class);
