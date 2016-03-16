@@ -127,6 +127,16 @@
 			<version>1.9-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>rest-api</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>rest-impl</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.2.2</version>

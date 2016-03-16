@@ -21,6 +21,7 @@ import com.fasterxml.jackson.module.jsonSchema.customProperties.HyperSchemaFacto
 import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
 import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
 import org.apache.log4j.Logger;
+import org.openinfobutton.rest.terminology.api.RestTermClient;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.schemas.kb.ProfileDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,9 @@ public class ProfileManagerService
     @Autowired
     @Qualifier("lDao")
     private LiteProfilesDao lDao;
+
+    @Autowired
+    private RestTermClient restTermClient;
     
     @RequestMapping(produces="application/json", value = "cloudProfiles", method = RequestMethod.GET)
     @ResponseBody
@@ -233,6 +237,13 @@ public class ProfileManagerService
         } catch (JsonProcessingException jsonEx) {
             return "Unable to process JSON: " + jsonEx;
         }
+    }
+
+    @RequestMapping(produces = "application/json", value="searchUts/{codeSystem}/{search}", method = RequestMethod.GET)
+    @ResponseBody
+    public String searchUts (@PathVariable String codeSystem, @PathVariable String search) {
+
+        return restTermClient.getTerms(search, codeSystem);
     }
 
     /**
