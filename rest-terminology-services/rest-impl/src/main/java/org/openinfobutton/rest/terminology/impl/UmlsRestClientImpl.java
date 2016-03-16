@@ -12,6 +12,8 @@ import org.apache.logging.log4j.LogManager;
 
 import org.openinfobutton.rest.terminology.api.RestTermClient;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -38,13 +40,19 @@ public class UmlsRestClientImpl implements RestTermClient {
 
     private static String SEARCH_PARAMETER = "string";
 
+    private static String SEARCH_TYPE_PARAMETER = "searchType";
+
+    private static String SEARCH_TYPE = "rightTruncation";
+
+    private static String RETURN_TYPE_PARAMETER = "returnIdType";
+
+    private static String RETURN_TYPE = "code";
+
     private static String CS_PARAMETER = "sabs";
 
     private String PAGE_SIZE_PARAMETER = "pageSize";
 
-    private String PAGE_SIZE_VALUE = "25";
-
-    private static String PAGE_PARAMETER = "pageNumber";
+    private String PAGE_SIZE_VALUE = "1000";
 
     private static String TICKET_PARAMETER = "ticket";
 
@@ -64,7 +72,8 @@ public class UmlsRestClientImpl implements RestTermClient {
      * @param userName
      * @param password
      */
-    public UmlsRestClientImpl (String userName, String password) {
+    @Autowired
+    public UmlsRestClientImpl (@Value( "${umls.username}") String userName, @Value( "${umls.password}") String password) {
 
         getTicketGrantingTicket(userName, password);
     }
@@ -90,16 +99,18 @@ public class UmlsRestClientImpl implements RestTermClient {
 
         String sts = getSingleUseTicket();
         String result = "";
-
+        logger.error("SEARCHING");
         try {
             URIBuilder b = new URIBuilder(UTS_REST_API_URL + SEARCH_PATH);
             b.addParameter(SEARCH_PARAMETER, search);
+            b.addParameter(RETURN_TYPE_PARAMETER, RETURN_TYPE);
+            b.addParameter(SEARCH_TYPE_PARAMETER, SEARCH_TYPE);
             b.addParameter(CS_PARAMETER, codeSytem);
             b.addParameter(PAGE_SIZE_PARAMETER, PAGE_SIZE_VALUE);
             b.addParameter(TICKET_PARAMETER, sts);
             result = Request.Get(b.build())
-                    .connectTimeout(1000)
-                    .socketTimeout(1000)
+                    .connectTimeout(3000)
+                    .socketTimeout(3000)
                     .execute().returnContent().asString();
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -108,7 +119,7 @@ public class UmlsRestClientImpl implements RestTermClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        logger.error("RESULTS: " + result);
         return result;
     }
 
@@ -122,7 +133,7 @@ public class UmlsRestClientImpl implements RestTermClient {
     private void getTicketGrantingTicket(String userName, String password)
     {
 
-
+        logger.error("GETTING TGT");
         try {
             ticketGrantingTicketURL = Request.Post(UMLS_AUTH_API_URL)
                     .useExpectContinue()
@@ -132,6 +143,7 @@ public class UmlsRestClientImpl implements RestTermClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        logger.error("GOT TGT");
     }
 
 
@@ -143,6 +155,7 @@ public class UmlsRestClientImpl implements RestTermClient {
      */
     private String getSingleUseTicket() {
 
+        logger.error("GETTING ST");
         String ticket = "";
         try {
             ticket = Request.Post(ticketGrantingTicketURL)
@@ -153,7 +166,7 @@ public class UmlsRestClientImpl implements RestTermClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        logger.error("GOT ST");
         return ticket;
     }
 }
