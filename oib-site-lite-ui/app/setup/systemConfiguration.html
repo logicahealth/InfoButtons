@@ -70,11 +70,11 @@
                             <button class='btn btn-default' type="submit">Add</button>
                         </span>
                     </div>
-                    <alert ng-repeat="oid in oids" type="info" close="deleteOid($index)">
+                    <uib-alert ng-repeat="oid in oids" type="info" close="deleteOid($index)">
                         <div style="margin: 0 auto; position:relative;">
                             <div class="entry">{{oid.orgOid}}</div><div class="entry name">{{oid.orgName}}</div>
                         </div>
-                    </alert>
+                    </uib-alert>
                 </div>
             </form>
         </div>

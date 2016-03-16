@@ -474,7 +474,7 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
 oibManagerServiceModule.service('properties', function () {
 
     return function(selectedProperty, assetId) {
-        var instance = $modal.open({
+        var instance = $uibModal.open({
             templateUrl: 'responder/editProperty.html',
             controller: 'ProfileFormCtrl',
             controllerAs: 'ProfileFormCtrl',

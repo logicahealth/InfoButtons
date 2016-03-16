@@ -3,9 +3,9 @@
  */
 var oibConfirmModule = angular.module('oibConfirmModule', ['ui.bootstrap']);
 
-oibConfirmModule.controller('ConfirmController', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+oibConfirmModule.controller('ConfirmController', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
     $scope.ok = function () {
-        $modalInstance.close();
+        $uibModalInstance.close();
     };
 }])

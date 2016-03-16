@@ -112,7 +112,7 @@ oibAssetControllerModule.controller('AssetFormCtrl', ['$scope', '$state', '$stat
         }
     }]);
 
-oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selectedProperty', 'assetId', 'assetFactory', 'ngNotify', function ($scope, $state, selectedProperty, assetId, assetFactory, ngNotify) {
+oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selectedProperty', 'assetId', 'assetFactory', 'ngNotify', '$filter', function ($scope, $state, selectedProperty, assetId, assetFactory, ngNotify, $filter) {
 
     var selectedId;
     var newAsset = false;
@@ -167,10 +167,10 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                          {"name" : "ObservationInterpretation", "oid" : "2.16.840.1.113883.5.83"},
                          {"name" : "ISO 3166 Part 1 Country Codes, 2nd Edition, Alpha-3 ", "oid" : "1.0.3166.1.2.3"}];
 
-    var mainSearchCodes = [{"name": "ICD9-CM", "oid" : "2.16.840.1.113883.6.103"},
-                        {"name": "ICD10-CM", "oid" : "2.16.840.1.113883.6.90"},
+    var mainSearchCodes = [{"name": "ICD9CM", "oid" : "2.16.840.1.113883.6.103"},
+                        {"name": "ICD10CM", "oid" : "2.16.840.1.113883.6.90"},
                         {"name": "ICD10", "oid" : "2.16.840.1.113883.6.3"},
-                        {"name": "SNOMED-CT", "oid" : "2.16.840.1.113883.6.96"},
+                        {"name": "SNOMEDCT_US", "oid" : "2.16.840.1.113883.6.96"},
                         {"name": "RxNorm", "oid" : "2.16.840.1.113883.6.88"},
                         {"name" : "MeSH" , "oid" : "2.16.840.1.113883.6.177"},
                         {"name" : "LOINC", "oid" : "2.16.840.1.113883.6.1"},
@@ -344,5 +344,25 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                 });
         }
     };
+
+    var terms = [];
+    var searchTerm = '';
+
+    $scope.getTerms = function (search, codeSystem) {
+
+        var truncatedSearch = $filter('limitTo')(search, 4);
+        var searchedTermArray = $filter('filter')(terms, search);
+        if (searchTerm != truncatedSearch || searchedTermArray.length == 0) {
+            searchTerm = truncatedSearch;
+            return assetFactory.searchUts(codeSystem, search)
+                .then(function (result) {
+
+                    terms = result.data.result.results;
+                    return terms;
+                });
+        } else {
+            return searchedTermArray;
+        }
+    }
 
 }]);

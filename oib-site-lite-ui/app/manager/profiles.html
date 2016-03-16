@@ -53,9 +53,9 @@
                 <p><br>{{profile.published  | date:'medium'}}</p>
             </div>
             <div class="btn-group" role="group" aria-label="status">
-                <button type="button" class="btn btn-success" ng-click="updateStatus(profile, 1)" ng-model="profile.status" btn-radio="1">Enabled</button>
-                <button type="button" class="btn btn-default" ng-click="updateStatus(profile, 3)" ng-model="profile.status" btn-radio="3">Disabled</button>
-                <button type="button" class="btn btn-info" ng-click="updateStatus(profile, 2)" ng-model="profile.status" btn-radio="2">Test</button>
+                <button type="button" class="btn btn-success" ng-click="updateStatus(profile, 1)" ng-model="profile.status" uib-btn-radio="1">Enabled</button>
+                <button type="button" class="btn btn-default" ng-click="updateStatus(profile, 3)" ng-model="profile.status" uib-btn-radio="3">Disabled</button>
+                <button type="button" class="btn btn-info" ng-click="updateStatus(profile, 2)" ng-model="profile.status" uib-btn-radio="2">Test</button>
             </div>
         </div>
     </div>

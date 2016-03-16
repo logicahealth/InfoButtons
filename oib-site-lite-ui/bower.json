@@ -13,7 +13,7 @@
     "angular-loader": "1.4.x",
     "angular-utf8-base64": "0.0.x",
     "angular-mocks": "1.4.x",
-    "angular-bootstrap": "0.13.0",
+    "angular-bootstrap": "1.2.4",
     "angular-datatables": "0.4.x",
     "angular-schema-form-bootstrap" : "0.2.0",
     "angular-ui-select": "0.11.x",

@@ -2,7 +2,7 @@
 
 var oibManagerModule = angular.module('oibManagerModule', ['ui.router','ngResource', 'ab-base64', 'ui.bootstrap', 'directives', 'schemaForm']);
 
-oibManagerModule.controller('ProfileCtrl', ['$scope', '$modal', 'profileFactory', '$state', function ($scope, $modal, profileFactory, $state) {
+oibManagerModule.controller('ProfileCtrl', ['$scope', '$uibModal', 'profileFactory', '$state', function ($scope, $uibModal, profileFactory, $state) {
 
         $scope.localProfiles = [];
         $scope.cloudProfiles = [];
@@ -83,7 +83,7 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$modal', 'profileFactory'
                 profileOids.push(uniqueItems[x]);
             }
         }
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'modalContent.html',
             controller: 'ModalController',
             resolve: {
@@ -3717,7 +3717,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
     return $scope;
     }]);
 
-oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$state', 'base64', 'cloudProfileFactory', function ($scope, $modal, $http, $state, base64, cloudProfileFactory) {
+oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$uibModal','$http', '$state', 'base64', 'cloudProfileFactory', function ($scope, $uibModal, $http, $state, base64, cloudProfileFactory) {
 
     $scope.repoUrl = 'https://github.com/' + 'VHAINNOVATIONS/InfoButtons' + '/blob/development/' + 'profilestore' + '/';
 
@@ -3832,7 +3832,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
 
     $scope.openModal = function(profile) {
 
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'modalContent.html',
             controller: 'ModalController',
             resolve: {
@@ -3890,7 +3890,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
                 profileOids.push(uniqueItems[x]);
             }
         }
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'modalContent.html',
             controller: 'ModalController',
             resolve: {
@@ -3916,7 +3916,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$modal','$http', '$s
 
     function confirm() {
 
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'confirm.html',
             controller: 'ConfirmController'
         });

@@ -1,6 +1,6 @@
 var oibSetupServices = angular.module('oibSetupServices', ['ui.bootstrap', 'ngResource', 'ab-base64']);
 
-oibSetupServices.service('loginModal', function ($modal) {
+oibSetupServices.service('loginModal', function ($uibModal) {
 
     function assignGitUser (user) {
         localStorage.setItem("gitUser", JSON.stringify(user));
@@ -8,7 +8,7 @@ oibSetupServices.service('loginModal', function ($modal) {
     }
 
     return function() {
-        var instance = $modal.open({
+        var instance = $uibModal.open({
             templateUrl: 'setup/loginModal.html',
             controller: 'LoginModalCtrl',
             controllerAs: 'LoginModalCtrl'

@@ -83,13 +83,22 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
         });
     }
 
+    assetFactory.searchUts = function (codeSystem, search) {
+
+        return $http.get ('http://localhost:8080/infobutton-service/liteManager/searchUts/' + codeSystem + '/' + search, {
+            headers: {
+                'Authorization' : undefined
+            }
+        })
+    }
+
     return assetFactory;
 }]);
 
-oibAssetServiceModule.service('editModal', function ($modal) {
+oibAssetServiceModule.service('editModal', function ($uibModal) {
 
     return function(selectedProperty, assetId) {
-        var instance = $modal.open({
+        var instance = $uibModal.open({
             templateUrl: 'responder/editProperty.html',
             controller: 'EditModalCtrl',
             controllerAs: 'EditModalCtrl',
