@@ -58,6 +58,14 @@ public class UmlsRestClientImpl implements RestTermClient {
 
     private String ticketGrantingTicketURL = "";
 
+    /** The username. */
+    private String username;
+
+    /** The password. */
+    private String password;
+
+    private long lastUpdate = -1;
+
     /**
      *
      * UMLS Authentication parameters
@@ -69,13 +77,13 @@ public class UmlsRestClientImpl implements RestTermClient {
     /**
      *Instantiates REST client by retrieving TGT
      *
-     * @param userName
-     * @param password
      */
     @Autowired
-    public UmlsRestClientImpl (@Value( "${umls.username}") String userName, @Value( "${umls.password}") String password) {
+    public UmlsRestClientImpl (@Value( "${umls.username}" ) String username, @Value( "${umls.password}" ) String password) {
 
-        getTicketGrantingTicket(userName, password);
+        this.username = username;
+        this.password = password;
+        getTicketGrantingTicket();
     }
 
     /**
@@ -127,23 +135,23 @@ public class UmlsRestClientImpl implements RestTermClient {
      *
      * Gets Ticket Granting Ticket from UMLS
      *
-     * @param userName UMLS Username
-     * @param password UMLS Password
      */
-    private void getTicketGrantingTicket(String userName, String password)
+    private void getTicketGrantingTicket()
     {
-
-        logger.error("GETTING TGT");
-        try {
-            ticketGrantingTicketURL = Request.Post(UMLS_AUTH_API_URL)
-                    .useExpectContinue()
-                    .version(HttpVersion.HTTP_1_1)
-                    .bodyForm(Form.form().add("username", userName).add("password", password).build())
-                    .execute().returnResponse().getFirstHeader("location").getValue();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (lastUpdate + 21600000000000l < System.nanoTime()) {
+            logger.error("GETTING TGT");
+            try {
+                ticketGrantingTicketURL = Request.Post(UMLS_AUTH_API_URL)
+                        .useExpectContinue()
+                        .version(HttpVersion.HTTP_1_1)
+                        .bodyForm(Form.form().add("username", username).add("password", password).build())
+                        .execute().returnResponse().getFirstHeader("location").getValue();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            lastUpdate = System.nanoTime();
+            logger.error("GOT TGT");
         }
-        logger.error("GOT TGT");
     }
 
 
@@ -155,6 +163,7 @@ public class UmlsRestClientImpl implements RestTermClient {
      */
     private String getSingleUseTicket() {
 
+        getTicketGrantingTicket();
         logger.error("GETTING ST");
         String ticket = "";
         try {
