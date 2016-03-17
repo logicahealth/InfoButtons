@@ -93,7 +93,28 @@ public class UmlsRestClientImpl implements RestTermClient {
      */
     public String getTerms (String search) {
 
+        String sts = getSingleUseTicket();
         String result = "";
+        logger.error("SEARCHING");
+        try {
+            URIBuilder b = new URIBuilder(UTS_REST_API_URL + SEARCH_PATH);
+            b.addParameter(SEARCH_PARAMETER, search);
+            b.addParameter(RETURN_TYPE_PARAMETER, RETURN_TYPE);
+            b.addParameter(SEARCH_TYPE_PARAMETER, SEARCH_TYPE);
+            b.addParameter(PAGE_SIZE_PARAMETER, PAGE_SIZE_VALUE);
+            b.addParameter(TICKET_PARAMETER, sts);
+            result = Request.Get(b.build())
+                    .connectTimeout(3000)
+                    .socketTimeout(3000)
+                    .execute().returnContent().asString();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        logger.error("RESULTS: " + result);
         return result;
     }
 
