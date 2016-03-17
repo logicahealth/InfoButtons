@@ -4,6 +4,8 @@ var oibAssetServiceModule = angular.module('oibAssetServiceModule', ['ui.bootstr
 
 oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
+    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/liteManager/'
+
     var responderManagerBase = 'http://' + localStorage.getItem('hostName') + ':8080/openInfobutton/assetManager/';
 
     var responderExpander = 'http://' + localStorage.getItem('hostName') + ':8080/openInfobutton/';
@@ -85,7 +87,7 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
     assetFactory.searchUts = function (codeSystem, search) {
 
-        return $http.get ('http://localhost:8080/infobutton-service/liteManager/searchUts/' + codeSystem + '/' + search, {
+        return $http.get (oibManagerUrl+ 'searchUts/' + codeSystem + '/' + search, {
             headers: {
                 'Authorization' : undefined
             }
