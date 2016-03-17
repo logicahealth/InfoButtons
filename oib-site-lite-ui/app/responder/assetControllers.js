@@ -171,9 +171,9 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                         {"name": "ICD10CM", "oid" : "2.16.840.1.113883.6.90"},
                         {"name": "ICD10", "oid" : "2.16.840.1.113883.6.3"},
                         {"name": "SNOMEDCT_US", "oid" : "2.16.840.1.113883.6.96"},
-                        {"name": "RxNorm", "oid" : "2.16.840.1.113883.6.88"},
-                        {"name" : "MeSH" , "oid" : "2.16.840.1.113883.6.177"},
-                        {"name" : "LOINC", "oid" : "2.16.840.1.113883.6.1"},
+                        {"name": "RXNORM", "oid" : "2.16.840.1.113883.6.88"},
+                        {"name" : "MSH" , "oid" : "2.16.840.1.113883.6.177"},
+                        {"name" : "LNC", "oid" : "2.16.840.1.113883.6.1"},
                         {"name" : "CPT", "oid": "2.16.840.1.113883.6.12"},
                         {"name" : "CDS Rules", "oid": "http://socraticgrid.org/cds/ka/ecarule"}]
 
@@ -364,5 +364,12 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
             return searchedTermArray;
         }
     }
+
+    $scope.onSelect = function ($item, $model, $label) {
+        $scope.$item = $item;
+        $scope.selected.property.codes.displayName = $label;
+        $scope.selected.property.codes.code = $model.ui;
+
+    };
 
 }]);

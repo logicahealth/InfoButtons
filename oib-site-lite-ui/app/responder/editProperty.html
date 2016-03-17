@@ -45,10 +45,10 @@
                             selected.property.propName == 'locationOfInterest.c' || selected.property.propName == 'mainSearchCriteria.v'"
                             class="input-group">
             <label for="displayName">Display Name</label>
-            <input type="text" ng-model="selected.property.codes.displayName" placeholder="Concepts load as you type...."
-                   uib-typeahead = "term.name for term in getTerms($viewValue, selected.property.codeSystem.name)"
+            <input type="text" typeahead-on-select="onSelect($item, $model, $label)" placeholder="Concepts load as you type...."
+                   uib-typeahead = "term as term.name for term in getTerms($viewValue, selected.property.codeSystem.name)"
                    typeahead-loading="loadingTerms" typeahead-no-results="noResults" class="form-control" id="displayName"
-                   typeahead-min-length="4" required>
+                   typeahead-min-length="4" ng-model="selected.property.codes.displayName" required>
             <i ng-show="loadingTerms" class="glyphicon glyphicon-refresh"></i>
             <div ng-show="noResults">
                 <i class="glyphicon glyphicon-remove"></i> No Results Found
