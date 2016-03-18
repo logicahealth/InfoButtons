@@ -159,7 +159,7 @@ public class UmlsRestClientImpl implements RestTermClient {
      */
     private void getTicketGrantingTicket()
     {
-        if (lastUpdate + 21600000000000l < System.nanoTime()) {
+        if (lastUpdate + 10800000000000l < System.nanoTime()) {
             logger.error("GETTING TGT");
             try {
                 ticketGrantingTicketURL = Request.Post(UMLS_AUTH_API_URL)
