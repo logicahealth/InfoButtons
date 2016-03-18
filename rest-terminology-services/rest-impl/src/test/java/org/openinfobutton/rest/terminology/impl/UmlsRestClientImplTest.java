@@ -4,7 +4,21 @@ import org.junit.Assert;
 import org.openinfobutton.rest.terminology.api.RestTermClient;
 
 /**
- * Created by Andrew on 3/15/2016.
+ *
+ * The Rest Terminology client calls an external web service using a search term
+ * and returns a JSON string as a result.
+ *
+ * -----------------------------------------------------------------------------------
+ * (c) 2010-2016 OpenInfobutton Project, Biomedical Informatics, University of Utah
+ * Contact: {@code <andrew.iskander@utah.edu>}
+ * Biomedical Informatics
+ * 421 Wakara Way, Ste 140
+ * Salt Lake City, UT 84108-3514
+ * Day Phone: 1-801-581-4080
+ * -----------------------------------------------------------------------------------
+ *
+ * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
+ * @version March 13, 2016
  */
 public class UmlsRestClientImplTest {
 
@@ -18,7 +32,7 @@ public class UmlsRestClientImplTest {
         result = client.getTerms("diabetes", "SNOMEDCT_US");
 
         System.out.println(result);
-        Assert.assertNotNull(result);
+        Assert.assertTrue(result.contains("diabetes"));
     }
 }
 

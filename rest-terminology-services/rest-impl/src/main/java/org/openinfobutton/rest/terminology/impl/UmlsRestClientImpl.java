@@ -20,7 +20,21 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 /**
- * Created by Andrew on 3/14/2016.
+ *
+ * The Rest Terminology client calls an external web service using a search term
+ * and returns a JSON string as a result.
+ *
+ * -----------------------------------------------------------------------------------
+ * (c) 2010-2016 OpenInfobutton Project, Biomedical Informatics, University of Utah
+ * Contact: {@code <andrew.iskander@utah.edu>}
+ * Biomedical Informatics
+ * 421 Wakara Way, Ste 140
+ * Salt Lake City, UT 84108-3514
+ * Day Phone: 1-801-581-4080
+ * -----------------------------------------------------------------------------------
+ *
+ * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
+ * @version March 13, 2016
  */
 @Service
 public class UmlsRestClientImpl implements RestTermClient {
