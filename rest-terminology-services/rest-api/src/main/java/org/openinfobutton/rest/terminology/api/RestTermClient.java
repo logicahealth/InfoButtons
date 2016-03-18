@@ -32,7 +32,7 @@ public interface RestTermClient {
 
     /**
      *
-     *  Returns a JSON result from a web service
+     * Returns a JSON result from a web service
      * in response to a search string and code system.
      *
      * @param search Search term
