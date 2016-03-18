@@ -5,8 +5,7 @@ import org.openinfobutton.rest.terminology.api.RestTermClient;
 
 /**
  *
- * The Rest Terminology client calls an external web service using a search term
- * and returns a JSON string as a result.
+ * Tests the UMLS Rest Client
  *
  * -----------------------------------------------------------------------------------
  * (c) 2010-2016 OpenInfobutton Project, Biomedical Informatics, University of Utah

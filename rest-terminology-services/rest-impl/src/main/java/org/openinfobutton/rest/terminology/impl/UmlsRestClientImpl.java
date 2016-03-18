@@ -21,8 +21,8 @@ import java.net.URISyntaxException;
 
 /**
  *
- * The Rest Terminology client calls an external web service using a search term
- * and returns a JSON string as a result.
+ * This UMLS Rest Client uses the UMLS Rest API to search
+ * for terminology content using a search string.
  *
  * -----------------------------------------------------------------------------------
  * (c) 2010-2016 OpenInfobutton Project, Biomedical Informatics, University of Utah
