@@ -4,13 +4,10 @@
 package org.openinfobutton.service.web;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.AnnotationIntrospector;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -18,12 +15,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import com.fasterxml.jackson.module.jsonSchema.customProperties.HyperSchemaFactoryWrapper;
-import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
 import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
 import org.apache.log4j.Logger;
 import org.openinfobutton.rest.terminology.api.RestTermClient;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
-import org.openinfobutton.schemas.kb.ProfileDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -49,7 +44,7 @@ import javax.xml.bind.Unmarshaller;
  * -----------------------------------------------------------------------------------
  *
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
- * @version May 5, 2014
+ * @version March 13, 2016
  */
 @Controller
 public class ProfileManagerService
