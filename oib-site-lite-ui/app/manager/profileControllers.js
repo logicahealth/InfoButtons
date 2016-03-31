@@ -1887,6 +1887,33 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                     "title" : "Supported Terminologies",
                     "items" : [
                         {
+                            "type": "fieldset",
+                            "items" : [
+                                {
+                                    "key": "supportedTerminology",
+                                    "type"  : "select",
+                                    "titleMap": [{"name": "HL7 ActCode", "value" : {"id" : "2.16.840.1.113883.5.4", "name": "HL7 ActCode", "namespace" : ""}},
+                                        {"name": "ICD9-CM", "value" : {"id" : "2.16.840.1.113883.6.103", "name": "ICD9-CM", "namespace" : ""}},
+                                        {"name": "ICD10-CM", "value" : {"id" : "2.16.840.1.113883.6.103", "name": "ICD10-CM", "namespace" : ""}},
+                                        {"name": "ICD10", "value" : {"id" : "2.16.840.1.113883.6.3", "name" : "ICD10", "namespace" : ""}},
+                                        {"name": "SNOMED-CT", "value" : {"id" : "2.16.840.1.113883.6.96", "name" : "SNOMED-CT", "namespace" : ""}},
+                                        {"name": "RxNorm", "value" : {"id" : "2.16.840.1.113883.6.88", "name" : "RxNorm"}},
+                                        {"name": "HL7 AdminstrativeGender", "value": {"id" : "2.16.840.1.113883.5.1", "name" : "HL7 AdministrativeGender", "namespace" : ""}},
+                                        {"name" : "MeSH" , "value" : {"id" : "2.16.840.1.113883.6.177", "name" : "MeSH", "namespace" : ""}},
+                                        {"name" : "NDC", "value" : {"id" : "2.16.840.1.113883.6.69", "name" : "NDC", "namespace" : ""}},
+                                        {"name" : "NUCC Health Care provider taxonomy", "value" : {"id" : "2.16.840.1.113883.6.101", "name" : "NUCC Health Care provider taxonomy", "namespace" : ""}},
+                                        {"name" : "ietf3066", "value" : {"id" : "2.16.840.1.113883.6.121", "name" : "ietf3066", "namespace" : ""}},
+                                        {"name" : "LOINC", "value" : {"id" : "2.16.840.1.113883.6.1", "name" : "LOINC", "namespace" : ""}},
+                                        {"name" : "ObservationInterpretation", "value" : {"id" : "2.16.840.1.113883.5.83", "name" : "ObservationInterpretation", "namespace" : ""}},
+                                        {"name" : "ISO 3166 Part 1 Country Codes, 2nd Edition, Alpha-3", "value" : {"id" : "1.0.3166.1.2.3", "name" : "ISO 3166 Part 1 Country Codes, 2nd Edition, Alpha-3", "namespace" : ""}}],
+                                    "onChange" : function(modelValue,form) {
+
+                                        $scope.jsonProfileModel.profileDefinition.supportedTerminologies.supportedTerminology.push(modelValue);
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "key" : "profileDefinition.supportedTerminologies.supportedTerminology",
                             "add" : "Add Terminology",
                             "title" : "Terminology",
