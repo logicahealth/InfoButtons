@@ -1892,6 +1892,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                 {
                                     "key": "supportedTerminology",
                                     "type"  : "select",
+                                    "description" : "Select terminology to add to profile",
                                     "titleMap": [{"name": "HL7 ActCode", "value" : {"id" : "2.16.840.1.113883.5.4", "name": "HL7 ActCode", "namespace" : ""}},
                                         {"name": "ICD9-CM", "value" : {"id" : "2.16.840.1.113883.6.103", "name": "ICD9-CM", "namespace" : ""}},
                                         {"name": "ICD10-CM", "value" : {"id" : "2.16.840.1.113883.6.103", "name": "ICD10-CM", "namespace" : ""}},
@@ -1908,7 +1909,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         {"name" : "ISO 3166 Part 1 Country Codes, 2nd Edition, Alpha-3", "value" : {"id" : "1.0.3166.1.2.3", "name" : "ISO 3166 Part 1 Country Codes, 2nd Edition, Alpha-3", "namespace" : ""}}],
                                     "onChange" : function(modelValue,form) {
 
-                                        $scope.jsonProfileModel.profileDefinition.supportedTerminologies.supportedTerminology.push(modelValue);
+                                        $scope.jsonProfileModel.profileDefinition.supportedTerminologies.supportedTerminology.unshift(modelValue);
                                     }
                                 }
                             ]
