@@ -1909,6 +1909,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         {"name" : "ISO 3166 Part 1 Country Codes, 2nd Edition, Alpha-3", "value" : {"id" : "1.0.3166.1.2.3", "name" : "ISO 3166 Part 1 Country Codes, 2nd Edition, Alpha-3", "namespace" : ""}}],
                                     "onChange" : function(modelValue,form) {
 
+                                        delete modelValue["$$hashKey"];
                                         $scope.jsonProfileModel.profileDefinition.supportedTerminologies.supportedTerminology.unshift(modelValue);
                                     }
                                 }
@@ -3732,6 +3733,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
     $scope.onJSONProfileSubmit = function(form) {
 
+            delete $scope.jsonProfileModel["supportedTerminology"];
             profileFactory.updateProfileContent($scope.jsonProfileModel, $stateParams.id)
                 .success(function (response) {
                     $scope.statusMessage = 'Profile Successfully Updated';
