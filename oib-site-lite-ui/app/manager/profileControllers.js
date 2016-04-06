@@ -1892,7 +1892,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                             "type": "fieldset",
                             "items" : [
                                 {
-                                    "key": "supportedTerminology",
+                                    "key": "supportedTerminologySelect",
                                     "type"  : "select",
                                     "description" : "Select terminology to add to profile",
                                     "titleMap": [{"name": "HL7 ActCode", "value" : {"id" : "2.16.840.1.113883.5.4", "name": "HL7 ActCode", "namespace" : ""}},
@@ -2033,7 +2033,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "type": "fieldset",
                                                                     "items" : [
                                                                         {
-                                                                            "key": "task",
+                                                                            "key": "taskSelect",
                                                                             "type"  : "select",
                                                                             "description" : "Select task to add to profile",
                                                                             "titleMap": [
@@ -2221,7 +2221,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
-                                                                    "startEmpty" : "true",
+                                                                    "startEmpty" : true,
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration.code[].code",
@@ -2258,7 +2258,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet",
                                                             "title" : "External Value Set",
-                                                            "startEmpty" : "true",
+                                                            "startEmpty" : true,
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].id",
@@ -2349,7 +2349,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                     "type": "fieldset",
                                                     "items" : [
                                                         {
-                                                            "key": "subTopic",
+                                                            "key": "subTopicSelect",
                                                             "type"  : "select",
                                                             "description" : "Select sub topic to add to profile",
                                                             "titleMap": [{"name" : "administration & dosage", "value" : {"searchParameter" : {"valueSource" : {"searchCode" : {"code"  : {"displayName" : "administration & dosage", "code" : "Q000008", "codeSystemName" : "MeSH" , "codeSystem" : "2.16.840.1.113883.6.177"}}}}}},
@@ -2392,7 +2392,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic",
                                                     "title" : "Sub Topic",
-                                                    "startEmpty" : "true",
+                                                    "startEmpty" : true,
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter",
@@ -2466,6 +2466,14 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "title" : "Gender",
                                             "items" : [
                                                 {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.match",
+                                                    "title" : "Use For Matching"
+                                                },
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.search",
+                                                    "title" : "Use For Searching"
+                                                },
+                                                {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain",
                                                     "title" : "",
                                                     "items" : [
@@ -2474,8 +2482,37 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "",
                                                             "items" : [
                                                                 {
+                                                                    "type": "fieldset",
+                                                                    "items" : [
+                                                                        {
+                                                                            "key": "genderSelect",
+                                                                            "type"  : "select",
+                                                                            "description" : "Select gender to add to profile",
+                                                                            "titleMap": [{"name" : "Female", "value" : {"displayName" : "Female", "code" : "F", "codeSystemName": "HL7 AdminstrativeGender", "codeSystem": "2.16.840.1.113883.5.1"}},
+                                                                                {"name" : "Male", "value" : {"displayName" : "Male", "code" : "M", "codeSystemName": "HL7 AdminstrativeGender", "codeSystem": "2.16.840.1.113883.5.1"}},
+                                                                                {"name" : "Undifferentiated", "value" : {"displayName" : "Undifferentiated", "code" : "UN", "codeSystemName": "HL7 AdminstrativeGender", "codeSystem": "2.16.840.1.113883.5.1"}}],
+                                                                            "onChange" : function(modelValue,form, formScope) {
+
+                                                                                delete modelValue["$$hashKey"];
+                                                                                var contextIndex = formScope.$parent.$parent.$parent.$parent.$parent.$parent.$index;
+                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain.enumeration.code != null) {
+
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain.enumeration.code.unshift(modelValue);
+                                                                                }
+                                                                                else {
+
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain.enumeration = {"code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain.enumeration.code.unshift(modelValue);
+                                                                                }
+
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
+                                                                    "startEmpty" : true,
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.code[].code",
@@ -2484,14 +2521,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.code[].codeSystem",
                                                                             "title" : "Code System"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.code[].codeSystemName",
-                                                                            "title" : "Code System Name"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.code[].displayName",
-                                                                            "title" : "Display Name"
                                                                         }
                                                                     ]
                                                                 },
@@ -2504,6 +2533,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.externalValueSet",
                                                             "title" : "External Value Set",
+                                                            "startEmpty" : true,
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.externalValueSet[].id",
@@ -2528,6 +2558,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
+                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter.syntaxOnResource.valuePrefix",
@@ -2548,6 +2579,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.outputCodeTransformation",
                                                     "title" : "Output Code Transformation",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.outputCodeTransformation.id",
@@ -2566,6 +2598,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.outputDisplayNameTransformation",
                                                     "title" : "Output Code Display Name",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.search",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.outputDisplayNameTransformation.id",
@@ -2580,14 +2613,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Namespace"
                                                         }
                                                     ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.search",
-                                                    "title" : "Use For Searching"
                                                 }
                                             ]
                                         },
@@ -2595,6 +2620,14 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup",
                                             "title" : "Age",
                                             "items" : [
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.match",
+                                                    "title" : "Use For Matching"
+                                                },
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.search",
+                                                    "title" : "Use For Searching"
+                                                },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain",
                                                     "title" : "",
@@ -2606,6 +2639,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
+                                                                    "startEmpty" : true,
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code[].code",
@@ -2634,6 +2668,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.externalValueSet",
                                                             "title" : "External Value Set",
+                                                            "startEmpty" : true,
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.externalValueSet[].id",
@@ -2658,6 +2693,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
+                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter.syntaxOnResource.valuePrefix",
@@ -2678,6 +2714,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputCodeTransformation",
                                                     "title" : "Output Code Transformation",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputCodeTransformation.id",
@@ -2696,6 +2733,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputDisplayNameTransformation",
                                                     "title" : "Output Code Display Name",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.search",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputDisplayNameTransformation.id",
@@ -2710,14 +2748,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Namespace"
                                                         }
                                                     ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.search",
-                                                    "title" : "Use For Searching"
                                                 }
                                             ]
                                         },
@@ -2725,6 +2755,14 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType",
                                             "title" : "Encounter",
                                             "items" : [
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.match",
+                                                    "title" : "Use For Matching"
+                                                },
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.search",
+                                                    "title" : "Use For Searching"
+                                                },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain",
                                                     "title" : "",
@@ -2736,6 +2774,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
+                                                                    "startEmpty" : true,
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration.code[].code",
@@ -2764,6 +2803,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.externalValueSet",
                                                             "title" : "External Value Set",
+                                                            "startEmpty" : true,
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.externalValueSet[].id",
@@ -2788,6 +2828,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
+                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter.syntaxOnResource.valuePrefix",
@@ -2808,6 +2849,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.outputCodeTransformation",
                                                     "title" : "Output Code Transformation",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.outputCodeTransformation.id",
@@ -2826,6 +2868,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.outputDisplayNameTransformation",
                                                     "title" : "Output Code Display Name",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.search",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.outputDisplayNameTransformation.id",
@@ -2840,14 +2883,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Namespace"
                                                         }
                                                     ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.search",
-                                                    "title" : "Use For Searching"
                                                 }
                                             ]
                                         },
@@ -2855,6 +2890,14 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage",
                                             "title" : "Performer Language",
                                             "items" : [
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.match",
+                                                    "title" : "Use For Matching"
+                                                },
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.search",
+                                                    "title" : "Use For Searching"
+                                                },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain",
                                                     "title" : "",
@@ -2866,6 +2909,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
+                                                                    "startEmpty" : true,
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code[].code",
@@ -2894,6 +2938,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.externalValueSet",
                                                             "title" : "External Value Set",
+                                                            "startEmpty" : true,
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.externalValueSet[].id",
@@ -2918,6 +2963,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
+                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter.syntaxOnResource.valuePrefix",
@@ -2938,6 +2984,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputCodeTransformation",
                                                     "title" : "Output Code Transformation",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputCodeTransformation.id",
@@ -2956,6 +3003,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputDisplayNameTransformation",
                                                     "title" : "Output Code Display Name",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.search",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputDisplayNameTransformation.id",
@@ -2970,14 +3018,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Namespace"
                                                         }
                                                     ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.search",
-                                                    "title" : "Use For Searching"
                                                 }
                                             ]
                                         },
@@ -2985,6 +3025,14 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline",
                                             "title" : "Performer Discipline",
                                             "items" : [
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.match",
+                                                    "title" : "Use For Matching"
+                                                },
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.search",
+                                                    "title" : "Use For Searching"
+                                                },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.matchingDomain",
                                                     "title" : "",
@@ -2996,6 +3044,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
+                                                                    "startEmpty" : true,
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.matchingDomain.enumeration.code[].code",
@@ -3024,6 +3073,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.matchingDomain.externalValueSet",
                                                             "title" : "External Value Set",
+                                                            "startEmpty" : true,
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.matchingDomain.externalValueSet[].id",
@@ -3048,6 +3098,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
+                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.searchParameter.syntaxOnResource.valuePrefix",
@@ -3068,6 +3119,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.outputCodeTransformation",
                                                     "title" : "Output Code Transformation",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerDiscipline.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.outputCodeTransformation.id",
@@ -3086,6 +3138,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.outputDisplayNameTransformation",
                                                     "title" : "Output Code Display Name",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerDiscipline.search",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.outputDisplayNameTransformation.id",
@@ -3100,14 +3153,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Namespace"
                                                         }
                                                     ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline.search",
-                                                    "title" : "Use For Searching"
                                                 }
                                             ]
                                         },
@@ -3115,6 +3160,14 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType",
                                             "title" : "Performer Type",
                                             "items" : [
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.match",
+                                                    "title" : "Use For Matching"
+                                                },
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.search",
+                                                    "title" : "Use For Searching"
+                                                },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain",
                                                     "title" : "",
@@ -3126,6 +3179,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
+                                                                    "startEmpty" : true,
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code[].code",
@@ -3154,6 +3208,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.externalValueSet",
                                                             "title" : "External Value Set",
+                                                            "startEmpty" : true,
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.externalValueSet[].id",
@@ -3178,6 +3233,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
+                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter.syntaxOnResource.valuePrefix",
@@ -3198,6 +3254,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputCodeTransformation",
                                                     "title" : "Output Code Transformation",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputCodeTransformation.id",
@@ -3216,6 +3273,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputDisplayNameTransformation",
                                                     "title" : "Output Code Display Name",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.search",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputDisplayNameTransformation.id",
@@ -3230,14 +3288,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Namespace"
                                                         }
                                                     ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.search",
-                                                    "title" : "Use For Searching"
                                                 }
                                             ]
                                         },
@@ -3245,6 +3295,14 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage",
                                             "title" : "Information Recipient Language",
                                             "items" : [
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.match",
+                                                    "title" : "Use For Matching"
+                                                },
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.search",
+                                                    "title" : "Use For Searching"
+                                                },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain",
                                                     "title" : "",
@@ -3256,6 +3314,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
+                                                                    "startEmpty" : true,
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.enumeration.code[].code",
@@ -3284,6 +3343,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.externalValueSet",
                                                             "title" : "External Value Set",
+                                                            "startEmpty" : true,
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.externalValueSet[].id",
@@ -3308,6 +3368,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
+                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter.syntaxOnResource.valuePrefix",
@@ -3328,6 +3389,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputCodeTransformation",
                                                     "title" : "Output Code Transformation",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputCodeTransformation.id",
@@ -3346,6 +3408,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputDisplayNameTransformation",
                                                     "title" : "Output Code Display Name",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.search",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputDisplayNameTransformation.id",
@@ -3360,14 +3423,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Namespace"
                                                         }
                                                     ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.search",
-                                                    "title" : "Use For Searching"
                                                 }
                                             ]
                                         },
@@ -3375,6 +3430,14 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline",
                                             "title" : "Information Recipient Discipline",
                                             "items" : [
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.match",
+                                                    "title" : "Use For Matching"
+                                                },
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.search",
+                                                    "title" : "Use For Searching"
+                                                },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.matchingDomain",
                                                     "title" : "",
@@ -3386,6 +3449,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
+                                                                    "startEmpty" : true,
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.matchingDomain.enumeration.code[].code",
@@ -3414,6 +3478,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.matchingDomain.externalValueSet",
                                                             "title" : "External Value Set",
+                                                            "startEmpty" : true,
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.matchingDomain.externalValueSet[].id",
@@ -3438,6 +3503,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
+                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.searchParameter.syntaxOnResource.valuePrefix",
@@ -3458,6 +3524,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.outputCodeTransformation",
                                                     "title" : "Output Code Transformation",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientDiscipline.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.outputCodeTransformation.id",
@@ -3476,6 +3543,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.outputDisplayNameTransformation",
                                                     "title" : "Output Code Display Name",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientDiscipline.search",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.outputDisplayNameTransformation.id",
@@ -3490,14 +3558,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Namespace"
                                                         }
                                                     ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline.search",
-                                                    "title" : "Use For Searching"
                                                 }
                                             ]
                                         },
@@ -3505,6 +3565,14 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType",
                                             "title" : "Information Recipient Type",
                                             "items" : [
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.match",
+                                                    "title" : "Use For Matching"
+                                                },
+                                                {
+                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.search",
+                                                    "title" : "Use For Searching"
+                                                },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain",
                                                     "title" : "",
@@ -3516,6 +3584,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
+                                                                    "startEmpty" : true,
                                                                     "items" : [
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code[].code",
@@ -3544,6 +3613,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.externalValueSet",
                                                             "title" : "External Value Set",
+                                                            "startEmpty" : true,
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.externalValueSet[].id",
@@ -3568,6 +3638,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
+                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter.syntaxOnResource.valuePrefix",
@@ -3588,6 +3659,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputCodeTransformation",
                                                     "title" : "Output Code Transformation",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputCodeTransformation.id",
@@ -3606,6 +3678,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputDisplayNameTransformation",
                                                     "title" : "Output Code Display Name",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.search",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputDisplayNameTransformation.id",
@@ -3620,14 +3693,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Namespace"
                                                         }
                                                     ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.search",
-                                                    "title" : "Use For Searching"
                                                 }
                                             ]
                                         }
@@ -3856,8 +3921,12 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
     $scope.onJSONProfileSubmit = function(form) {
 
-            delete $scope.jsonProfileModel["supportedTerminology"];
-            delete $scope.jsonProfileModel["task"];
+            //First remove extraneous form elements from model
+            delete $scope.jsonProfileModel["supportedTerminologySelect"];
+            delete $scope.jsonProfileModel["taskSelect"];
+            delete $scope.jsonProfileModel["genderSelect"];
+            delete $scope.jsonProfileModel["subTopicSelect"];
+
             profileFactory.updateProfileContent($scope.jsonProfileModel, $stateParams.id)
                 .success(function (response) {
                     $scope.statusMessage = 'Profile Successfully Updated';
