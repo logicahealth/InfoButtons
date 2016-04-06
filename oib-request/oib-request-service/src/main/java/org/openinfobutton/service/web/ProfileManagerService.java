@@ -128,7 +128,7 @@ public class ProfileManagerService
         if (profile.getId() == null) {
             try {
                 getProfileJAXBMarshaller().marshal(KnowledgeResourceProfile.builder().
-                        withProfileDefinition().withAuthorizedOrganizations().end().end().build(), sw);
+                        withProfileDefinition().withHl7URLCompliant(true).withAuthorizedOrganizations().end().end().build(), sw);
                 profile.setContent(sw.toString());
             } catch (SQLException e) {
                 e.printStackTrace();
