@@ -1,6 +1,6 @@
     'use strict';
 
-var oibManagerModule = angular.module('oibManagerModule', ['ui.router','ngResource', 'ab-base64', 'ui.bootstrap', 'directives', 'schemaForm']);
+var oibManagerModule = angular.module('oibManagerModule', ['ui.router','ngResource', 'ab-base64', 'ui.bootstrap', 'directives', 'schemaForm', 'ngNotify']);
 
 oibManagerModule.controller('ProfileCtrl', ['$scope', '$uibModal', 'profileFactory', '$state', function ($scope, $uibModal, profileFactory, $state) {
 
@@ -122,7 +122,7 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$uibModal', 'profileFacto
     return $scope;
     }]);
 
-oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', '$state', function ($scope, $stateParams, profileFactory, $state) {
+oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', '$state', 'ngNotify', function ($scope, $stateParams, profileFactory, $state, ngNotify) {
 
      var jsonProfileSchema = {
         "type" : "object",
@@ -2375,7 +2375,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
                                                                 delete modelValue["$$hashKey"];
                                                                 var contextIndex = formScope.$parent.$parent.$parent.$parent.$index;
-                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.subTopics.subTopic != null) {
+                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.subTopics != null) {
 
                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.subTopics.subTopic.unshift(modelValue);
                                                                 }
@@ -2413,14 +2413,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                                         {
                                                                                             "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code.code",
                                                                                             "title": "Code"
-                                                                                        },
-                                                                                        {
-                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code.codeSystem",
-                                                                                            "title": "Code System"
-                                                                                        },
-                                                                                        {
-                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code.codeSystemName",
-                                                                                            "title": "Code System Name"
                                                                                         },
                                                                                         {
                                                                                             "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code.displayName",
@@ -2481,6 +2473,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration",
                                                             "title" : "",
                                                             "items" : [
+
                                                                 {
                                                                     "type": "fieldset",
                                                                     "items" : [
@@ -2637,6 +2630,41 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "",
                                                             "items" : [
                                                                 {
+                                                                    "type": "fieldset",
+                                                                    "items" : [
+                                                                        {
+                                                                            "key": "ageSelect",
+                                                                            "type"  : "select",
+                                                                            "description" : "Select age to add to profile",
+                                                                            "titleMap": [{"name" : "infant, newborn; birth to 1 month", "value" : {"displayName" : "infant, newborn; birth to 1 month", "code" : "D007231", "codeSystemName" : "MeSH" , "codeSystem" : "2.16.840.1.113883.6.177"}},
+                                                                                {"name" : "Infant; 1 to 23 months", "value" : {"displayName" : "Infant; 1 to 23 months", "code" : "D007223", "codeSystemName" : "MeSH" , "codeSystem" : "2.16.840.1.113883.6.177"}},
+                                                                                {"name" : "child, preschool; 2 to 5 years", "value" : {"displayName" : "child, preschool; 2 to 5 years", "code" : "D002675", "codeSystemName" : "MeSH" , "codeSystem" : "2.16.840.1.113883.6.177"}},
+                                                                                {"name" : "child; 6 to 12 years", "value" : {"displayName" : "child; 6 to 12 years", "code" : "D002648", "codeSystemName" : "MeSH" , "codeSystem" : "2.16.840.1.113883.6.177"}},
+                                                                                {"name" : "adolescent; 13-18 years", "value" : {"displayName" : "adolescent; 13-18 years", "code" : "D000293", "codeSystemName" : "MeSH" , "codeSystem" : "2.16.840.1.113883.6.177"}},
+                                                                                {"name" : "young adult; 19-24 years", "value" : {"displayName" : "young adult; 19-24 years", "code" : "D055815", "codeSystemName" : "MeSH" , "codeSystem" : "2.16.840.1.113883.6.177"}},
+                                                                                {"name" : "adult; 19-44 years", "value" : {"displayName" : "adult; 19-44 years", "code" : "D000293", "codeSystemName" : "MeSH" , "codeSystem" : "2.16.840.1.113883.6.177"}},
+                                                                                {"name" : "aged; 56-79 years", "value" : {"displayName" : "aged; 56-79 years", "code" : "D000368", "codeSystemName" : "MeSH" , "codeSystem" : "2.16.840.1.113883.6.177"}},
+                                                                                {"name" : "middle aged; 45-64 years", "value" : {"displayName" : "middle aged; 45-64 years", "code" : "D008875", "codeSystemName" : "MeSH" , "codeSystem" : "2.16.840.1.113883.6.177"}},
+                                                                                {"name" : "aged, 80 and older; a person 80 years of age and older", "value" : {"displayName" : "aged, 80 and older; a person 80 years of age and older", "code" : "D000369", "codeSystemName" : "MeSH" , "codeSystem" : "2.16.840.1.113883.6.177"}}],
+                                                                            "onChange" : function(modelValue,form, formScope) {
+
+                                                                                delete modelValue["$$hashKey"];
+                                                                                var contextIndex = formScope.$parent.$parent.$parent.$parent.$parent.$parent.$index;
+                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code != null) {
+
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code.unshift(modelValue);
+                                                                                }
+                                                                                else {
+
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain.enumeration = {"code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code.unshift(modelValue);
+                                                                                }
+
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
                                                                     "startEmpty" : true,
@@ -2644,14 +2672,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code[].code",
                                                                             "title" : "Code"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code[].codeSystem",
-                                                                            "title" : "Code System"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code[].codeSystemName",
-                                                                            "title" : "Code System Name"
                                                                         },
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code[].displayName",
@@ -2771,6 +2791,41 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration",
                                                             "title" : "",
                                                             "items" : [
+
+                                                                {
+                                                                    "type": "fieldset",
+                                                                    "items" : [
+                                                                        {
+                                                                            "key": "encounterSelect",
+                                                                            "type"  : "select",
+                                                                            "description" : "Select encounter to add to profile",
+                                                                            "titleMap": [{"name" : "Ambulatory", "value" : {"displayName" : "Ambulatory", "code" : "AMB", "codeSystemName": "HL7 ActCode", "codeSystem" : "2.16.840.1.113883.5.4"}},
+                                                                                {"name" : "Emergency", "value" : {"displayName" : "Emergency", "code" : "EMER", "codeSystemName": "HL7 ActCode", "codeSystem" : "2.16.840.1.113883.5.4"}},
+                                                                                {"name" : "Field", "value" : {"displayName" : "Field", "code" : "FLD", "codeSystemName": "HL7 ActCode", "codeSystem" : "2.16.840.1.113883.5.4"}},
+                                                                                {"name" : "Home health", "value" : {"displayName" : "Home health", "code" : "HH", "codeSystemName": "HL7 ActCode", "codeSystem" : "2.16.840.1.113883.5.4"}},
+                                                                                {"name" : "Inpatient encounter", "value" : {"displayName" : "Inpatient encounter", "code" : "IMP", "codeSystemName": "HL7 ActCode", "codeSystem" : "2.16.840.1.113883.5.4"}},
+                                                                                {"name" : "Inpatient acute", "value" : {"displayName" : "Inpatient acute", "code" : "ACUTE", "codeSystemName": "HL7 ActCode", "codeSystem" : "2.16.840.1.113883.5.4"}},
+                                                                                {"name" : "Inpatient non-acute", "value" : {"displayName" : "Inpatient non-acute", "code" : "NONAC", "codeSystemName": "HL7 ActCode", "codeSystem" : "2.16.840.1.113883.5.4"}},
+                                                                                {"name" : "short stay", "value" : {"displayName" : "short stay", "code" : "SS", "codeSystemName": "HL7 ActCode", "codeSystem" : "2.16.840.1.113883.5.4"}},
+                                                                                {"name" : "virtual", "value" : {"displayName" : "virtual", "code" : "VR", "codeSystemName": "HL7 ActCode", "codeSystem" : "2.16.840.1.113883.5.4"}}],
+                                                                            "onChange" : function(modelValue,form, formScope) {
+
+                                                                                delete modelValue["$$hashKey"];
+                                                                                var contextIndex = formScope.$parent.$parent.$parent.$parent.$parent.$parent.$index;
+                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain.enumeration.code != null) {
+
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain.enumeration.code.unshift(modelValue);
+                                                                                }
+                                                                                else {
+
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain.enumeration = {"code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain.enumeration.code.unshift(modelValue);
+                                                                                }
+
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                },
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
@@ -2917,11 +2972,19 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         },
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code[].codeSystem",
-                                                                            "title" : "Code System"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code[].codeSystemName",
-                                                                            "title" : "Code System Name"
+                                                                            "title" : "Code System",
+                                                                            "type" : "select",
+                                                                            "titleMap" : [
+                                                                                {"name": "ICD9-CM", "value" : "2.16.840.1.113883.6.103"},
+                                                                                {"name": "ICD10-CM", "value" : "2.16.840.1.113883.6.90"},
+                                                                                {"name": "ICD10", "value" : "2.16.840.1.113883.6.3"},
+                                                                                {"name": "SNOMED-CT", "value" : "2.16.840.1.113883.6.96"},
+                                                                                {"name": "RxNorm", "value" : "2.16.840.1.113883.6.88"},
+                                                                                {"name" : "MeSH" , "value" : "2.16.840.1.113883.6.177"},
+                                                                                {"name" : "LOINC", "value" : "2.16.840.1.113883.6.1"},
+                                                                                {"name" : "CPT", "value": "2.16.840.1.113883.6.12"},
+                                                                                {"name" : "CDS Rules", "value": "http://socraticgrid.org/cds/ka/ecarule"}
+                                                                            ]
                                                                         },
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code[].displayName",
@@ -3021,7 +3084,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 }
                                             ]
                                         },
-                                        {
+/*                                        {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerDiscipline",
                                             "title" : "Performer Discipline",
                                             "items" : [
@@ -3155,7 +3218,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                     ]
                                                 }
                                             ]
-                                        },
+                                        },*/
                                         {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType",
                                             "title" : "Performer Type",
@@ -3177,6 +3240,33 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "",
                                                             "items" : [
                                                                 {
+                                                                    "type": "fieldset",
+                                                                    "items" : [
+                                                                        {
+                                                                            "key": "performerSelect",
+                                                                            "type"  : "select",
+                                                                            "description" : "Select performer to add to profile",
+                                                                            "titleMap": [{"name": "Healthcare Provider", "value" : {"displayName" : "Healthcare Provider", "code" : "PROV", "codeSystemName" : "NUCC Health Care provider taxonomy", "codeSystem" : "2.16.840.1.113883.6.101"}},
+                                                                                {"name": "Patient", "value" : {"displayName" : "Patient", "code" : "PAT", "codeSystemName" : "NUCC Health Care provider taxonomy", "codeSystem" : "2.16.840.1.113883.6.101"}}],
+                                                                            "onChange" : function(modelValue,form, formScope) {
+
+                                                                                delete modelValue["$$hashKey"];
+                                                                                var contextIndex = formScope.$parent.$parent.$parent.$parent.$parent.$parent.$index;
+                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code != null) {
+
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code.unshift(modelValue);
+                                                                                }
+                                                                                else {
+
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration = {"code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code.unshift(modelValue);
+                                                                                }
+
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
                                                                     "startEmpty" : true,
@@ -3184,14 +3274,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code[].code",
                                                                             "title" : "Code"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code[].codeSystem",
-                                                                            "title" : "Code System"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code[].codeSystemName",
-                                                                            "title" : "Code System Name"
                                                                         },
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code[].displayName",
@@ -3322,11 +3404,19 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         },
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.enumeration.code[].codeSystem",
-                                                                            "title" : "Code System"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.enumeration.code[].codeSystemName",
-                                                                            "title" : "Code System Name"
+                                                                            "title" : "Code System",
+                                                                            "type" : "select",
+                                                                            "titleMap" : [
+                                                                                {"name": "ICD9-CM", "value" : "2.16.840.1.113883.6.103"},
+                                                                                {"name": "ICD10-CM", "value" : "2.16.840.1.113883.6.90"},
+                                                                                {"name": "ICD10", "value" : "2.16.840.1.113883.6.3"},
+                                                                                {"name": "SNOMED-CT", "value" : "2.16.840.1.113883.6.96"},
+                                                                                {"name": "RxNorm", "value" : "2.16.840.1.113883.6.88"},
+                                                                                {"name" : "MeSH" , "value" : "2.16.840.1.113883.6.177"},
+                                                                                {"name" : "LOINC", "value" : "2.16.840.1.113883.6.1"},
+                                                                                {"name" : "CPT", "value": "2.16.840.1.113883.6.12"},
+                                                                                {"name" : "CDS Rules", "value": "http://socraticgrid.org/cds/ka/ecarule"}
+                                                                            ]
                                                                         },
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.enumeration.code[].displayName",
@@ -3426,7 +3516,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 }
                                             ]
                                         },
-                                        {
+ /*                                       {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientDiscipline",
                                             "title" : "Information Recipient Discipline",
                                             "items" : [
@@ -3560,7 +3650,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                     ]
                                                 }
                                             ]
-                                        },
+                                        },*/
                                         {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType",
                                             "title" : "Information Recipient Type",
@@ -3582,6 +3672,33 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "",
                                                             "items" : [
                                                                 {
+                                                                    "type": "fieldset",
+                                                                    "items" : [
+                                                                        {
+                                                                            "key": "informationRecipientSelect",
+                                                                            "type"  : "select",
+                                                                            "description" : "Select information recipient to add to profile",
+                                                                            "titleMap": [{"name": "Healthcare Provider", "value" : {"displayName" : "Healthcare Provider", "code" : "PROV", "codeSystemName" : "NUCC Health Care provider taxonomy", "codeSystem" : "2.16.840.1.113883.6.101"}},
+                                                                                {"name": "Patient", "value" : {"displayName" : "Patient", "code" : "PAT", "codeSystemName" : "NUCC Health Care provider taxonomy", "codeSystem" : "2.16.840.1.113883.6.101"}}],
+                                                                            "onChange" : function(modelValue,form, formScope) {
+
+                                                                                delete modelValue["$$hashKey"];
+                                                                                var contextIndex = formScope.$parent.$parent.$parent.$parent.$parent.$parent.$index;
+                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code != null) {
+
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code.unshift(modelValue);
+                                                                                }
+                                                                                else {
+
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain.enumeration = {"code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code.unshift(modelValue);
+                                                                                }
+
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code",
                                                                     "title" : "Coded Concepts",
                                                                     "startEmpty" : true,
@@ -3589,14 +3706,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code[].code",
                                                                             "title" : "Code"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code[].codeSystem",
-                                                                            "title" : "Code System"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code[].codeSystemName",
-                                                                            "title" : "Code System Name"
                                                                         },
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code[].displayName",
@@ -3710,135 +3819,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
         }
     ];
 
-    var codeSystems = [{"name": "HL7 ActCode", "oid" : "2.16.840.1.113883.5.4"},
-        {"name": "ICD9-CM", "oid" : "2.16.840.1.113883.6.103"},
-        {"name": "ICD10-CM", "oid" : "2.16.840.1.113883.6.90"},
-        {"name": "ICD10", "oid" : "2.16.840.1.113883.6.3"},
-        {"name": "SNOMED-CT", "oid" : "2.16.840.1.113883.6.96"},
-        {"name": "RxNorm", "oid" : "2.16.840.1.113883.6.88"},
-        {"name": "HL7 AdminstrativeGender", "oid": "2.16.840.1.113883.5.1"},
-        {"name" : "MeSH" , "oid" : "2.16.840.1.113883.6.177"},
-        {"name" : "NDC", "oid" : "2.16.840.1.113883.6.69"},
-        {"name" : "NUCC Health Care provider taxonomy", "oid" : "2.16.840.1.113883.6.101"},
-        {"name" : "ietf3066", "oid" : "2.16.840.1.113883.6.121"},
-        {"name" : "LOINC", "oid" : "2.16.840.1.113883.6.1"},
-        {"name" : "ObservationInterpretation", "oid" : "2.16.840.1.113883.5.83"},
-        {"name" : "ISO 3166 Part 1 Country Codes, 2nd Edition, Alpha-3 ", "oid" : "1.0.3166.1.2.3"}];
-
-    var mainSearchCodes = [{"name": "ICD9-CM", "oid" : "2.16.840.1.113883.6.103"},
-        {"name": "ICD10-CM", "oid" : "2.16.840.1.113883.6.90"},
-        {"name": "ICD10", "oid" : "2.16.840.1.113883.6.3"},
-        {"name": "SNOMED-CT", "oid" : "2.16.840.1.113883.6.96"},
-        {"name": "RxNorm", "oid" : "2.16.840.1.113883.6.88"},
-        {"name" : "MeSH" , "oid" : "2.16.840.1.113883.6.177"},
-        {"name" : "LOINC", "oid" : "2.16.840.1.113883.6.1"},
-        {"name" : "CPT", "oid": "2.16.840.1.113883.6.12"},
-        {"name" : "CDS Rules", "oid": "http://socraticgrid.org/cds/ka/ecarule"}]
-
-    var genderCodes= [{"displayName" : "Female", "code" : "F", "id": "1a"},
-        {"displayName" : "Male", "code" : "M", "id": "2a"},
-        {"displayName" : "Undifferentiated", "code" : "UN", "id": "3a"}];
-
-    var ageCodes= [{"displayName" : "infant, newborn; birth to 1 month", "code" : "D007231", "id": '1b'},
-        {"displayName" : "Infant; 1 to 23 months", "code" : "D007223", "id": "2b"},
-        {"displayName" : "child, preschool; 2 to 5 years", "code" : "D002675", "id": "3b"},
-        {"displayName" : "child; 6 to 12 years", "code" : "D002648", "id": "4b"},
-        {"displayName" : "adolescent; 13-18 years", "code" : "D000293", "id": "5b"},
-        {"displayName" : "young adult; 19-24 years", "code" : "D055815", "id": "6b"},
-        {"displayName" : "adult; 19-44 years", "code" : "D000293", "id": "7b"},
-        {"displayName" : "aged; 56-79 years", "code" : "D000368", "id": "8b"},
-        {"displayName" : "middle aged; 45-64 years", "code" : "D008875", "id": "9b"},
-        {"displayName" : "aged, 80 and older; a person 80 years of age and older", "code" : "D000369", "id": "10b"}];
-
-    var taskCodes = [{"displayName" : "order entry", "code" : "OE", "id": "1c"},
-        {"displayName" : "laboratory test order entry", "code" : "LABOE", "id": "2c"},
-        {"displayName" : "medication order entry", "code" : "MEDOE", "id": "3c"},
-        {"displayName" : "patient documentation", "code" : "PATDOC", "id": "4c"},
-        {"displayName" : "clinical note entry", "code" : "CLINNOTEE", "id": "5c"},
-        {"displayName" : "diagnosis list entry", "code" : "DIAGLISTE", "id": "6c"},
-        {"displayName" : "discharge summary entry", "code" : "DISCHSUME", "id": "7c"},
-        {"displayName" : "Patient education entry", "code" : "PATEDUE", "id": "8c"},
-        {"displayName" : "Discharge instruction entry", "code" : "DISCHINSTE", "id": "9c"},
-        {"displayName" : "pathology report entry", "code" : "PATREPE", "id": "10c"},
-        {"displayName" : "problem list entry", "code" : "PROBLISTE", "id": "11c"},
-        {"displayName" : "reminder list entry", "code" : "REMLE", "id": "12c"},
-        {"displayName" : "wellness reminder list entry", "code" : "WELLREMLE", "id": "13c"},
-        {"displayName" : "patient information review", "code" : "PATINFO", "id": "14c"},
-        {"displayName" : "allergy list entry", "code" : "ALLERLE", "id": "15c"},
-        {"displayName" : "clinical note review", "code" : "CLINNOTEREV", "id": "16c"},
-        {"displayName" : "discharge summary review", "code" : "DISCHSUMREV", "id": "17c"},
-        {"displayName" : "diagnosis list review", "code" : "DIAGLISTREV", "id": "18c"},
-        {"displayName" : "immunization list entry", "code" : "IMMLE", "id": "19c"},
-        {"displayName" : "labratory results review", "code" : "LABRREV", "id": "20c"},
-        {"displayName" : "microbiology results review", "code" : "MICRORREV", "id": "21c"},
-        {"displayName" : "microbiology organisms results review", "code" : "MICROORGRREV", "id": "22c"},
-        {"displayName" : "microbiology sensitivity test results review", "code" : "MICROSENSRREV", "id": "23c"},
-        {"displayName" : "medication list review", "code" : "MLREV", "id": "24c"},
-        {"displayName" : "medication administration record work list review", "code" : "MARWLREV", "id": "25c"},
-        {"displayName" : "orders review", "code" : "OREV", "id": "26c"},
-        {"displayName" : "pathology report review", "code" : "OREV", "id": "27c"},
-        {"displayName" : "problem list review", "code" : "PROBLISTREV", "id": "28c"},
-        {"displayName" : "radiology report review", "code" : "RADREPREV", "id": "29c"},
-        {"displayName" : "immunization list review", "code" : "IMMLREV", "id": "30c"},
-        {"displayName" : "reminder list review", "code": "REMLREV", "id": "31c"},
-        {"displayName" : "wellness reminder list review", "code" : "WELLREMLREV", "id": "32c"},
-        {"displayName" : "risk assessment instrument", "code" : "RISKASSESS", "id": "33c"},
-        {"displayName" : "falls risk assessment instrument", "code" : "FALLRISK", "id": "34c"},
-        {"displayName" : "CDS Review" , "code" : "CDSREV", "id" : "35c"}];
-
-    var encounterCodes = [{"displayName" : "Ambulatory", "code" : "AMB", "id": "1d"},
-        {"displayName" : "Emergency", "code" : "EMER", "id": "2d"},
-        {"displayName" : "Field", "code" : "FLD", "id": "3d"},
-        {"displayName" : "Home health", "code" : "HH", "id": "4d"},
-        {"displayName" : "Inpatient encounter", "code" : "IMP", "id": "5d"},
-        {"displayName" : "Inpatient acute", "code" : "ACUTE", "id": "6d"},
-        {"displayName" : "Inpatient non-acute", "code" : "NONAC", "id": "7d"},
-        {"displayName" : "short stay", "code" : "SS", "id": "8d"},
-        {"displayName" : "virtual", "code" : "VR", "id": "9d"}];
-
-    var observationCodes = [{"displayName" : "Abnormal", "code" : "A", "id": "1e"},
-        {"displayName" : "Abnormal alert", "code" : "AA", "id": "2e"},
-        {"displayName" : "High", "code" : "H", "id": "3e"},
-        {"displayName" : "High alert", "code" : "HH", "id": "4e"},
-        {"displayName" : "Low", "code" : "L", "id": "5e"},
-        {"displayName" : "Low alert", "code" : "LL", "id": "6e"},
-        {"displayName" : "Normal", "code" : "N", "id": "7e"}];
-
-    var subtopicCodes = [{"displayName" : "administration & dosage", "code" : "Q000008", "id": "1f"},
-        {"displayName" : "contraindications", "code" : "Q000744", "id": "2f"},
-        {"displayName" : "adverse effects", "code" : "Q000009", "id": "3f"},
-        {"displayName" : "drug interaction", "code" : "D004347", "id": "4f"},
-        {"displayName" : "classification", "code" : "Q000145", "id": "5f"},
-        {"displayName" : "etiology", "code" : "Q000209", "id": "6f"},
-        {"displayName" : "diagnosis", "code" : "Q000175", "id": "7f"},
-        {"displayName" : "therapy", "code" : "Q000628", "id": "8f"},
-        {"displayName" : "prognosis", "code" : "D011379", "id": "9f"},
-        {"displayName" : "therapeutic use", "code" : "Q000627", "id": "10f"},
-        {"displayName" : "pharmacokinetics", "code" : "Q000493", "id": "11f"},
-        {"displayName" : "pharmacology", "code" : "Q000494", "id": "12f"},
-        {"displayName" : "toxicity", "code" : "Q000633", "id": "13f"},
-        {"displayName" : "poisoning", "code" : "Q000506", "id": "14f"},
-        {"displayName" : "Drug interaction", "code" : "79899007", "id": "15f"},
-        {"displayName" : "Differential diagnosis", "code" : "47965005", "id": "16f"},
-        {"displayName" : "Drug interaction with drug", "code" : "404204005", "id": "17f"},
-        {"displayName" : "Drug interaction with food", "code" : "95907004", "id": "18f"},
-        {"displayName" : "Drug interaction with alcohol", "code" : "95906008", "id": "19f"}];
-
-    var performerAndInfoRecipCodes = [{"displayName" : "Healthcare Provider", "code" : "PROV", "id": "1g"},
-        {"displayName" : "Patient", "code" : "PAT", "id": "2g"}];
-
-    $scope.properties = [{"name": "Task Context", "propName" : "taskContext.c", "codeSystem" : codeSystems[0], "codes": taskCodes},
-        {"name": "Gender", "propName" : "administrativeGenderCode.c", "codeSystem" : codeSystems[6], "codes": genderCodes},
-        {"name": "Age Groups", "propName" : "ageGroup.v", "codeSystem" : codeSystems[7], "codes": ageCodes},
-        {"name": "Encounter", "propName" : "encounter.c", "codeSystem" : codeSystems[0], "codes": encounterCodes},
-        {"name": "Performer Language", "propName" : "performer.languageCode.c", "codeSystem" : codeSystems[10], "codes": {"displayName" : "", "code" : ""}},
-        {"name": "Information Recipient Language", "propName" : "informationRecipient.languageCode.c", "codeSystem" : codeSystems[10], "codes": {"displayName" : "", "code" : ""}},
-        {"name": "Performer", "propName" : "performer", "codeSystem" : codeSystems[9], "codes": performerAndInfoRecipCodes},
-        {"name": "Information Recipient", "propName" : "informationRecipient", "codeSystem" : codeSystems[9], "codes": performerAndInfoRecipCodes},
-        {"name": "Severity Observation", "propName" : "severityObservation.interpretationCode.c", "codeSystem" : codeSystems[12], "codes": observationCodes},
-        {"name": "Sub Topic", "propName" : "subTopic.v", "codeSystem" : [codeSystems[7]], "codes": subtopicCodes},
-        {"name": "Main Search Criteria", "propName" : "mainSearchCriteria.v", "codeSystem" : mainSearchCodes, "codes" : {"displayName" : "", "code" : ""}}];
-
         loadProfile();
 
         //$scope.jsonProfileModel = {"header":{"title":"Medical Home Portal","profileDescription":"Information for children with special healthcare needs. Developed and maintained by the University of Utah.","versionControl":{"publicationDate":1420614000000},"id":1},"profileDefinition":{"authorizedOrganizations":{"authorizedOrganization":[]},"supportedTerminologies":{"supportedTerminology":[{"id":"2.16.840.1.113883.6.103","name":"ICD9-CM","namespace":null}]},"contexts":{"context":[{"contextDescription":null,"contextDefinition":{"patientGender":null,"patientAgeGroup":{"matchingDomain":{"enumeration":{"code":[{"code":"D007231","codeSystem":"2.16.840.1.113883.6.177","codeSystemName":null,"displayName":null},{"code":"D007223","codeSystem":"2.16.840.1.113883.6.177","codeSystemName":null,"displayName":null},{"code":"D002675","codeSystem":"2.16.840.1.113883.6.177","codeSystemName":null,"displayName":null},{"code":"D002648","codeSystem":"2.16.840.1.113883.6.177","codeSystemName":null,"displayName":null},{"code":"D000293","codeSystem":"2.16.840.1.113883.6.177","codeSystemName":null,"displayName":null}],"includeDescendants":false},"externalValueSet":[]},"searchParameter":null,"outputCodeTransformation":null,"outputDisplayNameTransformation":null,"match":true,"search":false},"task":{"matchingDomain":{"enumeration":{"code":[{"code":"PROBLISTREV","codeSystem":"2.16.840.1.113883.5.4","codeSystemName":null,"displayName":"problem list review task"},{"code":"PROBLISTE","codeSystem":"2.16.840.1.113883.5.4","codeSystemName":null,"displayName":"problem list entry task"}],"includeDescendants":false},"externalValueSet":[]},"searchParameter":null,"outputCodeTransformation":null,"outputDisplayNameTransformation":null,"match":true,"search":false},"serviceDeliveryLocation":[],"encounterType":null,"performerLanguage":null,"performerDiscipline":null,"performerKnowledgeUserType":null,"informationRecipientLanguage":null,"informationRecipientDiscipline":null,"informationRecipientUserType":null,"conceptOfInterest":{"matchingDomain":{"enumeration":{"code":[{"code":"317","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Mild mental retardation "},{"code":"318","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Other specified mental retardation "},{"code":"277.5","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Mucopolysaccharidosis (all types)"},{"code":"759.89","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Angelman syndrome "},{"code":"307.23","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Tourette syndrome "},{"code":"758.0","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Down syndrome"},{"code":"277.85","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Disorders of fatty acid oxidation "},{"code":"359.1","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"hereditary progressive muscular dystrophy (Duchenne and Becker Muscular Dystrophy)"},{"code":"741","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Spina bifida (Neural Tube Defects)"},{"code":"343","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Cerebral palsy "},{"code":"579.0 ","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"celiac disease "},{"code":"952","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"spinal cord injury "},{"code":"907.0","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Late effect of intracranial injury"},{"code":"330.8","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Rett syndrome"},{"code":"759.83","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Fragile X syndrome "},{"code":"237.7","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Neurofibromatosis"},{"code":"345.6","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Infantile spasms "},{"code":"555","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Regional Enteritis (IBD)"},{"code":"556","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Ulcerative Enterocolitis (IBD)"},{"code":"359.21","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"myotonic muscular dystrophy type 1"},{"code":"359.22","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"myotonic muscular dystrophy type 2"},{"code":"317","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Mental Retardation (MR), mild "},{"code":"318.0 ","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"MR, moderate"},{"code":"318.1","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"MR, severe "},{"code":"318.2","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"MR, profound "},{"code":"319","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"MR, NOS "},{"code":"299.0","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Autistic disorder, Infantile autism, Primary autism "},{"code":"299.9","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Pervasive developmental disorder NOS"},{"code":"299.8","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Other pervasive developmental disorders (Asperger disorder) "},{"code":"296","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Major Depressive Disorder. Fourth and fifth digits required, see explanation below"},{"code":"300.4","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Dysthymic Disorder "},{"code":"311","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Depressive Disorder NOS "},{"code":"296.90 ","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Mood Disorder NOS "},{"code":"309.0 ","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Adjustment Disorder with Depressed Mood "},{"code":"309.28","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Adjustment Disorder with Mixed Anxious and Depressed Mood "},{"code":"758.9","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Conditions due to anomaly of unspecified chromosome (Cornelia de Lange Syndrome"},{"code":"759.81","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Prader-Willi syndrome"},{"code":"335","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Spinal muscular atrophy, unspecified "},{"code":"493","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Asthma "},{"code":"314.0 ","codeSystem":"2.16.840.1.113883.6.103","codeSystemName":null,"displayName":"Attention deficit disorder "}],"includeDescendants":false},"externalValueSet":[]},"searchParameter":{"syntaxOnResource":{"valuePrefix":null,"nonHl7CompliantName":"q","valueSuffix":"+site:www.medicalhomeportal.org/diagnoses-and-conditions/"},"source":"displayName"},"outputCodeTransformation":null,"outputDisplayNameTransformation":null,"match":false,"search":true},"subTopics":{"subTopic":[{"searchParameter":null,"linkName":"Disease Module"}]}},"knowledgeRequestService":{"knowledgeRequestServiceLocation":{"url":"http://www.google.com/search?hl=en&btnI=Im+Feeling+Lucky&"},"attributes":null},"id":"1","name":"Access to disease modules from problem list review and entry. Pediatric population."}]},"hl7URLCompliant":false,"hl7KnowledgeResponseCompliant":false,"urlStyle":"DIRTY"}};
@@ -3930,6 +3910,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
             profileFactory.updateProfileContent($scope.jsonProfileModel, $stateParams.id)
                 .success(function (response) {
                     $scope.statusMessage = 'Profile Successfully Updated';
+                    ngNotify.set("Profile Successfully Updated");
                     $scope.profile.content = response;
                 })
                 .error(function (error) {
