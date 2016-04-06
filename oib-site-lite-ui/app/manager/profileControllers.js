@@ -3905,7 +3905,11 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
             delete $scope.jsonProfileModel["supportedTerminologySelect"];
             delete $scope.jsonProfileModel["taskSelect"];
             delete $scope.jsonProfileModel["genderSelect"];
-            delete $scope.jsonProfileModel["subTopicSelect"];
+            delete $scope.jsonProfileModel["ageSelect"];
+            delete $scope.jsonProfileModel["encounterSelect"];
+            delete $scope.jsonProfileModel["performerSelect"];
+            delete $scope.jsonProfileModel["informationRecipientSelect"];
+
 
             profileFactory.updateProfileContent($scope.jsonProfileModel, $stateParams.id)
                 .success(function (response) {
