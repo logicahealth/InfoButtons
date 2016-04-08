@@ -58,17 +58,12 @@ public final class AccessCheckHandler
     /** The pdao. */
     @Autowired
     @Qualifier( "pDao" )
-    private static ProfilesDao pdao;
-
-    /**
-     * Instantiates a new access check handler.
-     */
-    private AccessCheckHandler(){}
+    private ProfilesDao pdao;
     
     /**
      * Inits the profiles.
      */
-    private static void initProfiles()
+    private void initProfiles()
     {
 
         provider = ResourceProfileProvider.getInstance();
@@ -81,7 +76,7 @@ public final class AccessCheckHandler
      * @param request the request
      * @return true, if successful
      */
-    public static boolean handleRequest( KnowledgeRequest request )
+    public boolean handleRequest( KnowledgeRequest request )
     {
 
         initProfiles();
@@ -114,7 +109,7 @@ public final class AccessCheckHandler
      * @param profile the profile
      * @return the boolean
      */
-    private static Boolean checkProfile( KnowledgeResourceProfile profile )
+    private Boolean checkProfile( KnowledgeResourceProfile profile )
     {
 
         Boolean match = false;

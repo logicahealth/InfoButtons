@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Access;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.hl7.v3.AggregateKnowledgeResponse;
@@ -77,8 +78,8 @@ public class KnowledgeRequestEngine
     private List<RequestResult> returnResult( KnowledgeRequest request )
     {
         List<RequestResult> result = new ArrayList<RequestResult>();
-
-        if ( AccessCheckHandler.handleRequest( request ) )
+        AccessCheckHandler accessChecker = new AccessCheckHandler();
+        if ( accessChecker.handleRequest( request ) )
         {
             return result;
         }

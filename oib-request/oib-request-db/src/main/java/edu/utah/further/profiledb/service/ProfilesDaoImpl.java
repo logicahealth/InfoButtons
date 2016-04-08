@@ -129,11 +129,12 @@ public class ProfilesDaoImpl
        }
 
     @Override
+    @Transactional
     public boolean isBlackListed(String profileTitle, String userId) {
 
         Map properties = new HashMap<String,String>();
         properties.put("userId", userId);
-        properties.put("title", profileTitle);
+        properties.put("profileTitle", profileTitle);
         final List blackListed = dao.findByProperties(ProfileBlackList.class, properties);
         if (blackListed.isEmpty()) {
 
