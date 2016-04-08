@@ -1813,7 +1813,8 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                     "id" : "urn:jsonschema:org:openinfobutton:schemas:kb:KnowledgeRequestServiceLocation",
                                                     "properties" : {
                                                         "url" : {
-                                                            "type" : "string"
+                                                            "type" : "string",
+                                                            "default" : "http://www"
                                                         }
                                                     }
                                                 },
@@ -2083,7 +2084,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.task.matchingDomain.enumeration = {"code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.task.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.task.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
 
@@ -2392,7 +2393,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic",
                                                     "title" : "Sub Topic",
-                                                    "startEmpty" : true,
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter",
@@ -2494,10 +2494,9 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain.enumeration = {"code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
-
                                                                             }
                                                                         }
                                                                     ]
@@ -2656,7 +2655,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain.enumeration = {"code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
 
@@ -2818,7 +2817,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain.enumeration = {"code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
 
@@ -3258,7 +3257,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration = {"code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
 
@@ -3690,7 +3689,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain.enumeration = {"code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
 
