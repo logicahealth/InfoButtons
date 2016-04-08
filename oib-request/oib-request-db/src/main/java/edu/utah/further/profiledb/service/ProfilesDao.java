@@ -44,4 +44,7 @@ public interface ProfilesDao
     public long count( int status );
     
     public List<Profiles> getProfiles();
+
+    public boolean isBlackListed(String profileTitle, String userId);
+
 }

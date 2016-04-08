@@ -97,6 +97,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value><![CDATA[edu.utah.further.profiledb.domain.Profiles]]></value>
+				<value><![CDATA[edu.utah.further.profiledb.domain.ProfileBlackList]]></value>
 			</list>
 		</property>
 	</bean>

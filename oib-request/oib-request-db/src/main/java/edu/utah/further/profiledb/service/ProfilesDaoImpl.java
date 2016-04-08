@@ -21,6 +21,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import edu.utah.further.profiledb.domain.ProfileBlackList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -127,4 +128,17 @@ public class ProfilesDaoImpl
            return profiles;
        }
 
+    @Override
+    public boolean isBlackListed(String profileTitle, String userId) {
+
+        Map properties = new HashMap<String,String>();
+        properties.put("userId", userId);
+        properties.put("title", profileTitle);
+        final List blackListed = dao.findByProperties(ProfileBlackList.class, properties);
+        if (blackListed.isEmpty()) {
+
+            return false;
+        }
+        return true;
+    }
 }

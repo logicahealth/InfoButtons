@@ -16,6 +16,7 @@ package org.openinfobutton.service.matching;
 import java.util.Iterator;
 import java.util.List;
 
+import edu.utah.further.profiledb.service.ProfilesDao;
 import org.apache.log4j.Logger;
 import org.openinfobutton.exception.OIBProfileProcessingException;
 import org.openinfobutton.schema.Holder;
@@ -25,11 +26,17 @@ import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.schemas.kb.ProfileDefinition;
 import org.openinfobutton.service.profile.ResourceProfileProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AccessCheckHandler.
  */
+@Service
+@Configurable( dependencyCheck = true )
 public final class AccessCheckHandler
 {
 
@@ -44,6 +51,14 @@ public final class AccessCheckHandler
 
     /** The access id. */
     private static String accessID;
+
+    /** The user id. */
+    private static String userId;
+
+    /** The pdao. */
+    @Autowired
+    @Qualifier( "pDao" )
+    private static ProfilesDao pdao;
 
     /**
      * Instantiates a new access check handler.
@@ -73,6 +88,7 @@ public final class AccessCheckHandler
         final Holder holder = request.getHolder();
         final IDLite representedOrganization = holder.getRepresentedOrganization();
         accessID = representedOrganization.getRoot();
+        userId = holder.getAssignedAuthorizedPerson().getRoot();
         KnowledgeResourceProfile profile;
         for ( final Iterator<KnowledgeResourceProfile> iter = profiles.iterator(); iter.hasNext(); )
         {
@@ -84,6 +100,7 @@ public final class AccessCheckHandler
             } catch (RuntimeException e)
             {
                 log.debug("\t\tProfile Processing Error While Doing Access Check Caused By: " + profile.getHeader().getTitle());
+                e.printStackTrace();
                 throw new OIBProfileProcessingException("Access Check Error Caused By Configuration Problem In: " + profile.getHeader().getTitle(), e);
             }
         }
@@ -107,6 +124,10 @@ public final class AccessCheckHandler
             profile.getProfileDefinition().getAuthorizedOrganizations().getAuthorizedOrganization();
         final int authCount = authorizedOrganizations.size();
         Id id;
+        if (pdao.isBlackListed(profile.getHeader().getTitle(), userId)) {
+
+            return false;
+        }
         for ( int x = 0; x < authCount; x++ )
         {
             id = authorizedOrganizations.get( x );
