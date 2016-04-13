@@ -88,7 +88,6 @@ public class ResourceProfileLoaderNew
         {
             s = 1;// active = 1
         }
-        length = pdao.count( s );
         final List<Profiles> profiles = pdao.getResourceProfiles( s );
         InputStream bdata = null;
         Blob blob;
