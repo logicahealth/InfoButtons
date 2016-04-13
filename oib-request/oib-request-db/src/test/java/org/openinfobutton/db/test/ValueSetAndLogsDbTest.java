@@ -6,8 +6,6 @@ package org.openinfobutton.db.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,11 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.w3c.dom.ls.DOMImplementationLS;
-import org.w3c.dom.ls.LSSerializer;
 
-import edu.utah.further.profiledb.service.FileandMarker;
-import edu.utah.further.profiledb.service.ProfilesDao;
 import edu.utah.further.subsetdb.domain.Concept;
 import edu.utah.further.subsetdb.domain.Subset;
 import edu.utah.further.subsetdb.service.LogsDao;

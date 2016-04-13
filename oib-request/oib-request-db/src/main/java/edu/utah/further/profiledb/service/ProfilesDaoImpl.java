@@ -14,6 +14,7 @@
 package edu.utah.further.profiledb.service;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,59 +49,17 @@ public class ProfilesDaoImpl
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.further.profiledb.service.ProfilesDao#getResourceProfile(long, int, 
-     *                              edu.utah.further.profiledb.service.FileandMarker)
+     * @see edu.utah.further.profiledb.service.ProfilesDao#getResourceProfile(int)
      */
     @Override
     @Transactional
-    public void getResourceProfile( long id, int status, FileandMarker fm )
+    public List<Profiles> getResourceProfiles( int status )
     {
 
-        boolean finish = false;
         Profiles p = null;
-        // FileandMarker fm = new FileandMarker();
-
-        while ( !finish )
-        {
-            final Map<String, Object> properties = new HashMap<String, Object>();
-            properties.put( "id", new Long( id ) );
-            properties.put( "status", new Integer( status ) );
-            final List l = dao.findByProperties( Profiles.class, properties );
-            id++;
-            fm.setMarker( (int) id );
-            if ( l.size() != 0 )
-            {
-
-                p = (Profiles) l.get( 0 );
-                finish = true;
-            }
-        }
-
-        try
-        {
-            final Blob b = p.getContent();
-            final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            dbf.setNamespaceAware( true );
-            final DocumentBuilder db = dbf.newDocumentBuilder();
-            final Document doc = db.parse( b.getBinaryStream() );
-            fm.setBlobFile( doc );
-            // A temporary file is created here
-            // fm.setBlobFile(new File("fetch.xml")) ;
-            //
-            // InputStream in = b.getBinaryStream();
-            // BufferedInputStream bufferedInputStream = new BufferedInputStream( in);
-            // FileOutputStream outStream = new FileOutputStream(fm.getBlobFile());
-            // int data = -1;
-            // while ( (data = bufferedInputStream.read( )) != -1 )
-            // {
-            // outStream.write( data);
-            // }
-        }
-        catch ( final Exception e )
-        {
-            e.printStackTrace();
-        }
+        final List<Profiles> profiles = dao.findByProperty( Profiles.class, "status", new Integer( status ) );
         // return fm;
+        return profiles;
     }
 
     /*
@@ -119,14 +78,6 @@ public class ProfilesDaoImpl
         count = no.size();
         return count;
     }
-    
-       @Transactional
-       public List<Profiles> getProfiles()
-       {
-           
-           List<Profiles> profiles = dao.findAll(Profiles.class);
-           return profiles;
-       }
 
     @Override
     @Transactional
@@ -135,6 +86,21 @@ public class ProfilesDaoImpl
         Map properties = new HashMap<String,String>();
         properties.put("userId", userId);
         properties.put("profileTitle", profileTitle);
+        final List blackListed = dao.findByProperties(ProfileBlackList.class, properties);
+        if (blackListed.isEmpty()) {
+
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public boolean isBlackListed(long profileId, String userId) {
+
+        Map properties = new HashMap<String,String>();
+        properties.put("userId", userId);
+        properties.put("profileID", (int) profileId);
         final List blackListed = dao.findByProperties(ProfileBlackList.class, properties);
         if (blackListed.isEmpty()) {
 

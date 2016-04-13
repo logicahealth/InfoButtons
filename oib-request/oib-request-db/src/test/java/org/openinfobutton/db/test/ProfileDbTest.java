@@ -17,10 +17,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.w3c.dom.ls.DOMImplementationLS;
-import org.w3c.dom.ls.LSSerializer;
-
-import edu.utah.further.profiledb.service.FileandMarker;
 import edu.utah.further.profiledb.service.ProfilesDao;
 
 /**
@@ -55,18 +51,14 @@ public class ProfileDbTest
     public void insertProfile() {
         
         String sql = "INSERT INTO custom_profiles (id, name, version, published, status, content) values (?, ?, ?, ?, ?, ?)";
-        Object[] params = new Object[] {300l, "TestProfile", 2, new Date(), 2, "<?xml version=\"1.0\" encoding=\"utf-8\"?><a>PROFILETEST</a>"};
+        Object[] params = new Object[] {300l, "TestProfile", 2, new Date(), 5, "<?xml version=\"1.0\" encoding=\"utf-8\"?><a>PROFILETEST</a>"};
         jdbcTemplate.update( sql, params );
     }
     
     @Test
     public void testProfileRead() {
-        
-        FileandMarker marker = new FileandMarker();
-        pdao.getResourceProfile( 300, 2, marker );
-        DOMImplementationLS domImplementation = (DOMImplementationLS) marker.getBlobFile().getImplementation();
-        LSSerializer lsSerializer = domImplementation.createLSSerializer();
-        assertTrue(lsSerializer.writeToString(marker.getBlobFile()).contains( "PROFILETEST" ));
+
+        assertTrue(!pdao.getResourceProfiles( 5).isEmpty());
     }
     
     

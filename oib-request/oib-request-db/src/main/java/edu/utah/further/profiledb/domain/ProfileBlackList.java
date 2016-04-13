@@ -26,6 +26,10 @@ public class ProfileBlackList implements PersistentEntity<Long>
     @Column( name = "profileTitle" )
     public String profileTitle;
 
+    /** The profile Id. */
+    @Column( name = "profileID" )
+    public int profileID;
+
     /** The userId. */
     @Column( name = "userId" )
     public String userId;
@@ -44,6 +48,14 @@ public class ProfileBlackList implements PersistentEntity<Long>
 
     public void setProfileTitleTitle(String profileTitle) {
         this.profileTitle = profileTitle;
+    }
+
+    public int getProfileID() {
+        return profileID;
+    }
+
+    public void setProfileID(int profileID) {
+        this.profileID = profileID;
     }
 
     public String getUserId() {

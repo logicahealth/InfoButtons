@@ -13,8 +13,10 @@
  */
 package org.openinfobutton.service.matching;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import edu.utah.further.profiledb.service.ProfilesDao;
 import org.apache.log4j.Logger;
@@ -44,7 +46,7 @@ public final class AccessCheckHandler
     private static Logger log = Logger.getLogger( AccessCheckHandler.class.getName() );
 
     /** The profiles. */
-    public static List<KnowledgeResourceProfile> profiles;
+    public static Map<Long, KnowledgeResourceProfile> profiles;
 
     /** The provider. */
     public static ResourceProfileProvider provider;
@@ -84,21 +86,23 @@ public final class AccessCheckHandler
         final IDLite representedOrganization = holder.getRepresentedOrganization();
         accessID = representedOrganization.getRoot();
         userId = holder.getAssignedAuthorizedPerson().getRoot();
-        KnowledgeResourceProfile profile;
-        for ( final Iterator<KnowledgeResourceProfile> iter = profiles.iterator(); iter.hasNext(); )
+        Map<Long, KnowledgeResourceProfile> tempProfiles = new HashMap<Long, KnowledgeResourceProfile>();
+        for ( Map.Entry<Long, KnowledgeResourceProfile> profile : profiles.entrySet() )
         {
-            profile = iter.next();
+
             try {
-                if (!checkProfile(profile)) {
-                    iter.remove();
+                if (checkProfile(profile.getKey(), profile.getValue())) {
+
+                    tempProfiles.put(profile.getKey(), profile.getValue());
                 }
             } catch (RuntimeException e)
             {
-                log.debug("\t\tProfile Processing Error While Doing Access Check Caused By: " + profile.getHeader().getTitle());
+                log.debug("\t\tProfile Processing Error While Doing Access Check Caused By: " + profile.getValue().getHeader().getTitle());
                 e.printStackTrace();
-                throw new OIBProfileProcessingException("Access Check Error Caused By Configuration Problem In: " + profile.getHeader().getTitle(), e);
+                throw new OIBProfileProcessingException("Access Check Error Caused By Configuration Problem In: " + profile.getValue().getHeader().getTitle(), e);
             }
         }
+        profiles = tempProfiles;
         provider.setProfiles( profiles );
         return profiles.isEmpty();
     }
@@ -109,7 +113,7 @@ public final class AccessCheckHandler
      * @param profile the profile
      * @return the boolean
      */
-    private Boolean checkProfile( KnowledgeResourceProfile profile )
+    private Boolean checkProfile(Long profileId,  KnowledgeResourceProfile profile )
     {
 
         Boolean match = false;
@@ -119,7 +123,7 @@ public final class AccessCheckHandler
             profile.getProfileDefinition().getAuthorizedOrganizations().getAuthorizedOrganization();
         final int authCount = authorizedOrganizations.size();
         Id id;
-        if (pdao.isBlackListed(profile.getHeader().getTitle(), userId)) {
+        if (pdao.isBlackListed(profileId, userId)) {
 
             return false;
         }

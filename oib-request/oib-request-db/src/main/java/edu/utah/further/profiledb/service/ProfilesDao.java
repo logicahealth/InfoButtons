@@ -33,7 +33,7 @@ public interface ProfilesDao
      * @param fm the fm
      * @return the resource profile
      */
-    public void getResourceProfile( long id, int status, FileandMarker fm );
+    public List<Profiles> getResourceProfiles(int status );
 
     /**
      * Count.
@@ -42,9 +42,9 @@ public interface ProfilesDao
      * @return the long
      */
     public long count( int status );
-    
-    public List<Profiles> getProfiles();
 
     public boolean isBlackListed(String profileTitle, String userId);
+
+    public boolean isBlackListed(long profileId, String userId);
 
 }
