@@ -122,7 +122,7 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$uibModal', 'profileFacto
     return $scope;
     }]);
 
-oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', '$state', 'ngNotify', function ($scope, $stateParams, profileFactory, $state, ngNotify) {
+oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', '$state', 'ngNotify', '$window', function ($scope, $stateParams, profileFactory, $state, ngNotify, $window) {
 
      var jsonProfileSchema = {
         "type" : "object",
@@ -1868,6 +1868,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
     var jsonProfileForm = [
         {
+            type: "submit",
+            title: "Save"
+        },
+        {
             "key" : "header",
             "title" : "Header",
             "items" : [
@@ -1929,10 +1933,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                             "startEmpty" : true,
                             "items" : [
                                 {
-                                    "key" : "profileDefinition.supportedTerminologies.supportedTerminology[].id",
-                                    "title" : "ID"
-                                },
-                                {
                                     "key": "profileDefinition.supportedTerminologies.supportedTerminology[].name",
                                     "title" : "Name"
                                 }
@@ -1959,6 +1959,8 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                         {
                             "key" : "profileDefinition.contexts.context",
                             "title" : "Context",
+                            "type" : "tabarray",
+                            "tabType" : "top",
                             "startEmpty" : true,
                             "items" : [
                                 {
@@ -2025,6 +2027,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.enumeration",
@@ -2078,13 +2081,13 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
                                                                                 delete modelValue["$$hashKey"];
                                                                                 var contextIndex = formScope.$parent.$parent.$parent.$parent.$parent.$parent.$index;
-                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.task.matchingDomain.enumeration.code != null) {
+                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.task.matchingDomain != null) {
 
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.task.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.task.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.task.matchingDomain = {"enumeration" : {"includeDescendants" : false, "code" : []}};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.task.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
 
@@ -2098,37 +2101,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "startEmpty" : true,
                                                                     "items" : [
                                                                         {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.enumeration.code[].code",
-                                                                            "title" : "Code"
-                                                                        },
-                                                                        {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.enumeration.code[].displayName",
                                                                             "title" : "Display Name"
                                                                         }
                                                                     ]
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.enumeration.includeDescendants",
-                                                                    "title" : "Include Descendants"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.externalValueSet",
-                                                            "title" : "External Value Set",
-                                                            "startEmpty" : true,
-                                                            "items" : [
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.externalValueSet[].id",
-                                                                    "title" : "ID"
-                                                                },
-                                                                {
-                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.externalValueSet[].name",
-                                                                    "title" : "Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.externalValueSet[].namespace",
-                                                                    "title" : "Namespace"
                                                                 }
                                                             ]
                                                         }
@@ -2137,7 +2113,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.task.searchParameter",
                                                     "title" : "",
-                                                    "condition" : "!model.profileDefinition.hl7URLCompliant",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.search && !model.profileDefinition.hl7URLCompliant",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.task.searchParameter.syntaxOnResource",
@@ -2156,44 +2132,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "title" : "Suffix"
                                                                 }
                                                             ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.task.outputCodeTransformation",
-                                                    "title" : "Output Code Transformation",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.match",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.task.outputCodeTransformation.id",
-                                                            "title" : "ID"
                                                         },
                                                         {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.task.outputCodeTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.task.outputCodeTransformation.namespace",
-                                                            "title" : "Namespace"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.task.outputDisplayNameTransformation",
-                                                    "title" : "Output Code Display Name",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.search",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.task.outputDisplayNameTransformation.id",
-                                                            "title" : "ID"
-                                                        },
-                                                        {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.task.outputDisplayNameTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.task.outputDisplayNameTransformation.namespace",
-                                                            "title" : "Namespace"
+                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.task.searchParameter.source",
+                                                            "title" : "Value Source",
+                                                            "type" : "select",
+                                                            "titleMap" : [
+                                                                {"name" : "code", "value" : "code"},
+                                                                {"name" : "displayName", "value" : "displayName"}
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -2214,6 +2161,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration",
@@ -2280,11 +2228,11 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.searchParameter",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.search && !model.profileDefinition.hl7URLCompliant",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
-                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.searchParameter.syntaxOnResource.valuePrefix",
@@ -2299,44 +2247,14 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "title" : "Suffix"
                                                                 }
                                                             ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.outputCodeTransformation",
-                                                    "title" : "Output Code Transformation",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.match",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.outputCodeTransformation.id",
-                                                            "title" : "ID"
                                                         },
                                                         {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.outputCodeTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.outputCodeTransformation.namespace",
-                                                            "title" : "Namespace"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.outputDisplayNameTransformation",
-                                                    "title" : "Output Code Display Name",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.search",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.outputDisplayNameTransformation.id",
-                                                            "title" : "ID"
-                                                        },
-                                                        {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.outputDisplayNameTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.outputDisplayNameTransformation.namespace",
-                                                            "title" : "Namespace"
+                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.searchParameter.source",
+                                                            "title" : "Value Source",
+                                                            "titleMap" : [
+                                                                {"name" : "code", "value" : "code"},
+                                                                {"name" : "displayName", "value" : "displayName"}
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -2393,6 +2311,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic",
                                                     "title" : "Sub Topic",
+                                                    "startEmpty" : true,
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter",
@@ -2410,10 +2329,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code",
                                                                                     "title" : "Coded Concepts",
                                                                                     "items" : [
-                                                                                        {
-                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code.code",
-                                                                                            "title": "Code"
-                                                                                        },
                                                                                         {
                                                                                             "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code.displayName",
                                                                                             "title": "Display Name"
@@ -2468,6 +2383,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration",
@@ -2488,13 +2404,13 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
                                                                                 delete modelValue["$$hashKey"];
                                                                                 var contextIndex = formScope.$parent.$parent.$parent.$parent.$parent.$parent.$index;
-                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain.enumeration.code != null) {
+                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain != null) {
 
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain = {"enumeration" : {"includeDescendants" : false, "code" : []}};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientGender.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
                                                                             }
@@ -2507,37 +2423,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "startEmpty" : true,
                                                                     "items" : [
                                                                         {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.code[].code",
-                                                                            "title" : "Code"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.code[].codeSystem",
-                                                                            "title" : "Code System"
+                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.code[].displayName",
+                                                                            "title" : "Display Name"
                                                                         }
                                                                     ]
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.includeDescendants",
-                                                                    "title" : "Include Descendants"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.externalValueSet",
-                                                            "title" : "External Value Set",
-                                                            "startEmpty" : true,
-                                                            "items" : [
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.externalValueSet[].id",
-                                                                    "title" : "ID"
-                                                                },
-                                                                {
-                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.externalValueSet[].name",
-                                                                    "title" : "Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.externalValueSet[].namespace",
-                                                                    "title" : "Namespace"
                                                                 }
                                                             ]
                                                         }
@@ -2546,11 +2435,11 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.search && !model.profileDefinition.hl7URLCompliant",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
-                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter.syntaxOnResource.valuePrefix",
@@ -2565,44 +2454,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "title" : "Suffix"
                                                                 }
                                                             ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.outputCodeTransformation",
-                                                    "title" : "Output Code Transformation",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.match",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.outputCodeTransformation.id",
-                                                            "title" : "ID"
                                                         },
                                                         {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.patientGender.outputCodeTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.outputCodeTransformation.namespace",
-                                                            "title" : "Namespace"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.outputDisplayNameTransformation",
-                                                    "title" : "Output Code Display Name",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.search",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.outputDisplayNameTransformation.id",
-                                                            "title" : "ID"
-                                                        },
-                                                        {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.patientGender.outputDisplayNameTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.outputDisplayNameTransformation.namespace",
-                                                            "title" : "Namespace"
+                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter.source",
+                                                            "title" : "Value Source",
+                                                            "type" : "select",
+                                                            "titleMap" : [
+                                                                {"name" : "code", "value" : "code"},
+                                                                {"name" : "displayName", "value" : "displayName"}
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -2623,6 +2483,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration",
@@ -2649,13 +2510,13 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
                                                                                 delete modelValue["$$hashKey"];
                                                                                 var contextIndex = formScope.$parent.$parent.$parent.$parent.$parent.$parent.$index;
-                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code != null) {
+                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain != null) {
 
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain = {"enumeration" : {"includeDescendants" : false, "code" : []}};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
 
@@ -2669,37 +2530,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "startEmpty" : true,
                                                                     "items" : [
                                                                         {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code[].code",
-                                                                            "title" : "Code"
-                                                                        },
-                                                                        {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code[].displayName",
                                                                             "title" : "Display Name"
                                                                         }
                                                                     ]
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.includeDescendants",
-                                                                    "title" : "Include Descendants"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.externalValueSet",
-                                                            "title" : "External Value Set",
-                                                            "startEmpty" : true,
-                                                            "items" : [
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.externalValueSet[].id",
-                                                                    "title" : "ID"
-                                                                },
-                                                                {
-                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.externalValueSet[].name",
-                                                                    "title" : "Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.externalValueSet[].namespace",
-                                                                    "title" : "Namespace"
                                                                 }
                                                             ]
                                                         }
@@ -2708,11 +2542,11 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.search && !model.profileDefinition.hl7URLCompliant",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
-                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter.syntaxOnResource.valuePrefix",
@@ -2727,44 +2561,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "title" : "Suffix"
                                                                 }
                                                             ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputCodeTransformation",
-                                                    "title" : "Output Code Transformation",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.match",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputCodeTransformation.id",
-                                                            "title" : "ID"
                                                         },
                                                         {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputCodeTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputCodeTransformation.namespace",
-                                                            "title" : "Namespace"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputDisplayNameTransformation",
-                                                    "title" : "Output Code Display Name",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.search",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputDisplayNameTransformation.id",
-                                                            "title" : "ID"
-                                                        },
-                                                        {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputDisplayNameTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.outputDisplayNameTransformation.namespace",
-                                                            "title" : "Namespace"
+                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter.source",
+                                                            "title" : "Value Source",
+                                                            "type" : "select",
+                                                            "titleMap" : [
+                                                                {"name" : "code", "value" : "code"},
+                                                                {"name" : "displayName", "value" : "displayName"}
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -2785,6 +2590,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration",
@@ -2811,13 +2617,13 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
                                                                                 delete modelValue["$$hashKey"];
                                                                                 var contextIndex = formScope.$parent.$parent.$parent.$parent.$parent.$parent.$index;
-                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain.enumeration.code != null) {
+                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain != null) {
 
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain = {"enumeration" : {"includeDescendants" : false, "code" : []}};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.encounterType.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
 
@@ -2831,45 +2637,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "startEmpty" : true,
                                                                     "items" : [
                                                                         {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration.code[].code",
-                                                                            "title" : "Code"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration.code[].codeSystem",
-                                                                            "title" : "Code System"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration.code[].codeSystemName",
-                                                                            "title" : "Code System Name"
-                                                                        },
-                                                                        {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration.code[].displayName",
                                                                             "title" : "Display Name"
                                                                         }
                                                                     ]
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration.includeDescendants",
-                                                                    "title" : "Include Descendants"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.externalValueSet",
-                                                            "title" : "External Value Set",
-                                                            "startEmpty" : true,
-                                                            "items" : [
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.externalValueSet[].id",
-                                                                    "title" : "ID"
-                                                                },
-                                                                {
-                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.externalValueSet[].name",
-                                                                    "title" : "Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.externalValueSet[].namespace",
-                                                                    "title" : "Namespace"
                                                                 }
                                                             ]
                                                         }
@@ -2878,11 +2649,11 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.search && !model.profileDefinition.hl7URLCompliant",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
-                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter.syntaxOnResource.valuePrefix",
@@ -2897,44 +2668,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "title" : "Suffix"
                                                                 }
                                                             ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.outputCodeTransformation",
-                                                    "title" : "Output Code Transformation",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.match",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.outputCodeTransformation.id",
-                                                            "title" : "ID"
                                                         },
                                                         {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.encounterType.outputCodeTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.outputCodeTransformation.namespace",
-                                                            "title" : "Namespace"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.outputDisplayNameTransformation",
-                                                    "title" : "Output Code Display Name",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.search",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.outputDisplayNameTransformation.id",
-                                                            "title" : "ID"
-                                                        },
-                                                        {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.encounterType.outputDisplayNameTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.outputDisplayNameTransformation.namespace",
-                                                            "title" : "Namespace"
+                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter.source",
+                                                            "title" : "Value Source",
+                                                            "type" : "select",
+                                                            "titleMap" : [
+                                                                {"name" : "code", "value" : "code"},
+                                                                {"name" : "displayName", "value" : "displayName"}
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -2955,6 +2697,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration",
@@ -2990,29 +2733,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                             "title" : "Display Name"
                                                                         }
                                                                     ]
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.includeDescendants",
-                                                                    "title" : "Include Descendants"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.externalValueSet",
-                                                            "title" : "External Value Set",
-                                                            "startEmpty" : true,
-                                                            "items" : [
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.externalValueSet[].id",
-                                                                    "title" : "ID"
-                                                                },
-                                                                {
-                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.externalValueSet[].name",
-                                                                    "title" : "Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.externalValueSet[].namespace",
-                                                                    "title" : "Namespace"
                                                                 }
                                                             ]
                                                         }
@@ -3021,11 +2741,11 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.search && !model.profileDefinition.hl7URLCompliant",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
-                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter.syntaxOnResource.valuePrefix",
@@ -3040,44 +2760,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "title" : "Suffix"
                                                                 }
                                                             ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputCodeTransformation",
-                                                    "title" : "Output Code Transformation",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.match",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputCodeTransformation.id",
-                                                            "title" : "ID"
                                                         },
                                                         {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputCodeTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputCodeTransformation.namespace",
-                                                            "title" : "Namespace"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputDisplayNameTransformation",
-                                                    "title" : "Output Code Display Name",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.search",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputDisplayNameTransformation.id",
-                                                            "title" : "ID"
-                                                        },
-                                                        {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputDisplayNameTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.outputDisplayNameTransformation.namespace",
-                                                            "title" : "Namespace"
+                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter.source",
+                                                            "title" : "Value Source",
+                                                            "type" : "select",
+                                                            "titleMap" : [
+                                                                {"name" : "code", "value" : "code"},
+                                                                {"name" : "displayName", "value" : "displayName"}
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -3233,6 +2924,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration",
@@ -3251,13 +2943,13 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
                                                                                 delete modelValue["$$hashKey"];
                                                                                 var contextIndex = formScope.$parent.$parent.$parent.$parent.$parent.$parent.$index;
-                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code != null) {
+                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain != null) {
 
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain = {"enumeration" : {"includeDescendants" : false, "code" : []}};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
 
@@ -3271,37 +2963,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "startEmpty" : true,
                                                                     "items" : [
                                                                         {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code[].code",
-                                                                            "title" : "Code"
-                                                                        },
-                                                                        {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code[].displayName",
                                                                             "title" : "Display Name"
                                                                         }
                                                                     ]
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.includeDescendants",
-                                                                    "title" : "Include Descendants"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.externalValueSet",
-                                                            "title" : "External Value Set",
-                                                            "startEmpty" : true,
-                                                            "items" : [
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.externalValueSet[].id",
-                                                                    "title" : "ID"
-                                                                },
-                                                                {
-                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.externalValueSet[].name",
-                                                                    "title" : "Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.externalValueSet[].namespace",
-                                                                    "title" : "Namespace"
                                                                 }
                                                             ]
                                                         }
@@ -3310,11 +2975,11 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.search && !model.profileDefinition.hl7URLCompliant",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
-                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter.syntaxOnResource.valuePrefix",
@@ -3329,44 +2994,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "title" : "Suffix"
                                                                 }
                                                             ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputCodeTransformation",
-                                                    "title" : "Output Code Transformation",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.match",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputCodeTransformation.id",
-                                                            "title" : "ID"
                                                         },
                                                         {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputCodeTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputCodeTransformation.namespace",
-                                                            "title" : "Namespace"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputDisplayNameTransformation",
-                                                    "title" : "Output Code Display Name",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.search",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputDisplayNameTransformation.id",
-                                                            "title" : "ID"
-                                                        },
-                                                        {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputDisplayNameTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.outputDisplayNameTransformation.namespace",
-                                                            "title" : "Namespace"
+                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter.source",
+                                                            "title" : "Value Source",
+                                                            "type" : "select",
+                                                            "titleMap" : [
+                                                                {"name" : "code", "value" : "code"},
+                                                                {"name" : "displayName", "value" : "displayName"}
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -3387,6 +3023,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.enumeration",
@@ -3422,29 +3059,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                             "title" : "Display Name"
                                                                         }
                                                                     ]
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.enumeration.includeDescendants",
-                                                                    "title" : "Include Descendants"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.externalValueSet",
-                                                            "title" : "External Value Set",
-                                                            "startEmpty" : true,
-                                                            "items" : [
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.externalValueSet[].id",
-                                                                    "title" : "ID"
-                                                                },
-                                                                {
-                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.externalValueSet[].name",
-                                                                    "title" : "Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain.externalValueSet[].namespace",
-                                                                    "title" : "Namespace"
                                                                 }
                                                             ]
                                                         }
@@ -3453,11 +3067,11 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.search && !model.profileDefinition.hl7URLCompliant",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
-                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter.syntaxOnResource.valuePrefix",
@@ -3472,44 +3086,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "title" : "Suffix"
                                                                 }
                                                             ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputCodeTransformation",
-                                                    "title" : "Output Code Transformation",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.match",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputCodeTransformation.id",
-                                                            "title" : "ID"
                                                         },
                                                         {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputCodeTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputCodeTransformation.namespace",
-                                                            "title" : "Namespace"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputDisplayNameTransformation",
-                                                    "title" : "Output Code Display Name",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.search",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputDisplayNameTransformation.id",
-                                                            "title" : "ID"
-                                                        },
-                                                        {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputDisplayNameTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.outputDisplayNameTransformation.namespace",
-                                                            "title" : "Namespace"
+                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter.source",
+                                                            "title" : "Value Source",
+                                                            "type" : "select",
+                                                            "titleMap" : [
+                                                                {"name" : "code", "value" : "code"},
+                                                                {"name" : "displayName", "value" : "displayName"}
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -3665,6 +3250,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.match",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration",
@@ -3683,13 +3269,13 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
 
                                                                                 delete modelValue["$$hashKey"];
                                                                                 var contextIndex = formScope.$parent.$parent.$parent.$parent.$parent.$parent.$index;
-                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code != null) {
+                                                                                if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain != null) {
 
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
                                                                                 else {
 
-                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain.enumeration = {"includeDescendants" : false, "code" : []};
+                                                                                    $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain = {"enumeration" : {"includeDescendants" : false, "code" : []}};
                                                                                     $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code.unshift(modelValue);
                                                                                 }
 
@@ -3703,37 +3289,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "startEmpty" : true,
                                                                     "items" : [
                                                                         {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code[].code",
-                                                                            "title" : "Code"
-                                                                        },
-                                                                        {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code[].displayName",
                                                                             "title" : "Display Name"
                                                                         }
                                                                     ]
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.includeDescendants",
-                                                                    "title" : "Include Descendants"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.externalValueSet",
-                                                            "title" : "External Value Set",
-                                                            "startEmpty" : true,
-                                                            "items" : [
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.externalValueSet[].id",
-                                                                    "title" : "ID"
-                                                                },
-                                                                {
-                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.externalValueSet[].name",
-                                                                    "title" : "Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.externalValueSet[].namespace",
-                                                                    "title" : "Namespace"
                                                                 }
                                                             ]
                                                         }
@@ -3742,11 +3301,11 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter",
                                                     "title" : "",
+                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.search && !model.profileDefinition.hl7URLCompliant",
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter.syntaxOnResource",
                                                             "title" : "Syntax On Resource",
-                                                            "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                             "items" : [
                                                                 {
                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter.syntaxOnResource.valuePrefix",
@@ -3761,44 +3320,15 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "title" : "Suffix"
                                                                 }
                                                             ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputCodeTransformation",
-                                                    "title" : "Output Code Transformation",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.match",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputCodeTransformation.id",
-                                                            "title" : "ID"
                                                         },
                                                         {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputCodeTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputCodeTransformation.namespace",
-                                                            "title" : "Namespace"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputDisplayNameTransformation",
-                                                    "title" : "Output Code Display Name",
-                                                    "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.search",
-                                                    "items" : [
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputDisplayNameTransformation.id",
-                                                            "title" : "ID"
-                                                        },
-                                                        {
-                                                            "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputDisplayNameTransformation.name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.outputDisplayNameTransformation.namespace",
-                                                            "title" : "Namespace"
+                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter.source",
+                                                            "title" : "Value Source",
+                                                            "type" : "select",
+                                                            "titleMap" : [
+                                                                {"name" : "code", "value" : "code"},
+                                                                {"name" : "displayName", "value" : "displayName"}
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -3811,10 +3341,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                     ]
                 }
             ]
-        },
-        {
-            type: "submit",
-            title: "Save"
         }
     ];
 

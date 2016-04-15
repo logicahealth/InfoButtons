@@ -46,12 +46,7 @@
             </div>
         </form>
         <form ng-hide="new" sf-schema="jsonProfileSchema" sf-form="jsonProfileForm" sf-model="jsonProfileModel" ng-submit="onJSONProfileSubmit(jsonProfileForm)"></form>
-        <div class="form-group ">
-            <label for="content">Content:</label>
-            <div>
-                <textarea ng-hide="new" ng-disabled="true" id="content" rows="20" class="form-control" ng-model="profile.content" required></textarea>
-            </div>
-        </div>
+        <button uib-popover="{{profile.content}}" popover-placement = "right-bottom" popover-title="XML Content" type="button" class="btn btn-default">See XML</button>
     </div>
 
 </div>
