@@ -2251,6 +2251,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.searchParameter.source",
                                                             "title" : "Value Source",
+                                                            "type" : "select",
                                                             "titleMap" : [
                                                                 {"name" : "code", "value" : "code"},
                                                                 {"name" : "displayName", "value" : "displayName"}
