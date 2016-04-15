@@ -13,20 +13,25 @@
  */
 package org.openinfobutton.service.profile;
 
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import edu.utah.further.profiledb.domain.Profiles;
 import org.apache.log4j.Logger;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import edu.utah.further.profiledb.service.FileandMarker;
 import edu.utah.further.profiledb.service.ProfilesDao;
 
 // TODO: Auto-generated Javadoc
@@ -55,10 +60,10 @@ public class ResourceProfileLoaderNew
      * @return the profiles
      */
     @SuppressWarnings( "boxing" )
-    public ArrayList<KnowledgeResourceProfile> getProfiles()
+    public Map<Long, KnowledgeResourceProfile> getProfiles()
     {
         log.info( "Loading Profiles from the Database" );
-        final ArrayList<KnowledgeResourceProfile> newProfiles = new ArrayList<KnowledgeResourceProfile>();
+        final Map<Long, KnowledgeResourceProfile> newProfiles = new HashMap<Long,KnowledgeResourceProfile>();
         JAXBContext context;
         Unmarshaller u = null;
         try
@@ -83,25 +88,26 @@ public class ResourceProfileLoaderNew
         {
             s = 1;// active = 1
         }
-        length = pdao.count( s );
-        length++;
-        KnowledgeResourceProfile profile = null;
-        final FileandMarker fm = new FileandMarker();
-        fm.setMarker( 1 );
-        for ( int x = 1; x < length; x++ )
+        final List<Profiles> profiles = pdao.getResourceProfiles( s );
+        InputStream bdata = null;
+        Blob blob;
+        KnowledgeResourceProfile content;
+        for (Profiles profile : profiles)
         {
-            final int marker = fm.getMarker();
-            pdao.getResourceProfile( marker, s, fm );
+            blob = profile.getContent();
             try
             {
-                profile = (KnowledgeResourceProfile) u.unmarshal( fm.getBlobFile() );
-                newProfiles.add( profile );
-                log.debug( "Loaded Profile : " + profile.getHeader().getTitle() );
+                bdata = blob.getBinaryStream();
+                content = (KnowledgeResourceProfile) u.unmarshal( bdata);
+                newProfiles.put(profile.getId(), content );
+                log.debug( "Loaded Profile : " + content.getHeader().getTitle() );
             }
             catch ( final JAXBException e )
             {
                 e.printStackTrace();
-                log.error( "Bad profile found and being skipped.Profile ID=" + marker + " Status=" + s );
+                log.error( "Bad profile found and being skipped.Profile ID=" + profile.getId() + " Status=" + s );
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return newProfiles;

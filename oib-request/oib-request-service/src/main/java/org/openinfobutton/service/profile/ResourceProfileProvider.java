@@ -14,7 +14,9 @@
 package org.openinfobutton.service.profile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 
@@ -29,7 +31,7 @@ public final class ResourceProfileProvider
     private static ResourceProfileProvider instance;
 
     /** The profiles. */
-    private List<KnowledgeResourceProfile> profiles;
+    private Map<Long, KnowledgeResourceProfile> profiles;
 
     /**
      * Instantiates a new resource profile provider.
@@ -37,9 +39,9 @@ public final class ResourceProfileProvider
     private ResourceProfileProvider()
     {
 
-        profiles = new ArrayList<KnowledgeResourceProfile>();
+        profiles = new HashMap<Long, KnowledgeResourceProfile>();
         final ResourceProfileLoaderNew rpn = new ResourceProfileLoaderNew();
-        profiles.addAll( rpn.getProfiles() );
+        profiles.putAll( rpn.getProfiles() );
     }
 
     /**
@@ -64,7 +66,7 @@ public final class ResourceProfileProvider
      *
      * @return the profiles
      */
-    public List<KnowledgeResourceProfile> getProfiles()
+    public Map<Long, KnowledgeResourceProfile> getProfiles()
     {
 
         return profiles;
@@ -75,7 +77,7 @@ public final class ResourceProfileProvider
      *
      * @param profiles the new profiles
      */
-    public void setProfiles( List<KnowledgeResourceProfile> profiles )
+    public void setProfiles( Map<Long, KnowledgeResourceProfile> profiles )
     {
 
         this.profiles = profiles;

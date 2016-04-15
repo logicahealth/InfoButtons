@@ -13,9 +13,7 @@
  */
 package org.openinfobutton.service.matching;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import org.apache.log4j.Logger;
 import org.openinfobutton.exception.OIBProfileProcessingException;
@@ -38,7 +36,7 @@ public final class TaskCheckHandler
     private static Logger log = Logger.getLogger( TaskCheckHandler.class.getName() );
 
     /** The profiles. */
-    public static List<KnowledgeResourceProfile> profiles;
+    public static Map<Long, KnowledgeResourceProfile> profiles;
 
     /** The provider. */
     public static ResourceProfileProvider provider;
@@ -71,20 +69,20 @@ public final class TaskCheckHandler
     {
         initProfiles();
         request = knowledgeRequest;
-        KnowledgeResourceProfile profile;
-        for ( final Iterator<KnowledgeResourceProfile> iter = profiles.iterator(); iter.hasNext(); )
+        Map<Long, KnowledgeResourceProfile> tempProfiles = new HashMap<Long, KnowledgeResourceProfile>();
+        for ( Map.Entry<Long, KnowledgeResourceProfile> profile : profiles.entrySet() )
         {
-            profile = iter.next();
             try {
-                if (!checkProfile(profile)) {
-                    iter.remove();
+                if (checkProfile(profile.getValue())) {
+                    tempProfiles.put(profile.getKey(), profile.getValue());
                 }
             } catch (RuntimeException e)
             {
-                log.debug("\t\tProfile Processing Error While Checking Task Caused By: " + profile.getHeader().getTitle());
-                throw new OIBProfileProcessingException("Task Matching Error Caused By Configuration Problem In: " + profile.getHeader().getTitle(), e);
+                log.debug("\t\tProfile Processing Error While Checking Task Caused By: " + profile.getValue().getHeader().getTitle());
+                throw new OIBProfileProcessingException("Task Matching Error Caused By Configuration Problem In: " + profile.getValue().getHeader().getTitle(), e);
             }
         }
+        profiles = tempProfiles;
         provider.setProfiles( profiles );
         return profiles.isEmpty();
     }

@@ -15,6 +15,7 @@ package org.openinfobutton.service.matching;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.openinfobutton.exception.OIBProfileProcessingException;
@@ -40,7 +41,7 @@ public class ContextProfileHandler
     ContextMatcher matcher;
 
     /** The profiles. */
-    public List<KnowledgeResourceProfile> profiles;
+    public static Map<Long, KnowledgeResourceProfile> profiles;
 
     /** The provider. */
     public ResourceProfileProvider provider;
@@ -72,17 +73,15 @@ public class ContextProfileHandler
         initProfiles();
         results = new ArrayList<RequestResult>();
         request = r;
-        KnowledgeResourceProfile profile;
-        for ( int i = 0; i < profiles.size(); i++ )
+        for (  Map.Entry<Long, KnowledgeResourceProfile> profile : profiles.entrySet()  )
         {
-            profile = profiles.get( i );
             try {
-                results.add(matchContexts(profile));
+                results.add(matchContexts(profile.getValue()));
             }
             catch (RuntimeException e)
             {
-                log.debug("\t\tProfile Processing Error While Matching Caused By: " + profile.getHeader().getTitle());
-                throw new OIBProfileProcessingException("Matching Error Caused By Configuration Problem In: " + profile.getHeader().getTitle(), e);
+                log.debug("\t\tProfile Processing Error While Matching Caused By: " + profile.getValue().getHeader().getTitle());
+                throw new OIBProfileProcessingException("Matching Error Caused By Configuration Problem In: " + profile.getValue().getHeader().getTitle(), e);
             }
 
         }
