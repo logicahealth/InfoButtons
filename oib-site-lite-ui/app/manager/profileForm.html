@@ -1,4 +1,9 @@
 <div ng-controller="ProfileFormCtrl">
+<style>
+   .persistentSave { position: fixed; bottom: 20px; right: 20px; }
+
+    .xmlView { position: fixed; bottom: 20px; left: 10px; }
+</style>
     <div class="container">
         <h2>Profile Editor</h2>
         <form name="profileForm" class="form-horizontal" role="form" validate>
@@ -46,7 +51,7 @@
             </div>
         </form>
         <form ng-hide="new" sf-schema="jsonProfileSchema" sf-form="jsonProfileForm" sf-model="jsonProfileModel" ng-submit="onJSONProfileSubmit(jsonProfileForm)"></form>
-        <button uib-popover="{{profile.content}}" popover-placement = "right-bottom" popover-title="XML Content" type="button" class="btn btn-default">See XML</button>
+        <button ng-click="openXML(profile.content)" class="btn btn-default xmlView">See XML</button>
     </div>
 
 </div>

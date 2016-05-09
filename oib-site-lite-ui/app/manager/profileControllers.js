@@ -122,7 +122,7 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$uibModal', 'profileFacto
     return $scope;
     }]);
 
-oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', '$state', 'ngNotify', '$window', function ($scope, $stateParams, profileFactory, $state, ngNotify, $window) {
+oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', '$state', 'ngNotify', '$window', '$uibModal', function ($scope, $stateParams, profileFactory, $state, ngNotify, $window, $uibModal) {
 
      var jsonProfileSchema = {
         "type" : "object",
@@ -1869,7 +1869,8 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
     var jsonProfileForm = [
         {
             type: "submit",
-            title: "Save"
+            title: "Save",
+            fieldHtmlClass : "persistentSave"
         },
         {
             "key" : "header",
@@ -3264,8 +3265,8 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                             "key": "informationRecipientSelect",
                                                                             "type"  : "select",
                                                                             "description" : "Select information recipient to add to profile",
-                                                                            "titleMap": [{"name": "Healthcare Provider", "value" : {"displayName" : "Healthcare Provider", "code" : "PROV", "codeSystemName" : "NUCC Health Care provider taxonomy", "codeSystem" : "2.16.840.1.113883.6.101"}},
-                                                                                {"name": "Patient", "value" : {"displayName" : "Patient", "code" : "PAT", "codeSystemName" : "NUCC Health Care provider taxonomy", "codeSystem" : "2.16.840.1.113883.6.101"}}],
+                                                                            "titleMap": [{"name": "Healthcare Provider", "value" : {"displayName" : "Healthcare Provider", "code" : "PROV", "codeSystemName" : "HL7 RoleCode", "codeSystem" : "HL7 RoleCode"}},
+                                                                                {"name": "Patient", "value" : {"displayName" : "Patient", "code" : "PAT", "codeSystemName" : "HL7 RoleCode", "codeSystem" : "2.16.840.1.113883.5.110"}}],
                                                                             "onChange" : function(modelValue,form, formScope) {
 
                                                                                 delete modelValue["$$hashKey"];
@@ -3446,6 +3447,16 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                 .error(function (error) {
                     $scope.statusMessage = 'Unable to update profile:' + error;
                 });
+    }
+
+    $scope.openXML = function (content) {
+
+        var modalInstance = $uibModal.open({
+
+            animation: $scope.animationsEnabled,
+            template: '<textarea style="min-width: 100% ; height: 500px">' + content + '</textarea>',
+            size: 'lg'
+        })
     }
 
     return $scope;

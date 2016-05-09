@@ -161,7 +161,7 @@ oibAssetControllerModule.controller('EditModalCtrl', ['$scope', '$state', 'selec
                          {"name": "HL7 AdminstrativeGender", "oid": "2.16.840.1.113883.5.1"},
                          {"name" : "MeSH" , "oid" : "2.16.840.1.113883.6.177"},
                          {"name" : "NDC", "oid" : "2.16.840.1.113883.6.69"},
-                         {"name" : "NUCC Health Care provider taxonomy", "oid" : "2.16.840.1.113883.6.101"},
+                         {"name" : "HL7 RoleCode", "oid" : "2.16.840.1.113883.5.110"},
                          {"name" : "ietf3066", "oid" : "2.16.840.1.113883.6.121"},
                          {"name" : "LOINC", "oid" : "2.16.840.1.113883.6.1"},
                          {"name" : "ObservationInterpretation", "oid" : "2.16.840.1.113883.5.83"},
