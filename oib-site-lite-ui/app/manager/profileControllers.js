@@ -2014,8 +2014,23 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                     "title" : "Matching Context Definitions",
                                     "items" : [
                                         {
+                                            "type" : "fieldset",
+                                            "items" : [
+                                                {
+                                                    "key" : "context",
+                                                    "type" : "checkboxes",
+                                                    "description" : "Select Context Elements",
+                                                    "titleMap" : [
+                                                        {"name" : "Task", "value" : "taskContext"},
+                                                        {"name" : "MainSearch", "value" : "mainSearch"},
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.task",
                                             "title" : "Task Context",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].context.taskContext",
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.task.match",
@@ -2939,8 +2954,8 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                             "key": "performerSelect",
                                                                             "type"  : "select",
                                                                             "description" : "Select performer to add to profile",
-                                                                            "titleMap": [{"name": "Healthcare Provider", "value" : {"displayName" : "Healthcare Provider", "code" : "PROV", "codeSystemName" : "NUCC Health Care provider taxonomy", "codeSystem" : "2.16.840.1.113883.6.101"}},
-                                                                                {"name": "Patient", "value" : {"displayName" : "Patient", "code" : "PAT", "codeSystemName" : "NUCC Health Care provider taxonomy", "codeSystem" : "2.16.840.1.113883.6.101"}}],
+                                                                            "titleMap": [{"name": "Healthcare Provider", "value" : {"displayName" : "Healthcare Provider", "code" : "PROV", "codeSystemName" : "HL7 RoleCode", "codeSystem" : "2.16.840.1.113883.5.110"}},
+                                                                                {"name": "Patient", "value" : {"displayName" : "Patient", "code" : "PAT", "codeSystemName" : "HL7 RoleCode", "codeSystem" : "2.16.840.1.113883.5.110"}}],
                                                                             "onChange" : function(modelValue,form, formScope) {
 
                                                                                 delete modelValue["$$hashKey"];
@@ -3265,7 +3280,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                             "key": "informationRecipientSelect",
                                                                             "type"  : "select",
                                                                             "description" : "Select information recipient to add to profile",
-                                                                            "titleMap": [{"name": "Healthcare Provider", "value" : {"displayName" : "Healthcare Provider", "code" : "PROV", "codeSystemName" : "HL7 RoleCode", "codeSystem" : "HL7 RoleCode"}},
+                                                                            "titleMap": [{"name": "Healthcare Provider", "value" : {"displayName" : "Healthcare Provider", "code" : "PROV", "codeSystemName" : "HL7 RoleCode", "codeSystem" : "2.16.840.1.113883.5.110"}},
                                                                                 {"name": "Patient", "value" : {"displayName" : "Patient", "code" : "PAT", "codeSystemName" : "HL7 RoleCode", "codeSystem" : "2.16.840.1.113883.5.110"}}],
                                                                             "onChange" : function(modelValue,form, formScope) {
 
