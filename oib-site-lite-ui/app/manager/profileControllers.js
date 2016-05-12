@@ -2014,19 +2014,18 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                     "title" : "Matching Context Definitions",
                                     "items" : [
                                         {
-                                            "type" : "fieldset",
-                                            "items" : [
-                                                {
-                                                    "key": "profileDefinition.contexts.context[].contextDefinition.showTask",
-                                                    "type": "checkboxes",
-                                                    "titleMap": [{name: "Show Task", value : true}]
-                                                }
-                                            ]
+                                            "key": "profileDefinition.contexts.context[].contextDefinition.showTask",
+                                            "type": "checkboxes",
+                                            "title" : "",
+                                            "fieldHtmlClass" : "css-checkbox",
+                                            "disableErrorState" : true,
+                                            "disableSuccessState" : true,
+                                            "titleMap": {name: "<span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Task Context"}
                                         },
                                         {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.task",
-                                            "title" : "Task Context",
-                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showTask",
+                                            "title" : "",
+                                            "condition" : "!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showTask.length > 0",
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.task.match",
@@ -3447,6 +3446,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
             delete $scope.jsonProfileModel["encounterSelect"];
             delete $scope.jsonProfileModel["performerSelect"];
             delete $scope.jsonProfileModel["informationRecipientSelect"];
+            for (var context in $scope.jsonProfileModel.profileDefinition.contexts.context)
+            {
+                delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showTask;
+            }
 
 
             profileFactory.updateProfileContent($scope.jsonProfileModel, $stateParams.id)
