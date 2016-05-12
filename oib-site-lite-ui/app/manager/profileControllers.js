@@ -2411,7 +2411,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         },
                                         {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender",
-                                            "title" : "Gender",
+                                            "title" : "",
                                             "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPatientGender.length > 0",
                                             "items" : [
                                                 {
@@ -2638,7 +2638,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         },
                                         {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType",
-                                            "title" : "Encounter",
+                                            "title" : "",
                                             "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showEncounterType.length > 0",
                                             "items" : [
                                                 {
