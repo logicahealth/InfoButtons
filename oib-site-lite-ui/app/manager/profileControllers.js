@@ -2013,8 +2013,19 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                     "title" : "Matching Context Definitions",
                                     "items" : [
                                         {
+                                            "type" : "fieldset",
+                                            "items" : [
+                                                {
+                                                    "key": "profileDefinition.contexts.context[].contextDefinition.showTask",
+                                                    "type": "checkboxes",
+                                                    "titleMap": [{name: "Show Task", value : true}]
+                                                }
+                                            ]
+                                        },
+                                        {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.task",
                                             "title" : "Task Context",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showTask",
                                             "items" : [
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.task.match",
