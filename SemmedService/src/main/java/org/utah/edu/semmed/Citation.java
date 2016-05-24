@@ -7,7 +7,6 @@ import java.util.List;
  */
 public class Citation {
 
-    @Column(name="email")
     private List<String> citations;
    // private String citations;
 

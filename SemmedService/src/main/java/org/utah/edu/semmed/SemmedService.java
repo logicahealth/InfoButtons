@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.utah.edu.semmedDao.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +19,12 @@ public class SemmedService {
     @RequestMapping(value = "/json", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
     public List<String>getCitations(@RequestBody List<String> citations) {
-        List<String> cites = new ArrayList<String>();
+        List<String> cites;
         System.out.println(citations);
-        if(citations.contains("25143121")) {
-            cites.add(JSONTemp1);
-        }
-        if(citations.contains("24299975")) {
-            cites.add(JSONTemp2);
-        }
 
+        SemmedServiceDaoImpl d = new SemmedServiceDaoImpl();
+
+        cites = d.getCitations(citations);
         return cites;
        // return new ArrayList<String>();
     }
