@@ -15,8 +15,9 @@
     http://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:component-scan base-package="org.utah.edu.semmed"/>
-
+    <context:component-scan base-package="org.utah.edu.semmedDao" />
     <mvc:annotation-driven />
+    <context:annotation-config />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
@@ -43,21 +44,34 @@
         </property>
     </bean>
 
-    <bean id="dataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://mysql.chpc.utah.edu:3306" />
+        <property name="url" value="jdbc:mysql://mysql.chpc.utah.edu:3306/RECENT_CITATIONS" />
         <property name="username" value="semmed" />
         <property name="password" value="mahdifatemeh" />
     </bean>
-    <!--
-    <bean id="SemmedServiceDaoImpl" class="org.utah.edu.semmedDao.SemmedServiceDaoImpl">
-        <property name="dataSource" ref="dataSource"></property>
-    </bean>
-    -->
+
     <bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource"><ref bean="dataSource"/></property>
+    </bean>
+
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:../webapp/WEB-INF/hibernate.cfg.xml" />
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="SemmedServiceDAO" class="org.utah.edu.semmedDao.SemmedServiceDaoImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
     </bean>
     <!--
           Converts JSON to POJO and vice versa

@@ -3,27 +3,9 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.dialect">
-            org.hibernate.dialect.MySQLDialect
-        </property>
-        <property name="hibernate.connection.driver_class">
-            com.mysql.jdbc.Driver
-        </property>
-
-        <!-- Assume test is the database name -->
-        <property name="hibernate.connection.url">
-            jdbc:mysql://mysql.chpc.utah.edu
-        </property>
-        <property name="hibernate.connection.username">
-            semmed
-        </property>
-        <property name="hibernate.connection.password">
-            mahdifatemeh
-        </property>
-
-        <!-- List of XML mapping files -->
-        <mapping resource="../java/org/utah/edu/semmedDao/Citations.hbm.xml"/>
-
-    </session-factory>
+<session-factory>
+    <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="show_sql">true</property>
+    <mapping resource="../java/org/utah/edu/semmedDao/RecentCitation.hbm.xml"/>
+</session-factory>
 </hibernate-configuration>

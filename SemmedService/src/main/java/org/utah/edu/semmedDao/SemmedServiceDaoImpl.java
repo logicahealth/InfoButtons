@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +27,7 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+    private SessionFactory sessionFactory;
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -31,6 +35,23 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+
+
+
+    public SemmedServiceDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public List<RecentCitation> getCitations(List<String> PMIDs) {
+        @SuppressWarnings("unchecked")
+        List<RecentCitation> listUser = (List<RecentCitation>) sessionFactory.getCurrentSession()
+                .createCriteria(RecentCitation.class)
+                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+        return listUser;
+    }
+
+    /*
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -68,4 +89,5 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
 
         return data;
     }
+    */
 }
