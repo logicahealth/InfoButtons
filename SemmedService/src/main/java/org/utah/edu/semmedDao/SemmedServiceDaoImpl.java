@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +15,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 
@@ -23,33 +26,26 @@ import org.springframework.jdbc.core.JdbcTemplate;
 /**
  * Created by JoeNarus on 5/23/16.
  */
+@Repository
 public class SemmedServiceDaoImpl implements SemmedServiceDao {
 
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
-    private SessionFactory sessionFactory;
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-    public void ContactDAOImpl(DataSource dataSource) {
-        jdbcTemplate = new JdbcTemplate(dataSource);
+    @Autowired
+    SessionFactory sessionFactory;
+
+    public SemmedServiceDaoImpl() {
+
     }
 
-
-
-
-    public SemmedServiceDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public List<RecentCitation> getCitations(List<String> PMIDs) {
+    @Transactional
+    public List<RecentCitationsEntity> getCitations(List<String> PMIDs) {
         @SuppressWarnings("unchecked")
-        List<RecentCitation> listUser = (List<RecentCitation>) sessionFactory.getCurrentSession()
-                .createCriteria(RecentCitation.class)
+        List<RecentCitationsEntity> listUser = (List<RecentCitationsEntity>) sessionFactory.getCurrentSession()
+                .createCriteria(RecentCitationsEntity.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
         return listUser;
     }
+
 
     /*
     @Bean

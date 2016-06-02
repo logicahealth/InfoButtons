@@ -7,6 +7,6 @@ import java.util.List;
  */
 public interface SemmedServiceDao {
 
-List<RecentCitation> getCitations(List<String> PMIDs);
+List<RecentCitationsEntity> getCitations(List<String> PMIDs);
 
 }

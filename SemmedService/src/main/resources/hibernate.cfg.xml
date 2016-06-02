@@ -6,6 +6,6 @@
 <session-factory>
     <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="show_sql">true</property>
-    <mapping resource="../java/org/utah/edu/semmedDao/RecentCitation.hbm.xml"/>
+    <property name="packagesToScan" value="org.utah.edu.semmedDao" />
 </session-factory>
 </hibernate-configuration>
