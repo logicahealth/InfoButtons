@@ -68,7 +68,13 @@
                 <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
             </props>
         </property>
-        <property name="packagesToScan" value="org.utah.edu.semmed" />
+        <property name="packagesToScan">
+        <array>
+            <value>org.utah.edu.semmed</value>
+        </array>
+        </property>
+
+
     </bean>
 
     <bean id="transactionManager"
