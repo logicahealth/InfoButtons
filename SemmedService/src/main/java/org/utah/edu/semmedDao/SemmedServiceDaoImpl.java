@@ -9,6 +9,7 @@ import javax.persistence.*;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,14 +34,19 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
     @Autowired
     SessionFactory sessionFactory;
 
+    public SemmedServiceDaoImpl() {
+
+    }
+
     @Transactional
     public List<RecentCitationsEntity> getCitations(List<String> PMIDs) {
 
 //        List<RecentCitationsEntity> listUser = (List<RecentCitationsEntity>) sessionFactory.getCurrentSession()
 //                .createCriteria(RecentCitationsEntity.class)
 //                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
         return (List<RecentCitationsEntity>) sessionFactory.getCurrentSession()
-                .createCriteria(RecentCitationsEntity.class).add(Restrictions.eq("PMID", PMIDs)).list();
+                .createCriteria(RecentCitationsEntity.class).add(Restrictions.in("pmid", PMIDs)).list();
 
     }
 }

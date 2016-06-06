@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by JoeNarus on 6/2/16.
  */
 @Entity
-@Table(name = "RECENT_CITATIONS", schema = "SemanticMedline", catalog = "")
+@Table(name = "RECENT_CITATIONS")
 public class RecentCitationsEntity {
     private String pmid;
     private String issn;
