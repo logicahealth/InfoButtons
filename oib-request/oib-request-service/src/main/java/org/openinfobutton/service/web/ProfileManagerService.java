@@ -164,7 +164,6 @@ public class ProfileManagerService
             System.err.println("Error updating profile content");
             e.printStackTrace();
         }
-        lDao.createOrUpdateCustomProfile(profile);
         return sw.toString();
     }
 
