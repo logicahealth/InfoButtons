@@ -1935,20 +1935,39 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                             "items" : [
                                 {
                                     "key": "profileDefinition.supportedTerminologies.supportedTerminology[].name",
-                                    "title" : "Name",
-                                    "readonly" : true
+                                    "readonly" : true,
+                                    "notitle" : true,
+                                    "feedback" : false
                                 }
                             ]
                         }
                     ]
                 },
                 {
-                    "key" : "profileDefinition.hl7URLCompliant",
-                    "title" : "HL7 URL Compliant"
-                },
-                {
-                    "key" : "profileDefinition.hl7KnowledgeResponseCompliant",
-                    "title" : "HL7 Knowledge Response Compliant"
+                    "type" : "section",
+                    "htmlClass" : "row",
+                    "items" : [
+                        {
+                            "type" : "section",
+                            "htmlClass": "col-md-4",
+                            "items" : [
+                                {
+                                    "key" : "profileDefinition.hl7URLCompliant",
+                                    "title" : "HL7 URL Compliant"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "section",
+                            "htmlClass": "col-md-4",
+                            "items": [
+                                {
+                                    "key": "profileDefinition.hl7KnowledgeResponseCompliant",
+                                    "title": "HL7 Knowledge Response Compliant"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "key" : "profileDefinition.urlStyle",
@@ -1993,12 +2012,30 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                     "startEmpty" : true,
                                                     "items" : [
                                                         {
-                                                            "key" : "profileDefinition.contexts.context[].knowledgeRequestService.attributes.attribute[].name",
-                                                            "title" : "Name"
-                                                        },
-                                                        {
-                                                            "key" : "profileDefinition.contexts.context[].knowledgeRequestService.attributes.attribute[].value",
-                                                            "title" : "Value"
+                                                            "type": "section",
+                                                            "htmlClass": "row",
+                                                            "items": [
+                                                                {
+                                                                    "type": "section",
+                                                                    "htmlClass": "col-md-4",
+                                                                    "items": [
+                                                                        {
+                                                                            "key": "profileDefinition.contexts.context[].knowledgeRequestService.attributes.attribute[].name",
+                                                                            "title": "Name"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "type": "section",
+                                                                    "htmlClass": "col-md-4",
+                                                                    "items": [
+                                                                        {
+                                                                            "key": "profileDefinition.contexts.context[].knowledgeRequestService.attributes.attribute[].value",
+                                                                            "title": "Value"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -2025,12 +2062,30 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showTask.length > 0",
                                             "items" : [
                                                 {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.task.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.task.search",
-                                                    "title" : "Use For Searching"
+                                                    "type": "section",
+                                                    "htmlClass": "row",
+                                                    "items": [
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-4",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.task.match",
+                                                                    "title": "Use For Matching"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-4",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.task.search",
+                                                                    "title": "Use For Searching"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain",
@@ -2111,7 +2166,9 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.task.matchingDomain.enumeration.code[].displayName",
                                                                             "title" : "Display Name",
-                                                                            "readonly" : true
+                                                                            "readonly" : true,
+                                                                            "notitle" : true,
+                                                                            "feedback" : false
                                                                         }
                                                                     ]
                                                                 }
@@ -2129,16 +2186,40 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Syntax On Resource",
                                                             "items" : [
                                                                 {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.task.searchParameter.syntaxOnResource.valuePrefix",
-                                                                    "title" : "Prefix"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.task.searchParameter.syntaxOnResource.nonHl7CompliantName",
-                                                                    "title" : "non-HL7 Compliant Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.task.searchParameter.syntaxOnResource.valueSuffix",
-                                                                    "title" : "Suffix"
+                                                                    "type": "section",
+                                                                    "htmlClass": "row",
+                                                                    "items": [
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-4",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.task.searchParameter.syntaxOnResource.valuePrefix",
+                                                                                    "title": "Prefix"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-4",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.task.searchParameter.syntaxOnResource.nonHl7CompliantName",
+                                                                                    "title": "non-HL7 Compliant Name"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-4",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.task.searchParameter.syntaxOnResource.valueSuffix",
+                                                                                    "title": "Suffix"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
                                                                 }
                                                             ]
                                                         },
@@ -2169,13 +2250,32 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "title" : "",
                                             "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showConceptOfInterest.length > 0",
                                             "items" : [
+
                                                 {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.search",
-                                                    "title" : "Use For Searching"
+                                                    "type": "section",
+                                                    "htmlClass": "row",
+                                                    "items": [
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-4",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.match",
+                                                                    "title": "Use For Matching"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-4",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.search",
+                                                                    "title": "Use For Searching"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain",
@@ -2192,29 +2292,80 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "startEmpty" : true,
                                                                     "items" : [
                                                                         {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration.code[].code",
-                                                                            "title" : "Code"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration.code[].codeSystem",
-                                                                            "title" : "Code System",
-                                                                            "type" : "select",
-                                                                            "titleMap" : [
+                                                                            "type": "section",
+                                                                            "htmlClass": "row",
+                                                                            "items": [
+                                                                                {
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration.code[].code",
+                                                                                            "title": "Code"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration.code[].codeSystem",
+                                                                                            "title": "Code System",
+                                                                                            "type": "select",
+                                                                                            "titleMap": [
 
-                                                                                {"name" : "CPT", "value": "2.16.840.1.113883.6.12"},
-                                                                                {"name" : "CDS Rules", "value": "http://socraticgrid.org/cds/ka/ecarule"},
-                                                                                {"name": "ICD9-CM", "value" : "2.16.840.1.113883.6.103"},
-                                                                                {"name": "ICD10-CM", "value" : "2.16.840.1.113883.6.90"},
-                                                                                {"name": "ICD10", "value" : "2.16.840.1.113883.6.3"},
-                                                                                {"name" : "LOINC", "value" : "2.16.840.1.113883.6.1"},
-                                                                                {"name" : "MeSH" , "value" : "2.16.840.1.113883.6.177"},
-                                                                                {"name": "SNOMED-CT", "value" : "2.16.840.1.113883.6.96"},
-                                                                                {"name": "RxNorm", "value" : "2.16.840.1.113883.6.88"}
+                                                                                                {
+                                                                                                    "name": "CPT",
+                                                                                                    "value": "2.16.840.1.113883.6.12"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "CDS Rules",
+                                                                                                    "value": "http://socraticgrid.org/cds/ka/ecarule"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "ICD9-CM",
+                                                                                                    "value": "2.16.840.1.113883.6.103"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "ICD10-CM",
+                                                                                                    "value": "2.16.840.1.113883.6.90"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "ICD10",
+                                                                                                    "value": "2.16.840.1.113883.6.3"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "LOINC",
+                                                                                                    "value": "2.16.840.1.113883.6.1"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "MeSH",
+                                                                                                    "value": "2.16.840.1.113883.6.177"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "SNOMED-CT",
+                                                                                                    "value": "2.16.840.1.113883.6.96"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "RxNorm",
+                                                                                                    "value": "2.16.840.1.113883.6.88"
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration.code[].displayName",
+                                                                                            "title": "Display Name"
+                                                                                        }
+                                                                                    ]
+                                                                                }
                                                                             ]
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.enumeration.code[].displayName",
-                                                                            "title" : "Display Name"
                                                                         }
                                                                     ]
                                                                 },
@@ -2230,16 +2381,40 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "startEmpty" : true,
                                                             "items" : [
                                                                 {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].id",
-                                                                    "title" : "ID"
-                                                                },
-                                                                {
-                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].name",
-                                                                    "title" : "Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].namespace",
-                                                                    "title" : "Namespace"
+                                                                    "type": "section",
+                                                                    "htmlClass": "row",
+                                                                    "items": [
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].id",
+                                                                                    "title": "ID"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].name",
+                                                                                    "title": "Name"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].namespace",
+                                                                                    "title": "Namespace"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
                                                                 }
                                                             ]
                                                         }
@@ -2255,16 +2430,40 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Syntax On Resource",
                                                             "items" : [
                                                                 {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.searchParameter.syntaxOnResource.valuePrefix",
-                                                                    "title" : "Prefix"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.searchParameter.syntaxOnResource.nonHl7CompliantName",
-                                                                    "title" : "non-HL7 Compliant Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.searchParameter.syntaxOnResource.valueSuffix",
-                                                                    "title" : "Suffix"
+                                                                    "type": "section",
+                                                                    "htmlClass": "row",
+                                                                    "items": [
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.searchParameter.syntaxOnResource.valuePrefix",
+                                                                                    "title": "Prefix"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.searchParameter.syntaxOnResource.nonHl7CompliantName",
+                                                                                    "title": "non-HL7 Compliant Name"
+                                                                                }
+                                                                            ],
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.searchParameter.syntaxOnResource.valueSuffix",
+                                                                                    "title": "Suffix"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
                                                                 }
                                                             ]
                                                         },
@@ -2363,7 +2562,9 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                                         {
                                                                                             "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code.displayName",
                                                                                             "title": "Display Name",
-                                                                                            "readonly" : true
+                                                                                            "readonly" : true,
+                                                                                            "notitle" : true,
+                                                                                            "feedback" : false
                                                                                         }
                                                                                     ]
                                                                                 }
@@ -2376,17 +2577,42 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "title" : "Syntax On Resource",
                                                                     "condition" : "!model.profileDefinition.hl7URLCompliant",
                                                                     "items" : [
+
                                                                         {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.syntaxOnResource.valuePrefix",
-                                                                            "title" : "Prefix"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.syntaxOnResource.nonHl7CompliantName",
-                                                                            "title" : "non-HL7 Compliant Name"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.syntaxOnResource.valueSuffix",
-                                                                            "title" : "Suffix"
+                                                                            "type": "section",
+                                                                            "htmlClass": "row",
+                                                                            "items": [
+                                                                                {
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.syntaxOnResource.valuePrefix",
+                                                                                            "title": "Prefix"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.syntaxOnResource.nonHl7CompliantName",
+                                                                                            "title": "non-HL7 Compliant Name"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.syntaxOnResource.valueSuffix",
+                                                                                            "title": "Suffix"
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
                                                                         }
                                                                     ]
                                                                 }
@@ -2415,12 +2641,30 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPatientGender.length > 0",
                                             "items" : [
                                                 {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.search",
-                                                    "title" : "Use For Searching"
+                                                    "type": "section",
+                                                    "htmlClass": "row",
+                                                    "items": [
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.patientGender.match",
+                                                                    "title": "Use For Matching"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.patientGender.search",
+                                                                    "title": "Use For Searching"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain",
@@ -2468,7 +2712,9 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.matchingDomain.enumeration.code[].displayName",
                                                                             "title" : "Display Name",
-                                                                            "readonly" : true
+                                                                            "readonly" : true,
+                                                                            "notitle" : true,
+                                                                            "feedback" : false
                                                                         }
                                                                     ]
                                                                 }
@@ -2486,16 +2732,40 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Syntax On Resource",
                                                             "items" : [
                                                                 {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter.syntaxOnResource.valuePrefix",
-                                                                    "title" : "Prefix"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter.syntaxOnResource.nonHl7CompliantName",
-                                                                    "title" : "non-HL7 Compliant Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter.syntaxOnResource.valueSuffix",
-                                                                    "title" : "Suffix"
+                                                                    "type": "section",
+                                                                    "htmlClass": "row",
+                                                                    "items": [
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter.syntaxOnResource.valuePrefix",
+                                                                                    "title": "Prefix"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter.syntaxOnResource.nonHl7CompliantName",
+                                                                                    "title": "non-HL7 Compliant Name"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.patientGender.searchParameter.syntaxOnResource.valueSuffix",
+                                                                                    "title": "Suffix"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
                                                                 }
                                                             ]
                                                         },
@@ -2527,12 +2797,30 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPatientAgeGroup.length > 0",
                                             "items" : [
                                                 {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.search",
-                                                    "title" : "Use For Searching"
+                                                    "type": "section",
+                                                    "htmlClass": "row",
+                                                    "items": [
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.match",
+                                                                    "title" : "Use For Matching"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.search",
+                                                                    "title": "Use For Searching"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain",
@@ -2587,7 +2875,9 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.matchingDomain.enumeration.code[].displayName",
                                                                             "title" : "Display Name",
-                                                                            "readonly" : true
+                                                                            "readonly" : true,
+                                                                            "notitle" : true,
+                                                                            "feedback" : false
                                                                         }
                                                                     ]
                                                                 }
@@ -2605,16 +2895,40 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Syntax On Resource",
                                                             "items" : [
                                                                 {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter.syntaxOnResource.valuePrefix",
-                                                                    "title" : "Prefix"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter.syntaxOnResource.nonHl7CompliantName",
-                                                                    "title" : "non-HL7 Compliant Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter.syntaxOnResource.valueSuffix",
-                                                                    "title" : "Suffix"
+                                                                    "type": "section",
+                                                                    "htmlClass": "row",
+                                                                    "items": [
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter.syntaxOnResource.valuePrefix",
+                                                                                    "title": "Prefix"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter.syntaxOnResource.nonHl7CompliantName",
+                                                                                    "title": "non-HL7 Compliant Name"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup.searchParameter.syntaxOnResource.valueSuffix",
+                                                                                    "title": "Suffix"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
                                                                 }
                                                             ]
                                                         },
@@ -2646,12 +2960,30 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showEncounterType.length > 0",
                                             "items" : [
                                                 {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.search",
-                                                    "title" : "Use For Searching"
+                                                    "type": "section",
+                                                    "htmlClass": "row",
+                                                    "items": [
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.encounterType.match",
+                                                                    "title": "Use For Matching"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.encounterType.search",
+                                                                    "title": "Use For Searching"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain",
@@ -2706,7 +3038,9 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.matchingDomain.enumeration.code[].displayName",
                                                                             "title" : "Display Name",
-                                                                            "readonly" : true
+                                                                            "readonly" : true,
+                                                                            "notitle" : true,
+                                                                            "feedback" : false
                                                                         }
                                                                     ]
                                                                 }
@@ -2724,16 +3058,40 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Syntax On Resource",
                                                             "items" : [
                                                                 {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter.syntaxOnResource.valuePrefix",
-                                                                    "title" : "Prefix"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter.syntaxOnResource.nonHl7CompliantName",
-                                                                    "title" : "non-HL7 Compliant Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter.syntaxOnResource.valueSuffix",
-                                                                    "title" : "Suffix"
+                                                                    "type": "section",
+                                                                    "htmlClass": "row",
+                                                                    "items": [
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter.syntaxOnResource.valuePrefix",
+                                                                                    "title": "Prefix"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter.syntaxOnResource.nonHl7CompliantName",
+                                                                                    "title": "non-HL7 Compliant Name"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.encounterType.searchParameter.syntaxOnResource.valueSuffix",
+                                                                                    "title": "Suffix"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
                                                                 }
                                                             ]
                                                         },
@@ -2765,12 +3123,30 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPerformerLanguage.length > 0",
                                             "items" : [
                                                 {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.search",
-                                                    "title" : "Use For Searching"
+                                                    "type": "section",
+                                                    "htmlClass": "row",
+                                                    "items": [
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerLanguage.match",
+                                                                    "title": "Use For Matching"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerLanguage.search",
+                                                                    "title": "Use For Searching"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain",
@@ -2787,28 +3163,79 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                     "startEmpty" : true,
                                                                     "items" : [
                                                                         {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code[].code",
-                                                                            "title" : "Code"
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code[].codeSystem",
-                                                                            "title" : "Code System",
-                                                                            "type" : "select",
-                                                                            "titleMap" : [
-                                                                                {"name" : "CPT", "value": "2.16.840.1.113883.6.12"},
-                                                                                {"name" : "CDS Rules", "value": "http://socraticgrid.org/cds/ka/ecarule"},
-                                                                                {"name": "ICD9-CM", "value" : "2.16.840.1.113883.6.103"},
-                                                                                {"name": "ICD10-CM", "value" : "2.16.840.1.113883.6.90"},
-                                                                                {"name": "ICD10", "value" : "2.16.840.1.113883.6.3"},
-                                                                                {"name" : "LOINC", "value" : "2.16.840.1.113883.6.1"},
-                                                                                {"name" : "MeSH" , "value" : "2.16.840.1.113883.6.177"},
-                                                                                {"name": "RxNorm", "value" : "2.16.840.1.113883.6.88"},
-                                                                                {"name": "SNOMED-CT", "value" : "2.16.840.1.113883.6.96"}
+                                                                            "type": "section",
+                                                                            "htmlClass": "row",
+                                                                            "items": [
+                                                                                {
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code[].code",
+                                                                                            "title": "Code"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code[].codeSystem",
+                                                                                            "title": "Code System",
+                                                                                            "type": "select",
+                                                                                            "titleMap": [
+                                                                                                {
+                                                                                                    "name": "CPT",
+                                                                                                    "value": "2.16.840.1.113883.6.12"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "CDS Rules",
+                                                                                                    "value": "http://socraticgrid.org/cds/ka/ecarule"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "ICD9-CM",
+                                                                                                    "value": "2.16.840.1.113883.6.103"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "ICD10-CM",
+                                                                                                    "value": "2.16.840.1.113883.6.90"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "ICD10",
+                                                                                                    "value": "2.16.840.1.113883.6.3"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "LOINC",
+                                                                                                    "value": "2.16.840.1.113883.6.1"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "MeSH",
+                                                                                                    "value": "2.16.840.1.113883.6.177"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "RxNorm",
+                                                                                                    "value": "2.16.840.1.113883.6.88"
+                                                                                                },
+                                                                                                {
+                                                                                                    "name": "SNOMED-CT",
+                                                                                                    "value": "2.16.840.1.113883.6.96"
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code[].displayName",
+                                                                                            "title": "Display Name"
+                                                                                        }
+                                                                                    ]
+                                                                                }
                                                                             ]
-                                                                        },
-                                                                        {
-                                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.matchingDomain.enumeration.code[].displayName",
-                                                                            "title" : "Display Name"
                                                                         }
                                                                     ]
                                                                 }
@@ -2826,16 +3253,40 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Syntax On Resource",
                                                             "items" : [
                                                                 {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter.syntaxOnResource.valuePrefix",
-                                                                    "title" : "Prefix"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter.syntaxOnResource.nonHl7CompliantName",
-                                                                    "title" : "non-HL7 Compliant Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter.syntaxOnResource.valueSuffix",
-                                                                    "title" : "Suffix"
+                                                                    "type": "section",
+                                                                    "htmlClass": "row",
+                                                                    "items": [
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter.syntaxOnResource.valuePrefix",
+                                                                                    "title": "Prefix"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter.syntaxOnResource.nonHl7CompliantName",
+                                                                                    "title": "non-HL7 Compliant Name"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerLanguage.searchParameter.syntaxOnResource.valueSuffix",
+                                                                                    "title": "Suffix"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
                                                                 }
                                                             ]
                                                         },
@@ -3002,12 +3453,30 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPerformerKnowledgeUserType.length > 0",
                                             "items" : [
                                                 {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.search",
-                                                    "title" : "Use For Searching"
+                                                    "type": "section",
+                                                    "htmlClass": "row",
+                                                    "items": [
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.match",
+                                                                    "title": "Use For Matching"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.search",
+                                                                    "title": "Use For Searching"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain",
@@ -3054,7 +3523,9 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.matchingDomain.enumeration.code[].displayName",
                                                                             "title" : "Display Name",
-                                                                            "readonly" : true
+                                                                            "readonly" : true,
+                                                                            "notitle" : true,
+                                                                            "feedback" : false
                                                                         }
                                                                     ]
                                                                 }
@@ -3072,16 +3543,40 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Syntax On Resource",
                                                             "items" : [
                                                                 {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter.syntaxOnResource.valuePrefix",
-                                                                    "title" : "Prefix"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter.syntaxOnResource.nonHl7CompliantName",
-                                                                    "title" : "non-HL7 Compliant Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter.syntaxOnResource.valueSuffix",
-                                                                    "title" : "Suffix"
+                                                                    "type": "section",
+                                                                    "htmlClass": "row",
+                                                                    "items": [
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter.syntaxOnResource.valuePrefix",
+                                                                                    "title": "Prefix"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter.syntaxOnResource.nonHl7CompliantName",
+                                                                                    "title": "non-HL7 Compliant Name"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType.searchParameter.syntaxOnResource.valueSuffix",
+                                                                                    "title": "Suffix"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
                                                                 }
                                                             ]
                                                         },
@@ -3113,12 +3608,30 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showInformationRecipientLanguage.length > 0",
                                             "items" : [
                                                 {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.search",
-                                                    "title" : "Use For Searching"
+                                                    "type": "section",
+                                                    "htmlClass": "row",
+                                                    "items": [
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.match",
+                                                                    "title": "Use For Matching"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.search",
+                                                                    "title": "Use For Searching"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.matchingDomain",
@@ -3174,16 +3687,40 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Syntax On Resource",
                                                             "items" : [
                                                                 {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter.syntaxOnResource.valuePrefix",
-                                                                    "title" : "Prefix"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter.syntaxOnResource.nonHl7CompliantName",
-                                                                    "title" : "non-HL7 Compliant Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter.syntaxOnResource.valueSuffix",
-                                                                    "title" : "Suffix"
+                                                                    "type": "section",
+                                                                    "htmlClass": "row",
+                                                                    "items": [
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter.syntaxOnResource.valuePrefix",
+                                                                                    "title": "Prefix"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter.syntaxOnResource.nonHl7CompliantName",
+                                                                                    "title": "non-HL7 Compliant Name"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage.searchParameter.syntaxOnResource.valueSuffix",
+                                                                                    "title": "Suffix"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
                                                                 }
                                                             ]
                                                         },
@@ -3350,12 +3887,30 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showInformationRecipientUserType.length > 0",
                                             "items" : [
                                                 {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.match",
-                                                    "title" : "Use For Matching"
-                                                },
-                                                {
-                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.search",
-                                                    "title" : "Use For Searching"
+                                                    "type": "section",
+                                                    "htmlClass": "row",
+                                                    "items": [
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.match",
+                                                                    "title": "Use For Matching"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "section",
+                                                            "htmlClass": "col-md-3",
+                                                            "items": [
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.search",
+                                                                    "title": "Use For Searching"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain",
@@ -3402,7 +3957,9 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                         {
                                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.matchingDomain.enumeration.code[].displayName",
                                                                             "title" : "Display Name",
-                                                                            "readonly" : true
+                                                                            "readonly" : true,
+                                                                            "notitle" : true,
+                                                                            "feedback" : false
                                                                         }
                                                                     ]
                                                                 }
@@ -3420,16 +3977,40 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             "title" : "Syntax On Resource",
                                                             "items" : [
                                                                 {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter.syntaxOnResource.valuePrefix",
-                                                                    "title" : "Prefix"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter.syntaxOnResource.nonHl7CompliantName",
-                                                                    "title" : "non-HL7 Compliant Name"
-                                                                },
-                                                                {
-                                                                    "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter.syntaxOnResource.valueSuffix",
-                                                                    "title" : "Suffix"
+                                                                    "type": "section",
+                                                                    "htmlClass": "row",
+                                                                    "items": [
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter.syntaxOnResource.valuePrefix",
+                                                                                    "title": "Prefix"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter.syntaxOnResource.nonHl7CompliantName",
+                                                                                    "title": "non-HL7 Compliant Name"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "type": "section",
+                                                                            "htmlClass": "col-md-3",
+                                                                            "items": [
+                                                                                {
+                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType.searchParameter.syntaxOnResource.valueSuffix",
+                                                                                    "title": "Suffix"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
                                                                 }
                                                             ]
                                                         },
