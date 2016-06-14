@@ -21,14 +21,18 @@ public class SemmedService {
 
     @RequestMapping(value = "/json", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public List<RecentCitationsEntity>getCitations(@RequestBody List<String> citations) {
+    public List<CitationWrapper>getCitations(@RequestBody List<String> citations) {
         List<RecentCitationsEntity> cites;
+        List<ConceptFrequencySemmedEntity> concepts;
         System.out.println(citations);
-
+        concepts = semmedServiceDao.getFilters(citations);
         cites = semmedServiceDao.getCitations(citations);
-
-
-        return cites;
+        CitationWrapper d = new CitationWrapper(cites, concepts);
+        List<CitationWrapper> a = new ArrayList<CitationWrapper>();
+        a.add(d);
+        System.out.println("Citations: \n" + d.getCitations());
+        System.out.println("Filters: \n" + d.getFilters());
+        return a;
        // return new ArrayList<String>();
     }
 

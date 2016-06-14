@@ -7,5 +7,7 @@
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
         <mapping resource="RecentCitationsEntity.hbm.xml"/>
+        <mapping resource="ConceptFrequencySemmedEntity.hbm.xml"/>
+        <mapping resource="InverseConceptFrequencySemmedEntity.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

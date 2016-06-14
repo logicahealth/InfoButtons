@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.utah.edu.semmedDao">
+
+    <class name="ConceptFrequencySemmedEntity" table="CONCEPT_FREQUENCY_SEMMED">
+        <id name="pmid" column="PMID"/>
+        <property name="cui" column="CUI"/>
+        <property name="preferredName" column="PREFERRED_NAME"/>
+        <property name="semGroup" column="SEM_GROUP"/>
+        <property name="conceptCount" column="concept_count"/>
+    </class>
+</hibernate-mapping>

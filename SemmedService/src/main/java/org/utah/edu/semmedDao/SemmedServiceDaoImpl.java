@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +46,24 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
         return (List<RecentCitationsEntity>) sessionFactory.getCurrentSession()
                 .createCriteria(RecentCitationsEntity.class).add(Restrictions.in("pmid", PMIDs)).list();
 
+    }
+
+    @Transactional
+    public List<ConceptFrequencySemmedEntity> getFilters(List<String> PMIDs) {
+
+        String query = "select tf " +
+                "FROM ConceptFrequencySemmedEntity tf " +
+                "WHERE tf.pmid IN ('3424234', '24299975', '10019768') " +
+                "group by tf.cui";
+
+
+        String query2 = "select tf.cui, tf.semGroup as semantic_group, tf.preferredName as term, idf.conceptCount as frequency_in_collection, count(tf) as frequency_in_results " +
+        "FROM ConceptFrequencySemmedEntity as tf, InverseConceptFrequencySemmedEntity as idf " +
+        "WHERE tf.pmid IN ('3424234', '24299975', '10019768') AND tf.cui = idf.cui group by tf.cui";
+
+        org.hibernate.Query query1 = sessionFactory.getCurrentSession().createQuery(query);
+        //query1.setParameterList("pmids",PMIDs);
+
+        return query1.list();
     }
 }

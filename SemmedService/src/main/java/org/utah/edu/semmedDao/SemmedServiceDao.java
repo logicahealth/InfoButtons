@@ -8,5 +8,6 @@ import java.util.List;
 public interface SemmedServiceDao {
 
 List<RecentCitationsEntity> getCitations(List<String> PMIDs);
+   List<ConceptFrequencySemmedEntity> getFilters(List<String> PMIDs);
 
 }
