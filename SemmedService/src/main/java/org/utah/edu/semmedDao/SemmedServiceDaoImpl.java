@@ -45,7 +45,7 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
     }
 
     @Transactional
-    public List<ConceptFrequencySemmedEntity> getFilters(List<String> PMIDs) {
+    public List<InverseConceptFrequencySemmedEntity> getFilters(List<String> PMIDs) {
 
         String query = "select tf " +
                 "FROM ConceptFrequencySemmedEntity tf " +
@@ -53,12 +53,12 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
                 "group by tf.cui";
 
         //TEST QUERY 1
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ConceptFrequencySemmedEntity.class,"cfse")
-                .createAlias("cfse.cui","cui")
-                .add(Restrictions.in("pmid",PMIDs));
-        List list = criteria.list();
+//        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(InverseConceptFrequencySemmedEntity.class,"inverse")
+//                .createAlias("inverse.cui","conceptFrequencySemmedEntity")
+//                .add(Restrictions.in("pmid",PMIDs));
+//        List list = criteria.list();
 
-        /* TEST QUERY 2
+        // TEST QUERY 2
 
 
         List<ConceptFrequencySemmedEntity> a = sessionFactory.getCurrentSession()
@@ -73,7 +73,7 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
                 .createCriteria(InverseConceptFrequencySemmedEntity.class).add(Restrictions.in("cui", CUIs)).list();
 
 
-        */
+
 
         /*
         String query2 = "select tf.cui, tf.semGroup as semantic_group, tf.preferredName as term, idf.conceptCount as frequency_in_collection, count(tf) as frequency_in_results " +
@@ -81,9 +81,9 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
         "WHERE tf.pmid IN ('3424234', '24299975', '10019768') AND tf.cui = idf.cui group by tf.cui";
 */
 
-        org.hibernate.Query query1 = sessionFactory.getCurrentSession().createQuery(query);
+        //org.hibernate.Query query1 = sessionFactory.getCurrentSession().createQuery(query);
         //query1.setParameterList("pmids",PMIDs);
 
-        return list;
+        return c;
     }
 }

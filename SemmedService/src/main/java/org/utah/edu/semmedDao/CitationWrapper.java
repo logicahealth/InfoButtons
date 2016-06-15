@@ -31,7 +31,7 @@ public class CitationWrapper {
 
     }
 
-    public CitationWrapper(List<RecentCitationsEntity> rce, List<ConceptFrequencySemmedEntity> cfse) {
+    public CitationWrapper(List<RecentCitationsEntity> rce, List<InverseConceptFrequencySemmedEntity> cfse) {
 
 
     citations = new ArrayList<String>();
@@ -42,8 +42,8 @@ public class CitationWrapper {
         }
 
         filters = new ArrayList<String>();
-        for (ConceptFrequencySemmedEntity a: cfse) {
-            if(a.getSemGroup() != null) {
+        for (InverseConceptFrequencySemmedEntity a: cfse) {
+            if(a.getPreferredName() != null) {
                 filters.add(a.getSemGroup());
             }
         }

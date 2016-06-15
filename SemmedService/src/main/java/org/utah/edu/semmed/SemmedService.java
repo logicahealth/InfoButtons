@@ -23,7 +23,7 @@ public class SemmedService {
     @ResponseBody
     public List<CitationWrapper>getCitations(@RequestBody List<String> citations) {
         List<RecentCitationsEntity> cites;
-        List<ConceptFrequencySemmedEntity> concepts;
+        List<InverseConceptFrequencySemmedEntity> concepts;
         System.out.println(citations);
         concepts = semmedServiceDao.getFilters(citations);
         cites = semmedServiceDao.getCitations(citations);
