@@ -47,18 +47,6 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
     @Transactional
     public List<InverseConceptFrequencySemmedEntity> getFilters(List<String> PMIDs) {
 
-        String query = "select tf " +
-                "FROM ConceptFrequencySemmedEntity tf " +
-                "WHERE tf.pmid IN ('3424234', '24299975', '10019768') " +
-                "group by tf.cui";
-
-        //TEST QUERY 1
-//        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(InverseConceptFrequencySemmedEntity.class,"inverse")
-//                .createAlias("inverse.cui","conceptFrequencySemmedEntity")
-//                .add(Restrictions.in("pmid",PMIDs));
-//        List list = criteria.list();
-
-        // TEST QUERY 2
 
 
         List<ConceptFrequencySemmedEntity> a = sessionFactory.getCurrentSession()
@@ -67,22 +55,13 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
         List<String> CUIs = new ArrayList<String>();
         for (ConceptFrequencySemmedEntity b: a) {
             CUIs.add(b.getCui());
+            System.out.println(b.getCui());
         }
+
 
         List<InverseConceptFrequencySemmedEntity> c = sessionFactory.getCurrentSession()
                 .createCriteria(InverseConceptFrequencySemmedEntity.class).add(Restrictions.in("cui", CUIs)).list();
 
-
-
-
-        /*
-        String query2 = "select tf.cui, tf.semGroup as semantic_group, tf.preferredName as term, idf.conceptCount as frequency_in_collection, count(tf) as frequency_in_results " +
-        "FROM ConceptFrequencySemmedEntity as tf, InverseConceptFrequencySemmedEntity as idf " +
-        "WHERE tf.pmid IN ('3424234', '24299975', '10019768') AND tf.cui = idf.cui group by tf.cui";
-*/
-
-        //org.hibernate.Query query1 = sessionFactory.getCurrentSession().createQuery(query);
-        //query1.setParameterList("pmids",PMIDs);
 
         return c;
     }

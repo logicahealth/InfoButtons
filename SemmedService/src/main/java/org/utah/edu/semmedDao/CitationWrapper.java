@@ -44,7 +44,7 @@ public class CitationWrapper {
         filters = new ArrayList<String>();
         for (InverseConceptFrequencySemmedEntity a: cfse) {
             if(a.getPreferredName() != null) {
-                filters.add(a.getSemGroup());
+                filters.add(a.getPreferredName());
             }
         }
     }

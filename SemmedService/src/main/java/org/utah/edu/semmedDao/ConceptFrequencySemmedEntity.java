@@ -15,7 +15,7 @@ public class ConceptFrequencySemmedEntity {
     private String semGroup;
     private Byte conceptCount;
 
-
+    @Id
     @Column(name = "PMID")
     public String getPmid() {
         return pmid;

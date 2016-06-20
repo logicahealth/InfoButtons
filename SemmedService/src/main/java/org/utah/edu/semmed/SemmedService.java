@@ -27,10 +27,12 @@ public class SemmedService {
         System.out.println(citations);
         concepts = semmedServiceDao.getFilters(citations);
         cites = semmedServiceDao.getCitations(citations);
+
+        System.out.print(concepts.size());
+
         CitationWrapper d = new CitationWrapper(cites, concepts);
         List<CitationWrapper> a = new ArrayList<CitationWrapper>();
         a.add(d);
-        System.out.println("Citations: \n" + d.getCitations());
         System.out.println("Filters: \n" + d.getFilters());
         return a;
        // return new ArrayList<String>();
