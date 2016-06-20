@@ -32,6 +32,7 @@ public class RecentCitationsEntity {
     private String summarySentence;
     private String citationjson;
 
+
     @Id
     @Column(name = "PMID")
     public String getPmid() {
