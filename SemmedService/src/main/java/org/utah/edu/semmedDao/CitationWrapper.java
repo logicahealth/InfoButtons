@@ -8,45 +8,42 @@ import java.util.List;
  */
 public class CitationWrapper {
 
-    public List<String> getCitations() {
-        return citations;
+    public List<String> getFeed() {
+        return feed;
     }
 
-    public void setCitations(List<String> citations) {
-        this.citations = citations;
+    public void setFeed(List<String> citations) {
+        this.feed = citations;
     }
 
-    public List<String> getFilters() {
+    public List<Filter> getFilters() {
         return filters;
     }
 
-    public void setFilters(List<String> filters) {
+    public void setFilters(List<Filter> filters) {
         this.filters = filters;
     }
 
-    private List<String> citations;
-    private List<String> filters;
+    private List<String> feed;
+    private List<Filter> filters;
 
     public CitationWrapper() {
 
     }
 
-    public CitationWrapper(List<RecentCitationsEntity> rce, List<InverseConceptFrequencySemmedEntity> cfse) {
+    public CitationWrapper(List<RecentCitationsEntity> rce, List<Filter> cfse) {
 
 
-    citations = new ArrayList<String>();
+    feed = new ArrayList<String>();
         for (RecentCitationsEntity s: rce) {
             if(s.getCitationjson() != null) {
-                citations.add(s.getCitationjson());
+                feed.add(s.getCitationjson());
             }
         }
 
-        filters = new ArrayList<String>();
-        for (InverseConceptFrequencySemmedEntity a: cfse) {
-            if(a.getPreferredName() != null) {
-                filters.add(a.getPreferredName());
-            }
+        filters = new ArrayList<Filter>(cfse);
+
         }
     }
 
-}
+

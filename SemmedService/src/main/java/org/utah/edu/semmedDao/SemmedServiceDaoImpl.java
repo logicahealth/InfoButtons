@@ -12,6 +12,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -49,8 +50,10 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
     }
 
     @Transactional
-    public List<InverseConceptFrequencySemmedEntity> getFilters(List<String> PMIDs) {
+    public List<Filter> getFilters(List<String> PMIDs) {
         List<String> CUIs = new ArrayList<String>();
+        Map<String,Integer> frequencies = new HashMap<String,Integer>();
+        List<Filter> filtersTemp = new ArrayList<Filter>();
         Map<String, ArrayList<String>> values = new HashMap<String, ArrayList<String>>();
 
         java.sql.Connection conn = null;
@@ -64,6 +67,7 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
             builder.append("?,");
         }
 
+
         String stmt = "select CUI from SemanticMedline.CONCEPT_FREQUENCY_SEMMED where PMID in ("
                 + builder.deleteCharAt( builder.length() -1 ).toString() + ")";
 
@@ -73,52 +77,30 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
 
             pstmt = conn.prepareStatement(stmt);
             int index = 1;
-
-            for( Object o : PMIDs ) {
-                pstmt.setObject(  index++, o ); // or whatever it applies
+            System.out.println(PMIDs.size());
+            for( String o : PMIDs ) {
+                pstmt.setString(  index++, o ); // or whatever it applies
             }
+
 
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()) {
-                CUIs.add(rs.getString(1));
+               CUIs.add(rs.getString(1));
+               if(frequencies.containsKey(rs.getString(1))) {
+                   int temp = frequencies.get(rs.getString(1));
+                   temp++;
+                    frequencies.put(rs.getString(1), temp);
+               }
+                else
+                   frequencies.put(rs.getString(1), 1);
             }
 
-            //***********////////// SECOND QUERY ////////////****************//
-//
-//            StringBuilder builder2 = new StringBuilder();
-//
-//            PreparedStatement pstmt2 = null;
-//
-//            for( int i = 0 ; i < CUIs.size(); i++ ) {
-//                builder2.append("?,");
-//            }
-//
-//            String stmt2 = "select * from SemanticMedline.INVERSE_CONCEPT_FREQUENCY_SEMMED where CUI in ("
-//                    + builder.deleteCharAt( builder2.length() -1 ).toString() + ")";
-//
-//            pstmt2 = conn.prepareStatement(stmt2);
-//            index = 1;
-//
-//            for( Object o : CUIs ) {
-//                pstmt2.setObject(  index++, o ); // or whatever it applies
-//            }
-//
-//            ResultSet rs2 = pstmt2.executeQuery();
-//            ResultSetMetaData rsmd = rs2.getMetaData();
-//            int columnCount = rsmd.getColumnCount();
-//            while(rs2.next()) {
-//                ArrayList<String> a = new ArrayList<String>();
-//                for (int i = 2; i <= columnCount; i++) {
-//                    a.add(rs2.getString(i));
-//                }
-//                values.put(rs2.getString(1), a);
-//            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-
+        System.out.println(frequencies);
 
 //        List<ConceptFrequencySemmedEntity> a = sessionFactory.getCurrentSession()
 //                .createCriteria(ConceptFrequencySemmedEntity.class).add(Restrictions.in("pmid", PMIDs)).list();
@@ -129,10 +111,18 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
 //        }
 
 
-        List<InverseConceptFrequencySemmedEntity> c = sessionFactory.getCurrentSession()
-                .createCriteria(InverseConceptFrequencySemmedEntity.class).add(Restrictions.in("cui", CUIs)).list();
+
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(InverseConceptFrequencySemmedEntity.class);
+        criteria.add(Restrictions.in("cui", CUIs));
+
+        List<InverseConceptFrequencySemmedEntity> c = criteria.list();
+
+        for(InverseConceptFrequencySemmedEntity temp : c) {
+            Filter temp1 = new Filter(temp.getCui(), temp.getSemGroup(), temp.getPreferredName(), temp.getConceptCount(), frequencies.get(temp.getCui()));
+            filtersTemp.add(temp1);
+        }
 
 
-        return c;
+        return filtersTemp;
     }
 }

@@ -10,6 +10,6 @@ import java.util.Map;
 public interface SemmedServiceDao {
 
 List<RecentCitationsEntity> getCitations(List<String> PMIDs);
-   List<InverseConceptFrequencySemmedEntity> getFilters(List<String> PMIDs);
+   List<Filter> getFilters(List<String> PMIDs);
 
 }
