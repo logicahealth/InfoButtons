@@ -1,8 +1,9 @@
-package org.utah.edu.semmedDao;
+package org.utah.edu.semmed.db.dao;
 
-import java.util.ArrayList;
+import org.utah.edu.semmed.web.wrappers.Filter;
+import org.utah.edu.semmed.db.domain.RecentCitationsEntity;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by JoeNarus on 5/23/16.

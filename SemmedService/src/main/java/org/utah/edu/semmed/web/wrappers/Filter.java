@@ -1,4 +1,4 @@
-package org.utah.edu.semmedDao;
+package org.utah.edu.semmed.web.wrappers;
 
 /**
  * Created by JoeNarus on 6/21/16.

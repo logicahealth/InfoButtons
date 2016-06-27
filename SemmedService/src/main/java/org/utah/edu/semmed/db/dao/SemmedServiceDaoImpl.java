@@ -1,31 +1,21 @@
-package org.utah.edu.semmedDao;
+package org.utah.edu.semmed.db.dao;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import javax.persistence.*;
 import java.sql.*;
 
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
 import org.hibernate.*;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
-import javax.sql.DataSource;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.utah.edu.semmed.db.domain.InverseConceptFrequencySemmedEntity;
+import org.utah.edu.semmed.db.domain.RecentCitationsEntity;
+import org.utah.edu.semmed.web.wrappers.Filter;
 
 
 /**
@@ -50,7 +40,7 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
     }
 
     @Transactional
-    public List<Filter> getFilters(List<String> PMIDs) {
+    public List<org.utah.edu.semmed.web.wrappers.Filter> getFilters(List<String> PMIDs) {
         List<String> CUIs = new ArrayList<String>();
         Map<String,Integer> frequencies = new HashMap<String,Integer>();
         List<Filter> filtersTemp = new ArrayList<Filter>();
@@ -77,7 +67,6 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
 
             pstmt = conn.prepareStatement(stmt);
             int index = 1;
-            System.out.println(PMIDs.size());
             for( String o : PMIDs ) {
                 pstmt.setString(  index++, o ); // or whatever it applies
             }
@@ -99,8 +88,6 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        System.out.println(frequencies);
 
 //        List<ConceptFrequencySemmedEntity> a = sessionFactory.getCurrentSession()
 //                .createCriteria(ConceptFrequencySemmedEntity.class).add(Restrictions.in("pmid", PMIDs)).list();

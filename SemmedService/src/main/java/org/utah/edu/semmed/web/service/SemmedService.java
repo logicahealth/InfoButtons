@@ -1,12 +1,13 @@
-package org.utah.edu.semmed; /**
+package org.utah.edu.semmed.web.service; /**
  * Created by JoeNarus on 5/16/16.
  */
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.utah.edu.semmedDao.*;
+import org.utah.edu.semmed.db.dao.SemmedServiceDao;
+import org.utah.edu.semmed.db.domain.RecentCitationsEntity;
+import org.utah.edu.semmed.web.wrappers.CitationWrapper;
+import org.utah.edu.semmed.web.wrappers.Filter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,19 +29,6 @@ public class SemmedService {
         List<CitationWrapper> a = new ArrayList<CitationWrapper>();
         a.add(d);
         return a;
-    }
-
-
-
-    @RequestMapping(value = "/json", method = RequestMethod.GET)
-    public List<String> get() {
-
-        Citation cit = new Citation();
-        List<String> h = new ArrayList<String>();
-        h.add("10002");
-        cit.SetCitations(h);
-
-        return cit.GetCitations();
     }
 
 }

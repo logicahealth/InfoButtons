@@ -56,7 +56,7 @@
         <property name="password" value="mahdifatemeh" />
     </bean>
 
-    <bean id="semmedServiceDao" class="org.utah.edu.semmedDao.SemmedServiceDaoImpl">
+    <bean id="semmedServiceDao" class="org.utah.edu.semmed.db.dao.SemmedServiceDaoImpl">
 
     </bean>
     <bean id="sessionFactory"

@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.utah.edu.semmedDao">
 
-    <class name="InverseConceptFrequencySemmedEntity" table="INVERSE_CONCEPT_FREQUENCY_SEMMED">
+    <class name="org.utah.edu.semmed.db.domain.InverseConceptFrequencySemmedEntity" table="INVERSE_CONCEPT_FREQUENCY_SEMMED">
         <id name="cui" column="CUI"/>
         <property name="preferredName" column="PREFERRED_NAME"/>
         <property name="semGroup" column="SEM_GROUP"/>

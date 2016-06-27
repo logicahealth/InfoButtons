@@ -1,4 +1,6 @@
-package org.utah.edu.semmedDao;
+package org.utah.edu.semmed.web.wrappers;
+
+import org.utah.edu.semmed.db.domain.RecentCitationsEntity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@
   <artifactId>SemmedService</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>org.utah.edu.semmed.SemmedService Maven Webapp</name>
+  <name>org.utah.edu.semmed.web.service.SemmedService Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -205,6 +205,6 @@
 
   </dependencies>
   <build>
-    <finalName>org.utah.edu.semmed.SemmedService</finalName>
+    <finalName>org.utah.edu.semmed.web.service.SemmedService</finalName>
   </build>
 </project>
