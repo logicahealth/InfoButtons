@@ -20,15 +20,24 @@ public class SemmedService {
 
     @RequestMapping(value = "/json", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public List<CitationWrapper>getCitations(@RequestBody List<String> citations) {
-        List<RecentCitationsEntity> cites;
-        List<Filter> concepts;
-        concepts = semmedServiceDao.getFilters(citations);
-        cites = semmedServiceDao.getCitations(citations);
-        CitationWrapper d = new CitationWrapper(cites, concepts);
-        List<CitationWrapper> a = new ArrayList<CitationWrapper>();
-        a.add(d);
-        return a;
+    public List<CitationWrapper>getCitations(@RequestBody List<String> citations, @RequestHeader(value = "Authorization", required=false) String credentials) {
+        System.out.println(credentials);
+        String[] splitt = credentials.split(":");
+        if(splitt[0].equals("semmed") && splitt[1].equals("semmedDB")) {
+            System.out.println(splitt[0] + " " + splitt[1]);
+
+            List<RecentCitationsEntity> cites;
+            List<Filter> concepts;
+            concepts = semmedServiceDao.getFilters(citations);
+            cites = semmedServiceDao.getCitations(citations);
+            CitationWrapper d = new CitationWrapper(cites, concepts);
+            List<CitationWrapper> a = new ArrayList<CitationWrapper>();
+            a.add(d);
+
+            return a;
+        }
+        else
+            return null;
     }
 
 }
