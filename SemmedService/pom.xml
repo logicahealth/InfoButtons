@@ -6,6 +6,21 @@
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>org.utah.edu.semmed.web.service.SemmedService Maven Webapp</name>
+
+  <properties>
+    <dts-version>3.5.0</dts-version>
+
+    <prop.dburl>jdbc:mysql://mysql.chpc.utah.edu:3306/SemanticMedline</prop.dburl>
+    <prop.dbdriver>com.mysql.jdbc.Driver</prop.dbdriver>
+    <prop.dbusername></prop.dbusername>
+    <prop.dbpassword></prop.dbpassword>
+
+
+    <prop.username></prop.username>
+    <prop.password></prop.password>
+  </properties>
+
+
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -205,6 +220,22 @@
 
   </dependencies>
   <build>
-    <finalName>org.utah.edu.semmed.web.service.SemmedService</finalName>
+    <finalName>SemmedService</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>serviceParams.properties</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+        <excludes>
+          <exclude>serviceParams.properties</exclude>
+        </excludes>
+      </resource>
+    </resources>
   </build>
 </project>

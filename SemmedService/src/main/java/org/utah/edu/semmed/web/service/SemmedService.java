@@ -17,13 +17,14 @@ public class SemmedService {
 
     @Autowired
     private SemmedServiceDao semmedServiceDao;
-
+    @Autowired
+    private PropertiesHandler props;
     @RequestMapping(value = "/json", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
     public List<CitationWrapper>getCitations(@RequestBody List<String> citations, @RequestHeader(value = "Authorization", required=false) String credentials) {
-        System.out.println(credentials);
         String[] splitt = credentials.split(":");
-        if(splitt[0].equals("semmed") && splitt[1].equals("semmedDB")) {
+        System.out.println(props.username);
+        if(splitt[0].equals(props.username) && splitt[1].equals(props.password)) {
             System.out.println(splitt[0] + " " + splitt[1]);
 
             List<RecentCitationsEntity> cites;

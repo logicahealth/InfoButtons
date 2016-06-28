@@ -17,6 +17,10 @@
     http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
 
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:serviceParams.properties"/>
+    </bean>
+
     <mvc:annotation-driven />
     <context:annotation-config />
 
@@ -52,10 +56,16 @@
     <tx:annotation-driven />
 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://mysql.chpc.utah.edu:3306/SemanticMedline" />
-        <property name="username" value="semmed" />
-        <property name="password" value="mahdifatemeh" />
+        <property name="driverClassName" >
+            <value>${prop.dbdriver}</value> </property>
+        <property name="url">
+            <value>${prop.dburl}</value> </property>
+        <property name="username">
+            <value>${prop.dbusername}</value>
+        </property>
+        <property name="password">
+            <value>${prop.dbpassword}</value>
+        </property>
     </bean>
 
     <bean id="semmedServiceDao" class="org.utah.edu.semmed.db.dao.SemmedServiceDaoImpl">
@@ -67,8 +77,8 @@
         <property name="configLocation" value="classpath:hibernate.cfg.xml" />
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.connection.url">jdbc:mysql://mysql.chpc.utah.edu:3306/SemanticMedline</prop>
-                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+                <prop key="hibernate.connection.url">${prop.dburl}</prop>
+                <prop key="hibernate.connection.driver_class">${prop.dbdriver}</prop>
             </props>
         </property>
     </bean>
