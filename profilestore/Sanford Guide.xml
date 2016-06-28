@@ -6,8 +6,7 @@
 		<versionControl publicationDate="2016-03-21T00:00:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
-		<authorizedOrganizations>
-                </authorizedOrganizations>
+		</authorizedOrganizations>
 		<supportedTerminologies>
 			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMED-CT"/>
 			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
