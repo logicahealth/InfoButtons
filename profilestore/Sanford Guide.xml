@@ -7,7 +7,6 @@
 	</header>
 	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
 		<authorizedOrganizations>
-                     <authorizedOrganization name="University of Washington" id="1.3.6.1.4.1.150"/>
                 </authorizedOrganizations>
 		<supportedTerminologies>
 			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMED-CT"/>
