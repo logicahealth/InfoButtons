@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<header id="1">
+		<title>Sanford Guide</title>
+		<profileDescription>The Sanford Guide Web Edition combines Antimicrobial, HIV/AIDS, and Viral Hepatitis Therapies into a comprehensive resource with evidence-based recommendations for clinicians and other healthcare professionals. The Sanford Guides have provided convenient, concise, and reliable guidance since 1969.</profileDescription>
+		<versionControl publicationDate="2016-03-21T00:00:00"/>
+	</header>
+	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
+		<authorizedOrganizations/>
+		<contexts>
+			<context name="Knowledge on meds" id="3">
+				<contextDefinition>
+					<patientGender match="false" search="true"/>
+					<patientAgeGroup match="false" search="true"/>
+					<task match="true" search="true">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="medication order entry" code="MEDOE"/>
+								<code codeSystem="2.16.840.1.113883.5.4" displayName="medication list review" code="MLREV"/>
+                                <code codeSystem="2.16.840.1.113883.5.4" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" code="PROBLISTE"/>
+                            </enumeration>
+						</matchingDomain>
+					</task>
+					<encounterType match="false" search="true"/>
+					<conceptOfInterest search="true" match="false"/>
+					<subTopics>
+						<subTopic linkName="Drug information"/>
+					</subTopics>
+				</contextDefinition>
+				<knowledgeRequestService>
+					<knowledgeRequestServiceLocation url="http://webedition.sanfordguide.com/search?searchType=HL7&amp;"/>
+				</knowledgeRequestService>
+			</context>
+		</contexts>
+	</profileDefinition>
+</knowledgeResourceProfile>
