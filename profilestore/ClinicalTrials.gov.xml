@@ -1,66 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<header id="2">
-		<title>ClinicalTrials.gov</title>
-		<profileDescription>US National registry of clinical trials.</profileDescription>
-		<versionControl publicationDate="2015-01-07T00:00:00"/>
+	<header id="1">
+		<title>Sanford Guide</title>
+		<profileDescription>The Sanford Guide Web Edition combines Antimicrobial, HIV/AIDS, and Viral Hepatitis Therapies into a comprehensive resource with evidence-based recommendations for clinicians and other healthcare professionals. The Sanford Guides have provided convenient, concise, and reliable guidance since 1969.</profileDescription>
+		<versionControl publicationDate="2016-03-21T00:00:00"/>
 	</header>
-	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false" urlStyle="DIRTY">
+	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
 		<authorizedOrganizations/>
 		<contexts>
-			<context name="Links from problem list to conditions in clinicaltrials.gov." id="1">
+			<context name="Knowledge on meds" id="3">
 				<contextDefinition>
-					<patientGender match="false" search="true">
-						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="gndr"/>
-						</searchParameter>
-					</patientGender>
-					<task match="true" search="false">
-						<matchingDomain>
-							<enumeration includeDescendants="false">
-								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
-								<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list entry task" code="PROBLISTE"/>
-							</enumeration>
-						</matchingDomain>
-					</task>
-					<conceptOfInterest match="false" search="true">
-						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="cond"/>
-						</searchParameter>
-					</conceptOfInterest>
-					<subTopics>
-						<subTopic linkName="Open trials"/>
-					</subTopics>
-				</contextDefinition>
-				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://clinicaltrials.gov/ct2/results?recr=Open&amp;type=Intr&amp;no_unk=Y&amp;"/>
-				</knowledgeRequestService>
-			</context>
-			<context name="Links from medications list to conditions in clinicaltrials.gov." id="1">
-				<contextDefinition>
-					<patientGender match="false" search="true">
-						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="gndr"/>
-						</searchParameter>
-					</patientGender>
-					<task match="true" search="false">
+					<patientGender match="false" search="true"/>
+					<patientAgeGroup match="false" search="true"/>
+					<task match="true" search="true">
 						<matchingDomain>
 							<enumeration includeDescendants="false">
 								<code codeSystem="2.16.840.1.113883.5.4" displayName="medication order entry" code="MEDOE"/>
 								<code codeSystem="2.16.840.1.113883.5.4" displayName="medication list review" code="MLREV"/>
-							</enumeration>
+                                <code codeSystem="2.16.840.1.113883.5.4" code="PROBLISTREV"/>
+								<code codeSystem="2.16.840.1.113883.5.4" code="PROBLISTE"/>
+                            </enumeration>
 						</matchingDomain>
 					</task>
-					<conceptOfInterest match="false" search="true">
-						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="intr"/>
-						</searchParameter>
-					</conceptOfInterest>
+					<encounterType match="false" search="true"/>
+					<conceptOfInterest search="true" match="false"/>
 					<subTopics>
-						<subTopic linkName="Open trials"/>
+						<subTopic linkName="Drug information"/>
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://clinicaltrials.gov/ct2/results?recr=Open&amp;type=Intr&amp;no_unk=Y&amp;"/>
+					<knowledgeRequestServiceLocation url="http://webedition.sanfordguide.com/search?searchType=HL7&amp;"/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>
