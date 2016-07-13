@@ -220,7 +220,7 @@
 
   </dependencies>
   <build>
-    <finalName>SemmedService</finalName>
+    <finalName>KnowledgeSummary</finalName>
     <resources>
       <resource>
         <directory>src/main/resources</directory>
