@@ -1,5 +1,6 @@
 package org.utah.edu.semmed.web.wrappers;
 
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import org.utah.edu.semmed.db.domain.RecentCitationsEntity;
 
 import java.util.ArrayList;
@@ -10,12 +11,13 @@ import java.util.List;
  */
 public class CitationWrapper {
 
-    public List<String> getFeed() {
+    @JsonRawValue
+    public List getFeed() {
         return feed;
     }
 
-    public void setFeed(List<String> citations) {
-        this.feed = citations;
+    public void setFeed(List feed) {
+        this.feed = feed;
     }
 
     public List<Filter> getFilters() {
@@ -33,15 +35,10 @@ public class CitationWrapper {
 
     }
 
-    public CitationWrapper(List<RecentCitationsEntity> rce, List<Filter> cfse) {
+    public CitationWrapper(List rce, List<Filter> cfse) {
 
 
-    feed = new ArrayList<String>();
-        for (RecentCitationsEntity s: rce) {
-            if(s.getCitationjson() != null) {
-                feed.add(s.getCitationjson());
-            }
-        }
+        feed = new ArrayList(rce);
 
         filters = new ArrayList<Filter>(cfse);
 

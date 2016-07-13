@@ -27,7 +27,7 @@ public class SemmedService {
         if(splitt[0].equals(props.username) && splitt[1].equals(props.password)) {
             System.out.println(splitt[0] + " " + splitt[1]);
 
-            List<RecentCitationsEntity> cites;
+            List cites;
             List<Filter> concepts;
             concepts = semmedServiceDao.getFilters(citations);
             cites = semmedServiceDao.getCitations(citations);

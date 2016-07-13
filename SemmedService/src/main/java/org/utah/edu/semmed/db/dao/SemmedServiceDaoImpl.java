@@ -8,6 +8,7 @@ import java.sql.*;
 
 
 import org.hibernate.*;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,10 +33,10 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
     }
 
     @Transactional
-    public List<RecentCitationsEntity> getCitations(List<String> PMIDs) {
+    public List getCitations(List<String> PMIDs) {
 
-        return (List<RecentCitationsEntity>) sessionFactory.getCurrentSession()
-                .createCriteria(RecentCitationsEntity.class).add(Restrictions.in("pmid", PMIDs)).list();
+        return sessionFactory.getCurrentSession()
+                .createCriteria(RecentCitationsEntity.class).add(Restrictions.in("pmid", PMIDs)).setProjection(Projections.property("citationjson")).list();
 
     }
 
