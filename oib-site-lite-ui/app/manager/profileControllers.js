@@ -1902,14 +1902,14 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                     "key": "supportedTerminologySelect",
                                     "type"  : "select",
                                     "description" : "Select terminology to add to profile",
-                                    "titleMap": [{"name": "ICD9-CM", "value" : {"id" : "2.16.840.1.113883.6.103", "name": "ICD9-CM", "namespace" : ""}},
+                                    "titleMap": [{"name" : "CPT", value : {"id": "2.16.840.1.113883.6.12", "name" : "CPT", "namespace" : ""}},
+                                        {"name": "ICD9-CM", "value" : {"id" : "2.16.840.1.113883.6.103", "name": "ICD9-CM", "namespace" : ""}},
                                         {"name": "ICD10-CM", "value" : {"id" : "2.16.840.1.113883.6.103", "name": "ICD10-CM", "namespace" : ""}},
                                         {"name": "ICD10", "value" : {"id" : "2.16.840.1.113883.6.3", "name" : "ICD10", "namespace" : ""}},
-                                        {"name": "SNOMED-CT", "value" : {"id" : "2.16.840.1.113883.6.96", "name" : "SNOMED-CT", "namespace" : ""}},
-                                        {"name": "RxNorm", "value" : {"id" : "2.16.840.1.113883.6.88", "name" : "RxNorm"}},
-                                        {"name" : "NDC", "value" : {"id" : "2.16.840.1.113883.6.69", "name" : "NDC", "namespace" : ""}},
                                         {"name" : "LOINC", "value" : {"id" : "2.16.840.1.113883.6.1", "name" : "LOINC", "namespace" : ""}},
-                                        {"name" : "CPT", value : {"id": "2.16.840.1.113883.6.12", "name" : "CPT", "namespace" : ""}}],
+                                        {"name" : "NDC", "value" : {"id" : "2.16.840.1.113883.6.69", "name" : "NDC", "namespace" : ""}},
+                                        {"name": "RxNorm", "value" : {"id" : "2.16.840.1.113883.6.88", "name" : "RxNorm"}},
+                                        {"name": "SNOMED-CT", "value" : {"id" : "2.16.840.1.113883.6.96", "name" : "SNOMED-CT", "namespace" : ""}}],
                                     "onChange" : function(modelValue,form) {
 
                                         delete modelValue["$$hashKey"];
@@ -2049,17 +2049,31 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                     "items" : [
                                         {
                                             "key": "profileDefinition.contexts.context[].contextDefinition.showTask",
+                                            "condition" : "!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.search",
                                             "type": "checkboxes",
                                             "title" : "",
                                             "fieldHtmlClass" : "css-checkbox",
                                             "disableErrorState" : true,
                                             "disableSuccessState" : true,
-                                            "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Task Context</div>"}
+                                            "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Task Context*</div>"}
+                                        },
+                                        {
+                                            "key": "profileDefinition.contexts.context[].contextDefinition.showFilledTask",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.search",
+                                            "type": "checkboxes",
+                                            "title" : "",
+                                            "fieldHtmlClass" : "css-checkbox",
+                                            "disableErrorState" : true,
+                                            "disableSuccessState" : true,
+                                            "titleMap": {name: "<div class=\"css-div css-filled\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Task Context*</div>"}
                                         },
                                         {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.task",
                                             "title" : "",
-                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showTask.length > 0",
+                                            "condition" : "((!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.search) && " +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showTask.length > 0)) || " +
+                                            "((model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.task.search) &&" +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showFilledTask.length > 0))",
                                             "items" : [
                                                 {
                                                     "type": "section",
@@ -2239,16 +2253,30 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         {
                                             "key": "profileDefinition.contexts.context[].contextDefinition.showConceptOfInterest",
                                             "type": "checkboxes",
+                                            "condition" : "!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.search",
                                             "title" : "",
                                             "fieldHtmlClass" : "css-checkbox",
                                             "disableErrorState" : true,
                                             "disableSuccessState" : true,
-                                            "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Concept of Interest</div>"}
+                                            "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Concept of Interest*</div>"}
+                                        },
+                                        {
+                                            "key": "profileDefinition.contexts.context[].contextDefinition.showFilledConceptOfInterest",
+                                            "type": "checkboxes",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.search",
+                                            "title" : "",
+                                            "fieldHtmlClass" : "css-checkbox",
+                                            "disableErrorState" : true,
+                                            "disableSuccessState" : true,
+                                            "titleMap": {name: "<div class=\"css-div css-filled\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Concept of Interest*</div>"}
                                         },
                                         {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest",
                                             "title" : "",
-                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showConceptOfInterest.length > 0",
+                                            "condition" : "((!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.search) && " +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showConceptOfInterest.length > 0)) || " +
+                                            "((model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.conceptOfInterest.search) &&" +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showFilledConceptOfInterest.length > 0))",
                                             "items" : [
 
                                                 {
@@ -2483,6 +2511,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         {
                                             "key": "profileDefinition.contexts.context[].contextDefinition.showSubTopics",
                                             "type": "checkboxes",
+                                            "condition" : "!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.subTopics.subTopic.length > 0",
                                             "title" : "",
                                             "fieldHtmlClass" : "css-checkbox",
                                             "disableErrorState" : true,
@@ -2490,9 +2519,22 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Sub Topics</div>"}
                                         },
                                         {
+                                            "key": "profileDefinition.contexts.context[].contextDefinition.showFilledSubTopics",
+                                            "type": "checkboxes",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.subTopics.subTopic.length > 0",
+                                            "title" : "",
+                                            "fieldHtmlClass" : "css-checkbox",
+                                            "disableErrorState" : true,
+                                            "disableSuccessState" : true,
+                                            "titleMap": {name: "<div class=\"css-div css-filled\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Sub Topics</div>"}
+                                        },
+                                        {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics",
                                             "title" : "",
-                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showSubTopics.length > 0",
+                                            "condition" : "((!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.subTopics.subTopic.length > 0) && " +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showSubTopics.length > 0)) || " +
+                                            "((model.profileDefinition.contexts.context[arrayIndex].contextDefinition.subTopics.subTopic.length > 0) &&" +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showFilledSubTopics.length > 0))",
                                             "items" : [
                                                 {
                                                     "type": "fieldset",
@@ -2629,6 +2671,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         {
                                             "key": "profileDefinition.contexts.context[].contextDefinition.showPatientGender",
                                             "type": "checkboxes",
+                                            "condition" : "!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.search",
                                             "title" : "",
                                             "fieldHtmlClass" : "css-checkbox",
                                             "disableErrorState" : true,
@@ -2636,9 +2679,22 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Gender</div>"}
                                         },
                                         {
+                                            "key": "profileDefinition.contexts.context[].contextDefinition.showFilledPatientGender",
+                                            "type": "checkboxes",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.search",
+                                            "title" : "",
+                                            "fieldHtmlClass" : "css-checkbox",
+                                            "disableErrorState" : true,
+                                            "disableSuccessState" : true,
+                                            "titleMap": {name: "<div class=\"css-div css-filled\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Gender</div>"}
+                                        },
+                                        {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientGender",
                                             "title" : "",
-                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPatientGender.length > 0",
+                                            "condition" : "((!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.search) && " +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPatientGender.length > 0)) || " +
+                                            "((model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientGender.search) &&" +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showFilledPatientGender.length > 0))",
                                             "items" : [
                                                 {
                                                     "type": "section",
@@ -2785,6 +2841,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         {
                                             "key": "profileDefinition.contexts.context[].contextDefinition.showPatientAgeGroup",
                                             "type": "checkboxes",
+                                            "condition" : "!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.search",
                                             "title" : "",
                                             "fieldHtmlClass" : "css-checkbox",
                                             "disableErrorState" : true,
@@ -2792,9 +2849,22 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Age</div>"}
                                         },
                                         {
+                                            "key": "profileDefinition.contexts.context[].contextDefinition.showFilledPatientAgeGroup",
+                                            "type": "checkboxes",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.search",
+                                            "title" : "",
+                                            "fieldHtmlClass" : "css-checkbox",
+                                            "disableErrorState" : true,
+                                            "disableSuccessState" : true,
+                                            "titleMap": {name: "<div class=\"css-div css-filled\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Age</div>"}
+                                        },
+                                        {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.patientAgeGroup",
                                             "title" : "",
-                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPatientAgeGroup.length > 0",
+                                            "condition" : "((!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.search) && " +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPatientAgeGroup.length > 0)) || " +
+                                            "((model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.patientAgeGroup.search) &&" +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showFilledPatientAgeGroup.length > 0))",
                                             "items" : [
                                                 {
                                                     "type": "section",
@@ -2948,6 +3018,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         {
                                             "key": "profileDefinition.contexts.context[].contextDefinition.showEncounterType",
                                             "type": "checkboxes",
+                                            "condition" : "!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.search",
                                             "title" : "",
                                             "fieldHtmlClass" : "css-checkbox",
                                             "disableErrorState" : true,
@@ -2955,9 +3026,22 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Encounter</div>"}
                                         },
                                         {
+                                            "key": "profileDefinition.contexts.context[].contextDefinition.showFilledEncounterType",
+                                            "type": "checkboxes",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.search",
+                                            "title" : "",
+                                            "fieldHtmlClass" : "css-checkbox",
+                                            "disableErrorState" : true,
+                                            "disableSuccessState" : true,
+                                            "titleMap": {name: "<div class=\"css-div css-filled\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Encounter</div>"}
+                                        },
+                                        {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.encounterType",
                                             "title" : "",
-                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showEncounterType.length > 0",
+                                            "condition" : "((!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.search) && " +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showEncounterType.length > 0)) || " +
+                                            "((model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.encounterType.search) &&" +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showFilledEncounterType.length > 0))",
                                             "items" : [
                                                 {
                                                     "type": "section",
@@ -3111,6 +3195,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         {
                                             "key": "profileDefinition.contexts.context[].contextDefinition.showPerformerLanguage",
                                             "type": "checkboxes",
+                                            "condition" : "!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.search",
                                             "title" : "",
                                             "fieldHtmlClass" : "css-checkbox",
                                             "disableErrorState" : true,
@@ -3118,9 +3203,22 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Performer Language</div>"}
                                         },
                                         {
+                                            "key": "profileDefinition.contexts.context[].contextDefinition.showFilledPerformerLanguage",
+                                            "type": "checkboxes",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.search",
+                                            "title" : "",
+                                            "fieldHtmlClass" : "css-checkbox",
+                                            "disableErrorState" : true,
+                                            "disableSuccessState" : true,
+                                            "titleMap": {name: "<div class=\"css-div css-filled\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Performer Language</div>"}
+                                        },
+                                        {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerLanguage",
                                             "title" : "",
-                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPerformerLanguage.length > 0",
+                                            "condition" : "((!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.search) && " +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPerformerLanguage.length > 0)) || " +
+                                            "((model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerLanguage.search) &&" +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showFilledPerformerLanguage.length > 0))",
                                             "items" : [
                                                 {
                                                     "type": "section",
@@ -3441,6 +3539,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         {
                                             "key": "profileDefinition.contexts.context[].contextDefinition.showPerformerKnowledgeUserType",
                                             "type": "checkboxes",
+                                            "condition" : "!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.search",
                                             "title" : "",
                                             "fieldHtmlClass" : "css-checkbox",
                                             "disableErrorState" : true,
@@ -3448,9 +3547,22 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Performer Type</div>"}
                                         },
                                         {
+                                            "key": "profileDefinition.contexts.context[].contextDefinition.showFilledPerformerKnowledgeUserType",
+                                            "type": "checkboxes",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.search",
+                                            "title" : "",
+                                            "fieldHtmlClass" : "css-checkbox",
+                                            "disableErrorState" : true,
+                                            "disableSuccessState" : true,
+                                            "titleMap": {name: "<div class=\"css-div css-filled\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Performer Type</div>"}
+                                        },
+                                        {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.performerKnowledgeUserType",
                                             "title" : "",
-                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPerformerKnowledgeUserType.length > 0",
+                                            "condition" : "((!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.search) && " +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showPerformerKnowledgeUserType.length > 0)) || " +
+                                            "((model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.performerKnowledgeUserType.search) &&" +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showFilledPerformerKnowledgeUserType.length > 0))",
                                             "items" : [
                                                 {
                                                     "type": "section",
@@ -3596,6 +3708,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         {
                                             "key": "profileDefinition.contexts.context[].contextDefinition.showInformationRecipientLanguage",
                                             "type": "checkboxes",
+                                            "condition" : "!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.search",
                                             "title" : "",
                                             "fieldHtmlClass" : "css-checkbox",
                                             "disableErrorState" : true,
@@ -3603,9 +3716,22 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Information Recipient Language</div>"}
                                         },
                                         {
+                                            "key": "profileDefinition.contexts.context[].contextDefinition.showFilledInformationRecipientLanguage",
+                                            "type": "checkboxes",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.search",
+                                            "title" : "",
+                                            "fieldHtmlClass" : "css-checkbox",
+                                            "disableErrorState" : true,
+                                            "disableSuccessState" : true,
+                                            "titleMap": {name: "<div class=\"css-div css-filled\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Information Recipient Language</div>"}
+                                        },
+                                        {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientLanguage",
                                             "title" : "",
-                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showInformationRecipientLanguage.length > 0",
+                                            "condition" : "((!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.search) && " +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showInformationRecipientLanguage.length > 0)) || " +
+                                            "((model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientLanguage.search) &&" +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showFilledInformationRecipientLanguage.length > 0))",
                                             "items" : [
                                                 {
                                                     "type": "section",
@@ -3875,6 +4001,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                         {
                                             "key": "profileDefinition.contexts.context[].contextDefinition.showInformationRecipientUserType",
                                             "type": "checkboxes",
+                                            "condition" : "!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.search",
                                             "title" : "",
                                             "fieldHtmlClass" : "css-checkbox",
                                             "disableErrorState" : true,
@@ -3882,9 +4009,22 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                             "titleMap": {name: "<div class=\"css-div\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Information Recipient Type</div>"}
                                         },
                                         {
+                                            "key": "profileDefinition.contexts.context[].contextDefinition.showFilledInformationRecipientUserType",
+                                            "type": "checkboxes",
+                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.search",
+                                            "title" : "",
+                                            "fieldHtmlClass" : "css-checkbox",
+                                            "disableErrorState" : true,
+                                            "disableSuccessState" : true,
+                                            "titleMap": {name: "<div class=\"css-div css-filled\"><span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span>Information Recipient Type</div>"}
+                                        },
+                                        {
                                             "key" : "profileDefinition.contexts.context[].contextDefinition.informationRecipientUserType",
                                             "title" : "",
-                                            "condition" : "model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showInformationRecipientUserType.length > 0",
+                                            "condition" : "((!model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.match && !model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.search) && " +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showInformationRecipientUserType.length > 0)) || " +
+                                            "((model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.match || model.profileDefinition.contexts.context[arrayIndex].contextDefinition.informationRecipientUserType.search) &&" +
+                                            "(model.profileDefinition.contexts.context[arrayIndex].contextDefinition.showFilledInformationRecipientUserType.length > 0))",
                                             "items" : [
                                                 {
                                                     "type": "section",
@@ -4131,6 +4271,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
             if ($scope.jsonProfileModel.profileDefinition.contexts != null) {
                 for (var context in $scope.jsonProfileModel.profileDefinition.contexts.context) {
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showTask;
+                    delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showFilledTask;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showConceptOfInterest;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showSubTopics;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showPatientGender;
