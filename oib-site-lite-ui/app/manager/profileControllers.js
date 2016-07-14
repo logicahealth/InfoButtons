@@ -4273,14 +4273,23 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showTask;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showFilledTask;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showConceptOfInterest;
+                    delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showFilledConceptOfInterest;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showSubTopics;
+                    delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showFilledSubTopics;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showPatientGender;
+                    delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showFilledPatientGender;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showPatientAgeGroup;
+                    delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showFilledPatientAgeGroup;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showEncounterType;
+                    delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showFilledEncounterType;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showPerformerLanguage;
+                    delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showFilledPerformerLanguage;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showPerformerKnowledgeUserType;
+                    delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showFilledPerformerKnowledgeUserType;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showInformationRecipientLanguage;
+                    delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showFilledInformationRecipientLanguage;
                     delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showInformationRecipientUserType;
+                    delete $scope.jsonProfileModel.profileDefinition.contexts.context[context].contextDefinition.showFilledInformationRecipientUserType;
                 }
             }
 
