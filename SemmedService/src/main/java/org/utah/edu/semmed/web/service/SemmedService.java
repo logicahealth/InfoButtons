@@ -21,11 +21,7 @@ public class SemmedService {
     private PropertiesHandler props;
     @RequestMapping(value = "/json", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public List<CitationWrapper>getCitations(@RequestBody List<String> citations, @RequestHeader(value = "Authorization", required=false) String credentials) {
-        String[] splitt = credentials.split(":");
-        System.out.println(props.username);
-        if(splitt[0].equals(props.username) && splitt[1].equals(props.password)) {
-            System.out.println(splitt[0] + " " + splitt[1]);
+    public List<CitationWrapper>getCitations(@RequestBody List<String> citations) {
 
             List cites;
             List<Filter> concepts;
@@ -36,9 +32,6 @@ public class SemmedService {
             a.add(d);
 
             return a;
-        }
-        else
-            return null;
     }
 
 }

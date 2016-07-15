@@ -36,7 +36,8 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
     public List getCitations(List<String> PMIDs) {
 
         return sessionFactory.getCurrentSession()
-                .createCriteria(RecentCitationsEntity.class).add(Restrictions.in("pmid", PMIDs)).setProjection(Projections.property("citationjson")).list();
+                .createCriteria(RecentCitationsEntity.class).add(Restrictions.in("pmid", PMIDs)).add(Restrictions
+                        .isNotNull("citationjson")).setProjection(Projections.property("citationjson")).list();
 
     }
 
