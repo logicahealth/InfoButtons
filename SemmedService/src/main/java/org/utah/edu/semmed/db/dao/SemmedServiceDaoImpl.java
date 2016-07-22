@@ -35,10 +35,13 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
     @Transactional
     public List getCitations(List<String> PMIDs) {
 
-        return sessionFactory.getCurrentSession()
-                .createCriteria(RecentCitationsEntity.class).add(Restrictions.in("pmid", PMIDs)).add(Restrictions
-                        .isNotNull("citationjson")).setProjection(Projections.property("citationjson")).list();
-
+        if(PMIDs.size() > 0) {
+            return sessionFactory.getCurrentSession()
+                    .createCriteria(RecentCitationsEntity.class).add(Restrictions.in("pmid", PMIDs)).add(Restrictions
+                            .isNotNull("citationjson")).setProjection(Projections.property("citationjson")).list();
+        }
+        else
+            return new ArrayList<String>();
     }
 
     @Transactional
@@ -59,37 +62,36 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
             builder.append("?,");
         }
 
+        if(PMIDs.size() > 0) {
+            String stmt = "select CUI from SemanticMedline.CONCEPT_FREQUENCY_SEMMED where PMID in ("
+                    + builder.deleteCharAt(builder.length() - 1).toString() + ")";
 
-        String stmt = "select CUI from SemanticMedline.CONCEPT_FREQUENCY_SEMMED where PMID in ("
-                + builder.deleteCharAt( builder.length() -1 ).toString() + ")";
+
+            try {
+                conn = DriverManager.getConnection("jdbc:mysql://mysql.chpc.utah.edu:3306/SemanticMedline", "semmed", "mahdifatemeh");
+
+                pstmt = conn.prepareStatement(stmt);
+                int index = 1;
+                for (String o : PMIDs) {
+                    pstmt.setString(index++, o); // or whatever it applies
+                }
 
 
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://mysql.chpc.utah.edu:3306/SemanticMedline", "semmed", "mahdifatemeh");
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    CUIs.add(rs.getString(1));
+                    if (frequencies.containsKey(rs.getString(1))) {
+                        int temp = frequencies.get(rs.getString(1));
+                        temp++;
+                        frequencies.put(rs.getString(1), temp);
+                    } else
+                        frequencies.put(rs.getString(1), 1);
+                }
 
-            pstmt = conn.prepareStatement(stmt);
-            int index = 1;
-            for( String o : PMIDs ) {
-                pstmt.setString(  index++, o ); // or whatever it applies
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
-
-            ResultSet rs = pstmt.executeQuery();
-            while(rs.next()) {
-               CUIs.add(rs.getString(1));
-               if(frequencies.containsKey(rs.getString(1))) {
-                   int temp = frequencies.get(rs.getString(1));
-                   temp++;
-                    frequencies.put(rs.getString(1), temp);
-               }
-                else
-                   frequencies.put(rs.getString(1), 1);
-            }
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
 //        List<ConceptFrequencySemmedEntity> a = sessionFactory.getCurrentSession()
 //                .createCriteria(ConceptFrequencySemmedEntity.class).add(Restrictions.in("pmid", PMIDs)).list();
@@ -100,17 +102,20 @@ public class SemmedServiceDaoImpl implements SemmedServiceDao {
 //        }
 
 
+            Criteria criteria = sessionFactory.getCurrentSession().createCriteria(InverseConceptFrequencySemmedEntity.class);
+            criteria.add(Restrictions.in("cui", CUIs));
+        try {
+            List<InverseConceptFrequencySemmedEntity> c = criteria.list();
 
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(InverseConceptFrequencySemmedEntity.class);
-        criteria.add(Restrictions.in("cui", CUIs));
-
-        List<InverseConceptFrequencySemmedEntity> c = criteria.list();
-
-        for(InverseConceptFrequencySemmedEntity temp : c) {
-            Filter temp1 = new Filter(temp.getCui(), temp.getSemGroup(), temp.getPreferredName(), temp.getConceptCount(), frequencies.get(temp.getCui()));
-            filtersTemp.add(temp1);
+            for (InverseConceptFrequencySemmedEntity temp : c) {
+                Filter temp1 = new Filter(temp.getCui(), temp.getSemGroup(), temp.getPreferredName(), temp.getConceptCount(), frequencies.get(temp.getCui()));
+                filtersTemp.add(temp1);
+            }
         }
-
+        catch (Exception e) {
+            return filtersTemp;
+        }
+        }
 
         return filtersTemp;
     }
