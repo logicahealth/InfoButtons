@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import com.fasterxml.jackson.module.jsonSchema.customProperties.HyperSchemaFactoryWrapper;
+import edu.utah.further.liteprofiledb.domain.UserAuthentication;
 import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
 import org.apache.log4j.Logger;
 import org.openinfobutton.rest.terminology.api.RestTermClient;
@@ -231,6 +232,22 @@ public class ProfileManagerService
         } catch (JsonProcessingException jsonEx) {
             return "Unable to process JSON: " + jsonEx;
         }
+    }
+
+    @RequestMapping(produces = "application/json",value="getUser", method = RequestMethod.POST)
+    @ResponseBody
+    public UserAuthentication getUser (@RequestBody final UserAuthentication user)
+    {
+
+       return lDao.getUser(user.getUsername(), user.getPassword());
+    }
+
+    @RequestMapping(value="updateUser", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void updateUser (@RequestBody final UserAuthentication user)
+    {
+
+        lDao.createOrUpdateUser(user);
     }
 
     @RequestMapping(produces = "application/json", value="searchUts/{codeSystem}/{search}", method = RequestMethod.GET)

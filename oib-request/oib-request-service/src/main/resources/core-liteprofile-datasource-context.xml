@@ -98,6 +98,7 @@
 			<list>
 				<value><![CDATA[edu.utah.further.liteprofiledb.domain.CloudProfiles]]></value>
 				<value><![CDATA[edu.utah.further.liteprofiledb.domain.CustomProfiles]]></value>
+				<value><![CDATA[edu.utah.further.liteprofiledb.domain.UserAuthentication]]></value>
 			</list>
 		</property>
 	</bean>

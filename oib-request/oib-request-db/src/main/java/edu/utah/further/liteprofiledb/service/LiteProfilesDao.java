@@ -2,7 +2,7 @@ package edu.utah.further.liteprofiledb.service;
 
 import edu.utah.further.liteprofiledb.domain.CloudProfiles;
 import edu.utah.further.liteprofiledb.domain.CustomProfiles;
-import edu.utah.further.profiledb.domain.Profiles;
+import edu.utah.further.liteprofiledb.domain.UserAuthentication;
 
 import java.util.List;
 
@@ -17,4 +17,8 @@ public interface LiteProfilesDao {
     void createOrUpdateCustomProfile (CustomProfiles profile);
 
     void createOrUpdateCloudProfile (CloudProfiles profile);
+
+    UserAuthentication getUser(String user, String password);
+
+    void createOrUpdateUser (UserAuthentication user);
 }

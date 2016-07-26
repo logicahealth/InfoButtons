@@ -1,11 +1,13 @@
 package edu.utah.further.liteprofiledb.service;
 
-
 import edu.utah.further.core.api.data.Dao;
 import edu.utah.further.liteprofiledb.domain.CloudProfiles;
 import edu.utah.further.liteprofiledb.domain.CustomProfiles;
+import edu.utah.further.liteprofiledb.domain.UserAuthentication;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -16,6 +18,31 @@ public class LiteProfilesDaoImpl implements LiteProfilesDao {
     @Autowired
     @Qualifier( "liteprofilesDao" )
     private Dao dao;
+
+    /**
+     * The session factory.
+     */
+    @Autowired
+    @Qualifier ("liteprofilesessionFactory")
+    SessionFactory sessionFactory;
+
+    /**
+     * Sets the session factory.
+     *
+     * @param sessionFactory the new session factory
+     */
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    /**
+     * Gets the session factory.
+     *
+     * @return the session factory
+     */
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
     @Transactional
     public List<CustomProfiles> getCustomProfiles()
@@ -46,6 +73,24 @@ public class LiteProfilesDaoImpl implements LiteProfilesDao {
     {
 
         dao.update(profile);
+    }
+
+    @Transactional
+    public UserAuthentication getUser(String user, String password)
+    {
+
+        UserAuthentication authUser = (UserAuthentication)getSessionFactory().getCurrentSession().
+                get(UserAuthentication.class, user);
+        if (authUser != null && authUser.getPassword().equals(password))
+            return authUser;
+        else
+            return null;
+    }
+
+    @Transactional
+    public void createOrUpdateUser(UserAuthentication user)
+    {
+        getSessionFactory().getCurrentSession().saveOrUpdate(user);
     }
 
     @Transactional
