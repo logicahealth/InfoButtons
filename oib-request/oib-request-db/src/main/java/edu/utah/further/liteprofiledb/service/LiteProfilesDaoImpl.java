@@ -5,6 +5,7 @@ import edu.utah.further.liteprofiledb.domain.CloudProfiles;
 import edu.utah.further.liteprofiledb.domain.CustomProfiles;
 import edu.utah.further.liteprofiledb.domain.UserAuthentication;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.User;
@@ -91,6 +92,19 @@ public class LiteProfilesDaoImpl implements LiteProfilesDao {
     public void createOrUpdateUser(UserAuthentication user)
     {
         getSessionFactory().getCurrentSession().saveOrUpdate(user);
+    }
+
+    @Transactional
+    public List<UserAuthentication> getUsers()
+    {
+        return getSessionFactory().getCurrentSession().createCriteria(UserAuthentication.class).
+                add(Restrictions.eq("role", "USER")).list();
+    }
+
+    @Transactional
+    public void deleteUser(UserAuthentication user)
+    {
+        getSessionFactory().getCurrentSession().delete(user);
     }
 
     @Transactional
