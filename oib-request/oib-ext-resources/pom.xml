@@ -191,6 +191,11 @@
 			<version>1.9-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>rest-impl</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<scm>

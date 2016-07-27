@@ -17,9 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
+import edu.utah.openinfobutton.externalresource.implementation.UTSHandler;
 import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.openinfobutton.exception.OIBProfileProcessingException;
 import org.openinfobutton.schema.KnowledgeRequest;
+import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.Context;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.schemas.kb.ProfileDefinition.AuthorizedOrganizations.AuthorizedOrganization;
@@ -50,6 +54,9 @@ public class ContextProfileHandler
     @Autowired
     public KnowledgeRequest request;
 
+    @Autowired
+    ExternalResourceHandler handler;
+
     /** The results. */
     public List<RequestResult> results;
 
@@ -73,6 +80,20 @@ public class ContextProfileHandler
         initProfiles();
         results = new ArrayList<RequestResult>();
         request = r;
+        final org.apache.logging.log4j.Logger logger = LogManager.getLogger(ContextProfileHandler.class);
+        logger.error("THIS IS WHERE THE CODE IS: " + request.getMainSearchCriteria().getCode().getCode());
+
+            UTSHandler a = new UTSHandler();
+            Code code = request.getMainSearchCriteria().getCode();
+            if (code.getCode().equals("") && request.getSearchCodes().size() == 0) {
+                logger.error("Starting Free Text Transformation for code: " + code.getDisplayName());
+                request.setSearchCodes(a.transformFreeText(code.getDisplayName()));
+                logger.error("Free Text Transformation Complete: " + request.getSearchCodes());
+                if (request.getSearchCodes().size() > 0) {
+                    code = request.searchCodes.get(0);// this is to ensure the free text is also matched with a valid code
+                }
+            }
+
         for (  Map.Entry<Long, KnowledgeResourceProfile> profile : profiles.entrySet()  )
         {
             try {
@@ -105,6 +126,7 @@ public class ContextProfileHandler
             final int count = contexts.size();
             setOrganizationSpecificParameters(result, profile.getProfileDefinition().getAuthorizedOrganizations().getAuthorizedOrganization());
             Context context;
+
             for (int x = 0; x < count; x++) {
                 log.debug("\tMatching Context Started...");
                 context = contexts.get(x);

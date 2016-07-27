@@ -83,6 +83,13 @@ public class UTSHandler
     /** The ticket granting ticket. */
     String ticketGrantingTicket;
 
+    @Autowired
+    RestTermClient umlsRestClient;
+
+    public UTSHandler() {
+
+    }
+
     /*
      * (non-Javadoc)
      * @see edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler#transformCode(org.openinfobutton.schemas.kb.Code, java.lang.String)
@@ -146,8 +153,8 @@ public class UTSHandler
         final ArrayList<Code> searchCodes = new ArrayList<Code>();
 
 
-        UmlsRestClientImpl umlsRestClient = new UmlsRestClientImpl(username, password);
         String results = umlsRestClient.getTerms(FreeText, "SNOMEDCT_US, ICD10CM, ICD9CM, RXNORM, ICD10, MSH, LNC, CPT");
+
 
         ObjectMapper mapper = new ObjectMapper();
         CodeTransformer codeTransformer = new CodeTransformer();
@@ -171,70 +178,6 @@ public class UTSHandler
             searchCodes.add( c );
         }
 
-
-
-
-
-//        String ticketGrantingTicket;
-//        String singleUseTicket1;
-//        try
-//        {
-//            ticketGrantingTicket = getTicketGrantingTicket();
-//            singleUseTicket1 = securityService.getProxyTicket( ticketGrantingTicket, serviceName );
-//
-//            final UtsMetathesaurusFinder.Psf myPsf = new UtsMetathesaurusFinder.Psf();
-//            myPsf.getIncludedSources().add( "SNOMEDCT_US" );
-//            myPsf.getIncludedSources().add( "ICD10CM" );
-//            myPsf.getIncludedSources().add( "ICD9CM" );
-//            final ArrayList<String> lookupList = new ArrayList<String>();
-//            lookupList.add( "SNOMEDCT_US" );
-//            lookupList.add( "ICD10CM" );
-//            lookupList.add( "ICD9CM" );
-//            myPsf.setIncludedLanguage( "ENG" );
-//            myPsf.setPageLn( 50 );
-//            List<UiLabelRootSource> myUiLabelsRootSource = new ArrayList<UiLabelRootSource>();
-//            myUiLabelsRootSource =
-//                utsFinderService.findCodes( singleUseTicket1, umlsRelease, "atom", FreeText, "approximate", myPsf );
-//            if ( myUiLabelsRootSource.size() == 0 )
-//            {
-//                throw new Exception( "UTS FAIL: Could not get the Free Text Codes after querying for the first time" );
-//            }
-//            for ( int i = 0; i < myUiLabelsRootSource.size(); i++ )
-//            {
-//                final UiLabelRootSource myUiLabelRootSource = myUiLabelsRootSource.get( i );
-//                final String ui = myUiLabelRootSource.getUi();
-//                final String label = myUiLabelRootSource.getLabel();
-//                final String source = myUiLabelRootSource.getRootSource();
-//                for ( int j = 0; j < lookupList.size(); j++ )
-//                {
-//                    final String s = lookupList.get( j );
-//                    if ( s.equals( source ) )
-//                    {
-//                    final Code c = CodeUtility.getCode( ui, getCodeSystemId( source ), label, source );
-//                        log.debug( ui + " " + label + " " + source );
-//                        searchCodes.add( c );
-//                        lookupList.remove( source );
-//                        j = 0;
-//                    }
-//                }
-//                if ( lookupList.size() == 0 )
-//                {
-//                    break;
-//                }
-//            }
-//        }
-//        catch ( final UtsFault_Exception e )
-//        {
-//            e.printStackTrace();
-//        }
-//        catch ( final UtsMetathesaurusFinder.UtsFault_Exception e )
-//        {
-//            e.printStackTrace();
-//        }
-//        catch ( final Exception e )
-//        {
-//            log.error( e.getMessage() );
-//        }
         return searchCodes;
     }
 

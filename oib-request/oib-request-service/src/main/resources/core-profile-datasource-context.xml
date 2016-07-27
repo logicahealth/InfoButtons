@@ -66,6 +66,7 @@
 
 		<!-- Hibernate configuration properties (read from a properties file) -->
 		<property name="hibernateProperties">
+
 			<bean
 				class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 
@@ -100,6 +101,8 @@
 				<value><![CDATA[edu.utah.further.profiledb.domain.ProfileBlackList]]></value>
 			</list>
 		</property>
+
+
 	</bean>
 
 	<!-- Hibernate data access template -->
