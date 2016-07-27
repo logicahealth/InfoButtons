@@ -100,6 +100,14 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
            requireGit: true
         }
       })
+      .state('logout', {
+          url: '/logout',
+          controller: function(liteAuthenticationService, $state) {
+
+              liteAuthenticationService.ClearCredentials();
+              $state.go('login');
+          }
+      })
 });
 
 oibConfigurationApp.run(function ($rootScope, $state, loginModal, $location, $cookieStore, $http) {

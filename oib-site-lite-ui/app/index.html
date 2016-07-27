@@ -21,7 +21,7 @@
         <span style="position: relative; bottom: 0.1em; left: 0em;font-size: 25px;"><nobr>Site LITE</nobr></span>
         <div class="navbar navbar-inverse" role="navigation" style="top:0em;">
             <div class="container">
-                <div class="navbar-collapse collapse">
+                <div class="navbar-collapse collapse pull-left">
                     <ul class="nav navbar-nav">
                         <li><a ui-sref="home">Home</a></li>
                         <li><a ui-sref="manager">Custom Resources</a></li>
@@ -30,7 +30,11 @@
                         <li><a ui-sref="systemConfiguration">System Configuration</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
-
+                <div ng-if="globals.currentUser" class="navbar-collapse collapse pull-right">
+                    <ul class="nav navbar-nav">
+                        <li><a ui-sref="logout">Logout</a><li>
+                    </ul>
+                </div>
             </div>
         </div>
 
