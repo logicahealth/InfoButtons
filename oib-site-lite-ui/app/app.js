@@ -12,6 +12,7 @@ var oibConfigurationApp = angular.module('oibConfigurationApp', [
   'ui.select',
   'ngNotify',
   'schemaForm',
+  'oibHomeModule',
   'liteAuthenticationServiceModule',
   'liteAuthenticationModule',
   'setupControllers',
@@ -20,7 +21,6 @@ var oibConfigurationApp = angular.module('oibConfigurationApp', [
   'oibManagerServiceModule',
   'oibAssetServiceModule',
   'oibAssetControllerModule',
-  'oibHomeModule',
   'oibVersionModule',
   'oibModalModule',
   'oibConfirmModule',
@@ -38,13 +38,19 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
       .state('login', {
           url: '/login',
           controller: 'LoginController',
-          templateUrl: 'authentication/login.html'
+          templateUrl: 'authentication/login.html',
+          data: {
+              requireGit: false
+          }
       })
 
       .state('home', {
         url: '/home',
         controller: 'HomeCtrl',
-        templateUrl: 'home/home.html'
+        templateUrl: 'home/home.html',
+          data: {
+              requireGit: false
+          }
       })
       .state('editProfile', {
         url: '/editProfile/:id',

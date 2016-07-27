@@ -1,8 +1,8 @@
 'use strict';
 
-var oibHomeModule = angular.module('oibHomeModule', []);
+var oibHomeModule = angular.module('oibHomeModule', ['ui.router']);
 
-oibHomeModule.controller('HomeCtrl', [function() {
+oibHomeModule.controller('HomeCtrl', ['$state', '$scope', function($state, $scope) {
 
 }]);
 
