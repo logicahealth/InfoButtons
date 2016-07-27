@@ -78,5 +78,27 @@
                 </div>
             </form>
         </div>
+        <div ng-show="globals.currentUser.admin", class="col-md-8">
+            <h3>User Configuration</h3>
+            <hr/>
+            <form class="form-inline" name="usersForm" ng-submit="addUser(username, password)">
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" ng-model="username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" id="password" name="password" ng-model="password" required>
+                        <span class="input-group-btn">
+                            <button class='btn btn-default' type="submit">Add</button>
+                        </span>
+                    </div>
+                    <uib-alert ng-repeat="user in users" type="warning" close="deleteUser(user)">
+                        {{user.username}}
+                    </uib-alert>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

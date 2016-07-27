@@ -1,6 +1,6 @@
 var setupControllers = angular.module('setupControllers', ['ui.bootstrap', 'ui.router']);
 
-setupControllers.controller('setupController', function ($scope, $state, loginModal) {
+setupControllers.controller('setupController', function ($scope, $state, loginModal, loginService) {
     $scope.oids = JSON.parse(localStorage.getItem("oids"));
 
     $scope.gitUser = JSON.parse(localStorage.getItem("gitUser"));
@@ -12,6 +12,20 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
     $scope.profilestore = localStorage.getItem("profileStorePath");
 
     $scope.oidRegex = /^\d+(\.\d+)*$/;
+
+    loginService.getUsers($scope);
+
+    $scope.deleteUser = function(user)
+    {
+
+        loginService.deleteUser(user, $state);
+    }
+
+    $scope.addUser = function (username, password)
+    {
+
+        loginService.updateUser(username, password, $state)
+    }
 
     $scope.addOids = function(orgOid, orgName) {
 

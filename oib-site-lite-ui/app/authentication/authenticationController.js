@@ -11,7 +11,7 @@ liteAuthenticationModule.controller('LoginController', ['$scope', '$rootScope', 
                     $scope.dataLoading = true;
                     liteAuthenticationService.Login($scope.username, $scope.password, function(response) {
                         if(response !== '') {
-                            liteAuthenticationService.SetCredentials($scope.username, $scope.password);
+                            liteAuthenticationService.SetCredentials($scope.username, $scope.password, response.role);
                             $state.go('home');
                         } else {
                             $scope.error = 'Username or password is incorrect';

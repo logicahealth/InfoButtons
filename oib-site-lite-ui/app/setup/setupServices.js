@@ -19,9 +19,48 @@ oibSetupServices.service('loginModal', function ($uibModal) {
 
 });
 
-oibSetupServices.service('loginService', function ($http, base64) {
+oibSetupServices.service('loginService', function ($rootScope, $http, base64) {
 
     var loginService = {};
+
+    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/liteManager/'
+
+    loginService.getUsers = function(setupScope) {
+
+        $http.get(oibManagerUrl + 'getUsers',
+            {
+                headers: {
+                    'Authorization': undefined
+                }
+            }).success(function(response) {
+
+            setupScope.users=response;
+        });
+    };
+
+    loginService.deleteUser = function (user, setupState) {
+
+        $http.post(oibManagerUrl + 'deleteUser', user,
+            {
+                headers: {
+                    'Authorization': undefined
+                }}).success(function() {
+
+                setupState.reload();
+        });
+    };
+
+    loginService.updateUser = function (username, password, setupState) {
+
+        $http.post(oibManagerUrl + 'updateUser', {username: username, password: password, role: "USER"},
+            {
+                headers: {
+                    'Authorization': undefined
+                }}).success(function() {
+
+            setupState.reload();
+        });
+    };
 
     loginService.checkValidUser = function (gitUser, loginModal, $loginScope) {
         $http.get(
