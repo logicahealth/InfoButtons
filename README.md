@@ -9,6 +9,23 @@ Built with:
 
 [![IntelliJ IDEA](https://www.jetbrains.com/idea/docs/logo_intellij_idea.png)](https://www.jetbrains.com/idea/)
 
+2.0 RELEASE NOTES
+=================
+
+OpenInfobutton 2.0 includes many major feature updates as well as optimizations and bug fixes to existing features. The biggest improvement is a fully featured custom profile editor that allows librarians to edit and author profiles without any knowledge of XML or usage of database tools. This will make it easier for organizations to tailor OpenInfobutton for their specific needs. Along with this feature, this release also includes the following:
+
+- A typeahead style search for Main Search Criteria in the Responder asset property editor
+- An additional database table that allows organizations to "blacklist" a profile based on the userId request parameter
+- Simple authentication to manage/restrict users of LITE 
+- Optimizations to profile loading code which should speed up requests
+- An optional unit test that can be used as a monitoring script for OpenInfobutton installations
+- Various other bug fixes and optimizations that are logged in our github repository
+
+Building and redeploying
+------------------------
+
+While this release does not make any changes to any existing OIB databases or tables, it does require the creation of two new tables for the profile black list and LITE user authentication. I've updated the BUILDGUIDE for oib-request and added the additions SQL scripts under the DeploymentPackage/dbScripts directory. There has also been an additional module added called rest-terminology-services that must be built and installed into your local maven repository before building oib-request. This module includes a java client for calling UMLS REST API.
+
 1.9 RELEASE NOTES
 =================
 
