@@ -12,13 +12,19 @@ Built with:
 2.0 RELEASE NOTES
 =================
 
-OpenInfobutton 2.0 includes many major feature updates as well as optimizations and bug fixes to existing features. The biggest improvement is a fully featured custom profile editor that allows librarians to edit and author profiles without any knowledge of XML or usage of database tools. This will make it easier for organizations to tailor OpenInfobutton for their specific needs. Along with this feature, this release also includes the following:
+OpenInfobutton 2.0 includes many major feature updates as well as optimizations and bug fixes to existing features. 
 
+Major features:
+
+- This is the first fully featured release of the LITE OpenInfobutton management tool. It includes the ability to download resource profiles from the OpenInfobutton cloud-based profile store, configure custom resource profiles, and index local resources for the infobutton responder. 
+- Major improvements in the overall usability of LITE.
+- LITE user authentication 
+
+Other general improvements:
 - A typeahead style search for Main Search Criteria in the Responder asset property editor
 - An additional database table that allows organizations to "blacklist" a profile based on the userId request parameter
-- Simple authentication to manage/restrict users of LITE 
-- Optimizations to profile loading code which should speed up requests
-- An optional unit test that can be used as a monitoring script for OpenInfobutton installations
+- Optimizations to profile loading code in the Infobutton Manager that speed up its response time
+- An optional unit test that can be used as to monitor the status of an OpenInfobutton server 
 - Various other bug fixes and optimizations that are logged in our github repository
 
 Building and redeploying
