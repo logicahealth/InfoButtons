@@ -30,7 +30,7 @@ Other general improvements:
 Building and redeploying
 ------------------------
 
-While this release does not make any changes to any existing OIB databases or tables, it does require the creation of two new tables for the profile black list and LITE user authentication. I've updated the BUILDGUIDE for oib-request and added the additions SQL scripts under the DeploymentPackage/dbScripts directory. There has also been an additional module added called rest-terminology-services that must be built and installed into your local maven repository before building oib-request. This module includes a java client for calling UMLS REST API.
+While this release does not make any changes to any existing OIB databases or tables, it does require the creation of two new tables for the profile black list and LITE user authentication. I've updated the BUILDGUIDE for oib-request and added the additional SQL scripts under the DeploymentPackage/dbScripts directory. There has also been an additional module added called rest-terminology-services that must be built and installed into your local maven repository before building oib-request. This module includes a java client for calling UMLS REST API.
 
 1.9 RELEASE NOTES
 =================
