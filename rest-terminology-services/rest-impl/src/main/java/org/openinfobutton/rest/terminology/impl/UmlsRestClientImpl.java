@@ -2,6 +2,7 @@ package org.openinfobutton.rest.terminology.impl;
 
 import org.apache.http.HttpVersion;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 
@@ -14,6 +15,7 @@ import org.openinfobutton.rest.terminology.api.RestTermClient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -36,7 +38,7 @@ import java.net.URISyntaxException;
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version March 13, 2016
  */
-@Service
+@Component
 public class UmlsRestClientImpl implements RestTermClient {
 
     // Logger
@@ -51,6 +53,8 @@ public class UmlsRestClientImpl implements RestTermClient {
     private static String UTS_REST_API_URL = "https://uts-ws.nlm.nih.gov/rest";
 
     private static String SEARCH_PATH = "/search/current";
+
+    private static String SEARCH_CODE_PATH = "/crosswalk/current/source";
 
     private static String SEARCH_PARAMETER = "string";
 
@@ -135,10 +139,10 @@ public class UmlsRestClientImpl implements RestTermClient {
     /**
      *
      * @param search Search term
-     * @param codeSytem Code System
+     * @param codeSystem Code System
      * @return Array of search results serialized to JSON
      */
-    public String getTerms (String search, String codeSytem){
+    public String getTerms (String search, String codeSystem){
 
         String sts = getSingleUseTicket();
         String result = "";
@@ -148,13 +152,15 @@ public class UmlsRestClientImpl implements RestTermClient {
             b.addParameter(SEARCH_PARAMETER, search);
             b.addParameter(RETURN_TYPE_PARAMETER, RETURN_TYPE);
             b.addParameter(SEARCH_TYPE_PARAMETER, SEARCH_TYPE);
-            b.addParameter(CS_PARAMETER, codeSytem);
+            b.addParameter(CS_PARAMETER, codeSystem);
             b.addParameter(PAGE_SIZE_PARAMETER, PAGE_SIZE_VALUE);
             b.addParameter(TICKET_PARAMETER, sts);
+
             result = Request.Get(b.build())
                     .connectTimeout(3000)
                     .socketTimeout(3000)
                     .execute().returnContent().asString();
+
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
@@ -163,6 +169,80 @@ public class UmlsRestClientImpl implements RestTermClient {
             e.printStackTrace();
         }
         logger.error("RESULTS: " + result);
+        return result;
+    }
+
+    public String getCodes (String code, String codeSystem) {
+        String sts = getSingleUseTicket();
+        String result = "";
+        String url = UTS_REST_API_URL + SEARCH_PATH;
+        logger.error(codeSystem);
+
+        try {
+            URIBuilder b = new URIBuilder(url);
+
+            b.addParameter(SEARCH_PARAMETER, code);
+            b.addParameter("inputType", "sourceUi");
+            b.addParameter("searchType", "exact");
+            b.addParameter(CS_PARAMETER, codeSystem);
+            b.addParameter(PAGE_SIZE_PARAMETER, PAGE_SIZE_VALUE);
+            b.addParameter(TICKET_PARAMETER, sts);
+
+            result = Request.Get(b.build())
+                    .connectTimeout(3000)
+                    .socketTimeout(3000)
+                    .execute().returnContent().asString();
+        }
+        catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public String getCodes (String CUI, String targetCS, String search)  {
+        String sts = getSingleUseTicket();
+        String result = "";
+//        String url = UTS_REST_API_URL + "/content/current/CUI/"+ CUI +"/atoms?sabs=" + targetCS;
+//
+//        try {
+//            URIBuilder b = new URIBuilder(url);
+//            b.addParameter(PAGE_SIZE_PARAMETER, PAGE_SIZE_VALUE);
+//            b.addParameter(TICKET_PARAMETER, sts);
+//
+//            result = Request.Get(b.build())
+//                    .connectTimeout(3000)
+//                    .socketTimeout(3000)
+//                    .execute().returnContent().asString();
+//        }
+        String url = UTS_REST_API_URL + SEARCH_PATH;
+        logger.error("TARGET: " + targetCS);
+        logger.error("SEARCH: "+ search);
+
+        try {
+            URIBuilder b = new URIBuilder(url);
+
+            b.addParameter(SEARCH_PARAMETER, search);
+            b.addParameter(CS_PARAMETER, targetCS);
+            b.addParameter("returnIdType", "code");
+            b.addParameter(PAGE_SIZE_PARAMETER, PAGE_SIZE_VALUE);
+            b.addParameter(TICKET_PARAMETER, sts);
+
+            result = Request.Get(b.build())
+                    .connectTimeout(3000)
+                    .socketTimeout(3000)
+                    .execute().returnContent().asString();
+        }
+        catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return result;
     }
 

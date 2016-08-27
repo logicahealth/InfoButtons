@@ -15,13 +15,16 @@ package edu.utah.openinfobutton.externalresource.implementation;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.utah.openinfobutton.externalresource.json.CodeTransformer;
 import edu.utah.openinfobutton.externalresource.json.CodeTransformerResult;
 import edu.utah.openinfobutton.externalresource.json.CodeTransformerResultList;
+import org.apache.http.client.HttpResponseException;
 import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.openinfobutton.rest.terminology.api.RestTermClient;
 import org.openinfobutton.rest.terminology.impl.UmlsRestClientImpl;
 import org.openinfobutton.schema.CodeUtility;
@@ -42,6 +45,7 @@ import UtsSecurity.UtsFault_Exception;
 import UtsSecurity.UtsWsSecurityController;
 import UtsSecurity.UtsWsSecurityControllerImplService;
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
+import org.springframework.stereotype.Service;
 
 /**
  * The Class UTSHandler.
@@ -83,6 +87,14 @@ public class UTSHandler
     /** The ticket granting ticket. */
     String ticketGrantingTicket;
 
+    public RestTermClient getUmlsRestClient() {
+        return umlsRestClient;
+    }
+
+    public void setUmlsRestClient(RestTermClient umlsRestClient) {
+        this.umlsRestClient = umlsRestClient;
+    }
+
     @Autowired
     RestTermClient umlsRestClient;
 
@@ -97,48 +109,75 @@ public class UTSHandler
     @Override
     public Code transformCode( Code code, String targetCS )
     {
-        Code retCode = null;
-        try
-        {
-            final String ticketGrantingTicket = getTicketGrantingTicket();
-            final String singleUseTicket1 = securityService.getProxyTicket( ticketGrantingTicket, serviceName );
-            final String singleUseTicket2 = securityService.getProxyTicket( ticketGrantingTicket, serviceName );
-            List<AtomDTO> myAtoms = new ArrayList<AtomDTO>();
-            final UtsMetathesaurusContent.Psf myPsf = new UtsMetathesaurusContent.Psf();
-            String cui = null;
-            myAtoms =
-                utsContentService.getCodeAtoms( singleUseTicket1, umlsRelease, code.getCode(),
-                                                code.getCodeSystemName(), myPsf );
-            if ( myAtoms.size() == 0 )
-            {
-                throw new Exception( "UTS FAIL: Failed to get the CUI for the first time" );
-            }
-            for ( int i = 0; i < myAtoms.size(); i++ )
-            {
-                final AtomDTO myAtomDTO = myAtoms.get( i );
-                cui = myAtomDTO.getConcept().getUi();
-                break;
-            }
-            myPsf.getIncludedSources().add( targetCS );
-            myAtoms = utsContentService.getConceptAtoms( singleUseTicket2, umlsRelease, cui, myPsf );
-            for ( int i = 0; i < myAtoms.size(); i++ )
-            {
-                final AtomDTO myAtomDTO = myAtoms.get( i );
-                retCode = CodeUtility.getCode();
-                
-                retCode.setCode( myAtomDTO.getCode().getUi() );
-                break;
-            }
-            log.debug( "Transformed: " + code.getCode() + " -> " + retCode.getCode() );
+        final org.apache.logging.log4j.Logger logger = LogManager.getLogger(UTSHandler.class);
+        logger.error("BEGIN TRANSFORM CODE");
+        Code retCode = new Code();
+
+        logger.error("CODE: " + code.getCode());
+        logger.error("DISPLAY NAME: " + code.getCodeSystemName());
+
+        String tempCode = "ICD9CM";
+        String tempDiab = "250.0";
+        String results = "";
+        try {
+             results = umlsRestClient.getCodes(code.getCode(), code.getCodeSystemName());
         }
-        catch ( final NullPointerException ex )
-        {
-            log.error( "Code transformation Failed" );
+        catch(Exception e) {
+            e.printStackTrace();
         }
-        catch ( final Exception ex )
-        {
-            log.error( ex.getMessage() );
+
+
+        logger.error(results);
+
+        ObjectMapper mapper = new ObjectMapper();
+        CodeTransformer codeTransformer = new CodeTransformer();
+
+        try {
+            codeTransformer  = mapper.readValue(results, CodeTransformer.class);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        List<CodeTransformerResultList> temp = new ArrayList<CodeTransformerResultList>(codeTransformer.getResult().getResults());
+
+        String ui = "";
+        int index = 0;
+        for(index = 0; index < temp.size(); index++) {
+            ui = temp.get(index).getUi();
+            log.error( ui );
+            break;
+        }
+        String codeResult = "";
+        List<String> elephantList = new ArrayList<String>();
+        try {
+            if(targetCS == "ICD10CM") {
+                targetCS = "ICD10AM";
+            }
+            String results2 = umlsRestClient.getCodes(ui, targetCS, temp.get(index).getName());
+            logger.error(results2);
+
+            elephantList = Arrays.asList(results2.split(","));
+            for (int i = 0; i < elephantList.size(); i++) {
+                logger.error(elephantList.get(i));
+                codeResult = elephantList.get(i);
+                if (codeResult.startsWith("\"results\"")) {
+                    break;
+                }
+            }
+
+            elephantList = Arrays.asList(codeResult.split(":"));
+            codeResult = elephantList.get((elephantList.size() - 1));
+            codeResult = codeResult.replaceAll("^\"|\"$", "");
+
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        retCode.setCode(codeResult);
+        retCode.setCodeSystemName(targetCS);
+
         return retCode;
     }
 
@@ -245,6 +284,27 @@ public class UTSHandler
         else if ( source.equals( "2.16.840.1.113883.6.103" ) )
         {
             return "ICD9CM";
+        }
+
+        else if ( source.equals( "2.16.840.1.113883.6.3" ) )
+        {
+            return "ICD10";
+        }
+        else if ( source.equals( "2.16.840.1.113883.6.88" ) )
+        {
+            return "RXNORM";
+        }
+        else if ( source.equals( "2.16.840.1.113883.6.177" ) )
+        {
+            return "MSH";
+        }
+        else if ( source.equals( "2.16.840.1.113883.6.1" ) )
+        {
+            return "LNC";
+        }
+        else if ( source.equals( "2.16.840.1.113883.6.12" ) )
+        {
+            return "CPT";
         }
         return "";
     }
