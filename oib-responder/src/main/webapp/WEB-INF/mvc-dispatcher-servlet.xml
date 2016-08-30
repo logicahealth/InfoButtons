@@ -48,6 +48,7 @@
     
     <tx:annotation-driven />
     <context:component-scan base-package="org.openinfobutton"/>
+    <context:component-scan base-package="gov.nih.nlm.rxnav.rest.model"/>
     
     <bean id="utsProperties"
           class="org.springframework.beans.factory.config.PropertiesFactoryBean"/>
@@ -107,6 +108,6 @@
     <!--
           Converts JSON to POJO and vice versa
     -->
-    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 
 </beans>
