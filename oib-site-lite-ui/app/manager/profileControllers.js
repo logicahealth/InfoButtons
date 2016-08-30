@@ -2583,7 +2583,6 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic",
                                                     "title" : "Sub Topic",
                                                     "startEmpty" : true,
-                                                    "add" : null,
                                                     "items" : [
                                                         {
                                                             "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter",
