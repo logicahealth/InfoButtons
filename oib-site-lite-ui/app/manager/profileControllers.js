@@ -2599,6 +2599,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                                             "items" : [
                                                                                 {
                                                                                     "key" : "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code",
+                                                                                    "title" : "",
                                                                                     "items" : [
                                                                                         {
                                                                                             "key": "profileDefinition.contexts.context[].contextDefinition.subTopics.subTopic[].searchParameter.valueSource.searchCode.code.displayName",
