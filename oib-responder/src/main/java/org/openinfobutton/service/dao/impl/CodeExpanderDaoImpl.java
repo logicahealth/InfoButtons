@@ -157,7 +157,7 @@ public class CodeExpanderDaoImpl
 
         final RestTemplate restTemplate = new RestTemplate();
         final Rxnormdata rxNormResponse
-                = restTemplate.getForObject("http://rxnav.nlm.nih.gov/REST/rxcui/{rxcui}/allrelated", Rxnormdata.class, vars);
+                = restTemplate.getForObject("https://rxnav.nlm.nih.gov/REST/rxcui/{rxcui}/allrelated", Rxnormdata.class, vars);
         final AllRelatedGroup allRelatedGroup = rxNormResponse.getAllRelatedGroup();
 
         for (final ConceptGroup conceptGroup : allRelatedGroup.getConceptGroup()) {
