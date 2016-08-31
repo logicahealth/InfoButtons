@@ -7,6 +7,16 @@ Salt Lake City, UT 84108-3514
 (801) 581-4080
 -------------------------------------------------------------------------
 
+Changes for version 2.0
+-----------------------
+
+-added two new database scripts, profile_black_list and users
+
+-added new web services for authentication
+
+-bug fixes and optimizations to profile loading
+
+
 Changes for version 1.7
 -----------------------
 
