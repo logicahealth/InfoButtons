@@ -1,52 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <knowledgeResourceProfile>
-	<header id="3">
-		<title>Krames</title>
-		<profileDescription>Patient education content</profileDescription>
-		<versionControl publicationDate="2015-01-07T00:00:00"/>
-	</header>
-	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
-		<authorizedOrganizations/>
-		<supportedTerminologies>
-			<supportedTerminology id="2.16.840.1.113883.6.90" name="ICD10CM"/>
-			<supportedTerminology id="2.16.840.1.113883.6.3" name="ICD10"/>
-			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMEDCT_US"/>
-			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9CM"/>
-			<supportedTerminology id="2.16.840.1.113883.6.42" name="ICD9"/>
-			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
-			<supportedTerminology id="2.16.840.1.113883.6.69" name="NDC"/>
-			<supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC"/>
-			<supportedTerminology id="2.16.840.1.113883.6.82" name="CPT"/>
-		</supportedTerminologies>
-		<contexts>
-			<context name="Patient education information from problems" id="1">
-				<contextDefinition>
-					<patientGender match="false" search="true"/>
-					<patientAgeGroup match="false" search="true"/>
-					<task match="true" search="false">
-						<matchingDomain>
-							<enumeration includeDescendants="false">
-								<code codeSystem="2.16.840.1.113883.5.4" code="PROBLISTE"/>
-								<code codeSystem="2.16.840.1.113883.5.4" code="PROBLISTREV"/>
-								<code codeSystem="2.16.840.1.113883.5.4" displayName="diagnosis list review task" code="DIAGLISTREV"/>
-								<code codeSystem="2.16.840.1.113883.5.4" displayName="diagnosis list entry task" code="DIAGLISTE"/>
-								<code codeSystem="2.16.840.1.113883.5.4" code="LABRREV"/>
-								<code codeSystem="2.16.840.1.113883.5.4" code="MEDOE"/>
-								<code codeSystem="2.16.840.1.113883.5.4" code="MLREV"/>
-							</enumeration>
-						</matchingDomain>
-					</task>
-					<informationRecipientLanguage match="false" search="true"/>
-					<informationRecipientUserType match="false" search="true"/>
-					<conceptOfInterest match="false" search="true"/>
-					<subTopics>
-						<subTopic linkName="Patient education"/>
-					</subTopics>
-				</contextDefinition>
-				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://clinical35.staywellsolutionsonline.com/infobutton/search.pg?"/>
-				</knowledgeRequestService>
-			</context>
-		</contexts>
-	</profileDefinition>
+    <header>
+        <title>Krames Staywell</title>
+        <profileDescription>Patient education. Profile customized to University of Utah (base URL).</profileDescription>
+    </header>
+    <profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
+        <authorizedOrganizations>
+        </authorizedOrganizations>
+        <supportedTerminologies>
+            <supportedTerminology id="2.16.840.1.113883.6.12" name="CPT" namespace=""/>
+            <supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMED-CT" namespace=""/>
+            <supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
+            <supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC" namespace=""/>
+            <supportedTerminology id="2.16.840.1.113883.6.103" name="ICD10-CM" namespace=""/>
+            <supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM" namespace=""/>
+        </supportedTerminologies>
+        <contexts>
+            <context>
+                <contextDescription>Patient education all contexts</contextDescription>
+                <contextDefinition>
+                    <patientGender match="false" search="true"/>
+                    <patientAgeGroup match="false" search="false"/>
+                    <task match="true" search="false">
+                        <matchingDomain>
+                            <enumeration includeDescendants="false">
+                                <code code="MEDOE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="medication order entry"/>
+                                <code code="MLREV" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="medication list review"/>
+                                <code code="LABRREV" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="labratory results review"/>
+                                <code code="PROBLISTREV" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="problem list review"/>
+                                <code code="PROBLISTE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="problem list entry"/>
+                                <code code="DIAGLISTREV" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="diagnosis list review"/>
+                                <code code="DIAGLISTE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="diagnosis list entry"/>
+                            </enumeration>
+                        </matchingDomain>
+                    </task>
+                    <encounterType match="false" search="false"/>
+                    <performerLanguage match="false" search="true"/>
+                    <performerKnowledgeUserType match="false" search="false"/>
+                    <informationRecipientLanguage match="false" search="true"/>
+                    <informationRecipientUserType match="false" search="false"/>
+                    <conceptOfInterest match="false" search="true">
+                        <matchingDomain>
+                            <enumeration includeDescendants="false"/>
+                        </matchingDomain>
+                    </conceptOfInterest>
+                    <subTopics>
+                        <subTopic linkName="Patient education"/>
+                    </subTopics>
+                </contextDefinition>
+                <knowledgeRequestService>
+                    <knowledgeRequestServiceLocation url="http://universityofutahib.staywellsolutionsonline.com/Infobutton/search.pg?"/>
+                </knowledgeRequestService>
+            </context>
+        </contexts>
+    </profileDefinition>
 </knowledgeResourceProfile>
