@@ -16,7 +16,7 @@
 			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM" namespace=""/>
 		</supportedTerminologies>
 		<contexts>
-			<context>
+			<context id="1" name="All contexts">
 				<contextDescription>Patient education all contexts</contextDescription>
 				<contextDefinition>
 					<patientGender match="false" search="true"/>
@@ -39,11 +39,7 @@
 					<performerKnowledgeUserType match="false" search="false"/>
 					<informationRecipientLanguage match="false" search="true"/>
 					<informationRecipientUserType match="false" search="false"/>
-					<conceptOfInterest match="false" search="true">
-						<matchingDomain>
-							<enumeration includeDescendants="false"/>
-						</matchingDomain>
-					</conceptOfInterest>
+					<conceptOfInterest match="false" search="true"/>
 					<subTopics>
 						<subTopic linkName="Patient education"/>
 					</subTopics>
