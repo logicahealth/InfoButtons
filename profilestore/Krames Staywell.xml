@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <knowledgeResourceProfile>
     <header>
-        <title>Krames Staywell</title>
+        <title>Krames</title>
         <profileDescription>Patient education. Profile customized to University of Utah (base URL).</profileDescription>
     </header>
     <profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
-        <authorizedOrganizations>
-        </authorizedOrganizations>
+        <authorizedOrganizations/>
         <supportedTerminologies>
             <supportedTerminology id="2.16.840.1.113883.6.12" name="CPT" namespace=""/>
             <supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMED-CT" namespace=""/>
