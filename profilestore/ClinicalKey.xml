@@ -1,69 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?><knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<header id="313">
-		<title>Clinical Key</title>
-		<profileDescription>ClinicalKey contains all the content previously available from MDConsult plus much more, including over 1,100 additional medical and surgical e-books, over 500 e-journals, over 13,000 Elsevier medical and surgical videos, and more than 3.7 million images.</profileDescription>
-		<versionControl publicationDate="2015-09-16T19:27:00"/>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Guilherme/OpenInfobutton/models/ResourceProfile-v2.9_LITE.xsd">
+	<header id="1">
+		<title>Krames</title>
+		<profileDescription>Patient education. Profile customized to University of Utah (base URL).</profileDescription>
+		<versionControl publicationDate="2016-09-09T19:27:00"/>
 	</header>
-	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="true">
+	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
 		<authorizedOrganizations/>
+		<supportedTerminologies>
+			<supportedTerminology id="2.16.840.1.113883.6.12" name="CPT" namespace=""/>
+			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMED-CT" namespace=""/>
+			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
+			<supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC" namespace=""/>
+			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD10-CM" namespace=""/>
+			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM" namespace=""/>
+		</supportedTerminologies>
 		<contexts>
-			<context name="Drug information" id="1">
+			<context>
+				<contextDescription>Patient education all contexts</contextDescription>
 				<contextDefinition>
-					<patientGender match="false" search="false"/>
-					<task match="true" search="false">
-						<matchingDomain>
-							<enumeration includeDescendants="false">
-								<code codeSystem="2.16.840.1.113883.5.4" displayName="Order entry" code="OE"/>
-								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="MEDOE"/>
-								<code codeSystem="2.16.840.1.113883.5.4" displayName="Medication list review" code="MLREV"/>
-							</enumeration>
-						</matchingDomain>
-					</task>
-					<performerKnowledgeUserType match="true" search="false">
-						<matchingDomain>
-							<enumeration includeDescendants="false">
-								<code codeSystem="2.16.840.1.113883.5.110" displayName="" code="PROV"/>
-							</enumeration>
-						</matchingDomain>
-					</performerKnowledgeUserType>
-					<conceptOfInterest match="false" search="true"/>
-					<subTopics>
-						<subTopic linkName="Drug information"/>
-					</subTopics>
-				</contextDefinition>
-				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="https://www.clinicalkey.com/search/hl7?"/>
-				</knowledgeRequestService>
-			</context>
-			<context name="Disease information" id="2">
-				<contextDefinition>
+					<patientGender match="false" search="true"/>
 					<patientAgeGroup match="false" search="false"/>
 					<task match="true" search="false">
 						<matchingDomain>
 							<enumeration includeDescendants="false">
-								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="DIAGLISTE"/>
-								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="DIAGLISTREV"/>
-								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PROBLISTE"/>
-								<code codeSystem="2.16.840.1.113883.5.4" displayName="" code="PROBLISTREV"/>
+								<code code="MEDOE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="medication order entry"/>
+								<code code="MLREV" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="medication list review"/>
+								<code code="LABRREV" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="labratory results review"/>
+								<code code="PROBLISTREV" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="problem list review"/>
+								<code code="PROBLISTE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="problem list entry"/>
+								<code code="DIAGLISTREV" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="diagnosis list review"/>
+								<code code="DIAGLISTE" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7 ActCode" displayName="diagnosis list entry"/>
 							</enumeration>
 						</matchingDomain>
 					</task>
-					<performerKnowledgeUserType match="true" search="false">
+					<encounterType match="false" search="false"/>
+					<performerLanguage match="false" search="true"/>
+					<performerKnowledgeUserType match="false" search="false"/>
+					<informationRecipientLanguage match="false" search="true"/>
+					<informationRecipientUserType match="false" search="false"/>
+					<conceptOfInterest match="false" search="true">
 						<matchingDomain>
-							<enumeration includeDescendants="false">
-								<code codeSystem="2.16.840.1.113883.5.110" displayName="" code="PROV"/>
-							</enumeration>
+							<enumeration includeDescendants="false"/>
 						</matchingDomain>
-					</performerKnowledgeUserType>
-					<conceptOfInterest match="false" search="true"/>
+					</conceptOfInterest>
 					<subTopics>
-						<subTopic linkName="Disease information"/>
+						<subTopic linkName="Patient education"/>
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="https://www.clinicalkey.com/search/hl7?"/>
+					<knowledgeRequestServiceLocation url="http://universityofutahib.staywellsolutionsonline.com/Infobutton/search.pg?"/>
 				</knowledgeRequestService>
 			</context>
-		</contexts> 
+		</contexts>
 	</profileDefinition>
 </knowledgeResourceProfile>
