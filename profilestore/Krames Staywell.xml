@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <knowledgeResourceProfile>
-    <header>
+    <header id="1">
         <title>Krames Staywell</title>
         <profileDescription>Patient education resources. To use this profile, an institution-specific base URL needs to be provided. Krames has a custom base URL for each institution that licenses Krames. Contact your Krames representative to obtain the cusotm base URL for your institution.</profileDescription>
+        <versionControl publicationDate="2016-09-19T13:23:00"/>
     </header>
     <profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
         <authorizedOrganizations></authorizedOrganizations>
@@ -15,7 +16,7 @@
             <supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM" namespace=""/>
         </supportedTerminologies>
         <contexts>
-            <context>
+            <context id="1" name="Medications, problems, and lab results">
                 <contextDescription>Patient education all contexts</contextDescription>
                 <contextDefinition>
                     <patientGender match="false" search="true"/>
