@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<knowledgeResourceProfile>
+<?xml version="1.0" encoding="UTF-8"?><knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <header id="1">
         <title>Krames Staywell</title>
         <profileDescription>Patient education resources. To use this profile, an institution-specific base URL needs to be provided. Krames has a custom base URL for each institution that licenses Krames. Contact your Krames representative to obtain the cusotm base URL for your institution.</profileDescription>
-        <versionControl publicationDate="2016-09-19T13:23:00"/>
+        <versionControl publicationDate="2016-09-19T10:23:00"/>
     </header>
     <profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
-        <authorizedOrganizations></authorizedOrganizations>
+        <authorizedOrganizations/>
         <supportedTerminologies>
             <supportedTerminology id="2.16.840.1.113883.6.12" name="CPT" namespace=""/>
             <supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMED-CT" namespace=""/>
@@ -17,7 +16,6 @@
         </supportedTerminologies>
         <contexts>
             <context id="1" name="Medications, problems, and lab results">
-                <contextDescription>Patient education all contexts</contextDescription>
                 <contextDefinition>
                     <patientGender match="false" search="true"/>
                     <patientAgeGroup match="false" search="false"/>
@@ -39,11 +37,7 @@
                     <performerKnowledgeUserType match="false" search="false"/>
                     <informationRecipientLanguage match="false" search="true"/>
                     <informationRecipientUserType match="false" search="false"/>
-                    <conceptOfInterest match="false" search="true">
-                        <matchingDomain>
-                            <enumeration includeDescendants="false"/>
-                        </matchingDomain>
-                    </conceptOfInterest>
+                    <conceptOfInterest match="false" search="true"/>
                     <subTopics>
                         <subTopic linkName="Patient education"/>
                     </subTopics>
