@@ -44,7 +44,7 @@
                 </contextDefinition>
                 <knowledgeRequestService>
                     <!-- Add institution-specific base URL under url attribute below. -->
-                    <knowledgeRequestServiceLocation url=""/>
+                    <knowledgeRequestServiceLocation url="http://"/>
                 </knowledgeRequestService>
             </context>
         </contexts>
