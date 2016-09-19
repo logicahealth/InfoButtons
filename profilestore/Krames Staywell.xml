@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <knowledgeResourceProfile>
     <header>
-        <title>Krames</title>
+        <title>Krames Staywell</title>
         <profileDescription>Patient education resources. To use this profile, an institution-specific base URL needs to be provided. Krames has a custom base URL for each institution that licenses Krames. Contact your Krames representative to obtain the cusotm base URL for your institution.</profileDescription>
     </header>
     <profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
