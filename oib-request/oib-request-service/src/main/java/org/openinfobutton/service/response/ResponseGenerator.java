@@ -758,7 +758,13 @@ public class ResponseGenerator
             {
                 str.append( CodeConstants.MAINSEARCH_ORIGINALTEXT );
                 str.append( "=" );
-                str.append( request.getMainSearchCriteria().getOriginalText() );
+                try {
+                    str.append(URLEncoder.encode(request.getMainSearchCriteria().getOriginalText(), "UTF-8"));
+                }
+                catch (UnsupportedEncodingException e) {
+
+                    e.printStackTrace();
+                }
                 str.append( "&" );
             }
             if ( ( entryLevelCategoryList != null )
