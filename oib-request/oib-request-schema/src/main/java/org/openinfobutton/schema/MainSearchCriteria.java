@@ -31,6 +31,9 @@ public class MainSearchCriteria
     /** The code. */
     private Code code;
 
+    /** The original text. */
+    private String originalText;
+
     /** The severity observation. */
     private SeverityObservation severityObservation;
 
@@ -91,6 +94,7 @@ public class MainSearchCriteria
         
         List<CategoryType> category = new ArrayList<CategoryType>();
         final Code mainsearchCode = CodeUtility.getCode();
+        this.originalText = new String();
         if ( requestParameters.containsKey( CodeConstants.MAINSEARCH_CODE ) )
         {
             mainsearchCode.setCode( requestParameters.get( CodeConstants.MAINSEARCH_CODE )[0] );
@@ -107,6 +111,22 @@ public class MainSearchCriteria
             c.setScheme( CodeConstants.MAINSEARCH_CODESYSTEM );
             category.add( c );
         }
+        if ( requestParameters.containsKey(CodeConstants.MAINSEARCH_ORIGINALTEXT))
+        {
+            mainsearchCode.setDisplayName(requestParameters.get(CodeConstants.MAINSEARCH_ORIGINALTEXT) [0]);
+            this.setOriginalText(requestParameters.get(CodeConstants.MAINSEARCH_ORIGINALTEXT) [0]);
+            final CategoryType c = new CategoryType();
+            c.setTerm( requestParameters.get(CodeConstants.MAINSEARCH_ORIGINALTEXT) [0]);
+            c.setScheme( CodeConstants.MAINSEARCH_ORIGINALTEXT);
+            category.add(c);
+            if (!requestParameters.containsKey(CodeConstants.MAINSEARCH_DISPLAYNAME))
+            {
+                final CategoryType ds = new CategoryType();
+                ds.setTerm( requestParameters.get(CodeConstants.MAINSEARCH_ORIGINALTEXT) [0]);
+                ds.setScheme( CodeConstants.MAINSEARCH_DISPLAYNAME);
+                category.add(ds);
+            }
+        }
         if ( requestParameters.containsKey( CodeConstants.MAINSEARCH_DISPLAYNAME ) )
         {
             mainsearchCode.setDisplayName( requestParameters.get( CodeConstants.MAINSEARCH_DISPLAYNAME )[0] );
@@ -114,6 +134,14 @@ public class MainSearchCriteria
             c.setTerm( requestParameters.get( CodeConstants.MAINSEARCH_DISPLAYNAME )[0] );
             c.setScheme( CodeConstants.MAINSEARCH_DISPLAYNAME );
             category.add( c );
+            if (!requestParameters.containsKey(CodeConstants.MAINSEARCH_ORIGINALTEXT))
+            {
+                this.setOriginalText(requestParameters.get(CodeConstants.MAINSEARCH_DISPLAYNAME )[0]);
+                final CategoryType ot = new CategoryType();
+                ot.setTerm( requestParameters.get(CodeConstants.MAINSEARCH_DISPLAYNAME )[0]);
+                ot.setScheme( CodeConstants.MAINSEARCH_ORIGINALTEXT);
+                category.add(ot);
+            }
         }
         this.setCode( mainsearchCode );
         // Set severity observation
@@ -197,6 +225,24 @@ public class MainSearchCriteria
     {
 
         this.severityObservation = severityObservation;
+    }
+
+    /**
+     * Gets the original text.
+     *
+     * @return the original text
+     */
+    public String getOriginalText() {
+        return originalText;
+    }
+
+    /**
+     * Sets the original text.
+     *
+     * @param originalText the new original text
+     */
+    public void setOriginalText(String originalText) {
+        this.originalText = originalText;
     }
 
     /**

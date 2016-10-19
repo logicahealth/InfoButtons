@@ -754,6 +754,13 @@ public class ResponseGenerator
                                     supportedCodeSystems, request );
             str.append( returnParameters( code, CodeConstants.MAINSEARCH_CODE, CodeConstants.MAINSEARCH_CODESYSTEM,
                                           CodeConstants.MAINSEARCH_DISPLAYNAME ) );
+            if (!request.getMainSearchCriteria().getOriginalText().isEmpty())
+            {
+                str.append( CodeConstants.MAINSEARCH_ORIGINALTEXT );
+                str.append( "=" );
+                str.append( request.getMainSearchCriteria().getOriginalText() );
+                str.append( "&" );
+            }
             if ( ( entryLevelCategoryList != null )
                 && ( request.getMainSearchCriteria().getCode().getCode().equals( "" ) ) )
             {
