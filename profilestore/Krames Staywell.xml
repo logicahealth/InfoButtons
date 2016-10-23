@@ -7,12 +7,12 @@
     <profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
         <authorizedOrganizations/>
         <supportedTerminologies>
-            <supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMED-CT" namespace=""/>
+            <supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMED-CT"/>
             <supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
-            <supportedTerminology id="2.16.840.1.113883.6.90" name="ICD10-CM" namespace=""/>
-            <supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM" namespace=""/>
-            <supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC" namespace=""/>
-            <supportedTerminology id="2.16.840.1.113883.6.12" name="CPT" namespace=""/>
+            <supportedTerminology id="2.16.840.1.113883.6.90" name="ICD10-CM"/>
+            <supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
+            <supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC"/>
+            <supportedTerminology id="2.16.840.1.113883.6.12" name="CPT"/>
         </supportedTerminologies>
         <contexts>
             <context id="1" name="Medications, problems, and lab results">
