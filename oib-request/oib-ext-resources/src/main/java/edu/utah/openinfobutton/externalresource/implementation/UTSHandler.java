@@ -13,12 +13,23 @@
  */
 package edu.utah.openinfobutton.externalresource.implementation;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.utah.openinfobutton.externalresource.json.CodeTransformer;
+import edu.utah.openinfobutton.externalresource.json.CodeTransformerResult;
+import edu.utah.openinfobutton.externalresource.json.CodeTransformerResultList;
+import org.apache.http.client.HttpResponseException;
 import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.openinfobutton.rest.terminology.api.RestTermClient;
+import org.openinfobutton.rest.terminology.impl.UmlsRestClientImpl;
 import org.openinfobutton.schema.CodeUtility;
 import org.openinfobutton.schemas.kb.Code;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +45,7 @@ import UtsSecurity.UtsFault_Exception;
 import UtsSecurity.UtsWsSecurityController;
 import UtsSecurity.UtsWsSecurityControllerImplService;
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
+import org.springframework.stereotype.Service;
 
 /**
  * The Class UTSHandler.
@@ -45,6 +57,8 @@ public class UTSHandler
 
     /** The log. */
     Logger log = Logger.getLogger( UTSHandler.class.getName() );
+
+
 
     /** The umls release. */
     @Value( "${umls.umlsRelease}" )
@@ -73,6 +87,21 @@ public class UTSHandler
     /** The ticket granting ticket. */
     String ticketGrantingTicket;
 
+    public RestTermClient getUmlsRestClient() {
+        return umlsRestClient;
+    }
+
+    public void setUmlsRestClient(RestTermClient umlsRestClient) {
+        this.umlsRestClient = umlsRestClient;
+    }
+
+    @Autowired
+    RestTermClient umlsRestClient;
+
+    public UTSHandler() {
+
+    }
+
     /*
      * (non-Javadoc)
      * @see edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler#transformCode(org.openinfobutton.schemas.kb.Code, java.lang.String)
@@ -80,48 +109,75 @@ public class UTSHandler
     @Override
     public Code transformCode( Code code, String targetCS )
     {
-        Code retCode = null;
-        try
-        {
-            final String ticketGrantingTicket = getTicketGrantingTicket();
-            final String singleUseTicket1 = securityService.getProxyTicket( ticketGrantingTicket, serviceName );
-            final String singleUseTicket2 = securityService.getProxyTicket( ticketGrantingTicket, serviceName );
-            List<AtomDTO> myAtoms = new ArrayList<AtomDTO>();
-            final UtsMetathesaurusContent.Psf myPsf = new UtsMetathesaurusContent.Psf();
-            String cui = null;
-            myAtoms =
-                utsContentService.getCodeAtoms( singleUseTicket1, umlsRelease, code.getCode(),
-                                                code.getCodeSystemName(), myPsf );
-            if ( myAtoms.size() == 0 )
-            {
-                throw new Exception( "UTS FAIL: Failed to get the CUI for the first time" );
-            }
-            for ( int i = 0; i < myAtoms.size(); i++ )
-            {
-                final AtomDTO myAtomDTO = myAtoms.get( i );
-                cui = myAtomDTO.getConcept().getUi();
-                break;
-            }
-            myPsf.getIncludedSources().add( targetCS );
-            myAtoms = utsContentService.getConceptAtoms( singleUseTicket2, umlsRelease, cui, myPsf );
-            for ( int i = 0; i < myAtoms.size(); i++ )
-            {
-                final AtomDTO myAtomDTO = myAtoms.get( i );
-                retCode = CodeUtility.getCode();
-                
-                retCode.setCode( myAtomDTO.getCode().getUi() );
-                break;
-            }
-            log.debug( "Transformed: " + code.getCode() + " -> " + retCode.getCode() );
+        final org.apache.logging.log4j.Logger logger = LogManager.getLogger(UTSHandler.class);
+        logger.error("BEGIN TRANSFORM CODE");
+        Code retCode = new Code();
+
+        logger.error("CODE: " + code.getCode());
+        logger.error("DISPLAY NAME: " + code.getCodeSystemName());
+
+        String tempCode = "ICD9CM";
+        String tempDiab = "250.0";
+        String results = "";
+        try {
+             results = umlsRestClient.getCodes(code.getCode(), code.getCodeSystemName());
         }
-        catch ( final NullPointerException ex )
-        {
-            log.error( "Code transformation Failed" );
+        catch(Exception e) {
+            e.printStackTrace();
         }
-        catch ( final Exception ex )
-        {
-            log.error( ex.getMessage() );
+
+
+        logger.error(results);
+
+        ObjectMapper mapper = new ObjectMapper();
+        CodeTransformer codeTransformer = new CodeTransformer();
+
+        try {
+            codeTransformer  = mapper.readValue(results, CodeTransformer.class);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        List<CodeTransformerResultList> temp = new ArrayList<CodeTransformerResultList>(codeTransformer.getResult().getResults());
+
+        String ui = "";
+        int index = 0;
+        for(index = 0; index < temp.size(); index++) {
+            ui = temp.get(index).getUi();
+            log.error( ui );
+            break;
+        }
+        String codeResult = "";
+        List<String> elephantList = new ArrayList<String>();
+        try {
+            if(targetCS == "ICD10CM") {
+                targetCS = "ICD10AM";
+            }
+            String results2 = umlsRestClient.getCodes(ui, targetCS, temp.get(index).getName());
+            logger.error(results2);
+
+            elephantList = Arrays.asList(results2.split(","));
+            for (int i = 0; i < elephantList.size(); i++) {
+                logger.error(elephantList.get(i));
+                codeResult = elephantList.get(i);
+                if (codeResult.startsWith("\"results\"")) {
+                    break;
+                }
+            }
+
+            elephantList = Arrays.asList(codeResult.split(":"));
+            codeResult = elephantList.get((elephantList.size() - 1));
+            codeResult = codeResult.replaceAll("^\"|\"$", "");
+
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        retCode.setCode(codeResult);
+        retCode.setCodeSystemName(targetCS);
+
         return retCode;
     }
 
@@ -134,65 +190,33 @@ public class UTSHandler
     {
         log.debug( "Got Free text: " + FreeText );
         final ArrayList<Code> searchCodes = new ArrayList<Code>();
-        String ticketGrantingTicket;
-        String singleUseTicket1;
-        try
-        {
-            ticketGrantingTicket = getTicketGrantingTicket();
-            singleUseTicket1 = securityService.getProxyTicket( ticketGrantingTicket, serviceName );
-            final UtsMetathesaurusFinder.Psf myPsf = new UtsMetathesaurusFinder.Psf();
-            myPsf.getIncludedSources().add( "SNOMEDCT_US" );
-            myPsf.getIncludedSources().add( "ICD10CM" );
-            myPsf.getIncludedSources().add( "ICD9CM" );
-            final ArrayList<String> lookupList = new ArrayList<String>();
-            lookupList.add( "SNOMEDCT_US" );
-            lookupList.add( "ICD10CM" );
-            lookupList.add( "ICD9CM" );
-            myPsf.setIncludedLanguage( "ENG" );
-            myPsf.setPageLn( 50 );
-            List<UiLabelRootSource> myUiLabelsRootSource = new ArrayList<UiLabelRootSource>();
-            myUiLabelsRootSource =
-                utsFinderService.findCodes( singleUseTicket1, umlsRelease, "atom", FreeText, "approximate", myPsf );
-            if ( myUiLabelsRootSource.size() == 0 )
-            {
-                throw new Exception( "UTS FAIL: Could not get the Free Text Codes after querying for the first time" );
-            }
-            for ( int i = 0; i < myUiLabelsRootSource.size(); i++ )
-            {
-                final UiLabelRootSource myUiLabelRootSource = myUiLabelsRootSource.get( i );
-                final String ui = myUiLabelRootSource.getUi();
-                final String label = myUiLabelRootSource.getLabel();
-                final String source = myUiLabelRootSource.getRootSource();
-                for ( int j = 0; j < lookupList.size(); j++ )
-                {
-                    final String s = lookupList.get( j );
-                    if ( s.equals( source ) )
-                    {
-                        final Code c = CodeUtility.getCode( ui, getCodeSystemId( source ), label, source );
-                        log.debug( ui + " " + label + " " + source );
-                        searchCodes.add( c );
-                        lookupList.remove( source );
-                        j = 0;
-                    }
-                }
-                if ( lookupList.size() == 0 )
-                {
-                    break;
-                }
-            }
-        }
-        catch ( final UtsFault_Exception e )
-        {
+
+
+        String results = umlsRestClient.getTerms(FreeText, "SNOMEDCT_US, ICD10CM, ICD9CM, RXNORM, ICD10, MSH, LNC, CPT");
+
+
+        ObjectMapper mapper = new ObjectMapper();
+        CodeTransformer codeTransformer = new CodeTransformer();
+
+        try {
+           codeTransformer  = mapper.readValue(results, CodeTransformer.class);
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        catch ( final UtsMetathesaurusFinder.UtsFault_Exception e )
-        {
-            e.printStackTrace();
+
+        List<CodeTransformerResultList> temp =
+                new ArrayList<CodeTransformerResultList>(codeTransformer.getResult().getResults());
+
+        for(int i = 0; i < temp.size(); i++) {
+
+            final String ui = temp.get(i).getUi();
+            final String label = temp.get(i).getName();
+            final String source = temp.get(i).getRootSource();
+            final Code c = CodeUtility.getCode(ui, getCodeSystemId( source ), label, source);
+            log.debug( ui + " " + label + " " + source );
+            searchCodes.add( c );
         }
-        catch ( final Exception e )
-        {
-            log.error( e.getMessage() );
-        }
+
         return searchCodes;
     }
 
@@ -216,6 +240,28 @@ public class UTSHandler
         {
             return "2.16.840.1.113883.6.103";
         }
+        else if ( source.equals( "ICD10" ) )
+        {
+            return "2.16.840.1.113883.6.3";
+        }
+        else if ( source.equals( "RXNORM" ) )
+        {
+            return "2.16.840.1.113883.6.88";
+        }
+        else if ( source.equals( "MSH" ) )
+        {
+            return "2.16.840.1.113883.6.177";
+        }
+        else if ( source.equals( "LNC" ) )
+        {
+            return "2.16.840.1.113883.6.1";
+        }
+        else if ( source.equals( "CPT" ) )
+        {
+            return "2.16.840.1.113883.6.12";
+        }
+
+
         return "";
     }
 
@@ -238,6 +284,27 @@ public class UTSHandler
         else if ( source.equals( "2.16.840.1.113883.6.103" ) )
         {
             return "ICD9CM";
+        }
+
+        else if ( source.equals( "2.16.840.1.113883.6.3" ) )
+        {
+            return "ICD10";
+        }
+        else if ( source.equals( "2.16.840.1.113883.6.88" ) )
+        {
+            return "RXNORM";
+        }
+        else if ( source.equals( "2.16.840.1.113883.6.177" ) )
+        {
+            return "MSH";
+        }
+        else if ( source.equals( "2.16.840.1.113883.6.1" ) )
+        {
+            return "LNC";
+        }
+        else if ( source.equals( "2.16.840.1.113883.6.12" ) )
+        {
+            return "CPT";
         }
         return "";
     }

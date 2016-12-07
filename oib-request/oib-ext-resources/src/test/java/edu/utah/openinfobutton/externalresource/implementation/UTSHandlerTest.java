@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.openinfobutton.schema.CodeUtility;
 import org.openinfobutton.schemas.kb.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -56,4 +57,18 @@ public class UTSHandlerTest
         }
         assertTrue(transformed);
     }
+
+    @Test
+    public void testTransformCode() {
+        final Code c2 = CodeUtility.getCode( "E11", "2.16.840.1.113883.6.96", "", "ICD10CM" );
+        final Code c1 = CodeUtility.getCode( "250.0", "2.16.840.1.113883.6.103 ", "", "ICD9CM" );
+        final Code answer1 = CodeUtility.getCode("E14.9", "2.16.840.1.113883.6.96", "", "ICD10CM");
+        final Code answer2 = CodeUtility.getCode("111552007", "2.16.840.1.113883.6.96", "", "SNOMEDCT_US");
+      //  handler.transformCode( c1, "SNOMEDCT_US" );
+        Code c = handler.transformCode( c1, "SNOMEDCT_US" );
+        System.out.print(c.getCode());
+        assertTrue(answer2.getCode().equals(c.getCode()));
+
+    }
+
 }

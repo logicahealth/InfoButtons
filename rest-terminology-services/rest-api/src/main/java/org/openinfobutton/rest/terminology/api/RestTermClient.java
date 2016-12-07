@@ -40,4 +40,7 @@ public interface RestTermClient {
      * @return JSON search result from web service
      */
     String getTerms (String search, String codeSystem);
+
+    String getCodes (String code, String codeSystem);
+    String getCodes (String CUI, String targetCS, String search);
 }
