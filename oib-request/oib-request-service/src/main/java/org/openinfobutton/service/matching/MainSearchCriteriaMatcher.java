@@ -85,7 +85,16 @@ public class MainSearchCriteriaMatcher
             log.debug( "Free Text Transformation Complete: " + request.getSearchCodes() );
             if ( request.getSearchCodes().size() > 0 )
             {
-                code = request.searchCodes.get( 0 );// this is to ensure the free text is also matched with a valid code
+                 outerloop:
+                 for (String codeSystem : supportedCodeSystems) {
+                     for (Code searchCode : request.getSearchCodes()) {
+                         if (searchCode.getCodeSystem().equals(codeSystem))
+                         {
+                             code = searchCode;
+                             break outerloop;
+                         }
+                     }// this is to ensure the free text is also matched with a valid code
+                 }
             }
         }
         match = CodeMatch( code, context, supportedCodeSystems, true, request );

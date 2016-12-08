@@ -85,13 +85,10 @@ public class ContextProfileHandler
         logger.error("THIS IS WHERE THE CODE IS: " + request.getMainSearchCriteria().getCode().getCode());
 
             Code code = request.getMainSearchCriteria().getCode();
-            if (code.getCode().equals("") && request.getSearchCodes().size() == 0) {
+            if (code.getCode().equals("")) {
                 logger.error("Starting Free Text Transformation for code: " + code.getDisplayName());
                 request.setSearchCodes(handler.transformFreeText(code.getDisplayName()));
                 logger.error("Free Text Transformation Complete: " + request.getSearchCodes());
-                if (request.getSearchCodes().size() > 0) {
-                    code = request.searchCodes.get(0);// this is to ensure the free text is also matched with a valid code
-                }
             }
 
         for (  Map.Entry<Long, KnowledgeResourceProfile> profile : profiles.entrySet()  )
