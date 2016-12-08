@@ -198,14 +198,16 @@ public class UTSHandler
         List<CodeTransformerResultList> temp =
                 new ArrayList<CodeTransformerResultList>(codeTransformer.getResult().getResults());
 
-        for(int i = 0; i < temp.size(); i++) {
+        if (!temp.get(0).getUi().equals("NONE")) {
+            for (int i = 0; i < temp.size(); i++) {
 
-            final String ui = temp.get(i).getUi();
-            final String label = temp.get(i).getName();
-            final String source = temp.get(i).getRootSource();
-            final Code c = CodeUtility.getCode(ui, getCodeSystemId( source ), label, source);
-            log.debug( ui + " " + label + " " + source );
-            searchCodes.add( c );
+                final String ui = temp.get(i).getUi();
+                final String label = temp.get(i).getName();
+                final String source = temp.get(i).getRootSource();
+                final Code c = CodeUtility.getCode(ui, getCodeSystemId(source), label, source);
+                log.debug(ui + " " + label + " " + source);
+                searchCodes.add(c);
+            }
         }
 
         return searchCodes;

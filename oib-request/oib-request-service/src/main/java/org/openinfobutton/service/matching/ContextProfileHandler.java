@@ -84,12 +84,12 @@ public class ContextProfileHandler
         final org.apache.logging.log4j.Logger logger = LogManager.getLogger(ContextProfileHandler.class);
         logger.error("THIS IS WHERE THE CODE IS: " + request.getMainSearchCriteria().getCode().getCode());
 
-            Code code = request.getMainSearchCriteria().getCode();
-            if (code.getCode().equals("")) {
-                logger.error("Starting Free Text Transformation for code: " + code.getDisplayName());
-                request.setSearchCodes(handler.transformFreeText(code.getDisplayName()));
-                logger.error("Free Text Transformation Complete: " + request.getSearchCodes());
-            }
+        Code code = request.getMainSearchCriteria().getCode();
+        if (code.getCode().equals("")) {
+            logger.error("Starting Free Text Transformation for code: " + code.getDisplayName());
+            request.setSearchCodes(handler.transformFreeText(code.getDisplayName()));
+            logger.error("Free Text Transformation Complete: " + request.getSearchCodes());
+        }
 
         for (  Map.Entry<Long, KnowledgeResourceProfile> profile : profiles.entrySet()  )
         {

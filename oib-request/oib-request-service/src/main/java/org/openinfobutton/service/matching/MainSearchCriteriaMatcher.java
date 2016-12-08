@@ -80,9 +80,6 @@ public class MainSearchCriteriaMatcher
         log.debug( "Matching MainSearchCriteria..." );
         if ( code.getCode().equals( "" ) && request.getSearchCodes().size() == 0 )
         {
-            log.info( "Starting Free Text Transformation for code: " + code.getDisplayName() );
-            request.setSearchCodes( handler.transformFreeText( code.getDisplayName() ) );
-            log.debug( "Free Text Transformation Complete: " + request.getSearchCodes() );
             if ( request.getSearchCodes().size() > 0 )
             {
                  outerloop:
