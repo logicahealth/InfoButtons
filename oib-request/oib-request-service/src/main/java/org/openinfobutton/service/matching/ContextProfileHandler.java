@@ -29,11 +29,13 @@ import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.schemas.kb.ProfileDefinition.AuthorizedOrganizations.AuthorizedOrganization;
 import org.openinfobutton.service.profile.ResourceProfileProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContextProfileHandler.
  */
+@Configurable( preConstruction = true )
 public class ContextProfileHandler
 {
 
@@ -41,7 +43,6 @@ public class ContextProfileHandler
     Logger log = Logger.getLogger( ContextProfileHandler.class.getName() );
 
     /** The matcher. */
-    @Autowired
     ContextMatcher matcher;
 
     /** The profiles. */
@@ -51,7 +52,6 @@ public class ContextProfileHandler
     public ResourceProfileProvider provider;
 
     /** The request. */
-    @Autowired
     public KnowledgeRequest request;
 
     @Autowired
@@ -59,6 +59,7 @@ public class ContextProfileHandler
 
     /** The results. */
     public List<RequestResult> results;
+
 
     /**
      * Inits the profiles.
@@ -83,11 +84,10 @@ public class ContextProfileHandler
         final org.apache.logging.log4j.Logger logger = LogManager.getLogger(ContextProfileHandler.class);
         logger.error("THIS IS WHERE THE CODE IS: " + request.getMainSearchCriteria().getCode().getCode());
 
-            UTSHandler a = new UTSHandler();
             Code code = request.getMainSearchCriteria().getCode();
             if (code.getCode().equals("") && request.getSearchCodes().size() == 0) {
                 logger.error("Starting Free Text Transformation for code: " + code.getDisplayName());
-                request.setSearchCodes(a.transformFreeText(code.getDisplayName()));
+                request.setSearchCodes(handler.transformFreeText(code.getDisplayName()));
                 logger.error("Free Text Transformation Complete: " + request.getSearchCodes());
                 if (request.getSearchCodes().size() > 0) {
                     code = request.searchCodes.get(0);// this is to ensure the free text is also matched with a valid code

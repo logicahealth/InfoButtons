@@ -45,13 +45,13 @@
 	<context:component-scan base-package="edu.utah.further.subsetdb.service" />
 	<context:component-scan base-package="edu.utah.further.profiledb.service" />
 	<context:component-scan base-package="edu.utah.further.liteprofiledb.service" />
+	<context:component-scan base-package="org.openinfobutton.rest.terminology.impl" />
     <context:component-scan base-package="edu.utah.openinfobutton.externalresource.implementation" /> 
     <bean id="externalSet" class="${service.MatchExternalSetClassName}"> </bean>
 	<context:component-scan base-package="org.openinfobutton.service.profile" />
 	<context:component-scan base-package="org.openinfobutton.service.transform" />
 	<context:component-scan base-package="org.openinfobutton.service.response" />
 	<context:component-scan base-package="org.openinfobutton.service.matching" />
-	<context:component-scan base-package="org.openinfobutton.rest.terminology.impl" />
 	<context:component-scan base-package="org.openinfobutton.service.web" />
 	
 	<context:spring-configured />

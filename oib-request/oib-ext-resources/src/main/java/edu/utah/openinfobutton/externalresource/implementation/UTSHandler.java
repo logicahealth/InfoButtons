@@ -31,7 +31,6 @@ import org.openinfobutton.schema.CodeUtility;
 import org.openinfobutton.schemas.kb.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import UtsMetathesaurusContent.AtomClusterRelationDTO;
 import UtsMetathesaurusContent.AtomDTO;
@@ -50,7 +49,7 @@ import org.springframework.stereotype.Service;
 /**
  * The Class UTSHandler.
  */
-@Component
+@Service
 public class UTSHandler
     implements ExternalResourceHandler
 {
@@ -86,14 +85,6 @@ public class UTSHandler
 
     /** The ticket granting ticket. */
     String ticketGrantingTicket;
-
-    public RestTermClient getUmlsRestClient() {
-        return umlsRestClient;
-    }
-
-    public void setUmlsRestClient(RestTermClient umlsRestClient) {
-        this.umlsRestClient = umlsRestClient;
-    }
 
     @Autowired
     RestTermClient umlsRestClient;
