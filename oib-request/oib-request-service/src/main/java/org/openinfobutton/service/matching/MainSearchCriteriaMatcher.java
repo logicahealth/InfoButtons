@@ -78,21 +78,14 @@ public class MainSearchCriteriaMatcher
         Boolean match = false;
         Code code = mainSearch.getCode();
         log.debug( "Matching MainSearchCriteria..." );
-        if ( code.getCode().equals( "" ) && request.getSearchCodes().size() == 0 )
+        if ( code.getCode().equals( "" ) && request.getSearchCodes().size() > 0 )
         {
-            if ( request.getSearchCodes().size() > 0 )
-            {
-                 outerloop:
-                 for (String codeSystem : supportedCodeSystems) {
-                     for (Code searchCode : request.getSearchCodes()) {
-                         if (searchCode.getCodeSystem().equals(codeSystem))
-                         {
-                             code = searchCode;
-                             break outerloop;
-                         }
-                     }// this is to ensure the free text is also matched with a valid code
+            for (Code searchCode : request.getSearchCodes()) {
+                 if (supportedCodeSystems.contains(searchCode.getCodeSystem()))
+                 {
+                     code = searchCode;
                  }
-            }
+             }// this is to ensure the free text is also matched with a valid code
         }
         match = CodeMatch( code, context, supportedCodeSystems, true, request );
         log.debug( "Match MainSearchCriteria RESULT = " + match );
