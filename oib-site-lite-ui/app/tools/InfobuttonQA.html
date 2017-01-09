@@ -85,6 +85,7 @@
 	return knowledgeRequest;
 }*/
 
+/*
 function launchUrl()
 {
 	var url = this.buildUrl();
@@ -93,6 +94,7 @@ function launchUrl()
 	window.open(url,"Infobutton", 'scrollbars=yes, resizable=yes, toolbar=yes, status=yes, left=0, top=0, width=1200,height=800');
 	return false;
 }
+*/
 
 
 
@@ -108,19 +110,6 @@ function launchUrl()
 		<font margin-top="0" face="Arial, Helvetica, sans-serif"><a
 			href="http://www.openinfobutton.org/">OpenInfobutton</a></font>
 	</h2>
-
-	<p>
-		<font face="Arial, Helvetica, sans-serif"><font size="3"><strong>*Server:
-			</strong></font> <select name="server" id="server">
-				<option
-					value="http://155.100.240.79:8080/infobutton-service/infoRequest?">ITS-
-					CISOPENINFO</option>
-				<option
-					value="http://dev-service.oib.utah.edu:8080/infobutton-service/infoRequest?">Development</option>
-				<option
-					value="http://service.oib.utah.edu:8080/infobutton-service/infoRequest?">Production</option>
-		</select> </font>
-	</p>
 
 	<p>
 		<font face="Arial, Helvetica, sans-serif"><font size="3"><strong>*Requesting
@@ -266,7 +255,7 @@ function launchUrl()
 
 	<p>
 		<font face="Arial, Helvetica, sans-serif"> <input name="submit"
-			type="submit" value="Build URL" onClick="launchUrl();">
+			type="submit" value="Build URL" ng-click="launchUrl();">
 		</font>
 	</p>
 

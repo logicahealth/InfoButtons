@@ -110,4 +110,12 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', function($state, $scop
         return knowledgeRequest;
     }
 
+    $scope.launchUrl = function ()
+    {
+        var url = this.buildUrl();
+        var textField = document.getElementById('urlOutput');
+        textField.value = url;
+        window.open(url,"Infobutton", 'scrollbars=yes, resizable=yes, toolbar=yes, status=yes, left=0, top=0, width=1200,height=800');
+    }
+
 }]);
