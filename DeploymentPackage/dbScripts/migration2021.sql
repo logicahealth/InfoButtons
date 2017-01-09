@@ -1,0 +1,1 @@
+ALTER TABLE valueset_and_log.logs ADD response MEDIUMTEXT NULL;
