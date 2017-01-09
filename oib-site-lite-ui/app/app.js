@@ -13,6 +13,7 @@ var oibConfigurationApp = angular.module('oibConfigurationApp', [
   'ngNotify',
   'schemaForm',
   'oibHomeModule',
+  'oibToolModule',
   'liteAuthenticationServiceModule',
   'liteAuthenticationModule',
   'setupControllers',
@@ -88,6 +89,22 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
         url: '/responder/editAsset/:assetId',
         templateUrl: 'responder/assetForm.html',
         controller: 'AssetsCtrl',
+          data: {
+              requireGit: false
+          }
+      })
+      .state('testTool', {
+          url: '/testTool',
+          templateUrl: 'tools/InfobuttonQA.html',
+          controller: 'ToolCtrl',
+          data: {
+              requireGit: false
+          }
+      })
+      .state('ehrDemo', {
+          url: '/ehrDemo',
+          templateUrl: 'tools/OpenInfobuttonDemo.html',
+          controller: 'ToolCtrl',
           data: {
               requireGit: false
           }
