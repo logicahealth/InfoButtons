@@ -50,11 +50,12 @@ public class LogsDaoImpl
      */
     @Override
     @Transactional
-    public void saveRequest( String req, String clientIP, String orgID )
+    public void saveRequest( String req, String rep, String clientIP, String orgID )
     {
         final Date d = new Date();
         final Logs log = new Logs();
         log.setRequest( req );
+        log.setResponse(rep);
         log.setClientIP( clientIP );
         log.setOrgID( orgID );
         log.setTimestamp( new Timestamp( d.getTime() ) );

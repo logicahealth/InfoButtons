@@ -27,9 +27,10 @@ public interface LogsDao
      * Save request.
      *
      * @param req the req
+     * @param rep the response
      * @param clip the clip
      * @param org the org
      */
-    public void saveRequest( String req, String clip, String org );
+    public void saveRequest( String req, String rep, String clip, String org );
 
 }

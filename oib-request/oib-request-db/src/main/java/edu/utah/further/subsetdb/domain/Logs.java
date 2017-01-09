@@ -51,6 +51,10 @@ public class Logs
     @Column( name = "request", nullable = true, columnDefinition = "MEDIUMTEXT" )
     public String request;
 
+    /** The response. */
+    @Column( name = "response", nullable = true, columnDefinition = "MEDIUMTEXT" )
+    public String response;
+
     /** The timestamp. */
     @Column( name = "timestamp", nullable = true )
     public Timestamp timestamp;
@@ -104,6 +108,26 @@ public class Logs
     public void setRequest( String request )
     {
         this.request = request;
+    }
+
+    /**
+     * Gets the response.
+     *
+     * @return the response
+     */
+    public String getResponse()
+    {
+        return response;
+    }
+
+    /**
+     * Sets the response.
+     *
+     * @param request the new response
+     */
+    public void setResponse( String response )
+    {
+        this.response = response;
     }
 
     /**

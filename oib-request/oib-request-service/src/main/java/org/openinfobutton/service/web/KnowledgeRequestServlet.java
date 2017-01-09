@@ -119,7 +119,6 @@ public class KnowledgeRequestServlet
             transformer = tfactory.newTransformer();
             transformer.transform(source, result);
             final String orgid = knowledgeRequest.getHolder().getRepresentedOrganization().getRoot();
-            dao.saveRequest( stringWriter.toString(), req.getRemoteAddr(), orgid );// Log written here
             final AggregateKnowledgeResponse response = engine.getResponse( knowledgeRequest );
             ctx = JAXBContext.newInstance(AggregateKnowledgeResponse.class);
             m = ctx.createMarshaller();
@@ -147,7 +146,8 @@ public class KnowledgeRequestServlet
                     {
                         final Gson gson = new Gson();
                         resp.setContentType( "application/json" );
-                        out.println( gson.toJson( response ) );
+                        finalXml = gson.toJson(response);
+                        out.println( finalXml );
                     }
                     else if ( knowledgeResType.equals( "text/xml" ) )
                     {
@@ -170,6 +170,7 @@ public class KnowledgeRequestServlet
             }
             else
             {
+                finalXml = stringWriter.getBuffer().toString();
                 String transformation = "Infobutton_UI";
                 if ( req.getParameter( "xsltTransform" ) != null )
                 {
@@ -182,8 +183,10 @@ public class KnowledgeRequestServlet
                 stringWriter = new StringWriter();
                 result = new StreamResult( stringWriter );
                 transformer.transform( source, result );
+                stringWriter.getBuffer().toString();
                 out.println( stringWriter.getBuffer().toString() );
             }
+            dao.saveRequest( req.getQueryString(), finalXml, req.getRemoteAddr(), orgid );// Log written here
 
         }
         catch ( final JAXBException e )
