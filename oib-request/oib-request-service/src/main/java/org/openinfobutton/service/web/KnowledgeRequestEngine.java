@@ -42,6 +42,12 @@ public class KnowledgeRequestEngine
     @Autowired
     ResponseGenerator rg;
 
+    /**The Context Profile Handler**
+     *
+     */
+    @Autowired
+    ContextProfileHandler contextProfileHandler;
+
     /**
      * Gets the response.
      *
@@ -89,8 +95,7 @@ public class KnowledgeRequestEngine
         }
         else
         {
-            final ContextProfileHandler contextProfileHandlerObject = new ContextProfileHandler();
-            result = contextProfileHandlerObject.handleRequest( request );
+            result = contextProfileHandler.handleRequest( request );
             return result;
         }
     }

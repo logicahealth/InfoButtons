@@ -30,12 +30,13 @@ import org.openinfobutton.schemas.kb.ProfileDefinition.AuthorizedOrganizations.A
 import org.openinfobutton.service.profile.ResourceProfileProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Service;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContextProfileHandler.
  */
-@Configurable( preConstruction = true )
+@Service
 public class ContextProfileHandler
 {
 
