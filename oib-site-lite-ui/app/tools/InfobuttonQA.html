@@ -102,14 +102,15 @@ function launchUrl()
 //-->
 </script>
 <div ng-controller="ToolCtrl">
+
 	<p>
-		<a href="http://www.openinfobutton.org/"><img border="0"
-			src="img/project_logo_medium.jpg" /></a>
+		<font face="Arial, Helvetica, sans-serif"><font size="3"><strong>*Execution mode: </strong></font>
+			<select name="executionMode" id="executionMode">
+				<option value="">Production</option>
+				<option value="TEST">Test</option>
+			</select>
+		</font>
 	</p>
-	<h2>
-		<font margin-top="0" face="Arial, Helvetica, sans-serif"><a
-			href="http://www.openinfobutton.org/">OpenInfobutton</a></font>
-	</h2>
 
 	<p>
 		<font face="Arial, Helvetica, sans-serif"><font size="3"><strong>*Requesting
@@ -122,11 +123,14 @@ function launchUrl()
 	<p>
 		<font face="Arial, Helvetica, sans-serif"><font size="3"><strong>*Task
 					context: </strong></font> <select name="taskContextC" id="taskContextC">
-				<option value=""></option>
-				<option value="LABRREV">Lab results review</option>
-				<option value="MLREV">Medication list review</option>
-				<option value="MEDOE">Medication order entry</option>
-				<option value="PROBLISTREV">Problem list review</option>
+			<option value=""></option>
+			<option value="LABRREV">Lab results review</option>
+			<option value="LABOE">Lab order entry</option>
+			<option value="MLREV">Medication list review</option>
+			<option value="MEDOE">Medication order entry</option>
+			<option value="PROBLISTREV">Problem list review</option>
+			<option value="PROBLISTE">Problem list entry</option>
+
 		</select> </font>
 	</p>
 
@@ -246,16 +250,17 @@ function launchUrl()
 		<font face="Arial, Helvetica, sans-serif"><strong>Output:
 		</strong></font><font face="Arial, Helvetica, sans-serif"> <select
 			name="output" id="output">
-				<option value="">HTML</option>
-				<option value="&transform">XML</option>
-		</select>
+		<option value="">HTML</option>
+		<option value="&knowledgeResponseType=text/xml">XML</option>
+		<option value="&knowledgeResponseType=application/json">JSON</option>
+	</select>
 		</font>
 	</p>
 
 
 	<p>
 		<font face="Arial, Helvetica, sans-serif"> <input name="submit"
-			type="submit" value="Build URL" ng-click="launchUrl();">
+			type="submit" value="Test Infobutton Request" ng-click="launchUrl();">
 		</font>
 	</p>
 

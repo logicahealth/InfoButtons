@@ -104,6 +104,10 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', function($state, $scop
                 document.getElementById("performerDisciplineC").value +
                 '&performer.healthCareProvider.c.cs=2.16.840.1.113883.6.101';
         }
+        if (document.getElementById("executionMode").value != '') {
+            knowledgeRequest = knowledgeRequest + '&executionMode=' +
+                document.getElementById("executionMode").value;
+        }
 
         knowledgeRequest = knowledgeRequest + document.getElementById("output").value;
 

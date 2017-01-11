@@ -27,8 +27,8 @@ img { border: none }
 #footer div div span { background: #ccc; color: #fff; padding: 5px 24px; }
 
 #header { 
-	padding: 70px 0px 0px 0px; margin: 0px;
-	background:#ffffff url('../img/project_logo_medium.jpg') no-repeat left top;
+	padding: 0px 0px 0px 0px; margin: 0px;
+	background:#ffffff no-repeat left top;
 }
 
 #header ul { 
