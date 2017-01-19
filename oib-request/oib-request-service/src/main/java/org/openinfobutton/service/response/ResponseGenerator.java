@@ -71,9 +71,9 @@ import org.openinfobutton.schemas.kb.SubTopic.SearchParameter;
 import org.openinfobutton.service.matching.RequestResult;
 import org.openinfobutton.service.transform.TransformCode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Configurable;
 
-@Component
+@Configurable( preConstruction = true )
 public class ResponseGenerator
 {
 
