@@ -6,12 +6,23 @@
 	</header>
 	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="true">
 		<authorizedOrganizations></authorizedOrganizations>
+        <supportedTerminologies>
+			<supportedTerminology id="2.16.840.1.113883.6.90" name="ICD10-CM"/>
+			<supportedTerminology id="2.16.840.1.113883.6.4" name="ICD10-PCS"/>
+			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMEDCT_US"/>
+			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9CM Diagosis"/>
+			<supportedTerminology id="2.16.840.1.113883.6.104" name="ICD9CM Procedure"/>
+			<supportedTerminology id="2.16.840.1.113883.6.42" name="ICD9"/>
+			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
+			<supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC"/>
+			<supportedTerminology id="2.16.840.1.113883.6.69" name="NDC"/>
+		</supportedTerminologies>
 		<contexts>
 			<context name="Knowledge on conditions and medications from problem list review and entry, order entry, and meds list" id="1">
 				<contextDefinition>
 					<patientGender match="false" search="true"/>
 					<patientAgeGroup match="false" search="true"/>
-					<task match="true" search="true">
+					<task match="true" search="false">
 						<matchingDomain>
 							<enumeration includeDescendants="false">
 									<code codeSystem="2.16.840.1.113883.5.4" displayName="problem list review task" code="PROBLISTREV"/>
@@ -31,7 +42,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://medical.ebscohost.com/HL7Translator/HL7/hl7request/dme?"/>
+					<knowledgeRequestServiceLocation url="http://medical.ebscohost.com/HL7Translator/HL7/hl7request/dmp?"/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>
