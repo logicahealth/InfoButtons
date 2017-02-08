@@ -1,5 +1,6 @@
 package org.openinfobutton.service.request;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openinfobutton.service.fixture.OibRequestTestingFixture;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class OibLiveServiceTest extends OibRequestTestingFixture{
     }
 
     @Test
+    @Ignore
     public void testTerminologyRequest() {
 
         String OIBHtml = new RestTemplate()
