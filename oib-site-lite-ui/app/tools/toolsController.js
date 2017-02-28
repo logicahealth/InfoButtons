@@ -13,8 +13,16 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', function($state, $scop
         var organizationOID = document.getElementById("organizationId").value;
         var organization = 'representedOrganization.id.root=' + organizationOID;
 
-        var genderParam = '&patientPerson.administrativeGenderCode.c=' + gender + '' ;
-        var ageParam = '&age.v.v=' + age + '&age.v.u=a';
+        var genderParam = '';
+        if (gender != null)
+        {
+
+            genderParam = '&patientPerson.administrativeGenderCode.c=' + gender + '' ;
+        }
+        var ageParam = '';
+        if (age != null) {
+            ageParam = '&age.v.v=' + age + '&age.v.u=a';
+        }
         var taskParam = '&taskContext.c.c=' + task;
 
         var mainSearchCriteriaParam = '&mainSearchCriteria.v.c=' + mainSearchCriteriaC + '&mainSearchCriteria.v.cs=' + getCs(mainSearchCriteriaC) + '&mainSearchCriteria.v.dn=' + getDn(mainSearchCriteriaC);
@@ -26,7 +34,11 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', function($state, $scop
 
         var performerParam = '&informationRecipient.languageCode.c=en&performer=PROV';
 
-        var xslt = '&xsltTransform=' + getXslt(organizationOID);
+        var xslt = '';
+        if (getXslt(organizationOID) != null)
+        {
+            xslt = '&xsltTransform=' + getXslt(organizationOID);
+        }
 
         var url = baseUrl + organization + genderParam + ageParam
             + taskParam + mainSearchCriteriaParam + performerParam + xslt;
