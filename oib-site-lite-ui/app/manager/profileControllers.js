@@ -1904,7 +1904,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                     "description" : "Select terminology to add to profile",
                                     "titleMap": [{"name" : "CPT", value : {"id": "2.16.840.1.113883.6.12", "name" : "CPT", "namespace" : ""}},
                                         {"name": "ICD9-CM", "value" : {"id" : "2.16.840.1.113883.6.103", "name": "ICD9-CM", "namespace" : ""}},
-                                        {"name": "ICD10-CM", "value" : {"id" : "2.16.840.1.113883.6.103", "name": "ICD10-CM", "namespace" : ""}},
+                                        {"name": "ICD10-CM", "value" : {"id" : "2.16.840.1.113883.6.90", "name": "ICD10-CM", "namespace" : ""}},
                                         {"name": "ICD10", "value" : {"id" : "2.16.840.1.113883.6.3", "name" : "ICD10", "namespace" : ""}},
                                         {"name" : "LOINC", "value" : {"id" : "2.16.840.1.113883.6.1", "name" : "LOINC", "namespace" : ""}},
                                         {"name" : "NDC", "value" : {"id" : "2.16.840.1.113883.6.69", "name" : "NDC", "namespace" : ""}},
