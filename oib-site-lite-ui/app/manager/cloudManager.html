@@ -42,7 +42,7 @@
 
 <h3>Resource Store</h3>
 <hr/>
-    <div class="well" ng-repeat="localCloudProfile in localCloudProfiles | orderBy: version | filter:needsUpdate()">
+    <div class="well" ng-repeat="localCloudProfile in localCloudProfiles | orderBy: '-published' | filter:needsUpdate()">
         <div class="row">
             <div class="col-md-3">
                 <!--Suggest adding logos/images for each profile - see next line -->
@@ -64,7 +64,7 @@
             </div>
         </div>
     </div>
-    <div class="well" ng-repeat="localCloudProfile in localCloudProfiles | orderBy: version | filter:isUpdated()">
+    <div class="well" ng-repeat="localCloudProfile in localCloudProfiles | orderBy: '-published' | filter:isUpdated()">
         <div class="row">
             <div class="col-md-3">
                 <!--Suggest adding logos/images for each profile - see next line -->
@@ -91,7 +91,7 @@
             </div>
         </div>
     </div>
-    <div class="well" ng-repeat="cloudProfileLink in cloudProfileLinks | orderBy: version | filter:notInstalled(localCloudProfiles)">
+    <div class="well" ng-repeat="cloudProfileLink in cloudProfileLinks | orderBy: '-version' | filter:notInstalled(localCloudProfiles)">
         <div class="row">
             <div class="col-md-3">
                 <!--Suggest adding logos/images for each profile - see next line -->

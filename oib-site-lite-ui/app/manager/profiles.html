@@ -33,7 +33,7 @@
 <h3>Custom Resources<a class="btn navbar-btn glyphicon glyphicon-plus" href="#/editProfile/"></a></h3>
 <hr/>
 
-    <div class="well" ng-repeat="profile in localProfiles">
+    <div class="well" ng-repeat="profile in localProfiles | orderBy:'-published'">
         <div class="row">
             <div class="col-md-3">
 <!--Suggest adding logos/images for each profile - see next line -->                 
