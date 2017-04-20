@@ -1,7 +1,7 @@
 #shadow { background: #f0f0f0 url('../img/shL.png') top left repeat-y; }
 #shadow2 { background: #f0f0f0 url('../img/shR.png') top right repeat-y; }
 
-h2 { font-weight: bold; font-size: 18px; margin: 4px 2px 4px 0px; padding: 8px 8px; color: #fff; background: #001155 }
+h2 { font-weight: bold; font-size: 18px; margin: 4px 2px 4px 0px; padding: 8px 8px; color: #069; background: #001155 }
 a:visited, a:active, a:focus, a:hover { color: #00f }
 img { border: none }
 
