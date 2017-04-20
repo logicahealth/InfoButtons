@@ -1979,7 +1979,7 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                     "items" : [
                         {
                             "key" : "profileDefinition.contexts.context",
-                            "title" : "Context",
+                            "title" : "{{ value.name }}",
                             "type" : "tabarray",
                             "tabType" : "top",
                             "startEmpty" : true,
@@ -1987,6 +1987,10 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                 {
                                     "key" : "profileDefinition.contexts.context[].contextDescription",
                                     "title" : "Context Description"
+                                },
+                                {
+                                    "key" : "profileDefinition.contexts.context[].name",
+                                    "title" : "Context Name"
                                 },
                                 {
                                     "key" : "profileDefinition.contexts.context[].knowledgeRequestService",
