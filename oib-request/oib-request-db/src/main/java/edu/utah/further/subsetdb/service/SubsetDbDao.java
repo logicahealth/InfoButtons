@@ -16,23 +16,15 @@ package edu.utah.further.subsetdb.service;
 import edu.utah.further.core.api.context.Api;
 import edu.utah.further.subsetdb.domain.Concept;
 import edu.utah.further.subsetdb.domain.Subset;
+import edu.utah.openinfobutton.valuset.matcher.api.ValueSetMatcher;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface SubsetDbDao.
  */
 @Api
-public interface SubsetDbDao
+public interface SubsetDbDao extends ValueSetMatcher
 {
-
-    /**
-     * Checks if is concept in subset.
-     *
-     * @param conceptid the conceptid
-     * @param subsetid the subsetid
-     * @return the boolean
-     */
-    public Boolean isConceptInSubset( Long conceptid, Long subsetid );
 
     /**
      * Gets the concept by code and code system.

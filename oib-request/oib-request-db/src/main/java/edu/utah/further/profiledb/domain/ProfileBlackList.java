@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table( name = "profile_black_list" )
-public class ProfileBlackList implements PersistentEntity<Long>
+public class ProfileBlackList implements PersistentEntity<Integer>
 {
     // ========================= CONSTANTS =================================
     /** The Constant serialVersionUID. */
@@ -20,7 +20,7 @@ public class ProfileBlackList implements PersistentEntity<Long>
 
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
-    public Long id;
+    public Integer id;
 
     /** The title. */
     @Column( name = "profileTitle" )
@@ -34,11 +34,11 @@ public class ProfileBlackList implements PersistentEntity<Long>
     @Column( name = "userId" )
     public String userId;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

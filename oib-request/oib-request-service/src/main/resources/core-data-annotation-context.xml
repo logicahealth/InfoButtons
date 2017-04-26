@@ -42,6 +42,7 @@
 			expression=".*\.CachingServiceEHCacheImpl" />
 	</context:component-scan>
 
+	<context:component-scan base-package="edu.utah.openinfobutton.valuset.matcher.impl.cloud" />
 	<context:component-scan base-package="edu.utah.further.subsetdb.service" />
 	<context:component-scan base-package="edu.utah.further.profiledb.service" />
 	<context:component-scan base-package="edu.utah.further.liteprofiledb.service" />

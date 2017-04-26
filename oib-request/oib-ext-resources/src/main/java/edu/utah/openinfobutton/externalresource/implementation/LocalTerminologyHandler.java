@@ -15,15 +15,14 @@ package edu.utah.openinfobutton.externalresource.implementation;
 
 import java.util.List;
 
+import edu.utah.openinfobutton.valuset.matcher.api.ValueSetMatcher;
 import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.TerminologyInference.CodeInference.InferenceDefinition.LocalMappings.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import edu.utah.further.subsetdb.domain.Concept;
-import edu.utah.further.subsetdb.domain.Subset;
-import edu.utah.further.subsetdb.service.SubsetDbDao;
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
 import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
 
@@ -37,7 +36,8 @@ public class LocalTerminologyHandler
 
     /** The dao. */
     @Autowired
-    private SubsetDbDao dao;
+    @Qualifier( "cloudMatcher" )
+    private ValueSetMatcher matcher;
 
     /** The handler. */
     @Autowired
@@ -59,14 +59,9 @@ public class LocalTerminologyHandler
     {
 
         Boolean match = false;
-        final Concept concept = dao.getConceptByCodeAndCodeSystem( code.getCode(), code.getCodeSystem() );
         for ( final Id subsetId : subsetIdList )
         {
-            final Subset subset = dao.getSubsetByName( subsetId.getId() );
-            if ( concept != null && subset != null )
-            {
-                match = dao.isConceptInSubset( concept.getId(), subset.getId() );
-            }
+            match = matcher.isConceptInSubset( code.getCode(), code.getCodeSystem(), subsetId.getId() );
             if ( match )
             {
                 break;

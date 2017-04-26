@@ -28,13 +28,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public abstract class ExternalResourcesTestFixture
 {
     
-    final static Code CONCEPT_IN_SUBSET = CodeUtility.getCode( "351710", "2.16.840.1.113883.6.88", "Barr - Tamoxifen Citrate 20 MG Oral Tablet", "RxNorm" );
+    final static Code CONCEPT_IN_SUBSET = CodeUtility.getCode( "614164", "2.16.840.1.113883.6.174", "GLUTATHIONE PEROXIDASE DEFICIENCY", "Genetic Codes" );
     
     final static Code VALID_MAPPING_CONCEPT = CodeUtility.getCode( "109769000", "2.16.840.1.113883.6.96", "Necrotizing sialometaplasia", "SNOMEDCT_US" );
     
     final static String ICD10 = "2.16.840.1.113883.6.90";
     
-    final static String SUBSET_ID = "TAMOXIFEN";
+    final static String SUBSET_ID = "OMIM_GENETIC_CONDITIONS";
     
     final static Code DIABETES = CodeUtility.getCode( "250", "2.16.840.1.113883.6.103", "Diabetes mellitus", "ICD9CM" );
     

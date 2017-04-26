@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,24 +45,24 @@ public class SubsetDbDaoImpl
      */
     @Autowired
     @Qualifier( "subsetlogDao" )
-    private Dao dao;// =new DaoHibernateImpl(new
-                    // Configuration().configure("core-data-datasource-context.xml").buildSessionFactory());
+    private Dao dao;
 
-    /*
-                     * (non-Javadoc)
-                     * @see edu.utah.further.subsetdb.service.SubsetDbDao#isConceptInSubset(java.lang.Long, java.lang.Long)
-                     */
-                    @Override
+    @Override
     @Transactional
-    public Boolean isConceptInSubset( Long conceptid, Long subsetid )
+    public Boolean isConceptInSubset( String code, String codeSystem, String subsetName )
     {
 
-        final Concept concept = dao.findById( Concept.class, conceptid );
-        final Subset subset = dao.findById( Subset.class, subsetid );
+        final Concept concept = getConceptByCodeAndCodeSystem( code, codeSystem );
+        final Subset subset = getSubsetByName(subsetName );
 
         Set<Subset> subsets = new HashSet<Subset>();
-        subsets = concept.getSubsets();
-        return subsets.contains( subset );
+        if (concept != null && subset != null) {
+            subsets = concept.getSubsets();
+            return subsets.contains(subset);
+        } else {
+
+            return false;
+        }
     }
 
     /*

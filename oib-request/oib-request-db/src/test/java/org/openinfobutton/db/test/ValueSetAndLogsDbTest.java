@@ -70,7 +70,7 @@ public class ValueSetAndLogsDbTest
         
         Concept concept = subsetDao.getConceptByCodeAndCodeSystem( "250.00", "2.16.840.1.113883.6.103" );
         Subset subset = subsetDao.getSubsetByName( "DIABETES_MELLITUS" );
-        assertTrue(subsetDao.isConceptInSubset( concept.getId(), subset.getId() ));
+        assertTrue(subsetDao.isConceptInSubset( "250.00", "2.16.840.1.113883.6.103", "DIABETES_MELLITUS"));
     }
     
     
