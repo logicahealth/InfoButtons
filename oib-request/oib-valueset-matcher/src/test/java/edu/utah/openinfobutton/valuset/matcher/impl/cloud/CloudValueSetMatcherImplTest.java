@@ -21,7 +21,7 @@ public class CloudValueSetMatcherImplTest {
     @org.junit.Test
     public void testIsConceptInSubset() throws Exception {
 
-        assertTrue(matcher.isConceptInSubset("148520", "2.16.840.1.113883.6.174", "OMIM_GENETIC_CONDITIONS"));
+        assertTrue(matcher.isConceptInSubset("ZNF883", "2.16.840.1.113883.6.281", "HGNC_GENE_SYMBOLS"));
 
     }
 }
