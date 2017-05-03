@@ -14,12 +14,20 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by andrew on 4/26/17.
  */
 @Service("cloudMatcher")
 public class CloudValueSetMatcherImpl implements ValueSetMatcher {
+
+    final List<ValueSets> valueSetCache = new ArrayList<ValueSets>();
+
+    private String code;
+
+    private String codeSystem;
 
     /** The username. */
     private String username;
@@ -52,8 +60,20 @@ public class CloudValueSetMatcherImpl implements ValueSetMatcher {
      */
     public Boolean isConceptInSubset( String code, String codeSystem, String subsetName ) {
 
+        if (!codeSystem.equals(this.codeSystem) || !code.equals(this.code))
+        {
+            this.codeSystem = codeSystem;
+            this.code = code;
+            valueSetCache.clear();
+        }
         RestTemplate restTemplate = new RestTemplate();
         final ResponseEntity<ValueSets> response;
+        ValueSets valueSet = isSubsetInCache(subsetName);
+        if (valueSet != null)
+        {
+
+            return ProcessValueSet(valueSet, code, codeSystem);
+        }
         try {
             response = restTemplate.exchange("https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/contents/valuesets/"
                     + subsetName + ".json?ref=development", HttpMethod.GET, new HttpEntity<Object>(headers), ValueSets.class);
@@ -66,7 +86,23 @@ public class CloudValueSetMatcherImpl implements ValueSetMatcher {
             return false;
         }
 
-        return ProcessValueSet(response.getBody(), code, codeSystem);
+        valueSet = response.getBody();
+        valueSetCache.add(valueSet);
+        return ProcessValueSet(valueSet, code, codeSystem);
+    }
+
+    private ValueSets isSubsetInCache (String subsetName)
+    {
+
+        for (ValueSets valueSet : valueSetCache)
+        {
+            if (valueSet.getValueSet().getName().equals(subsetName))
+            {
+                return valueSet;
+            }
+        }
+
+        return null;
     }
 
     private Boolean ProcessValueSet (ValueSets valueSet, String code, String codeSystem) {
@@ -113,22 +149,20 @@ public class CloudValueSetMatcherImpl implements ValueSetMatcher {
 
     private Boolean ProcessMultiPartValueSet (String code, String codeSystem, String subsetName, int count, ResponseEntity response)
     {
+
+        ValueSets valueSet = (ValueSets)response.getBody();
         RestTemplate restTemplate = new RestTemplate();
         int c = 2;
-        while (c <= count + 1) {
+        while (c <= count) {
 
-             if (ProcessValueSet((ValueSets)response.getBody(), code, codeSystem))
-             {
-                 return true;
-             } else if (c > count){
-                 return false;
-             }
             response = restTemplate.exchange("https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/contents/valuesets/"
                     + subsetName + "[" + c + "of" + count + "].json?ref=development", HttpMethod.GET, new HttpEntity<Object>(headers),
                     ValueSets.class);
+            valueSet.getValueSet().getCodeSystems().addAll(((ValueSets) response.getBody()).getValueSet().getCodeSystems());
             c++;
         }
-        return false;
+        valueSetCache.add(valueSet);
+        return ProcessValueSet(valueSet, code, codeSystem);
     }
 
 
