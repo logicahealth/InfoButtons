@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by andrew on 4/26/17.
  */
-@Service("cloudMatcher")
+@Service("cloudValueSets")
 public class CloudValueSetMatcherImpl implements ValueSetMatcher {
 
     final List<ValueSets> valueSetCache = new ArrayList<ValueSets>();
