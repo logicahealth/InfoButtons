@@ -19,7 +19,9 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -29,8 +31,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.openinfobutton.schema.CodeUtility;
 import org.openinfobutton.schemas.kb.Code;
 
-import edu.utah.further.core.api.xml.XmlService;
-import edu.utah.further.core.xml.jaxb.XmlServiceImpl;
 import edu.utah.openinfobutton.inference.rxnorm.schema.ApproximateGroup.Candidate;
 import edu.utah.openinfobutton.inference.rxnorm.schema.RelatedGroup;
 import edu.utah.openinfobutton.inference.rxnorm.schema.RelatedGroup.ConceptGroup.ConceptProperties;
@@ -56,9 +56,6 @@ public final class RxNormService
 
     /** The Constant RXNORM. */
     private static final String RXNORM = "2.16.840.1.113883.6.88";
-
-    /** The Constant xmlService. */
-    private static final XmlService xmlService = new XmlServiceImpl();
 
     /**
      * Instantiates a new rx norm service.
@@ -111,7 +108,9 @@ public final class RxNormService
 
         try
         {
-            final RxNormData data = xmlService.unmarshal( response, RxNormData.class );
+            JAXBContext context = JAXBContext.newInstance(RxNormData.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            final RxNormData data = (RxNormData)unmarshaller.unmarshal( response  );
             candidates = data.getApproximateGroup().getCandidates();
         }
         catch ( final JAXBException e )
@@ -141,7 +140,9 @@ public final class RxNormService
 
         try
         {
-            final RxNormData data = xmlService.unmarshal( response, RxNormData.class );
+            JAXBContext context = JAXBContext.newInstance(RxNormData.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            final RxNormData data =(RxNormData) unmarshaller.unmarshal( response  );
             group = data.getRelatedGroup();
         }
         catch ( final JAXBException e )
