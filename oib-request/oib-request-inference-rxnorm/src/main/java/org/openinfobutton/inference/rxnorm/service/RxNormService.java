@@ -11,7 +11,7 @@
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Jul 15, 2014
  */
-package edu.utah.openinfobutton.inference.rxnorm.service;
+package org.openinfobutton.inference.rxnorm.service;
 
 import java.io.IOException;
 import java.io.InputStream;

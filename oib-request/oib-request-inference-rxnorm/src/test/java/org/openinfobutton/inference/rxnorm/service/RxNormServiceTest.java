@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Source File: RxNormServiceText.java
  ******************************************************************************/
-package edu.utah.openinfobutton.inference.rxnorm.service;
+package org.openinfobutton.inference.rxnorm.service;
 
 import static org.junit.Assert.assertFalse;
 
