@@ -19,14 +19,13 @@ import java.util.Map;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.utah.further.core.api.context.Implementation;
-import edu.utah.further.core.api.data.Dao;
 import edu.utah.further.subsetdb.domain.Concept;
 import edu.utah.further.subsetdb.domain.Subset;
 
@@ -34,18 +33,35 @@ import edu.utah.further.subsetdb.domain.Subset;
 /**
  * The Class SubsetDbDaoImpl.
  */
-@Implementation
-@Repository( "subsetDbDao" )
+@Repository( "databaseValueSets" )
 public class SubsetDbDaoImpl
     implements SubsetDbDao
 {
 
     /**
-     * Handles generic DAO operations and searches.
+     * The session factory.
      */
     @Autowired
-    @Qualifier( "subsetlogDao" )
-    private Dao dao;
+    @Qualifier ("sessionFactory")
+    SessionFactory sessionFactory;
+
+    /**
+     * Sets the session factory.
+     *
+     * @param sessionFactory the new session factory
+     */
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    /**
+     * Gets the session factory.
+     *
+     * @return the session factory
+     */
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
     @Override
     @Transactional
@@ -78,7 +94,8 @@ public class SubsetDbDaoImpl
         properties.put( "codeSystem", codeSystem );
         properties.put( "code", code );
 
-        final List concept = dao.findByProperties( Concept.class, properties );
+        final List concept = getSessionFactory().getCurrentSession().createCriteria(Concept.class).
+                add(Restrictions.eq("codeSystem", codeSystem)).add(Restrictions.eq("code", code)).list();
         if ( concept.size() == 1 )
         {
             return (Concept) concept.get( 0 );
@@ -95,7 +112,8 @@ public class SubsetDbDaoImpl
     public Subset getSubsetByName( String subsetName )
     {
 
-        final List subset = dao.findByProperty( Subset.class, "name", subsetName );
+        final List subset = getSessionFactory().getCurrentSession().createCriteria(Subset.class).
+                add(Restrictions.eq("name", subsetName)).list();
         if ( subset.size() == 1 )
         {
             return (Subset) subset.get( 0 );

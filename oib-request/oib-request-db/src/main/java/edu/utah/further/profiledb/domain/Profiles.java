@@ -13,6 +13,7 @@
  */
 package edu.utah.further.profiledb.domain;
 
+import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Timestamp;
 
@@ -21,15 +22,12 @@ import javax.persistence.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.openinfobutton.service.json.BlobJsonSerializer;
 
-import edu.utah.further.core.api.data.PersistentEntity;
-
 /**
  * The Class Profiles.
  */
 @Entity
 @Table( name = "resource_profiles_all" )
-public class Profiles
-    implements PersistentEntity<Long>
+public class Profiles implements Serializable
 {
     // ========================= CONSTANTS =================================
     /** The Constant serialVersionUID. */
@@ -77,7 +75,6 @@ public class Profiles
      * (non-Javadoc)
      * @see edu.utah.further.core.api.discrete.HasIdentifier#getId()
      */
-    @Override
     public Long getId()
     {
         // TODO Auto-generated method stub

@@ -1,6 +1,5 @@
 package edu.utah.further.liteprofiledb.service;
 
-import edu.utah.further.core.api.data.Dao;
 import edu.utah.further.liteprofiledb.domain.CloudProfiles;
 import edu.utah.further.liteprofiledb.domain.CustomProfiles;
 import edu.utah.further.liteprofiledb.domain.UserAuthentication;
@@ -8,16 +7,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Repository( "lDao" )
 public class LiteProfilesDaoImpl implements LiteProfilesDao {
-
-    /** The dao. */
-    @Autowired
-    @Qualifier( "liteprofilesDao" )
-    private Dao dao;
 
     /**
      * The session factory.
@@ -48,7 +44,8 @@ public class LiteProfilesDaoImpl implements LiteProfilesDao {
     public List<CustomProfiles> getCustomProfiles()
     {
 
-        List<CustomProfiles> profiles = dao.findAll(CustomProfiles.class);
+        List<CustomProfiles> profiles = getSessionFactory().getCurrentSession().
+                createCriteria(CustomProfiles.class).list();
         return profiles;
     }
 
@@ -56,7 +53,8 @@ public class LiteProfilesDaoImpl implements LiteProfilesDao {
     public List<CloudProfiles> getCloudProfiles()
     {
 
-        List<CloudProfiles> profiles = dao.findAll(CloudProfiles.class);
+        List<CloudProfiles> profiles = getSessionFactory().getCurrentSession().
+                createCriteria(CloudProfiles.class).list();
         return profiles;
     }
 
@@ -64,7 +62,8 @@ public class LiteProfilesDaoImpl implements LiteProfilesDao {
     public CustomProfiles getCustomProfile(Long id)
     {
 
-        CustomProfiles profile = dao.findById(CustomProfiles.class, id);
+        CustomProfiles profile = (CustomProfiles)getSessionFactory().getCurrentSession().createCriteria(CustomProfiles.class).
+                add(Restrictions.eq("id", id)).uniqueResult();
         return profile;
     }
 
@@ -72,7 +71,7 @@ public class LiteProfilesDaoImpl implements LiteProfilesDao {
     public void createOrUpdateCustomProfile (CustomProfiles profile)
     {
 
-        dao.update(profile);
+        getSessionFactory().getCurrentSession().saveOrUpdate(profile);
     }
 
     @Transactional
@@ -110,6 +109,6 @@ public class LiteProfilesDaoImpl implements LiteProfilesDao {
     public void createOrUpdateCloudProfile (CloudProfiles profile)
     {
 
-        dao.update(profile);
+        getSessionFactory().getCurrentSession().saveOrUpdate(profile);
     }
 }

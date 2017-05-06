@@ -1,13 +1,14 @@
 package edu.utah.further.liteprofiledb.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by andrew on 7/26/16.
  */
 @Entity
 @Table( name = "users" )
-public class UserAuthentication {
+public class UserAuthentication implements Serializable {
 
     /**
      * The Constant serialVersionUID.

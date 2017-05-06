@@ -13,8 +13,7 @@
  */
 package edu.utah.further.subsetdb.domain;
 
-import static edu.utah.further.core.api.text.ToStringCustomStyles.SHORT_WITH_SPACES_STYLE;
-
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,16 +30,14 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import edu.utah.further.core.api.data.PersistentEntity;
-import edu.utah.further.core.api.lang.Final;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * The Class Concept.
  */
 @Entity
 @Table( name = "concept" )
-public class Concept
-    implements PersistentEntity<Long>
+public class Concept implements Serializable
 {
     // ========================= CONSTANTS =================================
 
@@ -57,7 +54,6 @@ public class Concept
      * The unique identifier of this entity.
      */
     @Id
-    @Final
     public Long conceptId;
 
     /**
@@ -135,7 +131,7 @@ public class Concept
     @Override
     public String toString()
     {
-        return new ToStringBuilder( this, SHORT_WITH_SPACES_STYLE ).append( "conceptId", conceptId ).append( "code",
+        return new ToStringBuilder( this, ToStringStyle.DEFAULT_STYLE ).append( "conceptId", conceptId ).append( "code",
                                     code ).append( "displayName",displayName ).append( "codeSystem", codeSystem ).
                                     append( "codeSystemName",codeSystemName ).toString();
     }
@@ -146,10 +142,7 @@ public class Concept
      * Gets the id.
      *
      * @return the id
-     * @see edu.utah.further.core.util.data.PersistentEntity#getId()
      */
-
-    @Override
     public Long getId()
     {
         return conceptId;

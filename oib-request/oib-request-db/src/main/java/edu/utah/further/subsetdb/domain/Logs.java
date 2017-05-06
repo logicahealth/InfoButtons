@@ -14,6 +14,7 @@
 
 package edu.utah.further.subsetdb.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -23,15 +24,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import edu.utah.further.core.api.data.PersistentEntity;
-
 /**
  * The Class Logs.
  */
 @Entity
 @Table( name = "logs" )
-public class Logs
-    implements PersistentEntity<Long>
+public class Logs implements Serializable
 {
     // ========================= CONSTANTS =================================
     /** The Constant serialVersionUID. */
@@ -73,7 +71,6 @@ public class Logs
      * (non-Javadoc)
      * @see edu.utah.further.core.api.discrete.HasIdentifier#getId()
      */
-    @Override
     public Long getId()
     {
         // TODO Auto-generated method stub

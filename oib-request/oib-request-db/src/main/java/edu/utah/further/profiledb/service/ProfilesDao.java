@@ -15,13 +15,11 @@ package edu.utah.further.profiledb.service;
 
 import java.util.List;
 
-import edu.utah.further.core.api.context.Api;
 import edu.utah.further.profiledb.domain.Profiles;
 
 /**
  * The Interface ProfilesDao.
  */
-@Api
 public interface ProfilesDao
 {
 

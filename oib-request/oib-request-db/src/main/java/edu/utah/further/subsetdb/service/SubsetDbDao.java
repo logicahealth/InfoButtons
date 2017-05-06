@@ -13,7 +13,6 @@
  */
 package edu.utah.further.subsetdb.service;
 
-import edu.utah.further.core.api.context.Api;
 import edu.utah.further.subsetdb.domain.Concept;
 import edu.utah.further.subsetdb.domain.Subset;
 import edu.utah.openinfobutton.valuset.matcher.api.ValueSetMatcher;
@@ -22,7 +21,6 @@ import edu.utah.openinfobutton.valuset.matcher.api.ValueSetMatcher;
 /**
  * The Interface SubsetDbDao.
  */
-@Api
 public interface SubsetDbDao extends ValueSetMatcher
 {
 

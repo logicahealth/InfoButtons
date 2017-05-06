@@ -50,122 +50,21 @@
 		</dependency>
 
 		<dependency>
-			<groupId>edu.utah.further.core</groupId>
-			<artifactId>core-data</artifactId>
-			<version>1.4.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>spring-jdbc</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-orm</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-expression</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-aop</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-context-support</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-aspects</artifactId>
-				</exclusion>
-
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-webmvc</artifactId>
-				</exclusion>
-
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-tx</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-test</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.aspectj</groupId>
-					<artifactId>aspectjweaver</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.11.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>4.3.11.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
 			<version>10.7.1.1</version>
 		</dependency>
-		<dependency>
-			<groupId>edu.utah.further.core</groupId>
-			<artifactId>core-test</artifactId>
-			<version>1.4.0-SNAPSHOT</version>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>spring-jdbc</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-orm</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-expression</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-aop</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-context-support</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
 
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-aspects</artifactId>
-				</exclusion>
-
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-webmvc</artifactId>
-				</exclusion>
-
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-tx</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-test</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 		<dependency>
 			<groupId>com.mysql.jdbc</groupId>
 			<artifactId>com.springsource.com.mysql.jdbc</artifactId>
@@ -228,8 +127,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>

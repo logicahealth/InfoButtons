@@ -1,15 +1,14 @@
 package edu.utah.further.profiledb.domain;
 
-import edu.utah.further.core.api.data.PersistentEntity;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Andrew on 4/7/2016.
  */
 @Entity
 @Table( name = "profile_black_list" )
-public class ProfileBlackList implements PersistentEntity<Integer>
+public class ProfileBlackList implements Serializable
 {
     // ========================= CONSTANTS =================================
     /** The Constant serialVersionUID. */

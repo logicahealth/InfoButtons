@@ -22,27 +22,41 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.utah.further.core.api.context.Implementation;
-import edu.utah.further.core.api.data.Dao;
 import edu.utah.further.subsetdb.domain.Logs;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class LogsDaoImpl.
  */
-@Implementation
 @Repository( "logsDbDao" )
 public class LogsDaoImpl
     implements LogsDao
 {
 
-    /** The dao. */
+    /**
+     * The session factory.
+     */
     @Autowired
-    @Qualifier( "subsetlogDao" )
-    private Dao dao;
+    @Qualifier ("sessionFactory")
+    SessionFactory sessionFactory;
 
-    /** The sf. */
-    private SessionFactory sf;
+    /**
+     * Sets the session factory.
+     *
+     * @param sessionFactory the new session factory
+     */
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    /**
+     * Gets the session factory.
+     *
+     * @return the session factory
+     */
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
     /*
      * (non-Javadoc)
@@ -59,8 +73,8 @@ public class LogsDaoImpl
         log.setClientIP( clientIP );
         log.setOrgID( orgID );
         log.setTimestamp( new Timestamp( d.getTime() ) );
+        getSessionFactory().getCurrentSession().saveOrUpdate(log);
 
-        dao.create( log );
 
     }
 }

@@ -13,39 +13,51 @@
  */
 package edu.utah.further.profiledb.service;
 
-import java.sql.Blob;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import edu.utah.further.profiledb.domain.ProfileBlackList;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.w3c.dom.Document;
 
-import edu.utah.further.core.api.context.Implementation;
-import edu.utah.further.core.api.data.Dao;
 import edu.utah.further.profiledb.domain.Profiles;
 
 /**
  * The Class ProfilesDaoImpl.
  */
-@Implementation
 @Repository( "profilesdbDao" )
 public class ProfilesDaoImpl
     implements ProfilesDao
 {
-
-    /** The dao. */
+    /**
+     * The session factory.
+     */
     @Autowired
-    @Qualifier( "profilesDao" )
-    private Dao dao;
+    @Qualifier ("profilesessionFactory")
+    SessionFactory sessionFactory;
+
+    /**
+     * Sets the session factory.
+     *
+     * @param sessionFactory the new session factory
+     */
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    /**
+     * Gets the session factory.
+     *
+     * @return the session factory
+     */
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
     /*
      * (non-Javadoc)
@@ -57,7 +69,8 @@ public class ProfilesDaoImpl
     {
 
         Profiles p = null;
-        final List<Profiles> profiles = dao.findByProperty( Profiles.class, "status", new Integer( status ) );
+        final List<Profiles> profiles = getSessionFactory().getCurrentSession().createCriteria(Profiles.class).
+                add(Restrictions.eq("status", new Integer( status ))).list();
         // return fm;
         return profiles;
     }
@@ -74,7 +87,8 @@ public class ProfilesDaoImpl
         long count = 0;
         final long i = 1;
         final Integer temp = new Integer( status );
-        final List no = dao.findByProperty( Profiles.class, "status", temp );
+        final List no = getSessionFactory().getCurrentSession().createCriteria(Profiles.class).
+                add(Restrictions.eq("status", temp)).list();
         count = no.size();
         return count;
     }
@@ -83,10 +97,8 @@ public class ProfilesDaoImpl
     @Transactional
     public boolean isBlackListed(String profileTitle, String userId) {
 
-        Map properties = new HashMap<String,String>();
-        properties.put("userId", userId);
-        properties.put("profileTitle", profileTitle);
-        final List blackListed = dao.findByProperties(ProfileBlackList.class, properties);
+        final List blackListed = getSessionFactory().getCurrentSession().createCriteria(ProfileBlackList.class).
+                add(Restrictions.eq("userId", userId)).add(Restrictions.eq("profileTitle", profileTitle)).list();
         if (blackListed.isEmpty()) {
 
             return false;
@@ -98,10 +110,8 @@ public class ProfilesDaoImpl
     @Transactional
     public boolean isBlackListed(long profileId, String userId) {
 
-        Map properties = new HashMap<String,String>();
-        properties.put("userId", userId);
-        properties.put("profileID", (int) profileId);
-        final List blackListed = dao.findByProperties(ProfileBlackList.class, properties);
+        final List blackListed = getSessionFactory().getCurrentSession().createCriteria(ProfileBlackList.class).
+                add(Restrictions.eq("userId", userId)).add(Restrictions.eq("profileID", ((Long)profileId).intValue())).list();
         if (blackListed.isEmpty()) {
 
             return false;

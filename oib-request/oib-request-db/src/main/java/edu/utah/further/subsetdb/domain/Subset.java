@@ -13,8 +13,6 @@
  */
 package edu.utah.further.subsetdb.domain;
 
-import static edu.utah.further.core.api.text.ToStringCustomStyles.SHORT_WITH_SPACES_STYLE;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,16 +22,16 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import edu.utah.further.core.api.data.PersistentEntity;
-import edu.utah.further.core.api.lang.Final;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import java.io.Serializable;
 
 /**
  * The Class Subset.
  */
 @Entity
 @Table( name = "subset" )
-public class Subset
-    implements PersistentEntity<Long>
+public class Subset implements Serializable
 {
     // ========================= CONSTANTS =================================
 
@@ -50,7 +48,6 @@ public class Subset
      * The unique identifier of this entity.
      */
     @Id
-    @Final
     public Long subsetId;
 
     /**
@@ -122,7 +119,7 @@ public class Subset
     @Override
     public String toString()
     {
-        return new ToStringBuilder( this, SHORT_WITH_SPACES_STYLE ).
+        return new ToStringBuilder( this, ToStringStyle.DEFAULT_STYLE ).
                         append( "subsetId", subsetId ).append( "name", name ).
                         append( "description",description ).
                         append( "internalconceptid",internalConceptId ).
@@ -136,10 +133,7 @@ public class Subset
      * Gets the id.
      *
      * @return the id
-     * @see edu.utah.further.core.util.data.PersistentEntity#getId()
      */
-
-    @Override
     public Long getId()
     {
         return subsetId;

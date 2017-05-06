@@ -13,13 +13,10 @@
  */
 package edu.utah.further.subsetdb.service;
 
-import edu.utah.further.core.api.context.Api;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Interface LogsDao.
  */
-@Api
 public interface LogsDao
 {
 

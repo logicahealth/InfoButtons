@@ -15,11 +15,11 @@ package edu.utah.further.liteprofiledb.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import edu.utah.further.core.api.data.PersistentEntity;
 import org.openinfobutton.service.json.BlobJsonSerializer;
 
 import javax.persistence.*;
 import javax.sql.rowset.serial.SerialBlob;
+import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -30,8 +30,7 @@ import java.sql.Timestamp;
 @Entity
 @Table( name = "installed_store_profiles" )
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CloudProfiles
-        implements PersistentEntity<Long>
+public class CloudProfiles implements Serializable
 {
     // ========================= CONSTANTS =================================
     /** The Constant serialVersionUID. */
@@ -79,7 +78,6 @@ public class CloudProfiles
      * (non-Javadoc)
      * @see edu.utah.further.core.api.discrete.HasIdentifier#getId()
      */
-    @Override
     public Long getId()
     {
         // TODO Auto-generated method stub
