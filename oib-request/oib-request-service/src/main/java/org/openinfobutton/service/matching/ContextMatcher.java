@@ -28,8 +28,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
-import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
+import org.openinfobutton.externalresource.api.ExternalResourceHandler;
+import org.openinfobutton.externalresource.api.TerminologyHandler;
 
 /**
  * The Class ContextMatcher.

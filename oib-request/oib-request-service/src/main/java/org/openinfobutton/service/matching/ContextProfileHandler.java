@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
+import org.openinfobutton.externalresource.api.ExternalResourceHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openinfobutton.exception.OIBProfileProcessingException;

@@ -23,7 +23,7 @@ import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.CodedContextElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
+import org.openinfobutton.externalresource.api.ExternalResourceHandler;
 
 // TODO: Auto-generated Javadoc
 /**

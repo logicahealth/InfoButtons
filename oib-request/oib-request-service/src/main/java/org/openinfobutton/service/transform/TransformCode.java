@@ -31,9 +31,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
-import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
-import edu.utah.openinfobutton.externalresource.implementation.TerminologyMappings;
+import org.openinfobutton.externalresource.api.ExternalResourceHandler;
+import org.openinfobutton.externalresource.api.TerminologyHandler;
+import org.openinfobutton.externalresource.implementation.TerminologyMappings;
 
 /**
  * The Class TransformCode.
