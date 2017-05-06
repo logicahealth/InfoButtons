@@ -17,7 +17,7 @@ import java.io.IOException;
 
 import org.openinfobutton.schemas.kb.Code;
 
-import edu.utah.openinfobutton.inference.rxnorm.service.RxNormService;
+import org.openinfobutton.inference.rxnorm.service.RxNormService;
 
 /**
  * The Enum NamedCodeInferences.

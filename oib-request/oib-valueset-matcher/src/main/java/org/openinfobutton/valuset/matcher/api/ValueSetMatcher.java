@@ -1,4 +1,4 @@
-package edu.utah.openinfobutton.valuset.matcher.api;
+package org.openinfobutton.valuset.matcher.api;
 
 /**
  * Created by andrew on 4/26/17.

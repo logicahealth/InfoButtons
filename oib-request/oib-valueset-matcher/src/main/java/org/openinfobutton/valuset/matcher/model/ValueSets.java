@@ -1,4 +1,4 @@
-package edu.utah.openinfobutton.valuset.matcher.model;
+package org.openinfobutton.valuset.matcher.model;
 
 import java.util.List;
 

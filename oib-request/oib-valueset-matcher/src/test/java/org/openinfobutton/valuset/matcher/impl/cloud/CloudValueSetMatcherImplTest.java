@@ -1,6 +1,6 @@
-package edu.utah.openinfobutton.valuset.matcher.impl.cloud;
+package org.openinfobutton.valuset.matcher.impl.cloud;
 
-import edu.utah.openinfobutton.valuset.matcher.api.ValueSetMatcher;
+import org.openinfobutton.valuset.matcher.api.ValueSetMatcher;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
