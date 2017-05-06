@@ -17,7 +17,8 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import com.fasterxml.jackson.module.jsonSchema.customProperties.HyperSchemaFactoryWrapper;
 import edu.utah.further.liteprofiledb.domain.UserAuthentication;
 import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openinfobutton.rest.terminology.api.RestTermClient;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class ProfileManagerService
 {
 
     /** The log. */
-    Logger log = Logger.getLogger( ProfileManagerService.class.getName() );
+    Logger log = LogManager.getLogger( ProfileManagerService.class.getName() );
 
     @Autowired
     @Qualifier("lDao")

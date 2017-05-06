@@ -18,9 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
-import edu.utah.openinfobutton.externalresource.implementation.UTSHandler;
-import org.apache.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openinfobutton.exception.OIBProfileProcessingException;
 import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.schemas.kb.Code;
@@ -29,7 +28,6 @@ import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.schemas.kb.ProfileDefinition.AuthorizedOrganizations.AuthorizedOrganization;
 import org.openinfobutton.service.profile.ResourceProfileProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 // TODO: Auto-generated Javadoc
@@ -41,7 +39,7 @@ public class ContextProfileHandler
 {
 
     /** The log. */
-    Logger log = Logger.getLogger( ContextProfileHandler.class.getName() );
+    Logger log = LogManager.getLogger( ContextProfileHandler.class.getName() );
 
     /** The matcher. */
     ContextMatcher matcher;

@@ -47,7 +47,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.w3c.dom.Document;
@@ -61,7 +61,7 @@ public abstract class OibServiceTestFixture
     @SuppressWarnings( "deprecation" )
     @Autowired
     @Qualifier( "simpleJdbcTemplate" )
-    protected SimpleJdbcTemplate jdbcTemplate;
+    protected JdbcTemplate jdbcTemplate;
 
     /**
      * Builds test request object
@@ -215,7 +215,7 @@ public abstract class OibServiceTestFixture
     @SuppressWarnings( "deprecation" )
     protected final int countRowsInTable( final String tableName )
     {
-        return jdbcTemplate.queryForInt( "SELECT COUNT(0) from " + tableName );
+        return jdbcTemplate.queryForObject( "SELECT COUNT(0) from " + tableName, Integer.class );
     }
 
     protected final String loadResponseXML( URI path, Charset encoding )

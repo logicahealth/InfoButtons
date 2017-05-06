@@ -46,7 +46,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hl7.v3.AggregateKnowledgeResponse;
 import org.hl7.v3.CategoryType;
 import org.hl7.v3.DateTimeType;
@@ -79,7 +80,7 @@ public class ResponseGenerator
 
     private KnowledgeRequest request;
 
-    Logger log = Logger.getLogger( ResponseGenerator.class.getName() );
+    Logger log = LogManager.getLogger( ResponseGenerator.class.getName() );
 
     @Autowired
     TransformCode tc;

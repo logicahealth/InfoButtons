@@ -32,15 +32,6 @@
 
 	<context:annotation-config />
 	<mvc:annotation-driven />
-	<!--
-		Activate production implementations in the core utility module
-	-->
-	<context:component-scan base-package="edu.utah.further.core">
-		<context:exclude-filter type="annotation"
-			expression="edu.utah.further.core.api.context.Stub" />
-		<context:exclude-filter type="regex"
-			expression=".*\.CachingServiceEHCacheImpl" />
-	</context:component-scan>
 
 	<context:component-scan base-package="edu.utah.openinfobutton.valuset.matcher.impl.cloud" />
 	<context:component-scan base-package="edu.utah.further.subsetdb.service" />

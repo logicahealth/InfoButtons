@@ -19,7 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 import edu.utah.further.profiledb.service.ProfilesDao;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openinfobutton.exception.OIBProfileProcessingException;
 import org.openinfobutton.schema.Holder;
 import org.openinfobutton.schema.IDLite;
@@ -43,7 +44,7 @@ public final class AccessCheckHandler
 {
 
     /** The log. */
-    private static Logger log = Logger.getLogger( AccessCheckHandler.class.getName() );
+    private static Logger log = LogManager.getLogger( AccessCheckHandler.class.getName() );
 
     /** The profiles. */
     public static Map<Long, KnowledgeResourceProfile> profiles;

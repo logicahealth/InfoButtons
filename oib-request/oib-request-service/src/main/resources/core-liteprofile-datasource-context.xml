@@ -44,15 +44,6 @@
 		<property name="password">
 			<value>${datasource2.password}</value>
 		</property>
-		<property name="testConnectionOnCheckin">
-			<value>true</value>
-		</property>
-		<property name="maxStatements">
-			<value>50</value>
-		</property>
-		<property name="idleConnectionTestPeriod">
-			<value>300</value>
-		</property>
 	</bean>
 
 
@@ -61,7 +52,7 @@
 	<!-- Session factory -->
 	<!-- Session Factory for the second datasource -->
 	<bean id="liteprofilesessionFactory"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="liteprofiledataSource" />
 
 		<!-- Hibernate configuration properties (read from a properties file) -->
@@ -103,11 +94,6 @@
 		</property>
 	</bean>
 
-	<!-- Hibernate data access template -->
-	<bean id="liteprofilehibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-		<property name="sessionFactory" ref="liteprofilesessionFactory" />
-	</bean>
-
 	<!-- =========================================== -->
 	<!-- Transaction management -->
 	<!-- =========================================== -->
@@ -117,24 +103,10 @@
 
 	<!-- a PlatformTransactionManager is still required -->
 	<bean id="liteprofiletransactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="liteprofilesessionFactory" />
 	</bean>
 
-
-
-	<!-- <bean id="daoEager" class="edu.utah.further.core.data.service.DaoHibernateEagerImpl" 
-		> -->
-	<!-- <property name="sessionFactory" ref="sessionFactory"></property> -->
-	<!-- </bean> -->
-
-	<!-- <bean class="edu.utah.further.core.data.service.DaoHibernateEagerImpl"> -->
-	<!-- <constructor-arg ref="profilesessionFactory"/> -->
-	<!-- </bean> -->
-
-	<bean id="liteprofilesDao" class="edu.utah.further.core.data.service.DaoHibernateImpl">
-		<constructor-arg ref="liteprofilesessionFactory" />
-	</bean>
 	<bean id="lDao" class="edu.utah.further.liteprofiledb.service.LiteProfilesDaoImpl">
 	</bean>
 	<!-- =========================================== -->

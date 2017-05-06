@@ -104,7 +104,7 @@
 	</bean>
 
 	<!-- SimpleJdbcTemplate for use in testing -->
-	<bean id="simpleJdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+	<bean id="simpleJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg index="0" ref="profiledataSource" />
 	</bean>
 

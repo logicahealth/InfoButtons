@@ -16,7 +16,6 @@ package org.openinfobutton.service.profile;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import edu.utah.further.profiledb.domain.Profiles;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -44,7 +44,7 @@ public class ResourceProfileLoaderNew
 {
 
     /** The log. */
-    Logger log = Logger.getLogger( ResourceProfileLoaderNew.class.getName() );
+    Logger log = LogManager.getLogger( ResourceProfileLoaderNew.class.getName() );
 
     /** The status. */
     static boolean status;
