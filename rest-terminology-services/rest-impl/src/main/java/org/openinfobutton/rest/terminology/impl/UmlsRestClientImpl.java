@@ -2,7 +2,6 @@ package org.openinfobutton.rest.terminology.impl;
 
 import org.apache.http.HttpVersion;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 
@@ -16,7 +15,6 @@ import org.openinfobutton.rest.terminology.api.RestTermClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
