@@ -6,7 +6,6 @@
   <packaging>pom</packaging>
   <name>oib-request</name>
  	<properties>
-		<dts-version>3.5.0</dts-version>
 
 		<datasource1.url>jdbc:mysql://localhost:3306/valueset_and_log</datasource1.url>
 		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
@@ -18,28 +17,42 @@
 		<datasource2.user>root</datasource2.user>
 		<datasource2.password></datasource2.password>
 
-		<umls.username></umls.username>
-		<umls.password></umls.password>
-		<github.username></github.username>
-		<github.password></github.password>
-		<spring.version>3.2.15.RELEASE</spring.version>
+		<!-- ============== Value Set Configuration =================
+
+		The following lines allow you to choose which value set implementation you would like
+		to use in your configuration. The default uses valuesets hosted on github
+		that are centrally managed for your convenience. You can also switch to the local database
+		implementation by commenting out the default implementation and uncommenting the database
+		implementation
+
+		=== Default Value Set Implementation ===
+
+		Uses github and requires a github username and password. Comment out
+		to use local database implementation instead.
+		-->
+
+		<service.subsetImplementation>cloudValueSets</service.subsetImplementation>
+		<github.username>aniskand</github.username>
+		<github.password>WND-r3700</github.password>
+
+		<!--
+		==== Local database implementation ====
+
+		Remove comment to use and make sure to also comment out default implementation
+		-->
+
+		<!--<service.subsetImplementation>databaseValueSets</service.subsetImplementation>-->
+
+		<!-- ================= End Value Set Configuration ================= -->
+
+		<umls.username>gdelfiol</umls.username>
+		<umls.password>WoodsHole2011</umls.password>
+
+		<spring.version>4.3.8.RELEASE</spring.version>
 		<hibernate.version>4.2.0.Final</hibernate.version>
 		<jacoco.version>0.7.0.201403182114</jacoco.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 
 	<pluginRepositories>
 		<pluginRepository>
