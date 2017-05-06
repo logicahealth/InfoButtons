@@ -20,24 +20,19 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.utah.openinfobutton.externalresource.json.CodeTransformer;
-import edu.utah.openinfobutton.externalresource.json.CodeTransformerResult;
 import edu.utah.openinfobutton.externalresource.json.CodeTransformerResultList;
-import org.apache.http.client.HttpResponseException;
-import org.apache.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openinfobutton.rest.terminology.api.RestTermClient;
-import org.openinfobutton.rest.terminology.impl.UmlsRestClientImpl;
 import org.openinfobutton.schema.CodeUtility;
 import org.openinfobutton.schemas.kb.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import UtsMetathesaurusContent.AtomClusterRelationDTO;
-import UtsMetathesaurusContent.AtomDTO;
 import UtsMetathesaurusContent.Psf;
 import UtsMetathesaurusContent.UtsWsContentController;
 import UtsMetathesaurusContent.UtsWsContentControllerImplService;
-import UtsMetathesaurusFinder.UiLabelRootSource;
 import UtsMetathesaurusFinder.UtsWsFinderController;
 import UtsMetathesaurusFinder.UtsWsFinderControllerImplService;
 import UtsSecurity.UtsFault_Exception;
@@ -55,7 +50,7 @@ public class UTSHandler
 {
 
     /** The log. */
-    Logger log = Logger.getLogger( UTSHandler.class.getName() );
+    Logger log = LogManager.getLogger( UTSHandler.class.getName() );
 
 
 

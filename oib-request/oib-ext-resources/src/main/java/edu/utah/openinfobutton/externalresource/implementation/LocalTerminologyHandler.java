@@ -26,6 +26,8 @@ import org.springframework.stereotype.Component;
 import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
 import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
 
+import javax.annotation.Resource;
+
 /**
  * The Class LocalTerminologyHandler.
  */
@@ -36,7 +38,7 @@ public class LocalTerminologyHandler
 
     /** The dao. */
     @Autowired
-    @Qualifier( "cloudMatcher" )
+    @Resource( name = "${service.SubsetImplementation}" )
     private ValueSetMatcher matcher;
 
     /** The handler. */
