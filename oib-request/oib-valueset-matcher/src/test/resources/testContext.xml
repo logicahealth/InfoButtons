@@ -26,6 +26,6 @@
 
     <mvc:annotation-driven />
 
-    <context:component-scan base-package="edu.utah.openinfobutton.valuset.matcher" />
+    <context:component-scan base-package="org.openinfobutton.valuset.matcher" />
 
 </beans>
