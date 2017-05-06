@@ -9,12 +9,12 @@
 
 		<datasource1.url>jdbc:mysql://localhost:3306/valueset_and_log</datasource1.url>
 		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
-		<datasource1.user>root</datasource1.user>
+		<datasource1.user></datasource1.user>
 		<datasource1.password></datasource1.password>
 		
 		<datasource2.url>jdbc:mysql://localhost:3306/resource_profile</datasource2.url>
 		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
-		<datasource2.user>root</datasource2.user>
+		<datasource2.user></datasource2.user>
 		<datasource2.password></datasource2.password>
 
 		<!-- ============== Value Set Configuration =================
@@ -32,8 +32,8 @@
 		-->
 
 		<service.subsetImplementation>cloudValueSets</service.subsetImplementation>
-		<github.username>aniskand</github.username>
-		<github.password>WND-r3700</github.password>
+		<github.username></github.username>
+		<github.password></github.password>
 
 		<!--
 		==== Local database implementation ====
@@ -45,8 +45,8 @@
 
 		<!-- ================= End Value Set Configuration ================= -->
 
-		<umls.username>gdelfiol</umls.username>
-		<umls.password>WoodsHole2011</umls.password>
+		<umls.username></umls.username>
+		<umls.password></umls.password>
 
 		<spring.version>4.3.8.RELEASE</spring.version>
 		<hibernate.version>4.2.0.Final</hibernate.version>
