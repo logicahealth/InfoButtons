@@ -11,7 +11,7 @@
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Jul 15, 2014
  */
-package edu.utah.openinfobutton.externalresource.implementation;
+package org.openinfobutton.externalresource.implementation;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,8 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.utah.openinfobutton.externalresource.json.CodeTransformer;
-import edu.utah.openinfobutton.externalresource.json.CodeTransformerResultList;
+import org.openinfobutton.externalresource.json.CodeTransformer;
+import org.openinfobutton.externalresource.json.CodeTransformerResultList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openinfobutton.rest.terminology.api.RestTermClient;
@@ -38,7 +38,7 @@ import UtsMetathesaurusFinder.UtsWsFinderControllerImplService;
 import UtsSecurity.UtsFault_Exception;
 import UtsSecurity.UtsWsSecurityController;
 import UtsSecurity.UtsWsSecurityControllerImplService;
-import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
+import org.openinfobutton.externalresource.api.ExternalResourceHandler;
 import org.springframework.stereotype.Service;
 
 /**
@@ -90,7 +90,7 @@ public class UTSHandler
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler#transformCode(org.openinfobutton.schemas.kb.Code, java.lang.String)
+     * @see ExternalResourceHandler#transformCode(org.openinfobutton.schemas.kb.Code, java.lang.String)
      */
     @Override
     public Code transformCode( Code code, String targetCS )
@@ -169,7 +169,7 @@ public class UTSHandler
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler#transformFreeText(java.lang.String)
+     * @see ExternalResourceHandler#transformFreeText(java.lang.String)
      */
     @Override
     public ArrayList<Code> transformFreeText( String FreeText )
@@ -299,7 +299,7 @@ public class UTSHandler
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler#isDescendant(org.openinfobutton.schemas.kb.Code, org.openinfobutton.schemas.kb.Code)
+     * @see ExternalResourceHandler#isDescendant(org.openinfobutton.schemas.kb.Code, org.openinfobutton.schemas.kb.Code)
      */
     @Override
     public boolean isDescendant( Code code1, Code code2 )

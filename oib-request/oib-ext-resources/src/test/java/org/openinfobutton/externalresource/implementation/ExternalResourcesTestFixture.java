@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Source File: ExternalResourcesTestFixture.java
  ******************************************************************************/
-package edu.utah.openinfobutton.externalresource.implementation;
+package org.openinfobutton.externalresource.implementation;
 
 import org.junit.runner.RunWith;
 import org.openinfobutton.schema.CodeUtility;

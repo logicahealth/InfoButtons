@@ -113,6 +113,11 @@
 			<artifactId>jaxws-tools</artifactId>
 			<version>2.2.8</version>
 		</dependency>
+		<dependency>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>rest-api</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
 
 		<!-- TESTING -->
 
@@ -126,6 +131,7 @@
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>rest-impl</artifactId>
 			<version>0.1-SNAPSHOT</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

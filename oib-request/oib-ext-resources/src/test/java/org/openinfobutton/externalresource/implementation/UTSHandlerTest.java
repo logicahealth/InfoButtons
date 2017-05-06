@@ -1,12 +1,11 @@
 /*******************************************************************************
  * Source File: UTSHandlerTest.java
  ******************************************************************************/
-package edu.utah.openinfobutton.externalresource.implementation;
+package org.openinfobutton.externalresource.implementation;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -14,7 +13,7 @@ import org.openinfobutton.schema.CodeUtility;
 import org.openinfobutton.schemas.kb.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
+import org.openinfobutton.externalresource.api.ExternalResourceHandler;
 
 /**
  * -----------------------------------------------------------------------------------

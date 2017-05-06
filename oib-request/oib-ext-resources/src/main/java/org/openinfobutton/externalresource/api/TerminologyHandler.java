@@ -11,7 +11,7 @@
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Jul 15, 2014
  */
-package edu.utah.openinfobutton.externalresource.api;
+package org.openinfobutton.externalresource.api;
 
 import java.util.List;
 

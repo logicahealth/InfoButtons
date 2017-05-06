@@ -1,6 +1,4 @@
-package edu.utah.openinfobutton.externalresource.json;
-
-import java.util.List;
+package org.openinfobutton.externalresource.json;
 
 /**
  * Created by JoeNarus on 7/19/16.

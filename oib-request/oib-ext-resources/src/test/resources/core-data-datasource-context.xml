@@ -45,22 +45,13 @@
 		<property name="password">
 			<value>${datasource1.password}</value>
 		</property>
-		<property name="testConnectionOnCheckin">
-			<value>true</value>
-		</property>
-		<property name="maxStatements">
-			<value>50</value>
-		</property>
-		<property name="idleConnectionTestPeriod">
-			<value>300</value>
-		</property>
 	</bean>
 
 
 	<!-- Session factory -->
 	<!-- Session Factory for the first datasource -->
 	<bean id="sessionFactory" primary="true"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 
 		<!-- Hibernate configuration properties (read from a properties file) -->
@@ -83,14 +74,6 @@
 			<bean class="org.hibernate.cfg.DefaultNamingStrategy" />
 		</property>
 
-		<!-- Reads package-level Hibernate annotations. Unfortunately, this has 
-			to be manually maintained for all model packages -->
-		<property name="annotatedPackages">
-			<list>
-				<!-- <value>edu.utah.further.core.data.oracle.type</value> -->
-			</list>
-		</property>
-
 		<!-- Mapping annotated classes using search patterns -->
 		<property name="annotatedClasses">
 			<list>
@@ -102,11 +85,6 @@
 		</property>
 	</bean>
 
-	<!-- Hibernate data access template -->
-	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
 	<!-- =========================================== -->
 	<!-- Transaction management -->
 	<!-- =========================================== -->
@@ -116,34 +94,12 @@
 
 	<!-- a PlatformTransactionManager is still required -->
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="subsetlogDao" class="edu.utah.further.core.data.service.DaoHibernateImpl">
-		<constructor-arg ref="sessionFactory" />
-	</bean>
 	<bean id="logDao" class=" org.openinfobutton.subsetdb.service.LogsDaoImpl">
 	</bean>
-
-
-
-
-
-	<!-- <bean id="profilesdbDao" claProfilesDaoImplImpl"
-		> -->
-	<!-- <property name="sessionFactory" ref="profilesessionFactory"></property> -->
-	<!-- </bean> -->
-
-
-	<!-- =========================================== -->
-	<!-- FURTHeR data layer -->
-	<!-- =========================================== -->
-
-	<!-- Component auto-detection configuration in the data layer package. Must 
-		come AFTER sessionFactory is declared for some strange reason when deployed 
-		to the ESB. -->
-	<!-- <context:component-scan base-package="edu.utah.further.core.data" /> -->
 
 
 </beans>

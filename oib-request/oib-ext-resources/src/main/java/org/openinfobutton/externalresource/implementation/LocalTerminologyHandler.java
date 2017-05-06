@@ -11,20 +11,19 @@
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Jul 15, 2014
  */
-package edu.utah.openinfobutton.externalresource.implementation;
+package org.openinfobutton.externalresource.implementation;
 
 import java.util.List;
 
-import edu.utah.openinfobutton.valuset.matcher.api.ValueSetMatcher;
+import org.openinfobutton.externalresource.api.TerminologyHandler;
+import org.openinfobutton.valuset.matcher.api.ValueSetMatcher;
 import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.TerminologyInference.CodeInference.InferenceDefinition.LocalMappings.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
-import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
+import org.openinfobutton.externalresource.api.ExternalResourceHandler;
 
 import javax.annotation.Resource;
 
@@ -54,7 +53,7 @@ public class LocalTerminologyHandler
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.openinfobutton.externalresource.api.TerminologyHandler#isSubsetMember(org.openinfobutton.schemas.kb.Code, java.util.List)
+     * @see TerminologyHandler#isSubsetMember(org.openinfobutton.schemas.kb.Code, java.util.List)
      */
     @Override
     public Boolean isSubsetMember( Code code, List<Id> subsetIdList )
@@ -80,7 +79,7 @@ public class LocalTerminologyHandler
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.openinfobutton.externalresource.api.TerminologyHandler#transformCode(org.openinfobutton.schemas.kb.Code, java.lang.String)
+     * @see TerminologyHandler#transformCode(org.openinfobutton.schemas.kb.Code, java.lang.String)
      */
     @Override
     public Code transformCode( Code code, String codeSystem )

@@ -1,4 +1,4 @@
-package edu.utah.openinfobutton.externalresource.json;
+package org.openinfobutton.externalresource.json;
 
 import java.util.List;
 

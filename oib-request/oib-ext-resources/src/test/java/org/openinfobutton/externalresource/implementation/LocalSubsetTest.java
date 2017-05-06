@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Source File: LocalSubsetTest.java
  ******************************************************************************/
-package edu.utah.openinfobutton.externalresource.implementation;
+package org.openinfobutton.externalresource.implementation;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -11,12 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.openinfobutton.externalresource.api.TerminologyHandler;
 import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
-import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
 
 /**
  * -----------------------------------------------------------------------------------

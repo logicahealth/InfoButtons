@@ -1,4 +1,4 @@
-package edu.utah.openinfobutton.externalresource.json;
+package org.openinfobutton.externalresource.json;
 
 /**
  * Created by JoeNarus on 7/19/16.
