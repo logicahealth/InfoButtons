@@ -76,20 +76,12 @@
 			<bean class="org.hibernate.cfg.DefaultNamingStrategy" />
 		</property>
 
-		<!-- Reads package-level Hibernate annotations. Unfortunately, this has 
-			to be manually maintained for all model packages -->
-		<property name="annotatedPackages">
-			<list>
-				<!-- <value>edu.utah.further.core.data.oracle.type</value> -->
-			</list>
-		</property>
-
 		<!-- Mapping annotated classes using search patterns -->
 		<property name="annotatedClasses">
 			<list>
-				<value><![CDATA[edu.utah.further.liteprofiledb.domain.CloudProfiles]]></value>
-				<value><![CDATA[edu.utah.further.liteprofiledb.domain.CustomProfiles]]></value>
-				<value><![CDATA[edu.utah.further.liteprofiledb.domain.UserAuthentication]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.CloudProfiles]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.CustomProfiles]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.UserAuthentication]]></value>
 			</list>
 		</property>
 	</bean>
@@ -107,16 +99,15 @@
 		<property name="sessionFactory" ref="liteprofilesessionFactory" />
 	</bean>
 
-	<bean id="lDao" class="edu.utah.further.liteprofiledb.service.LiteProfilesDaoImpl">
+	<bean id="lDao" class="org.openinfobutton.liteprofiledb.service.LiteProfilesDaoImpl">
 	</bean>
 	<!-- =========================================== -->
-	<!-- FURTHeR data layer -->
+	<!-- OpenInfobutton data layer -->
 	<!-- =========================================== -->
 
 	<!-- Component auto-detection configuration in the data layer package. Must 
-		come AFTER sessionFactory is declared for some strange reason when deployed 
-		to the ESB. -->
-	<!-- <context:component-scan base-package="edu.utah.further.core.data" /> -->
-	<context:component-scan base-package="edu.utah.further.liteprofiledb.service" />
+		come AFTER sessionFactory is declared for some strange reason when deployed. -->
+
+	<context:component-scan base-package="org.openinfobutton.liteprofiledb.service" />
 
 </beans>

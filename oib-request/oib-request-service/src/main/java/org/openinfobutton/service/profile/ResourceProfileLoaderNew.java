@@ -24,7 +24,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import edu.utah.further.profiledb.domain.Profiles;
+import org.openinfobutton.profiledb.domain.Profiles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
@@ -32,7 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import edu.utah.further.profiledb.service.ProfilesDao;
+import org.openinfobutton.profiledb.service.ProfilesDao;
 
 // TODO: Auto-generated Javadoc
 /**

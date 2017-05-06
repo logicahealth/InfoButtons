@@ -11,13 +11,11 @@
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Jul 15, 2014
  */
-package edu.utah.further.profiledb.service;
+package org.openinfobutton.profiledb.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import edu.utah.further.profiledb.domain.ProfileBlackList;
+import org.openinfobutton.profiledb.domain.ProfileBlackList;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.utah.further.profiledb.domain.Profiles;
+import org.openinfobutton.profiledb.domain.Profiles;
 
 /**
  * The Class ProfilesDaoImpl.
@@ -61,7 +59,7 @@ public class ProfilesDaoImpl
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.further.profiledb.service.ProfilesDao#getResourceProfile(int)
+     * @see ProfilesDao#getResourceProfile(int)
      */
     @Override
     @Transactional
@@ -77,7 +75,7 @@ public class ProfilesDaoImpl
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.further.profiledb.service.ProfilesDao#count(int)
+     * @see ProfilesDao#count(int)
      */
     @Override
     @Transactional

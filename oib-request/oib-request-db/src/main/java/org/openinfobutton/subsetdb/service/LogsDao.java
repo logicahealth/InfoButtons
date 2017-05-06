@@ -11,7 +11,7 @@
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Jul 15, 2014
  */
-package edu.utah.further.subsetdb.service;
+package org.openinfobutton.subsetdb.service;
 
 // TODO: Auto-generated Javadoc
 /**

@@ -94,9 +94,9 @@
 		<!-- Mapping annotated classes using search patterns -->
 		<property name="annotatedClasses">
 			<list>
-				<value><![CDATA[edu.utah.further.subsetdb.domain.Subset]]></value>
-				<value><![CDATA[edu.utah.further.subsetdb.domain.Concept]]></value>
-				<value><![CDATA[edu.utah.further.subsetdb.domain.Logs]]></value>
+				<value><![CDATA[org.openinfobutton.subsetdb.domain.Subset]]></value>
+				<value><![CDATA[org.openinfobutton.subsetdb.domain.Concept]]></value>
+				<value><![CDATA[org.openinfobutton.subsetdb.domain.Logs]]></value>
 
 			</list>
 		</property>
@@ -123,14 +123,14 @@
 	<bean id="subsetlogDao" class="edu.utah.further.core.data.service.DaoHibernateImpl">
 		<constructor-arg ref="sessionFactory" />
 	</bean>
-	<bean id="logDao" class=" edu.utah.further.subsetdb.service.LogsDaoImpl">
+	<bean id="logDao" class=" org.openinfobutton.subsetdb.service.LogsDaoImpl">
 	</bean>
 
 
 
 
 
-	<!-- <bean id="profilesdbDao" class="edu.utah.further.profiledb.service.ProfilesDaoImpl" 
+	<!-- <bean id="profilesdbDao" claProfilesDaoImplImpl"
 		> -->
 	<!-- <property name="sessionFactory" ref="profilesessionFactory"></property> -->
 	<!-- </bean> -->

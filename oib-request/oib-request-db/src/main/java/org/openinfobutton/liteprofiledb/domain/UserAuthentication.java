@@ -1,4 +1,4 @@
-package edu.utah.further.liteprofiledb.domain;
+package org.openinfobutton.liteprofiledb.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;

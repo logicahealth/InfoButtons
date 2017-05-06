@@ -54,7 +54,7 @@ import org.w3c.dom.Document;
 
 import com.google.gson.Gson;
 
-import edu.utah.further.subsetdb.service.LogsDao;
+import org.openinfobutton.subsetdb.service.LogsDao;
 
 /**
  * The Class KnowledgeRequestServlet.

@@ -8,32 +8,6 @@
 	<groupId>org.openinfobutton</groupId>
 	<artifactId>oib-request-db</artifactId>
 
-	<repositories>
-		<repository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
@@ -66,11 +40,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.mysql.jdbc</groupId>
-			<artifactId>com.springsource.com.mysql.jdbc</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 
 		<!-- TESTING -->

@@ -9,32 +9,6 @@
   <name>OIB Core Utility Module</name>
   <description>OIB Core Utility Module</description>
   
-  	<repositories>
-		<repository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-  
   <dependencies>
 
 	  <dependency>

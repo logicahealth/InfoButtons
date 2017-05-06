@@ -1,8 +1,8 @@
-package edu.utah.further.liteprofiledb.service;
+package org.openinfobutton.liteprofiledb.service;
 
-import edu.utah.further.liteprofiledb.domain.CloudProfiles;
-import edu.utah.further.liteprofiledb.domain.CustomProfiles;
-import edu.utah.further.liteprofiledb.domain.UserAuthentication;
+import org.openinfobutton.liteprofiledb.domain.CloudProfiles;
+import org.openinfobutton.liteprofiledb.domain.CustomProfiles;
+import org.openinfobutton.liteprofiledb.domain.UserAuthentication;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;

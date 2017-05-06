@@ -16,10 +16,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import edu.utah.further.subsetdb.domain.Concept;
-import edu.utah.further.subsetdb.domain.Subset;
-import edu.utah.further.subsetdb.service.LogsDao;
-import edu.utah.further.subsetdb.service.SubsetDbDao;
+import org.openinfobutton.subsetdb.domain.Concept;
+import org.openinfobutton.subsetdb.domain.Subset;
+import org.openinfobutton.subsetdb.service.LogsDao;
+import org.openinfobutton.subsetdb.service.SubsetDbDao;
 
 /**
  * -----------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-package edu.utah.further.profiledb.domain;
+package org.openinfobutton.profiledb.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;

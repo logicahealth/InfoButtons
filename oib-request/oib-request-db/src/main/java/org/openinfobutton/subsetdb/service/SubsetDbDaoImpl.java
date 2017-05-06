@@ -11,7 +11,7 @@
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Jul 15, 2014
  */
-package edu.utah.further.subsetdb.service;
+package org.openinfobutton.subsetdb.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,13 +21,13 @@ import java.util.Set;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.openinfobutton.subsetdb.domain.Subset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.utah.further.subsetdb.domain.Concept;
-import edu.utah.further.subsetdb.domain.Subset;
+import org.openinfobutton.subsetdb.domain.Concept;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -83,7 +83,7 @@ public class SubsetDbDaoImpl
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.further.subsetdb.service.SubsetDbDao#getConceptByCodeAndCodeSystem(java.lang.String, java.lang.String)
+     * @see SubsetDbDao#getConceptByCodeAndCodeSystem(java.lang.String, java.lang.String)
      */
     @Override
     @Transactional
@@ -105,7 +105,7 @@ public class SubsetDbDaoImpl
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.further.subsetdb.service.SubsetDbDao#getSubsetByName(java.lang.String)
+     * @see SubsetDbDao#getSubsetByName(java.lang.String)
      */
     @Override
     @Transactional

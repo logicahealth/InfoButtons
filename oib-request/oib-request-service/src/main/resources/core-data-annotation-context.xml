@@ -34,9 +34,9 @@
 	<mvc:annotation-driven />
 
 	<context:component-scan base-package="edu.utah.openinfobutton.valuset.matcher.impl.cloud" />
-	<context:component-scan base-package="edu.utah.further.subsetdb.service" />
-	<context:component-scan base-package="edu.utah.further.profiledb.service" />
-	<context:component-scan base-package="edu.utah.further.liteprofiledb.service" />
+	<context:component-scan base-package="org.openinfobutton.subsetdb.service" />
+	<context:component-scan base-package="org.openinfobutton.profiledb.service" />
+	<context:component-scan base-package="org.openinfobutton.liteprofiledb.service" />
 	<context:component-scan base-package="org.openinfobutton.rest.terminology.impl" />
     <context:component-scan base-package="edu.utah.openinfobutton.externalresource.implementation" /> 
     <bean id="externalSet" class="${service.MatchExternalSetClassName}"> </bean>

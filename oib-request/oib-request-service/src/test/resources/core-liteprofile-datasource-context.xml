@@ -103,9 +103,9 @@
 		<!-- Mapping annotated classes using search patterns -->
 		<property name="annotatedClasses">
 			<list>
-				<value><![CDATA[edu.utah.further.liteprofiledb.domain.CustomProfiles]]></value>
-				<value><![CDATA[edu.utah.further.liteprofiledb.domain.CloudProfiles]]></value>
-				<value><![CDATA[edu.utah.further.liteprofiledb.domain.UserAuthentication]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.CustomProfiles]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.CloudProfiles]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.UserAuthentication]]></value>
 			</list>
 		</property>
 	</bean>
@@ -142,7 +142,7 @@
 	<bean id="liteprofilesDao" class="edu.utah.further.core.data.service.DaoHibernateImpl">
 		<constructor-arg ref="liteprofilesessionFactory" />
 	</bean>
-	<bean id="lDao" class="edu.utah.further.liteprofiledb.service.LiteProfilesDaoImpl">
+	<bean id="lDao" class="org.openinfobutton.liteprofiledb.service.LiteProfilesDaoImpl">
 	</bean>
 	<!-- =========================================== -->
 	<!-- FURTHeR data layer -->

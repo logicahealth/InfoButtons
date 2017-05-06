@@ -96,9 +96,9 @@
 		<!-- Mapping annotated classes using search patterns -->
 		<property name="annotatedClasses">
 			<list>
-				<value><![CDATA[edu.utah.further.profiledb.domain.Profiles]]></value>
-				<value><![CDATA[edu.utah.further.profiledb.domain.ProfileBlackList]]></value>
-				<value><![CDATA[edu.utah.further.liteprofiledb.domain.UserAuthentication]]></value>
+				<value><![CDATA[org.openinfobutton.profiledb.domain.Profiles]]></value>
+				<value><![CDATA[org.openinfobutton.profiledb.domain.ProfileBlackList]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.UserAuthentication]]></value>
 			</list>
 		</property>
 	</bean>
@@ -135,7 +135,7 @@
 	<bean id="profilesDao" class="edu.utah.further.core.data.service.DaoHibernateImpl">
 		<constructor-arg ref="profilesessionFactory" />
 	</bean>
-	<bean id="pDao" class="edu.utah.further.profiledb.service.ProfilesDaoImpl">
+	<bean id="pDao" class="org.openinfobutton.profiledb.service.ProfilesDaoImpl">
 	</bean>
 	<!-- =========================================== -->
 	<!-- FURTHeR data layer -->

@@ -77,19 +77,11 @@
 			<bean class="org.hibernate.cfg.DefaultNamingStrategy" />
 		</property>
 
-		<!-- Reads package-level Hibernate annotations. Unfortunately, this has 
-			to be manually maintained for all model packages -->
-		<property name="annotatedPackages">
-			<list>
-				<!-- <value>edu.utah.further.core.data.oracle.type</value> -->
-			</list>
-		</property>
-
 		<!-- Mapping annotated classes using search patterns -->
 		<property name="annotatedClasses">
 			<list>
-				<value><![CDATA[edu.utah.further.profiledb.domain.Profiles]]></value>
-				<value><![CDATA[edu.utah.further.profiledb.domain.ProfileBlackList]]></value>
+				<value><![CDATA[org.openinfobutton.profiledb.domain.Profiles]]></value>
+				<value><![CDATA[org.openinfobutton.profiledb.domain.ProfileBlackList]]></value>
 			</list>
 		</property>
 
@@ -109,16 +101,15 @@
 		<property name="sessionFactory" ref="profilesessionFactory" />
 	</bean>
 
-	<bean id="pDao" class="edu.utah.further.profiledb.service.ProfilesDaoImpl">
+	<bean id="pDao" class="org.openinfobutton.profiledb.service.ProfilesDaoImpl">
 	</bean>
 	<!-- =========================================== -->
-	<!-- FURTHeR data layer -->
+	<!-- OpenInfobutton data layer -->
 	<!-- =========================================== -->
 
 	<!-- Component auto-detection configuration in the data layer package. Must 
-		come AFTER sessionFactory is declared for some strange reason when deployed 
-		to the ESB. -->
-	<!-- <context:component-scan base-package="edu.utah.further.core.data" /> -->
-	<context:component-scan base-package="edu.utah.further.profiledb.service" />
+		come AFTER sessionFactory is declared for some strange reason when deployed. -->
+
+	<context:component-scan base-package="org.openinfobutton.profiledb.service" />
 
 </beans>

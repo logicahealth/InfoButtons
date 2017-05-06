@@ -11,7 +11,7 @@
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Jul 15, 2014
  */
-package edu.utah.further.subsetdb.service;
+package org.openinfobutton.subsetdb.service;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.utah.further.subsetdb.domain.Logs;
+import org.openinfobutton.subsetdb.domain.Logs;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -60,7 +60,7 @@ public class LogsDaoImpl
 
     /*
      * (non-Javadoc)
-     * @see edu.utah.further.subsetdb.service.LogsDao#saveRequest(java.lang.String, java.lang.String, java.lang.String)
+     * @see LogsDao#saveRequest(java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
     @Transactional

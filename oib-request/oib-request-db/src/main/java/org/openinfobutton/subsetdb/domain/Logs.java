@@ -12,7 +12,7 @@
  * @version Jul 15, 2014
  */
 
-package edu.utah.further.subsetdb.domain;
+package org.openinfobutton.subsetdb.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

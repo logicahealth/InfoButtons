@@ -11,11 +11,11 @@
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Jul 15, 2014
  */
-package edu.utah.further.profiledb.service;
+package org.openinfobutton.profiledb.service;
 
 import java.util.List;
 
-import edu.utah.further.profiledb.domain.Profiles;
+import org.openinfobutton.profiledb.domain.Profiles;
 
 /**
  * The Interface ProfilesDao.

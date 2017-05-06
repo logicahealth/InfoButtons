@@ -15,8 +15,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import com.fasterxml.jackson.module.jsonSchema.customProperties.HyperSchemaFactoryWrapper;
-import edu.utah.further.liteprofiledb.domain.UserAuthentication;
-import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
+import org.openinfobutton.liteprofiledb.domain.UserAuthentication;
+import org.openinfobutton.liteprofiledb.service.LiteProfilesDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openinfobutton.rest.terminology.api.RestTermClient;
@@ -27,8 +27,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import edu.utah.further.liteprofiledb.domain.CloudProfiles;
-import edu.utah.further.liteprofiledb.domain.CustomProfiles;
+import org.openinfobutton.liteprofiledb.domain.CloudProfiles;
+import org.openinfobutton.liteprofiledb.domain.CustomProfiles;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

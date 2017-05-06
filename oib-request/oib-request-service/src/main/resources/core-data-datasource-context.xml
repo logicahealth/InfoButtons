@@ -74,20 +74,12 @@
 			<bean class="org.hibernate.cfg.DefaultNamingStrategy" />
 		</property>
 
-		<!-- Reads package-level Hibernate annotations. Unfortunately, this has 
-			to be manually maintained for all model packages -->
-		<property name="annotatedPackages">
-			<list>
-				<!-- <value>edu.utah.further.core.data.oracle.type</value> -->
-			</list>
-		</property>
-
 		<!-- Mapping annotated classes using search patterns -->
 		<property name="annotatedClasses">
 			<list>
-				<value><![CDATA[edu.utah.further.subsetdb.domain.Subset]]></value>
-				<value><![CDATA[edu.utah.further.subsetdb.domain.Concept]]></value>
-				<value><![CDATA[edu.utah.further.subsetdb.domain.Logs]]></value>
+				<value><![CDATA[org.openinfobutton.subsetdb.domain.Subset]]></value>
+				<value><![CDATA[org.openinfobutton.subsetdb.domain.Concept]]></value>
+				<value><![CDATA[org.openinfobutton.subsetdb.domain.Logs]]></value>
 
 			</list>
 		</property>
@@ -106,7 +98,7 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="logDao" class=" edu.utah.further.subsetdb.service.LogsDaoImpl">
+	<bean id="logDao" class=" org.openinfobutton.subsetdb.service.LogsDaoImpl">
 	</bean>
 
 

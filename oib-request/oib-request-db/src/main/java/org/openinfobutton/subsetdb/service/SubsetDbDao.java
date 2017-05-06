@@ -11,10 +11,10 @@
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version Jul 15, 2014
  */
-package edu.utah.further.subsetdb.service;
+package org.openinfobutton.subsetdb.service;
 
-import edu.utah.further.subsetdb.domain.Concept;
-import edu.utah.further.subsetdb.domain.Subset;
+import org.openinfobutton.subsetdb.domain.Concept;
+import org.openinfobutton.subsetdb.domain.Subset;
 import edu.utah.openinfobutton.valuset.matcher.api.ValueSetMatcher;
 
 // TODO: Auto-generated Javadoc

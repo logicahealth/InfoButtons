@@ -11,37 +11,14 @@
 	<description>Decoupling the handling of external resources from Business Logic</description>
 
 	<repositories>
-	
+
     <repository>
         <id>project.local</id>
         <name>project</name>
         <url>file:${project.basedir}/oibrepo</url>
     </repository>
-		<repository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-    
-	</repositories>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+	</repositories>
 
 
 	<dependencies>
