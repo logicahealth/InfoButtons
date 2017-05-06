@@ -15,7 +15,7 @@ package org.openinfobutton.subsetdb.service;
 
 import org.openinfobutton.subsetdb.domain.Concept;
 import org.openinfobutton.subsetdb.domain.Subset;
-import edu.utah.openinfobutton.valuset.matcher.api.ValueSetMatcher;
+import org.openinfobutton.valuset.matcher.api.ValueSetMatcher;
 
 // TODO: Auto-generated Javadoc
 /**

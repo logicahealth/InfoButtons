@@ -40,7 +40,7 @@ public class ValueSetAndLogsDbTest
 {
 
    @Autowired
-   @Qualifier( "subsetDbDao" )
+   @Qualifier( "databaseValueSets" )
     private SubsetDbDao subsetDao;
 
     @Autowired
