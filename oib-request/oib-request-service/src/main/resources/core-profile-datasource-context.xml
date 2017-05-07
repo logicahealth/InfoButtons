@@ -11,14 +11,6 @@
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- =========================================== -->
-	<!-- Properties files -->
-	<!-- =========================================== -->
-
-	<!-- Property file locations: suppressed here because it might override 
-		the main context file's resources. The main context is responsible for defining 
-		them. -->
-
-	<!-- =========================================== -->
 	<!-- Annotation configuration -->
 	<!-- =========================================== -->
 
