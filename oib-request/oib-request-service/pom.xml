@@ -83,11 +83,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
-			<artifactId>rest-api</artifactId>
-			<version>0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openinfobutton</groupId>
 			<artifactId>rest-impl</artifactId>
 			<version>0.1-SNAPSHOT</version>
 		</dependency>
@@ -192,7 +187,7 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.1.201405082137</version>
 				<configuration>
-					<destfile>${basedir}/target/coverage-reports/jacoco-unit.exec</destfile>
+					<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
 				</configuration>
 				<executions>
 					<!-- prepare agent for measuring integration tests -->
@@ -222,9 +217,6 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.10</version>
-				<configuration>
-					<argLine>${surefireArgLine}</argLine>
-				</configuration>
 				<executions>
 					<execution>
 						<id>default-test</id>
