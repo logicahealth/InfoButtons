@@ -30,6 +30,9 @@
 	<context:annotation-config />
 	<mvc:annotation-driven />
 
+	<mvc:resources mapping="/images/**" location="images/" />
+	<mvc:resources mapping="/css/**" location="css/" />
+
 	<context:component-scan base-package="org.openinfobutton.valuset.matcher.impl.cloud" />
 	<context:component-scan base-package="org.openinfobutton.subsetdb.service" />
 	<context:component-scan base-package="org.openinfobutton.profiledb.service" />
