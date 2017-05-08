@@ -16,8 +16,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import org.openinfobutton.subsetdb.domain.Concept;
-import org.openinfobutton.subsetdb.domain.Subset;
 import org.openinfobutton.subsetdb.service.LogsDao;
 import org.openinfobutton.subsetdb.service.SubsetDbDao;
 
@@ -67,9 +65,7 @@ public class ValueSetAndLogsDbTest
     
     @Test
     public void testValueSetLookUp() {
-        
-        Concept concept = subsetDao.getConceptByCodeAndCodeSystem( "250.00", "2.16.840.1.113883.6.103" );
-        Subset subset = subsetDao.getSubsetByName( "DIABETES_MELLITUS" );
+
         assertTrue(subsetDao.isConceptInSubset( "250.00", "2.16.840.1.113883.6.103", "DIABETES_MELLITUS"));
     }
     

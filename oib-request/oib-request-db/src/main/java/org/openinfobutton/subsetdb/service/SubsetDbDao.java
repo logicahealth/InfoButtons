@@ -13,9 +13,8 @@
  */
 package org.openinfobutton.subsetdb.service;
 
-import org.openinfobutton.subsetdb.domain.Concept;
-import org.openinfobutton.subsetdb.domain.Subset;
 import org.openinfobutton.valuset.matcher.api.ValueSetMatcher;
+import org.openinfobutton.valuset.matcher.model.ValueSets;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -23,22 +22,12 @@ import org.openinfobutton.valuset.matcher.api.ValueSetMatcher;
  */
 public interface SubsetDbDao extends ValueSetMatcher
 {
-
-    /**
-     * Gets the concept by code and code system.
-     *
-     * @param code the code
-     * @param codesystem the codesystem
-     * @return the concept by code and code system
-     */
-    public Concept getConceptByCodeAndCodeSystem( String code, String codesystem );
-
     /**
      * Gets the subset by name.
      *
      * @param subsetName the subset name
      * @return the subset by name
      */
-    public Subset getSubsetByName( String subsetName );
+     ValueSets getSubsetByName( String subsetName );
 
 }

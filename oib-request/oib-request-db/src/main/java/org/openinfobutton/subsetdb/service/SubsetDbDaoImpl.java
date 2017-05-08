@@ -13,21 +13,21 @@
  */
 package org.openinfobutton.subsetdb.service;
 
-import java.util.HashMap;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
-import java.util.HashSet;
-import java.util.Set;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.openinfobutton.subsetdb.domain.Subset;
+import org.openinfobutton.subsetdb.domain.SubsetJson;
+import org.openinfobutton.valuset.matcher.model.ValueSets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import org.openinfobutton.subsetdb.domain.Concept;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -44,6 +44,12 @@ public class SubsetDbDaoImpl
     @Autowired
     @Qualifier ("sessionFactory")
     SessionFactory sessionFactory;
+
+    /**
+     *
+     *The jackson object mapper
+     */
+    final ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      * Sets the session factory.
@@ -68,57 +74,61 @@ public class SubsetDbDaoImpl
     public Boolean isConceptInSubset( String code, String codeSystem, String subsetName )
     {
 
-        final Concept concept = getConceptByCodeAndCodeSystem( code, codeSystem );
-        final Subset subset = getSubsetByName(subsetName );
+        final ValueSets subset = getSubsetByName(subsetName );
 
-        Set<Subset> subsets = new HashSet<Subset>();
-        if (concept != null && subset != null) {
-            subsets = concept.getSubsets();
-            return subsets.contains(subset);
-        } else {
+        if (subset != null) {
 
-            return false;
+            return processValueSet(subset, code, codeSystem);
         }
-    }
+        return false;
 
-    /*
-     * (non-Javadoc)
-     * @see SubsetDbDao#getConceptByCodeAndCodeSystem(java.lang.String, java.lang.String)
-     */
-    @Override
-    @Transactional
-    public Concept getConceptByCodeAndCodeSystem( String code, String codeSystem )
-    {
-
-        final Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put( "codeSystem", codeSystem );
-        properties.put( "code", code );
-
-        final List concept = getSessionFactory().getCurrentSession().createCriteria(Concept.class).
-                add(Restrictions.eq("codeSystem", codeSystem)).add(Restrictions.eq("code", code)).list();
-        if ( concept.size() == 1 )
-        {
-            return (Concept) concept.get( 0 );
-        }
-        return null;
     }
 
     /*
      * (non-Javadoc)
      * @see SubsetDbDao#getSubsetByName(java.lang.String)
      */
-    @Override
     @Transactional
-    public Subset getSubsetByName( String subsetName )
+    public ValueSets getSubsetByName( String subsetName )
     {
 
-        final List subset = getSessionFactory().getCurrentSession().createCriteria(Subset.class).
+        final List subset = getSessionFactory().getCurrentSession().createCriteria(SubsetJson.class).
+                setProjection(Projections.projectionList()
+                    .add(Projections.property("valueSet"), "valueSet")).
                 add(Restrictions.eq("name", subsetName)).list();
-        if ( subset.size() == 1 )
+        if ( subset.size() > 0 )
         {
-            return (Subset) subset.get( 0 );
+            try {
+                return objectMapper.readValue(((Blob)subset.get( 0 )).getBinaryStream() , ValueSets.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
         return null;
+    }
+
+    private Boolean processValueSet (ValueSets valueSet, String code, String codeSystem) {
+
+        for (ValueSets.CodeSystem vsCodeSystem : valueSet.getValueSet().getCodeSystems())
+        {
+
+            if (vsCodeSystem.getCodeSystem().equals(codeSystem)) {
+
+                for (ValueSets.Code vsCode : vsCodeSystem.getCodes())
+                {
+                    if (vsCode.getCode().equals(code))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
 }

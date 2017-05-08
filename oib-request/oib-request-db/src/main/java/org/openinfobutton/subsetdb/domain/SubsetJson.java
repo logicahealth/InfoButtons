@@ -13,25 +13,28 @@
  */
 package org.openinfobutton.subsetdb.domain;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import org.apache.commons.lang.builder.ToStringStyle;
-
 import java.io.Serializable;
+import java.sql.Blob;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * The Class Subset.
  */
 @Entity
-@Table( name = "subset" )
-public class Subset implements Serializable
+@Table( name = "subset_json" )
+public class SubsetJson implements Serializable
 {
     // ========================= CONSTANTS =================================
 
@@ -48,25 +51,26 @@ public class Subset implements Serializable
      * The unique identifier of this entity.
      */
     @Id
-    public Long subsetId;
+    public int id;
 
     /**
      * Name of subset.
      */
-    @Column( name = "name", nullable = true )
+    @Column( name = "name", nullable = false )
     private String name;
 
-    /** Description of subset. */
-    @Column( name = "description", nullable = true )
-    private String description;
+    /**
+     *Last updated
+     */
+    @UpdateTimestamp
+    @Column( name = "last_updated", nullable = false )
+    private Timestamp lastUpdated;
 
-    /** Internal concept id. */
-    @Column( name = "internalconceptid", nullable = true )
-    private Integer internalConceptId;
-
-    /** Methodology concept id. */
-    @Column( name = "methodologyconceptid", nullable = true )
-    private String methodologyConceptId;
+    /**
+     *The Content
+     */
+    @Column (name = "value_set")
+    private Blob valueSet;
 
     // ========================= CONSTRUCTORS ==============================
 
@@ -77,7 +81,7 @@ public class Subset implements Serializable
      *
      * @param obj the obj
      * @return true, if successful
-     * @see java.lang.Object#equals(java.lang.Object)
+     * @see Object#equals(Object)
      */
     @Override
     public final boolean equals( final Object obj )
@@ -94,36 +98,33 @@ public class Subset implements Serializable
         {
             return false;
         }
-        final Subset that = (Subset) obj;
-        return new EqualsBuilder().append( this.subsetId, that.subsetId ).isEquals();
+        final SubsetJson that = (SubsetJson) obj;
+        return new EqualsBuilder().append( this.id, that.id ).isEquals();
     }
 
     /**
      * Hash code.
      *
      * @return the int
-     * @see java.lang.Object#hashCode()
+     * @see Object#hashCode()
      */
     @Override
     public final int hashCode()
     {
-        return new HashCodeBuilder().append( subsetId ).toHashCode();
+        return new HashCodeBuilder().append( id ).toHashCode();
     }
 
     /**
      * To string.
      *
      * @return the string
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     @Override
     public String toString()
     {
         return new ToStringBuilder( this, ToStringStyle.DEFAULT_STYLE ).
-                        append( "subsetId", subsetId ).append( "name", name ).
-                        append( "description",description ).
-                        append( "internalconceptid",internalConceptId ).
-                        append( "methodologyconceptid",methodologyConceptId ).
+                        append( "id", id ).append( "name", name ).
                         toString();
     }
 
@@ -134,19 +135,19 @@ public class Subset implements Serializable
      *
      * @return the id
      */
-    public Long getId()
+    public int getId()
     {
-        return subsetId;
+        return id;
     }
 
     /**
      * Sets the subset id.
      *
-     * @param subsetId the new subset id
+     * @param id the new subset id
      */
-    public void setSubsetId( Long subsetId )
+    public void setId( int id )
     {
-        this.subsetId = subsetId;
+        this.id = id;
     }
 
     /**
@@ -170,65 +171,38 @@ public class Subset implements Serializable
     }
 
     /**
-     * Gets the description.
+     * Gets the date
      *
-     * @return the description
+     * @return lastUpdated
      */
-    public String getDescription()
-    {
-        return description;
+    public Timestamp getLastUpdated() {
+        return lastUpdated;
     }
 
     /**
-     * Sets the description.
+     * Sets the date
      *
-     * @param description the new description
+     * @param lastUpdated
      */
-    public void setDescription( String description )
-    {
-        this.description = description;
+    private void setLastUpdated(Timestamp lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     /**
-     * Gets the internal concept id.
+     * Gets the Value Set
      *
-     * @return the internal concept id
+     * @return valueSet
      */
-    public Integer getInternalConceptId()
-    {
-        return internalConceptId;
+    public Blob getValueSet() {
+        return valueSet;
     }
 
     /**
-     * Sets the internal concept id.
+     * Sets the Value Set
      *
-     * @param internalConceptId the new internal concept id
+     * @param valueSet
      */
-    public void setInternalConceptId( Integer internalConceptId )
-    {
-        this.internalConceptId = internalConceptId;
+    public void setValueSet(Blob valueSet) {
+        this.valueSet = valueSet;
     }
-
-    /**
-     * Gets the methodology concept id.
-     *
-     * @return the methodology concept id
-     */
-    public String getMethodologyConceptId()
-    {
-        return methodologyConceptId;
-    }
-
-    /**
-     * Sets the methodology concept id.
-     *
-     * @param methodologyConceptId the new methodology concept id
-     */
-    public void setMethodologyConceptId( String methodologyConceptId )
-    {
-        this.methodologyConceptId = methodologyConceptId;
-    }
-
-    // ========================= IMPLEMENTATION: Person ====================
-
 }
