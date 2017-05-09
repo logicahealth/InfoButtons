@@ -4,12 +4,12 @@
                         arrConcept.push(['PROBLISTREV', '', 'Problem list review', '']);
                         arrConcept.push(['MLREV', '', 'Medication list review', '']);
                         arrConcept.push(['LABRREV', '', 'Laboratory results review', '']);
-                        arrConcept.push(['446.4', '2.16.840.1.113883.6.103', 'Wegeners Granulomatosis', '']);
+                        arrConcept.push(['446.6', '2.16.840.1.113883.6.103', 'Wegeners Granulomatosis', '']);
                         arrConcept.push(['44054006', '2.16.840.1.113883.6.96', 'Diabetes mellitus type 2', '']);
                         arrConcept.push(['84114007', '2.16.840.1.113883.6.96', 'Heart Failure', '']);
                         arrConcept.push(['595.9', '2.16.840.1.113883.6.103', 'Cystitis', '']);
                         arrConcept.push(['235595009', '2.16.840.1.113883.6.96', 'Gastroesophageal reflux', '']);
-                        arrConcept.push(['237.7', '2.16.840.1.113883.6.103', 'Neurofibromatosis', '']);
+                        arrConcept.push(['237.7', '2.16.840.1.113883.6.103', 'Neurofibromatosis type 1', '']);
                         arrConcept.push(['37796009', '2.16.840.1.113883.6.96', 'Migraine headache', '']);
                         arrConcept.push(['47505003', '2.16.840.1.113883.6.96', 'Post traumatic stress disorder', '']);
                         arrConcept.push(['372.00', '2.16.840.1.113883.6.103', 'Acute Conjunctivitis', '']);
@@ -166,9 +166,11 @@
 												   ng-click="callIM(gender, age, 'PROBLISTREV', '37796009', '');">
 										<img title="OpenInfobutton" src="img/infobutton_icon.png"> </a>
 									</li>
-									<li>Add problem<select name="problem" id="problem" ng-model="problem">
+									<li>Add problem
+									<select name="problem" id="problem" ng-model="problem">
 										<option selected="selected" value="237.7">Neurofibromatosis type 1</option>
-										<option value="446.6">Wegeners Granulomatosis</option><option value="595.9">Cystitis</option>
+										<option value="446.6">Wegeners Granulomatosis</option>
+										<option value="595.9">Cystitis</option>
 										<option value="372.00">Acute Conjunctivitis</option>
 									</select><a target="_blank"
 												ng-click="callIM(gender, age, 'PROBLISTREV', problem, '');">
