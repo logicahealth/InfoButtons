@@ -99,7 +99,13 @@ public class UmlsRestClientImpl implements RestTermClient {
 
         this.username = username;
         this.password = password;
-        getTicketGrantingTicket();
+        try {
+            getTicketGrantingTicket();
+        } catch (Exception e) {
+            logger.error("Unable to validate UTS account");
+            e.printStackTrace();
+
+        }
     }
 
     /**

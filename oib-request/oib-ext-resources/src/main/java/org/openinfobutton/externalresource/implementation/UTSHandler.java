@@ -110,6 +110,7 @@ public class UTSHandler
         }
         catch(Exception e) {
             e.printStackTrace();
+            return code;
         }
 
 
@@ -122,6 +123,7 @@ public class UTSHandler
             codeTransformer  = mapper.readValue(results, CodeTransformer.class);
         } catch (IOException e) {
             e.printStackTrace();
+            return code;
         }
 
         List<CodeTransformerResultList> temp = new ArrayList<CodeTransformerResultList>(codeTransformer.getResult().getResults());
@@ -159,6 +161,7 @@ public class UTSHandler
 
         catch (Exception e) {
             e.printStackTrace();
+            return code;
         }
 
         retCode.setCode(codeResult);
@@ -176,10 +179,15 @@ public class UTSHandler
     {
         log.debug( "Got Free text: " + FreeText );
         final ArrayList<Code> searchCodes = new ArrayList<Code>();
+        String results;
 
-
-        String results = umlsRestClient.getTerms(FreeText, "SNOMEDCT_US, ICD10CM, ICD9CM, RXNORM, ICD10, MSH, LNC, CPT");
-
+        try {
+             results = umlsRestClient.getTerms(FreeText, "SNOMEDCT_US, ICD10CM, ICD9CM, RXNORM, ICD10, MSH, LNC, CPT");
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return searchCodes;
+        }
 
         ObjectMapper mapper = new ObjectMapper();
         CodeTransformer codeTransformer = new CodeTransformer();
@@ -188,6 +196,7 @@ public class UTSHandler
            codeTransformer  = mapper.readValue(results, CodeTransformer.class);
         } catch (IOException e) {
             e.printStackTrace();
+            return searchCodes;
         }
 
         List<CodeTransformerResultList> temp =
