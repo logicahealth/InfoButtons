@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1">
-		<title>Medical Home Portal</title>
+		<title> Medical Home Portal</title>
 		<profileDescription>Information for children with special healthcare needs. Developed and maintained by the University of Utah.</profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
