@@ -32,7 +32,7 @@
 							</enumeration>
 						</matchingDomain>
 					</task>
-					<conceptOfInterest search="true" match="false">
+					<conceptOfInterest search="true" match="true">
 						<matchingDomain>
 							<enumeration includeDescendants="false">
 								<!-- ICD10 CM codes -->
