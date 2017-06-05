@@ -9,7 +9,6 @@
 		<authorizedOrganizations/>
 		<supportedTerminologies>
 			<supportedTerminology id="2.16.840.1.113883.6.90" name="ICD10-CM"/>
-			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
 		</supportedTerminologies>
 		<contexts>
 			<context name="Access to disease modules from problem list review and entry. Pediatric population." id="1">
@@ -36,46 +35,6 @@
 					<conceptOfInterest search="true" match="false">
 						<matchingDomain>
 							<enumeration includeDescendants="false">
-								<code codeSystem="2.16.840.1.113883.6.90" code="317" displayName="Mild mental retardation "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="318" displayName="Other specified mental retardation "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="277.5" displayName="Mucopolysaccharidosis (all types)"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="759.89" displayName="Angelman syndrome "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="307.23" displayName="Tourette syndrome "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="758.0" displayName="Down syndrome"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="277.85" displayName="Disorders of fatty acid oxidation "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="359.1" displayName="hereditary progressive muscular dystrophy (Duchenne and Becker Muscular Dystrophy)"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="741" displayName="Spina bifida (Neural Tube Defects)"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="343" displayName="Cerebral palsy "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="579.0 " displayName="celiac disease "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="952" displayName="spinal cord injury "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="907.0" displayName="Late effect of intracranial injury"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="330.8" displayName="Rett syndrome"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="759.83" displayName="Fragile X syndrome "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="237.7" displayName="Neurofibromatosis"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="345.6" displayName="Infantile spasms "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="555" displayName="Regional Enteritis (IBD)"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="556" displayName="Ulcerative Enterocolitis (IBD)"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="359.21" displayName="myotonic muscular dystrophy type 1"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="359.22" displayName="myotonic muscular dystrophy type 2"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="317" displayName="Mental Retardation (MR), mild "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="318.0 " displayName="MR, moderate"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="318.1" displayName="MR, severe "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="318.2" displayName="MR, profound "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="319" displayName="MR, NOS "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="299.0" displayName="Autistic disorder, Infantile autism, Primary autism "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="299.9" displayName="Pervasive developmental disorder NOS"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="299.8" displayName="Other pervasive developmental disorders (Asperger disorder) "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="296" displayName="Major Depressive Disorder. Fourth and fifth digits required, see explanation below"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="300.4" displayName="Dysthymic Disorder "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="311" displayName="Depressive Disorder NOS "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="296.90 " displayName="Mood Disorder NOS "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="309.0 " displayName="Adjustment Disorder with Depressed Mood "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="309.28" displayName="Adjustment Disorder with Mixed Anxious and Depressed Mood "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="758.9" displayName="Conditions due to anomaly of unspecified chromosome (Cornelia de Lange Syndrome"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="759.81" displayName="Prader-Willi syndrome"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="335" displayName="Spinal muscular atrophy, unspecified "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="493" displayName="Asthma "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="314.0 " displayName="Attention deficit disorder "/>
 								<!-- ICD10 CM codes -->
 								<code codeSystem="2.16.840.1.113883.6.90" code="Q93.5"/>
 								<code codeSystem="2.16.840.1.113883.6.90" code="F06.4"/>
