@@ -122,7 +122,10 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$uibModal', 'profileFacto
     return $scope;
     }]);
 
-oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profileFactory', '$state', 'ngNotify', '$window', '$uibModal', function ($scope, $stateParams, profileFactory, $state, ngNotify, $window, $uibModal) {
+oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', '$state', 'ngNotify', '$uibModal', 'base64', 'profileFactory', function ($scope, $stateParams, $state, ngNotify, base64, $uibModal, profileFactory) {
+
+     var subsetArray = [];
+     subsetArray = profileFactory.getValueSets(base64);
 
      var jsonProfileSchema = {
         "type" : "object",
@@ -2408,41 +2411,67 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', 'profi
                                                             ]
                                                         },
                                                         {
-                                                            "key" : "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet",
-                                                            "title" : "External Value Set",
-                                                            "startEmpty" : true,
-                                                            "items" : [
+                                                            "type": "fieldset",
+                                                            "items": [
                                                                 {
-                                                                    "type": "section",
-                                                                    "htmlClass": "row",
+                                                                    "key": "valueSetSelect",
+                                                                    "type"  : "select",
+                                                                    "description" : "Select value set for matching concept",
+                                                                    "titleMap": subsetArray,
+                                                                    "onChange" : function(modelValue,form, formScope) {
+
+                                                                        delete modelValue["$$hashKey"];
+                                                                        var contextIndex = formScope.$parent.$parent.$parent.$parent.$index;
+                                                                        if ($scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet != null) {
+
+                                                                            $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet.unshift(modelValue);
+                                                                        }
+                                                                        else {
+
+                                                                            $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet = [];
+                                                                            $scope.jsonProfileModel.profileDefinition.contexts.context[contextIndex].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet.unshift(modelValue);
+                                                                        }
+
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet",
+                                                                    "title": "External Value Set",
+                                                                    "startEmpty": true,
                                                                     "items": [
                                                                         {
                                                                             "type": "section",
-                                                                            "htmlClass": "col-md-3",
+                                                                            "htmlClass": "row",
                                                                             "items": [
                                                                                 {
-                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].id",
-                                                                                    "title": "ID"
-                                                                                }
-                                                                            ]
-                                                                        },
-                                                                        {
-                                                                            "type": "section",
-                                                                            "htmlClass": "col-md-3",
-                                                                            "items": [
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].id",
+                                                                                            "title": "ID"
+                                                                                        }
+                                                                                    ]
+                                                                                },
                                                                                 {
-                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].name",
-                                                                                    "title": "Name"
-                                                                                }
-                                                                            ]
-                                                                        },
-                                                                        {
-                                                                            "type": "section",
-                                                                            "htmlClass": "col-md-3",
-                                                                            "items": [
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].name",
+                                                                                            "title": "Name"
+                                                                                        }
+                                                                                    ]
+                                                                                },
                                                                                 {
-                                                                                    "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].namespace",
-                                                                                    "title": "Namespace"
+                                                                                    "type": "section",
+                                                                                    "htmlClass": "col-md-3",
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "key": "profileDefinition.contexts.context[].contextDefinition.conceptOfInterest.matchingDomain.externalValueSet[].namespace",
+                                                                                            "title": "Namespace"
+                                                                                        }
+                                                                                    ]
                                                                                 }
                                                                             ]
                                                                         }

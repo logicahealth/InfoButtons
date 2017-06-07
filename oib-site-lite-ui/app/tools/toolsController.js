@@ -12,7 +12,7 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', function($state, $scop
         var baseUrl = 'http://' + localStorage.getItem("hostName") + ':8080/infobutton-service/infoRequest?';
         var organizationOID = document.getElementById("organizationId").value;
         var organization = 'representedOrganization.id.root=' + organizationOID;
-        var performer = document.getElementById("performerId").value;
+        var performer = 'informationRecipient=' + document.getElementById("performerId").value;
 
         var genderParam = '';
         if (gender != null)
@@ -33,7 +33,7 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', function($state, $scop
         //	severityObservationParam = '&interpretationCode.c.c=' + labAbnormalFlag;
         //}
 
-        var performerParam = '&informationRecipient.languageCode.c=en&performer=PROV';
+        var performerParam = '&informationRecipient.languageCode.c=en&' + performer + '&performer=PROV';
 
         var xslt = '';
         if (getXslt(organizationOID) != null)
