@@ -100,6 +100,13 @@ public class LiteProfilesDaoImpl implements LiteProfilesDao {
     }
 
     @Transactional
+    public UserAuthentication getAdminUser()
+    {
+        return (UserAuthentication)getSessionFactory().getCurrentSession().createCriteria(UserAuthentication.class).
+                add(Restrictions.eq("role", "ADMIN")).list().get(0);
+    }
+
+    @Transactional
     public void deleteUser(UserAuthentication user)
     {
         getSessionFactory().getCurrentSession().delete(user);

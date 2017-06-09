@@ -268,6 +268,16 @@ public class ProfileManagerService
         lDao.deleteUser(userEntity);
     }
 
+    @RequestMapping(produces = "application/json",value="updateAdminUser", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void updateAdminUser (@RequestBody final UserAuthentication user)
+    {
+
+        UserAuthentication userEntity = lDao.getAdminUser();
+        lDao.deleteUser(userEntity);
+        lDao.createOrUpdateUser(user);
+    }
+
     @RequestMapping(produces = "application/json", value="searchUts/{codeSystem}/{search}", method = RequestMethod.GET)
     @ResponseBody
     public String searchUts (@PathVariable String codeSystem, @PathVariable String search) {

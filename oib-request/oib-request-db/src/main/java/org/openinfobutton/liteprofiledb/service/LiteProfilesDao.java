@@ -20,6 +20,8 @@ public interface LiteProfilesDao {
 
     UserAuthentication getUser(String user, String password);
 
+    UserAuthentication getAdminUser();
+
     void createOrUpdateUser (UserAuthentication user);
 
     void deleteUser (UserAuthentication user);
