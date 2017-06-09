@@ -27,6 +27,12 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
         loginService.updateUser(username, password, $state)
     }
 
+    $scope.updateAdminUser = function (username, password)
+    {
+
+        loginService.updateAdminUser(username, password, $state)
+    }
+
     $scope.addOids = function(orgOid, orgName) {
 
         var oids = localStorage.getItem("oids");

@@ -99,6 +99,22 @@
                     </uib-alert>
                 </div>
             </form>
+            <h3>Update Admin User</h3>
+            <form class="form-inline" name="usersForm" ng-submit="updateAdminUser(adminUsername, adminPassword)">
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="adminUsername" name="adminUsername" ng-model="adminUsername" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" id="adminPassword" name="adminPassword" ng-model="adminPassword" required>
+                        <span class="input-group-btn">
+                            <button class='btn btn-default' type="submit">Change</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
