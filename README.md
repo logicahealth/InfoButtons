@@ -21,21 +21,29 @@ New features:
 
 -We are now maintaining and distributing a preconfigured VM with instances of both OpenInfobutton and LITE already running. Users had been requesting
 an easier way to deploying their own instance of OpenInfobutton and we believe this is the best route going forward.
+
 -Value sets are now hosted in Github, similarily to the store profiles, and will now be centrally curated so they no longer need to managed for
 individual installs. The LITE profile editor now includes a pick list for value sets that automatically populates from Github.
+
 -Terminology translations and free text lookups now use the UTS REST API, rather than the now deprecated SOAP service. This both reduces the size
 of the deployed WAR and increases the speed of requests that require terminology services.
+
 -The InfoButton request log now includes the full response to make debugging easier. We are also now logging the request URL parameters rather than 
 an XML representation of the request.
+
 -LITE now includes a demo page and a request testing tool so users can more easily test their install.
+
 -You can now change the admin username and password directly from LITE rather than editing the database.
 
 Bug fixes and improvements:
 
 -ICD9 to SNOMED-CT mappings have been deprectated and removed from OpenInfobutton
+
 -Free text matching sometimes clashed with simultaneous requests, causing inconsistent results to be returned. This has been fixed.
+
 -The Responder RXNorm translation functionality was no longer working due to an update to the RXNorm web service. The responder has been 
 updated to account for that change.
+
 -Various improvements to LITE's usability have been implemented.
 
 Building and redeploying
