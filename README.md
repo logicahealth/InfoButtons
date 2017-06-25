@@ -12,7 +12,7 @@ Built with:
 2.1 RELEASE NOTES
 =================
 
-OpenInfobutton 2.1 is a major release that includes new features, bug fixes and a Vagrant/VirtualBox virtual machine that can be deployed with minimal configuration. Most importantly OIB now requires upgrading to JDK8, IT WILL NOT BUILD WITH OLDER VERSIONS OF JAVA. While I understand
+OpenInfobutton 2.1 is a major release that includes new features, bug fixes and a Vagrant/VirtualBox virtual machine that can be deployed with minimal configuration. Most importantly OIB now requires upgrading to JDK8, IT WILL NOT BUILD OR RUN WITH OLDER VERSIONS OF JAVA. While I understand
 this may be an inconvenience to some, JDK7 has been EOL by Oracle, meaning they are no longer releasing security updates for it. Given the nature
 of OpenInfobutton as a facet of clinical information systems, it made sense to upgrade for this reason alone.
 
