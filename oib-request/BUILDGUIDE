@@ -87,12 +87,12 @@ WIPE YOUR ENTIRE LOCAL MAVEN REPOSITORY. You WILL encounter build errors if you 
 Building
 --------
 
-1) Execute the following SQL scripts found in the Infobuttons/DeploymentPackage/dbScripts directory:
+1) Execute the following SQL scripts found in the Infobuttons/DeploymentPackage/dbScripts directory IN THE FOLLOWING ORDER:
 
-	profile_black_list.sql
-	resource_profile.sql	
-	userAuthentication.sql	
-	valueset_and_log.sql
+	1. resource_profile.sql	
+	2. valueset_and_log.sql
+	3. profile_black_list.sql
+	4. userAuthentication.sql	
 	
    If you are upgrading from OIB 2.0, you only need to execute,
    
