@@ -79,6 +79,9 @@ Initial Setup
    https://uts.nlm.nih.gov/home.html
    
 8) Create a Github account.
+
+9) If you are upgrading from an older version of OpenInfobutton you MUST COMPLETELY
+WIPE YOUR ENTIRE LOCAL MAVEN REPOSITORY. You WILL encounter build errors if you dont.
    
 
 Building
