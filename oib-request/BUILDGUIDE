@@ -103,7 +103,7 @@ Building
 
 3) Navigate back to the oib-request module directory (this directory)
 
-4) The oib-request master module's pom.xml includes the following configurable settings,
+4) The oib-request module's master pom.xml includes the following configurable settings,
 
 		<datasource1.url>jdbc:mysql://localhost:3306/valueset_and_log</datasource1.url>
 		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
