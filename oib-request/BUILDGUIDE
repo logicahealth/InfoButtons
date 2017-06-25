@@ -95,7 +95,7 @@ Building
    migration2021.sql
    
    You may also drop the 3 old valueset tables: concept, subset, and subsetmember but this is not necessary
-   and keeping them will not hurt anything. 
+   and keeping them will not hurt anything which is why I haven't included it in the script.
 
 2) Navigate to the Infobuttons/rest-terminology-services directory and run
 	
