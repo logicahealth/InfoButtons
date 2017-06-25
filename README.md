@@ -36,7 +36,7 @@ of the deployed WAR and increases the speed of requests that require terminology
 
 Bug fixes and improvements:
 
-- Updated to the latest versions of Spring and Hibernate, which is another reason why JDK8 is now required
+- Updated to the latest versions of Spring, Hibernate, and log4j2 which is another reason why JDK8 is now required
 
 - ICD9 to SNOMED-CT mappings have been deprectated and removed from OpenInfobutton
 
