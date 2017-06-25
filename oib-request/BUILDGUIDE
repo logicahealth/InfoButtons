@@ -53,7 +53,7 @@ Build Guide For OpenInfobutton Manager
 Initial Setup
 -------------
 
-1) Clone the entire Innovation-182 branch you'd like to build. 
+1) Clone the entire Infobuttons 2.1 branch. 
 
 2) Install JDK 8.0, which can be downloaded from 
    http://www.oracle.com/technetwork/java/javase/downloads/index.html
