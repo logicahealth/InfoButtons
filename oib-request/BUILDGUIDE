@@ -7,6 +7,13 @@ Salt Lake City, UT 84108-3514
 (801) 581-4080
 -------------------------------------------------------------------------
 
+Changes for version 2.1
+-----------------------
+
+-changed JDK7 to JDK8
+
+-added instructions to build the UTS REST Terminology Services module first
+
 Changes for version 2.0
 -----------------------
 
@@ -48,9 +55,9 @@ Initial Setup
 
 1) Clone the entire Innovation-182 branch you'd like to build. 
 
-2) Install JDK 7.0, which can be downloaded from 
+2) Install JDK 8.0, which can be downloaded from 
    http://www.oracle.com/technetwork/java/javase/downloads/index.html
-   Use version of 1.7.0_17 JDK or higher.
+   Use version of 1.8u131 JDK or higher.
 
 3) Make sure that your JAVA_HOME environment variable is set to the newly
    installed JDK location, and that your PATH includes %JAVA_HOME%\bin
@@ -70,21 +77,24 @@ Initial Setup
 7) Obtain a UTS account from here, 
    https://uts.nlm.nih.gov/home.html
    
+8) Create a Github account.
+   
 
 Building
 --------
 
-1) Execute all the SQL scripts found in the Innovations-182/DeploymentPackage/dbScripts directory except profilesInsert.sql.
+1) Execute all the SQL scripts found in the Infobuttons/DeploymentPackage/dbScripts directory except profilesInsert.sql.
    That one is optional and includes a set of pre-configured resource profiles.
 
-2) Navigate back to the oib-request module directory (this directory)
+2) Navigate to the Infobuttons/rest-terminology-services directory and run
+	
+	$> mvn clean install -Dmaven.test.skip=true
 
-3) The oib-request master module's pom.xml includes the following properties block,
+3) Navigate back to the oib-request module directory (this directory)
 
-   <properties>
-       <dts-version>3.5.0</dts-version>
-              
-		<datasource1.url>jdbc:mysql://localhost:3306/valuesets_and_logs</datasource1.url>
+4) The oib-request master module's pom.xml includes the following configurable settings,
+
+		<datasource1.url>jdbc:mysql://localhost:3306/valueset_and_log</datasource1.url>
 		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
 		<datasource1.user></datasource1.user>
 		<datasource1.password></datasource1.password>
@@ -93,29 +103,46 @@ Building
 		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
 		<datasource2.user></datasource2.user>
 		<datasource2.password></datasource2.password>
-		
+
+		<!-- ============== Value Set Configuration =================
+		The following lines allow you to choose which value set implementation you would like
+		to use in your configuration. The default uses valuesets hosted on github
+		that are centrally managed for your convenience. You can also switch to the local database
+		implementation by commenting out the default implementation and uncommenting the database
+		implementation
+		=== Default Value Set Implementation ===
+		Uses github and requires a github username and password. Comment out
+		to use local database implementation instead.
+		-->
+
+		<service.subsetImplementation>cloudValueSets</service.subsetImplementation>
+		<github.username></github.username>
+		<github.password></github.password>
+
+		<!--
+		==== Local database implementation ====
+		Remove comment to use and make sure to also comment out default implementation
+		-->
+
+		<!--<service.subsetImplementation>databaseValueSets</service.subsetImplementation>-->
+
+		<!-- ================= End Value Set Configuration ================= -->
+
 		<umls.username></umls.username>
 		<umls.password></umls.password>
-   </properties>
    
-   Set these to match your local database connection parameters and UTS account.
+   Set these to match your local database connection parameters, preferred valuet method, Github account, and UTS account.
 
-4) Run
+5) Run
 
-         $> mvn clean install
+         $> mvn clean install -Dmaven.test.skip=true
 
-   This will compile the OpenInfobutton Manager and run all of the tests in the 
-   oib-request source module. Alternatively, you can run
-
-         $> mvn install -Dmaven.test.skip=true
-
-   This will compile OpenInfobutton without running the tests in case you encounter problems
-   with the database connections or have not yet obtained a UTS account.
+   This will compile the OpenInfobutton Manager and build the WAR.
 
    It usually takes some time for maven to download required dependencies 
    in the first build.
 
-5) Upon a completed build, the WAR will be found under the oib-request-service/target directory. 
+6) Upon a completed build, the WAR will be found under the oib-request-service/target directory. 
    Simply deploy it to a functional Java EE servlet container and you should be able to
    start firing requests at it. Alternatively, you can also use the following maven command to start an
    instance of the manager in a self contained Tomcat 7 container.
