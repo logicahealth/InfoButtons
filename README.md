@@ -12,7 +12,7 @@ Built with:
 2.1 RELEASE NOTES
 =================
 
-OpenInfobutton 2.1 is a major release that includes new features, bug fixes and a Vagrant/VirtualBox virtual machine that can be deployed with minimal configuration. Most importantly OIB now requires upgrading to JDK8, IT WILL NOT BUILD WITH OLDER VERSIONS OF JAVA. While I understand
+OpenInfobutton 2.1 is a major release that includes new features, bug fixes and a Vagrant/VirtualBox virtual machine that can be deployed with minimal configuration. Most importantly OIB now requires upgrading to JDK8, IT WILL NOT BUILD OR RUN WITH OLDER VERSIONS OF JAVA. While I understand
 this may be an inconvenience to some, JDK7 has been EOL by Oracle, meaning they are no longer releasing security updates for it. Given the nature
 of OpenInfobutton as a facet of clinical information systems, it made sense to upgrade for this reason alone.
 
@@ -20,7 +20,9 @@ of OpenInfobutton as a facet of clinical information systems, it made sense to u
 New features:
 
 - We are now maintaining and distributing a preconfigured VM with instances of both OpenInfobutton and LITE already running. Users had been requesting
-an easier way to deploying their own instance of OpenInfobutton and we believe this is the best route going forward.
+an easier way to deploying their own instance of OpenInfobutton and we believe this is the best route going forward. It can be found here: 
+
+https://github.com/VHAINNOVATIONS/InfoButtons/releases
 
 - Value sets are now hosted in Github, similarily to the store profiles, and will now be centrally curated so they no longer need to managed for
 individual installs. The LITE profile editor now includes a pick list for value sets that automatically populates from Github.
