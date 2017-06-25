@@ -83,8 +83,19 @@ Initial Setup
 Building
 --------
 
-1) Execute all the SQL scripts found in the Infobuttons/DeploymentPackage/dbScripts directory except profilesInsert.sql.
-   That one is optional and includes a set of pre-configured resource profiles.
+1) Execute the following SQL scripts found in the Infobuttons/DeploymentPackage/dbScripts directory:
+
+	profile_black_list.sql
+	resource_profile.sql	
+	userAuthentication.sql	
+	valueset_and_log.sql
+	
+   If you are upgrading from OIB 2.0, you only need to execute,
+   
+   migration2021.sql
+   
+   You may also drop the 3 old valueset tables: concept, subset, and subsetmember but this is not necessary
+   and keeping them will not hurt anything. 
 
 2) Navigate to the Infobuttons/rest-terminology-services directory and run
 	
