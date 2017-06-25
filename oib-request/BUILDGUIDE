@@ -14,6 +14,8 @@ Changes for version 2.1
 
 -added instructions to build the UTS REST Terminology Services module first
 
+-removed building with CMake as that has not been maintained for several versions
+
 Changes for version 2.0
 -----------------------
 
@@ -48,7 +50,6 @@ Build Guide For OpenInfobutton Manager
 
 1 - Initial Setup
 2 - Building
-3 - Building with CMake
 
 Initial Setup
 -------------
@@ -159,22 +160,3 @@ Building
    instance of the manager in a self contained Tomcat 8 container.
    
    mvn clean tomcat8:run-war -Ddatasource1.password=mypass -Ddatasource2.password=mypass -DskipTests
-   
-Building with CMake
---------
-
-1) The OpenInfobutton Manager module includes a CMakeLists.txt file. If you use a recent
-   version of CMake in your development environment, you simply have to check the MySQL connection
-   parameters in the following files,
-   
-   oib-request/CMakeLists.txt
-   
-   oib-request/pom.xml
-   
-   and the execute the following commands from the module directory,
-   
-   cmake CMakeLists.txt
-   
-   ctest
-   
-   This should exectute the SQL scripts and build the project as well.
