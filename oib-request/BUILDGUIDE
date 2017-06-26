@@ -146,7 +146,7 @@ Building
 		<umls.username></umls.username>
 		<umls.password></umls.password>
    
-   Set these to match your local database connection parameters, preferred valuet method, Github account, and UTS account.
+   Set these to match your local database connection parameters, preferred Value Set method, Github account, and UTS account.
 
 5) Run
 
