@@ -11,5 +11,4 @@ CREATE TABLE `subset_json`
   `last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `name` VARCHAR(255) NOT NULL,
   `value_set` LONGBLOB
-)ENGINE=MyISAM DEFAULT CHARSET=latin1
-/*!40101 SET character_set_client = @saved_cs_client */;
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;
