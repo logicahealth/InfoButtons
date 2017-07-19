@@ -15,7 +15,8 @@ package org.openinfobutton.service.matching;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openinfobutton.exception.OIBProfileProcessingException;
 import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.schemas.kb.CodedContextElement;
@@ -33,7 +34,7 @@ public final class TaskCheckHandler
 {
 
     /** The log. */
-    private static Logger log = Logger.getLogger( TaskCheckHandler.class.getName() );
+    private static Logger log = LogManager.getLogger( TaskCheckHandler.class.getName() );
 
     /** The profiles. */
     public static Map<Long, KnowledgeResourceProfile> profiles;

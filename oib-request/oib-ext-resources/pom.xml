@@ -2,70 +2,30 @@
     <parent>
       <groupId>org.openinfobutton</groupId>
       <artifactId>oib-request</artifactId>
-      <version>2.0-SNAPSHOT</version>
+      <version>2.1-SNAPSHOT</version>
     </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>oib-ext-resources</artifactId>
-	<version>2.0-SNAPSHOT</version>
+	<version>2.1-SNAPSHOT</version>
 	<name>oib-ext-resources</name>
 	<description>Decoupling the handling of external resources from Business Logic</description>
 
 	<repositories>
-	
+
     <repository>
         <id>project.local</id>
         <name>project</name>
         <url>file:${project.basedir}/oibrepo</url>
     </repository>
-		<repository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-    
-	</repositories>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+	</repositories>
 
 
 	<dependencies>
 		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-web-api</artifactId>
-			<version>7.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.openinfobutton</groupId>
-			<artifactId>oib-core</artifactId>
-			<version>2.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-schema</artifactId>
-			<version>2.0-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.9</version>
+			<version>2.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -86,18 +46,6 @@
 			<version>2.7.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>sqljdbc4</artifactId>
-			<version>2.0</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.intersystems</groupId>
-			<artifactId>cachedb</artifactId>
-			<version>2009.1</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
 			<version>2.9.1</version>
@@ -105,23 +53,9 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>commons-configuration</groupId>
-			<artifactId>commons-configuration</artifactId>
-			<version>1.6</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.1.0.7.0</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-db</artifactId>
-			<version>2.0-SNAPSHOT</version>
+			<version>2.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -132,28 +66,14 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>com.springsource.slf4j.log4j</artifactId>
-			<version>1.6.1</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>com.springsource.slf4j.api</artifactId>
-			<version>1.6.1</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>oib-request-inference-rxnorm</artifactId>
+			<version>2.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-inference-rxnorm</artifactId>
-			<version>2.0-SNAPSHOT</version>
+			<version>2.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>UTSMetathesaurus</groupId>
@@ -182,19 +102,25 @@
 			<artifactId>jaxws-tools</artifactId>
 			<version>2.2.8</version>
 		</dependency>
+		<dependency>
+			<groupId>org.openinfobutton</groupId>
+			<artifactId>rest-api</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 
 		<!-- TESTING -->
 
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-service-test</artifactId>
-			<version>2.0-SNAPSHOT</version>
+			<version>2.1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>rest-impl</artifactId>
-			<version>0.1-SNAPSHOT</version>
+			<version>1.0-SNAPSHOT</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -226,8 +152,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>

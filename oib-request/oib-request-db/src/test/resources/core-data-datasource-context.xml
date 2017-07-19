@@ -10,25 +10,6 @@
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
-
-	<!-- <jaxws:endpoint -->
-	<!-- id="infobutton-service" -->
-	<!-- implementor="edu.duke.mc.cfm.dci.dss.EvaluationImpl" -->
-	<!-- address="/evaluate.dss.omg.org" -->
-	<!-- serviceName="dss:DecisionSupportService" -->
-	<!-- endpointName="dss:evaluate" -->
-	<!-- xmlns:dss="urn:evaluate.dss.omg.org" -->
-	<!-- wsdlLocation="wsdl/DssEvaluation.wsdl"> -->
-	<!-- </jaxws:endpoint> -->
-
-	<!-- =========================================== -->
-	<!-- Properties files -->
-	<!-- =========================================== -->
-
-	<!-- Property file locations: suppressed here because it might override 
-		the main context file's resources. The main context is responsible for defining 
-		them. -->
-
 	<!-- =========================================== -->
 	<!-- Annotation configuration -->
 	<!-- =========================================== -->
@@ -40,9 +21,7 @@
 	<!-- =========================================== -->
 
 	<!-- Data source: reads a properties file and injects them into a DBCP DS 
-		First datasource for Concept and Subset <property name="driverClass"><value>com.mysql.jdbc.Driver</value></property> 
-		<property name="jdbcUrl"><value>jdbc:mysql://mysql.chpc.utah.edu:3306/prodoib</value></property> 
-		<property name="user"><value>valuesetdb</value></property> <property name="password"><value>ctxRchgiP</value></property> -->
+		First datasource for Concept and Subset -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass">
 			<value>${datasource1.driver}</value>
@@ -56,22 +35,13 @@
 		<property name="password">
 			<value>${datasource1.password}</value>
 		</property>
-		<property name="testConnectionOnCheckin">
-			<value>true</value>
-		</property>
-		<property name="maxStatements">
-			<value>50</value>
-		</property>
-		<property name="idleConnectionTestPeriod">
-			<value>300</value>
-		</property>
 	</bean>
 
 
 	<!-- Session factory -->
 	<!-- Session Factory for the first datasource -->
 	<bean id="sessionFactory" primary="true"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 
 		<!-- Hibernate configuration properties (read from a properties file) -->
@@ -94,28 +64,14 @@
 			<bean class="org.hibernate.cfg.DefaultNamingStrategy" />
 		</property>
 
-		<!-- Reads package-level Hibernate annotations. Unfortunately, this has 
-			to be manually maintained for all model packages -->
-		<property name="annotatedPackages">
-			<list>
-				<!-- <value>edu.utah.further.core.data.oracle.type</value> -->
-			</list>
-		</property>
-
 		<!-- Mapping annotated classes using search patterns -->
 		<property name="annotatedClasses">
 			<list>
-				<value><![CDATA[edu.utah.further.subsetdb.domain.Subset]]></value>
-				<value><![CDATA[edu.utah.further.subsetdb.domain.Concept]]></value>
-				<value><![CDATA[edu.utah.further.subsetdb.domain.Logs]]></value>
+				<value><![CDATA[org.openinfobutton.subsetdb.domain.SubsetJson]]></value>
+				<value><![CDATA[org.openinfobutton.subsetdb.domain.Logs]]></value>
 
 			</list>
 		</property>
-	</bean>
-
-	<!-- Hibernate data access template -->
-	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
 	<!-- =========================================== -->
@@ -127,7 +83,7 @@
 
 	<!-- a PlatformTransactionManager is still required -->
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
@@ -136,30 +92,8 @@
 		<constructor-arg index="0" ref="dataSource" />
 	</bean>
 
-	<bean id="subsetlogDao" class="edu.utah.further.core.data.service.DaoHibernateImpl">
-		<constructor-arg ref="sessionFactory" />
+	<bean id="logDao" class=" org.openinfobutton.subsetdb.service.LogsDaoImpl">
 	</bean>
-	<bean id="logDao" class=" edu.utah.further.subsetdb.service.LogsDaoImpl">
-	</bean>
-
-
-
-
-
-	<!-- <bean id="profilesdbDao" class="edu.utah.further.profiledb.service.ProfilesDaoImpl" 
-		> -->
-	<!-- <property name="sessionFactory" ref="profilesessionFactory"></property> -->
-	<!-- </bean> -->
-
-
-	<!-- =========================================== -->
-	<!-- FURTHeR data layer -->
-	<!-- =========================================== -->
-
-	<!-- Component auto-detection configuration in the data layer package. Must 
-		come AFTER sessionFactory is declared for some strange reason when deployed 
-		to the ESB. -->
-	<!-- <context:component-scan base-package="edu.utah.further.core.data" /> -->
 
 
 </beans>

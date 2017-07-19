@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import edu.utah.further.profiledb.service.ProfilesDao;
+import org.openinfobutton.profiledb.service.ProfilesDao;
 
 /**
  * -----------------------------------------------------------------------------------

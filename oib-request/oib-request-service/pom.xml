@@ -5,7 +5,7 @@
     <parent>
       <groupId>org.openinfobutton</groupId>
       <artifactId>oib-request</artifactId>
-      <version>2.0-SNAPSHOT</version>
+      <version>2.1-SNAPSHOT</version>
     </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>oib-request-service</artifactId>
@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-schema</artifactId>
-			<version>2.0-SNAPSHOT</version>
+			<version>2.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -45,18 +45,6 @@
 			<version>2.7.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>sqljdbc4</artifactId>
-			<version>2.0</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.intersystems</groupId>
-			<artifactId>cachedb</artifactId>
-			<version>2009.1</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
 			<version>2.9.1</version>
@@ -64,23 +52,9 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>commons-configuration</groupId>
-			<artifactId>commons-configuration</artifactId>
-			<version>1.6</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.1.0.7.0</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-db</artifactId>
-			<version>2.0-SNAPSHOT</version>
+			<version>2.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -98,43 +72,19 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>com.springsource.slf4j.log4j</artifactId>
-			<version>1.6.1</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>com.springsource.slf4j.api</artifactId>
-			<version>1.6.1</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
-		</dependency>
-		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-inference-rxnorm</artifactId>
-			<version>2.0-SNAPSHOT</version>
+			<version>2.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-ext-resources</artifactId>
-			<version>2.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openinfobutton</groupId>
-			<artifactId>rest-api</artifactId>
-			<version>0.1-SNAPSHOT</version>
+			<version>2.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>rest-impl</artifactId>
-			<version>0.1-SNAPSHOT</version>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -147,7 +97,7 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-service-test</artifactId>
-			<version>2.0-SNAPSHOT</version>
+			<version>2.1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -228,8 +178,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -237,7 +187,7 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.1.201405082137</version>
 				<configuration>
-					<destfile>${basedir}/target/coverage-reports/jacoco-unit.exec</destfile>
+					<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
 				</configuration>
 				<executions>
 					<!-- prepare agent for measuring integration tests -->
@@ -267,9 +217,6 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.10</version>
-				<configuration>
-					<argLine>${surefireArgLine}</argLine>
-				</configuration>
 				<executions>
 					<execution>
 						<id>default-test</id>

@@ -8,7 +8,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import edu.utah.further.liteprofiledb.domain.CustomProfiles;
+import org.openinfobutton.liteprofiledb.domain.CustomProfiles;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

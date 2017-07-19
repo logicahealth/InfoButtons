@@ -3,44 +3,18 @@
   <parent>
     <groupId>org.openinfobutton</groupId>
     <artifactId>oib-request</artifactId>
-    <version>2.0-SNAPSHOT</version>
+    <version>2.1-SNAPSHOT</version>
   </parent>
   <artifactId>oib-core</artifactId>
   <name>OIB Core Utility Module</name>
   <description>OIB Core Utility Module</description>
   
-  	<repositories>
-		<repository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>further</id>
-			<url>https://nexus.chpc.utah.edu/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-  
   <dependencies>
 
 	  <dependency>
-		  <groupId>c3p0</groupId>
+		  <groupId>com.mchange</groupId>
 		  <artifactId>c3p0</artifactId>
-		  <version>0.9.1.2</version>
+		  <version>0.9.5.2</version>
 	  </dependency>
 
   		<dependency>  
@@ -66,7 +40,7 @@
 	  <dependency>
 		  <groupId>org.openinfobutton</groupId>
 		  <artifactId>oib-request-schema</artifactId>
-		  <version>2.0-SNAPSHOT</version>
+		  <version>2.1-SNAPSHOT</version>
 		  <scope>compile</scope>
 	  </dependency>
 
@@ -117,16 +91,6 @@
 		  <scope>compile</scope>
 	  </dependency>
 	  <dependency>
-		  <groupId>org.springframework.security</groupId>
-		  <artifactId>spring-security-config</artifactId>
-		  <version>3.2.9.RELEASE</version>
-	  </dependency>
-	  <dependency>
-		  <groupId>org.springframework.security</groupId>
-		  <artifactId>spring-security-web</artifactId>
-		  <version>3.2.9.RELEASE</version>
-	  </dependency>
-	  <dependency>
 		  <groupId>org.aspectj</groupId>
 		  <artifactId>aspectjrt</artifactId>
 		  <version>1.7.3</version>
@@ -136,9 +100,37 @@
 
 	  <dependency>
 		  <groupId>org.hibernate</groupId>
-		  <artifactId>hibernate-validator-annotation-processor</artifactId>
-		  <version>4.2.0.Final</version>
+		  <artifactId>hibernate-validator</artifactId>
+		  <version>5.4.1.Final</version>
 	  </dependency>
+
+	  <dependency>
+		  <groupId>commons-configuration</groupId>
+		  <artifactId>commons-configuration</artifactId>
+		  <version>1.6</version>
+		  <type>jar</type>
+		  <scope>compile</scope>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>org.apache.logging.log4j</groupId>
+		  <artifactId>log4j-api</artifactId>
+		  <version>2.5</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>org.apache.logging.log4j</groupId>
+		  <artifactId>log4j-core</artifactId>
+		  <version>2.5</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>org.apache.logging.log4j</groupId>
+		  <artifactId>log4j-slf4j-impl</artifactId>
+		  <version>2.5</version>
+	  </dependency>
+
+
 </dependencies>
 
 <build>
@@ -146,8 +138,8 @@
 		<plugin>
 			<artifactId>maven-compiler-plugin</artifactId>
 			<configuration>
-				<source>1.7</source>
-				<target>1.7</target>
+				<source>1.8</source>
+				<target>1.8</target>
 			</configuration>
 		</plugin>
 	</plugins>

@@ -62,6 +62,18 @@ oibSetupServices.service('loginService', function ($rootScope, $http, base64) {
         });
     };
 
+    loginService.updateAdminUser = function (username, password, setupState) {
+
+        $http.post(oibManagerUrl + 'updateAdminUser', {username: username, password: password, role: "ADMIN"},
+            {
+                headers: {
+                    'Authorization': undefined
+                }}).success(function() {
+
+            setupState.go('logout');
+        });
+    };
+
     loginService.checkValidUser = function (gitUser, loginModal, $loginScope) {
         $http.get(
             'https://api.github.com/repos/' + localStorage.getItem('gitRepo'),

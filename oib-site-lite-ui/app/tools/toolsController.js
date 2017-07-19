@@ -12,9 +12,18 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', function($state, $scop
         var baseUrl = 'http://' + localStorage.getItem("hostName") + ':8080/infobutton-service/infoRequest?';
         var organizationOID = document.getElementById("organizationId").value;
         var organization = 'representedOrganization.id.root=' + organizationOID;
+        var performer = 'informationRecipient=' + document.getElementById("performerId").value;
 
-        var genderParam = '&patientPerson.administrativeGenderCode.c=' + gender + '' ;
-        var ageParam = '&age.v.v=' + age + '&age.v.u=a';
+        var genderParam = '';
+        if (gender != null)
+        {
+
+            genderParam = '&patientPerson.administrativeGenderCode.c=' + gender + '' ;
+        }
+        var ageParam = '';
+        if (age != null) {
+            ageParam = '&age.v.v=' + age + '&age.v.u=a';
+        }
         var taskParam = '&taskContext.c.c=' + task;
 
         var mainSearchCriteriaParam = '&mainSearchCriteria.v.c=' + mainSearchCriteriaC + '&mainSearchCriteria.v.cs=' + getCs(mainSearchCriteriaC) + '&mainSearchCriteria.v.dn=' + getDn(mainSearchCriteriaC);
@@ -24,9 +33,13 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', function($state, $scop
         //	severityObservationParam = '&interpretationCode.c.c=' + labAbnormalFlag;
         //}
 
-        var performerParam = '&informationRecipient.languageCode.c=en&performer=PROV';
+        var performerParam = '&informationRecipient.languageCode.c=en&' + performer + '&performer=PROV';
 
-        var xslt = '&xsltTransform=' + getXslt(organizationOID);
+        var xslt = '';
+        if (getXslt(organizationOID) != null)
+        {
+            xslt = '&xsltTransform=' + getXslt(organizationOID);
+        }
 
         var url = baseUrl + organization + genderParam + ageParam
             + taskParam + mainSearchCriteriaParam + performerParam + xslt;

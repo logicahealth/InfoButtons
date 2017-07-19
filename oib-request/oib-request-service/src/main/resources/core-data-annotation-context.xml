@@ -12,9 +12,6 @@
 	http://www.springframework.org/schema/util  
     http://www.springframework.org/schema/util/spring-util.xsd
 	">
-	
-
-<!-- http://www.springframework.org/schema/beans/spring-beans-3.0.xsd -->
 
 	<!-- =========================================== -->
 	<!-- Properties files                            -->
@@ -32,21 +29,16 @@
 
 	<context:annotation-config />
 	<mvc:annotation-driven />
-	<!--
-		Activate production implementations in the core utility module
-	-->
-	<context:component-scan base-package="edu.utah.further.core">
-		<context:exclude-filter type="annotation"
-			expression="edu.utah.further.core.api.context.Stub" />
-		<context:exclude-filter type="regex"
-			expression=".*\.CachingServiceEHCacheImpl" />
-	</context:component-scan>
 
-	<context:component-scan base-package="edu.utah.further.subsetdb.service" />
-	<context:component-scan base-package="edu.utah.further.profiledb.service" />
-	<context:component-scan base-package="edu.utah.further.liteprofiledb.service" />
+	<mvc:resources mapping="/images/**" location="images/" />
+	<mvc:resources mapping="/css/**" location="css/" />
+
+	<context:component-scan base-package="org.openinfobutton.valuset.matcher.impl.cloud" />
+	<context:component-scan base-package="org.openinfobutton.subsetdb.service" />
+	<context:component-scan base-package="org.openinfobutton.profiledb.service" />
+	<context:component-scan base-package="org.openinfobutton.liteprofiledb.service" />
 	<context:component-scan base-package="org.openinfobutton.rest.terminology.impl" />
-    <context:component-scan base-package="edu.utah.openinfobutton.externalresource.implementation" /> 
+    <context:component-scan base-package="org.openinfobutton.externalresource.implementation" />
     <bean id="externalSet" class="${service.MatchExternalSetClassName}"> </bean>
 	<context:component-scan base-package="org.openinfobutton.service.profile" />
 	<context:component-scan base-package="org.openinfobutton.service.transform" />

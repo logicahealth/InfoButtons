@@ -1,13 +1,14 @@
 'use strict';
 
-var oibManagerServiceModule = angular.module('oibManagerServiceModule', ['ngResource']);
+var oibManagerServiceModule = angular.module('oibManagerServiceModule', ['ngResource', 'ab-base64']);
 
 var baseRepoUrl = 'https://api.github.com/repos/' + localStorage.getItem('gitRepo');
 var baseCloudUrl = baseRepoUrl + '/contents/';
 var baseCommitUrl = baseRepoUrl + '/commits?sha=development&path=' + localStorage.getItem('profileStorePath') + '/';
 var profileDirectoryUrl = baseCloudUrl + localStorage.getItem('profileStorePath') + '?ref=development';
+var valueSetDirectoryUrl = baseCloudUrl + 'valuesets' + '?ref=development';
 
-oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
+oibManagerServiceModule.factory('profileFactory', ['$http', 'base64', function($http, base64) {
 
     var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/liteManager/'
     var profileFactory = {};
@@ -62,6 +63,29 @@ oibManagerServiceModule.factory('profileFactory', ['$http', function($http) {
         }).error (function (error) {
             return error;
         });
+    };
+
+    profileFactory.getValueSets = function() {
+
+        var valueSetList = [];
+        var gitUser = JSON.parse(localStorage.getItem('gitUser'));
+        $http.defaults.headers.common.Authorization = 'Basic ' + base64.encode(gitUser.user + ':' + gitUser.password);
+        $http.get(valueSetDirectoryUrl).success(function (data) {
+
+            data.forEach(function (valueset) {
+
+                if (valueset.name.indexOf("[") != -1)
+                {
+                    valueset = valueset.name.substring(0, valueset.name.length - 11)
+                }
+                else
+                {
+                    valueset = valueset.name.substring(0, valueset.name.length - 5)
+                }
+                valueSetList.push({"name" : valueset, "value" : { "id" : valueset, "name" : valueset, "namespace" :"" }});
+            })
+        });
+        return valueSetList;
     };
 
     profileFactory.getOids = function (profile) {

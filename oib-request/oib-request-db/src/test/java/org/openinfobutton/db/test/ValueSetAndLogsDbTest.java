@@ -16,10 +16,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import edu.utah.further.subsetdb.domain.Concept;
-import edu.utah.further.subsetdb.domain.Subset;
-import edu.utah.further.subsetdb.service.LogsDao;
-import edu.utah.further.subsetdb.service.SubsetDbDao;
+import org.openinfobutton.subsetdb.service.LogsDao;
+import org.openinfobutton.subsetdb.service.SubsetDbDao;
 
 /**
  * -----------------------------------------------------------------------------------
@@ -40,7 +38,7 @@ public class ValueSetAndLogsDbTest
 {
 
    @Autowired
-   @Qualifier( "subsetDbDao" )
+   @Qualifier( "databaseValueSets" )
     private SubsetDbDao subsetDao;
 
     @Autowired
@@ -67,10 +65,8 @@ public class ValueSetAndLogsDbTest
     
     @Test
     public void testValueSetLookUp() {
-        
-        Concept concept = subsetDao.getConceptByCodeAndCodeSystem( "250.00", "2.16.840.1.113883.6.103" );
-        Subset subset = subsetDao.getSubsetByName( "DIABETES_MELLITUS" );
-        assertTrue(subsetDao.isConceptInSubset( concept.getId(), subset.getId() ));
+
+        assertTrue(subsetDao.isConceptInSubset( "250.00", "2.16.840.1.113883.6.103", "DIABETES_MELLITUS"));
     }
     
     

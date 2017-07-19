@@ -15,19 +15,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import com.fasterxml.jackson.module.jsonSchema.customProperties.HyperSchemaFactoryWrapper;
-import edu.utah.further.liteprofiledb.domain.UserAuthentication;
-import edu.utah.further.liteprofiledb.service.LiteProfilesDao;
-import org.apache.log4j.Logger;
+import org.openinfobutton.liteprofiledb.domain.UserAuthentication;
+import org.openinfobutton.liteprofiledb.service.LiteProfilesDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openinfobutton.rest.terminology.api.RestTermClient;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import edu.utah.further.liteprofiledb.domain.CloudProfiles;
-import edu.utah.further.liteprofiledb.domain.CustomProfiles;
+import org.openinfobutton.liteprofiledb.domain.CloudProfiles;
+import org.openinfobutton.liteprofiledb.domain.CustomProfiles;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -47,12 +47,13 @@ import javax.xml.bind.Unmarshaller;
  * @author Andrew Iskander {@code <andrew.iskander@utah.edu>}
  * @version March 13, 2016
  */
-@Controller
+@RestController
+@RequestMapping("liteManager")
 public class ProfileManagerService
 {
 
     /** The log. */
-    Logger log = Logger.getLogger( ProfileManagerService.class.getName() );
+    Logger log = LogManager.getLogger( ProfileManagerService.class.getName() );
 
     @Autowired
     @Qualifier("lDao")
@@ -265,6 +266,16 @@ public class ProfileManagerService
 
         UserAuthentication userEntity = lDao.getUser(user.getUsername(), user.getPassword());
         lDao.deleteUser(userEntity);
+    }
+
+    @RequestMapping(produces = "application/json",value="updateAdminUser", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void updateAdminUser (@RequestBody final UserAuthentication user)
+    {
+
+        UserAuthentication userEntity = lDao.getAdminUser();
+        lDao.deleteUser(userEntity);
+        lDao.createOrUpdateUser(user);
     }
 
     @RequestMapping(produces = "application/json", value="searchUts/{codeSystem}/{search}", method = RequestMethod.GET)

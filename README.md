@@ -9,6 +9,50 @@ Built with:
 
 [![IntelliJ IDEA](https://www.jetbrains.com/idea/docs/logo_intellij_idea.png)](https://www.jetbrains.com/idea/)
 
+2.1 RELEASE NOTES
+=================
+
+OpenInfobutton 2.1 is a major release that includes new features, bug fixes and a Vagrant/VirtualBox virtual machine that can be deployed with minimal configuration. Most importantly OIB now requires upgrading to JDK8, IT WILL NOT BUILD OR RUN WITH OLDER VERSIONS OF JAVA. While I understand
+this may be an inconvenience to some, JDK7 has been EOL by Oracle, meaning they are no longer releasing security updates for it. Given the nature
+of OpenInfobutton as a facet of clinical information systems, it made sense to upgrade for this reason alone.
+
+
+New features:
+
+- We are now maintaining and distributing a preconfigured VM with instances of both OpenInfobutton and LITE already running. Users had been requesting
+an easier way to deploying their own instance of OpenInfobutton and we believe this is the best route going forward. It can be found here: 
+
+https://github.com/VHAINNOVATIONS/InfoButtons/releases
+
+- Value sets are now hosted in Github, similarily to the store profiles, and will now be centrally curated so they no longer need to managed for
+individual installs. The LITE profile editor now includes a pick list for value sets that automatically populates from Github.
+
+- Terminology translations and free text lookups now use the UTS REST API, rather than the now deprecated SOAP service. This both reduces the size
+of the deployed WAR and increases the speed of requests that require terminology services.
+
+- The InfoButton request log now includes the full response to make debugging easier. We are also now logging the request URL parameters rather than an XML representation of the request.
+
+- LITE now includes a demo page and a request testing tool so users can more easily test their install.
+
+- You can now change the admin username and password directly from LITE rather than editing the database.
+
+Bug fixes and improvements:
+
+- Updated to the latest versions of Spring, Hibernate, and log4j2 which is another reason why JDK8 is now required
+
+- ICD9 to SNOMED-CT mappings have been deprectated and removed from OpenInfobutton
+
+- Free text matching sometimes clashed with simultaneous requests, causing inconsistent results to be returned. This has been fixed.
+
+- The Responder RXNorm translation functionality was no longer working due to an update to the RXNorm web service. The responder has been updated to account for that change.
+
+- Various improvements to LITE's usability have been implemented.
+
+Building and redeploying
+------------------------
+
+I've tried to streamline the building and deployment process as much as possible. To that end, many old or no longer needed dependencies have been removed. This has allowed me to remove our Nexus repository from all the Maven POM files, now all dependencies are retrieved directly from Maven central. You will of course still need an unrestricted internet connection to build the application, but it should be much more reliable and faster now. As mentioned earlier, you MUST UPGRADE TO JDK8. You will also need to COMPLETELY WIPE YOUR LOCAL MAVEN REPOSITORY, you WILL encounter build errors if you dont. I would also recommend upgrading to Tomcat 8 or later as well, but this is not currently required. There is a minor database migration script for the changes to the request log, and the value set database has been scrapped entirely in favor of a simpler schema that stores the value sets as XML files, exactly as they are in Github. You can configure your installation of OpenInfobutton to use either the Github value sets OR the database.
+
 2.0 RELEASE NOTES
 =================
 

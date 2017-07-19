@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1">
-		<title>Medical Home Portal</title>
+		<title> Medical Home Portal</title>
 		<profileDescription>Information for children with special healthcare needs. Developed and maintained by the University of Utah.</profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
 	<profileDefinition hl7KnowledgeResponseCompliant="false" hl7URLCompliant="false" urlStyle="DIRTY">
 		<authorizedOrganizations/>
 		<supportedTerminologies>
-			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
+			<supportedTerminology id="2.16.840.1.113883.6.90" name="ICD10-CM"/>
 		</supportedTerminologies>
 		<contexts>
 			<context name="Access to disease modules from problem list review and entry. Pediatric population." id="1">
@@ -32,49 +32,258 @@
 							</enumeration>
 						</matchingDomain>
 					</task>
-					<conceptOfInterest search="true" match="false">
+					<conceptOfInterest search="true" match="true">
 						<matchingDomain>
 							<enumeration includeDescendants="false">
-								<code codeSystem="2.16.840.1.113883.6.103" code="317" displayName="Mild mental retardation "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="318" displayName="Other specified mental retardation "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="277.5" displayName="Mucopolysaccharidosis (all types)"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="759.89" displayName="Angelman syndrome "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="307.23" displayName="Tourette syndrome "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="758.0" displayName="Down syndrome"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="277.85" displayName="Disorders of fatty acid oxidation "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="359.1" displayName="hereditary progressive muscular dystrophy (Duchenne and Becker Muscular Dystrophy)"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="741" displayName="Spina bifida (Neural Tube Defects)"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="343" displayName="Cerebral palsy "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="579.0 " displayName="celiac disease "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="952" displayName="spinal cord injury "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="907.0" displayName="Late effect of intracranial injury"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="330.8" displayName="Rett syndrome"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="759.83" displayName="Fragile X syndrome "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="237.7" displayName="Neurofibromatosis"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="345.6" displayName="Infantile spasms "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="555" displayName="Regional Enteritis (IBD)"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="556" displayName="Ulcerative Enterocolitis (IBD)"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="359.21" displayName="myotonic muscular dystrophy type 1"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="359.22" displayName="myotonic muscular dystrophy type 2"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="317" displayName="Mental Retardation (MR), mild "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="318.0 " displayName="MR, moderate"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="318.1" displayName="MR, severe "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="318.2" displayName="MR, profound "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="319" displayName="MR, NOS "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="299.0" displayName="Autistic disorder, Infantile autism, Primary autism "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="299.9" displayName="Pervasive developmental disorder NOS"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="299.8" displayName="Other pervasive developmental disorders (Asperger disorder) "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="296" displayName="Major Depressive Disorder. Fourth and fifth digits required, see explanation below"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="300.4" displayName="Dysthymic Disorder "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="311" displayName="Depressive Disorder NOS "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="296.90 " displayName="Mood Disorder NOS "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="309.0 " displayName="Adjustment Disorder with Depressed Mood "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="309.28" displayName="Adjustment Disorder with Mixed Anxious and Depressed Mood "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="758.9" displayName="Conditions due to anomaly of unspecified chromosome (Cornelia de Lange Syndrome"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="759.81" displayName="Prader-Willi syndrome"/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="335" displayName="Spinal muscular atrophy, unspecified "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="493" displayName="Asthma "/>
-								<code codeSystem="2.16.840.1.113883.6.103" code="314.0 " displayName="Attention deficit disorder "/>
+								<!-- ICD10 CM codes -->
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q93.5"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F06.4"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F40.00"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F40.10"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F41.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F41.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F41.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F42"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F43.10"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F93.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F94.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E72.21"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.20"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.21"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.22"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.30"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.31"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.32"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.40"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.41"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.42"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.50"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.51"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.52"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.90"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.901"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.902"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="J45.909"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F90.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F90.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F90.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F84.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="K90.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G80"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G80.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G80.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G80.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G80.3"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G80.4"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G80.8"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G80.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.A"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E66"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E66.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E66.01"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E66.09"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E66.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E66.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E66.3"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E66.8"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E66.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="K59.00"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="K59.01"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="K59.09"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q87.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32.3"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32.4"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32.5"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32.8"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32.8"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32.81"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32.89"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F32.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F33"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F33.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F33.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F33.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F33.3"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F33.4"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F33.40"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F33.41"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F33.42"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F33.8"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F33.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F34"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F34.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F34.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F34.8"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F34.81"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F34.89"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F34.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F43.21"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F43.23"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="N94.3"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q90.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q90.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q90.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q90.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G71.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E75.21"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Z62.21"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Z62.822"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F94.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F94.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q99.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E74.21"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="R51"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G43"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.11"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.12"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.3"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.4"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.41"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.42"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.5"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.6"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.7"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.71"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.72"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H90.8"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.01"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.02"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.03"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.09"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.3"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.8X"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.8X1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.8X2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.8X3"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.8X9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.90"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.91"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.92"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="H91.93"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E72.11"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.821"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.822"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.823"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.824"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="K50"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="K51"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="K52"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F70"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F71"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F72"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F73"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E75.23"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E75.25"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E75.29"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E71.311"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G71.11"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q85.01"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q87.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.00"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.01"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.02"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.03"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.10"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.14"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.15"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.16"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.17"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.18"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.20"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.21"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.22"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.23"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.24"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.25"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.26"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.3"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.30"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.31"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.32"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.33"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.34"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.35"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.36"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.37"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.38"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="P07.39"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F84.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="R56"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="R56.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="R56.00"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="R56.01"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="R56.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="R56.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.00"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.001"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.009"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.01"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.011"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.019"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.10"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G40.101"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q05"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q05.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q05.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q05.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q05.3"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q05.4"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q05.5"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q05.6"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q05.7"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q05.8"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q05.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="S12"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="S12.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="S12.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="S12.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="S12.3"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="S12.4"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="S12.5"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="S12.6"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="S12.8"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="S12.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G12.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G12.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="G12.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F10"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F11"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F12"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F13"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F14"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F15"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F16"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F17"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F18"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F19"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F95.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F95.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F95.2"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F95.8"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="F95.9"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q85.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="E70.21"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q98.0"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q98.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q98.4"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="D82.1"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q89.7"/>
+								<code codeSystem="2.16.840.1.113883.6.90" code="Q93.81"/>
 							</enumeration>
 						</matchingDomain>
 						<searchParameter source="displayName">

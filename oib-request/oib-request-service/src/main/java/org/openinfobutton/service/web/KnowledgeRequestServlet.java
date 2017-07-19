@@ -14,13 +14,11 @@
 package org.openinfobutton.service.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -48,20 +46,26 @@ import org.openinfobutton.service.profile.ResourceProfileLoaderNew;
 import org.openinfobutton.service.utility.WebServiceUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-import org.springframework.web.HttpRequestHandler;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.w3c.dom.Document;
 
 import com.google.gson.Gson;
 
-import edu.utah.further.subsetdb.service.LogsDao;
+import org.openinfobutton.subsetdb.service.LogsDao;
 
 /**
  * The Class KnowledgeRequestServlet.
  */
-@Component( "knowledgeRequestServlet" )
+@RestController
+@RequestMapping("infoRequest")
 public class KnowledgeRequestServlet
-    implements HttpRequestHandler
 {
 
     /** The dao. */
@@ -80,20 +84,16 @@ public class KnowledgeRequestServlet
      * Starting point. This is where the infobutton request enters the system
      *
      * @param req the req
-     * @param resp the resp
      * @throws ServletException the servlet exception
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    @Override
-    public void handleRequest( HttpServletRequest req, HttpServletResponse resp )
-        throws ServletException, IOException
+    @GetMapping
+    public ResponseEntity<String> infoRequest(@RequestParam final Map<String,String[]> requestParameters, HttpServletRequest req)
     {
-        final Map<String, String[]> requestParameters = req.getParameterMap();
-        final KnowledgeRequest knowledgeRequest = WebServiceUtility.getServiceRequest( requestParameters );
+
+        final KnowledgeRequest knowledgeRequest = WebServiceUtility.getServiceRequest( req.getParameterMap() );
         ResourceProfileLoaderNew.setMode( knowledgeRequest.getExecutionMode() );
         final REDSMT010001UVKnowledgeRequestNotification request = KnowledgeRequest.getJAXBElement( knowledgeRequest );
-        resp.setCharacterEncoding( "UTF-8" );
-        final PrintWriter out = resp.getWriter();
         JAXBContext ctx;
         DocumentBuilderFactory dbf;
         DocumentBuilder db;
@@ -129,7 +129,6 @@ public class KnowledgeRequestServlet
             doc = db.newDocument();
             m.marshal(new JAXBElement<AggregateKnowledgeResponse>(new QName("aggregateKnowledgeResponse"),
                     AggregateKnowledgeResponse.class, response), doc);
-            resp.setContentType( "text/html" );
             source = new DOMSource( doc );
             stringWriter = new StringWriter();
             result = new StreamResult( stringWriter );
@@ -137,6 +136,7 @@ public class KnowledgeRequestServlet
             transformer = tfactory.newTransformer();
             transformer.transform( source, result );// now stringwriter has xml.
             String finalXml = new String();
+            final HttpHeaders httpHeaders= new HttpHeaders();
             final String knowledgeResType = req.getParameter( CodeConstants.KNOWLEDGE_RESPONSE_TYPE );
             if ( ( req.getParameter( "transform" ) != null ) || ( knowledgeResType != null ) )
             {
@@ -145,27 +145,39 @@ public class KnowledgeRequestServlet
                     if ( knowledgeResType.equals( "application/json" ) )
                     {
                         final Gson gson = new Gson();
-                        resp.setContentType( "application/json" );
                         finalXml = gson.toJson(response);
-                        out.println( finalXml );
+                        dao.saveRequest( req.getQueryString(), finalXml, req.getRemoteAddr(), orgid );// Log written here
+                        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+                        return new ResponseEntity<>(finalXml, httpHeaders, HttpStatus.OK);
                     }
                     else if ( knowledgeResType.equals( "text/xml" ) )
                     {
-                        resp.setContentType( "text/xml" );
+
                         //temp fix for conforming to output standard
                         finalXml = stringWriter.getBuffer().toString();
                         finalXml = finalXml.replace("<aggregateKnowledgeResponse xml:lang=\"en\">", "<aggregateKnowledgeResponse xmlns=\"http://www.w3.org/2005/Atom\" xml:lang=\"en\">");
-                        out.println( finalXml );
+                        httpHeaders.setContentType(MediaType.APPLICATION_XML);
+                        return new ResponseEntity<>(finalXml, httpHeaders, HttpStatus.OK);
+                    }
+                    else
+                    {
+                        //temp fix for conforming to output standard
+                        finalXml = stringWriter.getBuffer().toString();
+                        finalXml = finalXml.replace("<aggregateKnowledgeResponse xml:lang=\"en\">", "<aggregateKnowledgeResponse xmlns=\"http://www.w3.org/2005/Atom\" xml:lang=\"en\">");
+                        httpHeaders.setContentType(MediaType.APPLICATION_XML);
+                        return new ResponseEntity<>(finalXml, httpHeaders, HttpStatus.OK);
                     }
                 }
                 else
                 // for backward compatibility with 'transform' in URL
                 {
-                    resp.setContentType( "text/xml" );
+
                     //temp fix for conforming to output standard
                     finalXml = stringWriter.getBuffer().toString();
                     finalXml = finalXml.replace("<aggregateKnowledgeResponse xml:lang=\"en\">", "<aggregateKnowledgeResponse xmlns=\"http://www.w3.org/2005/Atom\" xml:lang=\"en\">");
-                    out.println( finalXml );
+                    dao.saveRequest( req.getQueryString(), finalXml, req.getRemoteAddr(), orgid );// Log written here
+                    httpHeaders.setContentType(MediaType.APPLICATION_XML);
+                    return new ResponseEntity<>(finalXml, httpHeaders, HttpStatus.OK);
                 }
             }
             else
@@ -184,39 +196,51 @@ public class KnowledgeRequestServlet
                 result = new StreamResult( stringWriter );
                 transformer.transform( source, result );
                 stringWriter.getBuffer().toString();
-                out.println( stringWriter.getBuffer().toString() );
+                dao.saveRequest( req.getQueryString(), finalXml, req.getRemoteAddr(), orgid );// Log written here
+                httpHeaders.setContentType(MediaType.TEXT_HTML);
+                return new ResponseEntity<>(stringWriter.getBuffer().toString(), httpHeaders, HttpStatus.OK);
             }
-            dao.saveRequest( req.getQueryString(), finalXml, req.getRemoteAddr(), orgid );// Log written here
-
         }
         catch ( final JAXBException e )
         {
             e.printStackTrace();
+            final HttpHeaders httpHeaders= new HttpHeaders();
+            httpHeaders.setContentType(MediaType.TEXT_HTML);
+            return new ResponseEntity<>(e.getMessage(), httpHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         catch ( final TransformerConfigurationException e )
         {
             e.printStackTrace();
+            final HttpHeaders httpHeaders= new HttpHeaders();
+            httpHeaders.setContentType(MediaType.TEXT_HTML);
+            return new ResponseEntity<>(e.getMessage(), httpHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         catch ( final TransformerException e )
         {
             e.printStackTrace();
+            final HttpHeaders httpHeaders= new HttpHeaders();
+            httpHeaders.setContentType(MediaType.TEXT_HTML);
+            return new ResponseEntity<>(e.getMessage(), httpHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         catch ( final ParserConfigurationException e )
         {
             e.printStackTrace();
+            final HttpHeaders httpHeaders= new HttpHeaders();
+            httpHeaders.setContentType(MediaType.TEXT_HTML);
+            return new ResponseEntity<>(e.getMessage(), httpHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         catch (final OIBProfileProcessingException e)
         {
-            out.println(e);
-            throw e;
+            final HttpHeaders httpHeaders= new HttpHeaders();
+            httpHeaders.setContentType(MediaType.TEXT_HTML);
+            return new ResponseEntity<>(e.getMessage(), httpHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         catch (final RuntimeException e)
         {
             e.printStackTrace();
-        }
-        finally
-        {
-            out.close();
+            final HttpHeaders httpHeaders= new HttpHeaders();
+            httpHeaders.setContentType(MediaType.TEXT_HTML);
+            return new ResponseEntity<>(e.getMessage(), httpHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

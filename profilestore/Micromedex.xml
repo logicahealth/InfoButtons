@@ -48,7 +48,7 @@
 
 				<knowledgeRequestService>
 
-					<knowledgeRequestServiceLocation url="http://www.micromedexsolutions.com/infobutton/librarian/hl7v3?"/>
+					<knowledgeRequestServiceLocation url="https://www.micromedexsolutions.com/infobutton/librarian/hl7v3?"/>
 
 				</knowledgeRequestService>
 

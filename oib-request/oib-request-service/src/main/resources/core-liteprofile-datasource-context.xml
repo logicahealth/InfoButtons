@@ -11,14 +11,6 @@
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- =========================================== -->
-	<!-- Properties files -->
-	<!-- =========================================== -->
-
-	<!-- Property file locations: suppressed here because it might override 
-		the main context file's resources. The main context is responsible for defining 
-		them. -->
-
-	<!-- =========================================== -->
 	<!-- Annotation configuration -->
 	<!-- =========================================== -->
 
@@ -44,15 +36,6 @@
 		<property name="password">
 			<value>${datasource2.password}</value>
 		</property>
-		<property name="testConnectionOnCheckin">
-			<value>true</value>
-		</property>
-		<property name="maxStatements">
-			<value>50</value>
-		</property>
-		<property name="idleConnectionTestPeriod">
-			<value>300</value>
-		</property>
 	</bean>
 
 
@@ -61,7 +44,7 @@
 	<!-- Session factory -->
 	<!-- Session Factory for the second datasource -->
 	<bean id="liteprofilesessionFactory"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="liteprofiledataSource" />
 
 		<!-- Hibernate configuration properties (read from a properties file) -->
@@ -85,27 +68,14 @@
 			<bean class="org.hibernate.cfg.DefaultNamingStrategy" />
 		</property>
 
-		<!-- Reads package-level Hibernate annotations. Unfortunately, this has 
-			to be manually maintained for all model packages -->
-		<property name="annotatedPackages">
-			<list>
-				<!-- <value>edu.utah.further.core.data.oracle.type</value> -->
-			</list>
-		</property>
-
 		<!-- Mapping annotated classes using search patterns -->
 		<property name="annotatedClasses">
 			<list>
-				<value><![CDATA[edu.utah.further.liteprofiledb.domain.CloudProfiles]]></value>
-				<value><![CDATA[edu.utah.further.liteprofiledb.domain.CustomProfiles]]></value>
-				<value><![CDATA[edu.utah.further.liteprofiledb.domain.UserAuthentication]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.CloudProfiles]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.CustomProfiles]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.UserAuthentication]]></value>
 			</list>
 		</property>
-	</bean>
-
-	<!-- Hibernate data access template -->
-	<bean id="liteprofilehibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-		<property name="sessionFactory" ref="liteprofilesessionFactory" />
 	</bean>
 
 	<!-- =========================================== -->
@@ -117,34 +87,19 @@
 
 	<!-- a PlatformTransactionManager is still required -->
 	<bean id="liteprofiletransactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="liteprofilesessionFactory" />
 	</bean>
 
-
-
-	<!-- <bean id="daoEager" class="edu.utah.further.core.data.service.DaoHibernateEagerImpl" 
-		> -->
-	<!-- <property name="sessionFactory" ref="sessionFactory"></property> -->
-	<!-- </bean> -->
-
-	<!-- <bean class="edu.utah.further.core.data.service.DaoHibernateEagerImpl"> -->
-	<!-- <constructor-arg ref="profilesessionFactory"/> -->
-	<!-- </bean> -->
-
-	<bean id="liteprofilesDao" class="edu.utah.further.core.data.service.DaoHibernateImpl">
-		<constructor-arg ref="liteprofilesessionFactory" />
-	</bean>
-	<bean id="lDao" class="edu.utah.further.liteprofiledb.service.LiteProfilesDaoImpl">
+	<bean id="lDao" class="org.openinfobutton.liteprofiledb.service.LiteProfilesDaoImpl">
 	</bean>
 	<!-- =========================================== -->
-	<!-- FURTHeR data layer -->
+	<!-- OpenInfobutton data layer -->
 	<!-- =========================================== -->
 
 	<!-- Component auto-detection configuration in the data layer package. Must 
-		come AFTER sessionFactory is declared for some strange reason when deployed 
-		to the ESB. -->
-	<!-- <context:component-scan base-package="edu.utah.further.core.data" /> -->
-	<context:component-scan base-package="edu.utah.further.liteprofiledb.service" />
+		come AFTER sessionFactory is declared for some strange reason when deployed. -->
+
+	<context:component-scan base-package="org.openinfobutton.liteprofiledb.service" />
 
 </beans>

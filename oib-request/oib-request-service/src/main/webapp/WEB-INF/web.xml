@@ -29,32 +29,19 @@ $Date:: 2010-10-01 1#$:  Date of last commit
   </listener>
   
   <servlet>
-    <display-name>KnowledgeRequestServlet</display-name>
-  	<servlet-name>knowledgeRequestServlet</servlet-name>
-  	<servlet-class>
-  		org.springframework.web.context.support.HttpRequestHandlerServlet
-  	</servlet-class>
-  </servlet>
-  
-  <servlet>
     <display-name>ProfileManagerService</display-name>
   	<servlet-name>ProfileManagerService</servlet-name>
   	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>  
-    	<param-name>contextConfigLocation</param-name>  
+    <init-param>
+    	<param-name>contextConfigLocation</param-name>
     	<param-value></param-value>
-    	<load-on-startup>1</load-on-startup>    
-    </init-param>  
+    </init-param>
+    <load-on-startup>1</load-on-startup>
   </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>knowledgeRequestServlet</servlet-name>
-  	<url-pattern>/infoRequest</url-pattern>
-  </servlet-mapping>
 
   <servlet-mapping>
-        <servlet-name>ProfileManagerService</servlet-name>
-        <url-pattern>/liteManager/*</url-pattern>
+    <servlet-name>ProfileManagerService</servlet-name>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
 
   <filter>

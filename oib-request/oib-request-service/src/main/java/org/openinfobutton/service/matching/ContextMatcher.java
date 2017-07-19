@@ -16,7 +16,8 @@ package org.openinfobutton.service.matching;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.schemas.kb.CDset;
 import org.openinfobutton.schemas.kb.Code;
@@ -27,8 +28,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import edu.utah.openinfobutton.externalresource.api.ExternalResourceHandler;
-import edu.utah.openinfobutton.externalresource.api.TerminologyHandler;
+import org.openinfobutton.externalresource.api.ExternalResourceHandler;
+import org.openinfobutton.externalresource.api.TerminologyHandler;
 
 /**
  * The Class ContextMatcher.
@@ -45,7 +46,7 @@ public abstract class ContextMatcher
     public abstract Boolean MatchContext();
 
     /** The log. */
-    Logger log = Logger.getLogger( ContextMatcher.class.getName() );
+    Logger log = LogManager.getLogger( ContextMatcher.class.getName() );
 
     /** The ES handler. */
     @Autowired
