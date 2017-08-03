@@ -51,8 +51,6 @@ Configure environment
      "start": "http-server -a localhost -p 8000 -c-1",
 
      `````````````````````````````````````````````````
-     Note that the host name and port must match the "lite_server_url" parameter configured in env.json for the
-     oib-site-lite-rest-server
 
      - app/app.js, this is where I've configured the default URLs and paths used by LITE's REST client:
 
