@@ -66,8 +66,7 @@
 		<!-- Mapping annotated classes using search patterns -->
 		<property name="annotatedClasses">
 			<list>
-				<value><![CDATA[org.openinfobutton.subsetdb.domain.Subset]]></value>
-				<value><![CDATA[org.openinfobutton.subsetdb.domain.Concept]]></value>
+				<value><![CDATA[org.openinfobutton.subsetdb.domain.SubsetJson]]></value>
 				<value><![CDATA[org.openinfobutton.subsetdb.domain.Logs]]></value>
 				
 			</list>
