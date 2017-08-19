@@ -20,8 +20,7 @@ Install Prerequisites
 1) Build and install the OpenInfobutton web service, ensuring the resource_profile database is created
 2) Build and install the OpenInfobutton responder, or at least ensure it's database is created using the
    'install-db.sh' script found in oib-responder/oib-rdbms-model
-3) Make sure the oib-site-lite-rest-server is installed and running or LITE will display no content.
-4) Install Javascript Dependencies
+3) Install Javascript Dependencies
 
     - We have two kinds of dependencies in this project: tools and angular framework code.  The tools help
       us manage and test the application.
@@ -51,8 +50,6 @@ Configure environment
      "start": "http-server -a localhost -p 8000 -c-1",
 
      `````````````````````````````````````````````````
-     Note that the host name and port must match the "lite_server_url" parameter configured in env.json for the
-     oib-site-lite-rest-server
 
      - app/app.js, this is where I've configured the default URLs and paths used by LITE's REST client:
 
