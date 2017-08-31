@@ -66,7 +66,6 @@ public class ProfilesDaoImpl
     public List<Profiles> getResourceProfiles( int status )
     {
 
-        Profiles p = null;
         final List<Profiles> profiles = getSessionFactory().getCurrentSession().createCriteria(Profiles.class).
                 add(Restrictions.eq("status", new Integer( status ))).list();
         // return fm;

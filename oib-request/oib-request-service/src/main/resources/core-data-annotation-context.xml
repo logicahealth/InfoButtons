@@ -19,10 +19,7 @@
 
 	<!-- Property file locations -->
 	<!--  <context:property-placeholder location="classpath*:*-.properties" />-->
-
-<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="location" value="classpath:serviceParams.properties"/>
-       </bean>
+	<!--<context:property-placeholder location="classpath:serviceParams.properties" />-->
 	<!-- =========================================== -->
 	<!-- Annotation configuration                    -->
 	<!-- =========================================== -->
@@ -33,8 +30,10 @@
 	<mvc:resources mapping="/images/**" location="images/" />
 	<mvc:resources mapping="/css/**" location="css/" />
 
+	<context:component-scan base-package="org.openinfobutton.service.configuration" />
 	<context:component-scan base-package="org.openinfobutton.valuset.matcher.impl.cloud" />
 	<context:component-scan base-package="org.openinfobutton.subsetdb.service" />
+	<context:component-scan base-package="org.openinfobutton.oibpropertydb.service" />
 	<context:component-scan base-package="org.openinfobutton.profiledb.service" />
 	<context:component-scan base-package="org.openinfobutton.liteprofiledb.service" />
 	<context:component-scan base-package="org.openinfobutton.rest.terminology.impl" />

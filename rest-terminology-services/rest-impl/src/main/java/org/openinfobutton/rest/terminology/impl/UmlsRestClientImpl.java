@@ -75,10 +75,16 @@ public class UmlsRestClientImpl implements RestTermClient {
     private String ticketGrantingTicketURL = "";
 
     /** The username. */
+    @Value( "${umls.username}" )
     private String username;
 
     /** The password. */
+    @Value( "${umls.password}" )
     private String password;
+
+    /** The release. */
+    @Value( "${umls.umlsRelease}")
+    private String release;
 
     private long lastUpdate = -1;
 
@@ -88,25 +94,6 @@ public class UmlsRestClientImpl implements RestTermClient {
      */
 
     private static String UMLS_AUTH_API_URL = "https://utslogin.nlm.nih.gov/cas/v1/tickets";
-
-
-    /**
-     *Instantiates REST client by retrieving TGT
-     *
-     */
-    @Autowired
-    public UmlsRestClientImpl (@Value( "${umls.username}" ) String username, @Value( "${umls.password}" ) String password) {
-
-        this.username = username;
-        this.password = password;
-        try {
-            getTicketGrantingTicket();
-        } catch (Exception e) {
-            logger.error("Unable to validate UTS account");
-            e.printStackTrace();
-
-        }
-    }
 
     /**
      *

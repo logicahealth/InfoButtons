@@ -74,7 +74,7 @@
 			<list>
 				<value><![CDATA[org.openinfobutton.profiledb.domain.Profiles]]></value>
 				<value><![CDATA[org.openinfobutton.profiledb.domain.ProfileBlackList]]></value>
-				<value><![CDATA[org.openinfobutton.profiledb.domain.OibAppProperty]]></value>
+				<value><![CDATA[org.openinfobutton.oibpropertydb.domain.OibAppProperty]]></value>
 			</list>
 		</property>
 
