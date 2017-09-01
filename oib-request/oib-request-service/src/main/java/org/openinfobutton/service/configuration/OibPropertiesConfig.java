@@ -35,7 +35,10 @@ public class OibPropertiesConfig {
     @PostConstruct
     public void initializeDatabasePropertySourceUsage() {
         MutablePropertySources propertySources = ((ConfigurableEnvironment) env).getPropertySources();
+        if (propertySources.contains("dbPropertySource")) {
 
+            propertySources.remove("dbPropertySource");
+        }
         try {
 
             Parameters params = new Parameters();
@@ -49,8 +52,8 @@ public class OibPropertiesConfig {
                             .setTable("oib_app_property")
                             .setKeyColumn("prop_name")
                             .setValueColumn("prop_value")
-                            .setAutoCommit(true)
             );
+
 
             Configuration databaseConfiguration = builder.getConfiguration();
 

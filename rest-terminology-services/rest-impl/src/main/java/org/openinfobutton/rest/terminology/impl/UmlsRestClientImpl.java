@@ -13,7 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.openinfobutton.rest.terminology.api.RestTermClient;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -74,17 +74,8 @@ public class UmlsRestClientImpl implements RestTermClient {
 
     private String ticketGrantingTicketURL = "";
 
-    /** The username. */
-    @Value( "${umls.username}" )
-    private String username;
-
-    /** The password. */
-    @Value( "${umls.password}" )
-    private String password;
-
-    /** The release. */
-    @Value( "${umls.umlsRelease}")
-    private String release;
+    @Autowired
+    Environment env;
 
     private long lastUpdate = -1;
 
@@ -250,7 +241,7 @@ public class UmlsRestClientImpl implements RestTermClient {
                 ticketGrantingTicketURL = Request.Post(UMLS_AUTH_API_URL)
                         .useExpectContinue()
                         .version(HttpVersion.HTTP_1_1)
-                        .bodyForm(Form.form().add("username", username).add("password", password).build())
+                        .bodyForm(Form.form().add("username", env.getProperty("umls.username")).add("password", env.getProperty("umls.password")).build())
                         .execute().returnResponse().getFirstHeader("location").getValue();
             } catch (IOException e) {
                 e.printStackTrace();
