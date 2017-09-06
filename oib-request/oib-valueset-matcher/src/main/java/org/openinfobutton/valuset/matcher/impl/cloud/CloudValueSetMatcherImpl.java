@@ -5,6 +5,7 @@ import org.openinfobutton.valuset.matcher.model.ValueSets;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -29,29 +30,8 @@ public class CloudValueSetMatcherImpl implements ValueSetMatcher {
 
     private String codeSystem;
 
-    /** The username. */
-    private String username;
-
-    /** The password. */
-    private String password;
-
-    /**Headers**/
-    private HttpHeaders headers;
-
     @Autowired
-    public CloudValueSetMatcherImpl(@Value( "${github.username}" ) final String username,
-                                    @Value( "${github.password}" ) final String password) {
-
-        this.username = username;
-        this.password = password;
-        headers = new HttpHeaders() {{
-            String auth = username + ":" + password;
-            byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")) );
-            String authHeader = "Basic " + new String( encodedAuth );
-            set( "Authorization", authHeader );
-            set("Accept", "application/vnd.github.raw+json");
-        }};
-    }
+    Environment env;
 
     /**
      *
@@ -76,7 +56,7 @@ public class CloudValueSetMatcherImpl implements ValueSetMatcher {
         }
         try {
             response = restTemplate.exchange("https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/contents/valuesets/"
-                    + subsetName + ".json?ref=development", HttpMethod.GET, new HttpEntity<Object>(headers), ValueSets.class);
+                    + subsetName + ".json?ref=development", HttpMethod.GET, new HttpEntity<Object>(getHeaders()), ValueSets.class);
         } catch (HttpClientErrorException e) {
 
             if (e.getStatusCode().value() == 404)
@@ -134,7 +114,7 @@ public class CloudValueSetMatcherImpl implements ValueSetMatcher {
             try {
 
                 response = restTemplate.exchange("https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/contents/valuesets/"
-                        + subsetName + "[1of" + count + "].json?ref=development", HttpMethod.GET, new HttpEntity<Object>(headers), ValueSets.class);
+                        + subsetName + "[1of" + count + "].json?ref=development", HttpMethod.GET, new HttpEntity<Object>(getHeaders()), ValueSets.class);
                 return ProcessMultiPartValueSet( code, codeSystem, subsetName, count, response);
             } catch (HttpClientErrorException e) {
 
@@ -156,7 +136,7 @@ public class CloudValueSetMatcherImpl implements ValueSetMatcher {
         while (c <= count) {
 
             response = restTemplate.exchange("https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/contents/valuesets/"
-                    + subsetName + "[" + c + "of" + count + "].json?ref=development", HttpMethod.GET, new HttpEntity<Object>(headers),
+                    + subsetName + "[" + c + "of" + count + "].json?ref=development", HttpMethod.GET, new HttpEntity<Object>(getHeaders()),
                     ValueSets.class);
             valueSet.getValueSet().getCodeSystems().addAll(((ValueSets) response.getBody()).getValueSet().getCodeSystems());
             c++;
@@ -165,6 +145,15 @@ public class CloudValueSetMatcherImpl implements ValueSetMatcher {
         return ProcessValueSet(valueSet, code, codeSystem);
     }
 
+    private HttpHeaders getHeaders() {
 
+        return new HttpHeaders() {{
+            String auth = env.getProperty("github.username") + ":" + env.getProperty("github.password");
+            byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")) );
+            String authHeader = "Basic " + new String( encodedAuth );
+            set( "Authorization", authHeader );
+            set("Accept", "application/vnd.github.raw+json");
+        }};
+    }
 
 }

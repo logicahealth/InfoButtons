@@ -6,6 +6,7 @@ import org.openinfobutton.oibpropertydb.domain.OibAppProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,7 @@ public class OibAppPropertyDaoImpl implements OibAppPropertyDao {
 
 
     @Override
+    @Transactional
     public List<OibAppProperty> getPropertiesByName(String name) {
 
         List<OibAppProperty> properties = new ArrayList<>();
@@ -52,11 +54,19 @@ public class OibAppPropertyDaoImpl implements OibAppPropertyDao {
     }
 
     @Override
+    @Transactional
     public OibAppProperty getPropertyByName(String name) {
 
         OibAppProperty property = null;
         property = (OibAppProperty)getSessionFactory().getCurrentSession().createCriteria(OibAppProperty.class).
                 add(Restrictions.eq("propName", name)).list().get(0);
         return property;
+    }
+
+    @Override
+    @Transactional
+    public void updateProperty(OibAppProperty property) {
+
+        getSessionFactory().getCurrentSession().saveOrUpdate(property);
     }
 }

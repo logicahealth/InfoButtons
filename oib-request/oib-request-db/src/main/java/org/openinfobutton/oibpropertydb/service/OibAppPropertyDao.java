@@ -12,4 +12,6 @@ public interface OibAppPropertyDao {
     List<OibAppProperty> getPropertiesByName(String name);
 
     OibAppProperty getPropertyByName(String name);
+
+    void updateProperty(OibAppProperty property);
 }
