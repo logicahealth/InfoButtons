@@ -51,6 +51,20 @@
                             <button class='btn btn-default' type="button" ng-click="changeGitUser()">Change</button>
                         </span>
                     </div>
+                    <div class="input-group">
+                        <label for="umlsUser">UMLS Username</label>
+                        <input type="text" class="form-control" id="umlsUser" ng-disabled="true" value="{{umlsUser}}">
+                        <span class="input-group-btn">
+                            <button class='btn btn-default' type="button" ng-click="changeUmlsUser()">Change</button>
+                        </span>
+                    </div>
+                    <div class="input-group">
+                        <label for="umlsRelease">UMLS Release</label>
+                        <input type="text" class="form-control" id="umlsRelease" value="{{umlsRelease}}">
+                        <span class="input-group-btn">
+                            <button class='btn btn-default' type="submit" ng-click="changeUmlsRelease(umlsRelease)">Set</button>
+                        </span>
+                    </div>
                 </div>
             </form>
         </div>

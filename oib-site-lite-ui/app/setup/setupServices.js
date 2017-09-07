@@ -1,6 +1,6 @@
 var oibSetupServices = angular.module('oibSetupServices', ['ui.bootstrap', 'ngResource', 'ab-base64']);
 
-oibSetupServices.service('loginModal', function ($uibModal) {
+oibSetupServices.service('loginModal', function ($uibModal, propertiesService) {
 
     function assignGitUser (user) {
         localStorage.setItem("gitUser", JSON.stringify(user));
@@ -8,6 +8,7 @@ oibSetupServices.service('loginModal', function ($uibModal) {
     }
 
     return function() {
+
         var instance = $uibModal.open({
             templateUrl: 'setup/loginModal.html',
             controller: 'LoginModalCtrl',
@@ -17,6 +18,108 @@ oibSetupServices.service('loginModal', function ($uibModal) {
         return instance.result.then(assignGitUser);
     };
 
+});
+
+oibSetupServices.service('umlsModal', function ($uibModal) {
+
+    var oibPropertiesUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/propertiesManager/'
+
+    function assignUmlsUser (user) {
+        localStorage.setItem("umlsUser", JSON.stringify(user));
+        return user;
+    }
+
+    return function() {
+        var instance = $uibModal.open({
+            templateUrl: 'setup/umlsModal.html',
+            controller: 'UmlsModalCtrl',
+            controllerAs: 'UmlsModalCtrl'
+        });
+
+        return instance.result.then(assignUmlsUser);
+    };
+
+});
+
+oibSetupServices.service('propertiesService', function ($rootScope, $http) {
+
+    var propertiesService = {};
+
+    var oibPropertiesService = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/propertiesManager/'
+
+    propertiesService.getUmlsUserName = function() {
+
+       return $http.get (oibPropertiesService + 'getProperty/umls.username/', {
+            headers: {
+                'Authorization' : undefined
+            }
+        }).then(function(response) {
+
+            return response.data;
+        });
+    };
+
+    propertiesService.getUmlsPassword = function() {
+
+        return $http.get (oibPropertiesService + 'getProperty/umls.password/', {
+            headers: {
+                'Authorization' : undefined
+            }
+        }).then(function(response) {
+
+            return response.data;
+        });
+    };
+
+    propertiesService.getUmlsRelease = function() {
+
+        return $http.get (oibPropertiesService + 'getProperty/umls.umlsRelease/', {
+            headers: {
+                'Authorization' : undefined
+            }
+        }).then(function(response) {
+
+            return response.data;
+        });
+    };
+
+    propertiesService.getGitUsername = function() {
+
+        return $http.get (oibPropertiesService + 'getProperty/github.username/', {
+            headers: {
+                'Authorization' : undefined
+            }
+        }).then(function(response) {
+
+            return response.data;
+        });
+    };
+
+    propertiesService.getGitPassword = function() {
+
+        return $http.get (oibPropertiesService + 'getProperty/github.password/', {
+            headers: {
+                'Authorization' : undefined
+            }
+        }).then(function(response) {
+
+            return response.data;
+        });
+    };
+
+    propertiesService.getOids = function() {
+
+        return $http.get (oibPropertiesService + 'getProperties/oid/', {
+            headers: {
+                'Authorization' : undefined
+            }
+        }).then(function(response) {
+
+            return response.data;
+        });
+    };
+
+    return propertiesService;
 });
 
 oibSetupServices.service('loginService', function ($rootScope, $http, base64) {

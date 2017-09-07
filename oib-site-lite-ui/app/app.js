@@ -129,6 +129,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
 
 oibConfigurationApp.run(function ($rootScope, $state, loginModal, $location, $cookieStore, $http) {
 
+
     if (!localStorage.getItem('init'))
     {
         localStorage.setItem("hostName", $location.host());
