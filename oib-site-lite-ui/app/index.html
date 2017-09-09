@@ -29,7 +29,7 @@
                         <li><a ui-sref="cloudManager">Resource Store</a></li>
                         <li><a ui-sref="testTool">Test Resources</a></li>
                         <li><a ui-sref="ehrDemo">Infobutton demo</a></li>
-                        <li><a ui-sref="systemConfiguration">System Configuration</a></li>
+                        <li ng-show="globals.currentUser.admin"><a ui-sref="systemConfiguration">System Configuration</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
                 <div ng-if="globals.currentUser" class="navbar-collapse collapse pull-right">

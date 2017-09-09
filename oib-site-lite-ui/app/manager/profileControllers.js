@@ -2,12 +2,17 @@
 
 var oibManagerModule = angular.module('oibManagerModule', ['ui.router','ngResource', 'ab-base64', 'ui.bootstrap', 'directives', 'schemaForm', 'ngNotify']);
 
-oibManagerModule.controller('ProfileCtrl', ['$scope', '$uibModal', 'profileFactory', '$state', function ($scope, $uibModal, profileFactory, $state) {
+oibManagerModule.controller('ProfileCtrl', ['$scope', '$uibModal', 'profileFactory', '$state', 'propertiesService',
+    function ($scope, $uibModal, profileFactory, $state, propertiesService) {
 
         $scope.localProfiles = [];
         $scope.cloudProfiles = [];
         $scope.status;
-        $scope.items = JSON.parse(localStorage.getItem("oids"));
+
+        propertiesService.getOids().then(function(data){
+
+            $scope.items = data;
+        })
 
         getLocalProfiles();
 
@@ -59,7 +64,7 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$uibModal', 'profileFacto
         {
             for (var c = 0; c < profileOids.length; c++)
             {
-                if ((profileOids[c].orgOid != items[i].orgOid))
+                if ((profileOids[c].orgOid != items[i].propValue))
                 {
                     if ((c + 1) == profileOids.length)
                     {
@@ -4355,9 +4360,8 @@ oibManagerModule.controller('ProfileFormCtrl', ['$scope', '$stateParams', '$stat
     return $scope;
     }]);
 
-oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$uibModal','$http', '$state', 'base64', 'cloudProfileFactory', function ($scope, $uibModal, $http, $state, base64, cloudProfileFactory) {
-
-    $scope.repoUrl = 'https://github.com/' + 'VHAINNOVATIONS/InfoButtons' + '/blob/development/' + 'profilestore' + '/';
+oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$uibModal','$http', '$state', 'base64', 'cloudProfileFactory', 'propertiesService',
+    function ($scope, $uibModal, $http, $state, base64, cloudProfileFactory, propertiesService) {
 
     var cloudProfileLinks = [];
 
@@ -4466,7 +4470,10 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$uibModal','$http', 
     var oids = [];
     oids.push({});
 
-    $scope.items = JSON.parse(localStorage.getItem("oids"));
+    propertiesService.getOids().then(function(data){
+
+        $scope.items = data;
+    })
 
     $scope.openModal = function(profile) {
 
@@ -4504,7 +4511,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$uibModal','$http', 
         {
             for (var c = 0; c < profileOids.length; c++)
             {
-                if ((profileOids[c].orgOid != items[i].orgOid))
+                if ((profileOids[c].orgOid != items[i].propValue))
                 {
                     if ((c + 1) == profileOids.length)
                     {

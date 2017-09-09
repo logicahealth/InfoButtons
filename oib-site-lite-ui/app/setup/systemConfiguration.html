@@ -46,7 +46,7 @@
                     </div>
                     <div class="input-group">
                         <label for="gitUser">Git Username</label>
-                        <input type="text" class="form-control" id="gitUser" ng-disabled="true" value="{{gitUser.user}}">
+                        <input type="text" class="form-control" id="gitUser" ng-disabled="true" value="{{gitUser}}">
                         <span class="input-group-btn">
                             <button class='btn btn-default' type="button" ng-click="changeGitUser()">Change</button>
                         </span>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="input-group">
                         <label for="umlsRelease">UMLS Release</label>
-                        <input type="text" class="form-control" id="umlsRelease" value="{{umlsRelease}}">
+                        <input type="text" class="form-control" id="umlsRelease" ng-model="umlsRelease">
                         <span class="input-group-btn">
                             <button class='btn btn-default' type="submit" ng-click="changeUmlsRelease(umlsRelease)">Set</button>
                         </span>
@@ -84,9 +84,9 @@
                             <button class='btn btn-default' type="submit">Add</button>
                         </span>
                     </div>
-                    <uib-alert ng-repeat="oid in oids" type="info" close="deleteOid($index)">
+                    <uib-alert ng-repeat="oid in oids" type="info" close="deleteOid(oid.appPropertyId)">
                         <div style="margin: 0 auto; position:relative;">
-                            <div class="entry">{{oid.orgOid}}</div><div class="entry name">{{oid.orgName}}</div>
+                            <div class="entry">{{oid.propValue}}</div><div class="entry name">{{oid.propDescription}}</div>
                         </div>
                     </uib-alert>
                 </div>

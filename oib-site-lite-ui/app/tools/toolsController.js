@@ -2,11 +2,13 @@
 
 var oibToolModule = angular.module('oibToolModule', ['ui.router']);
 
-oibToolModule.controller('ToolCtrl', ['$state', '$scope', function($state, $scope) {
+oibToolModule.controller('ToolCtrl', ['$state', '$scope', 'propertiesService', function($state, $scope, propertiesService) {
 
-    $scope.oids = JSON.parse(localStorage.getItem("oids"));
+    propertiesService.getOids().then(function(data){
 
-    $scope.selected = $scope.oids[0];
+        $scope.oids = data;
+        $scope.selected = $scope.oids[0];
+    })
 
     $scope.callIM = function (gender, age, task, mainSearchCriteriaC, labAbnormalFlag){
         var baseUrl = 'http://' + localStorage.getItem("hostName") + ':8080/infobutton-service/infoRequest?';

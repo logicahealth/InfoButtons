@@ -3,7 +3,8 @@ var oibSetupServices = angular.module('oibSetupServices', ['ui.bootstrap', 'ngRe
 oibSetupServices.service('loginModal', function ($uibModal, propertiesService) {
 
     function assignGitUser (user) {
-        localStorage.setItem("gitUser", JSON.stringify(user));
+        propertiesService.setGitUsername(user.user);
+        propertiesService.setGitPassword(user.password);
         return user;
     }
 
@@ -20,12 +21,14 @@ oibSetupServices.service('loginModal', function ($uibModal, propertiesService) {
 
 });
 
-oibSetupServices.service('umlsModal', function ($uibModal) {
+oibSetupServices.service('umlsModal', function ($uibModal, propertiesService) {
 
     var oibPropertiesUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/propertiesManager/'
 
     function assignUmlsUser (user) {
-        localStorage.setItem("umlsUser", JSON.stringify(user));
+
+        propertiesService.setUmlsUserName(user.user);
+        propertiesService.setUmlsPassword(user.password);
         return user;
     }
 
@@ -83,6 +86,34 @@ oibSetupServices.service('propertiesService', function ($rootScope, $http) {
         });
     };
 
+    propertiesService.setUmlsUserName = function(userName) {
+
+        return $http.post (oibPropertiesService + 'updateProperty/umls.username/', userName, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
+    };
+
+    propertiesService.setUmlsPassword = function(password) {
+
+        return $http.post (oibPropertiesService + 'updateProperty/umls.password/', password, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
+
+    };
+
+    propertiesService.setUmlsRelease = function(release) {
+
+        return $http.post (oibPropertiesService + 'updateProperty/umls.umlsRelease/', release, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
+    };
+
     propertiesService.getGitUsername = function() {
 
         return $http.get (oibPropertiesService + 'getProperty/github.username/', {
@@ -107,6 +138,25 @@ oibSetupServices.service('propertiesService', function ($rootScope, $http) {
         });
     };
 
+    propertiesService.setGitUsername = function(userName) {
+
+        return $http.post (oibPropertiesService + 'updateProperty/github.username/', userName, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
+
+    };
+
+    propertiesService.setGitPassword = function(password) {
+
+        return $http.post (oibPropertiesService + 'updateProperty/github.password/', password, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
+    };
+
     propertiesService.getOids = function() {
 
         return $http.get (oibPropertiesService + 'getProperties/oid/', {
@@ -118,6 +168,24 @@ oibSetupServices.service('propertiesService', function ($rootScope, $http) {
             return response.data;
         });
     };
+
+    propertiesService.deleteOid = function(id) {
+
+        return $http.get (oibPropertiesService + 'deleteProperty/' + id, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
+    }
+
+    propertiesService.addOid = function(oidValue, oidName) {
+
+        return $http.get (oibPropertiesService + 'addProperty/oid/' + oidValue + '/' + oidName, {
+            headers: {
+                'Authorization' : undefined
+            }
+        });
+    }
 
     return propertiesService;
 });
@@ -189,7 +257,7 @@ oibSetupServices.service('loginService', function ($rootScope, $http, base64) {
                 loginModal.$close(gitUser);
             }).
             error(function () {
-                $loginScope.invalidUser = true;
+            $loginScope.invalidUser = true;
             })
         };
 

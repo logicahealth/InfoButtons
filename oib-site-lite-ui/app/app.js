@@ -41,7 +41,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
           controller: 'LoginController',
           templateUrl: 'authentication/login.html',
           data: {
-              requireGit: false
+              requireAdmin: false
           }
       })
 
@@ -50,7 +50,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
         controller: 'HomeCtrl',
         templateUrl: 'home/home.html',
           data: {
-              requireGit: false
+              requireAdmin: false
           }
       })
       .state('editProfile', {
@@ -58,7 +58,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
         templateUrl: 'manager/profileForm.html',
         controller: 'ProfileFormCtrl',
           data: {
-              requireGit: false
+              requireAdmin: false
           }
       })
       .state('manager', {
@@ -66,7 +66,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
         templateUrl: 'manager/profiles.html',
         controller: 'ProfileCtrl',
           data: {
-              requireGit: false
+              requireAdmin: false
           }
       })
       .state('cloudManager', {
@@ -74,7 +74,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
         templateUrl: 'manager/cloudManager.html',
         controller: 'CloudProfileCtrl',
         data: {
-            requireGit: true
+            requireAdmin: false
         }
       })
       .state('responder', {
@@ -82,7 +82,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
         templateUrl: 'responder/assets.html',
         controller: 'AssetsCtrl',
           data: {
-              requireGit: false
+              requireAdmin: false
           }
       })
       .state('editAsset', {
@@ -90,7 +90,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
         templateUrl: 'responder/assetForm.html',
         controller: 'AssetsCtrl',
           data: {
-              requireGit: false
+              requireAdmin: false
           }
       })
       .state('testTool', {
@@ -98,7 +98,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
           templateUrl: 'tools/InfobuttonQA.html',
           controller: 'ToolCtrl',
           data: {
-              requireGit: false
+              requireAdmin: false
           }
       })
       .state('ehrDemo', {
@@ -106,7 +106,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
           templateUrl: 'tools/OpenInfobuttonDemo.html',
           controller: 'ToolCtrl',
           data: {
-              requireGit: false
+              requireAdmin: false
           }
       })
       .state('systemConfiguration', {
@@ -114,7 +114,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
         templateUrl: 'setup/systemConfiguration.html',
         controller: 'setupController',
         data: {
-           requireGit: true
+           requireAdmin: true
         }
       })
       .state('logout', {
@@ -135,9 +135,7 @@ oibConfigurationApp.run(function ($rootScope, $state, loginModal, $location, $co
         localStorage.setItem("hostName", $location.host());
         localStorage.setItem("gitRepo", 'VHAINNOVATIONS/InfoButtons');
         localStorage.setItem("profileStorePath", 'profilestore');
-        localStorage.setItem("gitUser", 'undefined');
         localStorage.setItem('init','yes');
-        localStorage.setItem('oids', JSON.stringify([]));
     }
 
     $rootScope.globals = $cookieStore.get('globals') || {};
@@ -146,24 +144,15 @@ oibConfigurationApp.run(function ($rootScope, $state, loginModal, $location, $co
     }
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-        var requireLogin = toState.data.requireGit;
+        var requireAdmin = toState.data.requireAdmin;
 
         // redirect to login page if not logged in
         if (toState.name !== "login" && !$rootScope.globals.currentUser) {
-           event.preventDefault();
-           $state.go('login');
-        } else {
-            if (requireLogin && localStorage.getItem('gitUser') == 'undefined') {
-                event.preventDefault();
-
-                loginModal()
-                    .then(function () {
-                        return $state.go(toState.name, toParams);
-                    })
-                    .catch(function () {
-                        return $state.go('home');
-                    });
-            }
+            event.preventDefault();
+            $state.go('login');
+        } else if (requireAdmin && !$rootScope.globals.currentUser.admin) {
+            event.preventDefault();
+            return $state.reload();
         }
 
     });

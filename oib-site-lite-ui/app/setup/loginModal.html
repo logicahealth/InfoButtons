@@ -14,7 +14,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <div ng-show="github.$submitted || invalidUser">
+        <div ng-show="github.$submitted && invalidUser">
             <span>Invalid Account.</span>
         </div>
     </form>

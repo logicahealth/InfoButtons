@@ -8,7 +8,7 @@ var baseCommitUrl = baseRepoUrl + '/commits?sha=development&path=' + localStorag
 var profileDirectoryUrl = baseCloudUrl + localStorage.getItem('profileStorePath') + '?ref=development';
 var valueSetDirectoryUrl = baseCloudUrl + 'valuesets' + '?ref=development';
 
-oibManagerServiceModule.factory('profileFactory', ['$http', 'base64', function($http, base64) {
+oibManagerServiceModule.factory('profileFactory', ['$http', 'base64', 'propertiesService', function($http, base64, propertiesService) {
 
     var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/liteManager/'
     var profileFactory = {};
@@ -68,22 +68,35 @@ oibManagerServiceModule.factory('profileFactory', ['$http', 'base64', function($
     profileFactory.getValueSets = function() {
 
         var valueSetList = [];
-        var gitUser = JSON.parse(localStorage.getItem('gitUser'));
-        $http.defaults.headers.common.Authorization = 'Basic ' + base64.encode(gitUser.user + ':' + gitUser.password);
-        $http.get(valueSetDirectoryUrl).success(function (data) {
+        var gitUser = {};
+        propertiesService.getGitUsername().then(function(data) {
 
-            data.forEach(function (valueset) {
+            gitUser.user = data.propValue;
+            return propertiesService.getGitPassword();
+        }).then(function(data)
+        {
+            gitUser.password = data.propValue;
+            return;
+        }).then(function()
+        {
+            $http.defaults.headers.common.Authorization = 'Basic ' + base64.encode(gitUser.user + ':' + gitUser.password);
+            return;
+        }).then(function(){
+            $http.get(valueSetDirectoryUrl).success(function (data) {
 
-                if (valueset.name.indexOf("[") != -1)
-                {
-                    valueset = valueset.name.substring(0, valueset.name.length - 11)
-                }
-                else
-                {
-                    valueset = valueset.name.substring(0, valueset.name.length - 5)
-                }
-                valueSetList.push({"name" : valueset, "value" : { "id" : valueset, "name" : valueset, "namespace" :"" }});
-            })
+                data.forEach(function (valueset) {
+
+                    if (valueset.name.indexOf("[") != -1)
+                    {
+                        valueset = valueset.name.substring(0, valueset.name.length - 11)
+                    }
+                    else
+                    {
+                        valueset = valueset.name.substring(0, valueset.name.length - 5)
+                    }
+                    valueSetList.push({"name" : valueset, "value" : { "id" : valueset, "name" : valueset, "namespace" :"" }});
+                })
+            });
         });
         return valueSetList;
     };
@@ -135,8 +148,8 @@ oibManagerServiceModule.factory('profileFactory', ['$http', 'base64', function($
             authorizedOrg = xmlDoc.createElement('authorizedOrganization');
             nameattr = xmlDoc.createAttribute("name");
             idattr = xmlDoc.createAttribute("id");
-            nameattr.nodeValue = oids.items[i].orgName;
-            idattr.nodeValue = oids.items[i].orgOid;
+            nameattr.nodeValue = oids.items[i].propDescription;
+            idattr.nodeValue = oids.items[i].propValue;
             authorizedOrg.setAttributeNode(nameattr);
             authorizedOrg.setAttributeNode(idattr);
             authorizedOrgs.appendChild(authorizedOrg)
@@ -184,7 +197,7 @@ uuidGenerator.factory("idGenerator", function () {
     }
 });
 
-oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'idGenerator', '$filter', function ($http, $resource, idGenerator, $filter) {
+oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'idGenerator', '$filter', 'propertiesService', function ($http, $resource, idGenerator, $filter, propertiesService) {
 
     var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/liteManager/'
 
@@ -206,65 +219,78 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
     cloudProfileFactory.getCloudProfiles = function(base64) {
         var profileLinkList = [];
         var jsonString = {};
-        var gitUser = JSON.parse(localStorage.getItem('gitUser'));
-        $http.defaults.headers.common.Authorization = 'Basic ' + base64.encode(gitUser.user + ':' + gitUser.password);
+        var gitUser ={};
+        propertiesService.getGitUsername().then(function(data) {
 
-        $http.get(profileDirectoryUrl).success(function (data) {
+            gitUser.user = data.propValue;
+            return propertiesService.getGitPassword();
+        }).then(function(data)
+        {
+            gitUser.password = data.propValue;
+            return;
+        }).then(function()
+        {
+            $http.defaults.headers.common.Authorization = 'Basic ' + base64.encode(gitUser.user + ':' + gitUser.password);
+            return;
+        }).then(function(){
+            $http.get(profileDirectoryUrl).success(function (data) {
 
-            data.forEach(function (profileLink) {
+                data.forEach(function (profileLink) {
 
-                // filter xml files only
-                if (profileLink.path.indexOf('.xml') === (profileLink.path.length - 4)) {
+                    // filter xml files only
+                    if (profileLink.path.indexOf('.xml') === (profileLink.path.length - 4)) {
 
-                    var profileUrl = baseCloudUrl + profileLink.path + '?ref=development';
-                    var profileInJson = $http.get(profileUrl).success(function (data) {
+                        var profileUrl = baseCloudUrl + profileLink.path + '?ref=development';
+                        var profileInJson = $http.get(profileUrl).success(function (data) {
 
-                        var xmlContentString = base64.decode(data.content);
-                        var xmlDoc = $.parseXML(xmlContentString);
-                        var $xml = $(xmlDoc);
-                        var $title = $xml.find("title");
-                        var $contexts = $xml.find("context");
-                        var $profileD = $xml.find("profileDescription");
-                        var profileDescription = $profileD.text();
-                        var $versionControl = $xml.find("versionControl");
-                        var version = $versionControl[0].attributes[0].value;
-                        var attr0 = $contexts[0].attributes[0].value;
-                        var imageUrl = $filter('limitTo')(profileLink.path, profileLink.path.length - 4);
-                        $http.get(baseCommitUrl + data.name)
-                            .success (function(commit) {
-                                $http.get(baseCloudUrl + imageUrl + '.gif'  + '?ref=development')
-                                    .success(function(image) {
-                                        imageUrl = image.download_url;
-                                        if ($title.text().length > 1) {
-                                            jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': commit[0].commit.committer.date,
-                                                'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url, 'profileDescription': profileDescription, 'imgUrl': imageUrl};
-                                            profileLinkList.push(jsonString);
-                                        }
-                                    })
-                                    .error(function() {
-                                        $http.get(baseCloudUrl + imageUrl + '.png'  + '?ref=development')
-                                            .success(function(image) {
-                                                imageUrl = image.download_url;
-                                                if ($title.text().length > 1) {
-                                                    jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': commit[0].commit.committer.date,
-                                                        'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url, 'profileDescription': profileDescription, 'imgUrl': imageUrl};
-                                                    profileLinkList.push(jsonString);
-                                                }
-                                            })
-                                            .error(function() {
-                                                imageUrl = null;
-                                                if ($title.text().length > 1) {
-                                                    jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': commit[0].commit.committer.date,
-                                                        'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url, 'profileDescription': profileDescription, 'imgUrl': imageUrl};
-                                                    profileLinkList.push(jsonString);
-                                                }
-                                            })
-                                    });
-                            });
-                    });
-                }
+                            var xmlContentString = base64.decode(data.content);
+                            var xmlDoc = $.parseXML(xmlContentString);
+                            var $xml = $(xmlDoc);
+                            var $title = $xml.find("title");
+                            var $contexts = $xml.find("context");
+                            var $profileD = $xml.find("profileDescription");
+                            var profileDescription = $profileD.text();
+                            var $versionControl = $xml.find("versionControl");
+                            var version = $versionControl[0].attributes[0].value;
+                            var attr0 = $contexts[0].attributes[0].value;
+                            var imageUrl = $filter('limitTo')(profileLink.path, profileLink.path.length - 4);
+                            $http.get(baseCommitUrl + data.name)
+                                .success (function(commit) {
+                                    $http.get(baseCloudUrl + imageUrl + '.gif'  + '?ref=development')
+                                        .success(function(image) {
+                                            imageUrl = image.download_url;
+                                            if ($title.text().length > 1) {
+                                                jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': commit[0].commit.committer.date,
+                                                    'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url, 'profileDescription': profileDescription, 'imgUrl': imageUrl};
+                                                profileLinkList.push(jsonString);
+                                            }
+                                        })
+                                        .error(function() {
+                                            $http.get(baseCloudUrl + imageUrl + '.png'  + '?ref=development')
+                                                .success(function(image) {
+                                                    imageUrl = image.download_url;
+                                                    if ($title.text().length > 1) {
+                                                        jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': commit[0].commit.committer.date,
+                                                            'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url, 'profileDescription': profileDescription, 'imgUrl': imageUrl};
+                                                        profileLinkList.push(jsonString);
+                                                    }
+                                                })
+                                                .error(function() {
+                                                    imageUrl = null;
+                                                    if ($title.text().length > 1) {
+                                                        jsonString = {'sha': data.sha, 'url': profileLink.url, 'title': data.name, 'description': attr0, 'version': commit[0].commit.committer.date,
+                                                            'content_utf8': xmlContentString, 'gitUrl': profileLink.html_url, 'profileDescription': profileDescription, 'imgUrl': imageUrl};
+                                                        profileLinkList.push(jsonString);
+                                                    }
+                                                })
+                                        });
+                                });
+                        });
+                    }
+                });
             });
         });
+
         return profileLinkList;
     };
 
@@ -421,8 +447,8 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
             authorizedOrg = xmlDoc.createElement('authorizedOrganization');
             nameattr = xmlDoc.createAttribute("name");
             idattr = xmlDoc.createAttribute("id");
-            nameattr.nodeValue = oids.items[i].orgName;
-            idattr.nodeValue = oids.items[i].orgOid;
+            nameattr.nodeValue = oids.items[i].propDescription;
+            idattr.nodeValue = oids.items[i].propValue;
             authorizedOrg.setAttributeNode(nameattr);
             authorizedOrg.setAttributeNode(idattr);
             authorizedOrgs.appendChild(authorizedOrg)
