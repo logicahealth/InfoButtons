@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "oib_app_property", schema = "resource_profile", catalog = "")
 public class OibAppProperty {
+
     private int appPropertyId;
     private String propName;
     private String propDescription;
@@ -12,6 +13,7 @@ public class OibAppProperty {
 
     @Id
     @Column(name = "app_property_id")
+    @GeneratedValue( strategy = GenerationType.AUTO )
     public int getAppPropertyId() {
         return appPropertyId;
     }

@@ -14,4 +14,6 @@ public interface OibAppPropertyDao {
     OibAppProperty getPropertyByName(String name);
 
     void updateProperty(OibAppProperty property);
+
+    void deletePropertyById(int id);
 }

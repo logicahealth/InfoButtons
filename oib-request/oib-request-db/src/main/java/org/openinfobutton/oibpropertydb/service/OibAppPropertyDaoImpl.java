@@ -69,4 +69,13 @@ public class OibAppPropertyDaoImpl implements OibAppPropertyDao {
 
         getSessionFactory().getCurrentSession().saveOrUpdate(property);
     }
+
+    @Override
+    @Transactional
+    public void deletePropertyById(int id) {
+
+        OibAppProperty property = (OibAppProperty)getSessionFactory().getCurrentSession().
+                load(OibAppProperty.class, id);
+        getSessionFactory().getCurrentSession().delete(property);
+    }
 }
