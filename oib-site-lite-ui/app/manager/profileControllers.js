@@ -68,7 +68,7 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$uibModal', 'profileFacto
                 {
                     if ((c + 1) == profileOids.length)
                     {
-                        uniqueItems.push(items[i]);
+                        uniqueItems.push({orgOid: items[i].propValue, orgName: items[i].propDescription, selected: false});
                     }
                 }
                 else
@@ -79,7 +79,12 @@ oibManagerModule.controller('ProfileCtrl', ['$scope', '$uibModal', 'profileFacto
         }
         if (profileOids.length  == 0) {
 
-            profileOids = $scope.items;
+            profileOids = [];
+            for (var y = 0; y < items.length; y++)
+            {
+                profileOids.push({orgOid: items[y].propValue, orgName: items[y].propDescription, selected: false})
+            }
+
         }
         else
         {
@@ -4515,7 +4520,7 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$uibModal','$http', 
                 {
                     if ((c + 1) == profileOids.length)
                     {
-                        uniqueItems.push(items[i]);
+                        uniqueItems.push({orgOid: items[i].propValue, orgName: items[i].propDescription, selected: false});
                     }
                 }
                 else
@@ -4526,7 +4531,11 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$uibModal','$http', 
         }
         if (profileOids.length  == 0) {
 
-            profileOids = $scope.items;
+            profileOids = [];
+            for (var y = 0; y < items.length; y++)
+            {
+                profileOids.push({orgOid: items[y].propValue, orgName: items[y].propDescription, selected: false})
+            }
         }
         else
         {
