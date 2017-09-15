@@ -3,7 +3,7 @@ package org.openinfobutton.oibpropertydb.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "oib_app_property", schema = "resource_profile", catalog = "")
+@Table(name = "oib_app_property")
 public class OibAppProperty {
 
     private int appPropertyId;
