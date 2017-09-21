@@ -31,6 +31,8 @@ import gov.nih.nlm.uts.webservice.content.SourceAtomClusterDTO;
 import gov.nih.nlm.uts.webservice.content.UtsFault_Exception;
 import gov.nih.nlm.uts.webservice.content.UtsWsContentController;
 import gov.nih.nlm.uts.webservice.content.UtsWsContentControllerImplService;
+import gov.nih.nlm.uts.webservice.metadata.UtsWsMetadataController;
+import gov.nih.nlm.uts.webservice.metadata.UtsWsMetadataControllerImplService;
 import gov.nih.nlm.uts.webservice.security.UtsWsSecurityController;
 import gov.nih.nlm.uts.webservice.security.UtsWsSecurityControllerImplService;
 import java.util.ArrayList;
@@ -58,6 +60,12 @@ public class CodeExpanderUtsHelper {
      * The expansion codes.
      */
     private Set<Code> expansionCodes;
+
+    /**
+     *
+     * The release
+     */
+    private String currentRelease;
 
     /**
      * Instantiates a new code expander uts helper.
@@ -125,8 +133,8 @@ public class CodeExpanderUtsHelper {
 
         try {
             myAtomClusterRelations
-                    = utsContentService.getSourceDescriptorSourceDescriptorRelations(getSecurityTicket(),
-                            utsProperties.getProperty("uts.umlsRelease"),
+                    = utsContentService.getSourceDescriptorSourceDescriptorRelations(getSecurityTicketAndRelease(),
+                    currentRelease,
                             code, "ICD9CM", myPsf);
         } catch (final UtsFault_Exception e) {
             e.printStackTrace();
@@ -170,12 +178,12 @@ public class CodeExpanderUtsHelper {
         try {
 
             conceptAtomCluster
-                    = utsContentService.getCode(getSecurityTicket(), utsProperties.getProperty("uts.umlsRelease"), code,
+                    = utsContentService.getCode(getSecurityTicketAndRelease(), currentRelease, code,
                             "SNOMEDCT");
 
             myRelations
-                    = utsContentService.getSourceConceptSourceConceptRelations(getSecurityTicket(),
-                            utsProperties.getProperty("uts.umlsRelease"),
+                    = utsContentService.getSourceConceptSourceConceptRelations(getSecurityTicketAndRelease(),
+                    currentRelease,
                             code, "SNOMEDCT", myPsf);
 
         } catch (final UtsFault_Exception e) {
@@ -205,7 +213,7 @@ public class CodeExpanderUtsHelper {
      *
      * @return the security ticket
      */
-    private String getSecurityTicket() {
+    private String getSecurityTicketAndRelease() {
 
         String singleUseTicket = null;
         final UtsWsSecurityController securityService
@@ -218,6 +226,13 @@ public class CodeExpanderUtsHelper {
             singleUseTicket
                     = securityService.getProxyTicket(ticketGrantingTicket, utsProperties.getProperty("uts.serviceName"));
         } catch (final Exception e) {
+            e.printStackTrace();
+        }
+
+        final UtsWsMetadataController utsMetadataService = (new UtsWsMetadataControllerImplService()).getUtsWsMetadataControllerImplPort();
+        try {
+            currentRelease = utsMetadataService.getCurrentUMLSVersion(singleUseTicket);
+        } catch (gov.nih.nlm.uts.webservice.metadata.UtsFault_Exception e) {
             e.printStackTrace();
         }
 
