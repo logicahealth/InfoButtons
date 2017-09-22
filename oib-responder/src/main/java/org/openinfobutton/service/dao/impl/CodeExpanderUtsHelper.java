@@ -179,12 +179,12 @@ public class CodeExpanderUtsHelper {
 
             conceptAtomCluster
                     = utsContentService.getCode(getSecurityTicketAndRelease(), currentRelease, code,
-                            "SNOMEDCT");
+                            "SNOMEDCT_US");
 
             myRelations
                     = utsContentService.getSourceConceptSourceConceptRelations(getSecurityTicketAndRelease(),
                     currentRelease,
-                            code, "SNOMEDCT", myPsf);
+                            code, "SNOMEDCT_US", myPsf);
 
         } catch (final UtsFault_Exception e) {
             e.printStackTrace();
