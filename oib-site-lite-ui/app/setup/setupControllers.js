@@ -21,11 +21,6 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
             $scope.umlsUser=data.propValue;
         })
 
-        propertiesService.getUmlsRelease().then(function(data) {
-
-            $scope.umlsRelease=data.propValue;
-        })
-
         propertiesService.getGitUsername().then(function(data) {
 
             $scope.gitUser = data.propValue;
@@ -123,15 +118,6 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
             .catch(function () {
                 return $state.go('systemConfiguration');
             });
-    }
-
-    $scope.changeUmlsRelease = function (umlsRelease) {
-
-        propertiesService.setUmlsRelease(umlsRelease).then(function() {
-
-            return $state.reload();
-        });
-
     }
 });
 

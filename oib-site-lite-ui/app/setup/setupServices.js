@@ -74,18 +74,6 @@ oibSetupServices.service('propertiesService', function ($rootScope, $http) {
         });
     };
 
-    propertiesService.getUmlsRelease = function() {
-
-        return $http.get (oibPropertiesService + 'getProperty/umls.umlsRelease/', {
-            headers: {
-                'Authorization' : undefined
-            }
-        }).then(function(response) {
-
-            return response.data;
-        });
-    };
-
     propertiesService.setUmlsUserName = function(userName) {
 
         return $http.post (oibPropertiesService + 'updateProperty/umls.username/', userName, {
@@ -103,15 +91,6 @@ oibSetupServices.service('propertiesService', function ($rootScope, $http) {
             }
         });
 
-    };
-
-    propertiesService.setUmlsRelease = function(release) {
-
-        return $http.post (oibPropertiesService + 'updateProperty/umls.umlsRelease/', release, {
-            headers: {
-                'Authorization' : undefined
-            }
-        });
     };
 
     propertiesService.getGitUsername = function() {
