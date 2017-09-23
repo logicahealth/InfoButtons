@@ -14,6 +14,7 @@
 			<supportedTerminology id="2.16.840.1.113883.6.42" name="ICD9"/>
 			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
 			<supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC"/>
+			<supportedTerminology id="2.16.840.1.113883.6.69" name="NDC"/>
 		</supportedTerminologies>
 		<contexts>
 			<context name="Knowledge on conditions from problem list review and entry" id="1">
