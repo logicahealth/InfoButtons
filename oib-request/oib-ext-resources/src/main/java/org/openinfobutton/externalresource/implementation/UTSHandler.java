@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import UtsMetathesaurusMetaData.UtsWsMetadataController;
+import UtsMetathesaurusMetaData.UtsWsMetadataControllerImplService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openinfobutton.externalresource.json.CodeTransformer;
 import org.openinfobutton.externalresource.json.CodeTransformerResultList;
@@ -51,12 +53,6 @@ public class UTSHandler
 
     /** The log. */
     Logger log = LogManager.getLogger( UTSHandler.class.getName() );
-
-
-
-    /** The umls release. */
-    @Value( "${umls.umlsRelease}" )
-    String umlsRelease;
 
     /** The service name. */
     String serviceName = "http://umlsks.nlm.nih.gov";
@@ -347,12 +343,19 @@ public class UTSHandler
         {
 
             singleUseTicket1 = securityService.getProxyTicket( ticketGrantingTicket, serviceName );
-
+            String currentRelease="";
+            final UtsWsMetadataController utsMetadataService = (new UtsWsMetadataControllerImplService()).getUtsWsMetadataControllerImplPort();
+            try {
+                currentRelease = utsMetadataService.getCurrentUMLSVersion(singleUseTicket1);
+            } catch (UtsMetathesaurusMetaData.UtsFault_Exception e) {
+                e.printStackTrace();
+            }
+            singleUseTicket1 = securityService.getProxyTicket( ticketGrantingTicket, serviceName );
             List<AtomClusterRelationDTO> myAtomClusterRelations = new ArrayList<AtomClusterRelationDTO>();
             final Psf myPsf = new Psf();
             myPsf.getIncludedRelationLabels().add( "PAR" );
             myAtomClusterRelations =
-                utsContentService.getSourceDescriptorSourceDescriptorRelations( singleUseTicket1, umlsRelease, code2,
+                utsContentService.getSourceDescriptorSourceDescriptorRelations( singleUseTicket1, currentRelease, code2,
                                                                                 codeSystem, myPsf );
             for ( int i = 0; i < myAtomClusterRelations.size(); i++ )
             {
