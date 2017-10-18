@@ -13,6 +13,7 @@
 			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9-CM"/>
 			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
 			<supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC"/>
+			<supportedTerminology id="2.16.840.1.113883.6.69" name="NDC"/>
 		</supportedTerminologies>
 		<contexts>
 			<context name="Medication knowledge from order entry (OE) and medication list (MLREV). Patient is the knowledge consumer" id="1">
