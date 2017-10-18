@@ -24,7 +24,7 @@ public class UmlsRestClientImplTest {
     @org.junit.Test
     public void testGetTerms() throws Exception {
 
-        RestTermClient client = new UmlsRestClientImpl("", "");
+        RestTermClient client = new UmlsRestClientImpl();
 
         String result = "";
 
