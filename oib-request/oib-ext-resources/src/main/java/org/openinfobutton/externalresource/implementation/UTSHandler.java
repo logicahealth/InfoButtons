@@ -41,6 +41,7 @@ import UtsSecurity.UtsFault_Exception;
 import UtsSecurity.UtsWsSecurityController;
 import UtsSecurity.UtsWsSecurityControllerImplService;
 import org.openinfobutton.externalresource.api.ExternalResourceHandler;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 /**
@@ -57,13 +58,8 @@ public class UTSHandler
     /** The service name. */
     String serviceName = "http://umlsks.nlm.nih.gov";
 
-    /** The username. */
-    @Value( "${umls.username}" )
-    String username;
-
-    /** The password. */
-    @Value( "${umls.password}" )
-    String password;
+    @Autowired
+    Environment env;
 
     /** The uts content service. */
     UtsWsContentController utsContentService;
@@ -445,7 +441,7 @@ public class UTSHandler
         securityService = ( new UtsWsSecurityControllerImplService() ).getUtsWsSecurityControllerImplPort();
         utsFinderService = ( new UtsWsFinderControllerImplService() ).getUtsWsFinderControllerImplPort();
         // get the Proxy Grant Ticket - this is good for 8 hours and is needed to generate single use tickets.
-        final String ticketGrantingTicket = securityService.getProxyGrantTicket( username, password );
+        final String ticketGrantingTicket = securityService.getProxyGrantTicket( env.getProperty("umls.username"), env.getProperty("umls.password") );
         return ticketGrantingTicket;
     }
 }
