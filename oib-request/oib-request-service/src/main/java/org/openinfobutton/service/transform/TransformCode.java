@@ -76,6 +76,15 @@ public class TransformCode
     public Code transformInput( CodedContextElement element, Code code, List<String> supportedCodeSystems,
                                 KnowledgeRequest request )
     {
+        if ( element.getOutputDisplayNameTransformation() != null )
+        {
+            final String id = element.getOutputDisplayNameTransformation().getId();
+            final TerminologyInference inference = getTerminologyInference( id );
+            final Code newCode =
+                    NamedCodeInferences.valueOf( inference.getCallInferenceByName() ).getCodeFromDisplayName( code );
+            return newCode;
+        }
+
         if ( supportedCodeSystems.size() > 0 )
         {
             if ( supportedCodeSystems.contains( code.getCodeSystem() ) )
@@ -122,22 +131,9 @@ public class TransformCode
                         }
                     }
                 }
-
             }
         }
-
-        if ( element.getOutputDisplayNameTransformation() != null )
-        {
-            final String id = element.getOutputDisplayNameTransformation().getId();
-            final TerminologyInference inference = getTerminologyInference( id );
-            final Code newCode =
-                NamedCodeInferences.valueOf( inference.getCallInferenceByName() ).getCodeFromDisplayName( code );
-            return newCode;
-        }
-        else
-        {
-            return code;
-        }
+        return code;
     }
 
     /**
@@ -152,6 +148,15 @@ public class TransformCode
     public Code transformOutput( CodedContextElement element, Code code, List<String> supportedCodeSystems,
                                  KnowledgeRequest request )
     {
+
+        if ( element.getOutputDisplayNameTransformation() != null )
+        {
+            final String id = element.getOutputDisplayNameTransformation().getId();
+            final TerminologyInference inference = getTerminologyInference( id );
+            final Code newCode =
+                    NamedCodeInferences.valueOf( inference.getCallInferenceByName() ).getCodeFromDisplayName( code );
+            return newCode;
+        }
 
         if ( supportedCodeSystems.size() > 0 )
         {
@@ -202,18 +207,7 @@ public class TransformCode
             }
         }
 
-        if ( element.getOutputDisplayNameTransformation() != null )
-        {
-            final String id = element.getOutputDisplayNameTransformation().getId();
-            final TerminologyInference inference = getTerminologyInference( id );
-            final Code newCode =
-                NamedCodeInferences.valueOf( inference.getCallInferenceByName() ).getCodeFromDisplayName( code );
-            return newCode;
-        }
-        else
-        {
-            return code;
-        }
+        return code;
     }
 
     /**
