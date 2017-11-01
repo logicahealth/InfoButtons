@@ -14,6 +14,7 @@
 package org.openinfobutton.service.transform;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.openinfobutton.inference.rxnorm.service.RxNormService;
 import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.CodedContextElement;
@@ -103,6 +105,15 @@ public class TransformCode
                     {
                         // new method will transform into m.gettarget
                         code.setCodeSystemName( m.getSourceName() );
+                        if (request.getTaskContext().getCode().getCode().equals("MLREV") || request.getTaskContext().getCode().getCode().equals("MEDOE") )
+                        {
+                            try {
+                                return RxNormService.getTransformedCode(code);
+                            } catch (IOException e) {
+
+                                e.printStackTrace();
+                            }
+                        }
                         final Code transformedCode = ESHandler.transformCode( code, m.getTargetValue() );
                         if ( transformedCode != null )
                         {
@@ -171,6 +182,15 @@ public class TransformCode
                     {
                         // new method will transform into m.gettarget
                         code.setCodeSystemName( m.getSourceName() );
+                        if (request.getTaskContext().getCode().getCode().equals("MLREV") || request.getTaskContext().getCode().getCode().equals("MEDOE") )
+                        {
+                            try {
+                                return RxNormService.getTransformedCode(code);
+                            } catch (IOException e) {
+
+                                e.printStackTrace();
+                            }
+                        }
                         final Code transformedCode = ESHandler.transformCode( code, m.getTargetValue() );
                         if ( transformedCode != null )
                         {
