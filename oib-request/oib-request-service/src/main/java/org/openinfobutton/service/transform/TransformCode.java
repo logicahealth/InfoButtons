@@ -105,7 +105,7 @@ public class TransformCode
                     {
                         // new method will transform into m.gettarget
                         code.setCodeSystemName( m.getSourceName() );
-                        if (request.getTaskContext().getCode().getCode().equals("MLREV") || request.getTaskContext().getCode().getCode().equals("MEDOE") )
+                        if ((request.getTaskContext().getCode().getCode().equals("MLREV") || request.getTaskContext().getCode().getCode().equals("MEDOE")) && m.getTargetName().equals("RxNorm"))
                         {
                             try {
                                 return RxNormService.getTransformedCode(code);
@@ -182,7 +182,7 @@ public class TransformCode
                     {
                         // new method will transform into m.gettarget
                         code.setCodeSystemName( m.getSourceName() );
-                        if (request.getTaskContext().getCode().getCode().equals("MLREV") || request.getTaskContext().getCode().getCode().equals("MEDOE") )
+                        if ((request.getTaskContext().getCode().getCode().equals("MLREV") || request.getTaskContext().getCode().getCode().equals("MEDOE")) && m.getTargetName().equals("RxNorm"))
                         {
                             try {
                                 return RxNormService.getTransformedCode(code);
