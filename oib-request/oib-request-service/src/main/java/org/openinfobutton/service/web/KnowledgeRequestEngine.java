@@ -38,8 +38,6 @@ import org.springframework.stereotype.Component;
 public class KnowledgeRequestEngine
 {
 
-    ResponseGenerator rg;
-
     /**The Context Profile Handler**
      *
      */
@@ -57,7 +55,7 @@ public class KnowledgeRequestEngine
         final List<RequestResult> result = returnResult( knowledgeRequest );
         Collections.sort( result );
         AggregateKnowledgeResponse responseType = new AggregateKnowledgeResponse();
-        rg = new ResponseGenerator();
+        ResponseGenerator rg = new ResponseGenerator();
         try
         {
             if ( !result.isEmpty() )
