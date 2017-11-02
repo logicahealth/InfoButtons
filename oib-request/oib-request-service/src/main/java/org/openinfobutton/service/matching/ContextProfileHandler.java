@@ -50,15 +50,8 @@ public class ContextProfileHandler
     /** The provider. */
     public ResourceProfileProvider provider;
 
-    /** The request. */
-    public KnowledgeRequest request;
-
     @Autowired
     ExternalResourceHandler handler;
-
-    /** The results. */
-    public List<RequestResult> results;
-
 
     /**
      * Inits the profiles.
@@ -75,10 +68,9 @@ public class ContextProfileHandler
      * @param r the r
      * @return the list
      */
-    public void handleRequest( KnowledgeRequest r , final List<RequestResult> results)
+    public void handleRequest( KnowledgeRequest request , final List<RequestResult> results)
     {
         initProfiles();
-        request = r;
         final org.apache.logging.log4j.Logger logger = LogManager.getLogger(ContextProfileHandler.class);
         logger.error("THIS IS WHERE THE CODE IS: " + request.getMainSearchCriteria().getCode().getCode());
 
@@ -92,7 +84,7 @@ public class ContextProfileHandler
         for (  Map.Entry<Long, KnowledgeResourceProfile> profile : profiles.entrySet()  )
         {
             try {
-                results.add(matchContexts(profile.getValue()));
+                results.add(matchContexts(profile.getValue(), request));
             }
             catch (RuntimeException e)
             {
@@ -110,7 +102,7 @@ public class ContextProfileHandler
      * @param profile the profile
      * @return RequestResult
      */
-    private RequestResult matchContexts( KnowledgeResourceProfile profile )
+    private RequestResult matchContexts( KnowledgeResourceProfile profile, KnowledgeRequest request )
     {
             log.debug("Matching profile... " + profile.getHeader().getTitle());
             final RequestResult result = new RequestResult(profile);
@@ -118,7 +110,7 @@ public class ContextProfileHandler
             log.debug("    SupportedCS " + supportedCodeSystems);
             final List<Context> contexts = profile.getProfileDefinition().getContexts().getContext();
             final int count = contexts.size();
-            setOrganizationSpecificParameters(result, profile.getProfileDefinition().getAuthorizedOrganizations().getAuthorizedOrganization());
+            setOrganizationSpecificParameters(request, result, profile.getProfileDefinition().getAuthorizedOrganizations().getAuthorizedOrganization());
             Context context;
 
             for (int x = 0; x < count; x++) {
@@ -176,7 +168,7 @@ public class ContextProfileHandler
             return result;
     }
     
-    private void setOrganizationSpecificParameters(final RequestResult result, List<AuthorizedOrganization> authorizedOrganizations)
+    private void setOrganizationSpecificParameters(KnowledgeRequest request, final RequestResult result, List<AuthorizedOrganization> authorizedOrganizations)
     {
         result.setOrganizationURL( null );
         result.setUseAssignedAuthorizedPerson( false );
