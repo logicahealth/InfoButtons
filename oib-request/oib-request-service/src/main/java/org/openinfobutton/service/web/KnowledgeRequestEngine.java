@@ -82,7 +82,7 @@ public class KnowledgeRequestEngine
      */
     private List<RequestResult> returnResult( KnowledgeRequest request )
     {
-        List<RequestResult> result = new ArrayList<RequestResult>();
+        final List<RequestResult> result = new ArrayList<RequestResult>();
         AccessCheckHandler accessChecker = new AccessCheckHandler();
         if ( accessChecker.handleRequest( request ) )
         {
@@ -94,7 +94,7 @@ public class KnowledgeRequestEngine
         }
         else
         {
-            result = contextProfileHandler.handleRequest( request );
+            contextProfileHandler.handleRequest( request, result );
             return result;
         }
     }

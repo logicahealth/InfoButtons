@@ -75,10 +75,9 @@ public class ContextProfileHandler
      * @param r the r
      * @return the list
      */
-    public List<RequestResult> handleRequest( KnowledgeRequest r )
+    public void handleRequest( KnowledgeRequest r , final List<RequestResult> results)
     {
         initProfiles();
-        results = new ArrayList<RequestResult>();
         request = r;
         final org.apache.logging.log4j.Logger logger = LogManager.getLogger(ContextProfileHandler.class);
         logger.error("THIS IS WHERE THE CODE IS: " + request.getMainSearchCriteria().getCode().getCode());
@@ -103,7 +102,6 @@ public class ContextProfileHandler
 
         }
         ResourceProfileProvider.resetInstance();
-        return results;
     }
 
     /**
