@@ -49,14 +49,14 @@ public final class TaskCheckHandler
      * @param knowledgeRequest the knowledge request
      * @return true, if successful
      */
-    public static boolean handleRequest( KnowledgeRequest knowledgeRequest, Map<Long, KnowledgeResourceProfile> profiles )
+    public static boolean handleRequest( KnowledgeRequest knowledgeRequest, final Map<Long, KnowledgeResourceProfile> profiles )
     {
         request = knowledgeRequest;
         Map<Long, KnowledgeResourceProfile> tempProfiles = new HashMap<Long, KnowledgeResourceProfile>();
         for ( Map.Entry<Long, KnowledgeResourceProfile> profile : profiles.entrySet() )
         {
             try {
-                if (checkProfile(profile.getValue())) {
+                if (!checkProfile(profile.getValue())) {
                     tempProfiles.put(profile.getKey(), profile.getValue());
                 }
             } catch (RuntimeException e)
@@ -65,7 +65,10 @@ public final class TaskCheckHandler
                 throw new OIBProfileProcessingException("Task Matching Error Caused By Configuration Problem In: " + profile.getValue().getHeader().getTitle(), e);
             }
         }
-        profiles = tempProfiles;
+        for ( Map.Entry<Long, KnowledgeResourceProfile> profile : tempProfiles.entrySet() )
+        {
+            profiles.remove(profile.getKey());
+        }
         return profiles.isEmpty();
     }
 

@@ -61,7 +61,7 @@ public final class AccessCheckHandler
      * @param request the request
      * @return true, if successful
      */
-    public boolean handleRequest( KnowledgeRequest request,  Map<Long, KnowledgeResourceProfile> profiles)
+    public boolean handleRequest( KnowledgeRequest request,  final Map<Long, KnowledgeResourceProfile> profiles)
     {
 
         final Holder holder = request.getHolder();
@@ -73,7 +73,7 @@ public final class AccessCheckHandler
         {
 
             try {
-                if (checkProfile(profile.getKey(), profile.getValue())) {
+                if (!checkProfile(profile.getKey(), profile.getValue())) {
 
                     tempProfiles.put(profile.getKey(), profile.getValue());
                 }
@@ -84,7 +84,10 @@ public final class AccessCheckHandler
                 throw new OIBProfileProcessingException("Access Check Error Caused By Configuration Problem In: " + profile.getValue().getHeader().getTitle(), e);
             }
         }
-        profiles = tempProfiles;
+        for ( Map.Entry<Long, KnowledgeResourceProfile> profile : tempProfiles.entrySet() )
+        {
+            profiles.remove(profile.getKey());
+        }
         return profiles.isEmpty();
     }
 

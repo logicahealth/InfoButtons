@@ -86,7 +86,7 @@ public class KnowledgeRequestEngine
      */
     private List<RequestResult> returnResult( KnowledgeRequest request )
     {
-        Map<Long, KnowledgeResourceProfile> profiles = resourceProfileLoader.getProfiles();
+        final Map<Long, KnowledgeResourceProfile> profiles = resourceProfileLoader.getProfiles();
         final List<RequestResult> result = new ArrayList<RequestResult>();
         AccessCheckHandler accessChecker = new AccessCheckHandler();
         if ( accessChecker.handleRequest( request, profiles ) )
