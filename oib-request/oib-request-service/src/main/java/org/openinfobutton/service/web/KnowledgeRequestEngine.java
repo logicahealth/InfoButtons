@@ -16,16 +16,19 @@ package org.openinfobutton.service.web;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Access;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.hl7.v3.AggregateKnowledgeResponse;
 import org.openinfobutton.schema.KnowledgeRequest;
+import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.service.matching.AccessCheckHandler;
 import org.openinfobutton.service.matching.ContextProfileHandler;
 import org.openinfobutton.service.matching.RequestResult;
 import org.openinfobutton.service.matching.TaskCheckHandler;
+import org.openinfobutton.service.profile.ResourceProfileLoaderNew;
 import org.openinfobutton.service.response.ResponseGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,6 +46,9 @@ public class KnowledgeRequestEngine
      */
     @Autowired
     ContextProfileHandler contextProfileHandler;
+
+    @Autowired
+    private ResourceProfileLoaderNew resourceProfileLoader;
 
     /**
      * Gets the response.
@@ -80,19 +86,20 @@ public class KnowledgeRequestEngine
      */
     private List<RequestResult> returnResult( KnowledgeRequest request )
     {
+        Map<Long, KnowledgeResourceProfile> profiles = resourceProfileLoader.getProfiles();
         final List<RequestResult> result = new ArrayList<RequestResult>();
         AccessCheckHandler accessChecker = new AccessCheckHandler();
-        if ( accessChecker.handleRequest( request ) )
+        if ( accessChecker.handleRequest( request, profiles ) )
         {
             return result;
         }
-        else if ( TaskCheckHandler.handleRequest( request ) )
+        else if ( TaskCheckHandler.handleRequest( request, profiles ) )
         {
             return result;
         }
         else
         {
-            contextProfileHandler.handleRequest( request, result );
+            contextProfileHandler.handleRequest( request, result, profiles );
             return result;
         }
     }

@@ -13,7 +13,6 @@
  */
 package org.openinfobutton.service.matching;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +25,6 @@ import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.Context;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.schemas.kb.ProfileDefinition.AuthorizedOrganizations.AuthorizedOrganization;
-import org.openinfobutton.service.profile.ResourceProfileProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,23 +42,8 @@ public class ContextProfileHandler
     /** The matcher. */
     ContextMatcher matcher;
 
-    /** The profiles. */
-    public static Map<Long, KnowledgeResourceProfile> profiles;
-
-    /** The provider. */
-    public ResourceProfileProvider provider;
-
     @Autowired
     ExternalResourceHandler handler;
-
-    /**
-     * Inits the profiles.
-     */
-    private void initProfiles()
-    {
-        provider = ResourceProfileProvider.getInstance();
-        profiles = provider.getProfiles();
-    }
 
     /**
      * Handle request.
@@ -68,9 +51,8 @@ public class ContextProfileHandler
      * @param r the r
      * @return the list
      */
-    public void handleRequest( KnowledgeRequest request , final List<RequestResult> results)
+    public void handleRequest( KnowledgeRequest request , final List<RequestResult> results, Map<Long, KnowledgeResourceProfile> profiles)
     {
-        initProfiles();
         final org.apache.logging.log4j.Logger logger = LogManager.getLogger(ContextProfileHandler.class);
         logger.error("THIS IS WHERE THE CODE IS: " + request.getMainSearchCriteria().getCode().getCode());
 
@@ -93,7 +75,6 @@ public class ContextProfileHandler
             }
 
         }
-        ResourceProfileProvider.resetInstance();
     }
 
     /**

@@ -39,7 +39,6 @@ import org.openinfobutton.profiledb.service.ProfilesDao;
  * The Class ResourceProfileLoaderNew.
  */
 @Service
-@Configurable( dependencyCheck = true )
 public class ResourceProfileLoaderNew
 {
 

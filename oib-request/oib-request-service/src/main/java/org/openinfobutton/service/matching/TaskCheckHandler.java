@@ -24,7 +24,6 @@ import org.openinfobutton.schemas.kb.Context;
 import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.schemas.kb.ProfileDefinition.SupportedTerminologies;
-import org.openinfobutton.service.profile.ResourceProfileProvider;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -36,12 +35,6 @@ public final class TaskCheckHandler
     /** The log. */
     private static Logger log = LogManager.getLogger( TaskCheckHandler.class.getName() );
 
-    /** The profiles. */
-    public static Map<Long, KnowledgeResourceProfile> profiles;
-
-    /** The provider. */
-    public static ResourceProfileProvider provider;
-
     /** The request. */
     public static KnowledgeRequest request;
 
@@ -49,16 +42,6 @@ public final class TaskCheckHandler
      * Instantiates a new task check handler.
      */
     private TaskCheckHandler(){}
-    
-    /**
-     * Inits the profiles.
-     */
-    private static void initProfiles()
-    {
-
-        provider = ResourceProfileProvider.getInstance();
-        profiles = provider.getProfiles();
-    }
 
     /**
      * Handle request.
@@ -66,9 +49,8 @@ public final class TaskCheckHandler
      * @param knowledgeRequest the knowledge request
      * @return true, if successful
      */
-    public static boolean handleRequest( KnowledgeRequest knowledgeRequest )
+    public static boolean handleRequest( KnowledgeRequest knowledgeRequest, Map<Long, KnowledgeResourceProfile> profiles )
     {
-        initProfiles();
         request = knowledgeRequest;
         Map<Long, KnowledgeResourceProfile> tempProfiles = new HashMap<Long, KnowledgeResourceProfile>();
         for ( Map.Entry<Long, KnowledgeResourceProfile> profile : profiles.entrySet() )
@@ -84,7 +66,6 @@ public final class TaskCheckHandler
             }
         }
         profiles = tempProfiles;
-        provider.setProfiles( profiles );
         return profiles.isEmpty();
     }
 

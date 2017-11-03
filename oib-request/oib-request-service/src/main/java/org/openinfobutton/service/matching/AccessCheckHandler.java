@@ -27,7 +27,6 @@ import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.schemas.kb.ProfileDefinition;
-import org.openinfobutton.service.profile.ResourceProfileProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -45,12 +44,6 @@ public final class AccessCheckHandler
     /** The log. */
     private static Logger log = LogManager.getLogger( AccessCheckHandler.class.getName() );
 
-    /** The profiles. */
-    public static Map<Long, KnowledgeResourceProfile> profiles;
-
-    /** The provider. */
-    public static ResourceProfileProvider provider;
-
     /** The access id. */
     private static String accessID;
 
@@ -61,16 +54,6 @@ public final class AccessCheckHandler
     @Autowired
     @Qualifier( "pDao" )
     private ProfilesDao pdao;
-    
-    /**
-     * Inits the profiles.
-     */
-    private void initProfiles()
-    {
-
-        provider = ResourceProfileProvider.getInstance();
-        profiles = provider.getProfiles();
-    }
 
     /**
      * Handle request.
@@ -78,10 +61,9 @@ public final class AccessCheckHandler
      * @param request the request
      * @return true, if successful
      */
-    public boolean handleRequest( KnowledgeRequest request )
+    public boolean handleRequest( KnowledgeRequest request,  Map<Long, KnowledgeResourceProfile> profiles)
     {
 
-        initProfiles();
         final Holder holder = request.getHolder();
         final IDLite representedOrganization = holder.getRepresentedOrganization();
         accessID = representedOrganization.getRoot();
@@ -103,7 +85,6 @@ public final class AccessCheckHandler
             }
         }
         profiles = tempProfiles;
-        provider.setProfiles( profiles );
         return profiles.isEmpty();
     }
 
