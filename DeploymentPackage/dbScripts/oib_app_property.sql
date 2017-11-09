@@ -8,3 +8,8 @@ create table oib_app_property
 )
 ;
 
+INSERT INTO resource_profile.oib_app_property (prop_name, prop_description, prop_value) VALUES ('umls.username', null, '');
+INSERT INTO resource_profile.oib_app_property (prop_name, prop_description, prop_value) VALUES ('umls.password', null, '');
+INSERT INTO resource_profile.oib_app_property (prop_name, prop_description, prop_value) VALUES ('github.username', null, '');
+INSERT INTO resource_profile.oib_app_property (prop_name, prop_description, prop_value) VALUES ('github.password', null, '');
+
