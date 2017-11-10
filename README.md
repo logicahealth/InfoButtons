@@ -22,7 +22,7 @@ New features/improvements:
 
 - Both the OIB manger and responder now both use the latest version of UTS for all requests, rather than a configured version
 
-Big fixes:
+Bug fixes:
 
 - A major issue related to concurrent request handling has been resolved. With increased traffic to our hosted OIB instance, we began noticing errors in the response that seemed to indicate a concurrency issue. This was investigated and is now fixed. Users hosting an instance with heavy traffic should observe much more reliable request handling. 
 
