@@ -7,6 +7,11 @@ Salt Lake City, UT 84108-3514
 (801) 581-4080
 -------------------------------------------------------------------------
 
+Changes for version 2.2
+-----------------------
+
+-added property db creation script to instructions
+
 Changes for version 2.1
 -----------------------
 
@@ -93,10 +98,12 @@ Building
 	2. valueset_and_log.sql
 	3. profile_black_list.sql
 	4. userAuthentication.sql	
+	5. oib_app_property.sql
 	
    If you are upgrading from OIB 2.0, you only need to execute,
    
    migration2021.sql
+   oib_app_property.sql
    
    You may also drop the 3 old valueset tables: concept, subset, and subsetmember but this is not necessary
    and keeping them will not hurt anything which is why I haven't included it in the script.
@@ -146,7 +153,7 @@ Building
 		<umls.username></umls.username>
 		<umls.password></umls.password>
    
-   Set these to match your local database connection parameters, preferred Value Set method, Github account, and UTS account.
+   Set these to match your local database connection parameters, preferred Value Set method, Github account, and UTS account. Note that Github and UTS credentials can also be set via LITE which persist them to the app property database. Credentials set in LITE override those set in the POM.
 
 5) Run
 
