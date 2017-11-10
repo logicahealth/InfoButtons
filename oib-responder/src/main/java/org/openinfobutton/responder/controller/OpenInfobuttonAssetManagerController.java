@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Collection;
 
 @Controller
 @RequestMapping(value = "assetManager")
@@ -61,6 +62,24 @@ public class OpenInfobuttonAssetManagerController {
             e.printStackTrace();
         }
         return asset;
+    }
+
+    @RequestMapping(produces="application/json", value="asset", params={"url"}, method= RequestMethod.GET)
+    @ResponseBody
+    public Collection<Asset> getAssetByUrl(@RequestParam(value = "url") String url)
+    {
+        try
+        {
+            System.out.println("Searching by " + url);
+            return dao.findByAssetUrl(url);
+        }
+        catch (Exception e)
+        {
+            String eMessage = "Unable to connect to database and retrieve asset";
+            System.err.println(eMessage);
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @RequestMapping(produces="application/json", value="copyAsset/{assetId}", method= RequestMethod.GET)
@@ -140,15 +159,18 @@ public class OpenInfobuttonAssetManagerController {
     }
 
     @RequestMapping(value = "asset/update", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public void createOrUpdateAsset(@RequestBody Asset asset)
+    @ResponseBody
+    public String createOrUpdateAsset(@RequestBody Asset asset)
     {
         try {
             dao.save(asset);
+            return asset.getAssetId().toString();
         } catch (Exception e)
         {
             e.printStackTrace();
         }
+
+        return new BigDecimal(-1.0).toString();
     }
 
     @RequestMapping(value = "assetProperty/update", method = RequestMethod.POST)

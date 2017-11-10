@@ -69,6 +69,20 @@ public class ResponderAssetDaoImpl extends DaoBase<Asset> implements ResponderAs
     }
 
     /**
+     * Search for assets that contain the specified URL.
+     *
+     * @param url the URL of interest
+     * @return a collection of Asset objects representing that URL.
+     */
+    @Override
+    @Transactional
+    public Collection<Asset> findByAssetUrl(String url) {
+        Query query = getSessionFactory().getCurrentSession().createQuery("from Asset where assetUrl = :url");
+        query.setParameter("url", url);
+        return query.list();
+    }
+
+    /**
      *
      * @param maxSupportedQueryCriteria
      */

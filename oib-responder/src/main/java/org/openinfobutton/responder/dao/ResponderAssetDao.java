@@ -45,6 +45,8 @@ public interface ResponderAssetDao extends AssetDaoI {
      */
     Collection<Asset> findByInfobuttonRequest(Map<String, String> requestParameters);
 
+    Collection<Asset> findByAssetUrl(String url);
+
     List<Asset> findAll();
 
 }

@@ -88,4 +88,11 @@ public interface ResponderService {
      */
     Map<String, Map<String, String>> getIndexPropertyInterpretationMap(Collection<RequestParameter> requestParameters);
 
+    /**
+     *
+     * @param url
+     * @return
+     */
+    Collection<Asset> findByAssetUrl(String url);
+
 }

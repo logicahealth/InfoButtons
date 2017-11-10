@@ -322,4 +322,16 @@ public class ResponderServiceImpl implements ResponderService {
 
     }
 
+    /**
+     * Search for any assets that are associated with a specific URL
+     *
+     * @param url
+     * @return a Collection of Asset objects that contain the specified URL.
+     */
+    @Override
+    @Transactional
+    public Collection<Asset> findByAssetUrl(String url) {
+        return responderAssetDao.findByAssetUrl(url);
+    }
+
 }
