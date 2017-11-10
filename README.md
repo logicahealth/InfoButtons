@@ -9,6 +9,27 @@ Built with:
 
 [![IntelliJ IDEA](http://devblog.info/wp-content/uploads/2016/07/intellij.png)](https://www.jetbrains.com/idea/)
 
+2.2 RELEASE NOTES
+=================
+
+OpenInfobutton 2.2 includes a major quality of life update and some important bug fixes.
+
+New features/improvements:
+
+- A number of configurable properties are now stored in a database table and editable via LITE. These include UTS credentials, Github credentials and the OIDs used to configure profiles in LITE. This means that setting these properties no longer require rebuilding/restarting the service to set and every user of the same instance of LITE will have the same OIDs to pick from. Due to this change, the entire system configuration page is only accessible to administrators. 
+
+- All terminology transformations for medications will now use the RxNorm REST API rather than UTS. These should speed up requests that require medication terminology transformations as the RxNorm REST API is much faster. 
+
+Big fixes:
+
+- A major issue related to concurrent request handling has been resolved. With increased traffic to our hosted OIB instance, we began noticing errors in the response that seemed to indicate a concurrency issue. This was investigated and is now fixed. Users hosting an instance with heavy traffic should observe much more reliable request handling. 
+
+- Terminology transformations that returned no results by the underlying API were previously causing an error with the response. This has been resolved and the request should be properly handled with a failed match rather than throwing an error.
+
+- We've also removed transformations that are no longer supported by the underlying APIs so they are no longer attempted.
+
+
+
 2.1 RELEASE NOTES
 =================
 
