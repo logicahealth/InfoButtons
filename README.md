@@ -20,6 +20,8 @@ New features/improvements:
 
 - All terminology transformations for medications will now use the RxNorm REST API rather than UTS. These should speed up requests that require medication terminology transformations as the RxNorm REST API is much faster. 
 
+- Both the OIB manger and responder now both use the latest version of UTS for all requests, rather than a configured version
+
 Big fixes:
 
 - A major issue related to concurrent request handling has been resolved. With increased traffic to our hosted OIB instance, we began noticing errors in the response that seemed to indicate a concurrency issue. This was investigated and is now fixed. Users hosting an instance with heavy traffic should observe much more reliable request handling. 
