@@ -5,10 +5,6 @@ Repository for VHA Innovation 182 - Context Sensitive InfoButtons
 
 This project is a part of the Veterans Health Administration (VHA) Grassroots initiative. Infobuttons are context-sensitive links embedded in the electronic health record (EHR). They use clinical context information from the EHR such as patient demographics, medications, diagnoses, lab results, user role, and clinical setting to help find answers to clinicians' and patients' clinical questions. This project will insert Infobuttons into eHMP and other VHA systems at several different points and use an Infobutton Manager to customize the way resources are delivered to clinicians. OpenInfobutton software has been certified through the Open Source EHR Alliance (OSEHRA) and is available through Apache 2.0 license.
 
-Built with:
-
-[![IntelliJ IDEA](http://devblog.info/wp-content/uploads/2016/07/intellij.png)](https://www.jetbrains.com/idea/)
-
 2.2 RELEASE NOTES
 =================
 
@@ -22,7 +18,7 @@ New features/improvements:
 
 - Both the OIB manger and responder now both use the latest version of UTS for all requests, rather than a configured version
 
-Big fixes:
+Bug fixes:
 
 - A major issue related to concurrent request handling has been resolved. With increased traffic to our hosted OIB instance, we began noticing errors in the response that seemed to indicate a concurrency issue. This was investigated and is now fixed. Users hosting an instance with heavy traffic should observe much more reliable request handling. 
 
@@ -30,6 +26,15 @@ Big fixes:
 
 - We've also removed transformations that are no longer supported by the underlying APIs so they are no longer attempted.
 
+Building and redeploying
+------------------------
+
+This release requires a rebuild and redeploy of all the following modules in the sequence below (refer to the BUILDGUIDE within each module for further instructions):
+- Infobuton manager: oib-request
+- Infobutton responder: oib-responder
+- LITE client: oib-site-lite-ui
+
+NOTE: This release has a few database changes. Instructions are available in the BUILDGUIDE under the oib-request module.  
 
 
 2.1 RELEASE NOTES
