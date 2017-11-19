@@ -26,7 +26,7 @@ CREATE TABLE `subset_json`
   `last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `name` VARCHAR(255) NOT NULL,
   `value_set` LONGBLOB
-)ENGINE=MyISAM DEFAULT CHARSET=latin1
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 DROP TABLE IF EXISTS `logs`;
@@ -38,6 +38,6 @@ CREATE TABLE `logs` (
   `timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `clientIP` varchar(45) NOT NULL,
   `orgID` varchar(45) NOT NULL,
-  `response` mediumtext NULL
+  `response` mediumtext NULL,
   PRIMARY KEY  (`logsId`)
 ) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
