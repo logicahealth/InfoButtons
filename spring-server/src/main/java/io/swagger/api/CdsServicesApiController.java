@@ -43,7 +43,10 @@ public class CdsServicesApiController implements CdsServicesApi {
 
     public ResponseEntity<CDSServiceInformation> cdsServicesGet() {
         // do some magic!
-        return new ResponseEntity<CDSServiceInformation>(HttpStatus.OK);
+        CDSServiceInformation information = new CDSServiceInformation();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<CDSServiceInformation>(information, headers, HttpStatus.OK);
     }
 
     public ResponseEntity<Void> cdsServicesIdAnalyticsUuidPost(@ApiParam(value = "The id of this CDS service",required=true ) @PathVariable("id") String id,
