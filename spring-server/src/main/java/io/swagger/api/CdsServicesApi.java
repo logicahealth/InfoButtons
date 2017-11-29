@@ -30,6 +30,7 @@ public interface CdsServicesApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.GET)
+    @CrossOrigin
     ResponseEntity<CDSServiceInformation> cdsServicesGet();
 
 
@@ -41,6 +42,7 @@ public interface CdsServicesApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
+    @CrossOrigin
     ResponseEntity<Void> cdsServicesIdAnalyticsUuidPost(@ApiParam(value = "The id of this CDS service",required=true ) @PathVariable("id") String id,@ApiParam(value = "The UUID of the event (for example, a suggestion)",required=true ) @PathVariable("uuid") String uuid);
 
 
@@ -52,6 +54,7 @@ public interface CdsServicesApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
+    @CrossOrigin
     ResponseEntity<CDSResponse> cdsServicesIdPost(@ApiParam(value = "The id of this CDS service",required=true ) @PathVariable("id") String id,@ApiParam(value = "Body of CDS service request" ,required=true )  @Valid @RequestBody CDSRequest request);
 
 }
