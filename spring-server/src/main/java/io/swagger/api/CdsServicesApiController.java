@@ -44,6 +44,12 @@ public class CdsServicesApiController implements CdsServicesApi {
     public ResponseEntity<CDSServiceInformation> cdsServicesGet() {
         // do some magic!
         CDSServiceInformation information = new CDSServiceInformation();
+        CDSService service = new CDSService();
+        service.setHook(Hook.MEDICATION_PRESCRIBE);
+        service.setTitle("OpenInfobutton Knowledge Response Service");
+        service.description("A Protype OpenInfobutton to CDS-Hooks Wrapper");
+        service.setId("oibResponse");
+        information.addServicesItem(service);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<CDSServiceInformation>(information, headers, HttpStatus.OK);
@@ -76,9 +82,14 @@ public class CdsServicesApiController implements CdsServicesApi {
         }
         CDSResponse response = new CDSResponse();
         Card oibCard = new Card();
-        oibCard.setSummary("OpenInfobutton Request Card");
-        oibCard.setDetail("MedLine Plus");
+        oibCard.setSummary("Patient education on " + codes.get("display"));
+        oibCard.setDetail("");
         oibCard.setIndicator(Card.IndicatorEnum.INFO);
+        Source source = new Source();
+        source.setLabel("MedLine Plus");
+        source.setUrl("https://medlineplus.gov/");
+        oibCard.setSource(source);
+        oibCard.setSuggestions(new ArrayList<Suggestion>());
         List<Link> links = new ArrayList<>();
         Link oibLink = new Link();
         oibLink.setLabel(title);
