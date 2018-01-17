@@ -106,6 +106,10 @@ public class CdsServicesApiController implements CdsServicesApi {
                     oibLink.setUrl(link);
                     oibLink.setType("online");
                     links.add(oibLink);
+                    if (links.size() >= 3 )
+                    {
+                        break;
+                    }
                 }
                 oibCard.setLinks(links);
                 source.setLabel(label);
