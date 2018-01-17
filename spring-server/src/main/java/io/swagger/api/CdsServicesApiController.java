@@ -111,6 +111,7 @@ public class CdsServicesApiController implements CdsServicesApi {
                         break;
                     }
                 }
+                oibCard.setSuggestions(new ArrayList<Suggestion>());
                 oibCard.setLinks(links);
                 source.setLabel(label);
                 source.setUrl(url);
