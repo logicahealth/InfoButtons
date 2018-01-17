@@ -21,6 +21,7 @@ import org.xml.sax.InputSource;
 
 import java.io.ByteArrayInputStream;
 import java.io.StringReader;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
+import static utils.XmlUtil.*;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-26T20:35:01.320Z")
 
@@ -68,39 +71,58 @@ public class CdsServicesApiController implements CdsServicesApi {
         String oibResponse = new RestTemplate().getForObject("http://service.oib.utah.edu:8080/infobutton-service/infoRequest?representedOrganization.id.root=cdshookstest.org&taskContext.c.c=MLREV&mainSearchCriteria.v.c=" + codes.get("code") +"&mainSearchCriteria.v.cs=2.16.840.1.113883.6.88&mainSearchCriteria.v.dn=" + codes.get("display") +"&knowledgeResponseType=application/xml", String.class);
         String title = "";
         String link = "";
+        String label = "";
+        String url = "";
+        CDSResponse response = new CDSResponse();
+        Card oibCard;
+        List<Link> links;
+        Link oibLink;
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(oibResponse.getBytes())));
             doc.getDocumentElement().normalize();
-            Element element = (Element)doc.getElementsByTagName("entry").item(0);
-            title = element.getElementsByTagName("title").item(0).getTextContent();
-            link = element.getElementsByTagName("link").item(0).getAttributes().getNamedItem("href").getTextContent();
+            Element eElement;
+            NodeList nodes = (NodeList)doc.getElementsByTagName("feed");
+            for (Node n : asList(doc.getElementsByTagName("feed")))
+            {
+                oibCard = new Card();
+                oibCard.setSummary("Patient education on " + codes.get("display"));
+                oibCard.setDetail("");
+                oibCard.setIndicator(Card.IndicatorEnum.INFO);
+                eElement = (Element)n;
+                label = eElement.getElementsByTagName("title").item(0).getTextContent();
+                Source source = new Source();
+                links = new ArrayList<>();
+                for (Node nl : asList(eElement.getElementsByTagName("entry")))
+                {
+                    oibLink = new Link();
+                    eElement = (Element)nl;
+                    title = eElement.getElementsByTagName("title").item(0).getTextContent();
+                    link = eElement.getElementsByTagName("link").item(0).getAttributes().getNamedItem("href").getTextContent();
+                    URI uri = new URI(link);
+                    url = uri.getHost();
+                    oibLink.setLabel(title);
+                    oibLink.setUrl(link);
+                    oibLink.setType("online");
+                    links.add(oibLink);
+                }
+                oibCard.setLinks(links);
+                source.setLabel(label);
+                source.setUrl(url);
+                oibCard.setSource(source);
+                response.addCardsItem(oibCard);
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        CDSResponse response = new CDSResponse();
-        Card oibCard = new Card();
-        oibCard.setSummary("Patient education on " + codes.get("display"));
-        oibCard.setDetail("");
-        oibCard.setIndicator(Card.IndicatorEnum.INFO);
-        Source source = new Source();
-        source.setLabel("MedLine Plus");
-        source.setUrl("https://medlineplus.gov/");
-        oibCard.setSource(source);
-        oibCard.setSuggestions(new ArrayList<Suggestion>());
-        List<Link> links = new ArrayList<>();
-        Link oibLink = new Link();
-        oibLink.setLabel(title);
-        oibLink.setUrl(link);
-        oibLink.setType("online");
-        links.add(oibLink);
-        oibCard.setLinks(links);
-        response.addCardsItem(oibCard);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<CDSResponse>(response, headers, HttpStatus.OK);
     }
+
+
 
 }
