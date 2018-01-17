@@ -101,7 +101,7 @@ public class CdsServicesApiController implements CdsServicesApi {
                     title = eElement.getElementsByTagName("title").item(0).getTextContent();
                     link = eElement.getElementsByTagName("link").item(0).getAttributes().getNamedItem("href").getTextContent();
                     URI uri = new URI(link);
-                    url = uri.getHost();
+                    url = "http://" + uri.getHost();
                     oibLink.setLabel(title);
                     oibLink.setUrl(link);
                     oibLink.setType("online");
