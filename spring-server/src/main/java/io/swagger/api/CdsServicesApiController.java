@@ -53,6 +53,9 @@ public class CdsServicesApiController implements CdsServicesApi {
         service.description("A Protype OpenInfobutton to CDS-Hooks Wrapper");
         service.setId("oibResponse");
         information.addServicesItem(service);
+        Prefetch prefetch = new Prefetch();
+        prefetch.put("p", "Patient/{{Patient.id}}");
+        service.setPrefetch(prefetch);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<CDSServiceInformation>(information, headers, HttpStatus.OK);
