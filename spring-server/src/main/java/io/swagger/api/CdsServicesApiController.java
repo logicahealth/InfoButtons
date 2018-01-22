@@ -22,9 +22,9 @@ import org.xml.sax.InputSource;
 import java.io.ByteArrayInputStream;
 import java.io.StringReader;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javax.validation.constraints.*;
 import javax.validation.Valid;
@@ -40,6 +40,15 @@ import static utils.XmlUtil.*;
 
 @Controller
 public class CdsServicesApiController implements CdsServicesApi {
+
+    private static final Map<String, String> genders;
+    static {
+
+        Map<String, String> map = new HashMap<>();
+        map.put("male", "M");
+        map.put("female", "F");
+        genders = Collections.unmodifiableMap(map);
+    }
 
 
 
@@ -71,7 +80,17 @@ public class CdsServicesApiController implements CdsServicesApi {
         @ApiParam(value = "Body of CDS service request" ,required=true )  @Valid @RequestBody CDSRequest request) {
         HashMap context = (HashMap)request.getContext().get(0);
         HashMap codes = ((HashMap) ((List) ((HashMap) context.get("medicationCodeableConcept")).get("coding")).get(0));
-        String oibResponse = new RestTemplate().getForObject("http://service.oib.utah.edu:8080/infobutton-service/infoRequest?representedOrganization.id.root=cdshookstest.org&taskContext.c.c=MLREV&mainSearchCriteria.v.c=" + codes.get("code") +"&mainSearchCriteria.v.cs=2.16.840.1.113883.6.88&mainSearchCriteria.v.dn=" + codes.get("display") +"&knowledgeResponseType=application/xml", String.class);
+        String oibAge = new String();
+        String oibGender = new String();
+        if (!((HashMap) request.getPrefetch()).isEmpty()) {
+            HashMap patientContext = (HashMap) ((HashMap) ((HashMap) request.getPrefetch()).get("p")).get("resource");
+            String gender = (String) patientContext.get("gender");
+            String birthDate = (String) patientContext.get("birthDate");
+            oibAge = "&age.v.v=" + birthDateToAge(birthDate) + "&age.v.u=a";
+            oibGender = "&patientPerson.administrativeGenderCode.c=" + genders.get(gender) + "&patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1";
+        }
+        String oibRequest = "http://service.oib.utah.edu:8080/infobutton-service/infoRequest?representedOrganization.id.root=cdshookstest.org&taskContext.c.c=MLREV&mainSearchCriteria.v.c=" + codes.get("code") +"&mainSearchCriteria.v.cs=2.16.840.1.113883.6.88&mainSearchCriteria.v.dn=" + codes.get("display") + oibAge + oibGender +"&performer=PROV&knowledgeResponseType=application/xml";
+        String oibResponse = new RestTemplate().getForObject(oibRequest, String.class);
         String title = "";
         String link = "";
         String label = "";
@@ -132,5 +151,42 @@ public class CdsServicesApiController implements CdsServicesApi {
     }
 
 
+    private int birthDateToAge (String birthDateString)
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateOfBirth = new Date();
+        try {
+
+            dateOfBirth = dateFormat.parse(birthDateString);
+        } catch (ParseException e) {
+
+            e.printStackTrace();
+        }
+        Calendar today = Calendar.getInstance();
+        Calendar birthDate = Calendar.getInstance();
+        birthDate.setTime(dateOfBirth);
+        if (birthDate.after(today)) {
+            throw new IllegalArgumentException("You don't exist yet");
+        }
+        int todayYear = today.get(Calendar.YEAR);
+        int birthDateYear = birthDate.get(Calendar.YEAR);
+        int todayDayOfYear = today.get(Calendar.DAY_OF_YEAR);
+        int birthDateDayOfYear = birthDate.get(Calendar.DAY_OF_YEAR);
+        int todayMonth = today.get(Calendar.MONTH);
+        int birthDateMonth = birthDate.get(Calendar.MONTH);
+        int todayDayOfMonth = today.get(Calendar.DAY_OF_MONTH);
+        int birthDateDayOfMonth = birthDate.get(Calendar.DAY_OF_MONTH);
+        int age = todayYear - birthDateYear;
+
+        // If birth date is greater than todays date (after 2 days adjustment of leap year) then decrement age one year
+        if ((birthDateDayOfYear - todayDayOfYear > 3) || (birthDateMonth > todayMonth)){
+            age--;
+
+            // If birth date and todays date are of same month and birth day of month is greater than todays day of month then decrement age
+        } else if ((birthDateMonth == todayMonth) && (birthDateDayOfMonth > todayDayOfMonth)){
+            age--;
+        }
+        return age;
+    }
 
 }
