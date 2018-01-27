@@ -120,7 +120,7 @@ public class CdsServicesApiController implements CdsServicesApi {
                 problemName = ((String) problem.get("display"));
 
             }
-            String oibRequest = "http://service.oib.utah.edu:8080/infobutton-service/infoRequest?representedOrganization.id.root=cdshookstest.org&taskContext.c.c=MLREV&mainSearchCriteria.v.c=" + problemCode + "&mainSearchCriteria.v.cs=2.16.840.1.113883.6.96&mainSearchCriteria.v.dn=" + problemName + oibAge + oibGender + "&performer=PROV&knowledgeResponseType=application/xml";
+            String oibRequest = "http://service.oib.utah.edu:8080/infobutton-service/infoRequest?representedOrganization.id.root=cdshookstest.org&taskContext.c.c=PROBLISTREV&mainSearchCriteria.v.c=" + problemCode + "&mainSearchCriteria.v.cs=2.16.840.1.113883.6.96&mainSearchCriteria.v.dn=" + problemName + oibAge + oibGender + "&performer=PROV&knowledgeResponseType=application/xml";
             String oibResponse = new RestTemplate().getForObject(oibRequest, String.class);
 
             return getHooksResponse(oibResponse);
