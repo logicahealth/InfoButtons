@@ -186,8 +186,8 @@ public class CdsServicesApiController implements CdsServicesApi {
             NodeList nodes = (NodeList) doc.getElementsByTagName("feed");
             for (Node n : asList(doc.getElementsByTagName("feed"))) {
                 oibCard = new Card();
-                oibCard.setDetail("");
                 oibCard.setIndicator(Card.IndicatorEnum.INFO);
+                oibCard.setDetail("");
                 eElement = (Element) n;
                 label = eElement.getElementsByTagName("title").item(0).getTextContent();
                 if (!label.equals("MedlinePlus"))
@@ -209,6 +209,9 @@ public class CdsServicesApiController implements CdsServicesApi {
                     url = "http://" + uri.getHost();
                     oibLink.setLabel(title);
                     oibLink.setUrl(link);
+                    if (eElement.getElementsByTagName("summary").item(0) != null && oibCard.getDetail().isEmpty()) {
+                        oibCard.setDetail(eElement.getElementsByTagName("summary").item(0).getTextContent());
+                    }
                     oibLink.setType("online");
                     links.add(oibLink);
                     if (links.size() >= 3) {
