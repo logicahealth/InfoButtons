@@ -87,8 +87,15 @@ public class CdsServicesApiController implements CdsServicesApi {
     public ResponseEntity<CDSResponse> cdsServicesIdPost(@ApiParam(value = "The id of this CDS service",required=true ) @PathVariable("id") String id,
         @ApiParam(value = "Body of CDS service request" ,required=true )  @Valid @RequestBody CDSRequest request) {
         if (request.getHook().equals(Hook.MEDICATION_PRESCRIBE)) {
-            HashMap context = (HashMap) request.getContext().get(0);
-            HashMap codes = ((HashMap) ((List) ((HashMap) context.get("medicationCodeableConcept")).get("coding")).get(0));
+            HashMap context = (HashMap) request.getContext();
+            HashMap codes;
+            if (((HashMap) context.get("medicationCodeableConcept")) != null) {
+
+                codes = ((HashMap) ((List) ((HashMap) context.get("medicationCodeableConcept")).get("coding")).get(0));
+            } else {
+
+                codes = ((HashMap) ((List) ((HashMap) ((HashMap) ((List) context.get("medications")).get(0)).get("medicationCodeableConcept")).get("coding")).get(0));
+            }
             String oibAge = new String();
             String oibGender = new String();
             if (!((HashMap) request.getPrefetch()).isEmpty()) {

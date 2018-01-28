@@ -40,7 +40,7 @@ public class CDSRequest   {
   private String encounter = null;
 
   @JsonProperty("context")
-  private List<Object> context = null;
+  private Object context = null;
 
   @JsonProperty("prefetch")
   private Object prefetch = null;
@@ -187,16 +187,8 @@ public class CDSRequest   {
     this.encounter = encounter;
   }
 
-  public CDSRequest context(List<Object> context) {
+  public CDSRequest context(Object context) {
     this.context = context;
-    return this;
-  }
-
-  public CDSRequest addContextItem(Object contextItem) {
-    if (this.context == null) {
-      this.context = new ArrayList<Object>();
-    }
-    this.context.add(contextItem);
     return this;
   }
 
@@ -207,11 +199,11 @@ public class CDSRequest   {
   @ApiModelProperty(value = "")
 
 
-  public List<Object> getContext() {
+  public Object getContext() {
     return context;
   }
 
-  public void setContext(List<Object> context) {
+  public void setContext(Object context) {
     this.context = context;
   }
 
