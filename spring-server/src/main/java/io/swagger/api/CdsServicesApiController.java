@@ -219,7 +219,7 @@ public class CdsServicesApiController implements CdsServicesApi {
                     if (eElement.getElementsByTagName("summary").item(0) != null && oibCard.getDetail().isEmpty()) {
                         oibCard.setDetail(eElement.getElementsByTagName("summary").item(0).getTextContent());
                     }
-                    oibLink.setType("online");
+                    oibLink.setType("absolute");
                     links.add(oibLink);
                     if (links.size() >= 3) {
                         break;
