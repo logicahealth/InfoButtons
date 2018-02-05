@@ -1,7 +1,7 @@
 {
   "name": "oib-site-lite-ui",
   "private": true,
-  "version": "2.1.0-snapshot",
+  "version": "2.2.0-snapshot",
   "description": "An OpenInfobutton client for configuring OpenInfobutton settings/behavior.",
   "repository": "https://github.com/angular/angular-seed",
   "license": "Apache 2.0",

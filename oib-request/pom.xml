@@ -2,20 +2,20 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.openinfobutton</groupId>
   <artifactId>oib-request</artifactId>
-  <version>2.1-SNAPSHOT</version>
+  <version>2.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>oib-request</name>
  	<properties>
 
 		<datasource1.url>jdbc:mysql://localhost:3306/valueset_and_log</datasource1.url>
 		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
-		<datasource1.user></datasource1.user>
-		<datasource1.password></datasource1.password>
+		<datasource1.user />
+		<datasource1.password />
 		
 		<datasource2.url>jdbc:mysql://localhost:3306/resource_profile</datasource2.url>
 		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
-		<datasource2.user></datasource2.user>
-		<datasource2.password></datasource2.password>
+		<datasource2.user />
+		<datasource2.password />
 
 		<!-- ============== Value Set Configuration =================
 
@@ -32,8 +32,8 @@
 		-->
 
 		<service.subsetImplementation>cloudValueSets</service.subsetImplementation>
-		<github.username></github.username>
-		<github.password></github.password>
+		<github.username />
+		<github.password />
 
 		<!--
 		==== Local database implementation ====
@@ -45,8 +45,8 @@
 
 		<!-- ================= End Value Set Configuration ================= -->
 
-		<umls.username></umls.username>
-		<umls.password></umls.password>
+		<umls.username />
+		<umls.password />
 
 		<spring.version>4.3.8.RELEASE</spring.version>
 		<hibernate.version>4.2.0.Final</hibernate.version>
