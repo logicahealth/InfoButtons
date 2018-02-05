@@ -102,6 +102,18 @@ public class Asset
     private String assetMimeType;
 
     /**
+     * Knowledge response title
+     */
+    @Column(name = "KNOWLEDGE_CONTENT")
+    private String knowledgeContent;
+
+    /**
+     * Knowledge response summary
+     */
+    @Column (name = "KNOWLEDGE_SUMMARY")
+    private String knowledgeSummary;
+
+    /**
      * The asset properties.
      */
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "asset", orphanRemoval = true)
@@ -229,6 +241,22 @@ public class Asset
      */
     public void setAssetMimeType(String assetMimeType) {
         this.assetMimeType = assetMimeType;
+    }
+
+    public String getKnowledgeContent() {
+        return knowledgeContent;
+    }
+
+    public void setKnowledgeContent(String knowledgeContent) {
+        this.knowledgeContent = knowledgeContent;
+    }
+
+    public String getKnowledgeSummary() {
+        return knowledgeSummary;
+    }
+
+    public void setKnowledgeSummary(String knowledgeSummary) {
+        this.knowledgeSummary = knowledgeSummary;
     }
 
     /**
