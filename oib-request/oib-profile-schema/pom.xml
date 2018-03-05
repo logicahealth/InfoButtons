@@ -75,7 +75,7 @@
                     </args>
                     <plugins>
                         <plugin>
-                            <groupId>net.codesup.util</groupId>
+                            <groupId>net.codesup.utils</groupId>
                             <artifactId>jaxb2-rich-contract-plugin</artifactId>
                             <version>1.15.0</version>
                         </plugin>

@@ -95,7 +95,7 @@ public class ServiceAssetDaoImpl
 
     /*
      * (non-Javadoc)
-     * @see org.openinfobutton.service.dao.ServiceAssetDao#deleteAllAssetPropertiesByGeneratedByCode(java.util.Set)
+     * @see org.openinfobutton.service.dao.ServiceAssetDao#deleteAllAssetPropertiesByGeneratedByCode(java.utils.Set)
      */
     @Override
     public void deleteAllAssetPropertiesByGeneratedByCode(Set<String> generatedByCodes) {
