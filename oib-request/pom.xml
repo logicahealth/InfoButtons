@@ -50,6 +50,7 @@
 
 		<spring.version>4.3.8.RELEASE</spring.version>
 		<hibernate.version>4.2.0.Final</hibernate.version>
+		<tomcat.version>9.0.5</tomcat.version>
 		<jacoco.version>0.7.0.201403182114</jacoco.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
