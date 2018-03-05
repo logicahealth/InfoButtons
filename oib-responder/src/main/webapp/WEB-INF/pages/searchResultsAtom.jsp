@@ -39,6 +39,10 @@
 	<id>${atomFeedMetadata['id.urn']}</id><c:forEach items="${assets}" var="asset">
 	<entry xml:lang="en">
 		<title type="text">${fn:escapeXml(asset.displayName)}</title>
+		<c:if test="${not empty asset.knowledgeSummary}">
+			<summary type="html">${fn:escapeXml(asset.knowledgeSummary)}</summary></c:if>
+		<c:if test="${not empty asset.knowledgeContent}">
+			<content type="html">${fn:escapeXml(asset.knowledgeContent)}</content></c:if>
 		<link href="${asset.assetUrl}" hreflang="en" rel="via" type="${asset.assetMimeType}" title="${fn:escapeXml(asset.displayName)}"/>
 		<id>${atomFeedMetadata['entry.id.urnPrefix']}${asset.assetId}</id>
 		<updated><fmt:formatDate value="${asset.lastUpdateDate}" pattern="yyyy-MM-dd'T'HH:mm:ss"/></updated><c:forEach items="${asset.assetProperties}" var="indexProperty"><c:set var="typeMap" value="${indexPropertyInterpretationMap[indexProperty.propertyName]}"/><c:if test="${not empty typeMap['CODE'] and not empty indexProperty.code}">
