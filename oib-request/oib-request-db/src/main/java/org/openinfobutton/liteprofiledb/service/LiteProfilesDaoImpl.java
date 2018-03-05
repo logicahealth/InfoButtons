@@ -19,7 +19,7 @@ public class LiteProfilesDaoImpl implements LiteProfilesDao {
      * The session factory.
      */
     @Autowired
-    @Qualifier ("liteprofilesessionFactory")
+    @Qualifier ("profilesessionFactory")
     SessionFactory sessionFactory;
 
     /**

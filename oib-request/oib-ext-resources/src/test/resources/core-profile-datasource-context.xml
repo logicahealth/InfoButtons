@@ -31,18 +31,21 @@
 
 	<!-- Data source: reads a properties file and injects them into a DBCP DS 
 		Second datasource for Resource Profiles -->
-	<bean id="profiledataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClass">
+	<bean id="profiledataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+		<property name="driverClassName">
 			<value>${datasource2.driver}</value>
 		</property>
-		<property name="jdbcUrl">
+		<property name="url">
 			<value>${datasource2.url}</value>
 		</property>
-		<property name="user">
+		<property name="username">
 			<value>${datasource2.user}</value>
 		</property>
 		<property name="password">
 			<value>${datasource2.password}</value>
+		</property>
+		<property name="testWhileIdle">
+			<value>true</value>
 		</property>
 	</bean>
 
@@ -81,6 +84,9 @@
 			<list>
 				<value><![CDATA[org.openinfobutton.profiledb.domain.Profiles]]></value>
 				<value><![CDATA[org.openinfobutton.profiledb.domain.ProfileBlackList]]></value>
+				<value><![CDATA[org.openinfobutton.oibpropertydb.domain.OibAppProperty]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.CloudProfiles]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.CustomProfiles]]></value>
 				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.UserAuthentication]]></value>
 			</list>
 		</property>
@@ -97,9 +103,6 @@
 	<bean id="profiletransactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="profilesessionFactory" />
-	</bean>
-
-	<bean id="pDao" class="org.openinfobutton.profiledb.service.ProfilesDaoImpl">
 	</bean>
 	<!-- =========================================== -->
 	<!-- OpenInfobutton data layer -->

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	   xmlns:jaxws="http://cxf.apache.org/jaxws"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
 	   xsi:schemaLocation="
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -26,19 +25,30 @@
 		Data source: reads a properties file and injects them into a DBCP DS
 		Second datasource for Resource Profiles
 	-->
-	<bean id="profiledataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
-      <property name="driverClass"><value>${datasource2.driver}</value></property> 
-      <property name="jdbcUrl"><value>${datasource2.url}</value></property> 
-      <property name="user"><value>${datasource2.user}</value></property> 
-      <property name="password"><value>${datasource2.password}</value></property>
-    </bean>
+	<bean id="profiledataSource" name="profiledataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+		<property name="driverClassName">
+			<value>${datasource2.driver}</value>
+		</property>
+		<property name="url">
+			<value>${datasource2.url}</value>
+		</property>
+		<property name="username">
+			<value>${datasource2.user}</value>
+		</property>
+		<property name="password">
+			<value>${datasource2.password}</value>
+		</property>
+		<property name="testWhileIdle">
+			<value>true</value>
+		</property>
+	</bean>
 	
 
 	
 
 <!-- Session factory -->
 	<!-- Session Factory for the second datasource-->
-	<bean id="profilesessionFactory"
+	<bean id="profilesessionFactory" name="profilesessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="profiledataSource" />
 
@@ -46,20 +56,11 @@
 			Hibernate configuration properties (read from a properties file)
 		-->
 		<property name="hibernateProperties">
-			<bean
-				class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-				
-				<property name="locations">
-					<list>
-						<!--
-							hibernate.config.file, datasource.config.file should be defined
-							somewhere in the spring.properties layers
-						-->
-						<value>/hibernate.properties
-						</value>
-				</list>
-				</property>
-			</bean>
+			<map>
+				<entry key="hibernate.show_sql" value="false"/>
+				<entry key="hibernate.default_schema" value="resource_profile" />
+				<entry key="spring.jpa.hibernate.ddl-auto" value="validate" />
+			</map>
 		</property>
 
 		<!-- Using improved naming strategy -->
@@ -68,10 +69,11 @@
 		</property>
 
 		<!-- Mapping annotated classes using search patterns -->
-		<property name="annotatedClasses">
+		<property name="packagesToScan">
 			<list>
-				<value><![CDATA[org.openinfobutton.profiledb.domain.Profiles]]></value>
-				<value><![CDATA[org.openinfobutton.profiledb.domain.ProfileBlackList]]></value>
+				<value><![CDATA[org.openinfobutton.profiledb.domain]]></value>
+				<value><![CDATA[org.openinfobutton.oibpropertydb.domain]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain]]></value>
 			</list>
 		</property>
 	</bean>
@@ -101,28 +103,5 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="profilesessionFactory" />
 	</bean>
-
-
-	
-<!--    <bean id="daoEager" class="edu.utah.further.core.data.service.DaoHibernateEagerImpl" > -->
-<!--    		<property name="sessionFactory" ref="sessionFactory"></property> -->
-<!--    </bean> -->
-
-<!--    <bean class="edu.utah.further.core.data.service.DaoHibernateEagerImpl"> -->
-<!--    <constructor-arg ref="profilesessionFactory"/> -->
-<!--    </bean> -->
-
-   <bean id="pDao" class="org.openinfobutton.profiledb.service.ProfilesDaoImpl"> </bean>
-	<!-- =========================================== -->
-	<!-- FURTHeR data layer                          -->
-	<!-- =========================================== -->
-
-	<!--
-		Component auto-detection configuration in the data layer package. Must
-		come AFTER sessionFactory is declared for some strange reason when
-		deployed to the ESB.
-	-->
-<!-- 	<context:component-scan base-package="edu.utah.further.core.data" /> -->
-	<context:component-scan base-package="org.openinfobutton.profiledb.service" />
 	
 </beans>

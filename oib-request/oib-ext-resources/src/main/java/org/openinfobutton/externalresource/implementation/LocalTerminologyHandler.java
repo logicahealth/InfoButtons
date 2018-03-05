@@ -53,7 +53,7 @@ public class LocalTerminologyHandler
 
     /*
      * (non-Javadoc)
-     * @see TerminologyHandler#isSubsetMember(org.openinfobutton.schemas.kb.Code, java.util.List)
+     * @see TerminologyHandler#isSubsetMember(org.openinfobutton.schemas.kb.Code, java.utils.List)
      */
     @Override
     public Boolean isSubsetMember( Code code, List<Id> subsetIdList )

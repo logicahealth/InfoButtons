@@ -25,12 +25,23 @@
 		Data source: reads a properties file and injects them into a DBCP DS
 		Second datasource for Resource Profiles
 	-->
-	<bean id="profiledataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
-      <property name="driverClass"><value>${datasource2.driver}</value></property> 
-      <property name="jdbcUrl"><value>${datasource2.url}</value></property> 
-      <property name="user"><value>${datasource2.user}</value></property> 
-      <property name="password"><value>${datasource2.password}</value></property>
-    </bean>
+	<bean id="profiledataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+		<property name="driverClassName">
+			<value>${datasource2.driver}</value>
+		</property>
+		<property name="url">
+			<value>${datasource2.url}</value>
+		</property>
+		<property name="username">
+			<value>${datasource2.user}</value>
+		</property>
+		<property name="password">
+			<value>${datasource2.password}</value>
+		</property>
+		<property name="testWhileIdle">
+			<value>true</value>
+		</property>
+	</bean>
 	
 
 	
@@ -71,12 +82,16 @@
 			<list>
 				<value><![CDATA[org.openinfobutton.profiledb.domain.Profiles]]></value>
 				<value><![CDATA[org.openinfobutton.profiledb.domain.ProfileBlackList]]></value>
+				<value><![CDATA[org.openinfobutton.oibpropertydb.domain.OibAppProperty]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.CloudProfiles]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.CustomProfiles]]></value>
+				<value><![CDATA[org.openinfobutton.liteprofiledb.domain.UserAuthentication]]></value>
 			</list>
 		</property>
 	</bean>
 
 <!-- 	Hibernate data access template -->
-	<bean id="profilehibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+	<bean id="profilehibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
 		<property name="sessionFactory" ref="profilesessionFactory" />
 	</bean>
 
@@ -100,16 +115,5 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="profilesessionFactory" />
 	</bean>
-
-   <bean id="pDao" class="org.openinfobutton.profiledb.service.ProfilesDaoImpl"> </bean>
-	<!-- =========================================== -->
-	<!-- FURTHeR data layer                          -->
-	<!-- =========================================== -->
-
-	<!--
-		Component auto-detection configuration in the data layer package. Must
-		come AFTER sessionFactory is declared for some strange reason when.
-	-->
-	<context:component-scan base-package="org.openinfobutton.profiledb.service" />
 	
 </beans>

@@ -52,7 +52,7 @@ public final class AccessCheckHandler
 
     /** The pdao. */
     @Autowired
-    @Qualifier( "pDao" )
+    @Qualifier( "profilesdbDao" )
     private ProfilesDao pdao;
 
     /**

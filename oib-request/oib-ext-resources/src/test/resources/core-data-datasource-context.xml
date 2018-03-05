@@ -32,18 +32,21 @@
 		First datasource for Concept and Subset <property name="driverClass"><value>com.mysql.jdbc.Driver</value></property> 
 		<property name="jdbcUrl"><value>jdbc:mysql://mysql.chpc.utah.edu:3306/prodoib</value></property> 
 		<property name="user"><value>valuesetdb</value></property> <property name="password"><value>ctxRchgiP</value></property> -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClass">
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+		<property name="driverClassName">
 			<value>${datasource1.driver}</value>
 		</property>
-		<property name="jdbcUrl">
+		<property name="url">
 			<value>${datasource1.url}</value>
 		</property>
-		<property name="user">
+		<property name="username">
 			<value>${datasource1.user}</value>
 		</property>
 		<property name="password">
 			<value>${datasource1.password}</value>
+		</property>
+		<property name="testWhileIdle">
+			<value>true</value>
 		</property>
 	</bean>
 

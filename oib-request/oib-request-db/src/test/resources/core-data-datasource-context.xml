@@ -22,18 +22,21 @@
 
 	<!-- Data source: reads a properties file and injects them into a DBCP DS 
 		First datasource for Concept and Subset -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClass">
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+		<property name="driverClassName">
 			<value>${datasource1.driver}</value>
 		</property>
-		<property name="jdbcUrl">
+		<property name="url">
 			<value>${datasource1.url}</value>
 		</property>
-		<property name="user">
+		<property name="username">
 			<value>${datasource1.user}</value>
 		</property>
 		<property name="password">
 			<value>${datasource1.password}</value>
+		</property>
+		<property name="testWhileIdle">
+			<value>true</value>
 		</property>
 	</bean>
 
@@ -46,17 +49,11 @@
 
 		<!-- Hibernate configuration properties (read from a properties file) -->
 		<property name="hibernateProperties">
-			<bean
-				class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-				<property name="locations">
-					<list>
-						<!-- hibernate.config.file, datasource.config.file should be defined 
-							somewhere in the spring.properties layers -->
-						<value>hibernate.properties
-						</value>
-					</list>
-				</property>
-			</bean>
+			<map>
+				<entry key="hibernate.show_sql" value="false"/>
+				<entry key="hibernate.default_schema" value="valueset_and_log" />
+				<entry key="hibernate.hbm2ddl.auto" value="validate" />
+			</map>
 		</property>
 
 		<!-- Using improved naming strategy -->
@@ -65,10 +62,9 @@
 		</property>
 
 		<!-- Mapping annotated classes using search patterns -->
-		<property name="annotatedClasses">
+		<property name="packagesToScan">
 			<list>
-				<value><![CDATA[org.openinfobutton.subsetdb.domain.SubsetJson]]></value>
-				<value><![CDATA[org.openinfobutton.subsetdb.domain.Logs]]></value>
+				<value><![CDATA[org.openinfobutton.subsetdb.domain]]></value>
 
 			</list>
 		</property>
@@ -90,9 +86,6 @@
 	<!-- SimpleJdbcTemplate for use in testing -->
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg index="0" ref="dataSource" />
-	</bean>
-
-	<bean id="logDao" class=" org.openinfobutton.subsetdb.service.LogsDaoImpl">
 	</bean>
 
 

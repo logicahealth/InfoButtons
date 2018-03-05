@@ -30,6 +30,7 @@
 	<context:annotation-config />
 
 	<context:component-scan base-package="org.openinfobutton.profiledb.service" />
-	
+	<context:component-scan base-package="org.openinfobutton.oibpropertydb.service" />
+
 	<context:spring-configured />
 </beans>

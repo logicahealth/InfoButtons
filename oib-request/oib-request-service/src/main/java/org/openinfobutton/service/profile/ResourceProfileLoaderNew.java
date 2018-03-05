@@ -50,7 +50,7 @@ public class ResourceProfileLoaderNew
 
     /** The pdao. */
     @Autowired
-    @Qualifier( "pDao" )
+    @Qualifier( "profilesdbDao" )
     private ProfilesDao pdao;
 
     /**

@@ -29,7 +29,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @version May 5, 2014
  */
 @RunWith( SpringJUnit4ClassRunner.class )
-@ContextConfiguration( locations = { "/core-liteprofile-datasource-context.xml", "/core-data-annotation-context.xml", "/core-data-datasource-context.xml",
+@ContextConfiguration( locations = { "/core-data-annotation-context.xml", "/core-data-datasource-context.xml",
                        "/core-profile-datasource-context.xml"})
 public class ProfileManagerServiceTest
 {

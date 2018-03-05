@@ -42,7 +42,7 @@ public class ValueSetAndLogsDbTest
     private SubsetDbDao subsetDao;
 
     @Autowired
-    @Qualifier( "logDao" )
+    @Qualifier( "logsDbDao" )
     private LogsDao logsDao;
     
     @Autowired

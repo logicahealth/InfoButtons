@@ -27,8 +27,10 @@
 
 	<context:annotation-config />
 
+	<context:component-scan base-package="org.openinfobutton.service.configuration" />
 	<context:component-scan base-package="org.openinfobutton.valuset.matcher.impl.cloud" />
 	<context:component-scan base-package="org.openinfobutton.subsetdb.service" />
+	<context:component-scan base-package="org.openinfobutton.oibpropertydb.service" />
 	<context:component-scan base-package="org.openinfobutton.profiledb.service" />
 	<context:component-scan base-package="org.openinfobutton.liteprofiledb.service" />
     <context:component-scan base-package="org.openinfobutton.externalresource.implementation" />

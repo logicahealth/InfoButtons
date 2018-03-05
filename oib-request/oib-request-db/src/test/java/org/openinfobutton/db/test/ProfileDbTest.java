@@ -7,11 +7,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
+import java.util.Properties;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openinfobutton.oibpropertydb.domain.OibAppProperty;
+import org.openinfobutton.oibpropertydb.service.OibAppPropertyDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -40,8 +43,12 @@ public class ProfileDbTest
 {
     /** The pdao. */
     @Autowired
-    @Qualifier( "pDao" )
+    @Qualifier( "profilesdbDao" )
     private ProfilesDao pdao;
+
+    @Autowired
+    @Qualifier("oibAppPropertyDao")
+    private OibAppPropertyDao propDao;
     
     @Autowired
     @Qualifier("profileJdbcTemplate")

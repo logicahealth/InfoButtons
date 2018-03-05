@@ -18,7 +18,6 @@ $Date:: 2010-10-01 1#$:  Date of last commit
     classpath:core-data-annotation-context.xml
     classpath:core-data-datasource-context.xml
     classpath:core-profile-datasource-context.xml
-    classpath:core-liteprofile-datasource-context.xml
     </param-value>
   </context-param>
   
