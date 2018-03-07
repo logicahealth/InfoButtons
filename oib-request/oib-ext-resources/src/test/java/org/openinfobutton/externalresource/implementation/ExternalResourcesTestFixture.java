@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.openinfobutton.schema.CodeUtility;
 import org.openinfobutton.schemas.kb.Code;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
@@ -25,6 +26,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/core-data-annotation-context.xml", "/core-data-datasource-context.xml",
     "/core-profile-datasource-context.xml" } )
+@TestPropertySource("/serviceParams.properties")
 public abstract class ExternalResourcesTestFixture
 {
     

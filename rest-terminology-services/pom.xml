@@ -14,6 +14,12 @@
     </modules>
     <name>Rest Client Parent module</name>
     <description>Parent module for rest clients</description>
+
+    <properties>
+        <umls.username></umls.username>
+        <umls.password></umls.password>
+    </properties>
+
     <build>
         <plugins>
             <plugin>

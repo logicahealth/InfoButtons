@@ -60,7 +60,6 @@ public abstract class OibServiceTestFixture
 
     @SuppressWarnings( "deprecation" )
     @Autowired
-    @Qualifier( "simpleJdbcTemplate" )
     protected JdbcTemplate jdbcTemplate;
 
     /**

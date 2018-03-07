@@ -18,28 +18,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import UtsMetathesaurusMetaData.UtsWsMetadataController;
-import UtsMetathesaurusMetaData.UtsWsMetadataControllerImplService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.openinfobutton.externalresource.json.AtomSearchResult;
 import org.openinfobutton.externalresource.json.CodeTransformer;
 import org.openinfobutton.externalresource.json.CodeTransformerResultList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openinfobutton.externalresource.json.SourceAtomCluster;
 import org.openinfobutton.rest.terminology.api.RestTermClient;
 import org.openinfobutton.schema.CodeUtility;
 import org.openinfobutton.schemas.kb.Code;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
-import UtsMetathesaurusContent.AtomClusterRelationDTO;
-import UtsMetathesaurusContent.Psf;
-import UtsMetathesaurusContent.UtsWsContentController;
-import UtsMetathesaurusContent.UtsWsContentControllerImplService;
-import UtsMetathesaurusFinder.UtsWsFinderController;
-import UtsMetathesaurusFinder.UtsWsFinderControllerImplService;
-import UtsSecurity.UtsFault_Exception;
-import UtsSecurity.UtsWsSecurityController;
-import UtsSecurity.UtsWsSecurityControllerImplService;
 import org.openinfobutton.externalresource.api.ExternalResourceHandler;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -55,23 +45,6 @@ public class UTSHandler
     /** The log. */
     Logger log = LogManager.getLogger( UTSHandler.class.getName() );
 
-    /** The service name. */
-    String serviceName = "http://umlsks.nlm.nih.gov";
-
-    @Autowired
-    Environment env;
-
-    /** The uts content service. */
-    UtsWsContentController utsContentService;
-
-    /** The security service. */
-    UtsWsSecurityController securityService;
-
-    /** The uts finder service. */
-    UtsWsFinderController utsFinderService;
-
-    /** The ticket granting ticket. */
-    String ticketGrantingTicket;
 
     @Autowired
     RestTermClient umlsRestClient;
@@ -310,81 +283,47 @@ public class UTSHandler
             return false;
         }
 
-        try
-        {
-            ticketGrantingTicket = getTicketGrantingTicket();
-
-        }
-        catch ( final UtsFault_Exception e )
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return recursiveDescendantCheck( code1, code2.getCode(), getCodeSystemNameFromId( code2.getCodeSystem() ) );
+        return descendantCheck( code1, code2.getCode(), getCodeSystemNameFromId( code2.getCodeSystem() ) );
     }
 
     /**
-     * Recursive descendant check.
+     *  descendant check.
      *
      * @param code1 the code1
      * @param code2 the code2
      * @param codeSystem the code system
      * @return true, if successful
      */
-    public boolean recursiveDescendantCheck( Code code1, String code2, String codeSystem )
+    public boolean descendantCheck( Code code1, String code2, String codeSystem )
     {
-        String singleUseTicket1;
-        try
+
+       String output = umlsRestClient.getDescendants( code2, codeSystem);
+
+       ObjectMapper mapper = new ObjectMapper();
+       AtomSearchResult descendants;
+       try {
+           descendants = mapper.readValue(output, AtomSearchResult.class);
+       } catch (IOException e) {
+
+           e.printStackTrace();
+           return false;
+       }
+
+        for ( int i = 0; i < descendants.getResult().size(); i++ )
         {
 
-            singleUseTicket1 = securityService.getProxyTicket( ticketGrantingTicket, serviceName );
-            String currentRelease="";
-            final UtsWsMetadataController utsMetadataService = (new UtsWsMetadataControllerImplService()).getUtsWsMetadataControllerImplPort();
-            try {
-                currentRelease = utsMetadataService.getCurrentUMLSVersion(singleUseTicket1);
-            } catch (UtsMetathesaurusMetaData.UtsFault_Exception e) {
-                e.printStackTrace();
-            }
-            singleUseTicket1 = securityService.getProxyTicket( ticketGrantingTicket, serviceName );
-            List<AtomClusterRelationDTO> myAtomClusterRelations = new ArrayList<AtomClusterRelationDTO>();
-            final Psf myPsf = new Psf();
-            myPsf.getIncludedRelationLabels().add( "PAR" );
-            myAtomClusterRelations =
-                utsContentService.getSourceDescriptorSourceDescriptorRelations( singleUseTicket1, currentRelease, code2,
-                                                                                codeSystem, myPsf );
-            for ( int i = 0; i < myAtomClusterRelations.size(); i++ )
+            final SourceAtomCluster myAtomClusterRelationDTO = descendants.getResult().get( i );
+            final String otherAtomClusterUi = myAtomClusterRelationDTO.getUi();
+            final String otherAtomClusterName =
+                myAtomClusterRelationDTO.getName();
+            System.out.println( otherAtomClusterUi + " " + otherAtomClusterName  );
+            if ( otherAtomClusterUi.equals( code1.getCode() ) )
             {
-
-                final AtomClusterRelationDTO myAtomClusterRelationDTO = myAtomClusterRelations.get( i );
-                final String otherAtomClusterUi = myAtomClusterRelationDTO.getRelatedAtomCluster().getUi();
-                final String otherAtomClusterName =
-                    myAtomClusterRelationDTO.getRelatedAtomCluster().getDefaultPreferredName();
-                final String otherAtomClusterRel = myAtomClusterRelationDTO.getRelationLabel();
-                final String otherAtomClusterRela = myAtomClusterRelationDTO.getAdditionalRelationLabel();
-                System.out.println( otherAtomClusterUi + " " + otherAtomClusterName + " " + otherAtomClusterRel + " "
-                    + otherAtomClusterRela );
-                if ( otherAtomClusterUi.equals( code1.getCode() ) )
-                {
-                    return true;
-                }
-                if ( recursiveDescendantCheck( code1, otherAtomClusterUi, codeSystem ) )
-                {
-                    return true;
-                }
+                return true;
             }
+        }
 
-        }
-        catch ( final UtsFault_Exception e )
-        {
-            e.printStackTrace();
-        }
-        catch ( final UtsMetathesaurusContent.UtsFault_Exception e )
-        {
-            e.printStackTrace();
-        }
         return false;
-
     }
 
     /**
@@ -426,22 +365,5 @@ public class UTSHandler
         {
             ex.printStackTrace();
         }
-    }
-
-    /**
-     * Gets the ticket granting ticket.
-     *
-     * @return the ticket granting ticket
-     * @throws UtsFault_Exception the uts fault_ exception
-     */
-    public String getTicketGrantingTicket()
-        throws UtsFault_Exception
-    {
-        utsContentService = ( new UtsWsContentControllerImplService() ).getUtsWsContentControllerImplPort();
-        securityService = ( new UtsWsSecurityControllerImplService() ).getUtsWsSecurityControllerImplPort();
-        utsFinderService = ( new UtsWsFinderControllerImplService() ).getUtsWsFinderControllerImplPort();
-        // get the Proxy Grant Ticket - this is good for 8 hours and is needed to generate single use tickets.
-        final String ticketGrantingTicket = securityService.getProxyGrantTicket( env.getProperty("umls.username"), env.getProperty("umls.password") );
-        return ticketGrantingTicket;
     }
 }

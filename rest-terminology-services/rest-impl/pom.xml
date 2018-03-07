@@ -50,7 +50,32 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.3.8.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
+    <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>testParams.properties</include>
+                </includes>
+            </testResource>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>testParams.properties</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
+    </build>
 </project>

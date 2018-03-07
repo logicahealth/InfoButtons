@@ -70,7 +70,7 @@ public class KnowledgeRequestServlet
 
     /** The dao. */
     @Autowired
-    @Qualifier( "logDao" )
+    @Qualifier( "logsDbDao" )
     private LogsDao dao;
 
     /** The Constant serialVersionUID. */

@@ -15,6 +15,7 @@ package org.openinfobutton.service.transform;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -224,8 +225,9 @@ public class TransformCode
 
             final JAXBContext context = JAXBContext.newInstance( TerminologyInference.class );
             final Unmarshaller u = context.createUnmarshaller();
-            final File profile = new File( terminologyInferenceLocation + "/" + id + ".xml" );
-            inference = (TerminologyInference) u.unmarshal( profile );
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            final InputStream inputStream = classLoader.getResourceAsStream(terminologyInferenceLocation + "/" + id + ".xml" );
+            inference = (TerminologyInference) u.unmarshal( inputStream );
         }
         catch ( final JAXBException e )
         {

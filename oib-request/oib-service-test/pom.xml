@@ -51,12 +51,6 @@
             <version>2.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>4.2.0.Final</version>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -65,51 +59,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.10</version>
-            </plugin>
-            <plugin>
-                <groupId>ch.fortysix</groupId>
-                <artifactId>maven-postman-plugin</artifactId>
                 <configuration>
-                    <skip>false</skip>
-                    <failonerror>false</failonerror>
-                    <mailAltConfig>true</mailAltConfig>
-                    <mailssl>false</mailssl>
-                    <mailport>25</mailport>
-                    <from />
-                    <mailhost />
-                    <mailuser />
-                    <mailpassword />
-                    <receivers>
-                        <receiver />
-                    </receivers>
+                    <skipTests>true</skipTests>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>send surefire notification</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>surefire-mail</goal>
-                        </goals>
-                        <configuration>
-                            <subject>OIB Monitoring Test</subject>
-                            <from />
-                            <receivers>
-                                <receiver />
-                            </receivers>
-                            <htmlMessageFile>${project.build.directory}/site/surefire-report.html</htmlMessageFile>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.10</version>
-            </plugin>
-        </plugins>
-    </reporting>
 </project>

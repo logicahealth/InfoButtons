@@ -48,19 +48,13 @@
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 
-		<!-- Hibernate configuration properties (read from a properties file) -->
+		<!-- Hibernate configuration properties -->
 		<property name="hibernateProperties">
-			<bean
-				class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-				<property name="locations">
-					<list>
-						<!-- hibernate.config.file, datasource.config.file should be defined 
-							somewhere in the spring.properties layers -->
-						<value>classpath:hibernate.properties
-						</value>
-					</list>
-				</property>
-			</bean>
+			<map>
+				<entry key="hibernate.show_sql" value="false"/>
+				<entry key="hibernate.default_schema" value="valueset_and_log" />
+				<entry key="hibernate.hbm2ddl.auto" value="validate" />
+			</map>
 		</property>
 
 		<!-- Using improved naming strategy -->
@@ -69,11 +63,9 @@
 		</property>
 
 		<!-- Mapping annotated classes using search patterns -->
-		<property name="annotatedClasses">
+		<property name="packagesToScan">
 			<list>
-				<value><![CDATA[org.openinfobutton.subsetdb.domain.SubsetJson]]></value>
-				<value><![CDATA[org.openinfobutton.subsetdb.domain.Logs]]></value>
-
+				<value><![CDATA[org.openinfobutton.subsetdb.domain]]></value>
 			</list>
 		</property>
 	</bean>
@@ -89,9 +81,6 @@
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<bean id="logDao" class=" org.openinfobutton.subsetdb.service.LogsDaoImpl">
 	</bean>
 
 

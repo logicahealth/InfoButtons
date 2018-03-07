@@ -57,19 +57,14 @@
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 
-		<!-- Hibernate configuration properties (read from a properties file) -->
+		<!-- Hibernate configuration properties -->
 		<property name="hibernateProperties">
-			<bean
-				class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-				<property name="locations">
-					<list>
-						<!-- hibernate.config.file, datasource.config.file should be defined 
-							somewhere in the spring.properties layers -->
-						<value>/hibernate.properties
-						</value>
-					</list>
-				</property>
-			</bean>
+			<map>
+				<entry key="hibernate.show_sql" value="false"/>
+				<entry key="hibernate.default_schema" value="valueset_and_log" />
+				<entry key="hibernate.hbm2ddl.auto" value="validate" />
+				<entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			</map>
 		</property>
 
 		<!-- Using improved naming strategy -->

@@ -52,6 +52,8 @@ public class UmlsRestClientImpl implements RestTermClient {
 
     private static String SEARCH_PATH = "/search/current";
 
+    private static String DESCENDANT_PATH = "/content/current/source/";
+
     private static String SEARCH_CODE_PATH = "/crosswalk/current/source";
 
     private static String SEARCH_PARAMETER = "string";
@@ -227,6 +229,49 @@ public class UmlsRestClientImpl implements RestTermClient {
         }
         return result;
     }
+
+    @Override
+    public String getDescendants(String parentCode, String codeSystem) {
+
+        String sts = getSingleUseTicket();
+        String result = "";
+//        String url = UTS_REST_API_URL + "/content/current/CUI/"+ CUI +"/atoms?sabs=" + targetCS;
+//
+//        try {
+//            URIBuilder b = new URIBuilder(url);
+//            b.addParameter(PAGE_SIZE_PARAMETER, PAGE_SIZE_VALUE);
+//            b.addParameter(TICKET_PARAMETER, sts);
+//
+//            result = Request.Get(b.build())
+//                    .connectTimeout(3000)
+//                    .socketTimeout(3000)
+//                    .execute().returnContent().asString();
+//        }
+        StringBuilder urlBuilder = new StringBuilder();
+        urlBuilder.append(UTS_REST_API_URL).append(DESCENDANT_PATH).append(codeSystem).append('/').append(parentCode)
+                .append("/descendants");
+        logger.error("TARGET: " + codeSystem + ":" + parentCode);
+
+        try {
+            URIBuilder b = new URIBuilder(urlBuilder.toString());
+            b.addParameter(PAGE_SIZE_PARAMETER, PAGE_SIZE_VALUE);
+            b.addParameter(TICKET_PARAMETER, sts);
+
+            result = Request.Get(b.build())
+                    .connectTimeout(3000)
+                    .socketTimeout(3000)
+                    .execute().returnContent().asString();
+        }
+        catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
     /**
      *

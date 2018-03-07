@@ -43,4 +43,6 @@ public interface RestTermClient {
 
     String getCodes (String code, String codeSystem);
     String getCodes (String CUI, String targetCS, String search);
+
+    String getDescendants(String code, String codeSystem);
 }
