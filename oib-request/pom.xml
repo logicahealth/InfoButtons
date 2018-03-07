@@ -8,12 +8,12 @@
  	<properties>
 
 		<datasource1.url>jdbc:mysql://localhost:3306/valueset_and_log</datasource1.url>
-		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
+		<datasource1.driver>com.mysql.cj.jdbc.Driver</datasource1.driver>
 		<datasource1.user />
 		<datasource1.password />
 		
 		<datasource2.url>jdbc:mysql://localhost:3306/resource_profile</datasource2.url>
-		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
+		<datasource2.driver>com.mysql.cj.jdbc.Driver</datasource2.driver>
 		<datasource2.user />
 		<datasource2.password />
 
