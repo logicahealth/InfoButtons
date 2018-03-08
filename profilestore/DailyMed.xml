@@ -33,7 +33,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://dailymed.nlm.nih.gov/dailymed/search.cfm?searchdb=rxcui&"/>
+					<knowledgeRequestServiceLocation url="http://dailymed.nlm.nih.gov/dailymed/search.cfm?searchdb=rxcui&amp;"/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>
