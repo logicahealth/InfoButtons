@@ -65,7 +65,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="https://apps.nlm.nih.gov/medlineplus/services/mpconnect_service.cfm?knowledgeResponseType=text/xml&amp;"/>
+					<knowledgeRequestServiceLocation url="https://connect.medlineplus.gov/service?knowledgeResponseType=text/xml&amp;"/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>
