@@ -15,13 +15,6 @@
     <!-- Properties files                            -->
     <!-- =========================================== -->
 
-    <!-- Property file locations -->
-    <!--  <context:property-placeholder location="classpath*:*-.properties" />-->
-
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:serviceParams.properties"/>
-    </bean>
-
     <context:annotation-config />
 
     <mvc:annotation-driven />
