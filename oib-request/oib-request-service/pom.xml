@@ -5,7 +5,7 @@
     <parent>
       <groupId>org.openinfobutton</groupId>
       <artifactId>oib-request</artifactId>
-      <version>2.2-SNAPSHOT</version>
+      <version>2.3-SNAPSHOT</version>
     </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>oib-request-service</artifactId>
@@ -23,14 +23,14 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-schema</artifactId>
-			<version>2.2-SNAPSHOT</version>
+			<version>2.3-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-db</artifactId>
-			<version>2.2-SNAPSHOT</version>
+			<version>2.3-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -43,17 +43,17 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-request-inference-rxnorm</artifactId>
-			<version>2.2-SNAPSHOT</version>
+			<version>2.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-ext-resources</artifactId>
-			<version>2.2-SNAPSHOT</version>
+			<version>2.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>rest-impl</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -66,7 +66,7 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-service-test</artifactId>
-			<version>2.2-SNAPSHOT</version>
+			<version>2.3-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 

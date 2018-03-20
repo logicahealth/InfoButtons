@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.openinfobutton</groupId>
     <artifactId>rest-terminology-services</artifactId>
     <packaging>pom</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <modules>
         <module>rest-api</module>
         <module>rest-impl</module>
@@ -16,8 +14,8 @@
     <description>Parent module for rest clients</description>
 
     <properties>
-        <umls.username></umls.username>
-        <umls.password></umls.password>
+        <umls.username />
+        <umls.password />
     </properties>
 
     <build>
@@ -33,5 +31,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <scm>
+        <connection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</connection>
+        <developerConnection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</developerConnection>
+        <url>https://github.com/VHAINNOVATIONS/InfoButtons.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
 </project>

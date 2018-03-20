@@ -4,11 +4,11 @@
     <parent>
         <groupId>org.openinfobutton</groupId>
         <artifactId>oib-request</artifactId>
-        <version>2.2-SNAPSHOT</version>
+        <version>2.3-SNAPSHOT</version>
     </parent>
     <groupId>org.openinfobutton</groupId>
     <artifactId>oib-service-test</artifactId>
-    <version>2.2-SNAPSHOT</version>
+    <version>2.3-SNAPSHOT</version>
 
 
     <!--Testing-->

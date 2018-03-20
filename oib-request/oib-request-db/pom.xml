@@ -2,7 +2,7 @@
     <parent>
 	    <groupId>org.openinfobutton</groupId>
 	    <artifactId>oib-request</artifactId>
-      	<version>2.2-SNAPSHOT</version>
+      	<version>2.3-SNAPSHOT</version>
     </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openinfobutton</groupId>
@@ -12,14 +12,14 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-core</artifactId>
-			<version>2.2-SNAPSHOT</version>
+			<version>2.3-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-valueset-matcher</artifactId>
-			<version>2.2-SNAPSHOT</version>
+			<version>2.3-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>org.openinfobutton</groupId>
 			<artifactId>oib-service-test</artifactId>
-			<version>2.2-SNAPSHOT</version>
+			<version>2.3-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
