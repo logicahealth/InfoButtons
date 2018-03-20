@@ -4487,7 +4487,12 @@ oibManagerModule.controller('CloudProfileCtrl', ['$scope', '$uibModal','$http', 
             controller: 'ModalController',
             resolve: {
                 items: function () {
-                    return $scope.items;
+                    var profileOids = [];
+                    for (var y = 0; y < $scope.items.length; y++)
+                    {
+                        profileOids.push({orgOid: $scope.items[y].propValue, orgName: $scope.items[y].propDescription, selected: false})
+                    }
+                    return profileOids;
                 },
                 selectedOids : function () {
                     return [];
