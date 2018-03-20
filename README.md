@@ -9,6 +9,31 @@ Built with:
 
 [![IntelliJ IDEA](http://devblog.info/wp-content/uploads/2016/07/intellij.png)](https://www.jetbrains.com/idea/)
 
+2.3 RELEASE NOTES
+=================
+
+OpenInfobutton 2.3 improves performance, fixes bugs, simplifies the build, and adds a new feature to the InfoButton Responder.
+
+New features/improvements:
+
+- The OpenInfobutton Responder now supports adding Knowledge Summary and Knowlege Content to the InfoButton response for an asset configured in the Responder. LITE has also been updated to adding/editing these fields.
+
+- The underlying database connections used by the OpenInfobutton Manager have been reconfigured to use new libraries which has improved performance and the application's stability in a production server environment.
+
+- The code used find descendents for coded search criteria has been changed to run much faster, so try using it profiles again.
+
+Big fixes:
+
+- A configuration bug with the database connections was causing instances of OIB that experienced long periods without a request to crash. This has been fixed.
+
+- More old, unnecessary or conflicting dependencies have removed from various poms. This has significantly reduced built time and shrunk the size of the final WAR. 
+
+Building and redeploying
+------------------------
+
+For those of you running an instance of the OpenInfobutton Responder, you need to run a small SQL migration script that adds the new table columns for Knowledge Summary and Knowledge Content. It is located under oib-responder/oib-rdbms-model/migration2223.sql. Also, I would recommend clearing your entire local maven repository for building the new version, otherwise you may encounter some errors at build or runtime.
+
+
 2.2 RELEASE NOTES
 =================
 
@@ -29,7 +54,6 @@ Big fixes:
 - Terminology transformations that returned no results by the underlying API were previously causing an error with the response. This has been resolved and the request should be properly handled with a failed match rather than throwing an error.
 
 - We've also removed transformations that are no longer supported by the underlying APIs so they are no longer attempted.
-
 
 
 2.1 RELEASE NOTES
