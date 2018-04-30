@@ -40,7 +40,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="https://apps.nlm.nih.gov/medlineplus/services/mpconnect_service.cfm?knowledgeResponseType=text/xml&amp;"/>
+					<knowledgeRequestServiceLocation url="https://connect.medlineplus.gov/application?knowledgeResponseType=text/xml&amp;"/>
 				</knowledgeRequestService>
 			</context>
 			<context name="Medication knowledge from order entry (OE) and medication list (MLREV). Patient is the knowledge consumer" id="1">
