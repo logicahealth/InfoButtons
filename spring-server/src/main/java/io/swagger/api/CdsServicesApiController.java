@@ -50,9 +50,6 @@ public class CdsServicesApiController implements CdsServicesApi {
         genders = Collections.unmodifiableMap(map);
     }
 
-
-
-
     public ResponseEntity<CDSServiceInformation> cdsServicesGet() {
         // do some magic!
         CDSServiceInformation information = new CDSServiceInformation();
@@ -69,8 +66,8 @@ public class CdsServicesApiController implements CdsServicesApi {
         probservice.setId("oibResponseConditions");
         information.addServicesItem(probservice);
         Prefetch prefetch = new Prefetch();
-        prefetch.put("problems" , "Condition?patient={{Patient.id}}&_sort=clinicalstatus&_sort:desc=onset");
-        prefetch.put("p", "Patient/{{Patient.id}}");
+        prefetch.put("problems" , "Condition?patient={{context.patientId}}&_sort=clinicalstatus&_sort:desc=onset");
+        prefetch.put("p", "Patient/{{context.patientId}}");
         service.setPrefetch(prefetch);
         probservice.setPrefetch(prefetch);
         HttpHeaders headers = new HttpHeaders();
@@ -94,7 +91,7 @@ public class CdsServicesApiController implements CdsServicesApi {
                 codes = ((HashMap) ((List) ((HashMap) context.get("medicationCodeableConcept")).get("coding")).get(0));
             } else {
 
-                codes = ((HashMap) ((List) ((HashMap) ((HashMap) ((List) context.get("medications")).get(0)).get("medicationCodeableConcept")).get("coding")).get(0));
+                codes = ((HashMap) ((List) ((HashMap) ((HashMap) ((HashMap) ((List) ((HashMap) context.get("medications")).get("entry")).get(0)).get("resource")).get("medicationCodeableConcept")).get("coding")).get(0));
             }
             String oibAge = new String();
             String oibGender = new String();
