@@ -96,7 +96,7 @@ public class CdsServicesApiController implements CdsServicesApi {
             String oibAge = new String();
             String oibGender = new String();
             if (!((HashMap) request.getPrefetch()).isEmpty()) {
-                HashMap patientContext = (HashMap) ((HashMap) ((HashMap) request.getPrefetch()).get("p")).get("resource");
+                HashMap patientContext = (HashMap) ((HashMap) request.getPrefetch()).get("p");
                 String gender = (String) patientContext.get("gender");
                 String birthDate = (String) patientContext.get("birthDate");
                 oibAge = "&age.v.v=" + birthDateToAge(birthDate) + "&age.v.u=a";
@@ -113,12 +113,12 @@ public class CdsServicesApiController implements CdsServicesApi {
             String problemCode = new String();
             String problemName = new String();
             if (!((HashMap) request.getPrefetch()).isEmpty()) {
-                HashMap patientContext = (HashMap) ((HashMap) ((HashMap) request.getPrefetch()).get("p")).get("resource");
+                HashMap patientContext = (HashMap) ((HashMap) request.getPrefetch()).get("p");
                 String gender = (String) patientContext.get("gender");
                 String birthDate = (String) patientContext.get("birthDate");
                 oibAge = "&age.v.v=" + birthDateToAge(birthDate) + "&age.v.u=a";
                 oibGender = "&patientPerson.administrativeGenderCode.c=" + genders.get(gender) + "&patientPerson.administrativeGenderCode.cs=2.16.840.1.113883.5.1";
-                HashMap problems = (HashMap) ((HashMap) ((HashMap) request.getPrefetch()).get("problems")).get("resource");
+                HashMap problems = (HashMap) ((HashMap) request.getPrefetch()).get("problems");
                 HashMap problem = ((HashMap) ((ArrayList) ((HashMap) ((HashMap) ((HashMap) ((ArrayList) problems.get("entry")).get(0)).get("resource")).get("code")).get("coding")).get(0));
                 problemCode = ((String) problem.get("code"));
                 problemName = ((String) problem.get("display"));
