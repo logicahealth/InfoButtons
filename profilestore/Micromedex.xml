@@ -35,6 +35,13 @@
 						</matchingDomain>
 
 					</task>
+					<performerKnowledgeUserType match="true" search="false">
+						<matchingDomain>
+							<enumeration includeDescendants="false">
+								<code codeSystem="2.16.840.1.113883.5.110" code="PROV"/>
+							</enumeration>
+						</matchingDomain>
+					</performerKnowledgeUserType>
 
 					<conceptOfInterest match="false" search="true"/>
 
