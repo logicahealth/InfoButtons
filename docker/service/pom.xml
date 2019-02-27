@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.openinfobutton</groupId>
+  <artifactId>oib-request</artifactId>
+  <version>2.3-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>oib-request</name>
+ 	<properties>
+
+		<datasource1.url>jdbc:mysql://localhost:3306/valueset_and_log</datasource1.url>
+		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
+		<datasource1.user />
+		<datasource1.password />
+		
+		<datasource2.url>jdbc:mysql://localhost:3306/resource_profile</datasource2.url>
+		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
+		<datasource2.user />
+		<datasource2.password />
+
+		<!-- ============== Value Set Configuration =================
+
+		The following lines allow you to choose which value set implementation you would like
+		to use in your configuration. The default uses valuesets hosted on github
+		that are centrally managed for your convenience. You can also switch to the local database
+		implementation by commenting out the default implementation and uncommenting the database
+		implementation
+
+		=== Default Value Set Implementation ===
+
+		Uses github and requires a github username and password. Comment out
+		to use local database implementation instead.
+		-->
+
+		<service.subsetImplementation>cloudValueSets</service.subsetImplementation>
+		<github.username />
+		<github.password />
+
+		<!--
+		==== Local database implementation ====
+
+		Remove comment to use and make sure to also comment out default implementation
+		-->
+
+		<!--<service.subsetImplementation>databaseValueSets</service.subsetImplementation>-->
+
+		<!-- ================= End Value Set Configuration ================= -->
+
+		<umls.username />
+		<umls.password />
+
+		<spring.version>4.3.8.RELEASE</spring.version>
+		<hibernate.version>4.2.0.Final</hibernate.version>
+		<tomcat.version>9.0.5</tomcat.version>
+		<jacoco.version>0.7.0.201403182114</jacoco.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+    <modules>
+		<module>oib-profile-schema</module>
+		<module>oib-request-schema</module>
+		<module>oib-core</module>
+		<module>oib-service-test</module>
+		<module>oib-valueset-matcher</module>
+        <module>oib-request-db</module>
+        <module>oib-request-inference-rxnorm</module>
+        <module>oib-ext-resources</module>
+        <module>oib-request-service</module>
+	</modules>
+    
+	<scm>
+		<connection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</connection>
+		<developerConnection>scm:git:https://github.com/VHAINNOVATIONS/InfoButtons.git</developerConnection>
+		<url>https://github.com/VHAINNOVATIONS/InfoButtons.git</url>
+	  <tag>HEAD</tag>
+  </scm>
+</project>
