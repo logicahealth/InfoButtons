@@ -24,7 +24,7 @@ unzip /tmp/apache-tomcat-8.5.37.zip -d tomcat && \
 ln -s /opt/tomcat/apache-tomcat-8.5.37 /opt/tomcat/latest && \
 chown -R tomcat: tomcat && \
 chmod +x tomcat/latest/bin/*.sh && \
-systemctl enable mariadb
+systemctl enable tomcat
 
 COPY tomcat.service /etc/systemd/system/tomcat.service
 
