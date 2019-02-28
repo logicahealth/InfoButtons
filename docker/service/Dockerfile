@@ -34,10 +34,14 @@ RUN git clone https://github.com/VHAINNOVATIONS/InfoButtons.git
 
 WORKDIR InfoButtons/oib-request
 
+COPY pom.xml .
+
 RUN /opt/maven/bin/mvn clean install -Dmaven.test.skip=true && \
 cp oib-request-service/target/infobutton-service.war /opt/tomcat/latest/webapps
 
 WORKDIR ../oib-responder
+
+COPY jdbc.properties src/main/webapp/WEB-INF
 
 RUN /opt/maven/bin/mvn clean install -Dmaven.test.skip=true && \
 cp target/openInfobutton.war /opt/tomcat/latest/webapps
