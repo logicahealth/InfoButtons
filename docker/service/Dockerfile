@@ -18,6 +18,8 @@ RUN wget https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-mave
 tar xf /tmp/apache-maven-3.6.0-bin.tar.gz -C . && \
 ln -s apache-maven-3.6.0 maven
 
+COPY tomcat.service /etc/systemd/system/tomcat.service
+
 RUN useradd -m -U -d /opt/tomcat -s /bin/false tomcat && \
 wget http://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.zip -P /tmp && \
 unzip /tmp/apache-tomcat-8.5.37.zip -d tomcat && \
@@ -25,8 +27,6 @@ ln -s /opt/tomcat/apache-tomcat-8.5.37 /opt/tomcat/latest && \
 chown -R tomcat: tomcat && \
 chmod +x tomcat/latest/bin/*.sh && \
 systemctl enable tomcat
-
-COPY tomcat.service /etc/systemd/system/tomcat.service
 
 WORKDIR data
 
