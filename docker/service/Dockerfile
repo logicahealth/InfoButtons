@@ -32,7 +32,11 @@ WORKDIR data
 
 RUN git clone https://github.com/VHAINNOVATIONS/InfoButtons.git
 
-WORKDIR InfoButtons/oib-request
+WORKDIR InfoButtons/rest-terminology-services
+
+RUN /opt/maven/bin/mvn clean install -Dmaven.test.skip=true
+
+WORKDIR ../oib-request
 
 COPY pom.xml pom.xml
 
