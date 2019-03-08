@@ -2,7 +2,6 @@ FROM centos/systemd
 
 MAINTAINER "Andrew Iskander" 
 
-
 RUN yum update -y && \
 yum -y install java-1.8.0-openjdk-devel && \
 yum -y install git && \
@@ -11,6 +10,8 @@ yum -y install unzip && \
 yum -y install epel-release && \
 yum -y install nodejs && \
 yum clean all
+
+ENV JAVA_HOME=/usr/lib/jvm/java
 
 WORKDIR /opt
 
@@ -49,7 +50,6 @@ COPY jdbc.properties src/main/webapp/WEB-INF/jdbc.properties
 
 RUN /opt/maven/bin/mvn clean install -Dmaven.test.skip=true && \
 cp target/openInfobutton.war /opt/tomcat/latest/webapps
-
 
 WORKDIR ../oib-site-lite-ui
 
