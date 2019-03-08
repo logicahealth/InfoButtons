@@ -26,8 +26,7 @@ wget http://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5
 unzip /tmp/apache-tomcat-8.5.37.zip -d tomcat && \
 ln -s /opt/tomcat/apache-tomcat-8.5.37 /opt/tomcat/latest && \
 chown -R tomcat: tomcat && \
-chmod +x tomcat/latest/bin/*.sh && \
-systemctl enable tomcat
+chmod +x tomcat/latest/bin/*.sh
 
 WORKDIR data
 
@@ -53,13 +52,14 @@ cp target/openInfobutton.war /opt/tomcat/latest/webapps
 
 WORKDIR ../oib-site-lite-ui
 
-copy package.json package.json
+COPY package.json package.json
 
 RUN npm install -g bower && \
 npm install -g http-server && \
 bower install --allow-root && \
-npm install && \
-nohup npm start &
+npm install
+
+RUN systemctl enable tomcat
 
 EXPOSE 8080 8000
 
