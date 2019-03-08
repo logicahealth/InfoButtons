@@ -53,6 +53,8 @@ cp target/openInfobutton.war /opt/tomcat/latest/webapps
 
 WORKDIR ../oib-site-lite-ui
 
+copy package.json package.json
+
 RUN npm install -g bower && \
 npm install -g http-server && \
 bower install --allow-root && \
