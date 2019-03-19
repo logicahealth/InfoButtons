@@ -2,7 +2,7 @@
 
 Navigate to the service folder.
 
-Modify the pom.xml and jdbc.properties to match you database credentials. If you plan on using the docker infobutton
+Modify the pom.xml and jdbc.properties to match your database credentials. If you plan on using the docker infobutton
 database, you should run that first and figure out what IP address it will have on your host.
 
 Run the following commands to build and start the docker container with the Infobutton web service and LITE web client.
