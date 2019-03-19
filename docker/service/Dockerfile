@@ -59,7 +59,7 @@ npm install -g http-server && \
 bower install --allow-root && \
 npm install
 
-RUN systemctl enable tomcat
+RUN systemctl enable tomcat.service
 
 EXPOSE 8080 8000
 
