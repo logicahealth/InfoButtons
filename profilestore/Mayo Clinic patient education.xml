@@ -23,7 +23,7 @@
 					</task>
 					<conceptOfInterest match="false" search="true">
 						<searchParameter source="displayName">
-						  <syntaxOnResource nonHl7CompliantName="q" valuePrefix="" valueSuffix="+site:www.mayoclinic.com/health/"/>
+						  <syntaxOnResource nonHl7CompliantName="q"/>
 						</searchParameter>
 					</conceptOfInterest>
 					<subTopics>
@@ -39,7 +39,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://www.google.com/search?hl=en&amp;btnI=Im+Feeling+Lucky&amp;"/>
+					<knowledgeRequestServiceLocation url="https://www.mayoclinic.org/search/search-results?"/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>

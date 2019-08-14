@@ -302,6 +302,7 @@ public class ResponseGenerator
             final URL url = new URL( baseLink.toString() );
             final URI uri = new URI( url.getProtocol(), null, url.getHost(), url.getPort(), url.getPath(), url.getQuery(), null );
             final HttpGet getRequest = new HttpGet( uri.toString() );
+            log.info("Querying URL for Knowledge Response: " + uri.toString());
             getRequest.addHeader( "accept", "application/xml" );
             HttpResponse response;
             response = httpClient.execute( getRequest );
