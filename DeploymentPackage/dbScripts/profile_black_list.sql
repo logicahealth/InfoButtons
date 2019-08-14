@@ -2,7 +2,7 @@ USE `resource_profile`;
 
 CREATE TABLE `profile_black_list`
 (
-`id` BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 `profileTitle` VARCHAR(100) NOT NULL,
 `userId` VARCHAR(20) NOT NULL,
 `profileID` INT(11)
