@@ -22,9 +22,9 @@ ln -s apache-maven-3.6.0 maven
 COPY tomcat.service /etc/systemd/system/tomcat.service
 
 RUN useradd -m -U -d /opt/tomcat -s /bin/false tomcat && \
-wget http://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.zip -P /tmp && \
-unzip /tmp/apache-tomcat-8.5.37.zip -d tomcat && \
-ln -s /opt/tomcat/apache-tomcat-8.5.37 /opt/tomcat/latest && \
+wget https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.43/bin/apache-tomcat-8.5.43.zip -P /tmp && \
+unzip /tmp/apache-tomcat-8.5.43.zip -d tomcat && \
+ln -s /opt/tomcat/apache-tomcat-8.5.43 /opt/tomcat/latest && \
 chown -R tomcat: tomcat && \
 chmod +x tomcat/latest/bin/*.sh
 
