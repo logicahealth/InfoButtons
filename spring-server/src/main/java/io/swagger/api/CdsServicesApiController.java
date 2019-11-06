@@ -59,7 +59,7 @@ public class CdsServicesApiController implements CdsServicesApi {
         probservice.setId("oibResponseConditions");
         information.addServicesItem(probservice);
         Prefetch prefetch = new Prefetch();
-        prefetch.put("problems" , "Condition?patient={{context.patientId}}&_sort=clinicalstatus&_sort:desc=onset");
+        prefetch.put("problems" , "Condition?patient={{context.patientId}}&_sort=clinicalstatus&_sort:desc=date-recorded");
         prefetch.put("p", "Patient/{{context.patientId}}");
         service.setPrefetch(prefetch);
         probservice.setPrefetch(prefetch);
