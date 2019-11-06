@@ -4,7 +4,6 @@ import io.swagger.model.*;
 
 import io.swagger.annotations.*;
 
-import org.hl7.v3.AggregateKnowledgeResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,17 +18,12 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import java.io.ByteArrayInputStream;
-import java.io.StringReader;
 import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import javax.validation.constraints.*;
 import javax.validation.Valid;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -54,7 +47,7 @@ public class CdsServicesApiController implements CdsServicesApi {
         // do some magic!
         CDSServiceInformation information = new CDSServiceInformation();
         CDSService service = new CDSService();
-        service.setHook(Hook.MEDICATION_PRESCRIBE);
+        service.setHook(Hook.ORDER_SELECT);
         service.setTitle("OpenInfobutton Knowledge Response Service");
         service.description("A Protype OpenInfobutton to CDS-Hooks Wrapper");
         service.setId("oibResponseMedications");
@@ -83,16 +76,20 @@ public class CdsServicesApiController implements CdsServicesApi {
 
     public ResponseEntity<CDSResponse> cdsServicesIdPost(@ApiParam(value = "The id of this CDS service",required=true ) @PathVariable("id") String id,
         @ApiParam(value = "Body of CDS service request" ,required=true )  @Valid @RequestBody CDSRequest request) {
-        if (request.getHook().equals(Hook.MEDICATION_PRESCRIBE)) {
+        if (request.getHook().equals(Hook.ORDER_SELECT)) {
             HashMap context = (HashMap) request.getContext();
-            HashMap codes;
-            if (((HashMap) context.get("medicationCodeableConcept")) != null) {
-
-                codes = ((HashMap) ((List) ((HashMap) context.get("medicationCodeableConcept")).get("coding")).get(0));
-            } else {
-
-                codes = ((HashMap) ((List) ((HashMap) ((HashMap) ((HashMap) ((List) ((HashMap) context.get("medications")).get("entry")).get(0)).get("resource")).get("medicationCodeableConcept")).get("coding")).get(0));
+            List<HashMap> entries = ((List) ((HashMap) context.get("draftOrders")).get("entry"));
+            HashMap medication = ((HashMap) ((HashMap) ((HashMap) entries.get(0)).get("resource")).get("medicationCodeableConcept"));
+            for (HashMap entry : entries )
+            {
+                if (((HashMap)entry.get("resource")).get("medicationCodeableConcept") != null)
+                {
+                    medication = ((HashMap) ((HashMap)entry.get("resource")).get("medicationCodeableConcept"));
+                    break;
+                }
             }
+            HashMap codes = ((HashMap) ((List) medication.get("coding")).get(0));
+
             String oibAge = new String();
             String oibGender = new String();
             if (!((HashMap) request.getPrefetch()).isEmpty()) {

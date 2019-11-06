@@ -15,7 +15,7 @@ public enum Hook {
   
   PATIENT_VIEW("patient-view"),
   
-  MEDICATION_PRESCRIBE("medication-prescribe"),
+  ORDER_SELECT("order-select"),
   
   ORDER_REVIEW("order-review");
 
