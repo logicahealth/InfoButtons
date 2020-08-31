@@ -65,7 +65,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2004/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text] AND English[lang]&amp;"/>
+					<knowledgeRequestServiceLocation url="https://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2004/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text] AND English[lang]&amp;"/>
 				</knowledgeRequestService>
 			</context>
 			<context name="Links from Medication List to therapy in PubMed Clinical Queries" id="2">
@@ -110,7 +110,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2000/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text]&amp;"/>
+					<knowledgeRequestServiceLocation url="https://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2000/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text]&amp;"/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>
