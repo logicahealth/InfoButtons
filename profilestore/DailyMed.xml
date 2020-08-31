@@ -23,7 +23,7 @@
 						</matchingDomain>
 					</task>
 					<conceptOfInterest match="false" search="true">
-						<searchParameter source="code">
+						<searchParameter source="displayName">
 							<syntaxOnResource nonHl7CompliantName="query"/>
 						</searchParameter>
 					</conceptOfInterest>
