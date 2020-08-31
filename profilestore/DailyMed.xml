@@ -26,14 +26,13 @@
 						<searchParameter source="code">
 							<syntaxOnResource nonHl7CompliantName="query"/>
 						</searchParameter>
-						<outputDisplayNameTransformation id="getDrugCode" name="getDrugCode"/>
 					</conceptOfInterest>
 					<subTopics>
 						<subTopic linkName="FDA Drug Label"/>
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://dailymed.nlm.nih.gov/dailymed/search.cfm?searchdb=rxcui&amp;"/>
+					<knowledgeRequestServiceLocation url="http://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&amp;"/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>
