@@ -2,7 +2,7 @@
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1100">
 		<title>DailyMed</title>
-		<profileDescription>Trustworthy information about marketed drugs. DailyMed is the official provider of FDA label information (package inserts).</profileDescription>
+		<profileDescription> Trustworthy information about marketed drugs. DailyMed is the official provider of FDA label information (package inserts).</profileDescription>
 		<versionControl publicationDate="2015-01-26T14:39:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false" urlStyle="DIRTY">
@@ -23,17 +23,16 @@
 						</matchingDomain>
 					</task>
 					<conceptOfInterest match="false" search="true">
-						<searchParameter source="code">
+						<searchParameter source="displayName">
 							<syntaxOnResource nonHl7CompliantName="query"/>
 						</searchParameter>
-						<outputDisplayNameTransformation id="getDrugCode" name="getDrugCode"/>
 					</conceptOfInterest>
 					<subTopics>
-						<subTopic linkName="FDA Drug Label"/>
+						<subTopic linkName="FDA Drug Label "/>
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://dailymed.nlm.nih.gov/dailymed/search.cfm?searchdb=rxcui&amp;"/>
+					<knowledgeRequestServiceLocation url="https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&amp;"/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>
