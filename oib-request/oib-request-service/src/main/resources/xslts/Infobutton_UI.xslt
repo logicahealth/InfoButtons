@@ -4,7 +4,7 @@
 	<xsl:template match="/">
 		<html>
 			<head>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 				<title> OpenInfobutton</title>
 				<style type="text/css"><![CDATA[
 						@charset "UTF-8";
