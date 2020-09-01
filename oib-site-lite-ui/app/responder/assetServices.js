@@ -6,9 +6,9 @@ oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
     var oibManagerUrl = 'https://' + localStorage.getItem('hostName') + '/infobutton-service/liteManager/'
 
-    var responderManagerBase = 'http://' + localStorage.getItem('hostName') + ':8080/openInfobutton/assetManager/';
+    var responderManagerBase = 'https://' + localStorage.getItem('hostName') + '/openInfobutton/assetManager/';
 
-    var responderExpander = 'http://' + localStorage.getItem('hostName') + ':8080/openInfobutton/';
+    var responderExpander = 'https://' + localStorage.getItem('hostName') + '/openInfobutton/';
 //    var urlBase = 'http://service.oib.utah.edu:8080/infobutton-service-dev/manager/';
     var assetFactory = {};
 
