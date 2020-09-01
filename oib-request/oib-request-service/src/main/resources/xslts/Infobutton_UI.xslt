@@ -236,7 +236,7 @@
 						window.resizeTo(1250, 1000);
 						setContent('<xsl:value-of select="//feed[1]/entry[1]/link/@href"/>', '<xsl:value-of select="//feed[1]/entry[1]/id"/>');
 					}
-				</script>  
+				</script>
 			</head>
 			<body class="u_style" onload="start();">
 				<script type="text/javascript"><![CDATA[
@@ -246,12 +246,12 @@
 						    selectedLinks[i].style.display = 'none';
 						}
 						document.getElementById(linkId).style.display = 'inline';
-						if (url.search("medlineplus") == -1) {
-							var contentPanel = document.getElementById("contentPanel");
-							contentPanel.src = url;
+						if ((url.search(".gov") >= 0) || (url.search("pharmgkb") >= 0) || (url.search("mayoclinic") >= 0)) {
+							window.open(url);
 						}
 						else {
-							window.open(url);
+							var contentPanel = document.getElementById("contentPanel");
+							contentPanel.src = url;
 						}
 					}
 				]]></script>
