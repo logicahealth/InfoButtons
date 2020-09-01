@@ -89,7 +89,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://www.uptodate.com/online/content/search.do?searchType=HL7&amp;"/>
+					<knowledgeRequestServiceLocation url="https://www.uptodate.com/online/content/search.do?searchType=HL7&amp;"/>
 				</knowledgeRequestService>
 			</context>
 			<context name="Knowledge on lab tests" id="2">
@@ -118,7 +118,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://www.uptodate.com/online/content/search.do?searchType=HL7&amp;"/>
+					<knowledgeRequestServiceLocation url="https://www.uptodate.com/online/content/search.do?searchType=HL7&amp;"/>
 				</knowledgeRequestService>
 			</context>
 			<context name="Knowledge on meds" id="3">
@@ -185,7 +185,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="http://www.uptodate.com/online/content/search.do?searchType=HL7&amp;"/>
+					<knowledgeRequestServiceLocation url="https://www.uptodate.com/online/content/search.do?searchType=HL7&amp;"/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>
