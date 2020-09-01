@@ -4,7 +4,7 @@ var oibAssetServiceModule = angular.module('oibAssetServiceModule', ['ui.bootstr
 
 oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
-    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/liteManager/'
+    var oibManagerUrl = 'https://' + localStorage.getItem('hostName') + ':8080/infobutton-service/liteManager/'
 
     var responderManagerBase = 'http://' + localStorage.getItem('hostName') + ':8080/openInfobutton/assetManager/';
 

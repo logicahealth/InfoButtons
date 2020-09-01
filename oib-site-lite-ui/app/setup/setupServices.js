@@ -23,7 +23,7 @@ oibSetupServices.service('loginModal', function ($uibModal, propertiesService) {
 
 oibSetupServices.service('umlsModal', function ($uibModal, propertiesService) {
 
-    var oibPropertiesUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/propertiesManager/'
+    var oibPropertiesUrl = 'https://' + localStorage.getItem('hostName') + ':8080/infobutton-service/propertiesManager/'
 
     function assignUmlsUser (user) {
 
@@ -48,7 +48,7 @@ oibSetupServices.service('propertiesService', function ($rootScope, $http) {
 
     var propertiesService = {};
 
-    var oibPropertiesService = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/propertiesManager/'
+    var oibPropertiesService = 'https://' + localStorage.getItem('hostName') + ':8080/infobutton-service/propertiesManager/'
 
     propertiesService.getUmlsUserName = function() {
 
@@ -173,7 +173,7 @@ oibSetupServices.service('loginService', function ($rootScope, $http, base64) {
 
     var loginService = {};
 
-    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080/infobutton-service/liteManager/'
+    var oibManagerUrl = 'https://' + localStorage.getItem('hostName') + ':8080/infobutton-service/liteManager/'
 
     loginService.getUsers = function(setupScope) {
 
