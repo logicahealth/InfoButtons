@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- DWXMLSource="responseSample.xml" -->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions">
-	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+	<xsl:output method="html" encoding="UTF-8" indent="yes"/>
 	<xsl:template match="/">
 		<html>
 			<head>
@@ -246,12 +246,12 @@
 						    selectedLinks[i].style.display = 'none';
 						}
 						document.getElementById(linkId).style.display = 'inline';
-						if ((url.search(".gov") >= 0) || (url.search("pharmgkb") >= 0) || (url.search("mayoclinic") >= 0)) {
-							window.open(url);
-						}
-						else {
+						if ((url.search("uptodate") >= 0) || (url.search("micromedex") >= 0) || (url.search("drugs.com") >= 0) || (url.search("staywell") >= 0)) {
 							var contentPanel = document.getElementById("contentPanel");
 							contentPanel.src = url;
+						}
+						else {
+							window.open(url);
 						}
 					}
 				]]></script>
