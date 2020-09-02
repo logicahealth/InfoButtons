@@ -49,17 +49,17 @@
 						<subTopic linkName="Therapy">
 							<searchParameter>
 								<valueSource>
-									<searchTerm>Therapy/Narrow[filter]</searchTerm>
+									<searchTerm>=Therapy,Narrow</searchTerm>
 								</valueSource>
-								<syntaxOnResource nonHl7CompliantName="term"/>
+								<syntaxOnResource nonHl7CompliantName="clincat"/>
 							</searchParameter>
 						</subTopic>
 						<subTopic linkName="Diagnosis">
 							<searchParameter>
 								<valueSource>
-									<searchTerm>Diagnosis/Narrow[filter]</searchTerm>
+									<searchTerm>Diagnosis,Narrow</searchTerm>
 								</valueSource>
-								<syntaxOnResource nonHl7CompliantName="term"/>
+								<syntaxOnResource nonHl7CompliantName="clincat"/>
 							</searchParameter>
 						</subTopic>
 					</subTopics>
@@ -94,9 +94,9 @@
 						<subTopic linkName="Therapy (RCT)">
 							<searchParameter>
 								<valueSource>
-									<searchTerm>Therapy/Narrow[filter]</searchTerm>
+									<searchTerm>Therapy,Narrow[filter]</searchTerm>
 								</valueSource>
-								<syntaxOnResource nonHl7CompliantName="term"/>
+								<syntaxOnResource nonHl7CompliantName="clincat"/>
 							</searchParameter>
 						</subTopic>
 						<subTopic linkName="Systematic reviews">
@@ -104,7 +104,7 @@
 								<valueSource>
 									<searchTerm>systematic[sb]</searchTerm>
 								</valueSource>
-								<syntaxOnResource nonHl7CompliantName="term"/>
+								<syntaxOnResource nonHl7CompliantName="clincat"/>
 							</searchParameter>
 						</subTopic>
 					</subTopics>
