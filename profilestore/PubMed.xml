@@ -87,26 +87,11 @@
 					</performerKnowledgeUserType>
 					<conceptOfInterest match="false" search="true">
 						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="term" valuePrefix="(" valueSuffix=")"/>
+							<syntaxOnResource nonHl7CompliantName="term" valuePrefix="(" valueSuffix=") AND Therapy/Narrow[filter]"/>
 						</searchParameter>
 					</conceptOfInterest>
 					<subTopics>
-						<subTopic linkName="Therapy (RCT)">
-							<searchParameter>
-								<valueSource>
-									<searchTerm>Therapy,Narrow[filter]</searchTerm>
-								</valueSource>
-								<syntaxOnResource nonHl7CompliantName="clincat"/>
-							</searchParameter>
-						</subTopic>
-						<subTopic linkName="Systematic reviews">
-							<searchParameter>
-								<valueSource>
-									<searchTerm>systematic[sb]</searchTerm>
-								</valueSource>
-								<syntaxOnResource nonHl7CompliantName="clincat"/>
-							</searchParameter>
-						</subTopic>
+						<subTopic linkName="Therapy (RCT)"/>
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
