@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1">
-		<title>PubMed-</title>
+		<title>PubMed</title>
 		<profileDescription>Largest database of indexed biomedical literature. </profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
