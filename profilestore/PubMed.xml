@@ -2,7 +2,7 @@
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1">
 		<title>PubMed</title>
-		<profileDescription>Largest database of indexed biomedical literature. Uses the Pubmed Clinical Queries filter, which is optimized to retrieve recent, high quality clinical studies.</profileDescription>
+		<profileDescription>Largest database of indexed biomedical literature. </profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false" urlStyle="DIRTY">
