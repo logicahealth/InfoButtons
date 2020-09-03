@@ -37,7 +37,7 @@
 							<syntaxOnResource nonHl7CompliantName="term" valuePrefix="(" valueSuffix=") AND Therapy/Narrow[filter]"/>
 						</searchParameter>
 					</conceptOfInterest>
-					</subTopics>
+					<subTopics>
 						<subTopic linkName="Treatment (RCTs)"/>
 					</subTopics>
 				</contextDefinition>
