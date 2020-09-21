@@ -44,7 +44,7 @@ public interface CodeExpanderDao {
     /**
      * The Constant SNOMED_CODE_SYSTEM_OID.
      */
-    public static final String SNOMED_CODE_SYSTEM_OID = "2.16.840.1.113883.6.90";
+    public static final String SNOMED_CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";
 
     /**
      * The Constant ICD9_CODE_SYSTEM_OID.
@@ -54,7 +54,7 @@ public interface CodeExpanderDao {
     /**
      * The Constant ICD10CM_CODE_SYSTEM_OID.
      */
-    public static final String ICD10CM_CODE_SYSTEM_OID = "2.16.840.1.113883.6.103";
+    public static final String ICD10CM_CODE_SYSTEM_OID = "2.16.840.1.113883.6.90";
 
     /**
      * The Constant ICD10_CODE_SYSTEM_OID.
