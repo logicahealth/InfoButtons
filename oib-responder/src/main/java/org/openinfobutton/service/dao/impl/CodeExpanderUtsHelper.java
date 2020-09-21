@@ -120,6 +120,10 @@ public class CodeExpanderUtsHelper {
             getSnomedChildren(1, code);
         } else if (CodeExpanderDao.ICD9_CODE_SYSTEM_OID.equals(codeSystem)) {
             getIcd9Children(1, code);
+        } else if (CodeExpanderDao.ICD10_CODE_SYSTEM_OID.equals(codeSystem)) {
+            getIcd10Children(1, code);
+        } else if (CodeExpanderDao.ICD10CM_CODE_SYSTEM_OID.equals(codeSystem)) {
+            getIcd10CMChildren(1, code);
         } else {
             throw new UnsupportedOperationException("Code system " + codeSystem
                     + " is not supported by the current UTS implementation."); // To change body of generated methods,
@@ -165,6 +169,94 @@ public class CodeExpanderUtsHelper {
             code_.setDisplayName(cuiPreferredName);
             code_.setCodeSystemOid(CodeExpanderDao.ICD9_CODE_SYSTEM_OID);
             code_.setCodeSystemDisplayName("ICD-9 CM");
+
+            expansionCodes.add(code_);
+            getIcd9Children(level + 1, cuiCode);
+
+        }
+
+    }
+
+    /**
+     * Gets the icd10 children.
+     *
+     * @param level the level
+     * @param code the code
+     * @return the icd10 children
+     */
+    private void getIcd10Children(int level, String code) {
+
+        final UtsWsContentController utsContentService
+                = (new UtsWsContentControllerImplService()).getUtsWsContentControllerImplPort();
+
+        List<AtomClusterRelationDTO> myAtomClusterRelations = new ArrayList<AtomClusterRelationDTO>();
+        final Psf myPsf = new Psf();
+        myPsf.getIncludedRelationLabels().add("PAR");
+
+        try {
+            myAtomClusterRelations
+                    = utsContentService.getSourceDescriptorSourceDescriptorRelations(getSecurityTicket(),
+                    currentRelease,
+                    code, "ICD10", myPsf);
+        } catch (final UtsFault_Exception e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < myAtomClusterRelations.size(); i++) {
+
+            final AtomClusterRelationDTO myAtomClusterRelationDTO = myAtomClusterRelations.get(i);
+            final String cuiCode = myAtomClusterRelationDTO.getRelatedAtomCluster().getUi();
+            final String cuiPreferredName = myAtomClusterRelationDTO.getRelatedAtomCluster().getDefaultPreferredName();
+
+            final Code code_ = new Code();
+            code_.setCode(cuiCode);
+            code_.setDisplayName(cuiPreferredName);
+            code_.setCodeSystemOid(CodeExpanderDao.ICD10_CODE_SYSTEM_OID);
+            code_.setCodeSystemDisplayName("ICD-10");
+
+            expansionCodes.add(code_);
+            getIcd9Children(level + 1, cuiCode);
+
+        }
+
+    }
+
+    /**
+     * Gets the icd10CM children.
+     *
+     * @param level the level
+     * @param code the code
+     * @return the icd10 children
+     */
+    private void getIcd10CMChildren(int level, String code) {
+
+        final UtsWsContentController utsContentService
+                = (new UtsWsContentControllerImplService()).getUtsWsContentControllerImplPort();
+
+        List<AtomClusterRelationDTO> myAtomClusterRelations = new ArrayList<AtomClusterRelationDTO>();
+        final Psf myPsf = new Psf();
+        myPsf.getIncludedRelationLabels().add("PAR");
+
+        try {
+            myAtomClusterRelations
+                    = utsContentService.getSourceDescriptorSourceDescriptorRelations(getSecurityTicket(),
+                    currentRelease,
+                    code, "ICD10CM", myPsf);
+        } catch (final UtsFault_Exception e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < myAtomClusterRelations.size(); i++) {
+
+            final AtomClusterRelationDTO myAtomClusterRelationDTO = myAtomClusterRelations.get(i);
+            final String cuiCode = myAtomClusterRelationDTO.getRelatedAtomCluster().getUi();
+            final String cuiPreferredName = myAtomClusterRelationDTO.getRelatedAtomCluster().getDefaultPreferredName();
+
+            final Code code_ = new Code();
+            code_.setCode(cuiCode);
+            code_.setDisplayName(cuiPreferredName);
+            code_.setCodeSystemOid(CodeExpanderDao.ICD10_CODE_SYSTEM_OID);
+            code_.setCodeSystemDisplayName("ICD-10 CM");
 
             expansionCodes.add(code_);
             getIcd9Children(level + 1, cuiCode);

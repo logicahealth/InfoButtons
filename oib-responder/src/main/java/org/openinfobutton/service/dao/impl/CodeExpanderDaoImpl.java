@@ -127,6 +127,10 @@ public class CodeExpanderDaoImpl
             return getExpansionSnomedCodes(code);
         } else if (ICD9_CODE_SYSTEM_OID.equals(codeSystem)) {
             return getExpansionIcd9Codes(code);
+        } else if (ICD10_CODE_SYSTEM_OID.equals(codeSystem)) {
+            return getExpansionIcd10Codes(code);
+        } else if (ICD10CM_CODE_SYSTEM_OID.equals(codeSystem)) {
+            return getExpansionIcd10CMCodes(code);
         } else {
             throw new UnsupportedOperationException("Code system " + codeSystem + " not supported yet."); // To change
             // body of
@@ -196,6 +200,32 @@ public class CodeExpanderDaoImpl
 
         final CodeExpanderUtsHelper codeExpanderUtsHelper = new CodeExpanderUtsHelper(utsProperties);
         final Set<Code> codes = codeExpanderUtsHelper.getExpansionCodes(CodeExpanderDao.ICD9_CODE_SYSTEM_OID, code);
+
+        return codes;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.openinfobutton.service.dao.CodeExpanderDao#getExpansionIcd9Codes(java.lang.String)
+     */
+    @Override
+    public Set<Code> getExpansionIcd10Codes(String code) {
+
+        final CodeExpanderUtsHelper codeExpanderUtsHelper = new CodeExpanderUtsHelper(utsProperties);
+        final Set<Code> codes = codeExpanderUtsHelper.getExpansionCodes(CodeExpanderDao.ICD10_CODE_SYSTEM_OID, code);
+
+        return codes;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.openinfobutton.service.dao.CodeExpanderDao#getExpansionIcd9Codes(java.lang.String)
+     */
+    @Override
+    public Set<Code> getExpansionIcd10CMCodes(String code) {
+
+        final CodeExpanderUtsHelper codeExpanderUtsHelper = new CodeExpanderUtsHelper(utsProperties);
+        final Set<Code> codes = codeExpanderUtsHelper.getExpansionCodes(CodeExpanderDao.ICD10CM_CODE_SYSTEM_OID, code);
 
         return codes;
     }
