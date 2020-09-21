@@ -94,6 +94,22 @@ public interface CodeExpanderDao {
     public Set<Code> getExpansionIcd9Codes(String code);
 
     /**
+     * Gets the expansion icd10 codes.
+     *
+     * @param code the code
+     * @return the expansion icd9 codes
+     */
+    public Set<Code> getExpansionIcd10Codes(String code);
+
+    /**
+     * Gets the expansion icd10CM codes.
+     *
+     * @param code the code
+     * @return the expansion icd9 codes
+     */
+    public Set<Code> getExpansionIcd10CMCodes(String code);
+
+    /**
      * Gets the expansion snomed codes.
      *
      * @param code the code
