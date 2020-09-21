@@ -215,7 +215,7 @@ public class CodeExpanderUtsHelper {
             code_.setCodeSystemDisplayName("ICD-10");
 
             expansionCodes.add(code_);
-            getIcd9Children(level + 1, cuiCode);
+            getIcd10Children(level + 1, cuiCode);
 
         }
 
@@ -259,7 +259,7 @@ public class CodeExpanderUtsHelper {
             code_.setCodeSystemDisplayName("ICD-10 CM");
 
             expansionCodes.add(code_);
-            getIcd9Children(level + 1, cuiCode);
+            getIcd10CMChildren(level + 1, cuiCode);
 
         }
 
