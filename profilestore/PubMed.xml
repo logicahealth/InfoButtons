@@ -2,7 +2,7 @@
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1">
 		<title>PubMed</title>
-		<profileDescription>Largest database of indexed biomedical literature. Uses the Pubmed Clinical Queries filter, which is optimized to retrieve recent, high quality clinical studies.</profileDescription>
+		<profileDescription>Largest database of indexed biomedical literature. </profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="false" hl7KnowledgeResponseCompliant="false" urlStyle="DIRTY">
@@ -34,38 +34,15 @@
 					</performerKnowledgeUserType>
 					<conceptOfInterest match="false" search="true">
 						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="term" valuePrefix="(" valueSuffix=")"/>
+							<syntaxOnResource nonHl7CompliantName="term" valuePrefix="(" valueSuffix=") AND Therapy/Narrow[filter]"/>
 						</searchParameter>
 					</conceptOfInterest>
 					<subTopics>
-						<subTopic linkName="Systematic reviews">
-							<searchParameter>
-								<valueSource>
-									<searchTerm>systematic[sb]</searchTerm>
-								</valueSource>
-								<syntaxOnResource nonHl7CompliantName="term"/>
-							</searchParameter>
-						</subTopic>
-						<subTopic linkName="Therapy">
-							<searchParameter>
-								<valueSource>
-									<searchTerm>Therapy/Narrow[filter]</searchTerm>
-								</valueSource>
-								<syntaxOnResource nonHl7CompliantName="term"/>
-							</searchParameter>
-						</subTopic>
-						<subTopic linkName="Diagnosis">
-							<searchParameter>
-								<valueSource>
-									<searchTerm>Diagnosis/Narrow[filter]</searchTerm>
-								</valueSource>
-								<syntaxOnResource nonHl7CompliantName="term"/>
-							</searchParameter>
-						</subTopic>
+						<subTopic linkName="Treatment (RCTs)"/>
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="https://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2004/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text] AND English[lang]&amp;"/>
+					<knowledgeRequestServiceLocation url="https://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2000/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text] AND English[lang]&amp;"/>
 				</knowledgeRequestService>
 			</context>
 			<context name="Links from Medication List to therapy in PubMed Clinical Queries" id="2">
@@ -87,26 +64,11 @@
 					</performerKnowledgeUserType>
 					<conceptOfInterest match="false" search="true">
 						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="term" valuePrefix="(" valueSuffix=")"/>
+							<syntaxOnResource nonHl7CompliantName="term" valuePrefix="(" valueSuffix=") AND Therapy/Narrow[filter]"/>
 						</searchParameter>
 					</conceptOfInterest>
 					<subTopics>
-						<subTopic linkName="Therapy (RCT)">
-							<searchParameter>
-								<valueSource>
-									<searchTerm>Therapy/Narrow[filter]</searchTerm>
-								</valueSource>
-								<syntaxOnResource nonHl7CompliantName="term"/>
-							</searchParameter>
-						</subTopic>
-						<subTopic linkName="Systematic reviews">
-							<searchParameter>
-								<valueSource>
-									<searchTerm>systematic[sb]</searchTerm>
-								</valueSource>
-								<syntaxOnResource nonHl7CompliantName="term"/>
-							</searchParameter>
-						</subTopic>
+						<subTopic linkName="Treatment (RCTs)"/>
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>

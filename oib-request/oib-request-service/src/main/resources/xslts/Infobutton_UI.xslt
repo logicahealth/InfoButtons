@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- DWXMLSource="responseSample.xml" -->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions">
-	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+	<xsl:output method="html" encoding="UTF-8" indent="yes"/>
 	<xsl:template match="/">
 		<html>
 			<head>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 				<title> OpenInfobutton</title>
 				<style type="text/css"><![CDATA[
 						@charset "UTF-8";
@@ -236,7 +236,7 @@
 						window.resizeTo(1250, 1000);
 						setContent('<xsl:value-of select="//feed[1]/entry[1]/link/@href"/>', '<xsl:value-of select="//feed[1]/entry[1]/id"/>');
 					}
-				</script>  
+				</script>
 			</head>
 			<body class="u_style" onload="start();">
 				<script type="text/javascript"><![CDATA[
@@ -246,7 +246,7 @@
 						    selectedLinks[i].style.display = 'none';
 						}
 						document.getElementById(linkId).style.display = 'inline';
-						if (url.search("medlineplus") == -1) {
+						if ((url.search("uptodate") >= 0) || (url.search("micromedex") >= 0) || (url.search("drugs.com") >= 0) || (url.search("staywell") >= 0)) {
 							var contentPanel = document.getElementById("contentPanel");
 							contentPanel.src = url;
 						}
