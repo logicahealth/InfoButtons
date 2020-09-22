@@ -255,7 +255,7 @@ public class CodeExpanderUtsHelper {
             final Code code_ = new Code();
             code_.setCode(cuiCode);
             code_.setDisplayName(cuiPreferredName);
-            code_.setCodeSystemOid(CodeExpanderDao.ICD10_CODE_SYSTEM_OID);
+            code_.setCodeSystemOid(CodeExpanderDao.ICD10CM_CODE_SYSTEM_OID);
             code_.setCodeSystemDisplayName("ICD-10 CM");
 
             expansionCodes.add(code_);
