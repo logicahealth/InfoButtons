@@ -16,17 +16,17 @@ OpenInfobutton 2.3 improves performance, fixes bugs, simplifies the build, and a
 
 New features/improvements:
 
-- The OpenInfobutton Responder now supports adding Knowledge Summary and Knowlege Content to the InfoButton response for an asset configured in the Responder. LITE has also been updated to adding/editing these fields.
+- The OpenInfobutton Responder now supports adding a summary and full content to the InfoButton response for an asset configured in the Responder. LITE has also been updated to adding/editing these fields.
 
-- The underlying database connections used by the OpenInfobutton Manager have been reconfigured to use new libraries which has improved performance and the application's stability in a production server environment.
+- The underlying database connections used by the OpenInfobutton Manager have been reconfigured to use new libraries, which has improved performance and the application's stability in a production server environment.
 
-- The code used find descendents for coded search criteria has been changed to run much faster, so try using it profiles again.
+- The code used to find terminology concept descendants for coded search criteria has been changed to run much faster.
 
-Big fixes:
+Bug fixes:
 
-- A configuration bug with the database connections was causing instances of OIB that experienced long periods without a request to crash. This has been fixed.
+- A configuration bug with the database connections was causing instances of OpenInfobutton that experienced long periods without a request to crash. This has been fixed.
 
-- More old, unnecessary or conflicting dependencies have removed from various poms. This has significantly reduced built time and shrunk the size of the final WAR. 
+- More old, unnecessary or conflicting dependencies have been removed from various pom files. This has significantly reduced build time and shrunk the size of the final WAR.
 
 Building and redeploying
 ------------------------
@@ -47,7 +47,7 @@ New features/improvements:
 
 - Both the OIB manger and responder now both use the latest version of UTS for all requests, rather than a configured version
 
-Big fixes:
+Bug fixes:
 
 - A major issue related to concurrent request handling has been resolved. With increased traffic to our hosted OIB instance, we began noticing errors in the response that seemed to indicate a concurrency issue. This was investigated and is now fixed. Users hosting an instance with heavy traffic should observe much more reliable request handling. 
 
