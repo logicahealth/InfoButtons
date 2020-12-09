@@ -90,6 +90,13 @@ public class UmlsRestClientImpl implements RestTermClient {
 
     /**
      *
+     * UMLS Authentication parameters
+     */
+
+    private static String UMLS_AUTH_API_KEY_URL = "https://utslogin.nlm.nih.gov/cas/v1/api-key";
+
+    /**
+     *
      * @param search Search term
      * @return Array of search results serialized to JSON
      */
@@ -283,10 +290,10 @@ public class UmlsRestClientImpl implements RestTermClient {
         if (lastUpdate + 600000000000l < System.nanoTime()) {
             logger.error("GETTING TGT");
             try {
-                ticketGrantingTicketURL = Request.Post(UMLS_AUTH_API_URL)
+                ticketGrantingTicketURL = Request.Post(UMLS_AUTH_API_KEY_URL)
                         .useExpectContinue()
                         .version(HttpVersion.HTTP_1_1)
-                        .bodyForm(Form.form().add("username", env.getProperty("umls.username")).add("password", env.getProperty("umls.password")).build())
+                        .bodyForm(Form.form().add("apikey", env.getProperty("umls.apikey")).build())
                         .execute().returnResponse().getFirstHeader("location").getValue();
             } catch (IOException e) {
                 e.printStackTrace();
