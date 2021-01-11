@@ -4,11 +4,11 @@ var oibAssetServiceModule = angular.module('oibAssetServiceModule', ['ui.bootstr
 
 oibAssetServiceModule.factory('assetFactory', ['$http', function($http) {
 
-    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + '/infobutton-service/liteManager/'
+    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080' + '/infobutton-service/liteManager/'
 
-    var responderManagerBase = 'http://' + localStorage.getItem('hostName') + '/openInfobutton/assetManager/';
+    var responderManagerBase = 'http://' + localStorage.getItem('hostName') + ':8080' + '/openInfobutton/assetManager/';
 
-    var responderExpander = 'http://' + localStorage.getItem('hostName') + '/openInfobutton/';
+    var responderExpander = 'http://' + localStorage.getItem('hostName') + ':8080' + '/openInfobutton/';
 //    var urlBase = 'http://service.oib.utah.edu:8080/infobutton-service-dev/manager/';
     var assetFactory = {};
 
