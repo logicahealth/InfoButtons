@@ -5,7 +5,7 @@ var liteAuthenticationServiceModule = angular.module('liteAuthenticationServiceM
 liteAuthenticationServiceModule.factory('liteAuthenticationService',
         ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
             function (Base64, $http, $cookieStore, $rootScope, $timeout) {
-                var oibManagerUrl = 'https://' + localStorage.getItem('hostName') + '/infobutton-service/liteManager/'
+                var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + '/infobutton-service/liteManager/'
 
                 var service = {};
 
