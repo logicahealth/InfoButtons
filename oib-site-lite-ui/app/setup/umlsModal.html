@@ -1,16 +1,12 @@
 <div class="modal-header">
-    <h3 class="modal-title">Enter your UMLS Username and Password</h3>
+    <h3 class="modal-title">Enter your UMLS API Key</h3>
 </div>
 <div class="modal-body">
-    <form ng-submit="submit(umlsUser, umlsPassword)" class="form" name="umls">
+    <form ng-submit="submit(umlsApiKey)" class="form" name="umls">
         <div class="form-group">
             <div class="input-group">
-                <label for="umlsUser">UMLS Username</label>
-                <input type="text" class="form-control" id="umlsUser" ng-model="umlsUser" required>
-            </div>
-            <div class="input-group">
-                <label for="umlsPassword">UMLS Password</label>
-                <input type="password" class="form-control" id="umlsPassword" ng-model="umlsPassword" required>
+                <label for="umlsApiKey">UMLS Api Key</label>
+                <input type="text" class="form-control" id="umlsApiKey" ng-model="umlsApiKey" required>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
