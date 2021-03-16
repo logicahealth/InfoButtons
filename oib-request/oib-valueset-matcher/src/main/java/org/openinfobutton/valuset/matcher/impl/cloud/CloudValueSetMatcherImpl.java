@@ -55,7 +55,7 @@ public class CloudValueSetMatcherImpl implements ValueSetMatcher {
             return ProcessValueSet(valueSet, code, codeSystem);
         }
         try {
-            response = restTemplate.exchange("https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/contents/valuesets/"
+            response = restTemplate.exchange("https://api.github.com/repos/logicahealth/InfoButtons/contents/valuesets/"
                     + subsetName + ".json?ref=development", HttpMethod.GET, new HttpEntity<Object>(getHeaders()), ValueSets.class);
         } catch (HttpClientErrorException e) {
 
@@ -113,7 +113,7 @@ public class CloudValueSetMatcherImpl implements ValueSetMatcher {
 
             try {
 
-                response = restTemplate.exchange("https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/contents/valuesets/"
+                response = restTemplate.exchange("https://api.github.com/repos/logicahealth/InfoButtons/contents/valuesets/"
                         + subsetName + "[1of" + count + "].json?ref=development", HttpMethod.GET, new HttpEntity<Object>(getHeaders()), ValueSets.class);
                 return ProcessMultiPartValueSet( code, codeSystem, subsetName, count, response);
             } catch (HttpClientErrorException e) {
@@ -135,7 +135,7 @@ public class CloudValueSetMatcherImpl implements ValueSetMatcher {
         int c = 2;
         while (c <= count) {
 
-            response = restTemplate.exchange("https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/contents/valuesets/"
+            response = restTemplate.exchange("https://api.github.com/repos/logicahealth/InfoButtons/contents/valuesets/"
                     + subsetName + "[" + c + "of" + count + "].json?ref=development", HttpMethod.GET, new HttpEntity<Object>(getHeaders()),
                     ValueSets.class);
             valueSet.getValueSet().getCodeSystems().addAll(((ValueSets) response.getBody()).getValueSet().getCodeSystems());

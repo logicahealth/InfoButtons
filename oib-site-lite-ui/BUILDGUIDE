@@ -55,7 +55,7 @@ Configure environment
 
     `````````````````````````````````````````````````
      localStorage.setItem("hostName", $location.host());
-     localStorage.setItem("gitRepo", 'VHAINNOVATIONS/InfoButtons');
+     localStorage.setItem("gitRepo", 'logicahealth/InfoButtons');
      localStorage.setItem("profileStorePath", 'profilestore');
 
     `````````````````````````````````````````````````

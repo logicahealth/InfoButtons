@@ -1,0 +1,21 @@
+-----INFOBUTTON WEB SERVICE DOCKERFILE INSTRUCTIONS
+
+Navigate to the service folder.
+
+Modify the pom.xml and jdbc.properties to match your database credentials. If you plan on using the docker infobutton
+database, you should run that first and figure out what IP address it will have on your host.
+
+Run the following commands to build and start the docker container with the Infobutton web service and LITE web client.
+
+docker build --rm --no-cache -t infobutton .
+
+//TODO: this fails to run, when I launch manually from docker dashboard it seems tomcat does not start. Also, since we now have the app in the tomcat webapps, do we need port 8000 and "npm start"?
+docker run --privileged --name infobutton -v /sys/fs/cgroup:/sys/fs/cgroup:ro -p 8080:8080 -p 8000:8000 -d infobutton /bin/bash -c "npm start"
+
+-------INFOBUTTON DATABASE DOCKERFILE RUN COMMANDS------------
+
+Navigate to the database folder and run the following two commands.
+
+docker build --rm --no-cache -t oibdb .
+
+docker run --name oibdb -p 3306:3306 -d oibdb

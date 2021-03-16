@@ -3,7 +3,7 @@
 var oibManagerServiceModule = angular.module('oibManagerServiceModule', ['ngResource']);
 
 // hard-coded stuff for temporary development/testing
-var baseCloudUrl = 'https://api.github.com/repos/VHAINNOVATIONS/InfoButtons/';
+var baseCloudUrl = 'https://api.github.com/repos/logicahealth/InfoButtons/';
 var profileDirectoryUrl = baseCloudUrl + 'contents/DeploymentPackage/TailoringTool';
 var profileContentUrl = baseCloudUrl + 'git/blobs/';
 

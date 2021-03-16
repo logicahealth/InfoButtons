@@ -133,7 +133,8 @@ oibConfigurationApp.run(function ($rootScope, $state, loginModal, $location, $co
     if (!localStorage.getItem('init'))
     {
         localStorage.setItem("hostName", $location.host());
-        localStorage.setItem("gitRepo", 'VHAINNOVATIONS/InfoButtons');
+        // localStorage.setItem("hostPort", $location.port());
+        localStorage.setItem("gitRepo", 'logicahealth/InfoButtons');
         localStorage.setItem("profileStorePath", 'profilestore');
         localStorage.setItem('init','yes');
     }
