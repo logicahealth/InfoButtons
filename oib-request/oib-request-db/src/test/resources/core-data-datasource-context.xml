@@ -50,7 +50,7 @@
 		<property name="hibernateProperties">
 			<map>
 				<entry key="hibernate.show_sql" value="false"/>
-				<entry key="hibernate.default_schema" value="valueset_and_log" />
+				<entry key="hibernate.default_schema" value="resource_profile" />
 				<entry key="hibernate.hbm2ddl.auto" value="validate" />
 			</map>
 		</property>

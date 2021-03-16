@@ -7,7 +7,8 @@
   <name>oib-request</name>
  	<properties>
 
-		<datasource1.url>jdbc:mysql://infobuttondb:3306/valueset_and_log</datasource1.url>
+<!--		<datasource1.url>jdbc:mysql://infobuttondb:3306/valueset_and_log</datasource1.url>-->
+		<datasource1.url>jdbc:mysql://infobuttondb:3306/resource_profile</datasource1.url>
 		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
 		<datasource1.user>root</datasource1.user>
 		<datasource1.password>password</datasource1.password>

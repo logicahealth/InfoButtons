@@ -7,6 +7,5 @@ docker run -d \
        -e MYSQL_ROOT_PASSWORD=password \
        -e MYSQL_USER=root \
        -e MYSQL_PASSWORD=password \
-       -e MYSQL_DATABASE=valueset_and_log \
-       -v ~/IdeaProjects/Infobuttons/databaseDocker/data:/docker-entrypoint-initdb.d \
+       -e MYSQL_DATABASE=resource_profile \
        -p 3306:3306 --name infobuttondb -d infobutton/infobuttondb

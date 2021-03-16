@@ -14,5 +14,6 @@ COPY ./data/a_resource_profile.sql /docker-entrypoint-initdb.d
 COPY ./data/b_profile_black_list.sql /docker-entrypoint-initdb.d
 COPY ./data/c_userAuthentication.sql /docker-entrypoint-initdb.d
 COPY ./data/d_oib_app_property.sql /docker-entrypoint-initdb.d
+COPY ./data/a_valueset_and_log.sql /docker-entrypoint-initdb.d
 
 EXPOSE 3306

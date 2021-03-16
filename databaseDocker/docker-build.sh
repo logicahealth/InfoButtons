@@ -6,7 +6,7 @@ docker network create infobuttonNetwork
 # stop running container
 docker container stop infobuttondb
 
-# remove the container anticpating rebuild
+# remove the container
 docker container rm infobuttondb
 
 # Remove image of the container
