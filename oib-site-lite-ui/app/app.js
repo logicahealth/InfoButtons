@@ -1,5 +1,12 @@
 'use strict';
 
+var env = {};
+
+// Import variables if present (from env.js)
+if(window){
+  Object.assign(env, window.__env);
+}
+
 var oibConfigurationApp = angular.module('oibConfigurationApp', [
   'ui.router',
   'ngResource',
@@ -27,6 +34,8 @@ var oibConfigurationApp = angular.module('oibConfigurationApp', [
   'oibConfirmModule',
   'uuidGenerator'
 ]);
+
+oibConfigurationApp.constant('_env', env);
 
 oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelectConfig) {
 
@@ -127,12 +136,12 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
       })
 });
 
-oibConfigurationApp.run(function ($rootScope, $state, loginModal, $location, $cookieStore, $http) {
+oibConfigurationApp.run(function ($rootScope, $state, loginModal, $cookieStore, $http, _env) {
 
 
     if (!localStorage.getItem('init'))
     {
-        localStorage.setItem("hostName", $location.host());
+        localStorage.setItem("apiUrl", _env.apiUrl);
         localStorage.setItem("gitRepo", 'VHAINNOVATIONS/InfoButtons');
         localStorage.setItem("profileStorePath", 'profilestore');
         localStorage.setItem('init','yes');

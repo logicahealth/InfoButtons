@@ -4,7 +4,7 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
 
     $scope.gitRepo = localStorage.getItem("gitRepo");
 
-    $scope.hostName = localStorage.getItem("hostName");
+    $scope.apiUrl = localStorage.getItem("apiUrl");
 
     $scope.profilestore = localStorage.getItem("profileStorePath");
 
@@ -79,9 +79,9 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
         })
     };
 
-    $scope.setHostName = function(hostName) {
-        if ($scope.gitForm.hostPath.$valid) {
-            localStorage.setItem("hostName", hostName);
+    $scope.setApiUrl = function(apiUrl) {
+        if ($scope.gitForm.apiUrl.$valid) {
+            localStorage.setItem("apiUrl", apiUrl);
         }
     };
 
