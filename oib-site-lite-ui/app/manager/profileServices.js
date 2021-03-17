@@ -10,7 +10,7 @@ var valueSetDirectoryUrl = baseCloudUrl + 'valuesets' + '?ref=development';
 
 oibManagerServiceModule.factory('profileFactory', ['$http', 'base64', 'propertiesService', function($http, base64, propertiesService) {
 
-    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080' + '/infobutton-service/liteManager/'
+    var oibManagerUrl = localStorage.getItem('apiUrl') + '/infobutton-service/liteManager/'
     var profileFactory = {};
 
     profileFactory.getProfiles = function () {
@@ -199,7 +199,7 @@ uuidGenerator.factory("idGenerator", function () {
 
 oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'idGenerator', '$filter', 'propertiesService', function ($http, $resource, idGenerator, $filter, propertiesService) {
 
-    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080' + '/infobutton-service/liteManager/'
+    var oibManagerUrl = localStorage.getItem('apiUrl') + '/infobutton-service/liteManager/'
 
     var cloudProfileFactory = {};
 

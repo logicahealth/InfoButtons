@@ -23,13 +23,12 @@ oibSetupServices.service('loginModal', function ($uibModal, propertiesService) {
 
 oibSetupServices.service('umlsModal', function ($uibModal, propertiesService) {
 
-    var oibPropertiesUrl = 'http://' + localStorage.getItem('hostName') + ':8080' + '/infobutton-service/propertiesManager/'
+    var oibPropertiesUrl = localStorage.getItem('apiUrl') + '/infobutton-service/propertiesManager/'
 
-    function assignUmlsUser (user) {
+    function assignUmlsApiKey (umlsApiKey) {
 
-        propertiesService.setUmlsUserName(user.user);
-        propertiesService.setUmlsPassword(user.password);
-        return user;
+        propertiesService.setUmlsApiKey(umlsApiKey);
+        return umlsApiKey;
     }
 
     return function() {
@@ -39,7 +38,7 @@ oibSetupServices.service('umlsModal', function ($uibModal, propertiesService) {
             controllerAs: 'UmlsModalCtrl'
         });
 
-        return instance.result.then(assignUmlsUser);
+        return instance.result.then(assignUmlsApiKey);
     };
 
 });
@@ -48,11 +47,11 @@ oibSetupServices.service('propertiesService', function ($rootScope, $http) {
 
     var propertiesService = {};
 
-    var oibPropertiesService = 'http://' + localStorage.getItem('hostName') + ':8080' + '/infobutton-service/propertiesManager/'
+    var oibPropertiesService = localStorage.getItem('apiUrl') + '/infobutton-service/propertiesManager/'
 
-    propertiesService.getUmlsUserName = function() {
+    propertiesService.getUmlsApiKey = function() {
 
-       return $http.get (oibPropertiesService + 'getProperty/umls.username/', {
+       return $http.get (oibPropertiesService + 'getProperty/umls.apikey/', {
             headers: {
                 'Authorization' : undefined
             }
@@ -62,35 +61,13 @@ oibSetupServices.service('propertiesService', function ($rootScope, $http) {
         });
     };
 
-    propertiesService.getUmlsPassword = function() {
+    propertiesService.setUmlsApiKey = function(umlsApiKey) {
 
-        return $http.get (oibPropertiesService + 'getProperty/umls.password/', {
-            headers: {
-                'Authorization' : undefined
-            }
-        }).then(function(response) {
-
-            return response.data;
-        });
-    };
-
-    propertiesService.setUmlsUserName = function(userName) {
-
-        return $http.post (oibPropertiesService + 'updateProperty/umls.username/', userName, {
+        return $http.post (oibPropertiesService + 'updateProperty/umls.apikey/', umlsApiKey, {
             headers: {
                 'Authorization' : undefined
             }
         });
-    };
-
-    propertiesService.setUmlsPassword = function(password) {
-
-        return $http.post (oibPropertiesService + 'updateProperty/umls.password/', password, {
-            headers: {
-                'Authorization' : undefined
-            }
-        });
-
     };
 
     propertiesService.getGitUsername = function() {
@@ -173,7 +150,7 @@ oibSetupServices.service('loginService', function ($rootScope, $http, base64) {
 
     var loginService = {};
 
-    var oibManagerUrl = 'http://' + localStorage.getItem('hostName') + ':8080' + '/infobutton-service/liteManager/'
+    var oibManagerUrl = localStorage.getItem('apiUrl') + '/infobutton-service/liteManager/'
 
     loginService.getUsers = function(setupScope) {
 
