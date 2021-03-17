@@ -1,6 +1,5 @@
 #!/bin/bash
 
-date
 
 # stop running container
 docker container stop infobutton/infobuttonapp
