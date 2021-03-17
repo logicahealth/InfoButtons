@@ -16,9 +16,9 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
 
     function getProperties() {
 
-        propertiesService.getUmlsUserName().then(function(data) {
+        propertiesService.getUmlsApiKey().then(function(data) {
 
-            $scope.umlsUser=data.propValue;
+            $scope.umlsApiKey=data.propValue;
         })
 
         propertiesService.getGitUsername().then(function(data) {
@@ -109,7 +109,7 @@ setupControllers.controller('setupController', function ($scope, $state, loginMo
             });
     }
 
-    $scope.changeUmlsUser = function() {
+    $scope.changeUmlsApiKey = function() {
 
         umlsModal()
             .then(function () {
@@ -147,24 +147,20 @@ setupControllers.controller('LoginModalCtrl', function ($scope, loginService, pr
 
 setupControllers.controller('UmlsModalCtrl', function ($scope, loginService, propertiesService) {
 
-    getUmlsUser();
+    getUmlsApiKey();
 
-    function getUmlsUser() {
+    function getUmlsApiKey() {
 
-        propertiesService.getUmlsUserName().then(function(data) {
+        propertiesService.getUmlsApiKey().then(function(data) {
 
-            $scope.umlsUser=data.propValue;
+            $scope.umlsApiKey=data.propValue;
         })
 
-        propertiesService.getUmlsPassword().then(function(data) {
-
-            $scope.umlsPassword=data.propValue;
-        })
     }
 
-    $scope.submit = function (userName, password) {
-        var umlsUser = (userName != undefined) ? {user: userName, password: password} : undefined;
-        this.$close(umlsUser);
+    $scope.submit = function (umlsApiKey) {
+
+        this.$close(umlsApiKey);
 
     }
 
