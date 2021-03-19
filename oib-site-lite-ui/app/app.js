@@ -139,10 +139,10 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
 oibConfigurationApp.run(function ($rootScope, $state, loginModal, $cookieStore, $http, _env) {
 
 
-    if (!localStorage.getItem('init'))
+    if (!localStorage.getItem('apiUrl'))
     {
         localStorage.setItem("apiUrl", _env.apiUrl);
-        localStorage.setItem("gitRepo", 'VHAINNOVATIONS/InfoButtons');
+        localStorage.setItem("gitRepo", 'logicahealth/InfoButtons');
         localStorage.setItem("profileStorePath", 'profilestore');
         localStorage.setItem('init','yes');
     }

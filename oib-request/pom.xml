@@ -7,15 +7,6 @@
   <name>oib-request</name>
  	<properties>
 
-		<datasource1.url>jdbc:mysql://infobuttondb:3306/resource_profile</datasource1.url>
-		<datasource1.driver>com.mysql.jdbc.Driver</datasource1.driver>
-		<datasource1.user>root</datasource1.user>
-		<datasource1.password>password</datasource1.password>
-		
-		<datasource2.url>jdbc:mysql://infobuttondb:3306/resource_profile</datasource2.url>
-		<datasource2.driver>com.mysql.jdbc.Driver</datasource2.driver>
-		<datasource2.user>root</datasource2.user>
-		<datasource2.password>password</datasource2.password>
 
 		<!-- ============== Value Set Configuration =================
 

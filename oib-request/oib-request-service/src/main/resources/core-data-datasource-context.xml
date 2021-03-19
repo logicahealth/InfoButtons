@@ -15,6 +15,8 @@
 	<!-- =========================================== -->
 
 	<context:annotation-config />
+	<context:property-placeholder location="classpath:application.properties" />
+
 
 	<!-- =========================================== -->
 	<!-- Data Layer -->
@@ -25,16 +27,16 @@
 
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
 		<property name="driverClassName">
-			<value>${datasource1.driver}</value>
+			<value>${datasource.driver}</value>
 		</property>
 		<property name="url">
-			<value>${datasource1.url}</value>
+			<value>${datasource.url}</value>
 		</property>
 		<property name="username">
-			<value>${datasource1.user}</value>
+			<value>${datasource.user}</value>
 		</property>
 		<property name="password">
-			<value>${datasource1.password}</value>
+			<value>${datasource.password}</value>
 		</property>
 		<property name="testWhileIdle">
 			<value>true</value>
