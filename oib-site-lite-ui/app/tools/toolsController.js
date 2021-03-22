@@ -11,7 +11,8 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', 'propertiesService', f
     })
 
     $scope.callIM = function (gender, age, task, mainSearchCriteriaC, labAbnormalFlag){
-        var baseUrl = 'http://' + localStorage.getItem("hostName") + ':8080/infobutton-service/infoRequest?';
+        // var baseUrl = 'http://' + localStorage.getItem("hostName") + ':8080/infobutton-service/infoRequest?';
+        var baseUrl = localStorage.getItem("apiUrl") + '/infobutton-service/infoRequest?';
         var organizationOID = document.getElementById("organizationId").value;
         var organization = 'representedOrganization.id.root=' + organizationOID;
         var performer = 'informationRecipient=' + document.getElementById("performerId").value;
@@ -47,11 +48,12 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', 'propertiesService', f
             + taskParam + mainSearchCriteriaParam + performerParam + xslt;
         var winRef = window.open(url, '', 'width=970, height=670, status=no, location=no, toolbar=no, scrollbars=no, resizable=yes');
         //document.getElementById('urlDisplay').value = url;
-    }
+    };
 
     $scope.buildUrl = function(){
         var knowledgeRequest ;
-        knowledgeRequest = 'http://' + localStorage.getItem("hostName") + ':8080/infobutton-service/infoRequest?' + 'representedOrganization.id.root=' + document.getElementById("organizationId").value;
+        // knowledgeRequest = 'http://' + localStorage.getItem("hostName") + ':8080/infobutton-service/infoRequest?' + 'representedOrganization.id.root=' + document.getElementById("organizationId").value;
+        knowledgeRequest = localStorage.getItem("apiUrl") + '/infobutton-service/infoRequest?' + 'representedOrganization.id.root=' + document.getElementById("organizationId").value;
 
         if (document.getElementById("taskContextC").value != '') {
             knowledgeRequest = knowledgeRequest + '&taskContext.c.c=' + document.getElementById("taskContextC").value;
@@ -127,7 +129,7 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', 'propertiesService', f
         knowledgeRequest = knowledgeRequest + document.getElementById("output").value;
 
         return knowledgeRequest;
-    }
+    };
 
     $scope.launchUrl = function ()
     {
@@ -135,6 +137,6 @@ oibToolModule.controller('ToolCtrl', ['$state', '$scope', 'propertiesService', f
         var textField = document.getElementById('urlOutput');
         textField.value = url;
         window.open(url,"Infobutton", 'scrollbars=yes, resizable=yes, toolbar=yes, status=yes, left=0, top=0, width=1200,height=800');
-    }
+    };
 
 }]);
