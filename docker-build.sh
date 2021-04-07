@@ -2,9 +2,9 @@
 
 
 # stop running container
-docker container stop infobutton/infobuttonapp
+docker container stop infobuttonapp
 
-# remove the container anticpating rebuild
+# remove the container anticipating rebuild
 docker container rm infobuttonapp
 
 # Remove image of the container
