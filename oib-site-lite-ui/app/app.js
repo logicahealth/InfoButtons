@@ -130,18 +130,18 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
           url: '/logout',
           controller: function(liteAuthenticationService, $state) {
 
-              liteAuthenticationService.ClearCredentials();
+              liteAuthenticationService.ClearCredentials();a
               $state.go('login');
           }
       })
 });
 
-oibConfigurationApp.run(function ($rootScope, $state, loginModal, $cookieStore, $http, window) {
+oibConfigurationApp.run(function ($rootScope, $state, loginModal, $cookieStore, $http, $window) {
 
 
     // if (!localStorage.getItem('apiUrl'))
     // {
-        localStorage.setItem("apiUrl", window.location);
+        localStorage.setItem("apiUrl", $window.location);
         localStorage.setItem("gitRepo", 'logicahealth/InfoButtons');
         localStorage.setItem("profileStorePath", 'profilestore');
         localStorage.setItem('init','yes');
