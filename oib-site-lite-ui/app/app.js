@@ -130,7 +130,7 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
           url: '/logout',
           controller: function(liteAuthenticationService, $state) {
 
-              liteAuthenticationService.ClearCredentials();a
+              liteAuthenticationService.ClearCredentials();
               $state.go('login');
           }
       })
