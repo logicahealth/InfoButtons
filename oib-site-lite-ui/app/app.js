@@ -136,16 +136,16 @@ oibConfigurationApp.config(function($stateProvider, $urlRouterProvider, uiSelect
       })
 });
 
-oibConfigurationApp.run(function ($rootScope, $state, loginModal, $cookieStore, $http, $window) {
+oibConfigurationApp.run(function ($rootScope, $state, loginModal, $cookieStore, $http, _env) {
 
 
-    // if (!localStorage.getItem('apiUrl'))
-    // {
-        localStorage.setItem("apiUrl", $window.location);
+    if (!localStorage.getItem('init'))
+    {
+        // localStorage.setItem("apiUrl", _env.apiUrl);
         localStorage.setItem("gitRepo", 'logicahealth/InfoButtons');
         localStorage.setItem("profileStorePath", 'profilestore');
         localStorage.setItem('init','yes');
-    // }
+    }
 
     $rootScope.globals = $cookieStore.get('globals') || {};
     if ($rootScope.globals.currentUser) {
