@@ -2,18 +2,34 @@
 
 var oibManagerServiceModule = angular.module('oibManagerServiceModule', ['ngResource', 'ab-base64']);
 
-var baseRepoUrl = 'https://api.github.com/repos/' + localStorage.getItem('gitRepo');
-var baseCloudUrl = baseRepoUrl + '/contents/';
-var baseCommitUrl = baseRepoUrl + '/commits?sha=development&path=' + localStorage.getItem('profileStorePath') + '/';
-var profileDirectoryUrl = baseCloudUrl + localStorage.getItem('profileStorePath') + '?ref=development';
-var valueSetDirectoryUrl = baseCloudUrl + 'valuesets' + '?ref=development';
+var gitRepo;
+var baseRepoUrl;
+var baseCloudUrl;
+var baseCommitUrl;
+var profileDirectoryUrl;
+var valueSetDirectoryUrl;
+
+var refreshVars = function () {
+    gitRepo = localStorage.getItem('gitRepo');
+    baseRepoUrl = 'https://api.github.com/repos/' + gitRepo;
+    baseCloudUrl = baseRepoUrl + '/contents/';
+    baseCommitUrl = baseRepoUrl + '/commits?sha=development&path=' + localStorage.getItem('profileStorePath') + '/';
+    profileDirectoryUrl = baseCloudUrl + localStorage.getItem('profileStorePath') + '?ref=development';
+    valueSetDirectoryUrl = baseCloudUrl + 'valuesets' + '?ref=development';
+};
 
 oibManagerServiceModule.factory('profileFactory', ['$http', 'base64', 'propertiesService', function($http, base64, propertiesService) {
 
-    var oibManagerUrl = localStorage.getItem('apiUrl') + '/infobutton-service/liteManager/'
+    var oibManagerUrl = /*localStorage.getItem('apiUrl') + */'/infobutton-service/liteManager/'
     var profileFactory = {};
 
+    if (!gitRepo) {
+        refreshVars();
+    }
+
     profileFactory.getProfiles = function () {
+
+
         return $http.get(oibManagerUrl + 'customProfiles', {
             headers: {
                 'Authorization' : undefined
@@ -199,7 +215,11 @@ uuidGenerator.factory("idGenerator", function () {
 
 oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'idGenerator', '$filter', 'propertiesService', function ($http, $resource, idGenerator, $filter, propertiesService) {
 
-    var oibManagerUrl = localStorage.getItem('apiUrl') + '/infobutton-service/liteManager/'
+    if (!gitRepo) {
+        refreshVars();
+    }
+
+    var oibManagerUrl = /*localStorage.getItem('apiUrl') + */'/infobutton-service/liteManager/'
 
     var cloudProfileFactory = {};
 
@@ -522,6 +542,9 @@ oibManagerServiceModule.factory('cloudProfileFactory', ['$http', '$resource', 'i
 }]);
 
 oibManagerServiceModule.service('properties', function () {
+    if (!gitRepo) {
+        refreshVars();
+    }
 
     return function(selectedProperty, assetId) {
         var instance = $uibModal.open({

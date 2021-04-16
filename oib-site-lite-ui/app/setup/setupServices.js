@@ -23,7 +23,7 @@ oibSetupServices.service('loginModal', function ($uibModal, propertiesService) {
 
 oibSetupServices.service('umlsModal', function ($uibModal, propertiesService) {
 
-    var oibPropertiesUrl = localStorage.getItem('apiUrl') + '/infobutton-service/propertiesManager/'
+    var oibPropertiesUrl = /*localStorage.getItem('apiUrl') +*/ '/infobutton-service/propertiesManager/'
 
     function assignUmlsApiKey (umlsApiKey) {
 
@@ -47,7 +47,7 @@ oibSetupServices.service('propertiesService', function ($rootScope, $http) {
 
     var propertiesService = {};
 
-    var oibPropertiesService = localStorage.getItem('apiUrl') + '/infobutton-service/propertiesManager/'
+    var oibPropertiesService = /*localStorage.getItem('apiUrl') + */'/infobutton-service/propertiesManager/'
 
     propertiesService.getUmlsApiKey = function() {
 
@@ -150,7 +150,7 @@ oibSetupServices.service('loginService', function ($rootScope, $http, base64) {
 
     var loginService = {};
 
-    var oibManagerUrl = localStorage.getItem('apiUrl') + '/infobutton-service/liteManager/'
+    var oibManagerUrl = /*localStorage.getItem('apiUrl') + */'/infobutton-service/liteManager/'
 
     loginService.getUsers = function(setupScope) {
 
