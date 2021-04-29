@@ -60,7 +60,7 @@
     <bean id="dataSource"
           class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
           p:driverClassName="${jdbc.driverClassName}"
-          p:url="${jdbc.url}" 
+          p:url="${jdbc.url}?useSSL=false"
           p:username="${jdbc.username}"
           p:password="${jdbc.password}" />
 

@@ -16,6 +16,8 @@ CREATE TABLE OIB.OIB_ID_SEQ (
   PRIMARY KEY (SEQ_NAME)
 );
 
+SET GLOBAL log_bin_trust_function_creators = 1;
+
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` FUNCTION OIB.NEXTVAL (`p_seq_name` VARCHAR(100)) RETURNS bigint(20)
 BEGIN
