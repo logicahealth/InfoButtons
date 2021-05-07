@@ -45,7 +45,10 @@
     http://www.springframework.org/schema/mvc/spring-mvc.xsd
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util.xsd">
-    
+
+    <context:property-placeholder location="classpath:application.properties" />
+
+
     <tx:annotation-driven />
     <context:component-scan base-package="org.openinfobutton"/>
     <context:component-scan base-package="gov.nih.nlm.rxnav.rest.model"/>
@@ -59,17 +62,17 @@
     
     <bean id="dataSource"
           class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-          p:driverClassName="${jdbc.driverClassName}"
-          p:url="${jdbc.url}?useSSL=false"
-          p:username="${jdbc.username}"
-          p:password="${jdbc.password}" />
+          p:driverClassName="${ibresponder.jdbc.driverClassName}"
+          p:url="${ibresponder.jdbc.url}?useSSL=false"
+          p:username="${ibresponder.jdbc.username}"
+          p:password="${ibresponder.jdbc.password}" />
 
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">${jdbc.dialect}</prop>
+                <prop key="hibernate.dialect">${ibresponder.jdbc.dialect}</prop>
                 <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>

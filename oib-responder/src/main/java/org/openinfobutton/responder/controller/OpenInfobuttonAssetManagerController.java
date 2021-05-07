@@ -37,6 +37,7 @@ public class OpenInfobuttonAssetManagerController {
         catch (Exception e)
         {
 
+            e.printStackTrace();
             String eMessage = "Unable to connect to database and retrieve assets";
             System.err.println(eMessage);
         }

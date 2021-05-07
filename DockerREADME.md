@@ -19,20 +19,28 @@ In order to run this container you'll need docker installed.
    
 docker network create infobuttonNetwork
    
-2. Get the infobutton/infobuttondb image database
+2. Get the infobutton/infobuttondb and infobutton/infobuttonresponderdb images database
 
 docker pull infobutton/infobuttondb
+docker pull infobutton/infobuttonresponderdb
 
 3. Create an infobutton docker network
 
 docker network create infobuttonNetwork
 
-4. Run infobutton database container
+4. Run infobutton database container for both databases 
 
 docker run -d \
 --network infobuttonNetwork \
 --network-alias infobuttondb \
 -p 3306:3306 --name infobuttondb -d infobutton/infobuttondb
+
+
+docker run -d \
+--network infobuttonNetwork \
+--network-alias infobuttonresponderdb \
+-p 3307:3306 --name infobuttonresponderdb -d infobutton/infobuttonresponderdb
+
 
 5. Get the infobutton/infobuttonapp image application
 
@@ -56,6 +64,11 @@ docker pull infobutton/infobuttonapp
 2. Run the infobuttonapp image
 
 docker container run \
+-e ibresponder.jdbc.driverClassName=com.mysql.jdbc.Driver \
+-e ibresponder.jdbc.url=jdbc:mysql://<YOUR_INFOBUTTON_RESPONDER_DATABASE_HOST>:<YOUR_INFOBUTTON_RESPONDER_DATABASE_PORT>/OIB \
+-e ibresponder.jdbc.username=<YOUR_INFOBUTTON_RESPONDER_DATABASE_USER> \
+-e ibresponder.jdbc.password=<YOUR_INFOBUTTON_RESPONDER_DATABASE_PASSWORD> \
+-e ibresponder.jdbc.dialect=org.hibernate.dialect.MySQLDialect \
 -e datasource.url=jdbc:mysql://<YOUR_DATABASE_HOST>:<YOUR_DATABASE_PORT>/resource_profile \
 -e datasource.driver=com.mysql.jdbc.Driver \
 -e datasource.user=<YOUR_DATABASE_USER> \

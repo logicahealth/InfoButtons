@@ -72,11 +72,11 @@ Building
 
    src/main/webapp/WEB-INF/jdbc.properties
 
-   jdbc.driverClassName=com.mysql.jdbc.Driver
-   jdbc.url=jdbc:mysql://localhost:3306/OIB
-   jdbc.username=<enter db name>
-   jdbc.password=<enter db password>
-   jdbc.dialect=org.hibernate.dialect.MySQLDialect
+   ibresponder.jdbc.driverClassName=com.mysql.jdbc.Driver
+   ibresponder.jdbc.url=jdbc:mysql://localhost:3306/OIB
+   ibresponder.jdbc.username=<enter db name>
+   ibresponder.jdbc.password=<enter db password>
+   ibresponder.jdbc.dialect=org.hibernate.dialect.MySQLDialect
 
    Set these to match your local database connection parameters.
 

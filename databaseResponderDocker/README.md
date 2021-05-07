@@ -1,6 +1,6 @@
-# Infobutton database
+# Infobutton Responder database
 
-The Infobutton database is a MySql database that contains the tables necessary for the infobutton software to run. Some implementation may decide to use their own implementation.
+The Infobutton Responder database is a MySql database that contains the tables necessary for the infobutton responder software to run. Some implementation may decide to use their own implementation.
 In that case, this database is not necessary.
 
 ### Prerequisities
@@ -23,10 +23,10 @@ docker network create infobuttonNetwork
 
 docker run -d \
 --network infobuttonNetwork \
---network-alias infobuttondb \
--p 3306:3306 --name infobuttondb -d infobutton/infobuttondb
+--network-alias infobuttonresponderdb \
+-p 3307:3306 --name infobuttonresponderdb -d infobutton/infobuttonresponderdb
 
-* Note that the network alias for the container is infobuttondb. This is how the web application container will reference the database container. 
+* Note that the network alias for the container is infobuttonresponderdb. This is how the web application container will reference the database container. 
 
 
 ## Built With
