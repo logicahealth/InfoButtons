@@ -19,9 +19,14 @@ In order to run this container you'll need docker installed.
    
 docker network create infobuttonNetwork
    
-2. Get the infobutton/infobuttondb and infobutton/infobuttonresponderdb images database
+2. Get database images
+
+* Get the infobutton/infobuttondb image database
 
 docker pull infobutton/infobuttondb
+
+* Get the infobutton/infobuttonresponderdb image database
+
 docker pull infobutton/infobuttonresponderdb
 
 3. Create an infobutton docker network
