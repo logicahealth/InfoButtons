@@ -1,5 +1,5 @@
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<header id="2">
+	<header id="2"> 
 		<title>ClinicalTrials.gov</title>
 		<profileDescription>US National registry of clinical trials.</profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
