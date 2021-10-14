@@ -50,6 +50,12 @@ public class KnowledgeRequestEngine
     @Autowired
     private ResourceProfileLoaderNew resourceProfileLoader;
 
+    @Autowired
+    private AccessCheckHandler accessChecker;
+
+    @Autowired
+    private ResponseGenerator responseGenerator;
+
     /**
      * Gets the response.
      *
@@ -61,12 +67,11 @@ public class KnowledgeRequestEngine
         final List<RequestResult> result = returnResult( knowledgeRequest );
         Collections.sort( result );
         AggregateKnowledgeResponse responseType = new AggregateKnowledgeResponse();
-        ResponseGenerator rg = new ResponseGenerator();
         try
         {
             if ( !result.isEmpty() )
             {
-                responseType = rg.returnResponse( knowledgeRequest, result );
+                responseType = responseGenerator.returnResponse( knowledgeRequest, result );
             }
         }
         catch ( final DatatypeConfigurationException e )
@@ -88,7 +93,7 @@ public class KnowledgeRequestEngine
     {
         final Map<Long, KnowledgeResourceProfile> profiles = resourceProfileLoader.getProfiles();
         final List<RequestResult> result = new ArrayList<RequestResult>();
-        AccessCheckHandler accessChecker = new AccessCheckHandler();
+
         if ( accessChecker.handleRequest( request, profiles ) )
         {
             return result;

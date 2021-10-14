@@ -1,167 +1,152 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><!-- DWXMLSource="responseSample.xml" -->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions">
-	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+	<xsl:output method="html" encoding="UTF-8" indent="yes"/>
+	<xsl:variable name="htmlType" select="'html'"/>
+
 	<xsl:template match="/">
 		<html>
 			<head>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<!-- EDIT BELOW FOR FORMATTING / CSS CHANGES -->
-				<title>CPRS OpenInfobutton</title>
-				<style type="text/css"><![CDATA[
-						.linkDiv
-						{
-							position:absolute;
-							padding: 10px;
-							top:100px;
-							left:0px;
-							width:200px;
-							height: 730px;
-							border: solid 1px black;
-							background-color: #000063;
-							font-family:Arial;
-							font-size:11pt;
-						}
-						
-						.linkDiv h3
-						{
-							color: yellow;	
-							font-size:11pt
-						}
-						
-						.linkDiv a:visited, a:link
-						{
-							color: yellow;
-							border: none;
-							outline: none;
-							display: block;
-							margin-top:0px;
-							font-weight: bold;
-						}
-						
-						.linkDiv ul li a:link 
-						{
-							color: white;
-							border: none;
-							outline: none;
-							font-weight: normal;
-							display: inline;
-						}
-
-						.linkDiv li
-						{
-							color: White;
-							margin-left: -10px;
-						}
-						
-						
-						.linkDiv ul
-						{
-							margin-top: -10px;
-						}
-						
-						.infoDiv
-						{
-							position: absolute;
-							top:100px;
-							left:221px;
-							width: 1000px;
-							height: 750px;
-						}
-						
-						#contentPanel
-						{
-							height: 750px;
-							width: 1000px;
-						}
-						
-						.header
-						{
-							position:absolute;
-							width:1225px;
-							top: 0px;
-							left: 0px;
-							height:100;
-							background-image: url('images/behind-banner.gif');
-							background-repeat: repeat-x;
-						}
-						
-						.logo
-						{
-							width:996px;
-							position:absolute;
-							top: 0px;
-							left: 0px;
-							height:100;
-							background-image: url('images/inter-header-banner-print.gif');
-							background-repeat: no-repeat;
-						}
-
-					]]></style>
-
-				<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"/> 
-				<script type="text/javascript">
-					function start() {
-						window.resizeTo(1250, 1000);
-						setContent('<xsl:value-of select="//feed[1]/entry[1]/link/@href"/>', '<xsl:value-of select="//feed[1]/entry[1]/id"/>');
+				<meta charset="utf-8"/>
+				<title>.: OpenInfobutton :.</title>
+				<script src="css/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+				<!-- Bootstrap core CSS -->
+				<link href="css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+				<!-- Custom styles for this template -->
+				<link href="css/bootstrap/features.css" rel="stylesheet"/>
+				<style>
+					a {
+					color: #000000;
+					text-decoration: none;
 					}
-				</script>  
+
+					a:hover {
+					color:#00A0C6;
+					text-decoration:none;
+					cursor:pointer;
+					}
+
+					main > .container {
+					padding: 60px 15px 0;
+					}
+
+				</style>
 			</head>
+			<body>
+				<header>
+					<!-- Fixed navbar -->
+					<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: RGB(18,46,81)">
+						<div class="container-fluid">
+							<img src="images/logos/va.png"/>
+							<img src="images/project_logo_no_background.png" style="float: right; background-color: RGB(248,249,250)" height="94" width="363"/>
 
-		<body onload="start();">
-				<script type="text/javascript">
-				<![CDATA[
-					function setContent(url, linkId) {
-						var selectedLinks = document.getElementsByClassName('selected'), i;
-						for (var i = 0; i < selectedLinks.length; i ++) {
-						    selectedLinks[i].style.display = 'none';
-						}
-						document.getElementById(linkId).style.display = 'inline';
-						if (url.search("medlineplus") == -1) {
-							var contentPanel = document.getElementById("contentPanel");
-							contentPanel.src = url;
-						}
-						else {
-							window.open(url);
-						}
-					}
-					$(document).ready(function() {
-						$(".linkDiv ul li a").hover(function() {
-							$(this).css("color", "yellow");
-						}, function() {
-							$(this).css("color", "white");
-						});
-				
-						$(".linkDiv ul li").hover(function() {
-						$(this).css("background-color", "#33335C");
-						}, function() {
-							$(this).css("background-color", "transparent");
-						});
-					});
-				]]>
-				</script>
-				<div class="header"><div class="logo"/></div>
-				<div class="linkDiv">
-					<xsl:for-each select="//feed">
-						<h3><xsl:value-of select="title"/></h3>
-						<ul>
-							<xsl:for-each select="entry">
-								<li>
-									<a href="javascript:void(0);">
-										<xsl:attribute name="onclick">setContent('<xsl:value-of select="link/@href"/>','<xsl:value-of select="id"/>');</xsl:attribute>
+						</div>
+					</nav>
+				</header>
+
+				<main class="flex-shrink-0" style="padding-top: 80px">
+					<div class="container px-4 py-5" id="featured-3">
+						Resources for:
+						<strong>
+							<xsl:value-of select="//feed[1]/subtitle" />
+						</strong>
+
+						<xsl:for-each select="//feed">
+
+							<h2 class="pb-2 pt-5 border-bottom">
+								<xsl:choose>
+									<xsl:when test="title=' UpToDate'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/UpToDate.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='MedlinePlus'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/MedlinePlus.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='ClinicalTrials.gov'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/ClinicalTrials.gov.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='PubMed'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/PubMed.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='Krames Staywell'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/Krames Staywell.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='Medical Home Portal'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/Medical Home Portal.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='Sanford Guide'">
 										<xsl:value-of select="title"/>
-									</a>
-									<div class="selected" style="display:none">
-										<xsl:attribute name="id"><xsl:value-of select="id"/></xsl:attribute>
-										<img src="images/tick_white.png"></img>							
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/Sanford Guide.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="contains(., 'Mosby')">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/Elsevier Mosbys Skills.gif" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="title"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</h2>
+
+							<div class="row g-4 px-4 py-1 row-cols-1 row-cols-lg-3">
+								<xsl:for-each select="entry">
+									<xsl:variable name="flushHeading" select="concat('flush-heading', generate-id())"/>
+									<xsl:variable name="flushCollapse" select="concat('flush-collapse', generate-id())"/>
+									<xsl:variable name="accordionFlush" select="concat('accordionFlush', generate-id())"/>
+									<div class="feature col">
+										<h3 style="display:inline">
+
+											<a class="icon-link">
+												<xsl:attribute name="href">
+													<xsl:value-of select="link/@href"/>
+												</xsl:attribute>
+												<xsl:value-of select="title"/>
+											</a>
+
+										</h3>
+
+
+										<xsl:if test="summary/@type = $htmlType">
+											<div class="accordion accordion-flush">
+												<xsl:attribute name="id"><xsl:value-of select="$accordionFlush"/></xsl:attribute>
+												<div class="accordion-item">
+													<h2 class="accordion-header">
+														<xsl:attribute name="id"><xsl:value-of select="$flushHeading"/></xsl:attribute>
+														<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+																aria-expanded="false">
+															<xsl:attribute name="data-bs-target"><xsl:value-of select="concat('#', $flushCollapse)"/></xsl:attribute>
+															<xsl:attribute name="aria-controls"><xsl:value-of select="$flushCollapse"/></xsl:attribute>
+															Details...
+														</button>
+													</h2>
+													<div class="accordion-collapse collapse">
+														<xsl:attribute name="id"><xsl:value-of select="$flushCollapse"/></xsl:attribute>
+														<xsl:attribute name="aria-labelledby"><xsl:value-of select="$flushHeading"/></xsl:attribute>
+														<xsl:attribute name="data-bs-parent"><xsl:value-of select="concat('#', $accordionFlush)"/></xsl:attribute>
+														<div class="accordion-body">
+															<xsl:value-of select="summary"/>
+														</div>
+													</div>
+												</div>
+											</div>
+										</xsl:if>
+
 									</div>
-								</li>
-							</xsl:for-each>
-						</ul>
-					</xsl:for-each>
-				</div>
-				<div class="infoDiv">
-					<iframe id="contentPanel"/>
-				</div>
+								</xsl:for-each>
+							</div>
+
+							<!--							<div class="b-example-divider"></div>-->
+
+
+
+						</xsl:for-each>
+
+					</div>
+				</main>
+
+				<footer class="footer mt-auto py-3 bg-light">
+					<div class="container">
+						<span class="text-muted">Powered by <a href="https://www.openinfobutton.org/" target="_blank"><img src="images/project_logo.svg" width="170" height="37"/></a></span>
+					</div>
+				</footer>
+
 			</body>
 		</html>
 	</xsl:template>

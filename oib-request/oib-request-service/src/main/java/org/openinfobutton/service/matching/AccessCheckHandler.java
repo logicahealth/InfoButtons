@@ -27,6 +27,7 @@ import org.openinfobutton.schema.KnowledgeRequest;
 import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.schemas.kb.KnowledgeResourceProfile;
 import org.openinfobutton.schemas.kb.ProfileDefinition;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -52,8 +53,8 @@ public final class AccessCheckHandler
 
     /** The pdao. */
     @Autowired
-    @Qualifier( "profilesdbDao" )
-    private ProfilesDao pdao;
+//    @Qualifier( "profilesdbDao" )
+    protected ProfilesDao pdao;
 
     /**
      * Handle request.

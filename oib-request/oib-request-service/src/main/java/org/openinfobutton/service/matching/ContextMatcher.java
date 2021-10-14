@@ -24,6 +24,7 @@ import org.openinfobutton.schemas.kb.Code;
 import org.openinfobutton.schemas.kb.CodedContextElement;
 import org.openinfobutton.schemas.kb.Id;
 import org.openinfobutton.service.transform.TransformCode;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;

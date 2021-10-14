@@ -1,164 +1,152 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:ns2="urn:hl7-org:v3"
-	xmlns:ns3="http://www.w3.org/2005/Atom:atom">
-	<xsl:output method="html" version="1.0" encoding="UTF-8"
-		indent="yes" />
+<?xml version="1.0" encoding="UTF-8"?><!-- DWXMLSource="responseSample.xml" -->
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions">
+	<xsl:output method="html" encoding="UTF-8" indent="yes"/>
+	<xsl:variable name="htmlType" select="'html'"/>
+
 	<xsl:template match="/">
 		<html>
 			<head>
-				<link rel="stylesheet" href="http://depts.washington.edu/uweb/inc/css/header.css"
-					type="text/css" media="screen" />
-				<link rel="stylesheet" href="http://depts.washington.edu/uweb/inc/css/print.css"
-					type="text/css" media="print" />
-				<script type="text/javascript">
-					function make_blank()
-					{if(document.uwglobalsearch.q.value=="Search the UW")
-					{document.uwglobalsearch.q.value = "";}}
-				</script>
-				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-				<title>UW OpenInfobutton</title>
-				<style type="text/css">
-					.linkDiv
-					{
-					position:absolute;
-					padding: 10px;
-					top:25px;
-					left:0px;
-					width:200px;
-					height: 730px;
-					border: solid 1px
-					black;
-					background-color: #DFDDE8;
-					font-family:Frutiger, Arial;
-					font-size:10pt;
+				<meta charset="utf-8"/>
+				<title>.: OpenInfobutton :.</title>
+				<script src="css/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+				<!-- Bootstrap core CSS -->
+				<link href="css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+				<!-- Custom styles for this template -->
+				<link href="css/bootstrap/features.css" rel="stylesheet"/>
+				<style>
+					a {
+					color: #000000;
+					text-decoration: none;
 					}
 
-					.linkDiv h3
-					{
-					color: #8e632a;
-					font-size:10pt
+					a:hover {
+					color:#00A0C6;
+					text-decoration:none;
+					cursor:pointer;
 					}
 
-					.linkDiv
-					a:visited, a:link, a:active
-					{
-					color: grey;
-					border: none;
-					outline: none;
-					display: block;
-					margin-top:0px;
-					font-weight: bold;
+					main > .container {
+					padding: 60px 15px 0;
 					}
 
-					.linkDiv ul li
-					a:link, .linkDiv ul li a:visited, .linkDiv ul li a:active
-					{
-					color:
-					black;
-					border: none;
-					outline: none;
-					font-weight: normal;
-					}
-					.linkDiv li
-					{
-					color: grey;
-					margin-left: -10px;
-					}
-
-
-					.linkDiv ul
-					{
-					margin-top: -10px;
-					}
-
-					.infoDiv
-					{
-					position: absolute;
-					top:25px;
-					left:221px;
-					width: 1000px;
-					height: 800px;
-					}
-
-					#contentPanel
-					{
-					height: 750px;
-					width: 1000px;
-					}
 				</style>
-
-				<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" />
-				<script type="text/javascript">
-					function start() {
-					window.resizeTo(1250, 1000);
-					setContent('
-					<xsl:value-of select="//feed[1]/entry[1]/link/@href" />
-					');
-					}
-				</script>
 			</head>
-			<body onload="start();">
-				<script type="text/javascript"><![CDATA[
-					function setContent(url) {
-						if (url.search("medlineplus") == -1) {
-							var contentPanel = document.getElementById("contentPanel");
-							contentPanel.src = url;
-						}
-						else {
-							window.open(url);
-						}
-					}
-					$(document).ready(function() {
-						$(".linkDiv ul li a").hover(function() {
-							$(this).css("color", "white");
-						}, function() {
-							$(this).css("color", "black");
-						});
-				
-						$(".linkDiv ul li").hover(function() {
-						$(this).css("background-color", "#39275B");
-						}, function() {
-							$(this).css("background-color", "transparent");
-						});
-					});
-				]]></script>
-				<div id="wheader" class="colorPurple wYes patchNo">
-					<div id="autoMargin">
-						<div class="wlogoSmall">
-							<div class="logoAbsolute">
-								<a id="wlogoLink" href="http://www.washington.edu/">W</a>
-							</div>
-							<div>
-								<a href="http://www.washington.edu/">University of Washington</a>
-							</div>
-						</div>
-					</div>
-				</div>
+			<body>
+				<header>
+					<!-- Fixed navbar -->
+					<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: RGB(224,221,232)">
+						<div class="container-fluid">
+							<img src="images/logos/UW.png" width="600"/>
+							<img src="images/project_logo_no_background.png" style="float: right" height="94" width="363"/>
 
-				<div class="linkDiv">
-					<xsl:for-each select="//feed">
-						<h3>
-							<xsl:value-of select="title" />
-						</h3>
-						<ul>
-							<xsl:for-each select="entry">
-								<li>
-									<a href="javascript:void(0);">
-										<xsl:attribute name="onclick">setContent('<xsl:value-of
-											select="link/@href" />');</xsl:attribute>
-										<!-- <xsl:value-of select="category/subTopic/value/@displayName"/> -->
-										<xsl:value-of select="title" />
-									</a>
-								</li>
-							</xsl:for-each>
-						</ul>
-					</xsl:for-each>
-				</div>
-				<div class="infoDiv">
-					<iframe id="contentPanel" />
-				</div>
+						</div>
+					</nav>
+				</header>
+
+				<main class="flex-shrink-0" style="padding-top: 80px">
+					<div class="container px-4 py-5" id="featured-3">
+						Resources for:
+						<strong>
+							<xsl:value-of select="//feed[1]/subtitle" />
+						</strong>
+
+						<xsl:for-each select="//feed">
+
+							<h2 class="pb-2 pt-5 border-bottom">
+								<xsl:choose>
+									<xsl:when test="title=' UpToDate'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/UpToDate.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='MedlinePlus'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/MedlinePlus.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='ClinicalTrials.gov'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/ClinicalTrials.gov.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='PubMed'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/PubMed.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='Krames Staywell'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/Krames Staywell.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='Medical Home Portal'">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/Medical Home Portal.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="title='Sanford Guide'">
+										<xsl:value-of select="title"/>
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/Sanford Guide.png" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:when test="contains(., 'Mosby')">
+										<img src="https://raw.githubusercontent.com/logicahealth/InfoButtons/development/profilestore/Elsevier Mosbys Skills.gif" style="max-height: 80px; max-width: 200px;"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="title"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</h2>
+
+							<div class="row g-4 px-4 py-1 row-cols-1 row-cols-lg-3">
+								<xsl:for-each select="entry">
+									<xsl:variable name="flushHeading" select="concat('flush-heading', generate-id())"/>
+									<xsl:variable name="flushCollapse" select="concat('flush-collapse', generate-id())"/>
+									<xsl:variable name="accordionFlush" select="concat('accordionFlush', generate-id())"/>
+									<div class="feature col">
+										<h3 style="display:inline">
+
+											<a class="icon-link">
+												<xsl:attribute name="href">
+													<xsl:value-of select="link/@href"/>
+												</xsl:attribute>
+												<xsl:value-of select="title"/>
+											</a>
+
+										</h3>
+
+
+										<xsl:if test="summary/@type = $htmlType">
+											<div class="accordion accordion-flush">
+												<xsl:attribute name="id"><xsl:value-of select="$accordionFlush"/></xsl:attribute>
+												<div class="accordion-item">
+													<h2 class="accordion-header">
+														<xsl:attribute name="id"><xsl:value-of select="$flushHeading"/></xsl:attribute>
+														<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+																aria-expanded="false">
+															<xsl:attribute name="data-bs-target"><xsl:value-of select="concat('#', $flushCollapse)"/></xsl:attribute>
+															<xsl:attribute name="aria-controls"><xsl:value-of select="$flushCollapse"/></xsl:attribute>
+															Details...
+														</button>
+													</h2>
+													<div class="accordion-collapse collapse">
+														<xsl:attribute name="id"><xsl:value-of select="$flushCollapse"/></xsl:attribute>
+														<xsl:attribute name="aria-labelledby"><xsl:value-of select="$flushHeading"/></xsl:attribute>
+														<xsl:attribute name="data-bs-parent"><xsl:value-of select="concat('#', $accordionFlush)"/></xsl:attribute>
+														<div class="accordion-body">
+															<xsl:value-of select="summary"/>
+														</div>
+													</div>
+												</div>
+											</div>
+										</xsl:if>
+
+									</div>
+								</xsl:for-each>
+							</div>
+
+							<!--							<div class="b-example-divider"></div>-->
+
+
+
+						</xsl:for-each>
+
+					</div>
+				</main>
+
+				<footer class="footer mt-auto py-3 bg-light">
+					<div class="container">
+						<span class="text-muted">Powered by <a href="https://www.openinfobutton.org/" target="_blank"><img src="images/project_logo.svg" width="170" height="37"/></a></span>
+					</div>
+				</footer>
+
 			</body>
 		</html>
 	</xsl:template>
