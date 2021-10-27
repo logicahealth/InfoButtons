@@ -2,7 +2,7 @@
 <knowledgeResourceProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<header id="1">
 		<title> UpToDate</title>
-		<profileDescription>Evidence-based, physician-authored clinical decision support resource.</profileDescription>
+		<profileDescription>Evidence-based, physician-authored clinical decision support.</profileDescription>
 		<versionControl publicationDate="2015-01-07T00:00:00"/>
 	</header>
 	<profileDefinition hl7URLCompliant="true" hl7KnowledgeResponseCompliant="false">
@@ -11,10 +11,10 @@
 			<supportedTerminology id="2.16.840.1.113883.6.90" name="ICD10"/>
 			<supportedTerminology id="2.16.840.1.113883.6.96" name="SNOMEDCT_US"/>
 			<supportedTerminology id="2.16.840.1.113883.6.103" name="ICD9CM"/>
-			<supportedTerminology id="2.16.840.1.113883.6.42" name="ICD9"/>
 			<supportedTerminology id="2.16.840.1.113883.6.88" name="RxNorm"/>
 			<supportedTerminology id="2.16.840.1.113883.6.1" name="LOINC"/>
 			<supportedTerminology id="2.16.840.1.113883.6.69" name="NDC"/>
+			<supportedTerminology id="2.16.840.1.113883.6.42" name="ICD9"/>
 		</supportedTerminologies>
 		<contexts>
 			<context name="Knowledge on conditions from problem list review and entry" id="1">
