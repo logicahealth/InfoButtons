@@ -44,11 +44,12 @@
 
 				<main class="flex-shrink-0" style="padding-top: 80px">
 					<div class="container px-4 py-5" id="featured-3">
-						Resources for:
-						<strong>
-							<xsl:value-of select="//feed[1]/subtitle" />
-						</strong>
-
+						<p style="padding-top: 35px">
+							Resources for:
+							<strong>
+								<xsl:value-of select="//feed[1]/subtitle" />
+							</strong>
+						</p>
 						<xsl:for-each select="//feed">
 
 							<h2 class="pb-2 pt-5 border-bottom">
@@ -90,7 +91,7 @@
 									<xsl:variable name="flushCollapse" select="concat('flush-collapse', generate-id())"/>
 									<xsl:variable name="accordionFlush" select="concat('accordionFlush', generate-id())"/>
 									<div class="feature col">
-										<h3 style="display:inline">
+										<h6 style="display:inline">
 
 											<a class="icon-link">
 												<xsl:attribute name="href">
@@ -99,34 +100,7 @@
 												<xsl:value-of select="title"/>
 											</a>
 
-										</h3>
-
-
-										<xsl:if test="summary/@type = $htmlType">
-											<div class="accordion accordion-flush">
-												<xsl:attribute name="id"><xsl:value-of select="$accordionFlush"/></xsl:attribute>
-												<div class="accordion-item">
-													<h2 class="accordion-header">
-														<xsl:attribute name="id"><xsl:value-of select="$flushHeading"/></xsl:attribute>
-														<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-																aria-expanded="false">
-															<xsl:attribute name="data-bs-target"><xsl:value-of select="concat('#', $flushCollapse)"/></xsl:attribute>
-															<xsl:attribute name="aria-controls"><xsl:value-of select="$flushCollapse"/></xsl:attribute>
-															Details...
-														</button>
-													</h2>
-													<div class="accordion-collapse collapse">
-														<xsl:attribute name="id"><xsl:value-of select="$flushCollapse"/></xsl:attribute>
-														<xsl:attribute name="aria-labelledby"><xsl:value-of select="$flushHeading"/></xsl:attribute>
-														<xsl:attribute name="data-bs-parent"><xsl:value-of select="concat('#', $accordionFlush)"/></xsl:attribute>
-														<div class="accordion-body">
-															<xsl:value-of select="summary"/>
-														</div>
-													</div>
-												</div>
-											</div>
-										</xsl:if>
-
+										</h6>
 									</div>
 								</xsl:for-each>
 							</div>
