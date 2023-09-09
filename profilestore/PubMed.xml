@@ -72,7 +72,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="https://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2000/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text]&amp;"/>
+					<knowledgeRequestServiceLocation url="https://www.ncbi.nlm.nih.gov/pubmed?term="/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>
