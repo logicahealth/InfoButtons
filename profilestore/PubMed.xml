@@ -34,7 +34,7 @@
 					</performerKnowledgeUserType>
 					<conceptOfInterest match="false" search="true">
 						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="term" valuePrefix="(" valueSuffix=") AND Therapy/Narrow[filter]"/>
+							<syntaxOnResource nonHl7CompliantName="term"/>
 						</searchParameter>
 					</conceptOfInterest>
 					<subTopics>
@@ -42,7 +42,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="https://www.ncbi.nlm.nih.gov/pubmed?term=hasabstract[text] AND &quot;2000/04/23&quot;[PDat] : &quot;2100/04/19&quot;[PDat] AND &quot;humans&quot;[MeSH Terms] AND jsubsetaim[text] AND English[lang]&amp;"/>
+					<knowledgeRequestServiceLocation url="https://www.ncbi.nlm.nih.gov/pubmed?"/>
 				</knowledgeRequestService>
 			</context>
 			<context name="Links from Medication List to therapy in PubMed Clinical Queries" id="2">
@@ -64,7 +64,7 @@
 					</performerKnowledgeUserType>
 					<conceptOfInterest match="false" search="true">
 						<searchParameter source="displayName">
-							<syntaxOnResource nonHl7CompliantName="term" valuePrefix="(" valueSuffix=") AND Therapy/Narrow[filter]"/>
+							<syntaxOnResource nonHl7CompliantName="term"/>
 						</searchParameter>
 					</conceptOfInterest>
 					<subTopics>
@@ -72,7 +72,7 @@
 					</subTopics>
 				</contextDefinition>
 				<knowledgeRequestService>
-					<knowledgeRequestServiceLocation url="https://www.ncbi.nlm.nih.gov/pubmed?term="/>
+					<knowledgeRequestServiceLocation url="https://www.ncbi.nlm.nih.gov/pubmed?"/>
 				</knowledgeRequestService>
 			</context>
 		</contexts>
